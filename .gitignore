@@ -12,4 +12,6 @@
 *.la
 *.a
 
-release/
+[Rr]elease*/
+
+*.sdf
