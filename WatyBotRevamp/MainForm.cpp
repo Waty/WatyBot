@@ -96,228 +96,231 @@ void NextChannel()
 #pragma endregion
 #pragma region Hacks
 ////////////////////////////////////////////////////////////Jump Down Anywhere///////////////////////////////////////////////////////////////
-	BYTE bJDA1[] = {0xEB};																												/////
-	BYTE bJDA2[] = {0xEB};																												/////
-	BYTE bJDA3[] = {0x90, 0x90};																										/////
-	DWORD JDAAddy1 = 0x00B64C89;															// 74 06 3B 5C 24 ? 75 ? 8B 4C 24 ? 6A 01	/////
-	DWORD JDAAddy2 = 0x00B64CC6;															// 7D ? 8B 16 8B 52 ? 8D 44 24 ? 50			/////
-	DWORD JDAAddy3 = 0x00B64CE4;															// 74 ? 8B CF C7 87 ? ? 00 00 01 00 00 00	/////
-	CMemory JDA(JDAAddy1, bJDA1, 1, JDAAddy2, bJDA2, 1, JDAAddy3, bJDA3, 2);															/////
+BYTE bJDA1[] = {0xEB};																													/////
+BYTE bJDA2[] = {0xEB};																													/////
+BYTE bJDA3[] = {0x90, 0x90};																											/////
+DWORD JDAAddy1 = 0x00B64C89;															// 74 06 3B 5C 24 ? 75 ? 8B 4C 24 ? 6A 01		/////
+DWORD JDAAddy2 = 0x00B64CC6;															// 7D ? 8B 16 8B 52 ? 8D 44 24 ? 50				/////
+DWORD JDAAddy3 = 0x00B64CE4;															// 74 ? 8B CF C7 87 ? ? 00 00 01 00 00 00		/////
+CMemory JDA(JDAAddy1, bJDA1, 1, JDAAddy2, bJDA2, 1, JDAAddy3, bJDA3, 2);																/////
 ////////////////////////////////////////////////////////////Jump Down Anywhere///////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////Fast Mobs////////////////////////////////////////////////////////////////////////
-	BYTE bFastMobs[] = {0x90, 0x90};																									/////
-	DWORD FastMobsAddy = 0x00714F43;																									/////
-	CMemory FastMobs(FastMobsAddy, bFastMobs, 2);																						/////
+BYTE bFastMobs[] = {0x90, 0x90};																										/////
+DWORD FastMobsAddy = 0x00714F43;																										/////
+CMemory FastMobs(FastMobsAddy, bFastMobs, 2);																							/////
 ////////////////////////////////////////////////////////////Fast Mobs////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////Perfect Loot/////////////////////////////////////////////////////////////////////
-	BYTE bPerfectLoot1[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};																		/////
-	BYTE bPerfectLoot2[] = {0x25};																										/////
-	BYTE bPerfectLoot3[] = {0x81, 0xFE, 0x00, 0x00, 0x00, 0x00};																		/////
-	DWORD PerfectLootAddy1 = 0x004B42A7;																								/////
-	DWORD PerfectLootAddy2 = 0x005410C5;																								/////
-	DWORD PerfectLootAddy3 = 0x00443869;																								/////
-	CMemory PerfectLoot(PerfectLootAddy1, bPerfectLoot1, 6, PerfectLootAddy2, bPerfectLoot2, 1, PerfectLootAddy3, bPerfectLoot3, 6);	/////
+BYTE bPerfectLoot1[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};																			/////
+BYTE bPerfectLoot2[] = {0x25};																											/////
+BYTE bPerfectLoot3[] = {0x81, 0xFE, 0x00, 0x00, 0x00, 0x00};																			/////
+DWORD PerfectLootAddy1 = 0x004B42A7;																									/////
+DWORD PerfectLootAddy2 = 0x005410C5;																									/////
+DWORD PerfectLootAddy3 = 0x00443869;																									/////
+CMemory PerfectLoot(PerfectLootAddy1, bPerfectLoot1, 6, PerfectLootAddy2, bPerfectLoot2, 1, PerfectLootAddy3, bPerfectLoot3, 6);		/////
 ////////////////////////////////////////////////////////////Perfect Loot/////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////No Delay - All Attacks///////////////////////////////////////////////////////////
-	BYTE bNDAllAttacks[] = {0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3, 0x90};																	/////
-	DWORD NDAllAttacksAddy = 0x00B35220;																								/////
-	CMemory NDAllAttacks(NDAllAttacksAddy, bNDAllAttacks, 7);																			/////
+BYTE bNDAllAttacks[] = {0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3, 0x90};																		/////
+DWORD NDAllAttacksAddy = 0x00B35220;																									/////
+CMemory NDAllAttacks(NDAllAttacksAddy, bNDAllAttacks, 7);																				/////
 ////////////////////////////////////////////////////////////No Delay - All Attacks///////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////Unlimited Morph Kaizer////////////////////////////////////////////////////////////
-	BYTE bUnlMorph1[] = {0xEB, 0x2E};																									/////
-	BYTE bUnlMorph2[] = {0xEB};																											/////
-	DWORD UnlMorphAddy1 = 0x00BC3172;																									/////
-	DWORD UnlMorphAddy2 = 0x00BC38F0;																									/////
-	CMemory UnlimitedMorph(UnlMorphAddy1, bUnlMorph1, 2, UnlMorphAddy2, bUnlMorph2, 1);													/////
+BYTE bUnlMorph1[] = {0xEB, 0x2E};																										/////
+BYTE bUnlMorph2[] = {0xEB};																												/////
+DWORD UnlMorphAddy1 = 0x00BC3172;																										/////
+DWORD UnlMorphAddy2 = 0x00BC38F0;																										/////
+CMemory UnlimitedMorph(UnlMorphAddy1, bUnlMorph1, 2, UnlMorphAddy2, bUnlMorph2, 1);														/////
 ///////////////////////////////////////////////////////////Unlimited Morph Kaizer////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////Hide Damage///////////////////////////////////////////////////////////////////////
-	BYTE bHideDamage[] = {0x7F};																										/////
-	DWORD HideDamageAddy = 0x006D9A77;																									/////
-	CMemory HideDamage(HideDamageAddy, bHideDamage, 1);																					/////
+BYTE bHideDamage[] = {0x7F};																											/////
+DWORD HideDamageAddy = 0x006D9A77;																										/////
+CMemory HideDamage(HideDamageAddy, bHideDamage, 1);																						/////
 ///////////////////////////////////////////////////////////Hide Damage///////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////CPU Hack//////////////////////////////////////////////////////////////////////////
-	BYTE bCPUHack[] = {0x90, 0x90, 0x90, 0x90, 0x90};																					/////
-	DWORD CPUHackAddy1 = 0x006AC1CB;																									/////
-	DWORD CPUHackAddy2 = 0x006AF52D;																									/////
-	DWORD CPUHackAddy3 = 0x006B3D59;																									/////
-	CMemory CPUHack(CPUHackAddy1, bCPUHack, 5, CPUHackAddy2, bCPUHack, 5, CPUHackAddy3, bCPUHack, 5);									/////
+BYTE bCPUHack[] = {0x90, 0x90, 0x90, 0x90, 0x90};																						/////
+DWORD CPUHackAddy1 = 0x006AC1CB;																										/////
+DWORD CPUHackAddy2 = 0x006AF52D;																										/////
+DWORD CPUHackAddy3 = 0x006B3D59;																										/////
+CMemory CPUHack(CPUHackAddy1, bCPUHack, 5, CPUHackAddy2, bCPUHack, 5, CPUHackAddy3, bCPUHack, 5);										/////
 ///////////////////////////////////////////////////////////CPU Hack//////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////Pin Typer/////////////////////////////////////////////////////////////////////////
-	BYTE bPinTyper[] = {0x0F, 0x84};																									/////
-	DWORD PinTyperAddy1 = 0x0068A956;																									/////
-	DWORD PinTyperAddy2 = 0x0068C027;																									/////
-	CMemory PinTyper(PinTyperAddy1, bPinTyper, 2, PinTyperAddy2, bPinTyper, 2);															/////
+BYTE bPinTyper[] = {0x0F, 0x84};																										/////
+DWORD PinTyperAddy1 = 0x0068A956;																										/////
+DWORD PinTyperAddy2 = 0x0068C027;																										/////
+CMemory PinTyper(PinTyperAddy1, bPinTyper, 2, PinTyperAddy2, bPinTyper, 2);																/////
 ///////////////////////////////////////////////////////////Pin Typer/////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////No Char Knockback/////////////////////////////////////////////////////////////////
-	BYTE bNoCharKB[] = {0x00};																											/////
-	DWORD NoCharKBAddy = 0x0087BA5B;																									/////
-	CMemory NoCharKB(NoCharKBAddy, bNoCharKB, 1);																						/////
+BYTE bNoCharKB[] = {0x00};																												/////
+DWORD NoCharKBAddy = 0x0087BA5B;																										/////
+CMemory NoCharKB(NoCharKBAddy, bNoCharKB, 1);																							/////
 ///////////////////////////////////////////////////////////No Char Knockback/////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////Vac Right/////////////////////////////////////////////////////////////////////////
-	BYTE bVacRight[] = {0x75, 0x48};																									/////
-	DWORD VacRightAddy = 0x00C1A300;																									/////
-	CMemory VacRight(VacRightAddy, bVacRight, 2);																						/////
+BYTE bVacRight[] = {0x75, 0x48};																										/////
+DWORD VacRightAddy = 0x00C1A300;																										/////
+CMemory VacRight(VacRightAddy, bVacRight, 2);																							/////
 ///////////////////////////////////////////////////////////Vac Right/////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////Full Mob Disarm///////////////////////////////////////////////////////////////////
-	BYTE bFullMobDisarm[] = {0xE9, 0x9B, 0x02, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90};														/////
-	DWORD FullMobDisarmAddy = 0x006FC332;																								/////
-	CMemory FullMobDisarm(FullMobDisarmAddy, bFullMobDisarm, sizeof(bFullMobDisarm));													/////
+BYTE bFullMobDisarm[] = {0xE9, 0x9B, 0x02, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90};															/////
+DWORD FullMobDisarmAddy = 0x006FC332;																									/////
+CMemory FullMobDisarm(FullMobDisarmAddy, bFullMobDisarm, sizeof(bFullMobDisarm));														/////
 ///////////////////////////////////////////////////////////Full Mob Disarm///////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////No Delay Minig////////////////////////////////////////////////////////////////////
-	DWORD NDMiningAddy1 = 0x00B687A2;																									/////
-	DWORD NDMiningAddy2 = 0x00B6887B;																									/////
-	DWORD NDMiningAddy3 = 0x00B77527;																									/////
-	BYTE bNDMining1[] = {0x90, 0x90};																									/////
-	BYTE bNDMining2[] = {0xEB};																											/////
-	BYTE bNDMining3[] = {0x90, 0x90};																									/////
-	CMemory NDMining(NDMiningAddy1, bNDMining1, 2, NDMiningAddy2, bNDMining2, 1, NDMiningAddy3, bNDMining3, 2);							/////
+DWORD NDMiningAddy1 = 0x00B687A2;																										/////
+DWORD NDMiningAddy2 = 0x00B6887B;																										/////
+DWORD NDMiningAddy3 = 0x00B77527;																										/////
+BYTE bNDMining1[] = {0x90, 0x90};																										/////
+BYTE bNDMining2[] = {0xEB};																												/////
+BYTE bNDMining3[] = {0x90, 0x90};																										/////
+CMemory NDMining(NDMiningAddy1, bNDMining1, 2, NDMiningAddy2, bNDMining2, 1, NDMiningAddy3, bNDMining3, 2);								/////
 ///////////////////////////////////////////////////////////No Delay Minig////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////Uncensored////////////////////////////////////////////////////////////////////////
-	DWORD UncensorAddy1 = 0x00443869;																									/////
-	DWORD UncensorAddy2 = 0x004FFB84;																									/////
-	BYTE bUncensor1[] = {0x75};																											/////
-	BYTE bUncensor2[] = {0x85};																											/////
-	CMemory Uncensor(UncensorAddy1, bUncensor1, 1, UncensorAddy2, bUncensor2, 1);														/////
+DWORD UncensorAddy1 = 0x00443869;																										/////
+DWORD UncensorAddy2 = 0x004FFB84;																										/////
+BYTE bUncensor1[] = {0x75};																												/////
+BYTE bUncensor2[] = {0x85};																												/////
+CMemory Uncensor(UncensorAddy1, bUncensor1, 1, UncensorAddy2, bUncensor2, 1);															/////
 ///////////////////////////////////////////////////////////Uncensored////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////No Skill Movement/////////////////////////////////////////////////////////////////
-	DWORD NoSkillMovementAddy1 = 0x00B5DD4F;																							/////
-	DWORD NoSkillMovementAddy2 = 0x0087BA5F;																							/////
-	BYTE bNoSkillMovement1[] = {0x00};																									/////
-	BYTE bNoSkillMovement2[] = {0xD8, 0xD2};																							/////
-	CMemory NoSkillMovement(NoSkillMovementAddy1, bNoSkillMovement1, 1, NoSkillMovementAddy2, bNoSkillMovement2, 2);					/////
+DWORD NoSkillMovementAddy1 = 0x00B5DD4F;																								/////
+DWORD NoSkillMovementAddy2 = 0x0087BA5F;																								/////
+BYTE bNoSkillMovement1[] = {0x00};																										/////
+BYTE bNoSkillMovement2[] = {0xD8, 0xD2};																								/////
+CMemory NoSkillMovement(NoSkillMovementAddy1, bNoSkillMovement1, 1, NoSkillMovementAddy2, bNoSkillMovement2, 2);						/////
 ///////////////////////////////////////////////////////////No Skill Movement/////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////No Swear//////////////////////////////////////////////////////////////////////////
-	DWORD NoSwearsAddy = 0x0087888B;																									/////
-	BYTE bNoSwears[] = {0x90, 0x90};																									/////
-	CMemory NoSwears(NoSwearsAddy, bNoSwears, 2);																						/////
+DWORD NoSwearsAddy = 0x0087888B;																										/////
+BYTE bNoSwears[] = {0x90, 0x90};																										/////
+CMemory NoSwears(NoSwearsAddy, bNoSwears, 2);																							/////
 ///////////////////////////////////////////////////////////No Swear//////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////No Background + Clouds////////////////////////////////////////////////////////////
-	DWORD NoBackgroundAddy1 = 0x006AF52D;																								/////  E8 ?? ?? ?? ?? 8B 06 8B 48 ?? 56 C6 45 ?? ?? FF D1 8B 75 ?? 43
-	DWORD NoBackgroundAddy2 = 0x006ADE4B;																								/////  E8 ?? ?? ?? ?? 8B 06 8B 48 08 56 C7 44 24 34 FF FF FF FF FF D1 8B 4C 24 28 64 89 0D 00 00 00 00 59 5F 5E 5D 83 C4 24
-	BYTE bNoBackground[] = {0x90, 0x90, 0x90, 0x90, 0x90};																				/////
-	CMemory NoBackground(NoBackgroundAddy1, bNoBackground, 5, NoBackgroundAddy2, bNoBackground, 5);										/////
+DWORD NoBackgroundAddy1 = 0x006AF52D;																									/////  E8 ?? ?? ?? ?? 8B 06 8B 48 ?? 56 C6 45 ?? ?? FF D1 8B 75 ?? 43
+DWORD NoBackgroundAddy2 = 0x006ADE4B;																									/////  E8 ?? ?? ?? ?? 8B 06 8B 48 08 56 C7 44 24 34 FF FF FF FF FF D1 8B 4C 24 28 64 89 0D 00 00 00 00 59 5F 5E 5D 83 C4 24
+BYTE bNoBackground[] = {0x90, 0x90, 0x90, 0x90, 0x90};																					/////
+CMemory NoBackground(NoBackgroundAddy1, bNoBackground, 5, NoBackgroundAddy2, bNoBackground, 5);											/////
 ///////////////////////////////////////////////////////////No Background + Clouds////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////No Mobs///////////////////////////////////////////////////////////////////////////
-	DWORD NoMobsAddy = 0x00701EAD;																										/////
-	BYTE bNoMobs[] = {0xEB};																											/////
-	CMemory NoMobs(NoMobsAddy, bNoMobs, 1);																								/////
+DWORD NoMobsAddy = 0x00701EAD;																											/////
+BYTE bNoMobs[] = {0xEB};																												/////
+CMemory NoMobs(NoMobsAddy, bNoMobs, 1);																									/////
 ///////////////////////////////////////////////////////////No Mobs///////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////Mob Lag///////////////////////////////////////////////////////////////////////////
-	DWORD MonLagAddy = 0x00701EFA;																										/////
-	BYTE bMobLag[] = {0xEB};																											/////
-	CMemory MobLag(NoMobsAddy, bNoMobs, 1);																								/////
+DWORD MonLagAddy = 0x00701EFA;																											/////
+BYTE bMobLag[] = {0xEB};																												/////
+CMemory MobLag(NoMobsAddy, bNoMobs, 1);																									/////
 ///////////////////////////////////////////////////////////Mob Lag///////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////Instant air Loot//////////////////////////////////////////////////////////////////
-	DWORD InstantAirLootAddy = 0x005422B9;																								/////
-	BYTE bInstantAirLoot[] = {0x74};																									/////
-	CMemory InstantAirLoot(InstantAirLootAddy, bInstantAirLoot, 1);																		/////
+DWORD InstantAirLootAddy = 0x005422B9;																									/////
+BYTE bInstantAirLoot[] = {0x74};																										/////
+CMemory InstantAirLoot(InstantAirLootAddy, bInstantAirLoot, 1);																			/////
 ///////////////////////////////////////////////////////////Instant air Loot//////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////Raining Mobs//////////////////////////////////////////////////////////////////////
-	DWORD RainingMobsAddy = 0x00713576;																									/////
-	BYTE bRainingMobs[] = {0xD9, 0xC1};																									/////
-	CMemory RainingMobs(RainingMobsAddy, bRainingMobs, 2);																				/////
+DWORD RainingMobsAddy = 0x00713576;																										/////
+BYTE bRainingMobs[] = {0xD9, 0xC1};																										/////
+CMemory RainingMobs(RainingMobsAddy, bRainingMobs, 2);																					/////
 ///////////////////////////////////////////////////////////Raining Mobs//////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////Raining Mobs//////////////////////////////////////////////////////////////////////
-	DWORD NDMilleAddy = 0x00BB0AD5;																										/////
-	BYTE bNDMille[] = {0xEB};																											/////
-	CMemory NDMille(NDMilleAddy, bNDMille, 1);																							/////
+DWORD NDMilleAddy = 0x00BB0AD5;																											/////
+BYTE bNDMille[] = {0xEB};																												/////
+CMemory NDMille(NDMilleAddy, bNDMille, 1);																								/////
 ///////////////////////////////////////////////////////////Raining Mobs//////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////FLACC/////////////////////////////////////////////////////////////////////////////
-	DWORD FLACCAddy = 0x004747F9;																										/////
-	BYTE bFLACC[] = {0xB9, 0x07, 0x00, 0x00, 0x00, 0x90};																				/////
-	CMemory FLACC(FLACCAddy, bFLACC, sizeof(bFLACC));																					/////
+DWORD FLACCAddy = 0x004747F9;																											/////
+BYTE bFLACC[] = {0xB9, 0x07, 0x00, 0x00, 0x00, 0x90};																					/////
+CMemory FLACC(FLACCAddy, bFLACC, sizeof(bFLACC));																						/////
 ///////////////////////////////////////////////////////////FLACC/////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////7 Miss////////////////////////////////////////////////////////////////////////////
-    int Miss7Counter = 0;																												/////
-    DWORD Miss7Addy = 0x00B9B365;																										/////
-    DWORD Miss7Return = Miss7Addy + 7;																									/////
-	DWORD Miss7ReturnNoKB = Miss7Return + 0x30;																							/////
-	CodeCave(SevenMiss)																													/////
-    inc [Miss7Counter]																													/////
-    cmp dword ptr [Miss7Counter],0x07																									/////
-    jg Reset                            //jump if greater																				/////
-    mov dword ptr [esp+0x00000118],00																									/////
-    jmp dword ptr [Miss7ReturnNoKB]																										/////
+int Miss7Counter = 0;																													/////
+DWORD Miss7Addy = 0x00B9B365;																											/////
+DWORD Miss7Return = Miss7Addy + 7;																										/////
+DWORD Miss7ReturnNoKB = Miss7Return + 0x30;																								/////
+CodeCave(SevenMiss)																														/////
+   inc [Miss7Counter]																													/////
+   cmp dword ptr [Miss7Counter],0x07																									/////
+   jg Reset                            //jump if greater																				/////
+   mov dword ptr [esp+0x00000118],00																									/////
+   jmp dword ptr [Miss7ReturnNoKB]																										/////
 																																		/////
-    Reset:																																/////
-    mov [Miss7Counter],00																												/////
-    mov esi,[esp+0x0000011C]																											/////
-    jmp dword ptr [Miss7Return]																											/////
-	EndCodeCave																															/////
-	CMemory Miss7GodMode(Miss7Addy, CaveSevenMiss, 2, true);																			/////
+   Reset:																																/////
+   mov [Miss7Counter],00																												/////
+   mov esi,[esp+0x0000011C]																												/////
+   jmp dword ptr [Miss7Return]																											/////
+EndCodeCave																																/////
+CMemory Miss7GodMode(Miss7Addy, CaveSevenMiss, 2, true);																				/////
 ///////////////////////////////////////////////////////////7 Miss////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////Fusion Attack/////////////////////////////////////////////////////////////////////
-	DWORD FusionAttackAddy = 0x006FFBB2;																								/////
-	DWORD FusionAttackReturn = FusionAttackAddy + 8;																					/////
-	CodeCave(FusionAttack)																												/////
-	Hook:																																/////
-	mov dword ptr [ecx+eax*4],esi																										/////
-	inc eax																																/////
-	cmp eax,[esp+0x64]																													/////
-	jl Hook																																/////
-	mov [esp+0x18],eax																													/////
-	jmp [FusionAttackReturn]																											/////
-	EndCodeCave																															/////
-	CMemory FusionAttack(FusionAttackAddy, CaveFusionAttack, 3, true);																	/////
+DWORD FusionAttackAddy = 0x006FFBB2;																									/////
+DWORD FusionAttackReturn = FusionAttackAddy + 8;																						/////
+CodeCave(FusionAttack)																													/////
+Hook:																																	/////
+mov dword ptr [ecx+eax*4],esi																											/////
+inc eax																																	/////
+cmp eax,[esp+0x64]																														/////
+jl Hook																																	/////
+mov [esp+0x18],eax																														/////
+jmp [FusionAttackReturn]																												/////
+EndCodeCave																																/////
+CMemory FusionAttack(FusionAttackAddy, CaveFusionAttack, 3, true);																		/////
 ///////////////////////////////////////////////////////////Fusion Attack/////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////DSIFS/////////////////////////////////////////////////////////////////////////////
-	DWORD DSIFSAddy1 = 0x00BC820C;																										/////
-	DWORD DSIFSAddy2 = 0x00BC46B3;																										/////
-	DWORD DSIFSJump = 0x007FB2C0;																										/////
-	CodeCave(DSIFS)																														/////
-		cmp dword ptr [esp+0x8],0x1D905C4																								/////
-		jne DSIFSRet																													/////
-		mov dword ptr [esp+0x8],0x1D909B0																								/////
-		jmp DSIFSJump																													/////
+DWORD DSIFSAddy1 = 0x00BC820C;																											/////
+DWORD DSIFSAddy2 = 0x00BC46B3;																											/////
+DWORD DSIFSJump = 0x007FB2C0;																											/////
+CodeCave(DSIFS)																															/////
+	cmp dword ptr [esp+0x8],0x1D905C4																									/////
+	jne DSIFSRet																														/////
+	mov dword ptr [esp+0x8],0x1D909B0																									/////
+	jmp DSIFSJump																														/////
 																																		/////
-	DSIFSRet:																															/////
-		jmp DSIFSJump																													/////
-	EndCodeCave																															/////
-	CMemory DSIFS1(DSIFSAddy1, CaveDSIFS, 0, false);																					/////
-	CMemory DSIFS2(DSIFSAddy2, CaveDSIFS, 0, false);																					/////
+DSIFSRet:																																/////
+	jmp DSIFSJump																														/////
+EndCodeCave																																/////
+CMemory DSIFS1(DSIFSAddy1, CaveDSIFS, 0, false);																						/////
+CMemory DSIFS2(DSIFSAddy2, CaveDSIFS, 0, false);																						/////
 ///////////////////////////////////////////////////////////DSIFS/////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////FMA///////////////////////////////////////////////////////////////////////////////
-	DWORD FMAAddy = 0x75849260;
-	DWORD FMARetAddy = FMAAddy + 5;
-	CodeCave(FMA)
-		cmp [esp],0x006FFBA0
-		je return_FMA
-		mov edi,edi
-		push ebp
-		mov ebp,esp
-		jmp FMARetAddy
-		
-	return_FMA:
-		mov eax,0x1
-		ret 0x0C
-	EndCodeCave
-	CMemory FMA(FMAAddy, CaveFMA, 0, true);
+DWORD FMAAddy = 0x006FFBA2;																												/////
+BYTE bFMA[] = {0x74};																													/////
+CMemory FMA(FMAAddy, bFMA, 1);																											/////
 ///////////////////////////////////////////////////////////FMA///////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////Auto Aggro////////////////////////////////////////////////////////////////////////
+DWORD AutoAggroAddy = 0x00C2761f;																										/////
+DWORD AutoAggroRet = AutoAggroAddy + 5;																									/////
+DWORD AutoAggroCal = 0x00c1e110;																										/////
+CodeCave(AutoAggro)																														/////
+	call AutoAggroCal																													/////
+	mov edx,[0x011ADD04]																												/////
+	mov edx,[edx+0x29D0]																												/////
+	mov edx,[edx+0x0C]																													/////
+	mov [esi+0x2B0],edx																													/////
+	jmp AutoAggroRet																													/////
+EndCodeCave																																/////
+CMemory AutoAggro(AutoAggroAddy, CaveAutoAggro, 0, true);																				/////
+///////////////////////////////////////////////////////////Auto Aggro////////////////////////////////////////////////////////////////////////
 
 #pragma endregion 
 #pragma region Pointers Reading
@@ -556,120 +559,116 @@ void SpamPackets()
 }
 #pragma endregion
 #pragma region HackCheckBoxes
-
-	void MainForm::FullMobDisarmCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		FullMobDisarm.Enable(this->FullMobDisarmCheckBox->Checked);
-	}
-	void MainForm::PinTyperCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		PinTyper.Enable(this->PinTyperCheckBox->Checked);
-	}
-	void MainForm::NoCharKBCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		NoCharKB.Enable(this->NoCharKBCheckBox->Checked);
-	}
-	void MainForm::JumpDownAnywhereCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		JDA.Enable(this->JumpDownAnywhereCheckBox->Checked);
-	}
-	void MainForm::FastMobsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		FastMobs.Enable(this->FastMobsCheckBox->Checked);
-	}
-	void MainForm::PerfectLootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		PerfectLoot.Enable(this->PerfectLootCheckBox->Checked);
-	}
-	void MainForm::NDAllAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		NDAllAttacks.Enable(this->NDAllAttacksCheckBox->Checked);
-	}
-	void MainForm::UnlimitedMorphCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		UnlimitedMorph.Enable(this->UnlimitedMorphCheckBox->Checked);
-	}
-	void MainForm::HideDamageCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		HideDamage.Enable(this->HideDamageCheckBox->Checked);
-	}
-	void MainForm::CPUHackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		CPUHack.Enable(this->CPUHackCheckBox->Checked);
-	}
-	void MainForm::NoAttackLimitCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		UnlimitedAttackBool = NoAttackLimitCheckBox->Checked;
-		NewThread(UnlimitedAttack);
-		MessageBoxA(0,"Started", 0,0);
-	}
-	void MainForm::NDMiningCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		NDMining.Enable(this->NDMiningCheckBox->Checked);
-	}
-	void MainForm::UncensorCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		Uncensor.Enable(this->UncensorCheckBox->Checked);
-	}
-	void MainForm::SevenMissCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		Miss7GodMode.Enable(this->SevenMissCheckBox->Checked);
-	}
-	void MainForm::NoSkillMovementCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		NoSkillMovement.Enable(this->NoSkillMovementCheckBox->Checked);
-	}
-	void MainForm::NoSwearsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		NoSwears.Enable(this->NoSwearsCheckBox->Checked);
-	}
-	void MainForm::VacRightCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		VacRight.Enable(this->VacRightCheckBox->Checked);
-	}
-	void MainForm::FusionAttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		FusionAttack.Enable(this->FusionAttackCheckBox->Checked);
-	}	
-	void MainForm::NoBackGroundCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		NoBackground.Enable(this->NoBackGroundCheckBox->Checked);
-	}
-	void MainForm::DSIFSCheckBox_CheckedChanged_1(System::Object^  sender, System::EventArgs^  e)
-	{
-		DSIFS1.Enable(DSIFSCheckBox->Checked);
-		DSIFS2.Enable(DSIFSCheckBox->Checked);
-	}
-	void MainForm::NoMobsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		NoMobs.Enable(this->NoMobsCheckBox->Checked);
-	}
-	void MainForm::MobLagCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		MobLag.Enable(this->MobLagCheckBox->Checked);
-	}
-	void MainForm::InstantAirLootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		InstantAirLoot.Enable(this->InstantAirLootCheckBox->Checked);
-	}
-	void MainForm::RainingMobsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		RainingMobs.Enable(this->RainingMobsCheckBox->Checked);
-	}
-	void MainForm::NDMilleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		NDMille.Enable(this->NDMilleCheckBox->Checked);
-	}
-	void MainForm::FLACCCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		FLACC.Enable(this->FLACCCheckBox->Checked);
-	}
-	void MainForm::FMACheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		FMA.Enable(this->FMACheckBox->Checked);
-	}
-
-
+void MainForm::FullMobDisarmCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	FullMobDisarm.Enable(this->FullMobDisarmCheckBox->Checked);
+}
+void MainForm::PinTyperCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	PinTyper.Enable(this->PinTyperCheckBox->Checked);
+}
+void MainForm::NoCharKBCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	NoCharKB.Enable(this->NoCharKBCheckBox->Checked);
+}
+void MainForm::JumpDownAnywhereCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	JDA.Enable(this->JumpDownAnywhereCheckBox->Checked);
+}
+void MainForm::FastMobsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	FastMobs.Enable(this->FastMobsCheckBox->Checked);
+}
+void MainForm::PerfectLootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	PerfectLoot.Enable(this->PerfectLootCheckBox->Checked);
+}
+void MainForm::NDAllAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	NDAllAttacks.Enable(this->NDAllAttacksCheckBox->Checked);
+}
+void MainForm::UnlimitedMorphCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	UnlimitedMorph.Enable(this->UnlimitedMorphCheckBox->Checked);
+}
+void MainForm::HideDamageCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	HideDamage.Enable(this->HideDamageCheckBox->Checked);
+}
+void MainForm::CPUHackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	CPUHack.Enable(this->CPUHackCheckBox->Checked);
+}
+void MainForm::NoAttackLimitCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	UnlimitedAttackBool = NoAttackLimitCheckBox->Checked;
+	NewThread(UnlimitedAttack);
+	MessageBoxA(0,"Started", 0,0);
+}
+void MainForm::NDMiningCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	NDMining.Enable(this->NDMiningCheckBox->Checked);
+}
+void MainForm::UncensorCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Uncensor.Enable(this->UncensorCheckBox->Checked);
+}
+void MainForm::SevenMissCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Miss7GodMode.Enable(this->SevenMissCheckBox->Checked);
+}
+void MainForm::NoSkillMovementCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	NoSkillMovement.Enable(this->NoSkillMovementCheckBox->Checked);
+}
+void MainForm::NoSwearsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	NoSwears.Enable(this->NoSwearsCheckBox->Checked);
+}
+void MainForm::VacRightCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	VacRight.Enable(this->VacRightCheckBox->Checked);
+}
+void MainForm::FusionAttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	FusionAttack.Enable(this->FusionAttackCheckBox->Checked);
+}	
+void MainForm::NoBackGroundCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	NoBackground.Enable(this->NoBackGroundCheckBox->Checked);
+}
+void MainForm::NoMobsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	NoMobs.Enable(this->NoMobsCheckBox->Checked);
+}
+void MainForm::MobLagCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	MobLag.Enable(this->MobLagCheckBox->Checked);
+}
+void MainForm::InstantAirLootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	InstantAirLoot.Enable(this->InstantAirLootCheckBox->Checked);
+}
+void MainForm::RainingMobsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	RainingMobs.Enable(this->RainingMobsCheckBox->Checked);
+}
+void MainForm::NDMilleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	NDMille.Enable(this->NDMilleCheckBox->Checked);
+}
+void MainForm::FLACCCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	FLACC.Enable(this->FLACCCheckBox->Checked);
+}
+void MainForm::FMACheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	FMA.Enable(this->FMACheckBox->Checked);
+}
+void MainForm::AutoAggroCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	FMA.Enable(this->AutoAggroCheckBox->Checked);
+}
 #pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
 	void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -778,7 +777,7 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	URLDownloadToFileA(NULL,"http://wart.zuiderhoeve.nl/watybot/configcounter.php", "WatyBot.ini", 0, NULL);
 	boost::property_tree::ptree pt;
 	boost::property_tree::ini_parser::read_ini("WatyBot.ini", pt);
-	#define getHack(name) pt.get<bool>(name)
+	#define getHack(name) pt.get<bool>(name,false)
 
 	if(!IO::File::Exists("C:\\WatyBot\\packets.xml"))
 	{
@@ -815,7 +814,6 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	this->NoAttackLimitCheckBox->Enabled =		getHack("UA");
 	this->SevenMissCheckBox->Enabled =			getHack("SevenMiss");
 	this->FusionAttackCheckBox->Enabled =		getHack("FusionAttack");
-	this->DSIFSCheckBox->Enabled =				getHack("DSIFS");
 	this->PerfectLootCheckBox->Enabled =		getHack("PerfectLoot");
 	this->JumpDownAnywhereCheckBox->Enabled =	getHack("JDA");
 	this->NDMiningCheckBox->Enabled =			getHack("NDMining");
@@ -835,6 +833,7 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	this->NoMobsCheckBox->Enabled =				getHack("NoMobs");
 	this->MobLagCheckBox->Enabled =				getHack("MobLag");
 	this->RainingMobsCheckBox->Enabled =		getHack("RainingMobs");
+	this->FMACheckBox->Enabled =				pt.get<bool>("FMA",true);
 #pragma endregion
 	Globals::PacketsArray = gcnew array<String^>(100);
 	Globals::PacketsNamesArray = gcnew array<String^>(100);

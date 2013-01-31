@@ -142,7 +142,7 @@ private: System::Windows::Forms::CheckBox^  NoSwearsCheckBox;
 private: System::Windows::Forms::CheckBox^  VacRightCheckBox;
 private: System::Windows::Forms::CheckBox^  FusionAttackCheckBox;
 private: System::Windows::Forms::CheckBox^  NoBackGroundCheckBox;
-private: System::Windows::Forms::CheckBox^  DSIFSCheckBox;
+
 private: System::Windows::Forms::CheckBox^  NoMobsCheckBox;
 private: System::Windows::Forms::CheckBox^  MobLagCheckBox;
 private: System::Windows::Forms::CheckBox^  InstantAirLootCheckBox;
@@ -182,6 +182,7 @@ private: System::Windows::Forms::Button^  SavePacketEditButton;
 private: System::Windows::Forms::TextBox^  EditPacketPacketTextBox;
 private: System::Windows::Forms::TextBox^  EditPacketNameTextBox;
 private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
+private: System::Windows::Forms::CheckBox^  AutoAggroCheckBox;
 	private: System::ComponentModel::IContainer^  components;
 
 
@@ -268,7 +269,6 @@ private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
 			this->FMACheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->NDMilleCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->InstantAirLootCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->DSIFSCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->FusionAttackCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->NoSwearsCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->NoSkillMovementCheckBox = (gcnew System::Windows::Forms::CheckBox());
@@ -314,6 +314,7 @@ private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
 			this->PacketSelectBox = (gcnew System::Windows::Forms::ComboBox());
 			this->SendPacketButton = (gcnew System::Windows::Forms::Button());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->AutoAggroCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -843,6 +844,7 @@ private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
 			// 
 			// GeneralHacksGroupBox
 			// 
+			this->GeneralHacksGroupBox->Controls->Add(this->AutoAggroCheckBox);
 			this->GeneralHacksGroupBox->Controls->Add(this->FLACCCheckBox);
 			this->GeneralHacksGroupBox->Controls->Add(this->NoBackGroundCheckBox);
 			this->GeneralHacksGroupBox->Controls->Add(this->UncensorCheckBox);
@@ -870,7 +872,7 @@ private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
 			// NoBackGroundCheckBox
 			// 
 			this->NoBackGroundCheckBox->AutoSize = true;
-			this->NoBackGroundCheckBox->Location = System::Drawing::Point(7, 66);
+			this->NoBackGroundCheckBox->Location = System::Drawing::Point(6, 65);
 			this->NoBackGroundCheckBox->Name = L"NoBackGroundCheckBox";
 			this->NoBackGroundCheckBox->Size = System::Drawing::Size(145, 17);
 			this->NoBackGroundCheckBox->TabIndex = 6;
@@ -1009,7 +1011,6 @@ private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
 			this->CharacterHacksGroupBox->Controls->Add(this->FMACheckBox);
 			this->CharacterHacksGroupBox->Controls->Add(this->NDMilleCheckBox);
 			this->CharacterHacksGroupBox->Controls->Add(this->InstantAirLootCheckBox);
-			this->CharacterHacksGroupBox->Controls->Add(this->DSIFSCheckBox);
 			this->CharacterHacksGroupBox->Controls->Add(this->FusionAttackCheckBox);
 			this->CharacterHacksGroupBox->Controls->Add(this->NoSwearsCheckBox);
 			this->CharacterHacksGroupBox->Controls->Add(this->NoSkillMovementCheckBox);
@@ -1031,7 +1032,7 @@ private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
 			// FMACheckBox
 			// 
 			this->FMACheckBox->AutoSize = true;
-			this->FMACheckBox->Location = System::Drawing::Point(113, 19);
+			this->FMACheckBox->Location = System::Drawing::Point(6, 153);
 			this->FMACheckBox->Name = L"FMACheckBox";
 			this->FMACheckBox->Size = System::Drawing::Size(48, 17);
 			this->FMACheckBox->TabIndex = 11;
@@ -1042,7 +1043,7 @@ private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
 			// NDMilleCheckBox
 			// 
 			this->NDMilleCheckBox->AutoSize = true;
-			this->NDMilleCheckBox->Location = System::Drawing::Point(164, 153);
+			this->NDMilleCheckBox->Location = System::Drawing::Point(164, 151);
 			this->NDMilleCheckBox->Name = L"NDMilleCheckBox";
 			this->NDMilleCheckBox->Size = System::Drawing::Size(117, 17);
 			this->NDMilleCheckBox->TabIndex = 10;
@@ -1060,18 +1061,6 @@ private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
 			this->InstantAirLootCheckBox->Text = L"Instant Air Loot";
 			this->InstantAirLootCheckBox->UseVisualStyleBackColor = true;
 			this->InstantAirLootCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::InstantAirLootCheckBox_CheckedChanged);
-			// 
-			// DSIFSCheckBox
-			// 
-			this->DSIFSCheckBox->AutoSize = true;
-			this->DSIFSCheckBox->Enabled = false;
-			this->DSIFSCheckBox->Location = System::Drawing::Point(6, 153);
-			this->DSIFSCheckBox->Name = L"DSIFSCheckBox";
-			this->DSIFSCheckBox->Size = System::Drawing::Size(130, 17);
-			this->DSIFSCheckBox->TabIndex = 8;
-			this->DSIFSCheckBox->Text = L"DS Instant Final Slash";
-			this->DSIFSCheckBox->UseVisualStyleBackColor = true;
-			this->DSIFSCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::DSIFSCheckBox_CheckedChanged_1);
 			// 
 			// FusionAttackCheckBox
 			// 
@@ -1525,6 +1514,17 @@ private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
 			this->StatsTimer->Interval = 15;
 			this->StatsTimer->Tick += gcnew System::EventHandler(this, &MainForm::StatsTimer_Tick);
 			// 
+			// AutoAggroCheckBox
+			// 
+			this->AutoAggroCheckBox->AutoSize = true;
+			this->AutoAggroCheckBox->Location = System::Drawing::Point(230, 65);
+			this->AutoAggroCheckBox->Name = L"AutoAggroCheckBox";
+			this->AutoAggroCheckBox->Size = System::Drawing::Size(79, 17);
+			this->AutoAggroCheckBox->TabIndex = 8;
+			this->AutoAggroCheckBox->Text = L"Auto Aggro";
+			this->AutoAggroCheckBox->UseVisualStyleBackColor = true;
+			this->AutoAggroCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoAggroCheckBox_CheckedChanged);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1615,7 +1615,6 @@ private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
 	private: System::Void VacRightCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void FusionAttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void NoBackGroundCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);	
-	private: System::Void DSIFSCheckBox_CheckedChanged_1(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void NoMobsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void MobLagCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void InstantAirLootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
@@ -1634,6 +1633,7 @@ private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
 	private: System::Void SelectPacketForEditingComboBox_DropDown(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SelectPacketForEditingComboBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e);
-	};
+	private: System::Void AutoAggroCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+};
 }
 #pragma endregion
