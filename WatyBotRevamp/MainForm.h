@@ -183,6 +183,8 @@ private: System::Windows::Forms::TextBox^  EditPacketPacketTextBox;
 private: System::Windows::Forms::TextBox^  EditPacketNameTextBox;
 private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
 private: System::Windows::Forms::CheckBox^  AutoAggroCheckBox;
+private: System::Windows::Forms::Timer^  SpamPacketsTimer;
+
 	private: System::ComponentModel::IContainer^  components;
 
 
@@ -252,6 +254,7 @@ private: System::Windows::Forms::CheckBox^  AutoAggroCheckBox;
 			this->HPBackground = (gcnew System::Windows::Forms::PictureBox());
 			this->HacksTab = (gcnew System::Windows::Forms::TabPage());
 			this->GeneralHacksGroupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->AutoAggroCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->FLACCCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->NoBackGroundCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->UncensorCheckBox = (gcnew System::Windows::Forms::CheckBox());
@@ -314,7 +317,7 @@ private: System::Windows::Forms::CheckBox^  AutoAggroCheckBox;
 			this->PacketSelectBox = (gcnew System::Windows::Forms::ComboBox());
 			this->SendPacketButton = (gcnew System::Windows::Forms::Button());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->AutoAggroCheckBox = (gcnew System::Windows::Forms::CheckBox());
+			this->SpamPacketsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -858,6 +861,17 @@ private: System::Windows::Forms::CheckBox^  AutoAggroCheckBox;
 			this->GeneralHacksGroupBox->TabStop = false;
 			this->GeneralHacksGroupBox->Text = L"General Hacks";
 			// 
+			// AutoAggroCheckBox
+			// 
+			this->AutoAggroCheckBox->AutoSize = true;
+			this->AutoAggroCheckBox->Location = System::Drawing::Point(230, 65);
+			this->AutoAggroCheckBox->Name = L"AutoAggroCheckBox";
+			this->AutoAggroCheckBox->Size = System::Drawing::Size(79, 17);
+			this->AutoAggroCheckBox->TabIndex = 8;
+			this->AutoAggroCheckBox->Text = L"Auto Aggro";
+			this->AutoAggroCheckBox->UseVisualStyleBackColor = true;
+			this->AutoAggroCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoAggroCheckBox_CheckedChanged);
+			// 
 			// FLACCCheckBox
 			// 
 			this->FLACCCheckBox->AutoSize = true;
@@ -1332,7 +1346,6 @@ private: System::Windows::Forms::CheckBox^  AutoAggroCheckBox;
 			this->SelectPacketForEditingComboBox->Name = L"SelectPacketForEditingComboBox";
 			this->SelectPacketForEditingComboBox->Size = System::Drawing::Size(197, 21);
 			this->SelectPacketForEditingComboBox->TabIndex = 10;
-			this->SelectPacketForEditingComboBox->DropDown += gcnew System::EventHandler(this, &MainForm::SelectPacketForEditingComboBox_DropDown);
 			this->SelectPacketForEditingComboBox->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::SelectPacketForEditingComboBox_SelectedIndexChanged);
 			// 
 			// DeletePacketsGroupBox
@@ -1354,7 +1367,6 @@ private: System::Windows::Forms::CheckBox^  AutoAggroCheckBox;
 			this->DeletePacketComboBox->Name = L"DeletePacketComboBox";
 			this->DeletePacketComboBox->Size = System::Drawing::Size(197, 21);
 			this->DeletePacketComboBox->TabIndex = 4;
-			this->DeletePacketComboBox->DropDown += gcnew System::EventHandler(this, &MainForm::DeletePacketComboBox_DropDown);
 			// 
 			// DeletePacketButton
 			// 
@@ -1496,7 +1508,6 @@ private: System::Windows::Forms::CheckBox^  AutoAggroCheckBox;
 			this->PacketSelectBox->Name = L"PacketSelectBox";
 			this->PacketSelectBox->Size = System::Drawing::Size(197, 21);
 			this->PacketSelectBox->TabIndex = 2;
-			this->PacketSelectBox->DropDown += gcnew System::EventHandler(this, &MainForm::PacketSelectBox_DropDown);
 			// 
 			// SendPacketButton
 			// 
@@ -1514,16 +1525,9 @@ private: System::Windows::Forms::CheckBox^  AutoAggroCheckBox;
 			this->StatsTimer->Interval = 15;
 			this->StatsTimer->Tick += gcnew System::EventHandler(this, &MainForm::StatsTimer_Tick);
 			// 
-			// AutoAggroCheckBox
+			// SpamPacketsTimer
 			// 
-			this->AutoAggroCheckBox->AutoSize = true;
-			this->AutoAggroCheckBox->Location = System::Drawing::Point(230, 65);
-			this->AutoAggroCheckBox->Name = L"AutoAggroCheckBox";
-			this->AutoAggroCheckBox->Size = System::Drawing::Size(79, 17);
-			this->AutoAggroCheckBox->TabIndex = 8;
-			this->AutoAggroCheckBox->Text = L"Auto Aggro";
-			this->AutoAggroCheckBox->UseVisualStyleBackColor = true;
-			this->AutoAggroCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoAggroCheckBox_CheckedChanged);
+			this->SpamPacketsTimer->Tick += gcnew System::EventHandler(this, &MainForm::SpamPacketsTimer_Tick);
 			// 
 			// MainForm
 			// 
@@ -1624,16 +1628,14 @@ private: System::Windows::Forms::CheckBox^  AutoAggroCheckBox;
 	private: System::Void SendPacketButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void MainTabControl_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
-	private: System::Void PacketSelectBox_DropDown(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void DeletePacketButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void DeletePacketComboBox_DropDown(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void FMACheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SpamsPacketButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void SelectPacketForEditingComboBox_DropDown(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SelectPacketForEditingComboBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void AutoAggroCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-};
-}
+	private: System::Void SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^  e);
+	};
+	}
 #pragma endregion

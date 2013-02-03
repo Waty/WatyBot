@@ -10,18 +10,62 @@
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <msclr\marshal_cppstd.h>
+#include <boost/foreach.hpp>
 using namespace std;
 using namespace WatyBotRevamp;
 using namespace msclr::interop;
 
+#pragma region Packets
+#pragma region Packet Vars
+struct packet
+{
+	string	PacketName;
+	string	PacketData;
+};
+typedef vector<packet> PacketReader;
+#pragma endregion
+
+PacketReader read(istream & is)
+{
+	//populate xml tree
+	using boost::property_tree::ptree;
+	ptree pt;
+	read_xml(is, pt);
+
+	PacketReader ans;
+	BOOST_FOREACH( ptree::value_type const& v, pt.get_child("packetlist"))
+	{
+		if(v.first == "packet")
+		{
+			packet p;
+			p.PacketName = v.second.get<string>("name");
+			p.PacketData = v.second.get<string>("packet");
+			ans.push_back(p);
+		}
+	}
+	return ans;
+}
+void write( PacketReader packetreader, std::ostream & os )
+{
+    using boost::property_tree::ptree;
+    ptree pt;
+	BOOST_FOREACH( packet p, packetreader )
+	{
+        ptree & node = pt.add("packetlist.packet", "");
+		node.put("name", p.PacketName);
+		node.put("packet", p.PacketData);
+    }
+	write_xml(os, pt);
+}
+string PacketFileName = "C:\\WatyBot\\packets.xml";
+fstream PacketFile(PacketFileName);
+PacketReader Packets = read(PacketFile);
+#pragma endregion
 #pragma region vars
 public ref class Globals
 {
 public:
-	static array <System::String^> ^PacketsArray;
-	static array <System::String^> ^PacketsNamesArray;
 	static array <System::Object^> ^KeyNames;
-	static String^ SpamPacket;
 };
 
 int SpamTimes, SpamDelay;
@@ -542,21 +586,6 @@ void UnlimitedAttack()
 		Sleep(100);
 	}
 }
-void SpamPackets()
-{
-	for(int i = 0; i < SpamTimes; i++)
-	{
-		String^ strError = String::Empty;
-		if(!fSendPacket(Globals::SpamPacket->Replace(" ", ""),strError))
-		{
-			MessageBox::Show(strError);
-			i = SpamTimes;
-		}
-		SpammedTimes = i;
-		Sleep(SpamDelay);
-	}
-	SpammingPackets = false;
-}
 #pragma endregion
 #pragma region HackCheckBoxes
 void MainForm::FullMobDisarmCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -775,9 +804,8 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 {
 	IO::File::Delete("WatyBot.ini");
 	URLDownloadToFileA(NULL,"http://wart.zuiderhoeve.nl/watybot/configcounter.php", "WatyBot.ini", 0, NULL);
-	boost::property_tree::ptree pt;
-	boost::property_tree::ini_parser::read_ini("WatyBot.ini", pt);
-	#define getHack(name) pt.get<bool>(name,false)
+	boost::property_tree::ptree pt_ini;
+	boost::property_tree::ini_parser::read_ini("WatyBot.ini", pt_ini);
 
 	if(!IO::File::Exists("C:\\WatyBot\\packets.xml"))
 	{
@@ -789,11 +817,11 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	Globals::KeyNames = gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9"};
 	this->HPComboBox->Items->AddRange(Globals::KeyNames);
 	this->HPComboBox->SelectedIndex = 8;
-	this->HPTextBox->Text = Convert::ToString(pt.get<int>("AutoHPValue"));
+	this->HPTextBox->Text = Convert::ToString(pt_ini.get<int>("AutoHPValue"));
 
 	this->MPComboBox->Items->AddRange(Globals::KeyNames);
 	this->MPComboBox->SelectedIndex = 9;
-	this->MPTextBox->Text = Convert::ToString(pt.get<int>("AutoMPValue"));
+	this->MPTextBox->Text = Convert::ToString(pt_ini.get<int>("AutoMPValue"));
 
     this->AttackComboBox->Items->AddRange(Globals::KeyNames);
 	this->AttackComboBox->SelectedIndex = 2;
@@ -808,6 +836,7 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	this->AutoSkill4ComboBox->Items->AddRange(Globals::KeyNames);
 
 #pragma region Read config for enabled CheckBoxes
+	#define getHack(name) pt_ini.get<bool>(name,false)
 	this->NoCharKBCheckBox->Enabled =			getHack("NoCharKB");
 	this->NDAllAttacksCheckBox->Enabled =		getHack("AllAttacksND");
 	this->UnlimitedMorphCheckBox->Enabled =		getHack("UnlimitedMorph");
@@ -833,10 +862,24 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	this->NoMobsCheckBox->Enabled =				getHack("NoMobs");
 	this->MobLagCheckBox->Enabled =				getHack("MobLag");
 	this->RainingMobsCheckBox->Enabled =		getHack("RainingMobs");
-	this->FMACheckBox->Enabled =				pt.get<bool>("FMA",true);
+	this->FMACheckBox->Enabled =				getHack("FMA");
 #pragma endregion
-	Globals::PacketsArray = gcnew array<String^>(100);
-	Globals::PacketsNamesArray = gcnew array<String^>(100);
+
+
+#pragma region Create Packets
+	for(unsigned int i=0; i < Packets.size(); i++)
+	{
+		try
+		{
+			String^ PacketName = marshal_as<String^>(Packets.at(i).PacketName);
+			this->PacketSelectBox->Items->Add(PacketName);
+			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
+			this->DeletePacketComboBox->Items->Add(PacketName);
+		}
+		catch(...){};
+	}
+#pragma endregion
+
 }
 void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
@@ -870,20 +913,6 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	double EXPBarLength = (CharEXP()/100) * lengtOfBars;
 	this->EXPForeground->Width = EXPBarLength;
 #pragma endregion
-
-
-	if(!SpammingPackets)
-	{
-		this->SpamPacketTimesTextBox->Enabled = true;
-		this->SpamPacketTimesLabel->Enabled = true;
-		this->SpamPacketsDelayTextBox->Enabled = true;
-		this->SpamPacketsDelayLabel->Enabled = true;
-		this->SpamsPacketButton->Enabled = true;
-	}
-	if(SpammingPackets)
-		SpammingProgressBar->Value = SpammedTimes + 1;
-	if(SpammedTimes+1 == SpamTimes) this->SpammingProgressBar->Value = 0;
-
 }
 void MainForm::FixStatsButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
@@ -895,11 +924,9 @@ void MainForm::MainTabControl_SelectedIndexChanged(System::Object^  sender, Syst
 }
 void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 {
-	boost::property_tree::ptree pt;
-	boost::property_tree::read_ini("WatyBot.ini", pt);
-	pt.put("AutoHPValue", 8000);
-	boost::property_tree::write_ini("WatyBot.ini", pt);
-
+	IO::File::Delete("C:\\WatyBot\\testpackets.xml");
+	ofstream outputPacketFile("C:\\WatyBot\\testpackets.xml");
+	write(Packets, outputPacketFile);
 	switch(MessageBoxA(NULL, "Close MapleStory too?", "Terminate Maple?", MB_ICONQUESTION | MB_YESNO))
 	{
 	case IDYES:
@@ -911,141 +938,129 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 	}
 }
 #pragma region PacketSender
-void MainForm::PacketSelectBox_DropDown(System::Object^  sender, System::EventArgs^  e)
-{
-	boost::property_tree::ptree pt;
-	boost::property_tree::read_xml("C:\\WatyBot\\packets.xml", pt);
-	this->PacketSelectBox->Items->Clear();
-	for(int i = 0; i<1000; i++)
-	{
-		try
-		{
-			string name = pt.get<string>(marshal_as<string>("watybot.packet" + i + ".name"));
-			string packet = pt.get<string>(marshal_as<string>("watybot.packet" + i + ".packet"));
-			if(name != "NULL")
-			{
-				this->PacketSelectBox->Items->Add(marshal_as<String^>(name));
-				Globals::PacketsArray[i] = marshal_as<String^>(packet);
-			}
-		}
-		catch(...){};
-	}
-}
 void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-    String^ strError = String::Empty;
-	if(PacketSelectBox->SelectedIndex < 0)
-	{
-		MessageBoxA(0,"Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
-	}
-	else if(!fSendPacket(Globals::PacketsArray[PacketSelectBox->SelectedIndex]->Replace(" ", ""),strError)) MessageBox::Show(strError);
+	String^ strError = String::Empty;
+	if(PacketSelectBox->SelectedIndex < 0)	MessageBoxA(0,"Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
+	else if(!fSendPacket(marshal_as<String^>(Packets.at(PacketSelectBox->SelectedIndex).PacketData)->Replace(" ", ""),strError)) MessageBox::Show(strError);
 }
 void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	boost::property_tree::ptree pt;
-	boost::property_tree::read_xml("C:\\WatyBot\\packets.xml", pt);
-	if(this->AddPacketNameTextBox->Text != String::Empty | this->AddPacketPacketTextBox->Text != String::Empty)
+	packet p;
+	p.PacketName = marshal_as<string>(this->AddPacketNameTextBox->Text);
+	p.PacketData = marshal_as<string>(this->AddPacketPacketTextBox->Text);
+	Packets.push_back(p);
+	MessageBox::Show("Packet was added succesfully!");
+
+	//clear old packets
+	this->AddPacketNameTextBox->Text = String::Empty;
+	this->AddPacketPacketTextBox->Text = String::Empty;
+	this->PacketSelectBox->Items->Clear();
+	this->SelectPacketForEditingComboBox->Items->Clear();
+	this->DeletePacketComboBox->Items->Clear();
+
+	//refresh comboboxes
+	for(unsigned int i=0; i < Packets.size(); i++)
 	{
-		int i = 0;
-		while(pt.get<std::string>(marshal_as<string>("watybot.packet" + i + ".name"), "NULL") != "NULL")	i++;
-		
-		pt.put(marshal_as<string>("watybot.packet"+ i + ".name"), marshal_as<string>(this->AddPacketNameTextBox->Text));
-		pt.put(marshal_as<string>("watybot.packet"+ i + ".packet"), marshal_as<string>(this->AddPacketPacketTextBox->Text));
-		boost::property_tree::write_xml("C:\\WatyBot\\packets.xml", pt);
-		this->AddPacketNameTextBox->Clear();
-		this->AddPacketPacketTextBox->Clear();
-		MessageBox::Show("Added the packet to the list!");
+		try
+		{
+			String^ PacketName = marshal_as<String^>(Packets.at(i).PacketName);
+			this->PacketSelectBox->Items->Add(PacketName);
+			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
+			this->DeletePacketComboBox->Items->Add(PacketName);
+		}
+		catch(...){};
 	}
 }
 void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	boost::property_tree::ptree pt;
-	boost::property_tree::read_xml("C:\\WatyBot\\packets.xml", pt);
-	int i = this->DeletePacketComboBox->SelectedIndex;
-	switch (MessageBoxA(0, "Are you sure you want to delete this packet?", "Confirm", MB_YESNO | MB_ICONQUESTION))
-	{
-	case IDYES:
-		{
-			pt.put(marshal_as<string>("watybot.packet"+ i + ".name"), "NULL");
-			pt.put(marshal_as<string>("watybot.packet"+ i + ".packet"), "NULL");
-			boost::property_tree::write_xml("C:\\WatyBot\\packets.xml", pt);
-			this->DeletePacketComboBox->Items->Clear();
-		}
-	}
-}
-void MainForm::DeletePacketComboBox_DropDown(System::Object^  sender, System::EventArgs^  e)
-{
-	boost::property_tree::ptree pt;
-		boost::property_tree::read_xml("C:\\WatyBot\\packets.xml", pt);
-
-	this->DeletePacketComboBox->Items->Clear();
-	for(int i = 0; i<1000; i++)
-	{
-		try
-		{
-			string name = pt.get<string>(marshal_as<string>("watybot.packet" + i + ".name"));
-			string packet = pt.get<string>(marshal_as<string>("watybot.packet" + i + ".packet"));
-			if(name != "NULL")
-			{
-				this->DeletePacketComboBox->Items->Add(marshal_as<String^>(name));
-				Globals::PacketsArray[i] = marshal_as<String^>(packet);
-			}
-		}
-		catch(...){};
-	}
-}
-void MainForm::SelectPacketForEditingComboBox_DropDown(System::Object^  sender, System::EventArgs^  e)
-{
-	boost::property_tree::ptree pt;
-	boost::property_tree::read_xml("C:\\WatyBot\\packets.xml", pt);
+	//delete packet from vector
+	Packets.erase(Packets.begin() + DeletePacketComboBox->SelectedIndex);
+	MessageBox::Show("Packet was deleted succesfully!");
+	
+	//clear old packets
+	this->PacketSelectBox->Items->Clear();
 	this->SelectPacketForEditingComboBox->Items->Clear();
-	for(int i = 0; i<1000; i++)
+	this->DeletePacketComboBox->Items->Clear();
+
+	//refresh comboboxes
+	for(unsigned int i=0; i < Packets.size(); i++)
 	{
 		try
 		{
-			string name = pt.get<string>(marshal_as<string>("watybot.packet" + i + ".name"));
-			string packet = pt.get<string>(marshal_as<string>("watybot.packet" + i + ".packet"));
-			if(name != "NULL")
-			{
-				this->SelectPacketForEditingComboBox->Items->Add(marshal_as<String^>(name));
-				Globals::PacketsArray[i] = marshal_as<String^>(packet);
-				Globals::PacketsNamesArray[i] = marshal_as<String^>(name);
-			}
+			String^ PacketName = marshal_as<String^>(Packets.at(i).PacketName);
+			this->PacketSelectBox->Items->Add(PacketName);
+			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
+			this->DeletePacketComboBox->Items->Add(PacketName);
 		}
 		catch(...){};
 	}
 }
 void MainForm::SelectPacketForEditingComboBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	this->EditPacketNameTextBox->Text = Globals::PacketsNamesArray[SelectPacketForEditingComboBox->SelectedIndex];
-	this->EditPacketPacketTextBox->Text = Globals::PacketsArray[SelectPacketForEditingComboBox->SelectedIndex];
+	if(SelectPacketForEditingComboBox->SelectedIndex >= 0)
+	{
+		this->EditPacketNameTextBox->Text = marshal_as<String^>(Packets.at(SelectPacketForEditingComboBox->SelectedIndex).PacketName);
+		this->EditPacketPacketTextBox->Text = marshal_as<String^>(Packets.at(SelectPacketForEditingComboBox->SelectedIndex).PacketData);
+	}
 }
 void MainForm::SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	boost::property_tree::ptree pt;
-	boost::property_tree::read_xml("C:\\WatyBot\\packets.xml", pt);
-	int i = SelectPacketForEditingComboBox->SelectedIndex;
-	pt.put(marshal_as<string>("watybot.packet"+ i + ".name"), marshal_as<string>(this->EditPacketNameTextBox->Text));
-	pt.put(marshal_as<string>("watybot.packet"+ i + ".packet"), marshal_as<string>(this->EditPacketPacketTextBox->Text));
-	boost::property_tree::write_xml("C:\\WatyBot\\packets.xml", pt);
-	this->EditPacketNameTextBox->Clear();
-	this->EditPacketPacketTextBox->Clear();
+	Packets.at(SelectPacketForEditingComboBox->SelectedIndex).PacketName = marshal_as<string>(EditPacketNameTextBox->Text);
+	Packets.at(SelectPacketForEditingComboBox->SelectedIndex).PacketData = marshal_as<string>(EditPacketPacketTextBox->Text);
+
+	//clear old packets
+	this->EditPacketNameTextBox->Text = String::Empty;
+	this->EditPacketPacketTextBox->Text = String::Empty;
+	this->PacketSelectBox->Items->Clear();
 	this->SelectPacketForEditingComboBox->Items->Clear();
-	MessageBox::Show("Editing Complete!");
+	this->DeletePacketComboBox->Items->Clear();
+
+	//refresh comboboxes
+	for(unsigned int i=0; i < Packets.size(); i++)
+	{
+		try
+		{
+			String^ PacketName = marshal_as<String^>(Packets.at(i).PacketName);
+			this->PacketSelectBox->Items->Add(PacketName);
+			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
+			this->DeletePacketComboBox->Items->Add(PacketName);
+		}
+		catch(...){};
+	}
 }
+int SpammedPackets;
 void MainForm::SpamsPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	SpammingPackets = true;
-	Globals::SpamPacket = Globals::PacketsArray[this->PacketSelectBox->SelectedIndex];
-	SpamTimes = Convert::ToInt32(this->SpamPacketTimesTextBox->Text);
-	SpamDelay = Convert::ToInt32(this->SpamPacketsDelayTextBox->Text);
-	NewThread(SpamPackets);
-
-	this->SpamsPacketButton->Enabled = false;
-	this->SpamPacketTimesTextBox->Enabled = false;
-	this->SpamPacketTimesLabel->Enabled = false;
-	this->SpamPacketsDelayTextBox->Enabled = false;
-	this->SpamPacketsDelayLabel->Enabled = false;
-	this->SpammingProgressBar->Maximum = SpamTimes;
+	this->SpamPacketsTimer->Interval = Convert::ToInt32(this->SpamPacketsDelayTextBox->Text);
+	this->SpammingProgressBar->Maximum = Convert::ToInt32(this->SpamPacketTimesTextBox->Text);
+	this->SendPacketGroupBox->Enabled = false;
+	SpammedPackets = 0;
+	this->SpamPacketsTimer->Enabled = true;
 }
+void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
+{
+	
+	String^ strError = String::Empty;
+	if(PacketSelectBox->SelectedIndex < 0)
+	{
+		this->SpamPacketsTimer->Enabled = false;
+		MessageBoxA(0,"Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
+	}
+	else if(!fSendPacket(marshal_as<String^>(Packets.at(PacketSelectBox->SelectedIndex).PacketData)->Replace(" ", ""),strError))
+	{
+		this->SpamPacketsTimer->Enabled = false;
+		MessageBox::Show(strError);
+	}
+
+	this->SpammingProgressBar->Value = SpammedPackets;
+	SpammedPackets++;
+	if(SpammedPackets >= Convert::ToInt32(this->SpamPacketTimesTextBox->Text))
+	{
+		this->SpamPacketsTimer->Enabled = false;
+		MessageBox::Show("Finished Spamming packets!");
+		this->SendPacketGroupBox->Enabled = true;
+	}
+}
+
 #pragma endregion
