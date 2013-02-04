@@ -1,28 +1,33 @@
 #include "MyForm.h"
 #include <Windows.h>
+#include <iostream>
+#include <stdio.h>
+#include <tchar.h>
+#include <vector>
+#include <boost/property_tree/ptree.hpp>
+#include <msclr\marshal_cppstd.h>
 
 using namespace WatyBotInjector;
+using namespace System;
+using namespace System::IO;
+using namespace System::Diagnostics;
 
-void MyForm::OpenMSFile_FileOk(System::Object^  sender, System::ComponentModel::CancelEventArgs^  e)
+void StartMapleStory()
 {
+	if(!File::Exists("MapleStory.exe"))
+	{
+		::MessageBox::Show("You haven't placed this program in you're minecraft folder!!!");
+		exit(1);
+	}
 
+	ProcessStartInfo^ startInfo = gcnew ProcessStartInfo("MapleStory.exe");
+	Process::Start(startInfo);
 }
 
 void MyForm::MyForm_Load(System::Object^  sender, System::EventArgs^  e)
 {
+	StartMapleStory();
 }
-
-void MyForm::button1_Click(System::Object^  sender, System::EventArgs^  e)
-{
-	if(OpenMSFile->ShowDialog() == System::Windows::Forms::DialogResult::OK)
-	{
-
-	}
-
-}
-
-
-
 
 
 int main()
