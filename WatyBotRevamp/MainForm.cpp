@@ -328,23 +328,6 @@ EndCodeCave																																/////
 CMemory FusionAttack(FusionAttackAddy, CaveFusionAttack, 3, true);																		/////
 ///////////////////////////////////////////////////////////Fusion Attack/////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////DSIFS/////////////////////////////////////////////////////////////////////////////
-DWORD DSIFSAddy1 = 0x00BC820C;																											/////
-DWORD DSIFSAddy2 = 0x00BC46B3;																											/////
-DWORD DSIFSJump = 0x007FB2C0;																											/////
-CodeCave(DSIFS)																															/////
-	cmp dword ptr [esp+0x8],0x1D905C4																									/////
-	jne DSIFSRet																														/////
-	mov dword ptr [esp+0x8],0x1D909B0																									/////
-	jmp DSIFSJump																														/////
-																																		/////
-DSIFSRet:																																/////
-	jmp DSIFSJump																														/////
-EndCodeCave																																/////
-CMemory DSIFS1(DSIFSAddy1, CaveDSIFS, 0, false);																						/////
-CMemory DSIFS2(DSIFSAddy2, CaveDSIFS, 0, false);																						/////
-///////////////////////////////////////////////////////////DSIFS/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////FMA///////////////////////////////////////////////////////////////////////////////
 DWORD FMAAddy = 0x006FFBA2;																												/////
 BYTE bFMA[] = {0x74};																													/////
@@ -365,6 +348,19 @@ CodeCave(AutoAggro)																														/////
 EndCodeCave																																/////
 CMemory AutoAggro(AutoAggroAddy, CaveAutoAggro, 0, true);																				/////
 ///////////////////////////////////////////////////////////Auto Aggro////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////Spawn Control/////////////////////////////////////////////////////////////////////
+DWORD SPControlAddy = 0x00B8420A;
+DWORD SPControlRet = SPControlAddy + 6;
+DWORD spawn_x = 0x0;
+DWORD spawn_y = 0x0;
+CodeCave(SPControl)
+	mov ebx, [spawn_x]
+	mov ebp, [spawn_y]
+	jmp dword ptr SPControlRet
+EndCodeCave
+CMemory SPControl(SPControlAddy, CaveSPControl, 1, true);
+///////////////////////////////////////////////////////////Spawn Control/////////////////////////////////////////////////////////////////////
 
 #pragma endregion 
 #pragma region Pointers Reading
@@ -698,6 +694,13 @@ void MainForm::AutoAggroCheckBox_CheckedChanged(System::Object^  sender, System:
 {
 	FMA.Enable(this->AutoAggroCheckBox->Checked);
 }
+void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	SPControl.Enable(this->SPControlCheckBox->Checked);
+	spawn_x = CharX();
+	spawn_y = CharY();
+}
+
 #pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
 	void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -1033,7 +1036,6 @@ int SpammedPackets;
 void MainForm::SpamsPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	this->SpamPacketsTimer->Interval = Convert::ToInt32(this->SpamPacketsDelayTextBox->Text);
-	this->SpammingProgressBar->Maximum = Convert::ToInt32(this->SpamPacketTimesTextBox->Text);
 	this->SendPacketGroupBox->Enabled = false;
 	SpammedPackets = 0;
 	this->SpamPacketsTimer->Enabled = true;
@@ -1053,7 +1055,6 @@ void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^
 		MessageBox::Show(strError);
 	}
 
-	this->SpammingProgressBar->Value = SpammedPackets;
 	SpammedPackets++;
 	if(SpammedPackets >= Convert::ToInt32(this->SpamPacketTimesTextBox->Text))
 	{

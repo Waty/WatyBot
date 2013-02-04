@@ -176,7 +176,7 @@ private: System::Windows::Forms::GroupBox^  DeletePacketsGroupBox;
 private: System::Windows::Forms::ComboBox^  DeletePacketComboBox;
 private: System::Windows::Forms::Button^  DeletePacketButton;
 private: System::Windows::Forms::CheckBox^  FMACheckBox;
-private: System::Windows::Forms::ProgressBar^  SpammingProgressBar;
+
 private: System::Windows::Forms::GroupBox^  EditPacketGroupBox;
 private: System::Windows::Forms::Button^  SavePacketEditButton;
 private: System::Windows::Forms::TextBox^  EditPacketPacketTextBox;
@@ -184,6 +184,9 @@ private: System::Windows::Forms::TextBox^  EditPacketNameTextBox;
 private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
 private: System::Windows::Forms::CheckBox^  AutoAggroCheckBox;
 private: System::Windows::Forms::Timer^  SpamPacketsTimer;
+private: System::Windows::Forms::TabPage^  SPControlTabPage;
+private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
+
 
 	private: System::ComponentModel::IContainer^  components;
 
@@ -308,7 +311,6 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			this->AddPacketPacketLabel = (gcnew System::Windows::Forms::Label());
 			this->AddPacketNameLabel = (gcnew System::Windows::Forms::Label());
 			this->SendPacketGroupBox = (gcnew System::Windows::Forms::GroupBox());
-			this->SpammingProgressBar = (gcnew System::Windows::Forms::ProgressBar());
 			this->SpamsPacketButton = (gcnew System::Windows::Forms::Button());
 			this->SpamPacketsDelayLabel = (gcnew System::Windows::Forms::Label());
 			this->SpamPacketsDelayTextBox = (gcnew System::Windows::Forms::TextBox());
@@ -318,6 +320,8 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			this->SendPacketButton = (gcnew System::Windows::Forms::Button());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SpamPacketsTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->SPControlTabPage = (gcnew System::Windows::Forms::TabPage());
+			this->SPControlCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -341,18 +345,20 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			this->DeletePacketsGroupBox->SuspendLayout();
 			this->AddPacketsGroupBox->SuspendLayout();
 			this->SendPacketGroupBox->SuspendLayout();
+			this->SPControlTabPage->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
 			// 
 			this->MainTabControl->Controls->Add(this->AutoBotTab);
 			this->MainTabControl->Controls->Add(this->HacksTab);
-			this->MainTabControl->Controls->Add(this->InfoTab);
 			this->MainTabControl->Controls->Add(this->PacketSenderTab);
+			this->MainTabControl->Controls->Add(this->SPControlTabPage);
+			this->MainTabControl->Controls->Add(this->InfoTab);
 			this->MainTabControl->Location = System::Drawing::Point(1, 1);
 			this->MainTabControl->Name = L"MainTabControl";
 			this->MainTabControl->SelectedIndex = 0;
-			this->MainTabControl->Size = System::Drawing::Size(334, 376);
+			this->MainTabControl->Size = System::Drawing::Size(334, 422);
 			this->MainTabControl->TabIndex = 0;
 			this->MainTabControl->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::MainTabControl_SelectedIndexChanged);
 			// 
@@ -365,13 +371,14 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			this->AutoBotTab->Controls->Add(this->EXPForeground);
 			this->AutoBotTab->Controls->Add(this->MPForeground);
 			this->AutoBotTab->Controls->Add(this->HPForeground);
+			this->AutoBotTab->Controls->Add(this->FixStatsButton);
 			this->AutoBotTab->Controls->Add(this->EXPBackground);
 			this->AutoBotTab->Controls->Add(this->MPBackground);
 			this->AutoBotTab->Controls->Add(this->HPBackground);
 			this->AutoBotTab->Location = System::Drawing::Point(4, 22);
 			this->AutoBotTab->Name = L"AutoBotTab";
 			this->AutoBotTab->Padding = System::Windows::Forms::Padding(3);
-			this->AutoBotTab->Size = System::Drawing::Size(326, 350);
+			this->AutoBotTab->Size = System::Drawing::Size(326, 396);
 			this->AutoBotTab->TabIndex = 0;
 			this->AutoBotTab->Text = L"AutoBot";
 			this->AutoBotTab->UseVisualStyleBackColor = true;
@@ -385,7 +392,6 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill4CheckBox);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill4TextBox);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill3CheckBox);
-			this->AutoBotGroupBox->Controls->Add(this->FixStatsButton);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill3TextBox);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill3ComboBox);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill2CheckBox);
@@ -408,7 +414,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			this->AutoBotGroupBox->Controls->Add(this->AttackTrackBar);
 			this->AutoBotGroupBox->Location = System::Drawing::Point(0, 70);
 			this->AutoBotGroupBox->Name = L"AutoBotGroupBox";
-			this->AutoBotGroupBox->Size = System::Drawing::Size(325, 280);
+			this->AutoBotGroupBox->Size = System::Drawing::Size(325, 294);
 			this->AutoBotGroupBox->TabIndex = 36;
 			this->AutoBotGroupBox->TabStop = false;
 			this->AutoBotGroupBox->Text = L"Autobot";
@@ -427,17 +433,17 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			this->groupBox2->Controls->Add(this->CCTimeTextBox);
 			this->groupBox2->Controls->Add(this->CCTimeCheckBox);
 			this->groupBox2->Controls->Add(this->CCTimeLabel);
-			this->groupBox2->Location = System::Drawing::Point(167, 214);
+			this->groupBox2->Location = System::Drawing::Point(7, 254);
 			this->groupBox2->Name = L"groupBox2";
-			this->groupBox2->Size = System::Drawing::Size(150, 34);
+			this->groupBox2->Size = System::Drawing::Size(310, 34);
 			this->groupBox2->TabIndex = 48;
 			this->groupBox2->TabStop = false;
 			// 
 			// CCTimeTextBox
 			// 
-			this->CCTimeTextBox->Location = System::Drawing::Point(68, 11);
+			this->CCTimeTextBox->Location = System::Drawing::Point(84, 10);
 			this->CCTimeTextBox->Name = L"CCTimeTextBox";
-			this->CCTimeTextBox->Size = System::Drawing::Size(34, 20);
+			this->CCTimeTextBox->Size = System::Drawing::Size(102, 20);
 			this->CCTimeTextBox->TabIndex = 50;
 			this->CCTimeTextBox->Text = L"50";
 			// 
@@ -455,7 +461,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			// CCTimeLabel
 			// 
 			this->CCTimeLabel->AutoSize = true;
-			this->CCTimeLabel->Location = System::Drawing::Point(102, 15);
+			this->CCTimeLabel->Location = System::Drawing::Point(192, 15);
 			this->CCTimeLabel->Name = L"CCTimeLabel";
 			this->CCTimeLabel->Size = System::Drawing::Size(49, 13);
 			this->CCTimeLabel->TabIndex = 49;
@@ -469,22 +475,22 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			this->CCPeopleGroupBox->Controls->Add(this->CCPeopleCheckBox);
 			this->CCPeopleGroupBox->Location = System::Drawing::Point(6, 214);
 			this->CCPeopleGroupBox->Name = L"CCPeopleGroupBox";
-			this->CCPeopleGroupBox->Size = System::Drawing::Size(154, 34);
+			this->CCPeopleGroupBox->Size = System::Drawing::Size(311, 34);
 			this->CCPeopleGroupBox->TabIndex = 47;
 			this->CCPeopleGroupBox->TabStop = false;
 			// 
 			// CCPeopleTextBox
 			// 
-			this->CCPeopleTextBox->Location = System::Drawing::Point(76, 11);
+			this->CCPeopleTextBox->Location = System::Drawing::Point(85, 10);
 			this->CCPeopleTextBox->Name = L"CCPeopleTextBox";
-			this->CCPeopleTextBox->Size = System::Drawing::Size(20, 20);
+			this->CCPeopleTextBox->Size = System::Drawing::Size(102, 20);
 			this->CCPeopleTextBox->TabIndex = 48;
 			this->CCPeopleTextBox->Text = L"1";
 			// 
 			// CCPeopleLabel
 			// 
 			this->CCPeopleLabel->AutoSize = true;
-			this->CCPeopleLabel->Location = System::Drawing::Point(104, 14);
+			this->CCPeopleLabel->Location = System::Drawing::Point(193, 14);
 			this->CCPeopleLabel->Name = L"CCPeopleLabel";
 			this->CCPeopleLabel->Size = System::Drawing::Size(36, 13);
 			this->CCPeopleLabel->TabIndex = 47;
@@ -545,9 +551,9 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			// 
 			// FixStatsButton
 			// 
-			this->FixStatsButton->Location = System::Drawing::Point(6, 254);
+			this->FixStatsButton->Location = System::Drawing::Point(6, 370);
 			this->FixStatsButton->Name = L"FixStatsButton";
-			this->FixStatsButton->Size = System::Drawing::Size(311, 20);
+			this->FixStatsButton->Size = System::Drawing::Size(314, 20);
 			this->FixStatsButton->TabIndex = 32;
 			this->FixStatsButton->Text = L"Fix Stats";
 			this->FixStatsButton->UseVisualStyleBackColor = true;
@@ -840,14 +846,13 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			this->HacksTab->Location = System::Drawing::Point(4, 22);
 			this->HacksTab->Name = L"HacksTab";
 			this->HacksTab->Padding = System::Windows::Forms::Padding(3);
-			this->HacksTab->Size = System::Drawing::Size(326, 350);
+			this->HacksTab->Size = System::Drawing::Size(326, 396);
 			this->HacksTab->TabIndex = 1;
 			this->HacksTab->Text = L"Hacks";
 			this->HacksTab->UseVisualStyleBackColor = true;
 			// 
 			// GeneralHacksGroupBox
 			// 
-			this->GeneralHacksGroupBox->Controls->Add(this->AutoAggroCheckBox);
 			this->GeneralHacksGroupBox->Controls->Add(this->FLACCCheckBox);
 			this->GeneralHacksGroupBox->Controls->Add(this->NoBackGroundCheckBox);
 			this->GeneralHacksGroupBox->Controls->Add(this->UncensorCheckBox);
@@ -864,7 +869,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			// AutoAggroCheckBox
 			// 
 			this->AutoAggroCheckBox->AutoSize = true;
-			this->AutoAggroCheckBox->Location = System::Drawing::Point(230, 65);
+			this->AutoAggroCheckBox->Location = System::Drawing::Point(6, 65);
 			this->AutoAggroCheckBox->Name = L"AutoAggroCheckBox";
 			this->AutoAggroCheckBox->Size = System::Drawing::Size(79, 17);
 			this->AutoAggroCheckBox->TabIndex = 8;
@@ -941,6 +946,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			// 
 			// MobHacksGroupBox
 			// 
+			this->MobHacksGroupBox->Controls->Add(this->AutoAggroCheckBox);
 			this->MobHacksGroupBox->Controls->Add(this->RainingMobsCheckBox);
 			this->MobHacksGroupBox->Controls->Add(this->MobLagCheckBox);
 			this->MobHacksGroupBox->Controls->Add(this->NoMobsCheckBox);
@@ -949,7 +955,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			this->MobHacksGroupBox->Controls->Add(this->FullMobDisarmCheckBox);
 			this->MobHacksGroupBox->Location = System::Drawing::Point(7, 280);
 			this->MobHacksGroupBox->Name = L"MobHacksGroupBox";
-			this->MobHacksGroupBox->Size = System::Drawing::Size(313, 64);
+			this->MobHacksGroupBox->Size = System::Drawing::Size(313, 111);
 			this->MobHacksGroupBox->TabIndex = 1;
 			this->MobHacksGroupBox->TabStop = false;
 			this->MobHacksGroupBox->Text = L"Mob Hacks";
@@ -957,7 +963,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			// RainingMobsCheckBox
 			// 
 			this->RainingMobsCheckBox->AutoSize = true;
-			this->RainingMobsCheckBox->Location = System::Drawing::Point(203, 42);
+			this->RainingMobsCheckBox->Location = System::Drawing::Point(164, 42);
 			this->RainingMobsCheckBox->Name = L"RainingMobsCheckBox";
 			this->RainingMobsCheckBox->Size = System::Drawing::Size(91, 17);
 			this->RainingMobsCheckBox->TabIndex = 5;
@@ -968,7 +974,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			// MobLagCheckBox
 			// 
 			this->MobLagCheckBox->AutoSize = true;
-			this->MobLagCheckBox->Location = System::Drawing::Point(203, 19);
+			this->MobLagCheckBox->Location = System::Drawing::Point(164, 19);
 			this->MobLagCheckBox->Name = L"MobLagCheckBox";
 			this->MobLagCheckBox->Size = System::Drawing::Size(68, 17);
 			this->MobLagCheckBox->TabIndex = 4;
@@ -979,7 +985,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			// NoMobsCheckBox
 			// 
 			this->NoMobsCheckBox->AutoSize = true;
-			this->NoMobsCheckBox->Location = System::Drawing::Point(113, 41);
+			this->NoMobsCheckBox->Location = System::Drawing::Point(164, 65);
 			this->NoMobsCheckBox->Name = L"NoMobsCheckBox";
 			this->NoMobsCheckBox->Size = System::Drawing::Size(69, 17);
 			this->NoMobsCheckBox->TabIndex = 3;
@@ -990,7 +996,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			// VacRightCheckBox
 			// 
 			this->VacRightCheckBox->AutoSize = true;
-			this->VacRightCheckBox->Location = System::Drawing::Point(113, 19);
+			this->VacRightCheckBox->Location = System::Drawing::Point(6, 19);
 			this->VacRightCheckBox->Name = L"VacRightCheckBox";
 			this->VacRightCheckBox->Size = System::Drawing::Size(73, 17);
 			this->VacRightCheckBox->TabIndex = 2;
@@ -1012,7 +1018,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			// FullMobDisarmCheckBox
 			// 
 			this->FullMobDisarmCheckBox->AutoSize = true;
-			this->FullMobDisarmCheckBox->Location = System::Drawing::Point(6, 19);
+			this->FullMobDisarmCheckBox->Location = System::Drawing::Point(6, 88);
 			this->FullMobDisarmCheckBox->Name = L"FullMobDisarmCheckBox";
 			this->FullMobDisarmCheckBox->Size = System::Drawing::Size(101, 17);
 			this->FullMobDisarmCheckBox->TabIndex = 0;
@@ -1068,7 +1074,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			// InstantAirLootCheckBox
 			// 
 			this->InstantAirLootCheckBox->AutoSize = true;
-			this->InstantAirLootCheckBox->Location = System::Drawing::Point(164, 128);
+			this->InstantAirLootCheckBox->Location = System::Drawing::Point(164, 64);
 			this->InstantAirLootCheckBox->Name = L"InstantAirLootCheckBox";
 			this->InstantAirLootCheckBox->Size = System::Drawing::Size(97, 17);
 			this->InstantAirLootCheckBox->TabIndex = 9;
@@ -1101,7 +1107,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			// NoSkillMovementCheckBox
 			// 
 			this->NoSkillMovementCheckBox->AutoSize = true;
-			this->NoSkillMovementCheckBox->Location = System::Drawing::Point(164, 84);
+			this->NoSkillMovementCheckBox->Location = System::Drawing::Point(164, 130);
 			this->NoSkillMovementCheckBox->Name = L"NoSkillMovementCheckBox";
 			this->NoSkillMovementCheckBox->Size = System::Drawing::Size(140, 17);
 			this->NoSkillMovementCheckBox->TabIndex = 5;
@@ -1156,7 +1162,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			// NDMiningCheckBox
 			// 
 			this->NDMiningCheckBox->AutoSize = true;
-			this->NDMiningCheckBox->Location = System::Drawing::Point(164, 62);
+			this->NDMiningCheckBox->Location = System::Drawing::Point(164, 84);
 			this->NDMiningCheckBox->Name = L"NDMiningCheckBox";
 			this->NDMiningCheckBox->Size = System::Drawing::Size(76, 17);
 			this->NDMiningCheckBox->TabIndex = 4;
@@ -1203,7 +1209,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			this->InfoTab->Location = System::Drawing::Point(4, 22);
 			this->InfoTab->Name = L"InfoTab";
 			this->InfoTab->Padding = System::Windows::Forms::Padding(3);
-			this->InfoTab->Size = System::Drawing::Size(326, 350);
+			this->InfoTab->Size = System::Drawing::Size(326, 396);
 			this->InfoTab->TabIndex = 2;
 			this->InfoTab->Text = L"Info";
 			this->InfoTab->UseVisualStyleBackColor = true;
@@ -1219,7 +1225,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			this->PointerReadGroupBox->Controls->Add(this->CharPosLabel);
 			this->PointerReadGroupBox->Location = System::Drawing::Point(5, 5);
 			this->PointerReadGroupBox->Name = L"PointerReadGroupBox";
-			this->PointerReadGroupBox->Size = System::Drawing::Size(315, 113);
+			this->PointerReadGroupBox->Size = System::Drawing::Size(315, 385);
 			this->PointerReadGroupBox->TabIndex = 25;
 			this->PointerReadGroupBox->TabStop = false;
 			this->PointerReadGroupBox->Text = L"Some Pointers Read";
@@ -1296,7 +1302,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			this->PacketSenderTab->Location = System::Drawing::Point(4, 22);
 			this->PacketSenderTab->Name = L"PacketSenderTab";
 			this->PacketSenderTab->Padding = System::Windows::Forms::Padding(3);
-			this->PacketSenderTab->Size = System::Drawing::Size(326, 350);
+			this->PacketSenderTab->Size = System::Drawing::Size(326, 396);
 			this->PacketSenderTab->TabIndex = 3;
 			this->PacketSenderTab->Text = L"Packet Sender";
 			this->PacketSenderTab->UseVisualStyleBackColor = true;
@@ -1307,7 +1313,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			this->EditPacketGroupBox->Controls->Add(this->EditPacketPacketTextBox);
 			this->EditPacketGroupBox->Controls->Add(this->EditPacketNameTextBox);
 			this->EditPacketGroupBox->Controls->Add(this->SelectPacketForEditingComboBox);
-			this->EditPacketGroupBox->Location = System::Drawing::Point(6, 209);
+			this->EditPacketGroupBox->Location = System::Drawing::Point(6, 180);
 			this->EditPacketGroupBox->Name = L"EditPacketGroupBox";
 			this->EditPacketGroupBox->Size = System::Drawing::Size(314, 72);
 			this->EditPacketGroupBox->TabIndex = 6;
@@ -1352,7 +1358,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			// 
 			this->DeletePacketsGroupBox->Controls->Add(this->DeletePacketComboBox);
 			this->DeletePacketsGroupBox->Controls->Add(this->DeletePacketButton);
-			this->DeletePacketsGroupBox->Location = System::Drawing::Point(6, 291);
+			this->DeletePacketsGroupBox->Location = System::Drawing::Point(6, 258);
 			this->DeletePacketsGroupBox->Name = L"DeletePacketsGroupBox";
 			this->DeletePacketsGroupBox->Size = System::Drawing::Size(314, 51);
 			this->DeletePacketsGroupBox->TabIndex = 5;
@@ -1385,7 +1391,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			this->AddPacketsGroupBox->Controls->Add(this->AddPacketNameTextBox);
 			this->AddPacketsGroupBox->Controls->Add(this->AddPacketPacketLabel);
 			this->AddPacketsGroupBox->Controls->Add(this->AddPacketNameLabel);
-			this->AddPacketsGroupBox->Location = System::Drawing::Point(6, 114);
+			this->AddPacketsGroupBox->Location = System::Drawing::Point(6, 85);
 			this->AddPacketsGroupBox->Name = L"AddPacketsGroupBox";
 			this->AddPacketsGroupBox->Size = System::Drawing::Size(314, 89);
 			this->AddPacketsGroupBox->TabIndex = 4;
@@ -1436,7 +1442,6 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			// 
 			// SendPacketGroupBox
 			// 
-			this->SendPacketGroupBox->Controls->Add(this->SpammingProgressBar);
 			this->SendPacketGroupBox->Controls->Add(this->SpamsPacketButton);
 			this->SendPacketGroupBox->Controls->Add(this->SpamPacketsDelayLabel);
 			this->SendPacketGroupBox->Controls->Add(this->SpamPacketsDelayTextBox);
@@ -1446,17 +1451,10 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			this->SendPacketGroupBox->Controls->Add(this->SendPacketButton);
 			this->SendPacketGroupBox->Location = System::Drawing::Point(6, 6);
 			this->SendPacketGroupBox->Name = L"SendPacketGroupBox";
-			this->SendPacketGroupBox->Size = System::Drawing::Size(314, 102);
+			this->SendPacketGroupBox->Size = System::Drawing::Size(314, 73);
 			this->SendPacketGroupBox->TabIndex = 3;
 			this->SendPacketGroupBox->TabStop = false;
 			this->SendPacketGroupBox->Text = L"Packet Sender";
-			// 
-			// SpammingProgressBar
-			// 
-			this->SpammingProgressBar->Location = System::Drawing::Point(6, 73);
-			this->SpammingProgressBar->Name = L"SpammingProgressBar";
-			this->SpammingProgressBar->Size = System::Drawing::Size(302, 23);
-			this->SpammingProgressBar->TabIndex = 9;
 			// 
 			// SpamsPacketButton
 			// 
@@ -1529,12 +1527,32 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			// 
 			this->SpamPacketsTimer->Tick += gcnew System::EventHandler(this, &MainForm::SpamPacketsTimer_Tick);
 			// 
+			// SPControlTabPage
+			// 
+			this->SPControlTabPage->Controls->Add(this->SPControlCheckBox);
+			this->SPControlTabPage->Location = System::Drawing::Point(4, 22);
+			this->SPControlTabPage->Name = L"SPControlTabPage";
+			this->SPControlTabPage->Size = System::Drawing::Size(326, 396);
+			this->SPControlTabPage->TabIndex = 4;
+			this->SPControlTabPage->Text = L"Spawn Control";
+			this->SPControlTabPage->UseVisualStyleBackColor = true;
+			// 
+			// SPControlCheckBox
+			// 
+			this->SPControlCheckBox->AutoSize = true;
+			this->SPControlCheckBox->Location = System::Drawing::Point(7, 3);
+			this->SPControlCheckBox->Name = L"SPControlCheckBox";
+			this->SPControlCheckBox->Size = System::Drawing::Size(73, 17);
+			this->SPControlCheckBox->TabIndex = 27;
+			this->SPControlCheckBox->Text = L"SPControl";
+			this->SPControlCheckBox->UseVisualStyleBackColor = true;
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Control;
-			this->ClientSize = System::Drawing::Size(334, 377);
+			this->ClientSize = System::Drawing::Size(334, 423);
 			this->Controls->Add(this->MainTabControl);
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
@@ -1578,6 +1596,8 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 			this->AddPacketsGroupBox->PerformLayout();
 			this->SendPacketGroupBox->ResumeLayout(false);
 			this->SendPacketGroupBox->PerformLayout();
+			this->SPControlTabPage->ResumeLayout(false);
+			this->SPControlTabPage->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -1636,6 +1656,7 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 	private: System::Void SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void AutoAggroCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^  e);
-	};
+	private: System::Void SPControlCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+};
 	}
 #pragma endregion
