@@ -546,11 +546,11 @@ void AutoCCPeople()
 		}
 	}
 }
-void AutoCCTime()
+void AutoCCTimed()
 {
-	while(CCTimeBool)
+	while(CCTimedBool)
 	{
-		Sleep(CCTimeInt * 1000);
+		Sleep(CCTimedInt * 1000);
 		CCing = true;
 		while(Breath() > 0)
 			CatchABreath();
@@ -558,6 +558,22 @@ void AutoCCTime()
 		NextChannel();
 		Sleep(500);
 		CCing = false;
+	}
+}
+void AutoCCAttacks()
+{
+	while(CCAttacksBool)
+	{
+		if(AttackCount() >= CCAttacksInt)
+		{
+			CCing = true;
+			while(Breath() > 0)
+				CatchABreath();
+				Sleep(100);
+			NextChannel();
+			Sleep(500);
+			CCing = false;
+		}
 	}
 }
 void UnlimitedAttack()
@@ -789,11 +805,19 @@ void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System:
 	}
 	void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 	{
-		this->CCTimeTextBox->Enabled = !this->CCTimeCheckBox->Checked;
-		this->CCTimeLabel->Enabled = !this->CCTimeCheckBox->Checked;
-		if(this->CCTimeTextBox->Text != "") CCTimeInt = Convert::ToInt32(CCTimeTextBox->Text);
-		CCTimeBool = this->CCTimeCheckBox->Checked;
-		NewThread(AutoCCTime);
+		this->CCTimedTextBox->Enabled = !this->CCTimedCheckBox->Checked;
+		this->CCTimedLabel->Enabled = !this->CCTimedCheckBox->Checked;
+		if(this->CCTimedTextBox->Text != "") CCTimedInt = Convert::ToInt32(CCTimedTextBox->Text);
+		CCTimedBool = this->CCTimedCheckBox->Checked;
+		NewThread(AutoCCTimed);
+	}
+	void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+	{
+		this->CCAttacksTextBox->Enabled = !this->CCAttacksCheckBox->Checked;
+		this->CCAttacksLabel->Enabled = !this->CCAttacksCheckBox->Checked;
+		if(this->CCAttacksTextBox->Text != "") CCAttacksInt = Convert::ToInt32(CCAttacksTextBox->Text);
+		CCAttacksBool = this->CCAttacksCheckBox->Checked;
+		NewThread(AutoCCAttacks);
 	}
 #pragma endregion
 void Main(void)

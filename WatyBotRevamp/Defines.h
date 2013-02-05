@@ -5,6 +5,10 @@
 #define CodeCave(name) void __declspec(naked) Cave##name(){_asm{
 #define EndCodeCave }}
 
+#define CCSeconds 0;
+#define CCPeople 1;
+#define CCAttacks 2;
+
 unsigned long ReadPointer(unsigned long ulBase, int iOffset)
 {
 	__try { return *(unsigned long*)(*(unsigned long*)ulBase + iOffset); }
@@ -24,8 +28,8 @@ void WritePointer(unsigned long ulBase, int iOffset, int iValue)
 #pragma region Variables
 bool CCing;
 
-int CCPeopleInt, CCTimeInt;
-bool CCPeopleBool, CCTimeBool;
+int CCPeopleInt, CCTimedInt, CCAttacksInt;
+bool CCPeopleBool, CCTimedBool, CCAttacksBool;
 
 HWND MapleHWND;
 

@@ -126,18 +126,23 @@ private: System::Windows::Forms::CheckBox^  SevenMissCheckBox;
 private: System::Windows::Forms::CheckBox^  NoSkillMovementCheckBox;
 private: System::Windows::Forms::Label^  BreathLabel;
 private: System::Windows::Forms::CheckBox^  CCPeopleCheckBox;
-private: System::Windows::Forms::GroupBox^  CCPeopleGroupBox;
-private: System::Windows::Forms::GroupBox^  groupBox2;
-private: System::Windows::Forms::CheckBox^  CCTimeCheckBox;
-
-
-private: System::Windows::Forms::Label^  CCPeopleLabel;
-
 
 private: System::Windows::Forms::TextBox^  CCPeopleTextBox;
-private: System::Windows::Forms::TextBox^  CCTimeTextBox;
 
-private: System::Windows::Forms::Label^  CCTimeLabel;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 private: System::Windows::Forms::CheckBox^  NoSwearsCheckBox;
 private: System::Windows::Forms::CheckBox^  VacRightCheckBox;
 private: System::Windows::Forms::CheckBox^  FusionAttackCheckBox;
@@ -186,6 +191,27 @@ private: System::Windows::Forms::CheckBox^  AutoAggroCheckBox;
 private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 private: System::Windows::Forms::TabPage^  SPControlTabPage;
 private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
+private: System::Windows::Forms::TextBox^  CCAttacksTextBox;
+
+
+
+private: System::Windows::Forms::CheckBox^  CCAttacksCheckBox;
+
+
+private: System::Windows::Forms::TextBox^  CCTimedTextBox;
+
+
+
+private: System::Windows::Forms::CheckBox^  CCTimedCheckBox;
+private: System::Windows::Forms::Label^  CCTimedLabel;
+
+
+
+
+private: System::Windows::Forms::Label^  CCPeopleLabel;
+private: System::Windows::Forms::Label^  CCAttacksLabel;
+
+
 
 
 	private: System::ComponentModel::IContainer^  components;
@@ -212,20 +238,21 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->MainTabControl = (gcnew System::Windows::Forms::TabControl());
 			this->AutoBotTab = (gcnew System::Windows::Forms::TabPage());
 			this->AutoBotGroupBox = (gcnew System::Windows::Forms::GroupBox());
-			this->AutoSkill4ComboBox = (gcnew System::Windows::Forms::ComboBox());
-			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
-			this->CCTimeTextBox = (gcnew System::Windows::Forms::TextBox());
-			this->CCTimeCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->CCTimeLabel = (gcnew System::Windows::Forms::Label());
-			this->CCPeopleGroupBox = (gcnew System::Windows::Forms::GroupBox());
-			this->CCPeopleTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->CCAttacksLabel = (gcnew System::Windows::Forms::Label());
+			this->CCTimedLabel = (gcnew System::Windows::Forms::Label());
 			this->CCPeopleLabel = (gcnew System::Windows::Forms::Label());
-			this->CCPeopleCheckBox = (gcnew System::Windows::Forms::CheckBox());
+			this->FixStatsButton = (gcnew System::Windows::Forms::Button());
+			this->CCAttacksTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->CCAttacksCheckBox = (gcnew System::Windows::Forms::CheckBox());
+			this->CCTimedTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->CCTimedCheckBox = (gcnew System::Windows::Forms::CheckBox());
+			this->AutoSkill4ComboBox = (gcnew System::Windows::Forms::ComboBox());
+			this->CCPeopleTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->PointerTubiCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->AutoSkill4CheckBox = (gcnew System::Windows::Forms::CheckBox());
+			this->CCPeopleCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->AutoSkill4TextBox = (gcnew System::Windows::Forms::TextBox());
 			this->AutoSkill3CheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->FixStatsButton = (gcnew System::Windows::Forms::Button());
 			this->AutoSkill3TextBox = (gcnew System::Windows::Forms::TextBox());
 			this->AutoSkill3ComboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->AutoSkill2CheckBox = (gcnew System::Windows::Forms::CheckBox());
@@ -257,7 +284,6 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->HPBackground = (gcnew System::Windows::Forms::PictureBox());
 			this->HacksTab = (gcnew System::Windows::Forms::TabPage());
 			this->GeneralHacksGroupBox = (gcnew System::Windows::Forms::GroupBox());
-			this->AutoAggroCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->FLACCCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->NoBackGroundCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->UncensorCheckBox = (gcnew System::Windows::Forms::CheckBox());
@@ -265,6 +291,7 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->HideDamageCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->PinTyperCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->MobHacksGroupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->AutoAggroCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->RainingMobsCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->MobLagCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->NoMobsCheckBox = (gcnew System::Windows::Forms::CheckBox());
@@ -286,15 +313,6 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->NoAttackLimitCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->PerfectLootCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->JumpDownAnywhereCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
-			this->PointerReadGroupBox = (gcnew System::Windows::Forms::GroupBox());
-			this->BreathLabel = (gcnew System::Windows::Forms::Label());
-			this->TubiPointerLabel = (gcnew System::Windows::Forms::Label());
-			this->MobCountLabel = (gcnew System::Windows::Forms::Label());
-			this->AttackCountLabel = (gcnew System::Windows::Forms::Label());
-			this->PeopleCountLabel = (gcnew System::Windows::Forms::Label());
-			this->ItemCountLabel = (gcnew System::Windows::Forms::Label());
-			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->PacketSenderTab = (gcnew System::Windows::Forms::TabPage());
 			this->EditPacketGroupBox = (gcnew System::Windows::Forms::GroupBox());
 			this->SavePacketEditButton = (gcnew System::Windows::Forms::Button());
@@ -318,15 +336,22 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->SpamPacketTimesTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->PacketSelectBox = (gcnew System::Windows::Forms::ComboBox());
 			this->SendPacketButton = (gcnew System::Windows::Forms::Button());
-			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->SpamPacketsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SPControlTabPage = (gcnew System::Windows::Forms::TabPage());
 			this->SPControlCheckBox = (gcnew System::Windows::Forms::CheckBox());
+			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
+			this->PointerReadGroupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->BreathLabel = (gcnew System::Windows::Forms::Label());
+			this->TubiPointerLabel = (gcnew System::Windows::Forms::Label());
+			this->MobCountLabel = (gcnew System::Windows::Forms::Label());
+			this->AttackCountLabel = (gcnew System::Windows::Forms::Label());
+			this->PeopleCountLabel = (gcnew System::Windows::Forms::Label());
+			this->ItemCountLabel = (gcnew System::Windows::Forms::Label());
+			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
+			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->SpamPacketsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
-			this->groupBox2->SuspendLayout();
-			this->CCPeopleGroupBox->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->AttackTrackBar))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->EXPForeground))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->MPForeground))->BeginInit();
@@ -338,14 +363,14 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->GeneralHacksGroupBox->SuspendLayout();
 			this->MobHacksGroupBox->SuspendLayout();
 			this->CharacterHacksGroupBox->SuspendLayout();
-			this->InfoTab->SuspendLayout();
-			this->PointerReadGroupBox->SuspendLayout();
 			this->PacketSenderTab->SuspendLayout();
 			this->EditPacketGroupBox->SuspendLayout();
 			this->DeletePacketsGroupBox->SuspendLayout();
 			this->AddPacketsGroupBox->SuspendLayout();
 			this->SendPacketGroupBox->SuspendLayout();
 			this->SPControlTabPage->SuspendLayout();
+			this->InfoTab->SuspendLayout();
+			this->PointerReadGroupBox->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -371,7 +396,6 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->AutoBotTab->Controls->Add(this->EXPForeground);
 			this->AutoBotTab->Controls->Add(this->MPForeground);
 			this->AutoBotTab->Controls->Add(this->HPForeground);
-			this->AutoBotTab->Controls->Add(this->FixStatsButton);
 			this->AutoBotTab->Controls->Add(this->EXPBackground);
 			this->AutoBotTab->Controls->Add(this->MPBackground);
 			this->AutoBotTab->Controls->Add(this->HPBackground);
@@ -385,11 +409,19 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			// 
 			// AutoBotGroupBox
 			// 
+			this->AutoBotGroupBox->Controls->Add(this->CCAttacksLabel);
+			this->AutoBotGroupBox->Controls->Add(this->CCTimedLabel);
+			this->AutoBotGroupBox->Controls->Add(this->CCPeopleLabel);
+			this->AutoBotGroupBox->Controls->Add(this->FixStatsButton);
+			this->AutoBotGroupBox->Controls->Add(this->CCAttacksTextBox);
+			this->AutoBotGroupBox->Controls->Add(this->CCAttacksCheckBox);
+			this->AutoBotGroupBox->Controls->Add(this->CCTimedTextBox);
+			this->AutoBotGroupBox->Controls->Add(this->CCTimedCheckBox);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill4ComboBox);
-			this->AutoBotGroupBox->Controls->Add(this->groupBox2);
-			this->AutoBotGroupBox->Controls->Add(this->CCPeopleGroupBox);
+			this->AutoBotGroupBox->Controls->Add(this->CCPeopleTextBox);
 			this->AutoBotGroupBox->Controls->Add(this->PointerTubiCheckBox);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill4CheckBox);
+			this->AutoBotGroupBox->Controls->Add(this->CCPeopleCheckBox);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill4TextBox);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill3CheckBox);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill3TextBox);
@@ -414,10 +446,85 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->AutoBotGroupBox->Controls->Add(this->AttackTrackBar);
 			this->AutoBotGroupBox->Location = System::Drawing::Point(0, 70);
 			this->AutoBotGroupBox->Name = L"AutoBotGroupBox";
-			this->AutoBotGroupBox->Size = System::Drawing::Size(325, 294);
+			this->AutoBotGroupBox->Size = System::Drawing::Size(325, 326);
 			this->AutoBotGroupBox->TabIndex = 36;
 			this->AutoBotGroupBox->TabStop = false;
 			this->AutoBotGroupBox->Text = L"Autobot";
+			// 
+			// CCAttacksLabel
+			// 
+			this->CCAttacksLabel->AutoSize = true;
+			this->CCAttacksLabel->Location = System::Drawing::Point(199, 278);
+			this->CCAttacksLabel->Name = L"CCAttacksLabel";
+			this->CCAttacksLabel->Size = System::Drawing::Size(43, 13);
+			this->CCAttacksLabel->TabIndex = 56;
+			this->CCAttacksLabel->Text = L"Attacks";
+			// 
+			// CCTimedLabel
+			// 
+			this->CCTimedLabel->AutoSize = true;
+			this->CCTimedLabel->Location = System::Drawing::Point(199, 251);
+			this->CCTimedLabel->Name = L"CCTimedLabel";
+			this->CCTimedLabel->Size = System::Drawing::Size(49, 13);
+			this->CCTimedLabel->TabIndex = 55;
+			this->CCTimedLabel->Text = L"Seconds";
+			// 
+			// CCPeopleLabel
+			// 
+			this->CCPeopleLabel->AutoSize = true;
+			this->CCPeopleLabel->Location = System::Drawing::Point(199, 224);
+			this->CCPeopleLabel->Name = L"CCPeopleLabel";
+			this->CCPeopleLabel->Size = System::Drawing::Size(40, 13);
+			this->CCPeopleLabel->TabIndex = 54;
+			this->CCPeopleLabel->Text = L"People";
+			// 
+			// FixStatsButton
+			// 
+			this->FixStatsButton->Location = System::Drawing::Point(6, 300);
+			this->FixStatsButton->Name = L"FixStatsButton";
+			this->FixStatsButton->Size = System::Drawing::Size(311, 23);
+			this->FixStatsButton->TabIndex = 32;
+			this->FixStatsButton->Text = L"Fix Stats";
+			this->FixStatsButton->UseVisualStyleBackColor = true;
+			this->FixStatsButton->Click += gcnew System::EventHandler(this, &MainForm::FixStatsButton_Click);
+			// 
+			// CCAttacksTextBox
+			// 
+			this->CCAttacksTextBox->Location = System::Drawing::Point(91, 275);
+			this->CCAttacksTextBox->Name = L"CCAttacksTextBox";
+			this->CCAttacksTextBox->Size = System::Drawing::Size(102, 20);
+			this->CCAttacksTextBox->TabIndex = 53;
+			this->CCAttacksTextBox->Text = L"90";
+			// 
+			// CCAttacksCheckBox
+			// 
+			this->CCAttacksCheckBox->AutoSize = true;
+			this->CCAttacksCheckBox->Location = System::Drawing::Point(6, 277);
+			this->CCAttacksCheckBox->Name = L"CCAttacksCheckBox";
+			this->CCAttacksCheckBox->Size = System::Drawing::Size(65, 17);
+			this->CCAttacksCheckBox->TabIndex = 52;
+			this->CCAttacksCheckBox->Text = L"Auto CC";
+			this->CCAttacksCheckBox->UseVisualStyleBackColor = true;
+			this->CCAttacksCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCAttacksCheckBox_CheckedChanged);
+			// 
+			// CCTimedTextBox
+			// 
+			this->CCTimedTextBox->Location = System::Drawing::Point(91, 248);
+			this->CCTimedTextBox->Name = L"CCTimedTextBox";
+			this->CCTimedTextBox->Size = System::Drawing::Size(102, 20);
+			this->CCTimedTextBox->TabIndex = 50;
+			this->CCTimedTextBox->Text = L"50";
+			// 
+			// CCTimedCheckBox
+			// 
+			this->CCTimedCheckBox->AutoSize = true;
+			this->CCTimedCheckBox->Location = System::Drawing::Point(6, 250);
+			this->CCTimedCheckBox->Name = L"CCTimedCheckBox";
+			this->CCTimedCheckBox->Size = System::Drawing::Size(65, 17);
+			this->CCTimedCheckBox->TabIndex = 46;
+			this->CCTimedCheckBox->Text = L"Auto CC";
+			this->CCTimedCheckBox->UseVisualStyleBackColor = true;
+			this->CCTimedCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCTimeCheckBox_CheckedChanged);
 			// 
 			// AutoSkill4ComboBox
 			// 
@@ -428,85 +535,13 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->AutoSkill4ComboBox->Size = System::Drawing::Size(115, 21);
 			this->AutoSkill4ComboBox->TabIndex = 42;
 			// 
-			// groupBox2
-			// 
-			this->groupBox2->Controls->Add(this->CCTimeTextBox);
-			this->groupBox2->Controls->Add(this->CCTimeCheckBox);
-			this->groupBox2->Controls->Add(this->CCTimeLabel);
-			this->groupBox2->Location = System::Drawing::Point(7, 254);
-			this->groupBox2->Name = L"groupBox2";
-			this->groupBox2->Size = System::Drawing::Size(310, 34);
-			this->groupBox2->TabIndex = 48;
-			this->groupBox2->TabStop = false;
-			// 
-			// CCTimeTextBox
-			// 
-			this->CCTimeTextBox->Location = System::Drawing::Point(84, 10);
-			this->CCTimeTextBox->Name = L"CCTimeTextBox";
-			this->CCTimeTextBox->Size = System::Drawing::Size(102, 20);
-			this->CCTimeTextBox->TabIndex = 50;
-			this->CCTimeTextBox->Text = L"50";
-			// 
-			// CCTimeCheckBox
-			// 
-			this->CCTimeCheckBox->AutoSize = true;
-			this->CCTimeCheckBox->Location = System::Drawing::Point(6, 14);
-			this->CCTimeCheckBox->Name = L"CCTimeCheckBox";
-			this->CCTimeCheckBox->Size = System::Drawing::Size(65, 17);
-			this->CCTimeCheckBox->TabIndex = 46;
-			this->CCTimeCheckBox->Text = L"Auto CC";
-			this->CCTimeCheckBox->UseVisualStyleBackColor = true;
-			this->CCTimeCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCTimeCheckBox_CheckedChanged);
-			// 
-			// CCTimeLabel
-			// 
-			this->CCTimeLabel->AutoSize = true;
-			this->CCTimeLabel->Location = System::Drawing::Point(192, 15);
-			this->CCTimeLabel->Name = L"CCTimeLabel";
-			this->CCTimeLabel->Size = System::Drawing::Size(49, 13);
-			this->CCTimeLabel->TabIndex = 49;
-			this->CCTimeLabel->Text = L"Seconds";
-			this->CCTimeLabel->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
-			// 
-			// CCPeopleGroupBox
-			// 
-			this->CCPeopleGroupBox->Controls->Add(this->CCPeopleTextBox);
-			this->CCPeopleGroupBox->Controls->Add(this->CCPeopleLabel);
-			this->CCPeopleGroupBox->Controls->Add(this->CCPeopleCheckBox);
-			this->CCPeopleGroupBox->Location = System::Drawing::Point(6, 214);
-			this->CCPeopleGroupBox->Name = L"CCPeopleGroupBox";
-			this->CCPeopleGroupBox->Size = System::Drawing::Size(311, 34);
-			this->CCPeopleGroupBox->TabIndex = 47;
-			this->CCPeopleGroupBox->TabStop = false;
-			// 
 			// CCPeopleTextBox
 			// 
-			this->CCPeopleTextBox->Location = System::Drawing::Point(85, 10);
+			this->CCPeopleTextBox->Location = System::Drawing::Point(91, 221);
 			this->CCPeopleTextBox->Name = L"CCPeopleTextBox";
 			this->CCPeopleTextBox->Size = System::Drawing::Size(102, 20);
 			this->CCPeopleTextBox->TabIndex = 48;
 			this->CCPeopleTextBox->Text = L"1";
-			// 
-			// CCPeopleLabel
-			// 
-			this->CCPeopleLabel->AutoSize = true;
-			this->CCPeopleLabel->Location = System::Drawing::Point(193, 14);
-			this->CCPeopleLabel->Name = L"CCPeopleLabel";
-			this->CCPeopleLabel->Size = System::Drawing::Size(36, 13);
-			this->CCPeopleLabel->TabIndex = 47;
-			this->CCPeopleLabel->Text = L"Player";
-			this->CCPeopleLabel->TextAlign = System::Drawing::ContentAlignment::MiddleRight;
-			// 
-			// CCPeopleCheckBox
-			// 
-			this->CCPeopleCheckBox->AutoSize = true;
-			this->CCPeopleCheckBox->Location = System::Drawing::Point(6, 14);
-			this->CCPeopleCheckBox->Name = L"CCPeopleCheckBox";
-			this->CCPeopleCheckBox->Size = System::Drawing::Size(65, 17);
-			this->CCPeopleCheckBox->TabIndex = 46;
-			this->CCPeopleCheckBox->Text = L"Auto CC";
-			this->CCPeopleCheckBox->UseVisualStyleBackColor = true;
-			this->CCPeopleCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCPeopleCheckBox_CheckedChanged);
 			// 
 			// PointerTubiCheckBox
 			// 
@@ -530,6 +565,17 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->AutoSkill4CheckBox->UseVisualStyleBackColor = true;
 			this->AutoSkill4CheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill4CheckBox_CheckedChanged);
 			// 
+			// CCPeopleCheckBox
+			// 
+			this->CCPeopleCheckBox->AutoSize = true;
+			this->CCPeopleCheckBox->Location = System::Drawing::Point(6, 223);
+			this->CCPeopleCheckBox->Name = L"CCPeopleCheckBox";
+			this->CCPeopleCheckBox->Size = System::Drawing::Size(65, 17);
+			this->CCPeopleCheckBox->TabIndex = 46;
+			this->CCPeopleCheckBox->Text = L"Auto CC";
+			this->CCPeopleCheckBox->UseVisualStyleBackColor = true;
+			this->CCPeopleCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCPeopleCheckBox_CheckedChanged);
+			// 
 			// AutoSkill4TextBox
 			// 
 			this->AutoSkill4TextBox->Location = System::Drawing::Point(91, 194);
@@ -548,16 +594,6 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->AutoSkill3CheckBox->Text = L"Auto Skill 3";
 			this->AutoSkill3CheckBox->UseVisualStyleBackColor = true;
 			this->AutoSkill3CheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill3CheckBox_CheckedChanged);
-			// 
-			// FixStatsButton
-			// 
-			this->FixStatsButton->Location = System::Drawing::Point(6, 370);
-			this->FixStatsButton->Name = L"FixStatsButton";
-			this->FixStatsButton->Size = System::Drawing::Size(314, 20);
-			this->FixStatsButton->TabIndex = 32;
-			this->FixStatsButton->Text = L"Fix Stats";
-			this->FixStatsButton->UseVisualStyleBackColor = true;
-			this->FixStatsButton->Click += gcnew System::EventHandler(this, &MainForm::FixStatsButton_Click);
 			// 
 			// AutoSkill3TextBox
 			// 
@@ -866,17 +902,6 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->GeneralHacksGroupBox->TabStop = false;
 			this->GeneralHacksGroupBox->Text = L"General Hacks";
 			// 
-			// AutoAggroCheckBox
-			// 
-			this->AutoAggroCheckBox->AutoSize = true;
-			this->AutoAggroCheckBox->Location = System::Drawing::Point(6, 65);
-			this->AutoAggroCheckBox->Name = L"AutoAggroCheckBox";
-			this->AutoAggroCheckBox->Size = System::Drawing::Size(79, 17);
-			this->AutoAggroCheckBox->TabIndex = 8;
-			this->AutoAggroCheckBox->Text = L"Auto Aggro";
-			this->AutoAggroCheckBox->UseVisualStyleBackColor = true;
-			this->AutoAggroCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoAggroCheckBox_CheckedChanged);
-			// 
 			// FLACCCheckBox
 			// 
 			this->FLACCCheckBox->AutoSize = true;
@@ -959,6 +984,17 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->MobHacksGroupBox->TabIndex = 1;
 			this->MobHacksGroupBox->TabStop = false;
 			this->MobHacksGroupBox->Text = L"Mob Hacks";
+			// 
+			// AutoAggroCheckBox
+			// 
+			this->AutoAggroCheckBox->AutoSize = true;
+			this->AutoAggroCheckBox->Location = System::Drawing::Point(6, 65);
+			this->AutoAggroCheckBox->Name = L"AutoAggroCheckBox";
+			this->AutoAggroCheckBox->Size = System::Drawing::Size(79, 17);
+			this->AutoAggroCheckBox->TabIndex = 8;
+			this->AutoAggroCheckBox->Text = L"Auto Aggro";
+			this->AutoAggroCheckBox->UseVisualStyleBackColor = true;
+			this->AutoAggroCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoAggroCheckBox_CheckedChanged);
 			// 
 			// RainingMobsCheckBox
 			// 
@@ -1052,7 +1088,7 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			// FMACheckBox
 			// 
 			this->FMACheckBox->AutoSize = true;
-			this->FMACheckBox->Location = System::Drawing::Point(6, 153);
+			this->FMACheckBox->Location = System::Drawing::Point(6, 152);
 			this->FMACheckBox->Name = L"FMACheckBox";
 			this->FMACheckBox->Size = System::Drawing::Size(48, 17);
 			this->FMACheckBox->TabIndex = 11;
@@ -1063,18 +1099,18 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			// NDMilleCheckBox
 			// 
 			this->NDMilleCheckBox->AutoSize = true;
-			this->NDMilleCheckBox->Location = System::Drawing::Point(164, 151);
+			this->NDMilleCheckBox->Location = System::Drawing::Point(164, 152);
 			this->NDMilleCheckBox->Name = L"NDMilleCheckBox";
-			this->NDMilleCheckBox->Size = System::Drawing::Size(117, 17);
+			this->NDMilleCheckBox->Size = System::Drawing::Size(66, 17);
 			this->NDMilleCheckBox->TabIndex = 10;
-			this->NDMilleCheckBox->Text = L"ND Mille (Phantom)";
+			this->NDMilleCheckBox->Text = L"ND Mille";
 			this->NDMilleCheckBox->UseVisualStyleBackColor = true;
 			this->NDMilleCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NDMilleCheckBox_CheckedChanged);
 			// 
 			// InstantAirLootCheckBox
 			// 
 			this->InstantAirLootCheckBox->AutoSize = true;
-			this->InstantAirLootCheckBox->Location = System::Drawing::Point(164, 64);
+			this->InstantAirLootCheckBox->Location = System::Drawing::Point(164, 42);
 			this->InstantAirLootCheckBox->Name = L"InstantAirLootCheckBox";
 			this->InstantAirLootCheckBox->Size = System::Drawing::Size(97, 17);
 			this->InstantAirLootCheckBox->TabIndex = 9;
@@ -1096,7 +1132,7 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			// NoSwearsCheckBox
 			// 
 			this->NoSwearsCheckBox->AutoSize = true;
-			this->NoSwearsCheckBox->Location = System::Drawing::Point(164, 107);
+			this->NoSwearsCheckBox->Location = System::Drawing::Point(164, 110);
 			this->NoSwearsCheckBox->Name = L"NoSwearsCheckBox";
 			this->NoSwearsCheckBox->Size = System::Drawing::Size(78, 17);
 			this->NoSwearsCheckBox->TabIndex = 6;
@@ -1109,9 +1145,9 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->NoSkillMovementCheckBox->AutoSize = true;
 			this->NoSkillMovementCheckBox->Location = System::Drawing::Point(164, 130);
 			this->NoSkillMovementCheckBox->Name = L"NoSkillMovementCheckBox";
-			this->NoSkillMovementCheckBox->Size = System::Drawing::Size(140, 17);
+			this->NoSkillMovementCheckBox->Size = System::Drawing::Size(115, 17);
 			this->NoSkillMovementCheckBox->TabIndex = 5;
-			this->NoSkillMovementCheckBox->Text = L"Aran No Skill Movement";
+			this->NoSkillMovementCheckBox->Text = L"No Skill Movement";
 			this->NoSkillMovementCheckBox->UseVisualStyleBackColor = true;
 			this->NoSkillMovementCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NoSkillMovementCheckBox_CheckedChanged);
 			// 
@@ -1162,7 +1198,7 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			// NDMiningCheckBox
 			// 
 			this->NDMiningCheckBox->AutoSize = true;
-			this->NDMiningCheckBox->Location = System::Drawing::Point(164, 84);
+			this->NDMiningCheckBox->Location = System::Drawing::Point(164, 87);
 			this->NDMiningCheckBox->Name = L"NDMiningCheckBox";
 			this->NDMiningCheckBox->Size = System::Drawing::Size(76, 17);
 			this->NDMiningCheckBox->TabIndex = 4;
@@ -1195,103 +1231,13 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			// JumpDownAnywhereCheckBox
 			// 
 			this->JumpDownAnywhereCheckBox->AutoSize = true;
-			this->JumpDownAnywhereCheckBox->Location = System::Drawing::Point(164, 41);
+			this->JumpDownAnywhereCheckBox->Location = System::Drawing::Point(164, 65);
 			this->JumpDownAnywhereCheckBox->Name = L"JumpDownAnywhereCheckBox";
 			this->JumpDownAnywhereCheckBox->Size = System::Drawing::Size(46, 17);
 			this->JumpDownAnywhereCheckBox->TabIndex = 1;
 			this->JumpDownAnywhereCheckBox->Text = L"JDA";
 			this->JumpDownAnywhereCheckBox->UseVisualStyleBackColor = true;
 			this->JumpDownAnywhereCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::JumpDownAnywhereCheckBox_CheckedChanged);
-			// 
-			// InfoTab
-			// 
-			this->InfoTab->Controls->Add(this->PointerReadGroupBox);
-			this->InfoTab->Location = System::Drawing::Point(4, 22);
-			this->InfoTab->Name = L"InfoTab";
-			this->InfoTab->Padding = System::Windows::Forms::Padding(3);
-			this->InfoTab->Size = System::Drawing::Size(326, 396);
-			this->InfoTab->TabIndex = 2;
-			this->InfoTab->Text = L"Info";
-			this->InfoTab->UseVisualStyleBackColor = true;
-			// 
-			// PointerReadGroupBox
-			// 
-			this->PointerReadGroupBox->Controls->Add(this->BreathLabel);
-			this->PointerReadGroupBox->Controls->Add(this->TubiPointerLabel);
-			this->PointerReadGroupBox->Controls->Add(this->MobCountLabel);
-			this->PointerReadGroupBox->Controls->Add(this->AttackCountLabel);
-			this->PointerReadGroupBox->Controls->Add(this->PeopleCountLabel);
-			this->PointerReadGroupBox->Controls->Add(this->ItemCountLabel);
-			this->PointerReadGroupBox->Controls->Add(this->CharPosLabel);
-			this->PointerReadGroupBox->Location = System::Drawing::Point(5, 5);
-			this->PointerReadGroupBox->Name = L"PointerReadGroupBox";
-			this->PointerReadGroupBox->Size = System::Drawing::Size(315, 385);
-			this->PointerReadGroupBox->TabIndex = 25;
-			this->PointerReadGroupBox->TabStop = false;
-			this->PointerReadGroupBox->Text = L"Some Pointers Read";
-			// 
-			// BreathLabel
-			// 
-			this->BreathLabel->AutoSize = true;
-			this->BreathLabel->Location = System::Drawing::Point(6, 94);
-			this->BreathLabel->Name = L"BreathLabel";
-			this->BreathLabel->Size = System::Drawing::Size(44, 13);
-			this->BreathLabel->TabIndex = 26;
-			this->BreathLabel->Text = L"Breath: ";
-			// 
-			// TubiPointerLabel
-			// 
-			this->TubiPointerLabel->AutoSize = true;
-			this->TubiPointerLabel->Location = System::Drawing::Point(6, 81);
-			this->TubiPointerLabel->Name = L"TubiPointerLabel";
-			this->TubiPointerLabel->Size = System::Drawing::Size(28, 13);
-			this->TubiPointerLabel->TabIndex = 25;
-			this->TubiPointerLabel->Text = L"Tubi";
-			// 
-			// MobCountLabel
-			// 
-			this->MobCountLabel->AutoSize = true;
-			this->MobCountLabel->Location = System::Drawing::Point(6, 16);
-			this->MobCountLabel->Name = L"MobCountLabel";
-			this->MobCountLabel->Size = System::Drawing::Size(51, 13);
-			this->MobCountLabel->TabIndex = 20;
-			this->MobCountLabel->Text = L"Mobs: 15";
-			// 
-			// AttackCountLabel
-			// 
-			this->AttackCountLabel->AutoSize = true;
-			this->AttackCountLabel->Location = System::Drawing::Point(6, 68);
-			this->AttackCountLabel->Name = L"AttackCountLabel";
-			this->AttackCountLabel->Size = System::Drawing::Size(61, 13);
-			this->AttackCountLabel->TabIndex = 24;
-			this->AttackCountLabel->Text = L"Attacks: 50";
-			// 
-			// PeopleCountLabel
-			// 
-			this->PeopleCountLabel->AutoSize = true;
-			this->PeopleCountLabel->Location = System::Drawing::Point(6, 29);
-			this->PeopleCountLabel->Name = L"PeopleCountLabel";
-			this->PeopleCountLabel->Size = System::Drawing::Size(52, 13);
-			this->PeopleCountLabel->TabIndex = 21;
-			this->PeopleCountLabel->Text = L"People: 0";
-			// 
-			// ItemCountLabel
-			// 
-			this->ItemCountLabel->AutoSize = true;
-			this->ItemCountLabel->Location = System::Drawing::Point(6, 42);
-			this->ItemCountLabel->Name = L"ItemCountLabel";
-			this->ItemCountLabel->Size = System::Drawing::Size(56, 13);
-			this->ItemCountLabel->TabIndex = 23;
-			this->ItemCountLabel->Text = L"Items: 134";
-			// 
-			// CharPosLabel
-			// 
-			this->CharPosLabel->AutoSize = true;
-			this->CharPosLabel->Location = System::Drawing::Point(6, 55);
-			this->CharPosLabel->Name = L"CharPosLabel";
-			this->CharPosLabel->Size = System::Drawing::Size(74, 13);
-			this->CharPosLabel->TabIndex = 22;
-			this->CharPosLabel->Text = L"CharPos: (0,0)";
 			// 
 			// PacketSenderTab
 			// 
@@ -1517,16 +1463,6 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->SendPacketButton->UseVisualStyleBackColor = true;
 			this->SendPacketButton->Click += gcnew System::EventHandler(this, &MainForm::SendPacketButton_Click);
 			// 
-			// StatsTimer
-			// 
-			this->StatsTimer->Enabled = true;
-			this->StatsTimer->Interval = 15;
-			this->StatsTimer->Tick += gcnew System::EventHandler(this, &MainForm::StatsTimer_Tick);
-			// 
-			// SpamPacketsTimer
-			// 
-			this->SpamPacketsTimer->Tick += gcnew System::EventHandler(this, &MainForm::SpamPacketsTimer_Tick);
-			// 
 			// SPControlTabPage
 			// 
 			this->SPControlTabPage->Controls->Add(this->SPControlCheckBox);
@@ -1546,6 +1482,106 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->SPControlCheckBox->TabIndex = 27;
 			this->SPControlCheckBox->Text = L"SPControl";
 			this->SPControlCheckBox->UseVisualStyleBackColor = true;
+			// 
+			// InfoTab
+			// 
+			this->InfoTab->Controls->Add(this->PointerReadGroupBox);
+			this->InfoTab->Location = System::Drawing::Point(4, 22);
+			this->InfoTab->Name = L"InfoTab";
+			this->InfoTab->Padding = System::Windows::Forms::Padding(3);
+			this->InfoTab->Size = System::Drawing::Size(326, 396);
+			this->InfoTab->TabIndex = 2;
+			this->InfoTab->Text = L"Info";
+			this->InfoTab->UseVisualStyleBackColor = true;
+			// 
+			// PointerReadGroupBox
+			// 
+			this->PointerReadGroupBox->Controls->Add(this->BreathLabel);
+			this->PointerReadGroupBox->Controls->Add(this->TubiPointerLabel);
+			this->PointerReadGroupBox->Controls->Add(this->MobCountLabel);
+			this->PointerReadGroupBox->Controls->Add(this->AttackCountLabel);
+			this->PointerReadGroupBox->Controls->Add(this->PeopleCountLabel);
+			this->PointerReadGroupBox->Controls->Add(this->ItemCountLabel);
+			this->PointerReadGroupBox->Controls->Add(this->CharPosLabel);
+			this->PointerReadGroupBox->Location = System::Drawing::Point(5, 5);
+			this->PointerReadGroupBox->Name = L"PointerReadGroupBox";
+			this->PointerReadGroupBox->Size = System::Drawing::Size(315, 385);
+			this->PointerReadGroupBox->TabIndex = 25;
+			this->PointerReadGroupBox->TabStop = false;
+			this->PointerReadGroupBox->Text = L"Some Pointers Read";
+			// 
+			// BreathLabel
+			// 
+			this->BreathLabel->AutoSize = true;
+			this->BreathLabel->Location = System::Drawing::Point(6, 94);
+			this->BreathLabel->Name = L"BreathLabel";
+			this->BreathLabel->Size = System::Drawing::Size(44, 13);
+			this->BreathLabel->TabIndex = 26;
+			this->BreathLabel->Text = L"Breath: ";
+			// 
+			// TubiPointerLabel
+			// 
+			this->TubiPointerLabel->AutoSize = true;
+			this->TubiPointerLabel->Location = System::Drawing::Point(6, 81);
+			this->TubiPointerLabel->Name = L"TubiPointerLabel";
+			this->TubiPointerLabel->Size = System::Drawing::Size(28, 13);
+			this->TubiPointerLabel->TabIndex = 25;
+			this->TubiPointerLabel->Text = L"Tubi";
+			// 
+			// MobCountLabel
+			// 
+			this->MobCountLabel->AutoSize = true;
+			this->MobCountLabel->Location = System::Drawing::Point(6, 16);
+			this->MobCountLabel->Name = L"MobCountLabel";
+			this->MobCountLabel->Size = System::Drawing::Size(51, 13);
+			this->MobCountLabel->TabIndex = 20;
+			this->MobCountLabel->Text = L"Mobs: 15";
+			// 
+			// AttackCountLabel
+			// 
+			this->AttackCountLabel->AutoSize = true;
+			this->AttackCountLabel->Location = System::Drawing::Point(6, 68);
+			this->AttackCountLabel->Name = L"AttackCountLabel";
+			this->AttackCountLabel->Size = System::Drawing::Size(61, 13);
+			this->AttackCountLabel->TabIndex = 24;
+			this->AttackCountLabel->Text = L"Attacks: 50";
+			// 
+			// PeopleCountLabel
+			// 
+			this->PeopleCountLabel->AutoSize = true;
+			this->PeopleCountLabel->Location = System::Drawing::Point(6, 29);
+			this->PeopleCountLabel->Name = L"PeopleCountLabel";
+			this->PeopleCountLabel->Size = System::Drawing::Size(52, 13);
+			this->PeopleCountLabel->TabIndex = 21;
+			this->PeopleCountLabel->Text = L"People: 0";
+			// 
+			// ItemCountLabel
+			// 
+			this->ItemCountLabel->AutoSize = true;
+			this->ItemCountLabel->Location = System::Drawing::Point(6, 42);
+			this->ItemCountLabel->Name = L"ItemCountLabel";
+			this->ItemCountLabel->Size = System::Drawing::Size(56, 13);
+			this->ItemCountLabel->TabIndex = 23;
+			this->ItemCountLabel->Text = L"Items: 134";
+			// 
+			// CharPosLabel
+			// 
+			this->CharPosLabel->AutoSize = true;
+			this->CharPosLabel->Location = System::Drawing::Point(6, 55);
+			this->CharPosLabel->Name = L"CharPosLabel";
+			this->CharPosLabel->Size = System::Drawing::Size(74, 13);
+			this->CharPosLabel->TabIndex = 22;
+			this->CharPosLabel->Text = L"CharPos: (0,0)";
+			// 
+			// StatsTimer
+			// 
+			this->StatsTimer->Enabled = true;
+			this->StatsTimer->Interval = 15;
+			this->StatsTimer->Tick += gcnew System::EventHandler(this, &MainForm::StatsTimer_Tick);
+			// 
+			// SpamPacketsTimer
+			// 
+			this->SpamPacketsTimer->Tick += gcnew System::EventHandler(this, &MainForm::SpamPacketsTimer_Tick);
 			// 
 			// MainForm
 			// 
@@ -1567,10 +1603,6 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->AutoBotTab->ResumeLayout(false);
 			this->AutoBotGroupBox->ResumeLayout(false);
 			this->AutoBotGroupBox->PerformLayout();
-			this->groupBox2->ResumeLayout(false);
-			this->groupBox2->PerformLayout();
-			this->CCPeopleGroupBox->ResumeLayout(false);
-			this->CCPeopleGroupBox->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->AttackTrackBar))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->EXPForeground))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->MPForeground))->EndInit();
@@ -1585,9 +1617,6 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->MobHacksGroupBox->PerformLayout();
 			this->CharacterHacksGroupBox->ResumeLayout(false);
 			this->CharacterHacksGroupBox->PerformLayout();
-			this->InfoTab->ResumeLayout(false);
-			this->PointerReadGroupBox->ResumeLayout(false);
-			this->PointerReadGroupBox->PerformLayout();
 			this->PacketSenderTab->ResumeLayout(false);
 			this->EditPacketGroupBox->ResumeLayout(false);
 			this->EditPacketGroupBox->PerformLayout();
@@ -1598,6 +1627,9 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 			this->SendPacketGroupBox->PerformLayout();
 			this->SPControlTabPage->ResumeLayout(false);
 			this->SPControlTabPage->PerformLayout();
+			this->InfoTab->ResumeLayout(false);
+			this->PointerReadGroupBox->ResumeLayout(false);
+			this->PointerReadGroupBox->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -1657,6 +1689,7 @@ private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 	private: System::Void AutoAggroCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SPControlCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-};
+	private: System::Void CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+	};
 	}
 #pragma endregion

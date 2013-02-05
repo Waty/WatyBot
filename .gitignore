@@ -13,5 +13,6 @@
 *.a
 
 [Rr]elease*/
+[De]bug*/
 
 *.sdf
