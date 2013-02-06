@@ -99,6 +99,7 @@
       <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Async</ExceptionHandling>
     </ClCompile>
     <ClCompile Include="Memory.cpp" />
+    <ClCompile Include="Packet.cpp" />
     <ClCompile Include="SendPacket.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +114,8 @@
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Memory.h" />
+    <ClInclude Include="Packet.h" />
     <ClInclude Include="Pointers.h" />
     <ClInclude Include="SendPacket.h" />
   </ItemGroup>

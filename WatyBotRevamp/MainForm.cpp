@@ -9,58 +9,15 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 #include <boost/property_tree/xml_parser.hpp>
-#include <msclr\marshal_cppstd.h>
+#include <msclr/marshal_cppstd.h>
 #include <boost/foreach.hpp>
+#include "Packet.h"
 using namespace std;
 using namespace WatyBotRevamp;
 using namespace msclr::interop;
 
-#pragma region Packets
-#pragma region Packet Vars
-struct packet
-{
-	string	PacketName;
-	string	PacketData;
-};
-typedef vector<packet> PacketReader;
-#pragma endregion
+CPacket* Packets = new CPacket();
 
-PacketReader read(istream & is)
-{
-	//populate xml tree
-	using boost::property_tree::ptree;
-	ptree pt;
-	read_xml(is, pt);
-
-	PacketReader ans;
-	BOOST_FOREACH( ptree::value_type const& v, pt.get_child("packetlist"))
-	{
-		if(v.first == "packet")
-		{
-			packet p;
-			p.PacketName = v.second.get<string>("name");
-			p.PacketData = v.second.get<string>("packet");
-			ans.push_back(p);
-		}
-	}
-	return ans;
-}
-void write( PacketReader packetreader, std::ostream & os )
-{
-    using boost::property_tree::ptree;
-    ptree pt;
-	BOOST_FOREACH( packet p, packetreader )
-	{
-        ptree & node = pt.add("packetlist.packet", "");
-		node.put("name", p.PacketName);
-		node.put("packet", p.PacketData);
-    }
-	write_xml(os, pt);
-}
-string PacketFileName = "C:\\WatyBot\\packets.xml";
-fstream PacketFile(PacketFileName);
-PacketReader Packets = read(PacketFile);
-#pragma endregion
 #pragma region vars
 public ref class Globals
 {
@@ -70,6 +27,7 @@ public:
 
 int SpamTimes, SpamDelay;
 #pragma endregion
+
 #pragma region Packetsending stuff
 bool isGoodPacket(String^ strPacket, String^&strError){
     if(strPacket == String::Empty){
@@ -127,8 +85,6 @@ bool fSendPacket(String^ strPacket, String^&strError){
     }
     return true;
 }
-
-
 void NextChannel()
 {
 	String^ CCString = "3E 00 0* ** ** 5B 00 ";
@@ -136,219 +92,193 @@ void NextChannel()
 	if(!fSendPacket(CCString->Replace(" ", ""),strError))
         MessageBox::Show(strError);
 }
-
 #pragma endregion
 #pragma region Hacks
 ////////////////////////////////////////////////////////////Jump Down Anywhere///////////////////////////////////////////////////////////////
-BYTE bJDA1[] = {0xEB};																													/////
-BYTE bJDA2[] = {0xEB};																													/////
-BYTE bJDA3[] = {0x90, 0x90};																											/////
-DWORD JDAAddy1 = 0x00B64C89;															// 74 06 3B 5C 24 ? 75 ? 8B 4C 24 ? 6A 01		/////
-DWORD JDAAddy2 = 0x00B64CC6;															// 7D ? 8B 16 8B 52 ? 8D 44 24 ? 50				/////
-DWORD JDAAddy3 = 0x00B64CE4;															// 74 ? 8B CF C7 87 ? ? 00 00 01 00 00 00		/////
-CMemory JDA(JDAAddy1, bJDA1, 1, JDAAddy2, bJDA2, 1, JDAAddy3, bJDA3, 2);																/////
-////////////////////////////////////////////////////////////Jump Down Anywhere///////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+BYTE bJDA1[] = {0xEB};
+BYTE bJDA2[] = {0xEB};
+BYTE bJDA3[] = {0x90, 0x90};
+DWORD JDAAddy1 = 0x00B64C89;
+DWORD JDAAddy2 = 0x00B64CC6;
+DWORD JDAAddy3 = 0x00B64CE4;
+CMemory JDA(JDAAddy1, bJDA1, 1, JDAAddy2, bJDA2, 1, JDAAddy3, bJDA3, 2);
+
 ////////////////////////////////////////////////////////////Fast Mobs////////////////////////////////////////////////////////////////////////
-BYTE bFastMobs[] = {0x90, 0x90};																										/////
-DWORD FastMobsAddy = 0x00714F43;																										/////
-CMemory FastMobs(FastMobsAddy, bFastMobs, 2);																							/////
-////////////////////////////////////////////////////////////Fast Mobs////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+BYTE bFastMobs[] = {0x90, 0x90};
+DWORD FastMobsAddy = 0x00714F43;																										
+CMemory FastMobs(FastMobsAddy, bFastMobs, 2);																							
+ 
 ////////////////////////////////////////////////////////////Perfect Loot/////////////////////////////////////////////////////////////////////
-BYTE bPerfectLoot1[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};																			/////
-BYTE bPerfectLoot2[] = {0x25};																											/////
-BYTE bPerfectLoot3[] = {0x81, 0xFE, 0x00, 0x00, 0x00, 0x00};																			/////
-DWORD PerfectLootAddy1 = 0x004B42A7;																									/////
-DWORD PerfectLootAddy2 = 0x005410C5;																									/////
-DWORD PerfectLootAddy3 = 0x00443869;																									/////
-CMemory PerfectLoot(PerfectLootAddy1, bPerfectLoot1, 6, PerfectLootAddy2, bPerfectLoot2, 1, PerfectLootAddy3, bPerfectLoot3, 6);		/////
-////////////////////////////////////////////////////////////Perfect Loot/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+BYTE bPerfectLoot1[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};																		
+BYTE bPerfectLoot2[] = {0x25};																									
+BYTE bPerfectLoot3[] = {0x81, 0xFE, 0x00, 0x00, 0x00, 0x00};																			
+DWORD PerfectLootAddy1 = 0x004B42A7;																								
+DWORD PerfectLootAddy2 = 0x005410C5;																								
+DWORD PerfectLootAddy3 = 0x00443869;																								
+CMemory PerfectLoot(PerfectLootAddy1, bPerfectLoot1, 6, PerfectLootAddy2, bPerfectLoot2, 1, PerfectLootAddy3, bPerfectLoot3, 6);	
+ 
 ////////////////////////////////////////////////////////////No Delay - All Attacks///////////////////////////////////////////////////////////
-BYTE bNDAllAttacks[] = {0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3, 0x90};																		/////
-DWORD NDAllAttacksAddy = 0x00B35220;																									/////
-CMemory NDAllAttacks(NDAllAttacksAddy, bNDAllAttacks, 7);																				/////
-////////////////////////////////////////////////////////////No Delay - All Attacks///////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+BYTE bNDAllAttacks[] = {0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3, 0x90};																	
+DWORD NDAllAttacksAddy = 0x00B35220;																								
+CMemory NDAllAttacks(NDAllAttacksAddy, bNDAllAttacks, 7);																			
+ 
 ///////////////////////////////////////////////////////////Unlimited Morph Kaizer////////////////////////////////////////////////////////////
-BYTE bUnlMorph1[] = {0xEB, 0x2E};																										/////
-BYTE bUnlMorph2[] = {0xEB};																												/////
-DWORD UnlMorphAddy1 = 0x00BC3172;																										/////
-DWORD UnlMorphAddy2 = 0x00BC38F0;																										/////
-CMemory UnlimitedMorph(UnlMorphAddy1, bUnlMorph1, 2, UnlMorphAddy2, bUnlMorph2, 1);														/////
-///////////////////////////////////////////////////////////Unlimited Morph Kaizer////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+BYTE bUnlMorph1[] = {0xEB, 0x2E};																										
+BYTE bUnlMorph2[] = {0xEB};																												
+DWORD UnlMorphAddy1 = 0x00BC3172;																									
+DWORD UnlMorphAddy2 = 0x00BC38F0;																									
+CMemory UnlimitedMorph(UnlMorphAddy1, bUnlMorph1, 2, UnlMorphAddy2, bUnlMorph2, 1);													
+ 
 ///////////////////////////////////////////////////////////Hide Damage///////////////////////////////////////////////////////////////////////
-BYTE bHideDamage[] = {0x7F};																											/////
-DWORD HideDamageAddy = 0x006D9A77;																										/////
-CMemory HideDamage(HideDamageAddy, bHideDamage, 1);																						/////
-///////////////////////////////////////////////////////////Hide Damage///////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+BYTE bHideDamage[] = {0x7F};																											
+DWORD HideDamageAddy = 0x006D9A77;																										
+CMemory HideDamage(HideDamageAddy, bHideDamage, 1);																						
+ 
 ///////////////////////////////////////////////////////////CPU Hack//////////////////////////////////////////////////////////////////////////
-BYTE bCPUHack[] = {0x90, 0x90, 0x90, 0x90, 0x90};																						/////
-DWORD CPUHackAddy1 = 0x006AC1CB;																										/////
-DWORD CPUHackAddy2 = 0x006AF52D;																										/////
-DWORD CPUHackAddy3 = 0x006B3D59;																										/////
-CMemory CPUHack(CPUHackAddy1, bCPUHack, 5, CPUHackAddy2, bCPUHack, 5, CPUHackAddy3, bCPUHack, 5);										/////
-///////////////////////////////////////////////////////////CPU Hack//////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+BYTE bCPUHack[] = {0x90, 0x90, 0x90, 0x90, 0x90};																					
+DWORD CPUHackAddy1 = 0x006AC1CB;																									
+DWORD CPUHackAddy2 = 0x006AF52D;																									
+DWORD CPUHackAddy3 = 0x006B3D59;																										
+CMemory CPUHack(CPUHackAddy1, bCPUHack, 5, CPUHackAddy2, bCPUHack, 5, CPUHackAddy3, bCPUHack, 5);										
+ 
 ///////////////////////////////////////////////////////////Pin Typer/////////////////////////////////////////////////////////////////////////
-BYTE bPinTyper[] = {0x0F, 0x84};																										/////
-DWORD PinTyperAddy1 = 0x0068A956;																										/////
-DWORD PinTyperAddy2 = 0x0068C027;																										/////
-CMemory PinTyper(PinTyperAddy1, bPinTyper, 2, PinTyperAddy2, bPinTyper, 2);																/////
-///////////////////////////////////////////////////////////Pin Typer/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+BYTE bPinTyper[] = {0x0F, 0x84};																										
+DWORD PinTyperAddy1 = 0x0068A956;																										
+DWORD PinTyperAddy2 = 0x0068C027;																										
+CMemory PinTyper(PinTyperAddy1, bPinTyper, 2, PinTyperAddy2, bPinTyper, 2);																
+ 
 ///////////////////////////////////////////////////////////No Char Knockback/////////////////////////////////////////////////////////////////
-BYTE bNoCharKB[] = {0x00};																												/////
-DWORD NoCharKBAddy = 0x0087BA5B;																										/////
-CMemory NoCharKB(NoCharKBAddy, bNoCharKB, 1);																							/////
-///////////////////////////////////////////////////////////No Char Knockback/////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+BYTE bNoCharKB[] = {0x00};																												
+DWORD NoCharKBAddy = 0x0087BA5B;																									
+CMemory NoCharKB(NoCharKBAddy, bNoCharKB, 1);																							
+ 
 ///////////////////////////////////////////////////////////Vac Right/////////////////////////////////////////////////////////////////////////
-BYTE bVacRight[] = {0x75, 0x48};																										/////
-DWORD VacRightAddy = 0x00C1A300;																										/////
-CMemory VacRight(VacRightAddy, bVacRight, 2);																							/////
-///////////////////////////////////////////////////////////Vac Right/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+BYTE bVacRight[] = {0x75, 0x48};
+DWORD VacRightAddy = 0x00C1A300;
+CMemory VacRight(VacRightAddy, bVacRight, 2);
+
 ///////////////////////////////////////////////////////////Full Mob Disarm///////////////////////////////////////////////////////////////////
-BYTE bFullMobDisarm[] = {0xE9, 0x9B, 0x02, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90};															/////
-DWORD FullMobDisarmAddy = 0x006FC332;																									/////
-CMemory FullMobDisarm(FullMobDisarmAddy, bFullMobDisarm, sizeof(bFullMobDisarm));														/////
-///////////////////////////////////////////////////////////Full Mob Disarm///////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+BYTE bFullMobDisarm[] = {0xE9, 0x9B, 0x02, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90};
+DWORD FullMobDisarmAddy = 0x006FC332;
+CMemory FullMobDisarm(FullMobDisarmAddy, bFullMobDisarm, sizeof(bFullMobDisarm));
+ 
 ///////////////////////////////////////////////////////////No Delay Minig////////////////////////////////////////////////////////////////////
-DWORD NDMiningAddy1 = 0x00B687A2;																										/////
-DWORD NDMiningAddy2 = 0x00B6887B;																										/////
-DWORD NDMiningAddy3 = 0x00B77527;																										/////
-BYTE bNDMining1[] = {0x90, 0x90};																										/////
-BYTE bNDMining2[] = {0xEB};																												/////
-BYTE bNDMining3[] = {0x90, 0x90};																										/////
-CMemory NDMining(NDMiningAddy1, bNDMining1, 2, NDMiningAddy2, bNDMining2, 1, NDMiningAddy3, bNDMining3, 2);								/////
-///////////////////////////////////////////////////////////No Delay Minig////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DWORD NDMiningAddy1 = 0x00B687A2;
+DWORD NDMiningAddy2 = 0x00B6887B;
+DWORD NDMiningAddy3 = 0x00B77527;																									
+BYTE bNDMining1[] = {0x90, 0x90};																									
+BYTE bNDMining2[] = {0xEB};																												
+BYTE bNDMining3[] = {0x90, 0x90};																									
+CMemory NDMining(NDMiningAddy1, bNDMining1, 2, NDMiningAddy2, bNDMining2, 1, NDMiningAddy3, bNDMining3, 2);								
+
 ///////////////////////////////////////////////////////////Uncensored////////////////////////////////////////////////////////////////////////
-DWORD UncensorAddy1 = 0x00443869;																										/////
-DWORD UncensorAddy2 = 0x004FFB84;																										/////
-BYTE bUncensor1[] = {0x75};																												/////
-BYTE bUncensor2[] = {0x85};																												/////
-CMemory Uncensor(UncensorAddy1, bUncensor1, 1, UncensorAddy2, bUncensor2, 1);															/////
+DWORD UncensorAddy1 = 0x00443869;																										
+DWORD UncensorAddy2 = 0x004FFB84;																										
+BYTE bUncensor1[] = {0x75};																												
+BYTE bUncensor2[] = {0x85};																												
+CMemory Uncensor(UncensorAddy1, bUncensor1, 1, UncensorAddy2, bUncensor2, 1);															
 ///////////////////////////////////////////////////////////Uncensored////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
 ///////////////////////////////////////////////////////////No Skill Movement/////////////////////////////////////////////////////////////////
-DWORD NoSkillMovementAddy1 = 0x00B5DD4F;																								/////
-DWORD NoSkillMovementAddy2 = 0x0087BA5F;																								/////
-BYTE bNoSkillMovement1[] = {0x00};																										/////
-BYTE bNoSkillMovement2[] = {0xD8, 0xD2};																								/////
-CMemory NoSkillMovement(NoSkillMovementAddy1, bNoSkillMovement1, 1, NoSkillMovementAddy2, bNoSkillMovement2, 2);						/////
-///////////////////////////////////////////////////////////No Skill Movement/////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DWORD NoSkillMovementAddy1 = 0x00B5DD4F;																								
+DWORD NoSkillMovementAddy2 = 0x0087BA5F;																								
+BYTE bNoSkillMovement1[] = {0x00};																										
+BYTE bNoSkillMovement2[] = {0xD8, 0xD2};																								
+CMemory NoSkillMovement(NoSkillMovementAddy1, bNoSkillMovement1, 1, NoSkillMovementAddy2, bNoSkillMovement2, 2);						
+ 
 ///////////////////////////////////////////////////////////No Swear//////////////////////////////////////////////////////////////////////////
-DWORD NoSwearsAddy = 0x0087888B;																										/////
-BYTE bNoSwears[] = {0x90, 0x90};																										/////
-CMemory NoSwears(NoSwearsAddy, bNoSwears, 2);																							/////
-///////////////////////////////////////////////////////////No Swear//////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DWORD NoSwearsAddy = 0x0087888B;																										
+BYTE bNoSwears[] = {0x90, 0x90};																										
+CMemory NoSwears(NoSwearsAddy, bNoSwears, 2);																							
+ 
 ///////////////////////////////////////////////////////////No Background + Clouds////////////////////////////////////////////////////////////
-DWORD NoBackgroundAddy1 = 0x006AF52D;																									/////  E8 ?? ?? ?? ?? 8B 06 8B 48 ?? 56 C6 45 ?? ?? FF D1 8B 75 ?? 43
-DWORD NoBackgroundAddy2 = 0x006ADE4B;																									/////  E8 ?? ?? ?? ?? 8B 06 8B 48 08 56 C7 44 24 34 FF FF FF FF FF D1 8B 4C 24 28 64 89 0D 00 00 00 00 59 5F 5E 5D 83 C4 24
-BYTE bNoBackground[] = {0x90, 0x90, 0x90, 0x90, 0x90};																					/////
-CMemory NoBackground(NoBackgroundAddy1, bNoBackground, 5, NoBackgroundAddy2, bNoBackground, 5);											/////
-///////////////////////////////////////////////////////////No Background + Clouds////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DWORD NoBackgroundAddy1 = 0x006AF52D;
+DWORD NoBackgroundAddy2 = 0x006ADE4B;
+BYTE bNoBackground[] = {0x90, 0x90, 0x90, 0x90, 0x90};																					
+CMemory NoBackground(NoBackgroundAddy1, bNoBackground, 5, NoBackgroundAddy2, bNoBackground, 5);											
+ 
 ///////////////////////////////////////////////////////////No Mobs///////////////////////////////////////////////////////////////////////////
-DWORD NoMobsAddy = 0x00701EAD;																											/////
-BYTE bNoMobs[] = {0xEB};																												/////
-CMemory NoMobs(NoMobsAddy, bNoMobs, 1);																									/////
-///////////////////////////////////////////////////////////No Mobs///////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DWORD NoMobsAddy = 0x00701EAD;																											
+BYTE bNoMobs[] = {0xEB};																												
+CMemory NoMobs(NoMobsAddy, bNoMobs, 1);																									
+ 
 ///////////////////////////////////////////////////////////Mob Lag///////////////////////////////////////////////////////////////////////////
-DWORD MonLagAddy = 0x00701EFA;																											/////
-BYTE bMobLag[] = {0xEB};																												/////
-CMemory MobLag(NoMobsAddy, bNoMobs, 1);																									/////
-///////////////////////////////////////////////////////////Mob Lag///////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DWORD MonLagAddy = 0x00701EFA;																											
+BYTE bMobLag[] = {0xEB};																												
+CMemory MobLag(NoMobsAddy, bNoMobs, 1);																									
+ 
 ///////////////////////////////////////////////////////////Instant air Loot//////////////////////////////////////////////////////////////////
-DWORD InstantAirLootAddy = 0x005422B9;																									/////
-BYTE bInstantAirLoot[] = {0x74};																										/////
-CMemory InstantAirLoot(InstantAirLootAddy, bInstantAirLoot, 1);																			/////
-///////////////////////////////////////////////////////////Instant air Loot//////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DWORD InstantAirLootAddy = 0x005422B9;																									
+BYTE bInstantAirLoot[] = {0x74};																										
+CMemory InstantAirLoot(InstantAirLootAddy, bInstantAirLoot, 1);																			
+ 
 ///////////////////////////////////////////////////////////Raining Mobs//////////////////////////////////////////////////////////////////////
-DWORD RainingMobsAddy = 0x00713576;																										/////
-BYTE bRainingMobs[] = {0xD9, 0xC1};																										/////
-CMemory RainingMobs(RainingMobsAddy, bRainingMobs, 2);																					/////
+DWORD RainingMobsAddy = 0x00713576;																										
+BYTE bRainingMobs[] = {0xD9, 0xC1};																										
+CMemory RainingMobs(RainingMobsAddy, bRainingMobs, 2);																					
+ 
 ///////////////////////////////////////////////////////////Raining Mobs//////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////Raining Mobs//////////////////////////////////////////////////////////////////////
-DWORD NDMilleAddy = 0x00BB0AD5;																											/////
-BYTE bNDMille[] = {0xEB};																												/////
-CMemory NDMille(NDMilleAddy, bNDMille, 1);																								/////
-///////////////////////////////////////////////////////////Raining Mobs//////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DWORD NDMilleAddy = 0x00BB0AD5;																											
+BYTE bNDMille[] = {0xEB};																												
+CMemory NDMille(NDMilleAddy, bNDMille, 1);																								
+ 
 ///////////////////////////////////////////////////////////FLACC/////////////////////////////////////////////////////////////////////////////
-DWORD FLACCAddy = 0x004747F9;																											/////
-BYTE bFLACC[] = {0xB9, 0x07, 0x00, 0x00, 0x00, 0x90};																					/////
-CMemory FLACC(FLACCAddy, bFLACC, sizeof(bFLACC));																						/////
-///////////////////////////////////////////////////////////FLACC/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DWORD FLACCAddy = 0x004747F9;																											
+BYTE bFLACC[] = {0xB9, 0x07, 0x00, 0x00, 0x00, 0x90};																					
+CMemory FLACC(FLACCAddy, bFLACC, sizeof(bFLACC));																						
+ 
 ///////////////////////////////////////////////////////////7 Miss////////////////////////////////////////////////////////////////////////////
-int Miss7Counter = 0;																													/////
-DWORD Miss7Addy = 0x00B9B365;																											/////
-DWORD Miss7Return = Miss7Addy + 7;																										/////
-DWORD Miss7ReturnNoKB = Miss7Return + 0x30;																								/////
-CodeCave(SevenMiss)																														/////
-   inc [Miss7Counter]																													/////
-   cmp dword ptr [Miss7Counter],0x07																									/////
-   jg Reset                            //jump if greater																				/////
-   mov dword ptr [esp+0x00000118],00																									/////
-   jmp dword ptr [Miss7ReturnNoKB]																										/////
-																																		/////
-   Reset:																																/////
-   mov [Miss7Counter],00																												/////
-   mov esi,[esp+0x0000011C]																												/////
-   jmp dword ptr [Miss7Return]																											/////
-EndCodeCave																																/////
-CMemory Miss7GodMode(Miss7Addy, CaveSevenMiss, 2, true);																				/////
-///////////////////////////////////////////////////////////7 Miss////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+int Miss7Counter = 0;																													
+DWORD Miss7Addy = 0x00B9B365;																											
+DWORD Miss7Return = Miss7Addy + 7;																										
+DWORD Miss7ReturnNoKB = Miss7Return + 0x30;																								
+CodeCave(SevenMiss)																														
+   inc [Miss7Counter]																													
+   cmp dword ptr [Miss7Counter],0x07																									
+   jg Reset                            //jump if greater																				
+   mov dword ptr [esp+0x00000118],00																									
+   jmp dword ptr [Miss7ReturnNoKB]																										
+																																		
+   Reset:																																
+   mov [Miss7Counter],00																												
+   mov esi,[esp+0x0000011C]																												
+   jmp dword ptr [Miss7Return]																											
+EndCodeCave																																
+CMemory Miss7GodMode(Miss7Addy, CaveSevenMiss, 2, true);																				
+ 
 ///////////////////////////////////////////////////////////Fusion Attack/////////////////////////////////////////////////////////////////////
-DWORD FusionAttackAddy = 0x006FFBB2;																									/////
-DWORD FusionAttackReturn = FusionAttackAddy + 8;																						/////
-CodeCave(FusionAttack)																													/////
-Hook:																																	/////
-mov dword ptr [ecx+eax*4],esi																											/////
-inc eax																																	/////
-cmp eax,[esp+0x64]																														/////
-jl Hook																																	/////
-mov [esp+0x18],eax																														/////
-jmp [FusionAttackReturn]																												/////
-EndCodeCave																																/////
-CMemory FusionAttack(FusionAttackAddy, CaveFusionAttack, 3, true);																		/////
-///////////////////////////////////////////////////////////Fusion Attack/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DWORD FusionAttackAddy = 0x006FFBB2;																									
+DWORD FusionAttackReturn = FusionAttackAddy + 8;																						
+CodeCave(FusionAttack)																													
+Hook:																																	
+mov dword ptr [ecx+eax*4],esi																											
+inc eax																																	
+cmp eax,[esp+0x64]																														
+jl Hook																																	
+mov [esp+0x18],eax																														
+jmp [FusionAttackReturn]																												
+EndCodeCave																																
+CMemory FusionAttack(FusionAttackAddy, CaveFusionAttack, 3, true);																		
+ 
 ///////////////////////////////////////////////////////////FMA///////////////////////////////////////////////////////////////////////////////
-DWORD FMAAddy = 0x006FFBA2;																												/////
-BYTE bFMA[] = {0x74};																													/////
-CMemory FMA(FMAAddy, bFMA, 1);																											/////
-///////////////////////////////////////////////////////////FMA///////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DWORD FMAAddy = 0x006FFBA2;																												
+BYTE bFMA[] = {0x74};																													
+CMemory FMA(FMAAddy, bFMA, 1);																											
+ 
 ///////////////////////////////////////////////////////////Auto Aggro////////////////////////////////////////////////////////////////////////
-DWORD AutoAggroAddy = 0x00C2761f;																										/////
-DWORD AutoAggroRet = AutoAggroAddy + 5;																									/////
-DWORD AutoAggroCal = 0x00c1e110;																										/////
-CodeCave(AutoAggro)																														/////
-	call AutoAggroCal																													/////
-	mov edx,[0x011ADD04]																												/////
-	mov edx,[edx+0x29D0]																												/////
-	mov edx,[edx+0x0C]																													/////
-	mov [esi+0x2B0],edx																													/////
-	jmp AutoAggroRet																													/////
-EndCodeCave																																/////
-CMemory AutoAggro(AutoAggroAddy, CaveAutoAggro, 0, true);																				/////
-///////////////////////////////////////////////////////////Auto Aggro////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DWORD AutoAggroAddy = 0x00C2761f;
+DWORD AutoAggroRet = AutoAggroAddy + 5;
+DWORD AutoAggroCal = 0x00c1e110;
+CodeCave(AutoAggro)
+	call AutoAggroCal
+	mov edx,[0x011ADD04]
+	mov edx,[edx+0x29D0]
+	mov edx,[edx+0x0C]
+	mov [esi+0x2B0],edx
+	jmp AutoAggroRet																													
+EndCodeCave
+CMemory AutoAggro(AutoAggroAddy, CaveAutoAggro, 0, true);
+
 ///////////////////////////////////////////////////////////Spawn Control/////////////////////////////////////////////////////////////////////
 DWORD SPControlAddy = 0x00B8420A;
 DWORD SPControlRet = SPControlAddy + 6;
@@ -360,15 +290,10 @@ CodeCave(SPControl)
 	jmp dword ptr SPControlRet
 EndCodeCave
 CMemory SPControl(SPControlAddy, CaveSPControl, 1, true);
-///////////////////////////////////////////////////////////Spawn Control/////////////////////////////////////////////////////////////////////
 
 #pragma endregion 
 #pragma region Pointers Reading
 	int MobsCount(){		return (int) ReadPointer(MobBasePtr, MobCountOffset);}
-	int MobX(){				return (int) ReadPointer(MobBasePtr, MobXOffset);}
-	int MobY(){				return (int) ReadPointer(MobBasePtr, MobYOffset);}
-	int MobDeath(){			return (int) ReadPointer(MobBasePtr, MobDeathOffset);}
-
 	int ItemCount(){		return (int) ReadPointer(ItemBasePtr, ItemCountOffset);}
 	int PeopleCount(){		return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);}
 	int CharX(){			return (int) ReadPointer(CharBasePtr,XOffset);}
@@ -377,11 +302,9 @@ CMemory SPControl(SPControlAddy, CaveSPControl, 1, true);
 	int CharMP(){			WritePointer(SettingsBasePtr, MPAlertOffset, 20);return (int) ReadPointer(StatsBasePtr, MPOffset);}
 	double CharEXP(){		return ReadDoublePointer(StatsBasePtr, EXPOffset);}
 	int MapID(){			return (int) ReadPointer(InfoBasePtr, MapIDOffset);}
-	int CurWorld(){			return (int) ReadPointer(ServerBasePtr, WorldOffset);}
 	int AttackCount(){		return (int) ReadPointer(CharBasePtr, AttackCountOffset);}
 	int Tubi(){				return (int) ReadPointer(ServerBasePtr, TubiOffset);}
 	int Breath(){			return (int) ReadPointer(CharBasePtr, BreathOffset);}
-
 #pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/Skill/CC/UnlimitedAttack Voids
 void AutoHP()
@@ -829,26 +752,17 @@ void Main(void)
 }
 void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 {
-	IO::File::Delete("WatyBot.ini");
-	URLDownloadToFileA(NULL,"http://wart.zuiderhoeve.nl/watybot/configcounter.php", "WatyBot.ini", 0, NULL);
-	boost::property_tree::ptree pt_ini;
-	boost::property_tree::ini_parser::read_ini("WatyBot.ini", pt_ini);
 
-	if(!IO::File::Exists("C:\\WatyBot\\packets.xml"))
-	{
-		IO::Directory::CreateDirectory("C:\\WatyBot");
-		URLDownloadToFileA(NULL, "http://wart.zuiderhoeve.nl/watybot/packets.xml", "C:\\WatyBot\\packets.xml", 0, 0);
-		MessageBox::Show("Prepared WatyBot for first time use!");
-	}
+	if(!IO::File::Exists("WatyBotConfig\\Packets.xml"))	IO::Directory::CreateDirectory("C:\\WatyBot");
 
 	Globals::KeyNames = gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9"};
 	this->HPComboBox->Items->AddRange(Globals::KeyNames);
 	this->HPComboBox->SelectedIndex = 8;
-	this->HPTextBox->Text = Convert::ToString(pt_ini.get<int>("AutoHPValue"));
+	this->HPTextBox->Text = Convert::ToString(9000);
 
 	this->MPComboBox->Items->AddRange(Globals::KeyNames);
 	this->MPComboBox->SelectedIndex = 9;
-	this->MPTextBox->Text = Convert::ToString(pt_ini.get<int>("AutoMPValue"));
+	this->MPTextBox->Text = Convert::ToString(100);
 
     this->AttackComboBox->Items->AddRange(Globals::KeyNames);
 	this->AttackComboBox->SelectedIndex = 2;
@@ -862,43 +776,12 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	this->AutoSkill3ComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill4ComboBox->Items->AddRange(Globals::KeyNames);
 
-#pragma region Read config for enabled CheckBoxes
-	#define getHack(name) pt_ini.get<bool>(name,false)
-	this->NoCharKBCheckBox->Enabled =			getHack("NoCharKB");
-	this->NDAllAttacksCheckBox->Enabled =		getHack("AllAttacksND");
-	this->UnlimitedMorphCheckBox->Enabled =		getHack("UnlimitedMorph");
-	this->NoAttackLimitCheckBox->Enabled =		getHack("UA");
-	this->SevenMissCheckBox->Enabled =			getHack("SevenMiss");
-	this->FusionAttackCheckBox->Enabled =		getHack("FusionAttack");
-	this->PerfectLootCheckBox->Enabled =		getHack("PerfectLoot");
-	this->JumpDownAnywhereCheckBox->Enabled =	getHack("JDA");
-	this->NDMiningCheckBox->Enabled =			getHack("NDMining");
-	this->NoSkillMovementCheckBox->Enabled =	getHack("NoSkillMovement");
-	this->NoSwearsCheckBox->Enabled =			getHack("NoSwears");
-	this->InstantAirLootCheckBox->Enabled =		getHack("InstantAirLoot");
-	this->NDMilleCheckBox->Enabled =			getHack("NDMille");
-	this->PinTyperCheckBox->Enabled =			getHack("PinTyper");
-	this->UncensorCheckBox->Enabled =			getHack("Uncensor");
-	this->NoBackGroundCheckBox->Enabled =		getHack("NoBG");
-	this->CPUHackCheckBox->Enabled =			getHack("CPUHack");
-	this->HideDamageCheckBox->Enabled =			getHack("HideDamage");
-	this->FLACCCheckBox->Enabled =				getHack("FLACC");
-	this->FullMobDisarmCheckBox->Enabled =		getHack("MobDisarm");
-	this->FastMobsCheckBox->Enabled =			getHack("FastMobs");
-	this->VacRightCheckBox->Enabled =			getHack("VacRight");
-	this->NoMobsCheckBox->Enabled =				getHack("NoMobs");
-	this->MobLagCheckBox->Enabled =				getHack("MobLag");
-	this->RainingMobsCheckBox->Enabled =		getHack("RainingMobs");
-	this->FMACheckBox->Enabled =				getHack("FMA");
-#pragma endregion
-
-
 #pragma region Create Packets
-	for(unsigned int i=0; i < Packets.size(); i++)
+	for(unsigned int i=0; i < Packets->Packetv.size(); i++)
 	{
 		try
 		{
-			String^ PacketName = marshal_as<String^>(Packets.at(i).PacketName);
+			String^ PacketName = marshal_as<String^>(Packets->Packetv.at(i).Name);
 			this->PacketSelectBox->Items->Add(PacketName);
 			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
 			this->DeletePacketComboBox->Items->Add(PacketName);
@@ -951,9 +834,6 @@ void MainForm::MainTabControl_SelectedIndexChanged(System::Object^  sender, Syst
 }
 void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 {
-	IO::File::Delete("C:\\WatyBot\\testpackets.xml");
-	ofstream outputPacketFile("C:\\WatyBot\\testpackets.xml");
-	write(Packets, outputPacketFile);
 	switch(MessageBoxA(NULL, "Close MapleStory too?", "Terminate Maple?", MB_ICONQUESTION | MB_YESNO))
 	{
 	case IDYES:
@@ -969,14 +849,14 @@ void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs
 {
 	String^ strError = String::Empty;
 	if(PacketSelectBox->SelectedIndex < 0)	MessageBoxA(0,"Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
-	else if(!fSendPacket(marshal_as<String^>(Packets.at(PacketSelectBox->SelectedIndex).PacketData)->Replace(" ", ""),strError)) MessageBox::Show(strError);
+	else if(!fSendPacket(marshal_as<String^>(Packets->Packetv.at(PacketSelectBox->SelectedIndex).Data)->Replace(" ", ""),strError)) MessageBox::Show(strError);
 }
 void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	packet p;
-	p.PacketName = marshal_as<string>(this->AddPacketNameTextBox->Text);
-	p.PacketData = marshal_as<string>(this->AddPacketPacketTextBox->Text);
-	Packets.push_back(p);
+	packetStruct p;
+	p.Name = marshal_as<string>(this->AddPacketNameTextBox->Text);
+	p.Data = marshal_as<string>(this->AddPacketPacketTextBox->Text);
+	Packets->Packetv.push_back(p);
 	MessageBox::Show("Packet was added succesfully!");
 
 	//clear old packets
@@ -987,11 +867,11 @@ void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^
 	this->DeletePacketComboBox->Items->Clear();
 
 	//refresh comboboxes
-	for(unsigned int i=0; i < Packets.size(); i++)
+	for(unsigned int i=0; i < Packets->Packetv.size(); i++)
 	{
 		try
 		{
-			String^ PacketName = marshal_as<String^>(Packets.at(i).PacketName);
+			String^ PacketName = marshal_as<String^>(Packets->Packetv.at(i).Name);
 			this->PacketSelectBox->Items->Add(PacketName);
 			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
 			this->DeletePacketComboBox->Items->Add(PacketName);
@@ -1002,7 +882,7 @@ void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^
 void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	//delete packet from vector
-	Packets.erase(Packets.begin() + DeletePacketComboBox->SelectedIndex);
+	Packets->Packetv.erase(Packets->Packetv.begin() + DeletePacketComboBox->SelectedIndex);
 	MessageBox::Show("Packet was deleted succesfully!");
 	
 	//clear old packets
@@ -1011,11 +891,11 @@ void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventAr
 	this->DeletePacketComboBox->Items->Clear();
 
 	//refresh comboboxes
-	for(unsigned int i=0; i < Packets.size(); i++)
+	for(unsigned int i=0; i < Packets->Packetv.size(); i++)
 	{
 		try
 		{
-			String^ PacketName = marshal_as<String^>(Packets.at(i).PacketName);
+			String^ PacketName = marshal_as<String^>(Packets->Packetv.at(i).Name);
 			this->PacketSelectBox->Items->Add(PacketName);
 			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
 			this->DeletePacketComboBox->Items->Add(PacketName);
@@ -1027,14 +907,14 @@ void MainForm::SelectPacketForEditingComboBox_SelectedIndexChanged(System::Objec
 {
 	if(SelectPacketForEditingComboBox->SelectedIndex >= 0)
 	{
-		this->EditPacketNameTextBox->Text = marshal_as<String^>(Packets.at(SelectPacketForEditingComboBox->SelectedIndex).PacketName);
-		this->EditPacketPacketTextBox->Text = marshal_as<String^>(Packets.at(SelectPacketForEditingComboBox->SelectedIndex).PacketData);
+		this->EditPacketNameTextBox->Text = marshal_as<String^>(Packets->Packetv.at(SelectPacketForEditingComboBox->SelectedIndex).Name);
+		this->EditPacketPacketTextBox->Text = marshal_as<String^>(Packets->Packetv.at(SelectPacketForEditingComboBox->SelectedIndex).Data);
 	}
 }
 void MainForm::SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	Packets.at(SelectPacketForEditingComboBox->SelectedIndex).PacketName = marshal_as<string>(EditPacketNameTextBox->Text);
-	Packets.at(SelectPacketForEditingComboBox->SelectedIndex).PacketData = marshal_as<string>(EditPacketPacketTextBox->Text);
+	Packets->Packetv.at(SelectPacketForEditingComboBox->SelectedIndex).Name = marshal_as<string>(EditPacketNameTextBox->Text);
+	Packets->Packetv.at(SelectPacketForEditingComboBox->SelectedIndex).Data = marshal_as<string>(EditPacketPacketTextBox->Text);
 
 	//clear old packets
 	this->EditPacketNameTextBox->Text = String::Empty;
@@ -1044,11 +924,11 @@ void MainForm::SavePacketEditButton_Click(System::Object^  sender, System::Event
 	this->DeletePacketComboBox->Items->Clear();
 
 	//refresh comboboxes
-	for(unsigned int i=0; i < Packets.size(); i++)
+	for(unsigned int i=0; i < Packets->Packetv.size(); i++)
 	{
 		try
 		{
-			String^ PacketName = marshal_as<String^>(Packets.at(i).PacketName);
+			String^ PacketName = marshal_as<String^>(Packets->Packetv.at(i).Name);
 			this->PacketSelectBox->Items->Add(PacketName);
 			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
 			this->DeletePacketComboBox->Items->Add(PacketName);
@@ -1073,7 +953,7 @@ void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^
 		this->SpamPacketsTimer->Enabled = false;
 		MessageBoxA(0,"Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
 	}
-	else if(!fSendPacket(marshal_as<String^>(Packets.at(PacketSelectBox->SelectedIndex).PacketData)->Replace(" ", ""),strError))
+	else if(!fSendPacket(marshal_as<String^>(Packets->Packetv.at(PacketSelectBox->SelectedIndex).Data)->Replace(" ", ""),strError))
 	{
 		this->SpamPacketsTimer->Enabled = false;
 		MessageBox::Show(strError);
