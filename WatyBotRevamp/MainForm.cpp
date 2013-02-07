@@ -33,13 +33,16 @@ int SpamTimes, SpamDelay;
 #pragma endregion
 
 #pragma region Packetsending stuff
-bool isGoodPacket(String^ strPacket, String^&strError){
-    if(strPacket == String::Empty){
+bool isGoodPacket(String^ strPacket, String^&strError)
+{
+    if(strPacket == String::Empty)
+	{
         strError = "Packet is Empty";
         return false;
     }
  
-    if((strPacket->Length)%2 == 1){
+    if((strPacket->Length)%2 == 1)
+	{
         strError = "Packet size is not a multiple of 2";
         return false;
     }
@@ -56,37 +59,32 @@ bool isGoodPacket(String^ strPacket, String^&strError){
     }
     return true;
 }
-bool fSendPacket(String^ strPacket, String^&strError){
+bool SendPacketFunction(String^ strPacket, String^&strError){
     if(!isGoodPacket(strPacket, strError))
         return false;
  
     Random^ randObj = gcnew Random();
     String^ rawBytes = String::Empty;
  
-    for(int i = 0; i < strPacket->Length; i++){
-        if(strPacket[i] == '*'){
-            rawBytes += randObj->Next(16).ToString("X");
-        }
-        else
-            rawBytes += strPacket[i];
+    for(int i = 0; i < strPacket->Length; i++)
+	{
+        if(strPacket[i] == '*')	rawBytes += randObj->Next(16).ToString("X");
+        else	rawBytes += strPacket[i];
     }
  
-    //SRC ZPE
-    using namespace System::Globalization;
- 
-    ::DWORD    dwOffset = 0;
-    ::DWORD  dwLength = ( rawBytes->Length / 2 );
-    ::LPBYTE lpBytes  = new ::BYTE [ dwLength ];
+    ::DWORD dwOffset = 0;
+    ::DWORD dwLength = ( rawBytes->Length / 2 );
+    ::LPBYTE lpBytes = new ::BYTE [ dwLength ];
  
     for ( int i = 0; ( dwOffset < dwLength ) && ( ( i + 1 ) < rawBytes->Length ); dwOffset++, i += 2 )
-        lpBytes[dwOffset] = Byte::Parse(rawBytes->Substring(i, 2), NumberStyles::HexNumber, CultureInfo::InvariantCulture);
+        lpBytes[dwOffset] = Byte::Parse(rawBytes->Substring(i, 2), Globalization::NumberStyles::HexNumber, Globalization::CultureInfo::InvariantCulture);
  
-    try {
-        SendPacket(lpBytes, dwLength);
-    } catch ( Exception^ ) {
-    } finally {
-        delete [] lpBytes;
-    }
+    try
+	{
+		SendPacket(lpBytes, dwLength);
+	} 
+	catch ( Exception^ ){} 
+	finally {delete [] lpBytes;}
     return true;
 }
 void NextChannel()
@@ -756,36 +754,32 @@ void Main(void)
 }
 void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 {
+	//Initialize all Comboboxes and textboxes
 	Globals::KeyNames = gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9"};
 	this->HPComboBox->Items->AddRange(Globals::KeyNames);
 	this->HPComboBox->SelectedIndex = 8;
 	this->HPTextBox->Text = Convert::ToString(9000);
-
 	this->MPComboBox->Items->AddRange(Globals::KeyNames);
 	this->MPComboBox->SelectedIndex = 9;
 	this->MPTextBox->Text = Convert::ToString(100);
-
     this->AttackComboBox->Items->AddRange(Globals::KeyNames);
 	this->AttackComboBox->SelectedIndex = 2;
 	this->AttackTrackBar->Value = 25;
-
 	this->AutoLootComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoLootComboBox->SelectedIndex = 35;
-
 	this->AutoSkill1ComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill2ComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill3ComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill4ComboBox->Items->AddRange(Globals::KeyNames);
 	
-#pragma region Fill CPackets
+
 	if(!File::Exists(marshal_as<String^>(PacketFileName)))
 	{
 		Directory::CreateDirectory(marshal_as<String^>(WatyBotWorkingDirectory));
 		File::Create(marshal_as<String^>(PacketFileName));
 	}
 	Packets = new CPacket(PacketFileName);	
-#pragma endregion
-#pragma region Fill ComboBoxes with Packets
+
 	for(unsigned int i=0; i < Packets->Packetv.size(); i++)
 	{
 		try
@@ -797,7 +791,6 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 		}
 		catch(...){};
 	}
-#pragma endregion
 }
 void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
@@ -970,5 +963,4 @@ void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^
 		this->SendPacketGroupBox->Enabled = true;
 	}
 }
-
 #pragma endregion

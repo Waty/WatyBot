@@ -12,6 +12,8 @@ struct packetStruct
 class CPacket
 {
 public:
+	typedef vector<packetStruct> PacketVector;
+	PacketVector Packetv;
 	CPacket(string);
 	~CPacket(void);
 	void WriteXML(string);
@@ -20,9 +22,5 @@ public:
 	void DeletePacket(int index);
 	packetStruct At(int);
 
-	typedef vector<packetStruct> PacketVector;
-	PacketVector Packetv;
-
 	int SpammedPackets;
-private:
 };
