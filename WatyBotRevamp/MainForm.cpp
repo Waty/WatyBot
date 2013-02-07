@@ -91,7 +91,7 @@ void NextChannel()
 {
 	String^ CCString = "3E 00 0* ** ** 5B 00 ";
     String^ strError = String::Empty;
-	if(!fSendPacket(CCString->Replace(" ", ""),strError))
+	if(!SendPacketFunction(CCString->Replace(" ", ""),strError))
         MessageBox::Show(strError);
 }
 #pragma endregion
@@ -850,7 +850,7 @@ void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs
 {
 	String^ strError = String::Empty;
 	if(PacketSelectBox->SelectedIndex < 0)	MessageBoxA(0,"Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
-	else if(!fSendPacket(marshal_as<String^>(Packets->At(PacketSelectBox->SelectedIndex).Data)->Replace(" ", ""),strError)) MessageBox::Show(strError);
+	else if(!SendPacketFunction(marshal_as<String^>(Packets->At(PacketSelectBox->SelectedIndex).Data)->Replace(" ", ""),strError)) MessageBox::Show(strError);
 }
 void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
@@ -949,7 +949,7 @@ void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^
 		this->SpamPacketsTimer->Enabled = false;
 		MessageBoxA(0,"Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
 	}
-	else if(!fSendPacket(marshal_as<String^>(Packets->At(PacketSelectBox->SelectedIndex).Data)->Replace(" ", ""),strError))
+	else if(!SendPacketFunction(marshal_as<String^>(Packets->At(PacketSelectBox->SelectedIndex).Data)->Replace(" ", ""),strError))
 	{
 		this->SpamPacketsTimer->Enabled = false;
 		MessageBox::Show(strError);
