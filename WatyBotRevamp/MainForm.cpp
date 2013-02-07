@@ -16,7 +16,9 @@ using namespace std;
 using namespace WatyBotRevamp;
 using namespace msclr::interop;
 
-CPacket* Packets = new CPacket();
+//Fill the list of packets
+string PacketFileName;
+CPacket* Packets = new CPacket(PacketFileName);
 
 #pragma region vars
 public ref class Globals
@@ -853,11 +855,8 @@ void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs
 }
 void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	packetStruct p;
-	p.Name = marshal_as<string>(this->AddPacketNameTextBox->Text);
-	p.Data = marshal_as<string>(this->AddPacketPacketTextBox->Text);
-	Packets->Packetv.push_back(p);
-	MessageBox::Show("Packet was added succesfully!");
+	Packets->AddPacket(marshal_as<string>(this->AddPacketNameTextBox->Text), marshal_as<string>(this->AddPacketNameTextBox->Text));
+	MessageBox::Show("Packet was added!");
 
 	//clear old packets
 	this->AddPacketNameTextBox->Text = String::Empty;
@@ -871,7 +870,7 @@ void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^
 	{
 		try
 		{
-			String^ PacketName = marshal_as<String^>(Packets->Packetv.at(i).Name);
+			String^ PacketName = marshal_as<String^>(Packets->At(i).Name);
 			this->PacketSelectBox->Items->Add(PacketName);
 			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
 			this->DeletePacketComboBox->Items->Add(PacketName);
@@ -882,7 +881,7 @@ void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^
 void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	//delete packet from vector
-	Packets->Packetv.erase(Packets->Packetv.begin() + DeletePacketComboBox->SelectedIndex);
+	Packets->DeletePacket(DeletePacketComboBox->SelectedIndex);
 	MessageBox::Show("Packet was deleted succesfully!");
 	
 	//clear old packets
@@ -907,14 +906,13 @@ void MainForm::SelectPacketForEditingComboBox_SelectedIndexChanged(System::Objec
 {
 	if(SelectPacketForEditingComboBox->SelectedIndex >= 0)
 	{
-		this->EditPacketNameTextBox->Text = marshal_as<String^>(Packets->Packetv.at(SelectPacketForEditingComboBox->SelectedIndex).Name);
-		this->EditPacketPacketTextBox->Text = marshal_as<String^>(Packets->Packetv.at(SelectPacketForEditingComboBox->SelectedIndex).Data);
+		this->EditPacketNameTextBox->Text = marshal_as<String^>(Packets->At(SelectPacketForEditingComboBox->SelectedIndex).Name);
+		this->EditPacketPacketTextBox->Text = marshal_as<String^>(Packets->At(SelectPacketForEditingComboBox->SelectedIndex).Data);
 	}
 }
 void MainForm::SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	Packets->Packetv.at(SelectPacketForEditingComboBox->SelectedIndex).Name = marshal_as<string>(EditPacketNameTextBox->Text);
-	Packets->Packetv.at(SelectPacketForEditingComboBox->SelectedIndex).Data = marshal_as<string>(EditPacketPacketTextBox->Text);
+	Packets->EditPacket(SelectPacketForEditingComboBox->SelectedIndex, marshal_as<string>(EditPacketNameTextBox->Text), marshal_as<string>(EditPacketPacketTextBox->Text));
 
 	//clear old packets
 	this->EditPacketNameTextBox->Text = String::Empty;
@@ -936,12 +934,11 @@ void MainForm::SavePacketEditButton_Click(System::Object^  sender, System::Event
 		catch(...){};
 	}
 }
-int SpammedPackets;
 void MainForm::SpamsPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	this->SpamPacketsTimer->Interval = Convert::ToInt32(this->SpamPacketsDelayTextBox->Text);
 	this->SendPacketGroupBox->Enabled = false;
-	SpammedPackets = 0;
+	Packets->SpammedPackets = 0;
 	this->SpamPacketsTimer->Enabled = true;
 }
 void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
@@ -959,8 +956,8 @@ void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^
 		MessageBox::Show(strError);
 	}
 
-	SpammedPackets++;
-	if(SpammedPackets >= Convert::ToInt32(this->SpamPacketTimesTextBox->Text))
+	Packets->SpammedPackets++;
+	if(Packets->SpammedPackets >= Convert::ToInt32(this->SpamPacketTimesTextBox->Text))
 	{
 		this->SpamPacketsTimer->Enabled = false;
 		MessageBox::Show("Finished Spamming packets!");
