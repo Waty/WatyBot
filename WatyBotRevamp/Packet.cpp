@@ -3,16 +3,7 @@
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/foreach.hpp>
 
-CPacket::CPacket(void)
-{
-}
-
-
-CPacket::~CPacket(void)
-{
-}
-
-void CPacket::ReadXML(string filename)
+CPacket::CPacket(string filename)
 {
 	using boost::property_tree::ptree;
 	ptree pt;
@@ -30,6 +21,11 @@ void CPacket::ReadXML(string filename)
 	}
 }
 
+packetStruct CPacket::At(int i)
+{
+	return Packetv.at(i);
+}
+
 void CPacket::WriteXML(string filename)
 {
 	using boost::property_tree::ptree;
@@ -42,4 +38,28 @@ void CPacket::WriteXML(string filename)
 		node.put("data", p.Data);
     }
 	write_xml(filename, pt);
+}
+
+void CPacket::EditPacket(int index, string name, string data)
+{
+	Packetv.at(index).Name = name;
+	Packetv.at(index).Data = data;
+}
+
+void CPacket::DeletePacket(int index)
+{
+	Packetv.erase(Packetv.begin() + index);
+}
+
+void CPacket::AddPacket(string name, string data)
+{
+	packetStruct p;
+	p.Name = name;
+	p.Data = data;
+	Packetv.push_back(p);
+}
+
+
+CPacket::~CPacket(void)
+{
 }

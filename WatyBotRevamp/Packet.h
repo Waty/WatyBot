@@ -12,14 +12,19 @@ struct packetStruct
 class CPacket
 {
 public:
-	CPacket(void);
+	CPacket(string);
 	~CPacket(void);
-	void ReadXML(string filename);
-	void WriteXML(string filename);
+	void WriteXML(string);
+	void AddPacket(string name, string data);
+	void EditPacket(int, string, string);
+	void DeletePacket(int index);
+	packetStruct At(int);
 
 
 	typedef vector<packetStruct> PacketVector;
 	PacketVector Packetv;
+
+	
+	int SpammedPackets;
 private:
-	int test;
 };
