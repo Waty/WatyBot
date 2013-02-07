@@ -12,6 +12,7 @@
 #include <msclr/marshal_cppstd.h>
 #include <boost/foreach.hpp>
 #include "Packet.h"
+#include "Hacks.h"
 using namespace std;
 using namespace WatyBotRevamp;
 using namespace msclr::interop;
@@ -22,15 +23,13 @@ string WatyBotWorkingDirectory = "WatyBot\\";
 string PacketFileName = WatyBotWorkingDirectory + "packets.xml";
 CPacket* Packets;
 
-#pragma region vars
 public ref class Globals
 {
 public:
 	static array <System::Object^> ^KeyNames;
 };
 
-int SpamTimes, SpamDelay;
-#pragma endregion
+
 
 #pragma region Packetsending stuff
 bool isGoodPacket(String^ strPacket, String^&strError)
@@ -95,205 +94,7 @@ void NextChannel()
         MessageBox::Show(strError);
 }
 #pragma endregion
-#pragma region Hacks
-////////////////////////////////////////////////////////////Jump Down Anywhere///////////////////////////////////////////////////////////////
-BYTE bJDA1[] = {0xEB};
-BYTE bJDA2[] = {0xEB};
-BYTE bJDA3[] = {0x90, 0x90};
-DWORD JDAAddy1 = 0x00B64C89;
-DWORD JDAAddy2 = 0x00B64CC6;
-DWORD JDAAddy3 = 0x00B64CE4;
-CMemory JDA(JDAAddy1, bJDA1, 1, JDAAddy2, bJDA2, 1, JDAAddy3, bJDA3, 2);
 
-////////////////////////////////////////////////////////////Fast Mobs////////////////////////////////////////////////////////////////////////
-BYTE bFastMobs[] = {0x90, 0x90};
-DWORD FastMobsAddy = 0x00714F43;																										
-CMemory FastMobs(FastMobsAddy, bFastMobs, 2);																							
- 
-////////////////////////////////////////////////////////////Perfect Loot/////////////////////////////////////////////////////////////////////
-BYTE bPerfectLoot1[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};																		
-BYTE bPerfectLoot2[] = {0x25};																									
-BYTE bPerfectLoot3[] = {0x81, 0xFE, 0x00, 0x00, 0x00, 0x00};																			
-DWORD PerfectLootAddy1 = 0x004B42A7;																								
-DWORD PerfectLootAddy2 = 0x005410C5;																								
-DWORD PerfectLootAddy3 = 0x00443869;																								
-CMemory PerfectLoot(PerfectLootAddy1, bPerfectLoot1, 6, PerfectLootAddy2, bPerfectLoot2, 1, PerfectLootAddy3, bPerfectLoot3, 6);	
- 
-////////////////////////////////////////////////////////////No Delay - All Attacks///////////////////////////////////////////////////////////
-BYTE bNDAllAttacks[] = {0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3, 0x90};																	
-DWORD NDAllAttacksAddy = 0x00B35220;																								
-CMemory NDAllAttacks(NDAllAttacksAddy, bNDAllAttacks, 7);																			
- 
-///////////////////////////////////////////////////////////Unlimited Morph Kaizer////////////////////////////////////////////////////////////
-BYTE bUnlMorph1[] = {0xEB, 0x2E};																										
-BYTE bUnlMorph2[] = {0xEB};																												
-DWORD UnlMorphAddy1 = 0x00BC3172;																									
-DWORD UnlMorphAddy2 = 0x00BC38F0;																									
-CMemory UnlimitedMorph(UnlMorphAddy1, bUnlMorph1, 2, UnlMorphAddy2, bUnlMorph2, 1);													
- 
-///////////////////////////////////////////////////////////Hide Damage///////////////////////////////////////////////////////////////////////
-BYTE bHideDamage[] = {0x7F};																											
-DWORD HideDamageAddy = 0x006D9A77;																										
-CMemory HideDamage(HideDamageAddy, bHideDamage, 1);																						
- 
-///////////////////////////////////////////////////////////CPU Hack//////////////////////////////////////////////////////////////////////////
-BYTE bCPUHack[] = {0x90, 0x90, 0x90, 0x90, 0x90};																					
-DWORD CPUHackAddy1 = 0x006AC1CB;																									
-DWORD CPUHackAddy2 = 0x006AF52D;																									
-DWORD CPUHackAddy3 = 0x006B3D59;																										
-CMemory CPUHack(CPUHackAddy1, bCPUHack, 5, CPUHackAddy2, bCPUHack, 5, CPUHackAddy3, bCPUHack, 5);										
- 
-///////////////////////////////////////////////////////////Pin Typer/////////////////////////////////////////////////////////////////////////
-BYTE bPinTyper[] = {0x0F, 0x84};																										
-DWORD PinTyperAddy1 = 0x0068A956;																										
-DWORD PinTyperAddy2 = 0x0068C027;																										
-CMemory PinTyper(PinTyperAddy1, bPinTyper, 2, PinTyperAddy2, bPinTyper, 2);																
- 
-///////////////////////////////////////////////////////////No Char Knockback/////////////////////////////////////////////////////////////////
-BYTE bNoCharKB[] = {0x00};																												
-DWORD NoCharKBAddy = 0x0087BA5B;																									
-CMemory NoCharKB(NoCharKBAddy, bNoCharKB, 1);																							
- 
-///////////////////////////////////////////////////////////Vac Right/////////////////////////////////////////////////////////////////////////
-BYTE bVacRight[] = {0x75, 0x48};
-DWORD VacRightAddy = 0x00C1A300;
-CMemory VacRight(VacRightAddy, bVacRight, 2);
-
-///////////////////////////////////////////////////////////Full Mob Disarm///////////////////////////////////////////////////////////////////
-BYTE bFullMobDisarm[] = {0xE9, 0x9B, 0x02, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90};
-DWORD FullMobDisarmAddy = 0x006FC332;
-CMemory FullMobDisarm(FullMobDisarmAddy, bFullMobDisarm, sizeof(bFullMobDisarm));
- 
-///////////////////////////////////////////////////////////No Delay Minig////////////////////////////////////////////////////////////////////
-DWORD NDMiningAddy1 = 0x00B687A2;
-DWORD NDMiningAddy2 = 0x00B6887B;
-DWORD NDMiningAddy3 = 0x00B77527;																									
-BYTE bNDMining1[] = {0x90, 0x90};																									
-BYTE bNDMining2[] = {0xEB};																												
-BYTE bNDMining3[] = {0x90, 0x90};																									
-CMemory NDMining(NDMiningAddy1, bNDMining1, 2, NDMiningAddy2, bNDMining2, 1, NDMiningAddy3, bNDMining3, 2);								
-
-///////////////////////////////////////////////////////////Uncensored////////////////////////////////////////////////////////////////////////
-DWORD UncensorAddy1 = 0x00443869;																										
-DWORD UncensorAddy2 = 0x004FFB84;																										
-BYTE bUncensor1[] = {0x75};																												
-BYTE bUncensor2[] = {0x85};																												
-CMemory Uncensor(UncensorAddy1, bUncensor1, 1, UncensorAddy2, bUncensor2, 1);															
-///////////////////////////////////////////////////////////Uncensored////////////////////////////////////////////////////////////////////////
- 
-///////////////////////////////////////////////////////////No Skill Movement/////////////////////////////////////////////////////////////////
-DWORD NoSkillMovementAddy1 = 0x00B5DD4F;																								
-DWORD NoSkillMovementAddy2 = 0x0087BA5F;																								
-BYTE bNoSkillMovement1[] = {0x00};																										
-BYTE bNoSkillMovement2[] = {0xD8, 0xD2};																								
-CMemory NoSkillMovement(NoSkillMovementAddy1, bNoSkillMovement1, 1, NoSkillMovementAddy2, bNoSkillMovement2, 2);						
- 
-///////////////////////////////////////////////////////////No Swear//////////////////////////////////////////////////////////////////////////
-DWORD NoSwearsAddy = 0x0087888B;																										
-BYTE bNoSwears[] = {0x90, 0x90};																										
-CMemory NoSwears(NoSwearsAddy, bNoSwears, 2);																							
- 
-///////////////////////////////////////////////////////////No Background + Clouds////////////////////////////////////////////////////////////
-DWORD NoBackgroundAddy1 = 0x006AF52D;
-DWORD NoBackgroundAddy2 = 0x006ADE4B;
-BYTE bNoBackground[] = {0x90, 0x90, 0x90, 0x90, 0x90};																					
-CMemory NoBackground(NoBackgroundAddy1, bNoBackground, 5, NoBackgroundAddy2, bNoBackground, 5);											
- 
-///////////////////////////////////////////////////////////No Mobs///////////////////////////////////////////////////////////////////////////
-DWORD NoMobsAddy = 0x00701EAD;																											
-BYTE bNoMobs[] = {0xEB};																												
-CMemory NoMobs(NoMobsAddy, bNoMobs, 1);																									
- 
-///////////////////////////////////////////////////////////Mob Lag///////////////////////////////////////////////////////////////////////////
-DWORD MonLagAddy = 0x00701EFA;																											
-BYTE bMobLag[] = {0xEB};																												
-CMemory MobLag(NoMobsAddy, bNoMobs, 1);																									
- 
-///////////////////////////////////////////////////////////Instant air Loot//////////////////////////////////////////////////////////////////
-DWORD InstantAirLootAddy = 0x005422B9;																									
-BYTE bInstantAirLoot[] = {0x74};																										
-CMemory InstantAirLoot(InstantAirLootAddy, bInstantAirLoot, 1);																			
- 
-///////////////////////////////////////////////////////////Raining Mobs//////////////////////////////////////////////////////////////////////
-DWORD RainingMobsAddy = 0x00713576;																										
-BYTE bRainingMobs[] = {0xD9, 0xC1};																										
-CMemory RainingMobs(RainingMobsAddy, bRainingMobs, 2);																					
- 
-///////////////////////////////////////////////////////////Raining Mobs//////////////////////////////////////////////////////////////////////
-DWORD NDMilleAddy = 0x00BB0AD5;																											
-BYTE bNDMille[] = {0xEB};																												
-CMemory NDMille(NDMilleAddy, bNDMille, 1);																								
- 
-///////////////////////////////////////////////////////////FLACC/////////////////////////////////////////////////////////////////////////////
-DWORD FLACCAddy = 0x004747F9;																											
-BYTE bFLACC[] = {0xB9, 0x07, 0x00, 0x00, 0x00, 0x90};																					
-CMemory FLACC(FLACCAddy, bFLACC, sizeof(bFLACC));																						
- 
-///////////////////////////////////////////////////////////7 Miss////////////////////////////////////////////////////////////////////////////
-int Miss7Counter = 0;																													
-DWORD Miss7Addy = 0x00B9B365;																											
-DWORD Miss7Return = Miss7Addy + 7;																										
-DWORD Miss7ReturnNoKB = Miss7Return + 0x30;																								
-CodeCave(SevenMiss)																														
-   inc [Miss7Counter]																													
-   cmp dword ptr [Miss7Counter],0x07																									
-   jg Reset                            //jump if greater																				
-   mov dword ptr [esp+0x00000118],00																									
-   jmp dword ptr [Miss7ReturnNoKB]																										
-																																		
-   Reset:																																
-   mov [Miss7Counter],00																												
-   mov esi,[esp+0x0000011C]																												
-   jmp dword ptr [Miss7Return]																											
-EndCodeCave																																
-CMemory Miss7GodMode(Miss7Addy, CaveSevenMiss, 2, true);																				
- 
-///////////////////////////////////////////////////////////Fusion Attack/////////////////////////////////////////////////////////////////////
-DWORD FusionAttackAddy = 0x006FFBB2;																									
-DWORD FusionAttackReturn = FusionAttackAddy + 8;																						
-CodeCave(FusionAttack)																													
-Hook:																																	
-mov dword ptr [ecx+eax*4],esi																											
-inc eax																																	
-cmp eax,[esp+0x64]																														
-jl Hook																																	
-mov [esp+0x18],eax																														
-jmp [FusionAttackReturn]																												
-EndCodeCave																																
-CMemory FusionAttack(FusionAttackAddy, CaveFusionAttack, 3, true);																		
- 
-///////////////////////////////////////////////////////////FMA///////////////////////////////////////////////////////////////////////////////
-DWORD FMAAddy = 0x006FFBA2;																												
-BYTE bFMA[] = {0x74};																													
-CMemory FMA(FMAAddy, bFMA, 1);																											
- 
-///////////////////////////////////////////////////////////Auto Aggro////////////////////////////////////////////////////////////////////////
-DWORD AutoAggroAddy = 0x00C2761f;
-DWORD AutoAggroRet = AutoAggroAddy + 5;
-DWORD AutoAggroCal = 0x00c1e110;
-CodeCave(AutoAggro)
-	call AutoAggroCal
-	mov edx,[0x011ADD04]
-	mov edx,[edx+0x29D0]
-	mov edx,[edx+0x0C]
-	mov [esi+0x2B0],edx
-	jmp AutoAggroRet																													
-EndCodeCave
-CMemory AutoAggro(AutoAggroAddy, CaveAutoAggro, 0, true);
-
-///////////////////////////////////////////////////////////Spawn Control/////////////////////////////////////////////////////////////////////
-DWORD SPControlAddy = 0x00B8420A;
-DWORD SPControlRet = SPControlAddy + 6;
-DWORD spawn_x = 0x0;
-DWORD spawn_y = 0x0;
-CodeCave(SPControl)
-	mov ebx, [spawn_x]
-	mov ebp, [spawn_y]
-	jmp dword ptr SPControlRet
-EndCodeCave
-CMemory SPControl(SPControlAddy, CaveSPControl, 1, true);
-
-#pragma endregion 
 #pragma region Pointers Reading
 	int MobsCount(){		return (int) ReadPointer(MobBasePtr, MobCountOffset);}
 	int ItemCount(){		return (int) ReadPointer(ItemBasePtr, ItemCountOffset);}
@@ -638,13 +439,13 @@ void MainForm::AutoAggroCheckBox_CheckedChanged(System::Object^  sender, System:
 void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	SPControl.Enable(this->SPControlCheckBox->Checked);
-	spawn_x = CharX();
-	spawn_y = CharY();
+	SPControlXCoord = CharX();
+	SPControlYCoord = CharY();
 }
 
 #pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
-	void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 	{
 		this->HPComboBox->Enabled = !this->HPCheckBox->Checked;
 		this->HPTextBox->Enabled = !this->HPCheckBox->Checked;
@@ -653,7 +454,7 @@ void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System:
 		if(this->HPTextBox->Text != "")UserSetHP = Convert::ToInt32(this->HPTextBox->Text);
 		if(this->HPCheckBox->Checked) NewThread(AutoHP);		
 	}
-	void MainForm::MPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::MPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 	{		
 		this->MPComboBox->Enabled = !this->MPCheckBox->Checked;
 		this->MPTextBox->Enabled = !this->MPCheckBox->Checked;
@@ -662,7 +463,7 @@ void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System:
 		if(this->MPTextBox->Text != "")UserSetMP = Convert::ToInt32(this->MPTextBox->Text);
 		if(this->MPCheckBox->Checked) NewThread(AutoMP);
 	}
-	void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 	{
 		this->AttackComboBox->Enabled = !this->AttackCheckBox->Checked;
 		this->AttackTrackBar->Enabled = !this->AttackCheckBox->Checked;
@@ -672,7 +473,7 @@ void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System:
 		UserSetAttackDelay = this->AttackTrackBar->Value;
 		if(this->AttackCheckBox->Checked) NewThread(AutoAttack);
 	}
-	void MainForm::AutoLootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::AutoLootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 	{
 		this->AutoLootComboBox->Enabled = !this->AutoLootCheckBox->Checked;
 		this->PointerTubiCheckBox->Enabled = !this->AutoLootCheckBox->Checked;
@@ -680,11 +481,11 @@ void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System:
 		UserSetLootKey = KeyCodes[this->AutoLootComboBox->SelectedIndex];
 		if(this->AutoLootCheckBox->Checked) NewThread(AutoLoot);
 	}
-	void MainForm::PointerTubiCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::PointerTubiCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 	{
 		PointerTubiBool = this->PointerTubiCheckBox->Checked;
 	}
-	void MainForm::AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 	{
 		this->AutoSkill1ComboBox->Enabled = !this->AutoSkill1CheckBox->Checked;
 		this->AutoSkill1TextBox->Enabled = !this->AutoSkill1CheckBox->Checked;
@@ -693,7 +494,7 @@ void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System:
 		UserSetSkill1Key = KeyCodes[this->AutoSkill1ComboBox->SelectedIndex];
 		if(this->AutoSkill1TextBox->Text != "")UserSetSkill1Delay = Convert::ToInt32(this->AutoSkill1TextBox->Text) * 1000;
 	}
-	void MainForm::AutoSkill2CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::AutoSkill2CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 	{
 		this->AutoSkill2ComboBox->Enabled = !this->AutoSkill2CheckBox->Checked;
 		this->AutoSkill2TextBox->Enabled = !this->AutoSkill2CheckBox->Checked;
@@ -702,7 +503,7 @@ void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System:
 		if(this->AutoSkill2TextBox->Text != "")UserSetSkill2Delay = Convert::ToInt32(this->AutoSkill2TextBox->Text) * 1000;
 		if(this->AutoSkill2CheckBox->Checked) NewThread(AutoSkill2);
 	}
-	void MainForm::AutoSkill3CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::AutoSkill3CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 	{
 		this->AutoSkill3ComboBox->Enabled = !this->AutoSkill3CheckBox->Checked;
 		this->AutoSkill3TextBox->Enabled = !this->AutoSkill3CheckBox->Checked;
@@ -711,7 +512,7 @@ void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System:
 		if(this->AutoSkill3TextBox->Text != "")UserSetSkill3Delay = Convert::ToInt32(this->AutoSkill3TextBox->Text) * 1000;
 		if(this->AutoSkill3CheckBox->Checked) NewThread(AutoSkill3);
 	}
-	void MainForm::AutoSkill4CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::AutoSkill4CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 	{
 		this->AutoSkill4ComboBox->Enabled = !this->AutoSkill4CheckBox->Checked;
 		this->AutoSkill4TextBox->Enabled = !this->AutoSkill4CheckBox->Checked;
@@ -720,7 +521,7 @@ void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System:
 		if(this->AutoSkill4TextBox->Text != "")UserSetSkill4Delay = Convert::ToInt32(this->AutoSkill4TextBox->Text) * 1000;
 		if(this->AutoSkill4CheckBox->Checked) NewThread(AutoSkill4);
 	}
-	void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 	{
 		this->CCPeopleTextBox->Enabled = !this->CCPeopleCheckBox->Checked;
 		this->CCPeopleLabel->Enabled = !this->CCPeopleCheckBox->Checked;
@@ -728,7 +529,7 @@ void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System:
 		CCPeopleBool = this->CCPeopleCheckBox->Checked;
 		NewThread(AutoCCPeople);
 	}
-	void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 	{
 		this->CCTimedTextBox->Enabled = !this->CCTimedCheckBox->Checked;
 		this->CCTimedLabel->Enabled = !this->CCTimedCheckBox->Checked;
@@ -736,7 +537,7 @@ void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System:
 		CCTimedBool = this->CCTimedCheckBox->Checked;
 		NewThread(AutoCCTimed);
 	}
-	void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 	{
 		this->CCAttacksTextBox->Enabled = !this->CCAttacksCheckBox->Checked;
 		this->CCAttacksLabel->Enabled = !this->CCAttacksCheckBox->Checked;
@@ -771,7 +572,6 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	this->AutoSkill2ComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill3ComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill4ComboBox->Items->AddRange(Globals::KeyNames);
-	
 
 	if(!File::Exists(marshal_as<String^>(PacketFileName)))
 	{
@@ -845,7 +645,8 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 		break;
 	}
 }
-#pragma region PacketSender
+
+//Controls on the PacketSender tab
 void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	String^ strError = String::Empty;
@@ -941,8 +742,7 @@ void MainForm::SpamsPacketButton_Click(System::Object^  sender, System::EventArg
 	this->SpamPacketsTimer->Enabled = true;
 }
 void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
-{
-	
+{	
 	String^ strError = String::Empty;
 	if(PacketSelectBox->SelectedIndex < 0)
 	{
@@ -963,4 +763,3 @@ void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^
 		this->SendPacketGroupBox->Enabled = true;
 	}
 }
-#pragma endregion

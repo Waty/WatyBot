@@ -5,10 +5,6 @@
 #define CodeCave(name) void __declspec(naked) Cave##name(){_asm{
 #define EndCodeCave }}
 
-#define CCSeconds 0;
-#define CCPeople 1;
-#define CCAttacks 2;
-
 unsigned long ReadPointer(unsigned long ulBase, int iOffset)
 {
 	__try { return *(unsigned long*)(*(unsigned long*)ulBase + iOffset); }
@@ -25,9 +21,7 @@ void WritePointer(unsigned long ulBase, int iOffset, int iValue)
   __except (EXCEPTION_EXECUTE_HANDLER) {}
 }
 
-#pragma region Variables
 bool CCing;
-
 int CCPeopleInt, CCTimedInt, CCAttacksInt;
 bool CCPeopleBool, CCTimedBool, CCAttacksBool;
 
@@ -73,5 +67,3 @@ bool UnlimitedAttackBool;
 
 int MaxHP, MaxMP;
 int KeyCodes[] = {VK_SHIFT, VK_SPACE, VK_CONTROL, VK_MENU, VK_INSERT, VK_DELETE, VK_HOME, VK_END, VK_PRIOR, VK_NEXT, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B, 0x4C, 0x4D, 0x4E, 0x4F, 0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5A, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39};
-#pragma endregion
-
