@@ -15,10 +15,12 @@
 using namespace std;
 using namespace WatyBotRevamp;
 using namespace msclr::interop;
+using namespace System::IO;
 
 //Fill the list of packets
-string PacketFileName;
-CPacket* Packets = new CPacket(PacketFileName);
+string WatyBotWorkingDirectory = "WatyBot\\";
+string PacketFileName = WatyBotWorkingDirectory + "packets.xml";
+CPacket* Packets;
 
 #pragma region vars
 public ref class Globals
@@ -754,9 +756,6 @@ void Main(void)
 }
 void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 {
-
-	if(!IO::File::Exists("WatyBotConfig\\Packets.xml"))	IO::Directory::CreateDirectory("C:\\WatyBot");
-
 	Globals::KeyNames = gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9"};
 	this->HPComboBox->Items->AddRange(Globals::KeyNames);
 	this->HPComboBox->SelectedIndex = 8;
@@ -777,13 +776,21 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	this->AutoSkill2ComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill3ComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill4ComboBox->Items->AddRange(Globals::KeyNames);
-
-#pragma region Create Packets
+	
+#pragma region Fill CPackets
+	if(!File::Exists(marshal_as<String^>(PacketFileName)))
+	{
+		Directory::CreateDirectory(marshal_as<String^>(WatyBotWorkingDirectory));
+		File::Create(marshal_as<String^>(PacketFileName));
+	}
+	Packets = new CPacket(PacketFileName);	
+#pragma endregion
+#pragma region Fill ComboBoxes with Packets
 	for(unsigned int i=0; i < Packets->Packetv.size(); i++)
 	{
 		try
 		{
-			String^ PacketName = marshal_as<String^>(Packets->Packetv.at(i).Name);
+			String^ PacketName = marshal_as<String^>(Packets->At(i).Name);
 			this->PacketSelectBox->Items->Add(PacketName);
 			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
 			this->DeletePacketComboBox->Items->Add(PacketName);
@@ -791,7 +798,6 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 		catch(...){};
 	}
 #pragma endregion
-
 }
 void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
@@ -851,7 +857,7 @@ void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs
 {
 	String^ strError = String::Empty;
 	if(PacketSelectBox->SelectedIndex < 0)	MessageBoxA(0,"Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
-	else if(!fSendPacket(marshal_as<String^>(Packets->Packetv.at(PacketSelectBox->SelectedIndex).Data)->Replace(" ", ""),strError)) MessageBox::Show(strError);
+	else if(!fSendPacket(marshal_as<String^>(Packets->At(PacketSelectBox->SelectedIndex).Data)->Replace(" ", ""),strError)) MessageBox::Show(strError);
 }
 void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
@@ -894,7 +900,7 @@ void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventAr
 	{
 		try
 		{
-			String^ PacketName = marshal_as<String^>(Packets->Packetv.at(i).Name);
+			String^ PacketName = marshal_as<String^>(Packets->At(i).Name);
 			this->PacketSelectBox->Items->Add(PacketName);
 			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
 			this->DeletePacketComboBox->Items->Add(PacketName);
@@ -926,7 +932,7 @@ void MainForm::SavePacketEditButton_Click(System::Object^  sender, System::Event
 	{
 		try
 		{
-			String^ PacketName = marshal_as<String^>(Packets->Packetv.at(i).Name);
+			String^ PacketName = marshal_as<String^>(Packets->At(i).Name);
 			this->PacketSelectBox->Items->Add(PacketName);
 			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
 			this->DeletePacketComboBox->Items->Add(PacketName);
@@ -950,7 +956,7 @@ void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^
 		this->SpamPacketsTimer->Enabled = false;
 		MessageBoxA(0,"Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
 	}
-	else if(!fSendPacket(marshal_as<String^>(Packets->Packetv.at(PacketSelectBox->SelectedIndex).Data)->Replace(" ", ""),strError))
+	else if(!fSendPacket(marshal_as<String^>(Packets->At(PacketSelectBox->SelectedIndex).Data)->Replace(" ", ""),strError))
 	{
 		this->SpamPacketsTimer->Enabled = false;
 		MessageBox::Show(strError);

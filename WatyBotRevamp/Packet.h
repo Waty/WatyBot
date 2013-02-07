@@ -20,11 +20,9 @@ public:
 	void DeletePacket(int index);
 	packetStruct At(int);
 
-
 	typedef vector<packetStruct> PacketVector;
 	PacketVector Packetv;
 
-	
 	int SpammedPackets;
 private:
 };
