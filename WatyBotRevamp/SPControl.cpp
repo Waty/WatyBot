@@ -1,4 +1,4 @@
-#include "SPLocations.h"
+#include "SPControl.h"
 #include <fstream>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
@@ -35,18 +35,20 @@ void ReadSPControlXML(string filename)
 	using boost::property_tree::ptree;
 	ptree pt;
 	read_xml(file, pt);
-
-	BOOST_FOREACH( ptree::value_type const& v, pt.get_child("packetlist"))
+	if(!pt.empty())
 	{
-		if(v.first == "packet")
+		BOOST_FOREACH( ptree::value_type const& v, pt.get_child("packetlist"))
 		{
-			SPControlStruct SP;
-			SP.mapName = v.second.get<string>("mapname");
-			SP.mapID = v.second.get<int>("mapid");
-			SP.x = v.second.get<int>("x");
-			SP.y = v.second.get<int>("y");
-			SPControlv.push_back(SP);
-		}	
+			if(v.first == "packet")
+			{
+				SPControlStruct SP;
+				SP.mapName = v.second.get<string>("mapname");
+				SP.mapID = v.second.get<int>("mapid");
+				SP.x = v.second.get<int>("x");
+				SP.y = v.second.get<int>("y");
+				SPControlv.push_back(SP);
+			}	
+		}
 	}
 }
 

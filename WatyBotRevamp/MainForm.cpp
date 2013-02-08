@@ -6,12 +6,9 @@
 #include "Defines.h"
 #include "Pointers.h"
 #include "SendPacket.h"
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/ini_parser.hpp>
-#include <boost/property_tree/xml_parser.hpp>
 #include <msclr/marshal_cppstd.h>
-#include <boost/foreach.hpp>
 #include "Packet.h"
+#include "SPControl.h"
 #include "Hacks.h"
 using namespace std;
 using namespace WatyBotRevamp;
@@ -21,6 +18,7 @@ using namespace System::IO;
 //Fill the list of packets
 string WatyBotWorkingDirectory = "WatyBot\\";
 string PacketFileName = WatyBotWorkingDirectory + "packets.xml";
+string SPControlFileName = WatyBotWorkingDirectory + "spcontrol.xml";
 
 public ref class Globals
 {
@@ -572,8 +570,8 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	this->AutoSkill3ComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill4ComboBox->Items->AddRange(Globals::KeyNames);
 
-	if(File::Exists(marshal_as<String^>(PacketFileName)))
-		ReadPacketXML(PacketFileName);
+	if(File::Exists(marshal_as<String^>(PacketFileName))) ReadPacketXML(PacketFileName);
+	if(File::Exists(marshal_as<String^>(SPControlFileName))) ReadSPControlXML(SPControlFileName);
 
 
 	RefreshComboBoxes();
@@ -621,6 +619,8 @@ void MainForm::MainTabControl_SelectedIndexChanged(System::Object^  sender, Syst
 }
 void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 {
+	WriteSPControlXML(SPControlFileName);
+	WritePacketXML(PacketFileName);
 	switch(MessageBoxA(NULL, "Close MapleStory too?", "Terminate Maple?", MB_ICONQUESTION | MB_YESNO))
 	{
 	case IDYES:

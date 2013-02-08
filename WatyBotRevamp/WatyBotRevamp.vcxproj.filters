@@ -30,7 +30,7 @@
     <ClCompile Include="Packet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SPLocations.cpp">
+    <ClCompile Include="SPControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,7 +56,7 @@
     <ClInclude Include="Hacks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SPLocations.h">
+    <ClInclude Include="SPControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

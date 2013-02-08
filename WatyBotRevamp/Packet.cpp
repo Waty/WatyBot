@@ -47,15 +47,17 @@ void ReadPacketXML(string filename)
 	using boost::property_tree::ptree;
 	ptree pt;
 	read_xml(file, pt);
-
-	BOOST_FOREACH( ptree::value_type const& v, pt.get_child("packetlist"))
+	if(!pt.empty())
 	{
-		if(v.first == "packet")
+		BOOST_FOREACH( ptree::value_type const& v, pt.get_child("packetlist"))
 		{
-			sPacket p;
-			p.name = v.second.get<string>("name");
-			p.data = v.second.get<string>("data");
-			vPacket.push_back(p);
+			if(v.first == "packet")
+			{
+				sPacket p;
+				p.name = v.second.get<string>("name");
+				p.data = v.second.get<string>("data");
+				vPacket.push_back(p);
+			}
 		}
 	}
 }

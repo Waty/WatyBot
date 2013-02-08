@@ -101,7 +101,7 @@
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="Packet.cpp" />
     <ClCompile Include="SendPacket.cpp" />
-    <ClCompile Include="SPLocations.cpp" />
+    <ClCompile Include="SPControl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -120,7 +120,7 @@
     <ClInclude Include="Packet.h" />
     <ClInclude Include="Pointers.h" />
     <ClInclude Include="SendPacket.h" />
-    <ClInclude Include="SPLocations.h" />
+    <ClInclude Include="SPControl.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
