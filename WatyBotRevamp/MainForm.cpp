@@ -571,10 +571,10 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	this->AutoSkill4ComboBox->Items->AddRange(Globals::KeyNames);
 
 	if(File::Exists(marshal_as<String^>(PacketFileName))) ReadPacketXML(PacketFileName);
-	if(File::Exists(marshal_as<String^>(SPControlFileName))) ReadSPControlXML(SPControlFileName);
-
-
 	RefreshComboBoxes();
+	if(File::Exists(marshal_as<String^>(SPControlFileName))) ReadSPControlXML(SPControlFileName);
+	RefreshSPControlListView();
+
 }
 void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
@@ -725,5 +725,29 @@ void MainForm::RefreshComboBoxes()
 			this->DeletePacketComboBox->Items->Add(PacketName);
 		}
 		catch(...){};
+	}
+}
+
+//controls on SPControl Tab
+void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	AddSPControl(marshal_as<string>(SPControlNameTextBox->Text), Convert::ToInt32(SPControlMapIDTextBox->Text), Convert::ToInt32(SPControlXTextBox->Text), Convert::ToInt32(SPControlYTextBox->Text));
+	RefreshSPControlListView();
+}
+
+void MainForm::RefreshSPControlListView()
+{
+	SPControlListView->Items->Clear();
+	this->SPControlNameTextBox->Clear();
+	this->SPControlMapIDTextBox->Clear();
+	this->SPControlXTextBox->Clear();
+	this->SPControlYTextBox->Clear();
+	for(unsigned int i = 0; i < SPControlv.size(); i++)
+	{
+		ListViewItem^ item = gcnew ListViewItem(marshal_as<String^>(SPControlv.at(i).mapName));
+		item->SubItems->Add(Convert::ToString(SPControlv.at(i).mapID));
+		item->SubItems->Add(Convert::ToString(SPControlv.at(i).x));
+		item->SubItems->Add(Convert::ToString(SPControlv.at(i).y));
+		SPControlListView->Items->Add(item);
 	}
 }

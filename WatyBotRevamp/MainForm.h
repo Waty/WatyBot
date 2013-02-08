@@ -211,6 +211,26 @@ private: System::Windows::Forms::Label^  CCTimedLabel;
 private: System::Windows::Forms::Label^  CCPeopleLabel;
 private: System::Windows::Forms::Label^  CCAttacksLabel;
 private: System::Windows::Forms::Button^  SavePacketsButton;
+private: System::Windows::Forms::ListView^  SPControlListView;
+
+
+private: System::Windows::Forms::ColumnHeader^  HeaderMapName;
+private: System::Windows::Forms::ColumnHeader^  HeaderMapID;
+private: System::Windows::Forms::ColumnHeader^  HeaderX;
+private: System::Windows::Forms::ColumnHeader^  HeaderY;
+private: System::Windows::Forms::Label^  SPControlNameLabel;
+private: System::Windows::Forms::Label^  SPControlMapIDLabel;
+private: System::Windows::Forms::Label^  SPControlXLabel;
+private: System::Windows::Forms::Label^  SPControlYLabel;
+private: System::Windows::Forms::GroupBox^  SPControlGroupBox;
+private: System::Windows::Forms::TextBox^  SPControlYTextBox;
+private: System::Windows::Forms::TextBox^  SPControlXTextBox;
+private: System::Windows::Forms::TextBox^  SPControlMapIDTextBox;
+private: System::Windows::Forms::TextBox^  SPControlNameTextBox;
+private: System::Windows::Forms::Button^  SPControlAddButton;
+
+
+
 
 
 
@@ -315,6 +335,7 @@ private: System::Windows::Forms::Button^  SavePacketsButton;
 			this->PerfectLootCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->JumpDownAnywhereCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->PacketSenderTab = (gcnew System::Windows::Forms::TabPage());
+			this->SavePacketsButton = (gcnew System::Windows::Forms::Button());
 			this->EditPacketGroupBox = (gcnew System::Windows::Forms::GroupBox());
 			this->SavePacketEditButton = (gcnew System::Windows::Forms::Button());
 			this->EditPacketPacketTextBox = (gcnew System::Windows::Forms::TextBox());
@@ -338,6 +359,21 @@ private: System::Windows::Forms::Button^  SavePacketsButton;
 			this->PacketSelectBox = (gcnew System::Windows::Forms::ComboBox());
 			this->SendPacketButton = (gcnew System::Windows::Forms::Button());
 			this->SPControlTabPage = (gcnew System::Windows::Forms::TabPage());
+			this->SPControlGroupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->SPControlAddButton = (gcnew System::Windows::Forms::Button());
+			this->SPControlMapIDLabel = (gcnew System::Windows::Forms::Label());
+			this->SPControlYTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->SPControlNameLabel = (gcnew System::Windows::Forms::Label());
+			this->SPControlXTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->SPControlYLabel = (gcnew System::Windows::Forms::Label());
+			this->SPControlMapIDTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->SPControlXLabel = (gcnew System::Windows::Forms::Label());
+			this->SPControlNameTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->SPControlListView = (gcnew System::Windows::Forms::ListView());
+			this->HeaderMapName = (gcnew System::Windows::Forms::ColumnHeader());
+			this->HeaderMapID = (gcnew System::Windows::Forms::ColumnHeader());
+			this->HeaderX = (gcnew System::Windows::Forms::ColumnHeader());
+			this->HeaderY = (gcnew System::Windows::Forms::ColumnHeader());
 			this->SPControlCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
 			this->PointerReadGroupBox = (gcnew System::Windows::Forms::GroupBox());
@@ -350,7 +386,6 @@ private: System::Windows::Forms::Button^  SavePacketsButton;
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SpamPacketsTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->SavePacketsButton = (gcnew System::Windows::Forms::Button());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -371,6 +406,7 @@ private: System::Windows::Forms::Button^  SavePacketsButton;
 			this->AddPacketsGroupBox->SuspendLayout();
 			this->SendPacketGroupBox->SuspendLayout();
 			this->SPControlTabPage->SuspendLayout();
+			this->SPControlGroupBox->SuspendLayout();
 			this->InfoTab->SuspendLayout();
 			this->PointerReadGroupBox->SuspendLayout();
 			this->SuspendLayout();
@@ -1256,6 +1292,16 @@ private: System::Windows::Forms::Button^  SavePacketsButton;
 			this->PacketSenderTab->Text = L"Packet Sender";
 			this->PacketSenderTab->UseVisualStyleBackColor = true;
 			// 
+			// SavePacketsButton
+			// 
+			this->SavePacketsButton->Location = System::Drawing::Point(6, 367);
+			this->SavePacketsButton->Name = L"SavePacketsButton";
+			this->SavePacketsButton->Size = System::Drawing::Size(314, 23);
+			this->SavePacketsButton->TabIndex = 7;
+			this->SavePacketsButton->Text = L"Save Packets";
+			this->SavePacketsButton->UseVisualStyleBackColor = true;
+			this->SavePacketsButton->Click += gcnew System::EventHandler(this, &MainForm::SavePacketsButton_Click);
+			// 
 			// EditPacketGroupBox
 			// 
 			this->EditPacketGroupBox->Controls->Add(this->SavePacketEditButton);
@@ -1468,6 +1514,8 @@ private: System::Windows::Forms::Button^  SavePacketsButton;
 			// 
 			// SPControlTabPage
 			// 
+			this->SPControlTabPage->Controls->Add(this->SPControlGroupBox);
+			this->SPControlTabPage->Controls->Add(this->SPControlListView);
 			this->SPControlTabPage->Controls->Add(this->SPControlCheckBox);
 			this->SPControlTabPage->Location = System::Drawing::Point(4, 22);
 			this->SPControlTabPage->Name = L"SPControlTabPage";
@@ -1475,6 +1523,129 @@ private: System::Windows::Forms::Button^  SavePacketsButton;
 			this->SPControlTabPage->TabIndex = 4;
 			this->SPControlTabPage->Text = L"Spawn Control";
 			this->SPControlTabPage->UseVisualStyleBackColor = true;
+			// 
+			// SPControlGroupBox
+			// 
+			this->SPControlGroupBox->Controls->Add(this->SPControlAddButton);
+			this->SPControlGroupBox->Controls->Add(this->SPControlMapIDLabel);
+			this->SPControlGroupBox->Controls->Add(this->SPControlYTextBox);
+			this->SPControlGroupBox->Controls->Add(this->SPControlNameLabel);
+			this->SPControlGroupBox->Controls->Add(this->SPControlXTextBox);
+			this->SPControlGroupBox->Controls->Add(this->SPControlYLabel);
+			this->SPControlGroupBox->Controls->Add(this->SPControlMapIDTextBox);
+			this->SPControlGroupBox->Controls->Add(this->SPControlXLabel);
+			this->SPControlGroupBox->Controls->Add(this->SPControlNameTextBox);
+			this->SPControlGroupBox->Location = System::Drawing::Point(7, 222);
+			this->SPControlGroupBox->Name = L"SPControlGroupBox";
+			this->SPControlGroupBox->Size = System::Drawing::Size(307, 91);
+			this->SPControlGroupBox->TabIndex = 37;
+			this->SPControlGroupBox->TabStop = false;
+			this->SPControlGroupBox->Text = L"Add New Location";
+			// 
+			// SPControlAddButton
+			// 
+			this->SPControlAddButton->Location = System::Drawing::Point(6, 62);
+			this->SPControlAddButton->Name = L"SPControlAddButton";
+			this->SPControlAddButton->Size = System::Drawing::Size(295, 23);
+			this->SPControlAddButton->TabIndex = 37;
+			this->SPControlAddButton->Text = L"Add Location";
+			this->SPControlAddButton->UseVisualStyleBackColor = true;
+			this->SPControlAddButton->Click += gcnew System::EventHandler(this, &MainForm::SPControlAddButton_Click);
+			// 
+			// SPControlMapIDLabel
+			// 
+			this->SPControlMapIDLabel->Location = System::Drawing::Point(106, 16);
+			this->SPControlMapIDLabel->Name = L"SPControlMapIDLabel";
+			this->SPControlMapIDLabel->Size = System::Drawing::Size(83, 14);
+			this->SPControlMapIDLabel->TabIndex = 32;
+			this->SPControlMapIDLabel->Text = L"MapID";
+			this->SPControlMapIDLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
+			// SPControlYTextBox
+			// 
+			this->SPControlYTextBox->Location = System::Drawing::Point(255, 33);
+			this->SPControlYTextBox->Name = L"SPControlYTextBox";
+			this->SPControlYTextBox->Size = System::Drawing::Size(45, 20);
+			this->SPControlYTextBox->TabIndex = 36;
+			// 
+			// SPControlNameLabel
+			// 
+			this->SPControlNameLabel->Location = System::Drawing::Point(6, 16);
+			this->SPControlNameLabel->Name = L"SPControlNameLabel";
+			this->SPControlNameLabel->Size = System::Drawing::Size(98, 14);
+			this->SPControlNameLabel->TabIndex = 29;
+			this->SPControlNameLabel->Text = L"Name:";
+			this->SPControlNameLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
+			// SPControlXTextBox
+			// 
+			this->SPControlXTextBox->Location = System::Drawing::Point(197, 33);
+			this->SPControlXTextBox->Name = L"SPControlXTextBox";
+			this->SPControlXTextBox->Size = System::Drawing::Size(45, 20);
+			this->SPControlXTextBox->TabIndex = 35;
+			// 
+			// SPControlYLabel
+			// 
+			this->SPControlYLabel->Location = System::Drawing::Point(256, 16);
+			this->SPControlYLabel->Name = L"SPControlYLabel";
+			this->SPControlYLabel->Size = System::Drawing::Size(59, 14);
+			this->SPControlYLabel->TabIndex = 30;
+			this->SPControlYLabel->Text = L"Y";
+			this->SPControlYLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
+			// SPControlMapIDTextBox
+			// 
+			this->SPControlMapIDTextBox->Location = System::Drawing::Point(105, 33);
+			this->SPControlMapIDTextBox->Name = L"SPControlMapIDTextBox";
+			this->SPControlMapIDTextBox->Size = System::Drawing::Size(80, 20);
+			this->SPControlMapIDTextBox->TabIndex = 34;
+			// 
+			// SPControlXLabel
+			// 
+			this->SPControlXLabel->Location = System::Drawing::Point(185, 16);
+			this->SPControlXLabel->Name = L"SPControlXLabel";
+			this->SPControlXLabel->Size = System::Drawing::Size(68, 14);
+			this->SPControlXLabel->TabIndex = 31;
+			this->SPControlXLabel->Text = L"X";
+			this->SPControlXLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			// 
+			// SPControlNameTextBox
+			// 
+			this->SPControlNameTextBox->Location = System::Drawing::Point(9, 33);
+			this->SPControlNameTextBox->Name = L"SPControlNameTextBox";
+			this->SPControlNameTextBox->Size = System::Drawing::Size(83, 20);
+			this->SPControlNameTextBox->TabIndex = 33;
+			// 
+			// SPControlListView
+			// 
+			this->SPControlListView->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->SPControlListView->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(4) {this->HeaderMapName, 
+				this->HeaderMapID, this->HeaderX, this->HeaderY});
+			this->SPControlListView->GridLines = true;
+			this->SPControlListView->Location = System::Drawing::Point(7, 3);
+			this->SPControlListView->Name = L"SPControlListView";
+			this->SPControlListView->Size = System::Drawing::Size(310, 213);
+			this->SPControlListView->TabIndex = 28;
+			this->SPControlListView->UseCompatibleStateImageBehavior = false;
+			this->SPControlListView->View = System::Windows::Forms::View::Details;
+			// 
+			// HeaderMapName
+			// 
+			this->HeaderMapName->Text = L"Name";
+			this->HeaderMapName->Width = 100;
+			// 
+			// HeaderMapID
+			// 
+			this->HeaderMapID->Text = L"MapID";
+			this->HeaderMapID->Width = 88;
+			// 
+			// HeaderX
+			// 
+			this->HeaderX->Text = L"X";
+			// 
+			// HeaderY
+			// 
+			this->HeaderY->Text = L"Y";
 			// 
 			// SPControlCheckBox
 			// 
@@ -1586,16 +1757,6 @@ private: System::Windows::Forms::Button^  SavePacketsButton;
 			// 
 			this->SpamPacketsTimer->Tick += gcnew System::EventHandler(this, &MainForm::SpamPacketsTimer_Tick);
 			// 
-			// SavePacketsButton
-			// 
-			this->SavePacketsButton->Location = System::Drawing::Point(6, 367);
-			this->SavePacketsButton->Name = L"SavePacketsButton";
-			this->SavePacketsButton->Size = System::Drawing::Size(314, 23);
-			this->SavePacketsButton->TabIndex = 7;
-			this->SavePacketsButton->Text = L"Save Packets";
-			this->SavePacketsButton->UseVisualStyleBackColor = true;
-			this->SavePacketsButton->Click += gcnew System::EventHandler(this, &MainForm::SavePacketsButton_Click);
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1640,6 +1801,8 @@ private: System::Windows::Forms::Button^  SavePacketsButton;
 			this->SendPacketGroupBox->PerformLayout();
 			this->SPControlTabPage->ResumeLayout(false);
 			this->SPControlTabPage->PerformLayout();
+			this->SPControlGroupBox->ResumeLayout(false);
+			this->SPControlGroupBox->PerformLayout();
 			this->InfoTab->ResumeLayout(false);
 			this->PointerReadGroupBox->ResumeLayout(false);
 			this->PointerReadGroupBox->PerformLayout();
@@ -1647,7 +1810,10 @@ private: System::Windows::Forms::Button^  SavePacketsButton;
 
 		}
 #pragma endregion
-
+#pragma region custom voids
+	private: System::Void RefreshComboBoxes();
+	private: System::Void RefreshSPControlListView();
+#pragma endregion
 #pragma region CheckBoxes
 	private: System::Void PinTyperCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void MobCountLabel_Click(System::Object^  sender, System::EventArgs^  e){}
@@ -1704,7 +1870,7 @@ private: System::Windows::Forms::Button^  SavePacketsButton;
 	private: System::Void SPControlCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SavePacketsButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void RefreshComboBoxes();
+	private: System::Void SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e);
 	};
 	}
 #pragma endregion
