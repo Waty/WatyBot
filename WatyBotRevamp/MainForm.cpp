@@ -21,7 +21,6 @@ using namespace System::IO;
 //Fill the list of packets
 string WatyBotWorkingDirectory = "WatyBot\\";
 string PacketFileName = WatyBotWorkingDirectory + "packets.xml";
-CPacket* Packets;
 
 public ref class Globals
 {
@@ -446,105 +445,105 @@ void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System:
 #pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
 void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		this->HPComboBox->Enabled = !this->HPCheckBox->Checked;
-		this->HPTextBox->Enabled = !this->HPCheckBox->Checked;
-		AutoHPBool = this->HPCheckBox->Checked;
-		UserSetHPKey = KeyCodes[this->HPComboBox->SelectedIndex];
-		if(this->HPTextBox->Text != "")UserSetHP = Convert::ToInt32(this->HPTextBox->Text);
-		if(this->HPCheckBox->Checked) NewThread(AutoHP);		
-	}
+{
+	this->HPComboBox->Enabled = !this->HPCheckBox->Checked;
+	this->HPTextBox->Enabled = !this->HPCheckBox->Checked;
+	AutoHPBool = this->HPCheckBox->Checked;
+	UserSetHPKey = KeyCodes[this->HPComboBox->SelectedIndex];
+	if(this->HPTextBox->Text != "")UserSetHP = Convert::ToInt32(this->HPTextBox->Text);
+	if(this->HPCheckBox->Checked) NewThread(AutoHP);		
+}
 void MainForm::MPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{		
-		this->MPComboBox->Enabled = !this->MPCheckBox->Checked;
-		this->MPTextBox->Enabled = !this->MPCheckBox->Checked;
-		AutoMPBool = this->MPCheckBox->Checked;
-		UserSetMPKey = KeyCodes[this->MPComboBox->SelectedIndex];
-		if(this->MPTextBox->Text != "")UserSetMP = Convert::ToInt32(this->MPTextBox->Text);
-		if(this->MPCheckBox->Checked) NewThread(AutoMP);
-	}
+{		
+	this->MPComboBox->Enabled = !this->MPCheckBox->Checked;
+	this->MPTextBox->Enabled = !this->MPCheckBox->Checked;
+	AutoMPBool = this->MPCheckBox->Checked;
+	UserSetMPKey = KeyCodes[this->MPComboBox->SelectedIndex];
+	if(this->MPTextBox->Text != "")UserSetMP = Convert::ToInt32(this->MPTextBox->Text);
+	if(this->MPCheckBox->Checked) NewThread(AutoMP);
+}
 void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		this->AttackComboBox->Enabled = !this->AttackCheckBox->Checked;
-		this->AttackTrackBar->Enabled = !this->AttackCheckBox->Checked;
-		this->AttackDelayLabel->Enabled = !this->AttackCheckBox->Checked;
-		AutoAttackBool = this->AttackCheckBox->Checked;
-		UserSetAttackKey = KeyCodes[this->AttackComboBox->SelectedIndex];
-		UserSetAttackDelay = this->AttackTrackBar->Value;
-		if(this->AttackCheckBox->Checked) NewThread(AutoAttack);
-	}
+{
+	this->AttackComboBox->Enabled = !this->AttackCheckBox->Checked;
+	this->AttackTrackBar->Enabled = !this->AttackCheckBox->Checked;
+	this->AttackDelayLabel->Enabled = !this->AttackCheckBox->Checked;
+	AutoAttackBool = this->AttackCheckBox->Checked;
+	UserSetAttackKey = KeyCodes[this->AttackComboBox->SelectedIndex];
+	UserSetAttackDelay = this->AttackTrackBar->Value;
+	if(this->AttackCheckBox->Checked) NewThread(AutoAttack);
+}
 void MainForm::AutoLootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		this->AutoLootComboBox->Enabled = !this->AutoLootCheckBox->Checked;
-		this->PointerTubiCheckBox->Enabled = !this->AutoLootCheckBox->Checked;
-		AutoLootBool = this->AutoLootCheckBox->Checked;
-		UserSetLootKey = KeyCodes[this->AutoLootComboBox->SelectedIndex];
-		if(this->AutoLootCheckBox->Checked) NewThread(AutoLoot);
-	}
+{
+	this->AutoLootComboBox->Enabled = !this->AutoLootCheckBox->Checked;
+	this->PointerTubiCheckBox->Enabled = !this->AutoLootCheckBox->Checked;
+	AutoLootBool = this->AutoLootCheckBox->Checked;
+	UserSetLootKey = KeyCodes[this->AutoLootComboBox->SelectedIndex];
+	if(this->AutoLootCheckBox->Checked) NewThread(AutoLoot);
+}
 void MainForm::PointerTubiCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		PointerTubiBool = this->PointerTubiCheckBox->Checked;
-	}
+{
+	PointerTubiBool = this->PointerTubiCheckBox->Checked;
+}
 void MainForm::AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		this->AutoSkill1ComboBox->Enabled = !this->AutoSkill1CheckBox->Checked;
-		this->AutoSkill1TextBox->Enabled = !this->AutoSkill1CheckBox->Checked;
-		AutoSkill1Bool = this->AutoSkill1CheckBox->Checked;
-		if(this->AutoSkill1CheckBox->Checked) NewThread(AutoSkill1);
-		UserSetSkill1Key = KeyCodes[this->AutoSkill1ComboBox->SelectedIndex];
-		if(this->AutoSkill1TextBox->Text != "")UserSetSkill1Delay = Convert::ToInt32(this->AutoSkill1TextBox->Text) * 1000;
-	}
+{
+	this->AutoSkill1ComboBox->Enabled = !this->AutoSkill1CheckBox->Checked;
+	this->AutoSkill1TextBox->Enabled = !this->AutoSkill1CheckBox->Checked;
+	AutoSkill1Bool = this->AutoSkill1CheckBox->Checked;
+	if(this->AutoSkill1CheckBox->Checked) NewThread(AutoSkill1);
+	UserSetSkill1Key = KeyCodes[this->AutoSkill1ComboBox->SelectedIndex];
+	if(this->AutoSkill1TextBox->Text != "")UserSetSkill1Delay = Convert::ToInt32(this->AutoSkill1TextBox->Text) * 1000;
+}
 void MainForm::AutoSkill2CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		this->AutoSkill2ComboBox->Enabled = !this->AutoSkill2CheckBox->Checked;
-		this->AutoSkill2TextBox->Enabled = !this->AutoSkill2CheckBox->Checked;
-		AutoSkill2Bool = this->AutoSkill2CheckBox->Checked;
-		UserSetSkill2Key = KeyCodes[this->AutoSkill2ComboBox->SelectedIndex];
-		if(this->AutoSkill2TextBox->Text != "")UserSetSkill2Delay = Convert::ToInt32(this->AutoSkill2TextBox->Text) * 1000;
-		if(this->AutoSkill2CheckBox->Checked) NewThread(AutoSkill2);
-	}
+{
+	this->AutoSkill2ComboBox->Enabled = !this->AutoSkill2CheckBox->Checked;
+	this->AutoSkill2TextBox->Enabled = !this->AutoSkill2CheckBox->Checked;
+	AutoSkill2Bool = this->AutoSkill2CheckBox->Checked;
+	UserSetSkill2Key = KeyCodes[this->AutoSkill2ComboBox->SelectedIndex];
+	if(this->AutoSkill2TextBox->Text != "")UserSetSkill2Delay = Convert::ToInt32(this->AutoSkill2TextBox->Text) * 1000;
+	if(this->AutoSkill2CheckBox->Checked) NewThread(AutoSkill2);
+}
 void MainForm::AutoSkill3CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		this->AutoSkill3ComboBox->Enabled = !this->AutoSkill3CheckBox->Checked;
-		this->AutoSkill3TextBox->Enabled = !this->AutoSkill3CheckBox->Checked;
-		AutoSkill3Bool = this->AutoSkill3CheckBox->Checked;
-		UserSetSkill3Key = KeyCodes[this->AutoSkill3ComboBox->SelectedIndex];
-		if(this->AutoSkill3TextBox->Text != "")UserSetSkill3Delay = Convert::ToInt32(this->AutoSkill3TextBox->Text) * 1000;
-		if(this->AutoSkill3CheckBox->Checked) NewThread(AutoSkill3);
-	}
+{
+	this->AutoSkill3ComboBox->Enabled = !this->AutoSkill3CheckBox->Checked;
+	this->AutoSkill3TextBox->Enabled = !this->AutoSkill3CheckBox->Checked;
+	AutoSkill3Bool = this->AutoSkill3CheckBox->Checked;
+	UserSetSkill3Key = KeyCodes[this->AutoSkill3ComboBox->SelectedIndex];
+	if(this->AutoSkill3TextBox->Text != "")UserSetSkill3Delay = Convert::ToInt32(this->AutoSkill3TextBox->Text) * 1000;
+	if(this->AutoSkill3CheckBox->Checked) NewThread(AutoSkill3);
+}
 void MainForm::AutoSkill4CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		this->AutoSkill4ComboBox->Enabled = !this->AutoSkill4CheckBox->Checked;
-		this->AutoSkill4TextBox->Enabled = !this->AutoSkill4CheckBox->Checked;
-		AutoSkill4Bool = this->AutoSkill4CheckBox->Checked;
-		UserSetSkill4Key = KeyCodes[this->AutoSkill4ComboBox->SelectedIndex];
-		if(this->AutoSkill4TextBox->Text != "")UserSetSkill4Delay = Convert::ToInt32(this->AutoSkill4TextBox->Text) * 1000;
-		if(this->AutoSkill4CheckBox->Checked) NewThread(AutoSkill4);
-	}
+{
+	this->AutoSkill4ComboBox->Enabled = !this->AutoSkill4CheckBox->Checked;
+	this->AutoSkill4TextBox->Enabled = !this->AutoSkill4CheckBox->Checked;
+	AutoSkill4Bool = this->AutoSkill4CheckBox->Checked;
+	UserSetSkill4Key = KeyCodes[this->AutoSkill4ComboBox->SelectedIndex];
+	if(this->AutoSkill4TextBox->Text != "")UserSetSkill4Delay = Convert::ToInt32(this->AutoSkill4TextBox->Text) * 1000;
+	if(this->AutoSkill4CheckBox->Checked) NewThread(AutoSkill4);
+}
 void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		this->CCPeopleTextBox->Enabled = !this->CCPeopleCheckBox->Checked;
-		this->CCPeopleLabel->Enabled = !this->CCPeopleCheckBox->Checked;
-		if(this->CCPeopleTextBox->Text != "") CCPeopleInt = Convert::ToInt32(CCPeopleTextBox->Text);
-		CCPeopleBool = this->CCPeopleCheckBox->Checked;
-		NewThread(AutoCCPeople);
-	}
+{
+	this->CCPeopleTextBox->Enabled = !this->CCPeopleCheckBox->Checked;
+	this->CCPeopleLabel->Enabled = !this->CCPeopleCheckBox->Checked;
+	if(this->CCPeopleTextBox->Text != "") CCPeopleInt = Convert::ToInt32(CCPeopleTextBox->Text);
+	CCPeopleBool = this->CCPeopleCheckBox->Checked;
+	NewThread(AutoCCPeople);
+}
 void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		this->CCTimedTextBox->Enabled = !this->CCTimedCheckBox->Checked;
-		this->CCTimedLabel->Enabled = !this->CCTimedCheckBox->Checked;
-		if(this->CCTimedTextBox->Text != "") CCTimedInt = Convert::ToInt32(CCTimedTextBox->Text);
-		CCTimedBool = this->CCTimedCheckBox->Checked;
-		NewThread(AutoCCTimed);
-	}
+{
+	this->CCTimedTextBox->Enabled = !this->CCTimedCheckBox->Checked;
+	this->CCTimedLabel->Enabled = !this->CCTimedCheckBox->Checked;
+	if(this->CCTimedTextBox->Text != "") CCTimedInt = Convert::ToInt32(CCTimedTextBox->Text);
+	CCTimedBool = this->CCTimedCheckBox->Checked;
+	NewThread(AutoCCTimed);
+}
 void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		this->CCAttacksTextBox->Enabled = !this->CCAttacksCheckBox->Checked;
-		this->CCAttacksLabel->Enabled = !this->CCAttacksCheckBox->Checked;
-		if(this->CCAttacksTextBox->Text != "") CCAttacksInt = Convert::ToInt32(CCAttacksTextBox->Text);
-		CCAttacksBool = this->CCAttacksCheckBox->Checked;
-		NewThread(AutoCCAttacks);
-	}
+{
+	this->CCAttacksTextBox->Enabled = !this->CCAttacksCheckBox->Checked;
+	this->CCAttacksLabel->Enabled = !this->CCAttacksCheckBox->Checked;
+	if(this->CCAttacksTextBox->Text != "") CCAttacksInt = Convert::ToInt32(CCAttacksTextBox->Text);
+	CCAttacksBool = this->CCAttacksCheckBox->Checked;
+	NewThread(AutoCCAttacks);
+}
 #pragma endregion
 void Main(void)
 {
@@ -573,24 +572,11 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	this->AutoSkill3ComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill4ComboBox->Items->AddRange(Globals::KeyNames);
 
-	if(!File::Exists(marshal_as<String^>(PacketFileName)))
-	{
-		Directory::CreateDirectory(marshal_as<String^>(WatyBotWorkingDirectory));
-		File::Create(marshal_as<String^>(PacketFileName));
-	}
-	Packets = new CPacket(PacketFileName);	
+	if(File::Exists(marshal_as<String^>(PacketFileName)))
+		ReadXML(PacketFileName);
 
-	for(unsigned int i=0; i < Packets->Packetv.size(); i++)
-	{
-		try
-		{
-			String^ PacketName = marshal_as<String^>(Packets->At(i).Name);
-			this->PacketSelectBox->Items->Add(PacketName);
-			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
-			this->DeletePacketComboBox->Items->Add(PacketName);
-		}
-		catch(...){};
-	}
+
+	RefreshComboBoxes();
 }
 void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
@@ -651,94 +637,46 @@ void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs
 {
 	String^ strError = String::Empty;
 	if(PacketSelectBox->SelectedIndex < 0)	MessageBoxA(0,"Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
-	else if(!SendPacketFunction(marshal_as<String^>(Packets->At(PacketSelectBox->SelectedIndex).Data)->Replace(" ", ""),strError)) MessageBox::Show(strError);
+	else if(!SendPacketFunction(marshal_as<String^>(vPacket.at(PacketSelectBox->SelectedIndex).data)->Replace(" ", ""),strError)) MessageBox::Show(strError);
 }
 void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	Packets->AddPacket(marshal_as<string>(this->AddPacketNameTextBox->Text), marshal_as<string>(this->AddPacketNameTextBox->Text));
+	AddPacket(marshal_as<string>(this->AddPacketNameTextBox->Text), marshal_as<string>(this->AddPacketPacketTextBox->Text));
 	MessageBox::Show("Packet was added!");
 
-	//clear old packets
-	this->AddPacketNameTextBox->Text = String::Empty;
-	this->AddPacketPacketTextBox->Text = String::Empty;
-	this->PacketSelectBox->Items->Clear();
-	this->SelectPacketForEditingComboBox->Items->Clear();
-	this->DeletePacketComboBox->Items->Clear();
-
-	//refresh comboboxes
-	for(unsigned int i=0; i < Packets->Packetv.size(); i++)
-	{
-		try
-		{
-			String^ PacketName = marshal_as<String^>(Packets->At(i).Name);
-			this->PacketSelectBox->Items->Add(PacketName);
-			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
-			this->DeletePacketComboBox->Items->Add(PacketName);
-		}
-		catch(...){};
-	}
+	RefreshComboBoxes();
 }
 void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	//delete packet from vector
-	Packets->DeletePacket(DeletePacketComboBox->SelectedIndex);
-	MessageBox::Show("Packet was deleted succesfully!");
-	
-	//clear old packets
-	this->PacketSelectBox->Items->Clear();
-	this->SelectPacketForEditingComboBox->Items->Clear();
-	this->DeletePacketComboBox->Items->Clear();
-
-	//refresh comboboxes
-	for(unsigned int i=0; i < Packets->Packetv.size(); i++)
+	switch (MessageBoxA(0, "Are you sure you want to delete this packet???", "Sure?", MB_ICONQUESTION | MB_YESNO))
+		case IDYES:
 	{
-		try
-		{
-			String^ PacketName = marshal_as<String^>(Packets->At(i).Name);
-			this->PacketSelectBox->Items->Add(PacketName);
-			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
-			this->DeletePacketComboBox->Items->Add(PacketName);
-		}
-		catch(...){};
-	}
+		DeletePacket(DeletePacketComboBox->SelectedIndex);
+		MessageBox::Show("Packet was deleted succesfully!");
+		RefreshComboBoxes();
+		break;
+	}	
 }
 void MainForm::SelectPacketForEditingComboBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	if(SelectPacketForEditingComboBox->SelectedIndex >= 0)
 	{
-		this->EditPacketNameTextBox->Text = marshal_as<String^>(Packets->At(SelectPacketForEditingComboBox->SelectedIndex).Name);
-		this->EditPacketPacketTextBox->Text = marshal_as<String^>(Packets->At(SelectPacketForEditingComboBox->SelectedIndex).Data);
+		this->EditPacketNameTextBox->Text = marshal_as<String^>(vPacket.at(SelectPacketForEditingComboBox->SelectedIndex).name);
+		this->EditPacketPacketTextBox->Text = marshal_as<String^>(vPacket.at(SelectPacketForEditingComboBox->SelectedIndex).data);
 	}
 }
 void MainForm::SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	Packets->EditPacket(SelectPacketForEditingComboBox->SelectedIndex, marshal_as<string>(EditPacketNameTextBox->Text), marshal_as<string>(EditPacketPacketTextBox->Text));
+	EditPacket(SelectPacketForEditingComboBox->SelectedIndex, marshal_as<string>(EditPacketNameTextBox->Text), marshal_as<string>(EditPacketPacketTextBox->Text));
 
-	//clear old packets
-	this->EditPacketNameTextBox->Text = String::Empty;
-	this->EditPacketPacketTextBox->Text = String::Empty;
-	this->PacketSelectBox->Items->Clear();
-	this->SelectPacketForEditingComboBox->Items->Clear();
-	this->DeletePacketComboBox->Items->Clear();
-
-	//refresh comboboxes
-	for(unsigned int i=0; i < Packets->Packetv.size(); i++)
-	{
-		try
-		{
-			String^ PacketName = marshal_as<String^>(Packets->At(i).Name);
-			this->PacketSelectBox->Items->Add(PacketName);
-			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
-			this->DeletePacketComboBox->Items->Add(PacketName);
-		}
-		catch(...){};
-	}
+	RefreshComboBoxes();
 }
 void MainForm::SpamsPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	this->SpamPacketsTimer->Interval = Convert::ToInt32(this->SpamPacketsDelayTextBox->Text);
 	this->SendPacketGroupBox->Enabled = false;
-	Packets->SpammedPackets = 0;
+	SpammedPackets = 0;
 	this->SpamPacketsTimer->Enabled = true;
 }
 void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
@@ -749,17 +687,43 @@ void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^
 		this->SpamPacketsTimer->Enabled = false;
 		MessageBoxA(0,"Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
 	}
-	else if(!SendPacketFunction(marshal_as<String^>(Packets->At(PacketSelectBox->SelectedIndex).Data)->Replace(" ", ""),strError))
+	else if(!SendPacketFunction(marshal_as<String^>(vPacket.at(PacketSelectBox->SelectedIndex).data)->Replace(" ", ""),strError))
 	{
 		this->SpamPacketsTimer->Enabled = false;
 		MessageBox::Show(strError);
 	}
 
-	Packets->SpammedPackets++;
-	if(Packets->SpammedPackets >= Convert::ToInt32(this->SpamPacketTimesTextBox->Text))
+	SpammedPackets++;
+	if(SpammedPackets >= Convert::ToInt32(this->SpamPacketTimesTextBox->Text))
 	{
 		this->SpamPacketsTimer->Enabled = false;
 		MessageBox::Show("Finished Spamming packets!");
 		this->SendPacketGroupBox->Enabled = true;
+	}
+}
+void MainForm::SavePacketsButton_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	WriteXML(PacketFileName);
+}
+void MainForm::RefreshComboBoxes()
+{	
+	//clear old packets
+	this->AddPacketNameTextBox->Text = String::Empty;
+	this->AddPacketPacketTextBox->Text = String::Empty;
+	this->PacketSelectBox->Items->Clear();
+	this->SelectPacketForEditingComboBox->Items->Clear();
+	this->DeletePacketComboBox->Items->Clear();
+
+	//refresh comboboxes
+	for(unsigned int i=0; i < vPacket.size(); i++)
+	{
+		try
+		{
+			String^ PacketName = marshal_as<String^>(vPacket.at(i).name);
+			this->PacketSelectBox->Items->Add(PacketName);
+			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
+			this->DeletePacketComboBox->Items->Add(PacketName);
+		}
+		catch(...){};
 	}
 }

@@ -3,24 +3,19 @@
 #include <vector>
 using namespace std;
 	
-struct packetStruct
+struct sPacket
 {
-	string Name;
-	string Data;
+	string name;
+	string data;
 };
 
-class CPacket
-{
-public:
-	typedef vector<packetStruct> PacketVector;
-	PacketVector Packetv;
-	CPacket(string);
-	~CPacket(void);
-	void WriteXML(string);
-	void AddPacket(string name, string data);
-	void EditPacket(int, string, string);
-	void DeletePacket(int index);
-	packetStruct At(int);
+typedef vector<sPacket> PacketVector;
+extern PacketVector vPacket;
 
-	int SpammedPackets;
-};
+extern void AddPacket(string name, string data);
+extern void DeletePacket(int index);
+extern void EditPacket(int i, string name, string data);
+extern void WriteXML(string filename);
+extern void ReadXML(string filename);
+
+static int SpammedPackets;

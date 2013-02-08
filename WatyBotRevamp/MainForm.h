@@ -210,6 +210,7 @@ private: System::Windows::Forms::Label^  CCTimedLabel;
 
 private: System::Windows::Forms::Label^  CCPeopleLabel;
 private: System::Windows::Forms::Label^  CCAttacksLabel;
+private: System::Windows::Forms::Button^  SavePacketsButton;
 
 
 
@@ -349,6 +350,7 @@ private: System::Windows::Forms::Label^  CCAttacksLabel;
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SpamPacketsTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->SavePacketsButton = (gcnew System::Windows::Forms::Button());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1241,6 +1243,7 @@ private: System::Windows::Forms::Label^  CCAttacksLabel;
 			// 
 			// PacketSenderTab
 			// 
+			this->PacketSenderTab->Controls->Add(this->SavePacketsButton);
 			this->PacketSenderTab->Controls->Add(this->EditPacketGroupBox);
 			this->PacketSenderTab->Controls->Add(this->DeletePacketsGroupBox);
 			this->PacketSenderTab->Controls->Add(this->AddPacketsGroupBox);
@@ -1476,7 +1479,7 @@ private: System::Windows::Forms::Label^  CCAttacksLabel;
 			// SPControlCheckBox
 			// 
 			this->SPControlCheckBox->AutoSize = true;
-			this->SPControlCheckBox->Location = System::Drawing::Point(7, 3);
+			this->SPControlCheckBox->Location = System::Drawing::Point(7, 371);
 			this->SPControlCheckBox->Name = L"SPControlCheckBox";
 			this->SPControlCheckBox->Size = System::Drawing::Size(73, 17);
 			this->SPControlCheckBox->TabIndex = 27;
@@ -1582,6 +1585,16 @@ private: System::Windows::Forms::Label^  CCAttacksLabel;
 			// SpamPacketsTimer
 			// 
 			this->SpamPacketsTimer->Tick += gcnew System::EventHandler(this, &MainForm::SpamPacketsTimer_Tick);
+			// 
+			// SavePacketsButton
+			// 
+			this->SavePacketsButton->Location = System::Drawing::Point(6, 367);
+			this->SavePacketsButton->Name = L"SavePacketsButton";
+			this->SavePacketsButton->Size = System::Drawing::Size(314, 23);
+			this->SavePacketsButton->TabIndex = 7;
+			this->SavePacketsButton->Text = L"Save Packets";
+			this->SavePacketsButton->UseVisualStyleBackColor = true;
+			this->SavePacketsButton->Click += gcnew System::EventHandler(this, &MainForm::SavePacketsButton_Click);
 			// 
 			// MainForm
 			// 
@@ -1690,6 +1703,8 @@ private: System::Windows::Forms::Label^  CCAttacksLabel;
 	private: System::Void SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SPControlCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void SavePacketsButton_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void RefreshComboBoxes();
 	};
 	}
 #pragma endregion
