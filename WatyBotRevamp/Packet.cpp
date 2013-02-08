@@ -5,6 +5,7 @@
 #include <fstream>
 
 PacketVector vPacket;
+int SpammedPackets;
 
 void AddPacket(string name, string data)
 {

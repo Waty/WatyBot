@@ -16,6 +16,14 @@ void AddSPControl(string name, int ID, int x, int y)
 	SPControlv.push_back(SP);
 }
 
+void EditSPControl(int i, string mapname, int mapid, int x, int y)
+{
+	SPControlv.at(i).mapName = mapname;
+	SPControlv.at(i).mapID = mapid;
+	SPControlv.at(i).x = x;
+	SPControlv.at(i).y = y;
+}
+
 void DeleteSPControl(int i)
 {
 	SPControlv.erase(SPControlv.begin() + i);

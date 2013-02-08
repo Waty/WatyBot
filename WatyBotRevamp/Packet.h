@@ -18,4 +18,4 @@ extern void EditPacket(int i, string name, string data);
 extern void WritePacketXML(string filename);
 extern void ReadPacketXML(string filename);
 
-static int SpammedPackets;
+extern int SpammedPackets;
