@@ -25,7 +25,7 @@ void EditPacket(int i, string name, string data)
 	vPacket.at(i).data = data;
 }
 
-void WriteXML(string filename)
+void WritePacketXML(string filename)
 {
 	ofstream file(filename);
 	using boost::property_tree::ptree;
@@ -40,7 +40,7 @@ void WriteXML(string filename)
 	write_xml(file, pt);
 }
 
-void ReadXML(string filename)
+void ReadPacketXML(string filename)
 {
 	ifstream file(filename);
 	using boost::property_tree::ptree;

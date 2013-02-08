@@ -573,7 +573,7 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	this->AutoSkill4ComboBox->Items->AddRange(Globals::KeyNames);
 
 	if(File::Exists(marshal_as<String^>(PacketFileName)))
-		ReadXML(PacketFileName);
+		ReadPacketXML(PacketFileName);
 
 
 	RefreshComboBoxes();
@@ -703,7 +703,7 @@ void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^
 }
 void MainForm::SavePacketsButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	WriteXML(PacketFileName);
+	WritePacketXML(PacketFileName);
 }
 void MainForm::RefreshComboBoxes()
 {	

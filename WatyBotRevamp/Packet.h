@@ -15,7 +15,7 @@ extern PacketVector vPacket;
 extern void AddPacket(string name, string data);
 extern void DeletePacket(int index);
 extern void EditPacket(int i, string name, string data);
-extern void WriteXML(string filename);
-extern void ReadXML(string filename);
+extern void WritePacketXML(string filename);
+extern void ReadPacketXML(string filename);
 
 static int SpammedPackets;
