@@ -228,6 +228,8 @@ private: System::Windows::Forms::TextBox^  SPControlXTextBox;
 private: System::Windows::Forms::TextBox^  SPControlMapIDTextBox;
 private: System::Windows::Forms::TextBox^  SPControlNameTextBox;
 private: System::Windows::Forms::Button^  SPControlAddButton;
+private: System::Windows::Forms::ContextMenuStrip^  SPControlContextMenu;
+private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuItem;
 
 
 
@@ -386,6 +388,8 @@ private: System::Windows::Forms::Button^  SPControlAddButton;
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SpamPacketsTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->SPControlContextMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
+			this->deletePacketToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -409,6 +413,7 @@ private: System::Windows::Forms::Button^  SPControlAddButton;
 			this->SPControlGroupBox->SuspendLayout();
 			this->InfoTab->SuspendLayout();
 			this->PointerReadGroupBox->SuspendLayout();
+			this->SPControlContextMenu->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -1621,8 +1626,11 @@ private: System::Windows::Forms::Button^  SPControlAddButton;
 			this->SPControlListView->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->SPControlListView->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(4) {this->HeaderMapName, 
 				this->HeaderMapID, this->HeaderX, this->HeaderY});
+			this->SPControlListView->ContextMenuStrip = this->SPControlContextMenu;
 			this->SPControlListView->GridLines = true;
+			this->SPControlListView->HeaderStyle = System::Windows::Forms::ColumnHeaderStyle::Nonclickable;
 			this->SPControlListView->Location = System::Drawing::Point(7, 3);
+			this->SPControlListView->MultiSelect = false;
 			this->SPControlListView->Name = L"SPControlListView";
 			this->SPControlListView->Size = System::Drawing::Size(310, 213);
 			this->SPControlListView->TabIndex = 28;
@@ -1757,6 +1765,19 @@ private: System::Windows::Forms::Button^  SPControlAddButton;
 			// 
 			this->SpamPacketsTimer->Tick += gcnew System::EventHandler(this, &MainForm::SpamPacketsTimer_Tick);
 			// 
+			// SPControlContextMenu
+			// 
+			this->SPControlContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->deletePacketToolStripMenuItem});
+			this->SPControlContextMenu->Name = L"SPControlContextMenu";
+			this->SPControlContextMenu->Size = System::Drawing::Size(146, 26);
+			// 
+			// deletePacketToolStripMenuItem
+			// 
+			this->deletePacketToolStripMenuItem->Name = L"deletePacketToolStripMenuItem";
+			this->deletePacketToolStripMenuItem->Size = System::Drawing::Size(145, 22);
+			this->deletePacketToolStripMenuItem->Text = L"Delete Packet";
+			this->deletePacketToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::SPControlDeleteItem_Click);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1806,6 +1827,7 @@ private: System::Windows::Forms::Button^  SPControlAddButton;
 			this->InfoTab->ResumeLayout(false);
 			this->PointerReadGroupBox->ResumeLayout(false);
 			this->PointerReadGroupBox->PerformLayout();
+			this->SPControlContextMenu->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}
@@ -1871,6 +1893,7 @@ private: System::Windows::Forms::Button^  SPControlAddButton;
 	private: System::Void CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SavePacketsButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void SPControlDeleteItem_Click(System::Object^  sender, System::EventArgs^  e);
 	};
 	}
 #pragma endregion

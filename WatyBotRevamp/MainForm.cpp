@@ -734,6 +734,17 @@ void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventAr
 	AddSPControl(marshal_as<string>(SPControlNameTextBox->Text), Convert::ToInt32(SPControlMapIDTextBox->Text), Convert::ToInt32(SPControlXTextBox->Text), Convert::ToInt32(SPControlYTextBox->Text));
 	RefreshSPControlListView();
 }
+void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	this->SPControlListView->SelectedItems;
+	ListViewItem^ L = this->SPControlListView->SelectedItems[0];
+	if(SPControlListView->SelectedItems->Count > 0)
+	{
+		SPControlv.erase(SPControlv.begin() + SPControlListView->Items->IndexOf(L));
+		RefreshSPControlListView();
+	}
+}
+
 
 void MainForm::RefreshSPControlListView()
 {
