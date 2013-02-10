@@ -27,7 +27,7 @@ bool inject(DWORD pID, string DLLFileName)
 	if(dwAttr == 0xFFFFFFFF)
 	{
 		if (GetLastError() == ERROR_FILE_NOT_FOUND)
-			cout << path.c_str() << " not found!" << endl; 
+			cout << path.c_str() << " not found!" << endl << "Trying to continue with next dll";
 		else
 			cout << "Wild unknown error appeared!";
 
@@ -103,8 +103,7 @@ bool FindProcess()
 			cout << "Found StartUp dialog! Injecting now...";
 			bool valid = inject(dwProcessId, "/MSCRC.dll");
 			Sleep(1000);
-			if(valid)
-				valid = inject(dwProcessId, "/WatyBot.dll");
+			valid = inject(dwProcessId, "/WatyBot.dll");
 			Sleep(1000);
 			::PostMessage(hWnd,WM_KEYDOWN, VK_ESCAPE , ::MapVirtualKey(VK_ESCAPE, 0) << 16);
 			return valid;
