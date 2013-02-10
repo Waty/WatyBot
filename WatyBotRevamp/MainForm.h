@@ -376,6 +376,8 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			this->HeaderMapID = (gcnew System::Windows::Forms::ColumnHeader());
 			this->HeaderX = (gcnew System::Windows::Forms::ColumnHeader());
 			this->HeaderY = (gcnew System::Windows::Forms::ColumnHeader());
+			this->SPControlContextMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
+			this->deletePacketToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->SPControlCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
 			this->PointerReadGroupBox = (gcnew System::Windows::Forms::GroupBox());
@@ -388,8 +390,6 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SpamPacketsTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->SPControlContextMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
-			this->deletePacketToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -411,9 +411,9 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			this->SendPacketGroupBox->SuspendLayout();
 			this->SPControlTabPage->SuspendLayout();
 			this->SPControlGroupBox->SuspendLayout();
+			this->SPControlContextMenu->SuspendLayout();
 			this->InfoTab->SuspendLayout();
 			this->PointerReadGroupBox->SuspendLayout();
-			this->SPControlContextMenu->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -1655,6 +1655,19 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			// 
 			this->HeaderY->Text = L"Y";
 			// 
+			// SPControlContextMenu
+			// 
+			this->SPControlContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->deletePacketToolStripMenuItem});
+			this->SPControlContextMenu->Name = L"SPControlContextMenu";
+			this->SPControlContextMenu->Size = System::Drawing::Size(146, 26);
+			// 
+			// deletePacketToolStripMenuItem
+			// 
+			this->deletePacketToolStripMenuItem->Name = L"SPControlDeletePacket";
+			this->deletePacketToolStripMenuItem->Size = System::Drawing::Size(145, 22);
+			this->deletePacketToolStripMenuItem->Text = L"Delete Packet";
+			this->deletePacketToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::SPControlDeleteItem_Click);
+			// 
 			// SPControlCheckBox
 			// 
 			this->SPControlCheckBox->AutoSize = true;
@@ -1765,19 +1778,6 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			// 
 			this->SpamPacketsTimer->Tick += gcnew System::EventHandler(this, &MainForm::SpamPacketsTimer_Tick);
 			// 
-			// SPControlContextMenu
-			// 
-			this->SPControlContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->deletePacketToolStripMenuItem});
-			this->SPControlContextMenu->Name = L"SPControlContextMenu";
-			this->SPControlContextMenu->Size = System::Drawing::Size(146, 26);
-			// 
-			// deletePacketToolStripMenuItem
-			// 
-			this->deletePacketToolStripMenuItem->Name = L"deletePacketToolStripMenuItem";
-			this->deletePacketToolStripMenuItem->Size = System::Drawing::Size(145, 22);
-			this->deletePacketToolStripMenuItem->Text = L"Delete Packet";
-			this->deletePacketToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::SPControlDeleteItem_Click);
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1824,10 +1824,10 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			this->SPControlTabPage->PerformLayout();
 			this->SPControlGroupBox->ResumeLayout(false);
 			this->SPControlGroupBox->PerformLayout();
+			this->SPControlContextMenu->ResumeLayout(false);
 			this->InfoTab->ResumeLayout(false);
 			this->PointerReadGroupBox->ResumeLayout(false);
 			this->PointerReadGroupBox->PerformLayout();
-			this->SPControlContextMenu->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}

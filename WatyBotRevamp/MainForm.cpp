@@ -740,11 +740,15 @@ void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventA
 	ListViewItem^ L = this->SPControlListView->SelectedItems[0];
 	if(SPControlListView->SelectedItems->Count > 0)
 	{
-		SPControlv.erase(SPControlv.begin() + SPControlListView->Items->IndexOf(L));
-		RefreshSPControlListView();
+		switch( MessageBoxA(NULL, "Are you sure?", "????", MB_ICONQUESTION | MB_YESNO))
+		case IDYES:
+		{
+			SPControlv.erase(SPControlv.begin() + SPControlListView->Items->IndexOf(L));
+			RefreshSPControlListView();
+			break;
+		}
 	}
 }
-
 
 void MainForm::RefreshSPControlListView()
 {
