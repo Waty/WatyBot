@@ -3,10 +3,9 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/foreach.hpp>
-
 SPControlVector SPControlv;
 
-void AddSPControl(string name, int ID, int x, int y)
+void SPControl::AddSPControl(string name, int ID, int x, int y)
 {
 	SPControlStruct SP;
 	SP.mapName = name;
@@ -16,7 +15,7 @@ void AddSPControl(string name, int ID, int x, int y)
 	SPControlv.push_back(SP);
 }
 
-void EditSPControl(int i, string mapname, int mapid, int x, int y)
+void SPControl::EditSPControl(int i, string mapname, int mapid, int x, int y)
 {
 	SPControlv.at(i).mapName = mapname;
 	SPControlv.at(i).mapID = mapid;
@@ -24,12 +23,12 @@ void EditSPControl(int i, string mapname, int mapid, int x, int y)
 	SPControlv.at(i).y = y;
 }
 
-void DeleteSPControl(int i)
+void SPControl::DeleteSPControl(int i)
 {
 	SPControlv.erase(SPControlv.begin() + i);
 }
 
-void ReadSPControlXML(string filename)
+void SPControl::ReadXML(string filename)
 {
 	ifstream file(filename);
 	using boost::property_tree::ptree;
@@ -52,7 +51,7 @@ void ReadSPControlXML(string filename)
 	}
 }
 
-void WriteSPControlXML(string filename)
+void SPControl::WriteXML(string filename)
 {
 	ofstream file(filename);
 	using boost::property_tree::ptree;

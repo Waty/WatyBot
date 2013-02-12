@@ -193,6 +193,6 @@ CodeCave(SPControl)
 	mov ebp, [SPControlYCoord]
 	jmp dword ptr SPControlRet
 EndCodeCave
-CMemory SPControl(SPControlAddy, CaveSPControl, 1, true);
+CMemory SPControlCodeCave(SPControlAddy, CaveSPControl, 1, true);
 
 #pragma endregion 

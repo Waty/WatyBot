@@ -405,7 +405,7 @@ void MainForm::AutoAggroCheckBox_CheckedChanged(System::Object^  sender, System:
 }
 void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	SPControl.Enable(this->SPControlCheckBox->Checked);
+	SPControlCodeCave.Enable(this->SPControlCheckBox->Checked);
 }
 
 #pragma endregion
@@ -540,7 +540,7 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 
 	if(File::Exists(marshal_as<String^>(PacketFileName))) ReadPacketXML(PacketFileName);
 	RefreshComboBoxes();
-	if(File::Exists(marshal_as<String^>(SPControlFileName))) ReadSPControlXML(SPControlFileName);
+	if(File::Exists(marshal_as<String^>(SPControlFileName))) SPControl::ReadXML(SPControlFileName);
 	RefreshSPControlListView();
 
 }
@@ -584,7 +584,7 @@ void MainForm::MainTabControl_SelectedIndexChanged(System::Object^  sender, Syst
 }
 void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 {
-	WriteSPControlXML(SPControlFileName);
+	SPControl::WriteXML(SPControlFileName);
 	WritePacketXML(PacketFileName);
 	switch(MessageBoxA(NULL, "Close MapleStory too?", "Terminate Maple?", MB_ICONQUESTION | MB_YESNO))
 	{
@@ -696,7 +696,7 @@ void MainForm::RefreshComboBoxes()
 //controls on SPControl Tab
 void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	AddSPControl(marshal_as<string>(SPControlNameTextBox->Text), Convert::ToInt32(SPControlMapIDTextBox->Text), Convert::ToInt32(SPControlXTextBox->Text), Convert::ToInt32(SPControlYTextBox->Text));
+	SPControl::AddSPControl(marshal_as<string>(SPControlNameTextBox->Text), Convert::ToInt32(SPControlMapIDTextBox->Text), Convert::ToInt32(SPControlXTextBox->Text), Convert::ToInt32(SPControlYTextBox->Text));
 	RefreshSPControlListView();
 }
 void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventArgs^  e)
@@ -716,7 +716,9 @@ void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventA
 }
 void MainForm::GetSPControlCoordsButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	this->SPControlXTextBox->Text;
+	this->SPControlXTextBox->Text = Convert::ToString(getCharX());
+	this->SPControlYTextBox->Text = Convert::ToString(getCharY());
+	this->SPControlMapIDTextBox->Text = Convert::ToString(getMapID());
 }
 
 void MainForm::RefreshSPControlListView()
