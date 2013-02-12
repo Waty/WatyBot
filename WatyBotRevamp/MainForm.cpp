@@ -26,8 +26,6 @@ public:
 	static array <System::Object^> ^KeyNames;
 };
 
-
-
 #pragma region Packetsending stuff
 bool isGoodPacket(String^ strPacket, String^&strError)
 {
@@ -93,25 +91,25 @@ void NextChannel()
 #pragma endregion
 
 #pragma region Pointers Reading
-	int MobsCount(){		return (int) ReadPointer(MobBasePtr, MobCountOffset);}
-	int ItemCount(){		return (int) ReadPointer(ItemBasePtr, ItemCountOffset);}
-	int PeopleCount(){		return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);}
-	int CharX(){			return (int) ReadPointer(CharBasePtr,XOffset);}
-	int CharY(){			return (int) ReadPointer(CharBasePtr,XOffset + 4);}
-	int CharHP(){			WritePointer(SettingsBasePtr, HPAlertOffset, 20);return (int) ReadPointer(StatsBasePtr, HPOffset);}
-	int CharMP(){			WritePointer(SettingsBasePtr, MPAlertOffset, 20);return (int) ReadPointer(StatsBasePtr, MPOffset);}
-	double CharEXP(){		return ReadDoublePointer(StatsBasePtr, EXPOffset);}
-	int MapID(){			return (int) ReadPointer(InfoBasePtr, MapIDOffset);}
-	int AttackCount(){		return (int) ReadPointer(CharBasePtr, AttackCountOffset);}
-	int Tubi(){				return (int) ReadPointer(ServerBasePtr, TubiOffset);}
-	int Breath(){			return (int) ReadPointer(CharBasePtr, BreathOffset);}
+	int getMobCount(){		return (int) ReadPointer(MobBasePtr, MobCountOffset);}
+	int getItemCount(){		return (int) ReadPointer(ItemBasePtr, ItemCountOffset);}
+	int getPeopleCount(){		return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);}
+	int getCharX(){			return (int) ReadPointer(CharBasePtr,XOffset);}
+	int getCharY(){			return (int) ReadPointer(CharBasePtr,XOffset + 4);}
+	int getCharHP(){			WritePointer(SettingsBasePtr, HPAlertOffset, 20);return (int) ReadPointer(StatsBasePtr, HPOffset);}
+	int getCharMP(){			WritePointer(SettingsBasePtr, MPAlertOffset, 20);return (int) ReadPointer(StatsBasePtr, MPOffset);}
+	double getCharEXP(){		return ReadDoublePointer(StatsBasePtr, EXPOffset);}
+	int getMapID(){			return (int) ReadPointer(InfoBasePtr, MapIDOffset);}
+	int getAttackCount(){		return (int) ReadPointer(CharBasePtr, AttackCountOffset);}
+	int getTubiValue(){				return (int) ReadPointer(ServerBasePtr, TubiOffset);}
+	int getBreathValue(){			return (int) ReadPointer(CharBasePtr, BreathOffset);}
 #pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/Skill/CC/UnlimitedAttack Voids
 void AutoHP()
 {
 	while(AutoHPBool)
 	{
-		if(CharHP() < UserSetHP)
+		if(getCharHP() < UserSetHP)
 		{
 			MapleHWND = FindWindow(TEXT("MapleStoryClass"), 0);
 			LPARAM lParam = (MapVirtualKey(UserSetHPKey, 0) << 16) + 1;
@@ -129,7 +127,7 @@ void AutoMP()
 {
 	while(AutoMPBool)
 	{
-		if(CharMP() < UserSetMP)
+		if(getCharMP() < UserSetMP)
 		{
 			MapleHWND = FindWindow(TEXT("MapleStoryClass"), 0);
 			LPARAM lParam = (MapVirtualKey(UserSetMPKey, 0) << 16) + 1;
@@ -147,7 +145,7 @@ void AutoLoot()
 {
 	while(AutoLootBool)
 	{
-		if(ItemCount() > 0 && !UsingPot && !UsingAutoSkill)
+		if(getItemCount() > 0 && !UsingPot && !UsingAutoSkill)
 		{
 			MapleHWND = FindWindow(TEXT("MapleStoryClass"), 0);
 			LPARAM lParam = (MapVirtualKey(UserSetLootKey, 0) << 16) + 1;
@@ -162,7 +160,7 @@ void AutoAttack()
 {
 	while(AutoAttackBool)
 	{
-		if(MobsCount() > 0 && !UsingPot && !UsingAutoSkill && !CCing){
+		if(getMobCount() > 0 && !UsingPot && !UsingAutoSkill && !CCing){
 			MapleHWND = FindWindow(TEXT("MapleStoryClass"), 0);
 			LPARAM lParam = (MapVirtualKey(UserSetAttackKey, 0) << 16) + 1;
 			PostMessage(MapleHWND, WM_KEYDOWN, UserSetAttackKey, lParam);
@@ -248,7 +246,7 @@ void AutoSkill4()
 }
 void CatchABreath()
 {
-	while(Breath() > 0)
+	while(getBreathValue() > 0)
 	{
 		Sleep(100);
 	}
@@ -257,10 +255,10 @@ void AutoCCPeople()
 {
 	while(CCPeopleBool)
 	{
-		if(PeopleCount() >= CCPeopleInt)
+		if(getPeopleCount() >= CCPeopleInt)
 		{
 			CCing = true;
-			while(Breath() > 0)
+			while(getBreathValue() > 0)
 				CatchABreath();
 				Sleep(100);
 			NextChannel();
@@ -275,7 +273,7 @@ void AutoCCTimed()
 	{
 		Sleep(CCTimedInt * 1000);
 		CCing = true;
-		while(Breath() > 0)
+		while(getBreathValue() > 0)
 			CatchABreath();
 		Sleep(100);
 		NextChannel();
@@ -287,38 +285,16 @@ void AutoCCAttacks()
 {
 	while(CCAttacksBool)
 	{
-		if(AttackCount() >= CCAttacksInt)
+		if(getAttackCount() >= CCAttacksInt)
 		{
 			CCing = true;
-			while(Breath() > 0)
+			while(getBreathValue() > 0)
 				CatchABreath();
 				Sleep(100);
 			NextChannel();
 			Sleep(500);
 			CCing = false;
 		}
-	}
-}
-void UnlimitedAttack()
-{
-	while(UnlimitedAttackBool)
-	{
-		if(AttackCount() > 90)
-		{
-			MessageBoxA(0,"Bigger then 90",0,0);
-			UsingPot = true;
-			MapleHWND = FindWindow(TEXT("MapleStoryClass"), 0);
-			LPARAM lParam = (MapVirtualKey(VK_LEFT, 0) << 16) + 1;
-			PostMessage(MapleHWND, WM_KEYDOWN, VK_LEFT, lParam);
-			Sleep(100);			
-			PostMessage(MapleHWND, WM_KEYUP, VK_LEFT, lParam);
-			lParam = (MapVirtualKey(VK_RIGHT, 0) << 16) + 1;
-			PostMessage(MapleHWND, WM_KEYDOWN, VK_RIGHT, lParam);
-			Sleep(100);			
-			PostMessage(MapleHWND, WM_KEYUP, VK_RIGHT, lParam);
-			UsingPot = false;
-		}
-		Sleep(100);
 	}
 }
 #pragma endregion
@@ -362,12 +338,6 @@ void MainForm::HideDamageCheckBox_CheckedChanged(System::Object^  sender, System
 void MainForm::CPUHackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	CPUHack.Enable(this->CPUHackCheckBox->Checked);
-}
-void MainForm::NoAttackLimitCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	UnlimitedAttackBool = NoAttackLimitCheckBox->Checked;
-	NewThread(UnlimitedAttack);
-	MessageBoxA(0,"Started", 0,0);
 }
 void MainForm::NDMiningCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -436,8 +406,6 @@ void MainForm::AutoAggroCheckBox_CheckedChanged(System::Object^  sender, System:
 void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	SPControl.Enable(this->SPControlCheckBox->Checked);
-	SPControlXCoord = CharX();
-	SPControlYCoord = CharY();
 }
 
 #pragma endregion
@@ -578,34 +546,31 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 }
 void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
-	this->MobCountLabel->Text =		"Mobs: "	+ MobsCount();
-	this->PeopleCountLabel->Text =	"People: "	+ PeopleCount();
-	this->CharPosLabel->Text =		"CharPos: ("+ CharX() +","+ CharY()+")";
-	this->ItemCountLabel->Text =	"Items: "	+ ItemCount();
-	this->AttackCountLabel->Text =	"Attacks: " + AttackCount();
+	this->MobCountLabel->Text =		"Mobs: "	+ getMobCount();
+	this->PeopleCountLabel->Text =	"People: "	+ getPeopleCount();
+	this->CharPosLabel->Text =		"CharPos: ("+ getCharX() +","+ getCharY()+")";
+	this->ItemCountLabel->Text =	"Items: "	+ getItemCount();
+	this->AttackCountLabel->Text =	"Attacks: " + getAttackCount();
 	this->AttackDelayLabel->Text =	this->AttackTrackBar->Value + " ms";
-	this->TubiPointerLabel->Text =	"Tubi: "	+Tubi();
-	this->BreathLabel->Text =		"Breath: "	+ Breath();
+	this->TubiPointerLabel->Text =	"Tubi: "	+getTubiValue();
+	this->BreathLabel->Text =		"Breath: "	+ getBreathValue();
 	
 #pragma region HP/MP/EXP Bars Drawing
-	CharHP();
-	if(CharHP() >= MaxHP)	MaxHP = CharHP();
-	CharMP();
-	if(CharMP() >= MaxMP)	MaxMP = CharMP();
-	CharEXP();
+	if(getCharHP() >= MaxHP)	MaxHP = getCharHP();
+	if(getCharMP() >= MaxMP)	MaxMP = getCharMP();
 	
-	this->HPLabel->Text = "HP: " + CharHP() + "/" + MaxHP;
-	this->MPLabel->Text = "MP: " + CharMP() + "/" + MaxMP;
-	this->EXPLabel->Text = "EXP: " + CharEXP().ToString("f2") +"%";
+	this->HPLabel->Text = "HP: " + getCharHP() + "/" + MaxHP;
+	this->MPLabel->Text = "MP: " + getCharMP() + "/" + MaxMP;
+	this->EXPLabel->Text = "EXP: " + getCharEXP().ToString("f2") +"%";
 	
 
 	int lengtOfBars  = 223;
 
-	double HPBarLength = ((double)CharHP()/(double)MaxHP) * lengtOfBars;
+	double HPBarLength = ((double)getCharHP()/(double)MaxHP) * lengtOfBars;
 	this->HPForeground->Width = HPBarLength;
-	double MPBarLength = ((double)CharMP()/(double)MaxMP) * lengtOfBars;
+	double MPBarLength = ((double)getCharMP()/(double)MaxMP) * lengtOfBars;
 	this->MPForeground->Width = MPBarLength;
-	double EXPBarLength = (CharEXP()/100) * lengtOfBars;
+	double EXPBarLength = (getCharEXP()/100) * lengtOfBars;
 	this->EXPForeground->Width = EXPBarLength;
 #pragma endregion
 }
@@ -740,7 +705,7 @@ void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventA
 	ListViewItem^ L = this->SPControlListView->SelectedItems[0];
 	if(SPControlListView->SelectedItems->Count > 0)
 	{
-		switch( MessageBoxA(NULL, "Are you sure?", "????", MB_ICONQUESTION | MB_YESNO))
+		switch( MessageBoxA(NULL, "Are you sure you want to delete this???", "Are you sure?", MB_ICONQUESTION | MB_YESNO))
 		case IDYES:
 		{
 			SPControlv.erase(SPControlv.begin() + SPControlListView->Items->IndexOf(L));
@@ -748,6 +713,10 @@ void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventA
 			break;
 		}
 	}
+}
+void MainForm::GetSPControlCoordsButton_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	this->SPControlXTextBox->Text;
 }
 
 void MainForm::RefreshSPControlListView()
