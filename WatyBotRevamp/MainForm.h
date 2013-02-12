@@ -73,7 +73,7 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::CheckBox^  UnlimitedMorphCheckBox;
 	private: System::Windows::Forms::CheckBox^  HideDamageCheckBox;
 	private: System::Windows::Forms::CheckBox^  CPUHackCheckBox;
-	private: System::Windows::Forms::CheckBox^  NoAttackLimitCheckBox;
+
 	private: System::Windows::Forms::CheckBox^  NDMiningCheckBox;
 	private: System::Windows::Forms::CheckBox^  HPCheckBox;
 
@@ -230,6 +230,8 @@ private: System::Windows::Forms::TextBox^  SPControlNameTextBox;
 private: System::Windows::Forms::Button^  SPControlAddButton;
 private: System::Windows::Forms::ContextMenuStrip^  SPControlContextMenu;
 private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuItem;
+private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
+
 
 
 
@@ -333,7 +335,6 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			this->NoCharKBCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->SevenMissCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->NDMiningCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->NoAttackLimitCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->PerfectLootCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->JumpDownAnywhereCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->PacketSenderTab = (gcnew System::Windows::Forms::TabPage());
@@ -362,8 +363,10 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			this->SendPacketButton = (gcnew System::Windows::Forms::Button());
 			this->SPControlTabPage = (gcnew System::Windows::Forms::TabPage());
 			this->SPControlGroupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->GetSPControlCoordsButton = (gcnew System::Windows::Forms::Button());
 			this->SPControlAddButton = (gcnew System::Windows::Forms::Button());
 			this->SPControlMapIDLabel = (gcnew System::Windows::Forms::Label());
+			this->SPControlCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->SPControlYTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->SPControlNameLabel = (gcnew System::Windows::Forms::Label());
 			this->SPControlXTextBox = (gcnew System::Windows::Forms::TextBox());
@@ -378,7 +381,6 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			this->HeaderY = (gcnew System::Windows::Forms::ColumnHeader());
 			this->SPControlContextMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->deletePacketToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->SPControlCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
 			this->PointerReadGroupBox = (gcnew System::Windows::Forms::GroupBox());
 			this->BreathLabel = (gcnew System::Windows::Forms::Label());
@@ -1118,7 +1120,6 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			this->CharacterHacksGroupBox->Controls->Add(this->NoCharKBCheckBox);
 			this->CharacterHacksGroupBox->Controls->Add(this->SevenMissCheckBox);
 			this->CharacterHacksGroupBox->Controls->Add(this->NDMiningCheckBox);
-			this->CharacterHacksGroupBox->Controls->Add(this->NoAttackLimitCheckBox);
 			this->CharacterHacksGroupBox->Controls->Add(this->PerfectLootCheckBox);
 			this->CharacterHacksGroupBox->Controls->Add(this->JumpDownAnywhereCheckBox);
 			this->CharacterHacksGroupBox->Location = System::Drawing::Point(7, 6);
@@ -1248,17 +1249,6 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			this->NDMiningCheckBox->Text = L"ND Mining";
 			this->NDMiningCheckBox->UseVisualStyleBackColor = true;
 			this->NDMiningCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NDMiningCheckBox_CheckedChanged);
-			// 
-			// NoAttackLimitCheckBox
-			// 
-			this->NoAttackLimitCheckBox->AutoSize = true;
-			this->NoAttackLimitCheckBox->Location = System::Drawing::Point(6, 87);
-			this->NoAttackLimitCheckBox->Name = L"NoAttackLimitCheckBox";
-			this->NoAttackLimitCheckBox->Size = System::Drawing::Size(98, 17);
-			this->NoAttackLimitCheckBox->TabIndex = 3;
-			this->NoAttackLimitCheckBox->Text = L"No Attack Limit";
-			this->NoAttackLimitCheckBox->UseVisualStyleBackColor = true;
-			this->NoAttackLimitCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NoAttackLimitCheckBox_CheckedChanged);
 			// 
 			// PerfectLootCheckBox
 			// 
@@ -1521,7 +1511,6 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			// 
 			this->SPControlTabPage->Controls->Add(this->SPControlGroupBox);
 			this->SPControlTabPage->Controls->Add(this->SPControlListView);
-			this->SPControlTabPage->Controls->Add(this->SPControlCheckBox);
 			this->SPControlTabPage->Location = System::Drawing::Point(4, 22);
 			this->SPControlTabPage->Name = L"SPControlTabPage";
 			this->SPControlTabPage->Size = System::Drawing::Size(326, 396);
@@ -1531,8 +1520,10 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			// 
 			// SPControlGroupBox
 			// 
+			this->SPControlGroupBox->Controls->Add(this->GetSPControlCoordsButton);
 			this->SPControlGroupBox->Controls->Add(this->SPControlAddButton);
 			this->SPControlGroupBox->Controls->Add(this->SPControlMapIDLabel);
+			this->SPControlGroupBox->Controls->Add(this->SPControlCheckBox);
 			this->SPControlGroupBox->Controls->Add(this->SPControlYTextBox);
 			this->SPControlGroupBox->Controls->Add(this->SPControlNameLabel);
 			this->SPControlGroupBox->Controls->Add(this->SPControlXTextBox);
@@ -1540,18 +1531,28 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			this->SPControlGroupBox->Controls->Add(this->SPControlMapIDTextBox);
 			this->SPControlGroupBox->Controls->Add(this->SPControlXLabel);
 			this->SPControlGroupBox->Controls->Add(this->SPControlNameTextBox);
-			this->SPControlGroupBox->Location = System::Drawing::Point(7, 222);
+			this->SPControlGroupBox->Location = System::Drawing::Point(7, 295);
 			this->SPControlGroupBox->Name = L"SPControlGroupBox";
-			this->SPControlGroupBox->Size = System::Drawing::Size(307, 91);
+			this->SPControlGroupBox->Size = System::Drawing::Size(310, 93);
 			this->SPControlGroupBox->TabIndex = 37;
 			this->SPControlGroupBox->TabStop = false;
 			this->SPControlGroupBox->Text = L"Add New Location";
 			// 
+			// GetSPControlCoordsButton
+			// 
+			this->GetSPControlCoordsButton->Location = System::Drawing::Point(149, 59);
+			this->GetSPControlCoordsButton->Name = L"GetSPControlCoordsButton";
+			this->GetSPControlCoordsButton->Size = System::Drawing::Size(80, 23);
+			this->GetSPControlCoordsButton->TabIndex = 38;
+			this->GetSPControlCoordsButton->Text = L"Get Current";
+			this->GetSPControlCoordsButton->UseVisualStyleBackColor = true;
+			this->GetSPControlCoordsButton->Click += gcnew System::EventHandler(this, &MainForm::GetSPControlCoordsButton_Click);
+			// 
 			// SPControlAddButton
 			// 
-			this->SPControlAddButton->Location = System::Drawing::Point(6, 62);
+			this->SPControlAddButton->Location = System::Drawing::Point(9, 59);
 			this->SPControlAddButton->Name = L"SPControlAddButton";
-			this->SPControlAddButton->Size = System::Drawing::Size(295, 23);
+			this->SPControlAddButton->Size = System::Drawing::Size(134, 23);
 			this->SPControlAddButton->TabIndex = 37;
 			this->SPControlAddButton->Text = L"Add Location";
 			this->SPControlAddButton->UseVisualStyleBackColor = true;
@@ -1559,57 +1560,68 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			// 
 			// SPControlMapIDLabel
 			// 
-			this->SPControlMapIDLabel->Location = System::Drawing::Point(106, 16);
+			this->SPControlMapIDLabel->Location = System::Drawing::Point(149, 16);
 			this->SPControlMapIDLabel->Name = L"SPControlMapIDLabel";
-			this->SPControlMapIDLabel->Size = System::Drawing::Size(83, 14);
+			this->SPControlMapIDLabel->Size = System::Drawing::Size(80, 14);
 			this->SPControlMapIDLabel->TabIndex = 32;
 			this->SPControlMapIDLabel->Text = L"MapID";
 			this->SPControlMapIDLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
+			// SPControlCheckBox
+			// 
+			this->SPControlCheckBox->Location = System::Drawing::Point(235, 63);
+			this->SPControlCheckBox->Name = L"SPControlCheckBox";
+			this->SPControlCheckBox->Size = System::Drawing::Size(66, 17);
+			this->SPControlCheckBox->TabIndex = 27;
+			this->SPControlCheckBox->Text = L"Enable";
+			this->SPControlCheckBox->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->SPControlCheckBox->UseVisualStyleBackColor = true;
+			this->SPControlCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::SPControlCheckBox_CheckedChanged);
+			// 
 			// SPControlYTextBox
 			// 
-			this->SPControlYTextBox->Location = System::Drawing::Point(255, 33);
+			this->SPControlYTextBox->Location = System::Drawing::Point(271, 33);
 			this->SPControlYTextBox->Name = L"SPControlYTextBox";
-			this->SPControlYTextBox->Size = System::Drawing::Size(45, 20);
+			this->SPControlYTextBox->Size = System::Drawing::Size(30, 20);
 			this->SPControlYTextBox->TabIndex = 36;
 			// 
 			// SPControlNameLabel
 			// 
 			this->SPControlNameLabel->Location = System::Drawing::Point(6, 16);
 			this->SPControlNameLabel->Name = L"SPControlNameLabel";
-			this->SPControlNameLabel->Size = System::Drawing::Size(98, 14);
+			this->SPControlNameLabel->Size = System::Drawing::Size(137, 14);
 			this->SPControlNameLabel->TabIndex = 29;
 			this->SPControlNameLabel->Text = L"Name:";
 			this->SPControlNameLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// SPControlXTextBox
 			// 
-			this->SPControlXTextBox->Location = System::Drawing::Point(197, 33);
+			this->SPControlXTextBox->Location = System::Drawing::Point(235, 33);
 			this->SPControlXTextBox->Name = L"SPControlXTextBox";
-			this->SPControlXTextBox->Size = System::Drawing::Size(45, 20);
+			this->SPControlXTextBox->Size = System::Drawing::Size(30, 20);
 			this->SPControlXTextBox->TabIndex = 35;
 			// 
 			// SPControlYLabel
 			// 
-			this->SPControlYLabel->Location = System::Drawing::Point(256, 16);
+			this->SPControlYLabel->Location = System::Drawing::Point(271, 16);
 			this->SPControlYLabel->Name = L"SPControlYLabel";
-			this->SPControlYLabel->Size = System::Drawing::Size(59, 14);
+			this->SPControlYLabel->Size = System::Drawing::Size(30, 14);
 			this->SPControlYLabel->TabIndex = 30;
 			this->SPControlYLabel->Text = L"Y";
 			this->SPControlYLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// SPControlMapIDTextBox
 			// 
-			this->SPControlMapIDTextBox->Location = System::Drawing::Point(105, 33);
+			this->SPControlMapIDTextBox->Location = System::Drawing::Point(149, 33);
 			this->SPControlMapIDTextBox->Name = L"SPControlMapIDTextBox";
 			this->SPControlMapIDTextBox->Size = System::Drawing::Size(80, 20);
 			this->SPControlMapIDTextBox->TabIndex = 34;
 			// 
 			// SPControlXLabel
 			// 
-			this->SPControlXLabel->Location = System::Drawing::Point(185, 16);
+			this->SPControlXLabel->Location = System::Drawing::Point(235, 16);
 			this->SPControlXLabel->Name = L"SPControlXLabel";
-			this->SPControlXLabel->Size = System::Drawing::Size(68, 14);
+			this->SPControlXLabel->Size = System::Drawing::Size(30, 14);
 			this->SPControlXLabel->TabIndex = 31;
 			this->SPControlXLabel->Text = L"X";
 			this->SPControlXLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -1618,7 +1630,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			// 
 			this->SPControlNameTextBox->Location = System::Drawing::Point(9, 33);
 			this->SPControlNameTextBox->Name = L"SPControlNameTextBox";
-			this->SPControlNameTextBox->Size = System::Drawing::Size(83, 20);
+			this->SPControlNameTextBox->Size = System::Drawing::Size(134, 20);
 			this->SPControlNameTextBox->TabIndex = 33;
 			// 
 			// SPControlListView
@@ -1632,7 +1644,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			this->SPControlListView->Location = System::Drawing::Point(7, 3);
 			this->SPControlListView->MultiSelect = false;
 			this->SPControlListView->Name = L"SPControlListView";
-			this->SPControlListView->Size = System::Drawing::Size(310, 213);
+			this->SPControlListView->Size = System::Drawing::Size(310, 281);
 			this->SPControlListView->TabIndex = 28;
 			this->SPControlListView->UseCompatibleStateImageBehavior = false;
 			this->SPControlListView->View = System::Windows::Forms::View::Details;
@@ -1640,20 +1652,22 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			// HeaderMapName
 			// 
 			this->HeaderMapName->Text = L"Name";
-			this->HeaderMapName->Width = 100;
+			this->HeaderMapName->Width = 160;
 			// 
 			// HeaderMapID
 			// 
 			this->HeaderMapID->Text = L"MapID";
-			this->HeaderMapID->Width = 88;
+			this->HeaderMapID->Width = 80;
 			// 
 			// HeaderX
 			// 
 			this->HeaderX->Text = L"X";
+			this->HeaderX->Width = 35;
 			// 
 			// HeaderY
 			// 
 			this->HeaderY->Text = L"Y";
+			this->HeaderY->Width = 35;
 			// 
 			// SPControlContextMenu
 			// 
@@ -1663,20 +1677,10 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			// 
 			// deletePacketToolStripMenuItem
 			// 
-			this->deletePacketToolStripMenuItem->Name = L"SPControlDeletePacket";
+			this->deletePacketToolStripMenuItem->Name = L"deletePacketToolStripMenuItem";
 			this->deletePacketToolStripMenuItem->Size = System::Drawing::Size(145, 22);
 			this->deletePacketToolStripMenuItem->Text = L"Delete Packet";
 			this->deletePacketToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::SPControlDeleteItem_Click);
-			// 
-			// SPControlCheckBox
-			// 
-			this->SPControlCheckBox->AutoSize = true;
-			this->SPControlCheckBox->Location = System::Drawing::Point(7, 371);
-			this->SPControlCheckBox->Name = L"SPControlCheckBox";
-			this->SPControlCheckBox->Size = System::Drawing::Size(73, 17);
-			this->SPControlCheckBox->TabIndex = 27;
-			this->SPControlCheckBox->Text = L"SPControl";
-			this->SPControlCheckBox->UseVisualStyleBackColor = true;
 			// 
 			// InfoTab
 			// 
@@ -1821,7 +1825,6 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 			this->SendPacketGroupBox->ResumeLayout(false);
 			this->SendPacketGroupBox->PerformLayout();
 			this->SPControlTabPage->ResumeLayout(false);
-			this->SPControlTabPage->PerformLayout();
 			this->SPControlGroupBox->ResumeLayout(false);
 			this->SPControlGroupBox->PerformLayout();
 			this->SPControlContextMenu->ResumeLayout(false);
@@ -1849,7 +1852,6 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 	private: System::Void UnlimitedMorphCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void HideDamageCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void CPUHackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void NoAttackLimitCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void NDMiningCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void UncensorCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
@@ -1894,6 +1896,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuIt
 	private: System::Void SavePacketsButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SPControlDeleteItem_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void GetSPControlCoordsButton_Click(System::Object^  sender, System::EventArgs^  e);
 	};
 	}
 #pragma endregion
