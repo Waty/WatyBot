@@ -190,8 +190,7 @@ private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
 private: System::Windows::Forms::CheckBox^  AutoAggroCheckBox;
 private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 private: System::Windows::Forms::TabPage^  SPControlTabPage;
-private: System::Windows::Forms::CheckBox^  SPControlEnableCheckBox;
-
+private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 private: System::Windows::Forms::TextBox^  CCAttacksTextBox;
 
 
@@ -231,8 +230,6 @@ private: System::Windows::Forms::TextBox^  SPControlNameTextBox;
 private: System::Windows::Forms::Button^  SPControlAddButton;
 private: System::Windows::Forms::ContextMenuStrip^  SPControlContextMenu;
 private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuItem;
-
-private: System::Windows::Forms::Button^  SPControlGetCurrentLocation;
 
 
 
@@ -365,9 +362,7 @@ private: System::Windows::Forms::Button^  SPControlGetCurrentLocation;
 			this->SendPacketButton = (gcnew System::Windows::Forms::Button());
 			this->SPControlTabPage = (gcnew System::Windows::Forms::TabPage());
 			this->SPControlGroupBox = (gcnew System::Windows::Forms::GroupBox());
-			this->SPControlGetCurrentLocation = (gcnew System::Windows::Forms::Button());
 			this->SPControlAddButton = (gcnew System::Windows::Forms::Button());
-			this->SPControlEnableCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->SPControlMapIDLabel = (gcnew System::Windows::Forms::Label());
 			this->SPControlYTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->SPControlNameLabel = (gcnew System::Windows::Forms::Label());
@@ -383,6 +378,7 @@ private: System::Windows::Forms::Button^  SPControlGetCurrentLocation;
 			this->HeaderY = (gcnew System::Windows::Forms::ColumnHeader());
 			this->SPControlContextMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->deletePacketToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->SPControlCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
 			this->PointerReadGroupBox = (gcnew System::Windows::Forms::GroupBox());
 			this->BreathLabel = (gcnew System::Windows::Forms::Label());
@@ -1525,6 +1521,7 @@ private: System::Windows::Forms::Button^  SPControlGetCurrentLocation;
 			// 
 			this->SPControlTabPage->Controls->Add(this->SPControlGroupBox);
 			this->SPControlTabPage->Controls->Add(this->SPControlListView);
+			this->SPControlTabPage->Controls->Add(this->SPControlCheckBox);
 			this->SPControlTabPage->Location = System::Drawing::Point(4, 22);
 			this->SPControlTabPage->Name = L"SPControlTabPage";
 			this->SPControlTabPage->Size = System::Drawing::Size(326, 396);
@@ -1534,9 +1531,7 @@ private: System::Windows::Forms::Button^  SPControlGetCurrentLocation;
 			// 
 			// SPControlGroupBox
 			// 
-			this->SPControlGroupBox->Controls->Add(this->SPControlGetCurrentLocation);
 			this->SPControlGroupBox->Controls->Add(this->SPControlAddButton);
-			this->SPControlGroupBox->Controls->Add(this->SPControlEnableCheckBox);
 			this->SPControlGroupBox->Controls->Add(this->SPControlMapIDLabel);
 			this->SPControlGroupBox->Controls->Add(this->SPControlYTextBox);
 			this->SPControlGroupBox->Controls->Add(this->SPControlNameLabel);
@@ -1545,58 +1540,37 @@ private: System::Windows::Forms::Button^  SPControlGetCurrentLocation;
 			this->SPControlGroupBox->Controls->Add(this->SPControlMapIDTextBox);
 			this->SPControlGroupBox->Controls->Add(this->SPControlXLabel);
 			this->SPControlGroupBox->Controls->Add(this->SPControlNameTextBox);
-			this->SPControlGroupBox->Location = System::Drawing::Point(7, 297);
+			this->SPControlGroupBox->Location = System::Drawing::Point(7, 222);
 			this->SPControlGroupBox->Name = L"SPControlGroupBox";
 			this->SPControlGroupBox->Size = System::Drawing::Size(307, 91);
 			this->SPControlGroupBox->TabIndex = 37;
 			this->SPControlGroupBox->TabStop = false;
 			this->SPControlGroupBox->Text = L"Add New Location";
 			// 
-			// SPControlGetCurrentLocation
-			// 
-			this->SPControlGetCurrentLocation->Location = System::Drawing::Point(9, 62);
-			this->SPControlGetCurrentLocation->Name = L"SPControlGetCurrentLocation";
-			this->SPControlGetCurrentLocation->Size = System::Drawing::Size(129, 23);
-			this->SPControlGetCurrentLocation->TabIndex = 38;
-			this->SPControlGetCurrentLocation->Text = L"Get Location";
-			this->SPControlGetCurrentLocation->UseVisualStyleBackColor = true;
-			this->SPControlGetCurrentLocation->Click += gcnew System::EventHandler(this, &MainForm::SPControlGetCurrentLocation_Click);
-			// 
 			// SPControlAddButton
 			// 
-			this->SPControlAddButton->Location = System::Drawing::Point(144, 62);
+			this->SPControlAddButton->Location = System::Drawing::Point(6, 62);
 			this->SPControlAddButton->Name = L"SPControlAddButton";
-			this->SPControlAddButton->Size = System::Drawing::Size(85, 23);
+			this->SPControlAddButton->Size = System::Drawing::Size(295, 23);
 			this->SPControlAddButton->TabIndex = 37;
 			this->SPControlAddButton->Text = L"Add Location";
 			this->SPControlAddButton->UseVisualStyleBackColor = true;
 			this->SPControlAddButton->Click += gcnew System::EventHandler(this, &MainForm::SPControlAddButton_Click);
 			// 
-			// SPControlEnableCheckBox
-			// 
-			this->SPControlEnableCheckBox->Location = System::Drawing::Point(235, 66);
-			this->SPControlEnableCheckBox->Name = L"SPControlEnableCheckBox";
-			this->SPControlEnableCheckBox->Size = System::Drawing::Size(66, 17);
-			this->SPControlEnableCheckBox->TabIndex = 27;
-			this->SPControlEnableCheckBox->Text = L"Enable";
-			this->SPControlEnableCheckBox->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			this->SPControlEnableCheckBox->UseVisualStyleBackColor = true;
-			this->SPControlEnableCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::SPControlEnableCheckBox_CheckedChanged);
-			// 
 			// SPControlMapIDLabel
 			// 
-			this->SPControlMapIDLabel->Location = System::Drawing::Point(141, 16);
+			this->SPControlMapIDLabel->Location = System::Drawing::Point(106, 16);
 			this->SPControlMapIDLabel->Name = L"SPControlMapIDLabel";
-			this->SPControlMapIDLabel->Size = System::Drawing::Size(88, 14);
+			this->SPControlMapIDLabel->Size = System::Drawing::Size(83, 14);
 			this->SPControlMapIDLabel->TabIndex = 32;
 			this->SPControlMapIDLabel->Text = L"MapID";
 			this->SPControlMapIDLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// SPControlYTextBox
 			// 
-			this->SPControlYTextBox->Location = System::Drawing::Point(271, 33);
+			this->SPControlYTextBox->Location = System::Drawing::Point(255, 33);
 			this->SPControlYTextBox->Name = L"SPControlYTextBox";
-			this->SPControlYTextBox->Size = System::Drawing::Size(30, 20);
+			this->SPControlYTextBox->Size = System::Drawing::Size(45, 20);
 			this->SPControlYTextBox->TabIndex = 36;
 			// 
 			// SPControlNameLabel
@@ -1610,32 +1584,32 @@ private: System::Windows::Forms::Button^  SPControlGetCurrentLocation;
 			// 
 			// SPControlXTextBox
 			// 
-			this->SPControlXTextBox->Location = System::Drawing::Point(235, 33);
+			this->SPControlXTextBox->Location = System::Drawing::Point(197, 33);
 			this->SPControlXTextBox->Name = L"SPControlXTextBox";
-			this->SPControlXTextBox->Size = System::Drawing::Size(30, 20);
+			this->SPControlXTextBox->Size = System::Drawing::Size(45, 20);
 			this->SPControlXTextBox->TabIndex = 35;
 			// 
 			// SPControlYLabel
 			// 
-			this->SPControlYLabel->Location = System::Drawing::Point(271, 16);
+			this->SPControlYLabel->Location = System::Drawing::Point(256, 16);
 			this->SPControlYLabel->Name = L"SPControlYLabel";
-			this->SPControlYLabel->Size = System::Drawing::Size(30, 14);
+			this->SPControlYLabel->Size = System::Drawing::Size(59, 14);
 			this->SPControlYLabel->TabIndex = 30;
 			this->SPControlYLabel->Text = L"Y";
 			this->SPControlYLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// SPControlMapIDTextBox
 			// 
-			this->SPControlMapIDTextBox->Location = System::Drawing::Point(144, 33);
+			this->SPControlMapIDTextBox->Location = System::Drawing::Point(105, 33);
 			this->SPControlMapIDTextBox->Name = L"SPControlMapIDTextBox";
-			this->SPControlMapIDTextBox->Size = System::Drawing::Size(85, 20);
+			this->SPControlMapIDTextBox->Size = System::Drawing::Size(80, 20);
 			this->SPControlMapIDTextBox->TabIndex = 34;
 			// 
 			// SPControlXLabel
 			// 
-			this->SPControlXLabel->Location = System::Drawing::Point(235, 16);
+			this->SPControlXLabel->Location = System::Drawing::Point(185, 16);
 			this->SPControlXLabel->Name = L"SPControlXLabel";
-			this->SPControlXLabel->Size = System::Drawing::Size(30, 14);
+			this->SPControlXLabel->Size = System::Drawing::Size(68, 14);
 			this->SPControlXLabel->TabIndex = 31;
 			this->SPControlXLabel->Text = L"X";
 			this->SPControlXLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -1644,7 +1618,7 @@ private: System::Windows::Forms::Button^  SPControlGetCurrentLocation;
 			// 
 			this->SPControlNameTextBox->Location = System::Drawing::Point(9, 33);
 			this->SPControlNameTextBox->Name = L"SPControlNameTextBox";
-			this->SPControlNameTextBox->Size = System::Drawing::Size(129, 20);
+			this->SPControlNameTextBox->Size = System::Drawing::Size(83, 20);
 			this->SPControlNameTextBox->TabIndex = 33;
 			// 
 			// SPControlListView
@@ -1658,7 +1632,7 @@ private: System::Windows::Forms::Button^  SPControlGetCurrentLocation;
 			this->SPControlListView->Location = System::Drawing::Point(7, 3);
 			this->SPControlListView->MultiSelect = false;
 			this->SPControlListView->Name = L"SPControlListView";
-			this->SPControlListView->Size = System::Drawing::Size(310, 281);
+			this->SPControlListView->Size = System::Drawing::Size(310, 213);
 			this->SPControlListView->TabIndex = 28;
 			this->SPControlListView->UseCompatibleStateImageBehavior = false;
 			this->SPControlListView->View = System::Windows::Forms::View::Details;
@@ -1666,7 +1640,7 @@ private: System::Windows::Forms::Button^  SPControlGetCurrentLocation;
 			// HeaderMapName
 			// 
 			this->HeaderMapName->Text = L"Name";
-			this->HeaderMapName->Width = 140;
+			this->HeaderMapName->Width = 100;
 			// 
 			// HeaderMapID
 			// 
@@ -1676,12 +1650,10 @@ private: System::Windows::Forms::Button^  SPControlGetCurrentLocation;
 			// HeaderX
 			// 
 			this->HeaderX->Text = L"X";
-			this->HeaderX->Width = 40;
 			// 
 			// HeaderY
 			// 
 			this->HeaderY->Text = L"Y";
-			this->HeaderY->Width = 40;
 			// 
 			// SPControlContextMenu
 			// 
@@ -1691,10 +1663,20 @@ private: System::Windows::Forms::Button^  SPControlGetCurrentLocation;
 			// 
 			// deletePacketToolStripMenuItem
 			// 
-			this->deletePacketToolStripMenuItem->Name = L"deletePacketToolStripMenuItem";
+			this->deletePacketToolStripMenuItem->Name = L"SPControlDeletePacket";
 			this->deletePacketToolStripMenuItem->Size = System::Drawing::Size(145, 22);
 			this->deletePacketToolStripMenuItem->Text = L"Delete Packet";
 			this->deletePacketToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::SPControlDeleteItem_Click);
+			// 
+			// SPControlCheckBox
+			// 
+			this->SPControlCheckBox->AutoSize = true;
+			this->SPControlCheckBox->Location = System::Drawing::Point(7, 371);
+			this->SPControlCheckBox->Name = L"SPControlCheckBox";
+			this->SPControlCheckBox->Size = System::Drawing::Size(73, 17);
+			this->SPControlCheckBox->TabIndex = 27;
+			this->SPControlCheckBox->Text = L"SPControl";
+			this->SPControlCheckBox->UseVisualStyleBackColor = true;
 			// 
 			// InfoTab
 			// 
@@ -1839,6 +1821,7 @@ private: System::Windows::Forms::Button^  SPControlGetCurrentLocation;
 			this->SendPacketGroupBox->ResumeLayout(false);
 			this->SendPacketGroupBox->PerformLayout();
 			this->SPControlTabPage->ResumeLayout(false);
+			this->SPControlTabPage->PerformLayout();
 			this->SPControlGroupBox->ResumeLayout(false);
 			this->SPControlGroupBox->PerformLayout();
 			this->SPControlContextMenu->ResumeLayout(false);
@@ -1906,12 +1889,11 @@ private: System::Windows::Forms::Button^  SPControlGetCurrentLocation;
 	private: System::Void SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void AutoAggroCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void SPControlCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SavePacketsButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SPControlDeleteItem_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void SPControlGetCurrentLocation_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void SPControlEnableCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	};
 	}
 #pragma endregion

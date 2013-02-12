@@ -67,7 +67,6 @@ bool StartProcess()
 	std::string path(Buffer);
 
 	path.append("/MapleStory.exe");
-	cout << path.c_str() << endl;
 
 	STARTUPINFO si = { sizeof(si) };
 
@@ -101,13 +100,11 @@ bool FindProcess()
 
 		if (!strcmp(szBuffer,"StartUpDlgClass"))
 		{
-			cout << "Found StartUp dialog! Injecting MSCRC.dll now..." << endl;
+			cout << "Found StartUp dialog! Injecting now...";
 			bool valid = inject(dwProcessId, "/MSCRC.dll");
-			cout << (valid ? "Bypass Injected Succesfull. Now injecting WatyBot.dll .........." : "Failed to inject MSCRC.dll. Error was: " + GetLastError()) << endl;
-			Sleep(100);
+			Sleep(1000);
 			valid = inject(dwProcessId, "/WatyBot.dll");
-			cout << (valid ? "WatyBot Injected Succesfull. Now starting MapleStory.........." : "Failed to inject WatyBot.dll. Error was: " + GetLastError()) << endl;
-			Sleep(100);
+			Sleep(1000);
 			::PostMessage(hWnd,WM_KEYDOWN, VK_ESCAPE , ::MapVirtualKey(VK_ESCAPE, 0) << 16);
 			return valid;
 		}
@@ -133,7 +130,7 @@ int main()
 {
 	cout << "WatyBotInjector:" << endl;
 	cout << "You need to have [D.R.T]'s MSCRC.dll, WatyBot.dll and this program in the Maplestory folder!!!!" << endl;
-	cout << "Full credits to \"TheFox\"" << endl << endl;
+	cout << "   Full credits to \"TheFox\"" << endl << endl;
 	if(!IsElevated())
 	{
 		cout << "Run me as administrator!" << endl;

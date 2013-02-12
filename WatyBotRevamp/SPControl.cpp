@@ -1,15 +1,10 @@
 #include "SPControl.h"
-#include "Pointers.h"
 #include <fstream>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/foreach.hpp>
-#include <Windows.h>
 
 SPControlVector SPControlv;
-int SPControlMapID;
-DWORD SPControlXCoord;
-DWORD SPControlYCoord;
 
 void AddSPControl(string name, int ID, int x, int y)
 {
@@ -72,22 +67,4 @@ void WriteSPControlXML(string filename)
 		node.put("y", SP.y);
     }
 	write_xml(file, pt);
-}
-
-BOOL WINAPI SPControlGetCoords()
-{
-	int MapID = GetMapID();
-	if(MapID == 0)
-		return FALSE;
-
-	BOOST_FOREACH(SPControlStruct SP, SPControlv)
-	{
-		if (MapID == SP.mapID)
-		{
-			SPControlXCoord = SP.x;
-			return TRUE;
-			SPControlYCoord = SP.y;
-		}
-	}
-	return FALSE;
 }

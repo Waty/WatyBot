@@ -44,9 +44,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>C:\Users\Wart\Desktop\Modules\</OutDir>
     <TargetName>WatyBot</TargetName>
-    <OutDir>E:\Games\Europe MapleStory\</OutDir>
-    <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -80,12 +79,6 @@
       <AdditionalDependencies>urlmon.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>E:\Programs\boost_1_52_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
-    <PostBuildEvent>
-      <Command>
-      </Command>
-      <Message>
-      </Message>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="MainDll.cpp" />
@@ -107,7 +100,6 @@
     </ClCompile>
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="Packet.cpp" />
-    <ClCompile Include="Pointers.cpp" />
     <ClCompile Include="SendPacket.cpp" />
     <ClCompile Include="SPControl.cpp" />
   </ItemGroup>
