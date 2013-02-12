@@ -10,6 +10,7 @@
 #include "Packet.h"
 #include "SPControl.h"
 #include "Hacks.h"
+#include <boost/foreach.hpp>
 using namespace std;
 using namespace WatyBotRevamp;
 using namespace msclr::interop;
@@ -25,8 +26,6 @@ public ref class Globals
 public:
 	static array <System::Object^> ^KeyNames;
 };
-
-
 
 #pragma region Packetsending stuff
 bool isGoodPacket(String^ strPacket, String^&strError)
@@ -92,26 +91,12 @@ void NextChannel()
 }
 #pragma endregion
 
-#pragma region Pointers Reading
-	int MobsCount(){		return (int) ReadPointer(MobBasePtr, MobCountOffset);}
-	int ItemCount(){		return (int) ReadPointer(ItemBasePtr, ItemCountOffset);}
-	int PeopleCount(){		return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);}
-	int CharX(){			return (int) ReadPointer(CharBasePtr,XOffset);}
-	int CharY(){			return (int) ReadPointer(CharBasePtr,XOffset + 4);}
-	int CharHP(){			WritePointer(SettingsBasePtr, HPAlertOffset, 20);return (int) ReadPointer(StatsBasePtr, HPOffset);}
-	int CharMP(){			WritePointer(SettingsBasePtr, MPAlertOffset, 20);return (int) ReadPointer(StatsBasePtr, MPOffset);}
-	double CharEXP(){		return ReadDoublePointer(StatsBasePtr, EXPOffset);}
-	int MapID(){			return (int) ReadPointer(InfoBasePtr, MapIDOffset);}
-	int AttackCount(){		return (int) ReadPointer(CharBasePtr, AttackCountOffset);}
-	int Tubi(){				return (int) ReadPointer(ServerBasePtr, TubiOffset);}
-	int Breath(){			return (int) ReadPointer(CharBasePtr, BreathOffset);}
-#pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/Skill/CC/UnlimitedAttack Voids
 void AutoHP()
 {
 	while(AutoHPBool)
 	{
-		if(CharHP() < UserSetHP)
+		if(GetCharacterHP() < UserSetHP)
 		{
 			MapleHWND = FindWindow(TEXT("MapleStoryClass"), 0);
 			LPARAM lParam = (MapVirtualKey(UserSetHPKey, 0) << 16) + 1;
@@ -129,7 +114,7 @@ void AutoMP()
 {
 	while(AutoMPBool)
 	{
-		if(CharMP() < UserSetMP)
+		if(GetCharacterMP() < UserSetMP)
 		{
 			MapleHWND = FindWindow(TEXT("MapleStoryClass"), 0);
 			LPARAM lParam = (MapVirtualKey(UserSetMPKey, 0) << 16) + 1;
@@ -147,7 +132,7 @@ void AutoLoot()
 {
 	while(AutoLootBool)
 	{
-		if(ItemCount() > 0 && !UsingPot && !UsingAutoSkill)
+		if(GetItemCount() > 0 && !UsingPot && !UsingAutoSkill)
 		{
 			MapleHWND = FindWindow(TEXT("MapleStoryClass"), 0);
 			LPARAM lParam = (MapVirtualKey(UserSetLootKey, 0) << 16) + 1;
@@ -162,7 +147,7 @@ void AutoAttack()
 {
 	while(AutoAttackBool)
 	{
-		if(MobsCount() > 0 && !UsingPot && !UsingAutoSkill && !CCing){
+		if(GetMobsCount() > 0 && !UsingPot && !UsingAutoSkill && !CCing){
 			MapleHWND = FindWindow(TEXT("MapleStoryClass"), 0);
 			LPARAM lParam = (MapVirtualKey(UserSetAttackKey, 0) << 16) + 1;
 			PostMessage(MapleHWND, WM_KEYDOWN, UserSetAttackKey, lParam);
@@ -248,7 +233,7 @@ void AutoSkill4()
 }
 void CatchABreath()
 {
-	while(Breath() > 0)
+	while(GetBreathValue() > 0)
 	{
 		Sleep(100);
 	}
@@ -257,10 +242,10 @@ void AutoCCPeople()
 {
 	while(CCPeopleBool)
 	{
-		if(PeopleCount() >= CCPeopleInt)
+		if(GetPeopleCount() >= CCPeopleInt)
 		{
 			CCing = true;
-			while(Breath() > 0)
+			while(GetBreathValue() > 0)
 				CatchABreath();
 				Sleep(100);
 			NextChannel();
@@ -275,7 +260,7 @@ void AutoCCTimed()
 	{
 		Sleep(CCTimedInt * 1000);
 		CCing = true;
-		while(Breath() > 0)
+		while(GetBreathValue() > 0)
 			CatchABreath();
 		Sleep(100);
 		NextChannel();
@@ -287,10 +272,10 @@ void AutoCCAttacks()
 {
 	while(CCAttacksBool)
 	{
-		if(AttackCount() >= CCAttacksInt)
+		if(GetAttackCount() >= CCAttacksInt)
 		{
 			CCing = true;
-			while(Breath() > 0)
+			while(GetBreathValue() > 0)
 				CatchABreath();
 				Sleep(100);
 			NextChannel();
@@ -303,7 +288,7 @@ void UnlimitedAttack()
 {
 	while(UnlimitedAttackBool)
 	{
-		if(AttackCount() > 90)
+		if(GetAttackCount() > 90)
 		{
 			MessageBoxA(0,"Bigger then 90",0,0);
 			UsingPot = true;
@@ -432,12 +417,6 @@ void MainForm::FMACheckBox_CheckedChanged(System::Object^  sender, System::Event
 void MainForm::AutoAggroCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	FMA.Enable(this->AutoAggroCheckBox->Checked);
-}
-void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	SPControl.Enable(this->SPControlCheckBox->Checked);
-	SPControlXCoord = CharX();
-	SPControlYCoord = CharY();
 }
 
 #pragma endregion
@@ -578,34 +557,29 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 }
 void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
-	this->MobCountLabel->Text =		"Mobs: "	+ MobsCount();
-	this->PeopleCountLabel->Text =	"People: "	+ PeopleCount();
-	this->CharPosLabel->Text =		"CharPos: ("+ CharX() +","+ CharY()+")";
-	this->ItemCountLabel->Text =	"Items: "	+ ItemCount();
-	this->AttackCountLabel->Text =	"Attacks: " + AttackCount();
+	this->MobCountLabel->Text =		"Mobs: "	+ GetMobsCount();
+	this->PeopleCountLabel->Text =	"People: "	+ GetPeopleCount();
+	this->CharPosLabel->Text =		"CharPos: ("+ GetCharacterX() + ","+ GetCharacterY()+")";
+	this->ItemCountLabel->Text =	"Items: "	+ GetItemCount();
+	this->AttackCountLabel->Text =	"Attacks: " + GetAttackCount();
 	this->AttackDelayLabel->Text =	this->AttackTrackBar->Value + " ms";
-	this->TubiPointerLabel->Text =	"Tubi: "	+Tubi();
-	this->BreathLabel->Text =		"Breath: "	+ Breath();
-	
+	this->TubiPointerLabel->Text =	"Tubi: "	+ GetTubiValue();
+	this->BreathLabel->Text =		"Breath: "	+ GetBreathValue();
+
 #pragma region HP/MP/EXP Bars Drawing
-	CharHP();
-	if(CharHP() >= MaxHP)	MaxHP = CharHP();
-	CharMP();
-	if(CharMP() >= MaxMP)	MaxMP = CharMP();
-	CharEXP();
+	if(GetCharacterHP() >= MaxHP)	MaxHP = GetCharacterHP();
+	if(GetCharacterMP() >= MaxMP)	MaxMP = GetCharacterMP();
 	
-	this->HPLabel->Text = "HP: " + CharHP() + "/" + MaxHP;
-	this->MPLabel->Text = "MP: " + CharMP() + "/" + MaxMP;
-	this->EXPLabel->Text = "EXP: " + CharEXP().ToString("f2") +"%";
+	this->HPLabel->Text = "HP: " + GetCharacterHP() + "/" + MaxHP;
+	this->MPLabel->Text = "MP: " + GetCharacterMP() + "/" + MaxMP;
+	this->EXPLabel->Text = "EXP: " + GetCharacterEXP().ToString("f2") +"%";
 	
-
 	int lengtOfBars  = 223;
-
-	double HPBarLength = ((double)CharHP()/(double)MaxHP) * lengtOfBars;
+	double HPBarLength = ((double)GetCharacterHP()/(double)MaxHP) * lengtOfBars;
 	this->HPForeground->Width = HPBarLength;
-	double MPBarLength = ((double)CharMP()/(double)MaxMP) * lengtOfBars;
+	double MPBarLength = ((double)GetCharacterMP()/(double)MaxMP) * lengtOfBars;
 	this->MPForeground->Width = MPBarLength;
-	double EXPBarLength = (CharEXP()/100) * lengtOfBars;
+	double EXPBarLength = (GetCharacterEXP()/100) * lengtOfBars;
 	this->EXPForeground->Width = EXPBarLength;
 #pragma endregion
 }
@@ -749,7 +723,16 @@ void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventA
 		}
 	}
 }
-
+void MainForm::SPControlGetCurrentLocation_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	this->SPControlMapIDTextBox->Text = Convert::ToString(	GetMapID());
+	this->SPControlXTextBox->Text = Convert::ToString(		GetCharacterX());
+	this->SPControlYTextBox->Text = Convert::ToString(		GetCharacterY());
+}
+void MainForm::SPControlEnableCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	SPControl.Enable(this->SPControlEnableCheckBox->Checked);
+}
 void MainForm::RefreshSPControlListView()
 {
 	SPControlListView->Items->Clear();

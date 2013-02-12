@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WatyBotRevamp", "WatyBotRevamp\WatyBotRevamp.vcxproj", "{E5812690-3792-4563-90DD-CABC4B18A6DB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{26B0D4D4-27B8-4A92-B453-732E7D44348A} = {26B0D4D4-27B8-4A92-B453-732E7D44348A}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WatyBotInjector", "WatyBotInjector\WatyBotInjector.vcxproj", "{26B0D4D4-27B8-4A92-B453-732E7D44348A}"
 EndProject

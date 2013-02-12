@@ -1,4 +1,6 @@
-#pragma region Hacks
+#define CodeCave(name) void __declspec(naked) Cave##name(){_asm
+#define EndCodeCave }
+
 ////////////////////////////////////////////////////////////Jump Down Anywhere///////////////////////////////////////////////////////////////
 BYTE bJDA1[] = {0xEB};
 BYTE bJDA2[] = {0xEB};
@@ -137,16 +139,18 @@ DWORD Miss7Addy = 0x00B9B365;
 DWORD Miss7Return = Miss7Addy + 7;
 DWORD Miss7ReturnNoKB = Miss7Return + 0x30;
 CodeCave(SevenMiss)
-	inc [Miss7Counter]
-	cmp dword ptr [Miss7Counter],0x07																									
-   jg Reset
-   mov dword ptr [esp+0x00000118],00
-   jmp dword ptr [Miss7ReturnNoKB]
+{
+		inc [Miss7Counter]
+		cmp dword ptr [Miss7Counter],0x07																									
+		jg Reset
+		mov dword ptr [esp+0x00000118],0x00
+		jmp dword ptr [Miss7ReturnNoKB]
 
 Reset:
-	mov [Miss7Counter],00
-	mov esi,[esp+0x0000011C]
-	jmp dword ptr [Miss7Return]
+		mov [Miss7Counter],00
+		mov esi,[esp+0x0000011C]
+		jmp dword ptr [Miss7Return]
+}
 EndCodeCave
 CMemory Miss7GodMode(Miss7Addy, CaveSevenMiss, 2, true);
 
@@ -154,13 +158,15 @@ CMemory Miss7GodMode(Miss7Addy, CaveSevenMiss, 2, true);
 DWORD FusionAttackAddy = 0x006FFBB2;
 DWORD FusionAttackReturn = FusionAttackAddy + 8;
 CodeCave(FusionAttack)
-Hook:
-mov dword ptr [ecx+eax*4],esi
-inc eax
-cmp eax,[esp+0x64]																														
-jl Hook
-mov [esp+0x18],eax
-jmp [FusionAttackReturn]
+{
+	Hook:
+	mov dword ptr [ecx+eax*4],esi
+	inc eax
+	cmp eax,[esp+0x64]
+	jl Hook
+	mov [esp+0x18],eax
+	jmp [FusionAttackReturn]
+}
 EndCodeCave
 CMemory FusionAttack(FusionAttackAddy, CaveFusionAttack, 3, true);
 
@@ -174,25 +180,36 @@ DWORD AutoAggroAddy = 0x00C2761f;
 DWORD AutoAggroRet = AutoAggroAddy + 5;
 DWORD AutoAggroCal = 0x00c1e110;
 CodeCave(AutoAggro)
+{
 	call AutoAggroCal
 	mov edx,[0x011ADD04]
 	mov edx,[edx+0x29D0]
 	mov edx,[edx+0x0C]
 	mov [esi+0x2B0],edx
-	jmp AutoAggroRet																													
+	jmp AutoAggroRet
+}
 EndCodeCave
 CMemory AutoAggro(AutoAggroAddy, CaveAutoAggro, 0, true);
 
 ///////////////////////////////////////////////////////////Spawn Control/////////////////////////////////////////////////////////////////////
 DWORD SPControlAddy = 0x00B8420A;
 DWORD SPControlRet = SPControlAddy + 6;
-DWORD SPControlXCoord = 0x0;
-DWORD SPControlYCoord = 0x0;
 CodeCave(SPControl)
+{
+	push eax
+	call SPControlGetCoords
+	cmp eax,FALSE
+	pop eax
+	je SpawnNormal
+
+SpawnControl:
 	mov ebx, [SPControlXCoord]
 	mov ebp, [SPControlYCoord]
 	jmp dword ptr SPControlRet
+
+SpawnNormal:
+	//mov edi
+}
 EndCodeCave
 CMemory SPControl(SPControlAddy, CaveSPControl, 1, true);
-
 #pragma endregion 

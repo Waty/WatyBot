@@ -2,24 +2,6 @@
 #define SendKey(KeyPress) PostMessage(MapleHWND, WM_KEYDOWN, KeyPress, (MapVirtualKey(KeyPress, 0) << 16) + 1);
 #define NewThread(Function) CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)&Function, NULL, NULL, NULL)
 #define jmp(frm, to) (int)(((int)to - (int)frm) - 5);
-#define CodeCave(name) void __declspec(naked) Cave##name(){_asm{
-#define EndCodeCave }}
-
-unsigned long ReadPointer(unsigned long ulBase, int iOffset)
-{
-	__try { return *(unsigned long*)(*(unsigned long*)ulBase + iOffset); }
-	__except (EXCEPTION_EXECUTE_HANDLER) { return 0; }
-}
-double ReadDoublePointer(DWORD ulBase, INT iOffset)
-{
-      __try { return (*(DOUBLE*)(*(DWORD*)ulBase + iOffset)); }
-      __except (EXCEPTION_EXECUTE_HANDLER) { return 0.0; }
-}
-void WritePointer(unsigned long ulBase, int iOffset, int iValue)
-{
-  __try { *(int*)(*(unsigned long*)ulBase + iOffset) = iValue;}
-  __except (EXCEPTION_EXECUTE_HANDLER) {}
-}
 
 bool CCing;
 int CCPeopleInt, CCTimedInt, CCAttacksInt;

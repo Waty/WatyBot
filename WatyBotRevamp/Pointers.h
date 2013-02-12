@@ -1,3 +1,4 @@
+#include <Windows.h>
 #define CharBasePtr 0x011C8964
 #define AttackCountOffset 0x7004
 #define AttackXOffset 0x6FFC
@@ -58,3 +59,20 @@
 #define SendAddy 0x004C9780
 #define SendClassAddy 0x004901F7
 #define ClientSocketAddy 0x011C8A58
+
+unsigned long ReadPointer(unsigned long ulBase, int iOffset);
+double ReadDoublePointer(DWORD ulBase, INT iOffset);
+void WritePointer(unsigned long ulBase, int iOffset, int iValue);
+
+int GetMobsCount();
+int GetItemCount();
+int GetPeopleCount();
+int GetCharacterX();
+int GetCharacterY();
+int GetCharacterHP();
+int GetCharacterMP();
+double GetCharacterEXP();
+int GetMapID();
+int GetAttackCount();
+int GetTubiValue();
+int GetBreathValue();
