@@ -36,9 +36,9 @@ void SPControl::ReadXML(string filename)
 	read_xml(file, pt);
 	if(!pt.empty())
 	{
-		BOOST_FOREACH( ptree::value_type const& v, pt.get_child("packetlist"))
+		BOOST_FOREACH( ptree::value_type const& v, pt.get_child("spcontrol"))
 		{
-			if(v.first == "packet")
+			if(v.first == "location")
 			{
 				SPControlStruct SP;
 				SP.mapName = v.second.get<string>("mapname");
@@ -59,7 +59,7 @@ void SPControl::WriteXML(string filename)
 
 	BOOST_FOREACH( SPControlStruct SP, SPControlv )
 	{
-        ptree & node = pt.add("packetlist.packet", "");
+        ptree & node = pt.add("spcontrol.location", "");
 		node.put("mapname", SP.mapName);
 		node.put("mapid", SP.mapID);
 		node.put("x", SP.x);
