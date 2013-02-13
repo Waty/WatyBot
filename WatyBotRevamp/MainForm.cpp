@@ -537,7 +537,7 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	this->AutoSkill2ComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill3ComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill4ComboBox->Items->AddRange(Globals::KeyNames);
-
+	if(!Directory::Exists("WatyBot"))Directory::CreateDirectory("WatyBot");
 	if(File::Exists(marshal_as<String^>(PacketFileName))) ReadPacketXML(PacketFileName);
 	RefreshComboBoxes();
 	if(File::Exists(marshal_as<String^>(SPControlFileName))) SPControl::ReadXML(SPControlFileName);
