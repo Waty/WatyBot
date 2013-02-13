@@ -301,111 +301,111 @@ void AutoCCAttacks()
 #pragma region HackCheckBoxes
 void MainForm::FullMobDisarmCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	FullMobDisarm.Enable(this->FullMobDisarmCheckBox->Checked);
+	Hacks::FullMobDisarm.Enable(this->FullMobDisarmCheckBox->Checked);
 }
 void MainForm::PinTyperCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	PinTyper.Enable(this->PinTyperCheckBox->Checked);
+	Hacks::PinTyper.Enable(this->PinTyperCheckBox->Checked);
 }
 void MainForm::NoCharKBCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	NoCharKB.Enable(this->NoCharKBCheckBox->Checked);
+	Hacks::NoCharKB.Enable(this->NoCharKBCheckBox->Checked);
 }
 void MainForm::JumpDownAnywhereCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	JDA.Enable(this->JumpDownAnywhereCheckBox->Checked);
+	Hacks::JDA.Enable(this->JumpDownAnywhereCheckBox->Checked);
 }
 void MainForm::FastMobsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	FastMobs.Enable(this->FastMobsCheckBox->Checked);
+	Hacks::FastMobs.Enable(this->FastMobsCheckBox->Checked);
 }
 void MainForm::PerfectLootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	PerfectLoot.Enable(this->PerfectLootCheckBox->Checked);
+	Hacks::PerfectLoot.Enable(this->PerfectLootCheckBox->Checked);
 }
 void MainForm::NDAllAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	NDAllAttacks.Enable(this->NDAllAttacksCheckBox->Checked);
+	Hacks::NDAllAttacks.Enable(this->NDAllAttacksCheckBox->Checked);
 }
 void MainForm::UnlimitedMorphCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	UnlimitedMorph.Enable(this->UnlimitedMorphCheckBox->Checked);
+	Hacks::UnlimitedMorph.Enable(this->UnlimitedMorphCheckBox->Checked);
 }
 void MainForm::HideDamageCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	HideDamage.Enable(this->HideDamageCheckBox->Checked);
+	Hacks::HideDamage.Enable(this->HideDamageCheckBox->Checked);
 }
 void MainForm::CPUHackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	CPUHack.Enable(this->CPUHackCheckBox->Checked);
+	Hacks::CPUHack.Enable(this->CPUHackCheckBox->Checked);
 }
 void MainForm::NDMiningCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	NDMining.Enable(this->NDMiningCheckBox->Checked);
+	Hacks::NDMining.Enable(this->NDMiningCheckBox->Checked);
 }
 void MainForm::UncensorCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Uncensor.Enable(this->UncensorCheckBox->Checked);
+	Hacks::Uncensor.Enable(this->UncensorCheckBox->Checked);
 }
 void MainForm::SevenMissCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Miss7GodMode.Enable(this->SevenMissCheckBox->Checked);
+	Hacks::Miss7GodMode.Enable(this->SevenMissCheckBox->Checked);
 }
 void MainForm::NoSkillMovementCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	NoSkillMovement.Enable(this->NoSkillMovementCheckBox->Checked);
+	Hacks::NoSkillMovement.Enable(this->NoSkillMovementCheckBox->Checked);
 }
 void MainForm::NoSwearsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	NoSwears.Enable(this->NoSwearsCheckBox->Checked);
+	Hacks::NoSwears.Enable(this->NoSwearsCheckBox->Checked);
 }
 void MainForm::VacRightCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	VacRight.Enable(this->VacRightCheckBox->Checked);
+	Hacks::VacRight.Enable(this->VacRightCheckBox->Checked);
 }
 void MainForm::FusionAttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	FusionAttack.Enable(this->FusionAttackCheckBox->Checked);
+	Hacks::FusionAttack.Enable(this->FusionAttackCheckBox->Checked);
 }	
 void MainForm::NoBackGroundCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	NoBackground.Enable(this->NoBackGroundCheckBox->Checked);
+	Hacks::NoBackground.Enable(this->NoBackGroundCheckBox->Checked);
 }
 void MainForm::NoMobsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	NoMobs.Enable(this->NoMobsCheckBox->Checked);
+	Hacks::NoMobs.Enable(this->NoMobsCheckBox->Checked);
 }
 void MainForm::MobLagCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	MobLag.Enable(this->MobLagCheckBox->Checked);
+	Hacks::MobLag.Enable(this->MobLagCheckBox->Checked);
 }
 void MainForm::InstantAirLootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	InstantAirLoot.Enable(this->InstantAirLootCheckBox->Checked);
+	Hacks::InstantAirLoot.Enable(this->InstantAirLootCheckBox->Checked);
 }
 void MainForm::RainingMobsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	RainingMobs.Enable(this->RainingMobsCheckBox->Checked);
+	Hacks::RainingMobs.Enable(this->RainingMobsCheckBox->Checked);
 }
 void MainForm::NDMilleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	NDMille.Enable(this->NDMilleCheckBox->Checked);
+	Hacks::NDMille.Enable(this->NDMilleCheckBox->Checked);
 }
 void MainForm::FLACCCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	FLACC.Enable(this->FLACCCheckBox->Checked);
+	Hacks::FLACC.Enable(this->FLACCCheckBox->Checked);
 }
 void MainForm::FMACheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	FMA.Enable(this->FMACheckBox->Checked);
+	Hacks::FMA.Enable(this->FMACheckBox->Checked);
 }
 void MainForm::AutoAggroCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	FMA.Enable(this->AutoAggroCheckBox->Checked);
+	Hacks::AutoAggro.Enable(this->AutoAggroCheckBox->Checked);
 }
 void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	SPControlCodeCave.Enable(this->SPControlCheckBox->Checked);
+	Hacks::SPControlCodeCave.Enable(this->SPControlCheckBox->Checked);
 }
 
 #pragma endregion
