@@ -27,9 +27,9 @@ bool inject(DWORD pID, string DLLFileName)
 	if(dwAttr == 0xFFFFFFFF)
 	{
 		if (GetLastError() == ERROR_FILE_NOT_FOUND)
-			cout << path.c_str() << " not found!" << endl << "Trying to continue with next dll";
+			cout << path.c_str() << " not found!" << endl << "Trying to continue with next dll" << endl;
 		else
-			cout << "Wild unknown error appeared!";
+			cout << "Wild unknown error appeared!" << endl;
 
 		return false;
 	}
@@ -100,7 +100,7 @@ bool FindProcess()
 
 		if (!strcmp(szBuffer,"StartUpDlgClass"))
 		{
-			cout << "Found StartUp dialog! Injecting now...";
+			cout << "Found StartUp dialog! Injecting MSCRC...." << endl;
 			bool valid = inject(dwProcessId, "/MSCRC.dll");
 			Sleep(1000);
 			valid = inject(dwProcessId, "/WatyBot.dll");
@@ -130,7 +130,7 @@ int main()
 {
 	cout << "WatyBotInjector:" << endl;
 	cout << "You need to have [D.R.T]'s MSCRC.dll, WatyBot.dll and this program in the Maplestory folder!!!!" << endl;
-	cout << "   Full credits to \"TheFox\"" << endl << endl;
+	cout << "Full credits to \"TheFox\"" << endl << endl;
 	if(!IsElevated())
 	{
 		cout << "Run me as administrator!" << endl;
