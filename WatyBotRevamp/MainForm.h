@@ -42,9 +42,9 @@ namespace WatyBotRevamp {
 	protected: 
 	private: System::Windows::Forms::TabPage^  AutoBotTab;
 	private: System::Windows::Forms::TabPage^  HacksTab;
-	private: System::Windows::Forms::GroupBox^  CharacterHacksGroupBox;
 
-	private: System::Windows::Forms::CheckBox^  PinTyperCheckBox;
+
+
 
 	private: System::Windows::Forms::Timer^  StatsTimer;
 
@@ -61,25 +61,25 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::PictureBox^  HPForeground;
 	private: System::Windows::Forms::PictureBox^  EXPBackground;
 
-	private: System::Windows::Forms::GroupBox^  MobHacksGroupBox;
 
-	private: System::Windows::Forms::CheckBox^  FullMobDisarmCheckBox;
-	private: System::Windows::Forms::GroupBox^  GeneralHacksGroupBox;
-	private: System::Windows::Forms::CheckBox^  NoCharKBCheckBox;
-	private: System::Windows::Forms::CheckBox^  JumpDownAnywhereCheckBox;
-	private: System::Windows::Forms::CheckBox^  FastMobsCheckBox;
-	private: System::Windows::Forms::CheckBox^  PerfectLootCheckBox;
-	private: System::Windows::Forms::CheckBox^  NDAllAttacksCheckBox;
-	private: System::Windows::Forms::CheckBox^  UnlimitedMorphCheckBox;
-	private: System::Windows::Forms::CheckBox^  HideDamageCheckBox;
-	private: System::Windows::Forms::CheckBox^  CPUHackCheckBox;
 
-	private: System::Windows::Forms::CheckBox^  NDMiningCheckBox;
+
+
+
+
+
+
+
+
+
+
+
+
 	private: System::Windows::Forms::CheckBox^  HPCheckBox;
 
 	private: System::Windows::Forms::ComboBox^  HPComboBox;
 	private: System::Windows::Forms::TextBox^  HPTextBox;
-	private: System::Windows::Forms::CheckBox^  UncensorCheckBox;
+
 
 	private: System::Windows::Forms::ComboBox^  MPComboBox;
 	private: System::Windows::Forms::TextBox^  MPTextBox;
@@ -122,8 +122,8 @@ private: System::Windows::Forms::ComboBox^  AutoSkill2ComboBox;
 private: System::Windows::Forms::Label^  TubiPointerLabel;
 private: System::Windows::Forms::CheckBox^  PointerTubiCheckBox;
 
-private: System::Windows::Forms::CheckBox^  SevenMissCheckBox;
-private: System::Windows::Forms::CheckBox^  NoSkillMovementCheckBox;
+
+
 private: System::Windows::Forms::Label^  BreathLabel;
 private: System::Windows::Forms::CheckBox^  CCPeopleCheckBox;
 
@@ -140,20 +140,6 @@ private: System::Windows::Forms::TextBox^  CCPeopleTextBox;
 
 
 
-
-
-
-private: System::Windows::Forms::CheckBox^  NoSwearsCheckBox;
-private: System::Windows::Forms::CheckBox^  VacRightCheckBox;
-private: System::Windows::Forms::CheckBox^  FusionAttackCheckBox;
-private: System::Windows::Forms::CheckBox^  NoBackGroundCheckBox;
-
-private: System::Windows::Forms::CheckBox^  NoMobsCheckBox;
-private: System::Windows::Forms::CheckBox^  MobLagCheckBox;
-private: System::Windows::Forms::CheckBox^  InstantAirLootCheckBox;
-private: System::Windows::Forms::CheckBox^  RainingMobsCheckBox;
-private: System::Windows::Forms::CheckBox^  NDMilleCheckBox;
-private: System::Windows::Forms::CheckBox^  FLACCCheckBox;
 private: System::Windows::Forms::TabPage^  PacketSenderTab;
 private: System::Windows::Forms::Button^  SendPacketButton;
 
@@ -169,9 +155,7 @@ private: System::Windows::Forms::Label^  SpamPacketTimesLabel;
 private: System::Windows::Forms::TextBox^  SpamPacketTimesTextBox;
 private: System::Windows::Forms::Label^  SpamPacketsDelayLabel;
 
-
-
-
+		 
 private: System::Windows::Forms::TextBox^  SpamPacketsDelayTextBox;
 
 private: System::Windows::Forms::Button^  SpamsPacketButton;
@@ -180,40 +164,31 @@ private: System::Windows::Forms::Button^  SpamsPacketButton;
 private: System::Windows::Forms::GroupBox^  DeletePacketsGroupBox;
 private: System::Windows::Forms::ComboBox^  DeletePacketComboBox;
 private: System::Windows::Forms::Button^  DeletePacketButton;
-private: System::Windows::Forms::CheckBox^  FMACheckBox;
+
 
 private: System::Windows::Forms::GroupBox^  EditPacketGroupBox;
 private: System::Windows::Forms::Button^  SavePacketEditButton;
 private: System::Windows::Forms::TextBox^  EditPacketPacketTextBox;
 private: System::Windows::Forms::TextBox^  EditPacketNameTextBox;
 private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
-private: System::Windows::Forms::CheckBox^  AutoAggroCheckBox;
+
 private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 private: System::Windows::Forms::TabPage^  SPControlTabPage;
 private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
 private: System::Windows::Forms::TextBox^  CCAttacksTextBox;
-
-
-
+		 
 private: System::Windows::Forms::CheckBox^  CCAttacksCheckBox;
-
-
+		 
 private: System::Windows::Forms::TextBox^  CCTimedTextBox;
-
-
-
+		 
 private: System::Windows::Forms::CheckBox^  CCTimedCheckBox;
 private: System::Windows::Forms::Label^  CCTimedLabel;
-
-
-
-
+		 
 private: System::Windows::Forms::Label^  CCPeopleLabel;
 private: System::Windows::Forms::Label^  CCAttacksLabel;
 private: System::Windows::Forms::Button^  SavePacketsButton;
 private: System::Windows::Forms::ListView^  SPControlListView;
-
-
+		 
 private: System::Windows::Forms::ColumnHeader^  HeaderMapName;
 private: System::Windows::Forms::ColumnHeader^  HeaderMapID;
 private: System::Windows::Forms::ColumnHeader^  HeaderX;
@@ -231,12 +206,23 @@ private: System::Windows::Forms::Button^  SPControlAddButton;
 private: System::Windows::Forms::ContextMenuStrip^  SPControlContextMenu;
 private: System::Windows::Forms::ToolStripMenuItem^  deletePacketToolStripMenuItem;
 private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
+private: System::Windows::Forms::GroupBox^  MobHacks;
+private: System::Windows::Forms::CheckBox^  cbPerfectLoot;
+private: System::Windows::Forms::CheckBox^  cbFusionAttack;
+private: System::Windows::Forms::GroupBox^  gbMiscHacks;
+private: System::Windows::Forms::CheckBox^  cbJDA;
+private: System::Windows::Forms::CheckBox^  cbNoBG;
+private: System::Windows::Forms::GroupBox^  gbCharHacks;
+private: System::Windows::Forms::CheckBox^  cbInstantAirLoot;
+private: System::Windows::Forms::CheckBox^  cbVacRight;
 
-
-
-
-
-
+private: System::Windows::Forms::CheckBox^  cbJumpRight;
+private: System::Windows::Forms::CheckBox^  cbWalkRight;
+private: System::Windows::Forms::CheckBox^  cbPinTyper;
+private: System::Windows::Forms::CheckBox^  cbNoKB;
+private: System::Windows::Forms::CheckBox^  cbMobDisarm;
+private: System::Windows::Forms::CheckBox^  cbDojangGodmode;
+private: System::Windows::Forms::CheckBox^  cbUnlimitedMorph;
 
 
 	private: System::ComponentModel::IContainer^  components;
@@ -308,35 +294,21 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->MPBackground = (gcnew System::Windows::Forms::PictureBox());
 			this->HPBackground = (gcnew System::Windows::Forms::PictureBox());
 			this->HacksTab = (gcnew System::Windows::Forms::TabPage());
-			this->GeneralHacksGroupBox = (gcnew System::Windows::Forms::GroupBox());
-			this->FLACCCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->NoBackGroundCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->UncensorCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->CPUHackCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->HideDamageCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->PinTyperCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->MobHacksGroupBox = (gcnew System::Windows::Forms::GroupBox());
-			this->AutoAggroCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->RainingMobsCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->MobLagCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->NoMobsCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->VacRightCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->FastMobsCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->FullMobDisarmCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->CharacterHacksGroupBox = (gcnew System::Windows::Forms::GroupBox());
-			this->FMACheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->NDMilleCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->InstantAirLootCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->FusionAttackCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->NoSwearsCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->NoSkillMovementCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->UnlimitedMorphCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->NDAllAttacksCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->NoCharKBCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->SevenMissCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->NDMiningCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->PerfectLootCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->JumpDownAnywhereCheckBox = (gcnew System::Windows::Forms::CheckBox());
+			this->gbMiscHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbPinTyper = (gcnew System::Windows::Forms::CheckBox());
+			this->cbJDA = (gcnew System::Windows::Forms::CheckBox());
+			this->cbNoBG = (gcnew System::Windows::Forms::CheckBox());
+			this->gbCharHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbDojangGodmode = (gcnew System::Windows::Forms::CheckBox());
+			this->cbNoKB = (gcnew System::Windows::Forms::CheckBox());
+			this->cbInstantAirLoot = (gcnew System::Windows::Forms::CheckBox());
+			this->cbFusionAttack = (gcnew System::Windows::Forms::CheckBox());
+			this->cbPerfectLoot = (gcnew System::Windows::Forms::CheckBox());
+			this->MobHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbMobDisarm = (gcnew System::Windows::Forms::CheckBox());
+			this->cbJumpRight = (gcnew System::Windows::Forms::CheckBox());
+			this->cbWalkRight = (gcnew System::Windows::Forms::CheckBox());
+			this->cbVacRight = (gcnew System::Windows::Forms::CheckBox());
 			this->PacketSenderTab = (gcnew System::Windows::Forms::TabPage());
 			this->SavePacketsButton = (gcnew System::Windows::Forms::Button());
 			this->EditPacketGroupBox = (gcnew System::Windows::Forms::GroupBox());
@@ -392,6 +364,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SpamPacketsTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->cbUnlimitedMorph = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -403,9 +376,9 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->MPBackground))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->HPBackground))->BeginInit();
 			this->HacksTab->SuspendLayout();
-			this->GeneralHacksGroupBox->SuspendLayout();
-			this->MobHacksGroupBox->SuspendLayout();
-			this->CharacterHacksGroupBox->SuspendLayout();
+			this->gbMiscHacks->SuspendLayout();
+			this->gbCharHacks->SuspendLayout();
+			this->MobHacks->SuspendLayout();
 			this->PacketSenderTab->SuspendLayout();
 			this->EditPacketGroupBox->SuspendLayout();
 			this->DeletePacketsGroupBox->SuspendLayout();
@@ -528,7 +501,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->FixStatsButton->Location = System::Drawing::Point(6, 300);
 			this->FixStatsButton->Name = L"FixStatsButton";
 			this->FixStatsButton->Size = System::Drawing::Size(311, 23);
-			this->FixStatsButton->TabIndex = 32;
+			this->FixStatsButton->TabIndex = 31;
 			this->FixStatsButton->Text = L"Fix Stats";
 			this->FixStatsButton->UseVisualStyleBackColor = true;
 			this->FixStatsButton->Click += gcnew System::EventHandler(this, &MainForm::FixStatsButton_Click);
@@ -538,8 +511,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->CCAttacksTextBox->Location = System::Drawing::Point(91, 275);
 			this->CCAttacksTextBox->Name = L"CCAttacksTextBox";
 			this->CCAttacksTextBox->Size = System::Drawing::Size(102, 20);
-			this->CCAttacksTextBox->TabIndex = 53;
-			this->CCAttacksTextBox->Text = L"90";
+			this->CCAttacksTextBox->TabIndex = 30;
 			// 
 			// CCAttacksCheckBox
 			// 
@@ -547,7 +519,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->CCAttacksCheckBox->Location = System::Drawing::Point(6, 277);
 			this->CCAttacksCheckBox->Name = L"CCAttacksCheckBox";
 			this->CCAttacksCheckBox->Size = System::Drawing::Size(65, 17);
-			this->CCAttacksCheckBox->TabIndex = 52;
+			this->CCAttacksCheckBox->TabIndex = 29;
 			this->CCAttacksCheckBox->Text = L"Auto CC";
 			this->CCAttacksCheckBox->UseVisualStyleBackColor = true;
 			this->CCAttacksCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCAttacksCheckBox_CheckedChanged);
@@ -557,8 +529,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->CCTimedTextBox->Location = System::Drawing::Point(91, 248);
 			this->CCTimedTextBox->Name = L"CCTimedTextBox";
 			this->CCTimedTextBox->Size = System::Drawing::Size(102, 20);
-			this->CCTimedTextBox->TabIndex = 50;
-			this->CCTimedTextBox->Text = L"50";
+			this->CCTimedTextBox->TabIndex = 28;
 			// 
 			// CCTimedCheckBox
 			// 
@@ -566,7 +537,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->CCTimedCheckBox->Location = System::Drawing::Point(6, 250);
 			this->CCTimedCheckBox->Name = L"CCTimedCheckBox";
 			this->CCTimedCheckBox->Size = System::Drawing::Size(65, 17);
-			this->CCTimedCheckBox->TabIndex = 46;
+			this->CCTimedCheckBox->TabIndex = 27;
 			this->CCTimedCheckBox->Text = L"Auto CC";
 			this->CCTimedCheckBox->UseVisualStyleBackColor = true;
 			this->CCTimedCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCTimeCheckBox_CheckedChanged);
@@ -578,15 +549,14 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->AutoSkill4ComboBox->Location = System::Drawing::Point(202, 194);
 			this->AutoSkill4ComboBox->Name = L"AutoSkill4ComboBox";
 			this->AutoSkill4ComboBox->Size = System::Drawing::Size(115, 21);
-			this->AutoSkill4ComboBox->TabIndex = 42;
+			this->AutoSkill4ComboBox->TabIndex = 24;
 			// 
 			// CCPeopleTextBox
 			// 
 			this->CCPeopleTextBox->Location = System::Drawing::Point(91, 221);
 			this->CCPeopleTextBox->Name = L"CCPeopleTextBox";
 			this->CCPeopleTextBox->Size = System::Drawing::Size(102, 20);
-			this->CCPeopleTextBox->TabIndex = 48;
-			this->CCPeopleTextBox->Text = L"1";
+			this->CCPeopleTextBox->TabIndex = 26;
 			// 
 			// PointerTubiCheckBox
 			// 
@@ -594,7 +564,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->PointerTubiCheckBox->Location = System::Drawing::Point(91, 45);
 			this->PointerTubiCheckBox->Name = L"PointerTubiCheckBox";
 			this->PointerTubiCheckBox->Size = System::Drawing::Size(83, 17);
-			this->PointerTubiCheckBox->TabIndex = 45;
+			this->PointerTubiCheckBox->TabIndex = 5;
 			this->PointerTubiCheckBox->Text = L"Pointer Tubi";
 			this->PointerTubiCheckBox->UseVisualStyleBackColor = true;
 			this->PointerTubiCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::PointerTubiCheckBox_CheckedChanged);
@@ -605,7 +575,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->AutoSkill4CheckBox->Location = System::Drawing::Point(6, 196);
 			this->AutoSkill4CheckBox->Name = L"AutoSkill4CheckBox";
 			this->AutoSkill4CheckBox->Size = System::Drawing::Size(79, 17);
-			this->AutoSkill4CheckBox->TabIndex = 44;
+			this->AutoSkill4CheckBox->TabIndex = 22;
 			this->AutoSkill4CheckBox->Text = L"Auto Skill 4";
 			this->AutoSkill4CheckBox->UseVisualStyleBackColor = true;
 			this->AutoSkill4CheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill4CheckBox_CheckedChanged);
@@ -616,7 +586,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->CCPeopleCheckBox->Location = System::Drawing::Point(6, 223);
 			this->CCPeopleCheckBox->Name = L"CCPeopleCheckBox";
 			this->CCPeopleCheckBox->Size = System::Drawing::Size(65, 17);
-			this->CCPeopleCheckBox->TabIndex = 46;
+			this->CCPeopleCheckBox->TabIndex = 25;
 			this->CCPeopleCheckBox->Text = L"Auto CC";
 			this->CCPeopleCheckBox->UseVisualStyleBackColor = true;
 			this->CCPeopleCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCPeopleCheckBox_CheckedChanged);
@@ -627,7 +597,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->AutoSkill4TextBox->MaxLength = 10;
 			this->AutoSkill4TextBox->Name = L"AutoSkill4TextBox";
 			this->AutoSkill4TextBox->Size = System::Drawing::Size(102, 20);
-			this->AutoSkill4TextBox->TabIndex = 43;
+			this->AutoSkill4TextBox->TabIndex = 23;
 			// 
 			// AutoSkill3CheckBox
 			// 
@@ -635,7 +605,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->AutoSkill3CheckBox->Location = System::Drawing::Point(6, 170);
 			this->AutoSkill3CheckBox->Name = L"AutoSkill3CheckBox";
 			this->AutoSkill3CheckBox->Size = System::Drawing::Size(79, 17);
-			this->AutoSkill3CheckBox->TabIndex = 41;
+			this->AutoSkill3CheckBox->TabIndex = 19;
 			this->AutoSkill3CheckBox->Text = L"Auto Skill 3";
 			this->AutoSkill3CheckBox->UseVisualStyleBackColor = true;
 			this->AutoSkill3CheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill3CheckBox_CheckedChanged);
@@ -646,7 +616,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->AutoSkill3TextBox->MaxLength = 10;
 			this->AutoSkill3TextBox->Name = L"AutoSkill3TextBox";
 			this->AutoSkill3TextBox->Size = System::Drawing::Size(102, 20);
-			this->AutoSkill3TextBox->TabIndex = 40;
+			this->AutoSkill3TextBox->TabIndex = 20;
 			// 
 			// AutoSkill3ComboBox
 			// 
@@ -655,7 +625,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->AutoSkill3ComboBox->Location = System::Drawing::Point(202, 168);
 			this->AutoSkill3ComboBox->Name = L"AutoSkill3ComboBox";
 			this->AutoSkill3ComboBox->Size = System::Drawing::Size(115, 21);
-			this->AutoSkill3ComboBox->TabIndex = 39;
+			this->AutoSkill3ComboBox->TabIndex = 21;
 			// 
 			// AutoSkill2CheckBox
 			// 
@@ -663,7 +633,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->AutoSkill2CheckBox->Location = System::Drawing::Point(6, 144);
 			this->AutoSkill2CheckBox->Name = L"AutoSkill2CheckBox";
 			this->AutoSkill2CheckBox->Size = System::Drawing::Size(79, 17);
-			this->AutoSkill2CheckBox->TabIndex = 38;
+			this->AutoSkill2CheckBox->TabIndex = 16;
 			this->AutoSkill2CheckBox->Text = L"Auto Skill 2";
 			this->AutoSkill2CheckBox->UseVisualStyleBackColor = true;
 			this->AutoSkill2CheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill2CheckBox_CheckedChanged);
@@ -674,7 +644,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->AutoSkill2TextBox->MaxLength = 10;
 			this->AutoSkill2TextBox->Name = L"AutoSkill2TextBox";
 			this->AutoSkill2TextBox->Size = System::Drawing::Size(102, 20);
-			this->AutoSkill2TextBox->TabIndex = 37;
+			this->AutoSkill2TextBox->TabIndex = 17;
 			// 
 			// AutoSkill2ComboBox
 			// 
@@ -683,7 +653,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->AutoSkill2ComboBox->Location = System::Drawing::Point(202, 142);
 			this->AutoSkill2ComboBox->Name = L"AutoSkill2ComboBox";
 			this->AutoSkill2ComboBox->Size = System::Drawing::Size(115, 21);
-			this->AutoSkill2ComboBox->TabIndex = 36;
+			this->AutoSkill2ComboBox->TabIndex = 18;
 			// 
 			// AttackCheckBox
 			// 
@@ -691,7 +661,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->AttackCheckBox->Location = System::Drawing::Point(6, 18);
 			this->AttackCheckBox->Name = L"AttackCheckBox";
 			this->AttackCheckBox->Size = System::Drawing::Size(82, 17);
-			this->AttackCheckBox->TabIndex = 24;
+			this->AttackCheckBox->TabIndex = 1;
 			this->AttackCheckBox->Text = L"Auto Attack";
 			this->AttackCheckBox->UseVisualStyleBackColor = true;
 			this->AttackCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AttackCheckBox_CheckedChanged);
@@ -702,7 +672,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->AutoSkill1CheckBox->Location = System::Drawing::Point(6, 118);
 			this->AutoSkill1CheckBox->Name = L"AutoSkill1CheckBox";
 			this->AutoSkill1CheckBox->Size = System::Drawing::Size(79, 17);
-			this->AutoSkill1CheckBox->TabIndex = 35;
+			this->AutoSkill1CheckBox->TabIndex = 13;
 			this->AutoSkill1CheckBox->Text = L"Auto Skill 1";
 			this->AutoSkill1CheckBox->UseVisualStyleBackColor = true;
 			this->AutoSkill1CheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill1CheckBox_CheckedChanged);
@@ -713,7 +683,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->HPCheckBox->Location = System::Drawing::Point(6, 69);
 			this->HPCheckBox->Name = L"HPCheckBox";
 			this->HPCheckBox->Size = System::Drawing::Size(66, 17);
-			this->HPCheckBox->TabIndex = 15;
+			this->HPCheckBox->TabIndex = 7;
 			this->HPCheckBox->Text = L"Auto HP";
 			this->HPCheckBox->UseVisualStyleBackColor = true;
 			this->HPCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::HPCheckBox_CheckedChanged);
@@ -724,7 +694,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->AutoSkill1TextBox->MaxLength = 10;
 			this->AutoSkill1TextBox->Name = L"AutoSkill1TextBox";
 			this->AutoSkill1TextBox->Size = System::Drawing::Size(102, 20);
-			this->AutoSkill1TextBox->TabIndex = 34;
+			this->AutoSkill1TextBox->TabIndex = 14;
 			// 
 			// HPTextBox
 			// 
@@ -732,8 +702,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->HPTextBox->MaxLength = 10;
 			this->HPTextBox->Name = L"HPTextBox";
 			this->HPTextBox->Size = System::Drawing::Size(102, 20);
-			this->HPTextBox->TabIndex = 16;
-			this->HPTextBox->Text = L"7000";
+			this->HPTextBox->TabIndex = 8;
 			// 
 			// AutoSkill1ComboBox
 			// 
@@ -742,7 +711,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->AutoSkill1ComboBox->Location = System::Drawing::Point(202, 116);
 			this->AutoSkill1ComboBox->Name = L"AutoSkill1ComboBox";
 			this->AutoSkill1ComboBox->Size = System::Drawing::Size(115, 21);
-			this->AutoSkill1ComboBox->TabIndex = 33;
+			this->AutoSkill1ComboBox->TabIndex = 15;
 			// 
 			// HPComboBox
 			// 
@@ -751,7 +720,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->HPComboBox->Location = System::Drawing::Point(202, 66);
 			this->HPComboBox->Name = L"HPComboBox";
 			this->HPComboBox->Size = System::Drawing::Size(115, 21);
-			this->HPComboBox->TabIndex = 17;
+			this->HPComboBox->TabIndex = 9;
 			// 
 			// MPCheckBox
 			// 
@@ -759,7 +728,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->MPCheckBox->Location = System::Drawing::Point(6, 95);
 			this->MPCheckBox->Name = L"MPCheckBox";
 			this->MPCheckBox->Size = System::Drawing::Size(67, 17);
-			this->MPCheckBox->TabIndex = 21;
+			this->MPCheckBox->TabIndex = 10;
 			this->MPCheckBox->Text = L"Auto MP";
 			this->MPCheckBox->UseVisualStyleBackColor = true;
 			this->MPCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::MPCheckBox_CheckedChanged);
@@ -771,7 +740,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->AutoLootComboBox->Location = System::Drawing::Point(202, 41);
 			this->AutoLootComboBox->Name = L"AutoLootComboBox";
 			this->AutoLootComboBox->Size = System::Drawing::Size(115, 21);
-			this->AutoLootComboBox->TabIndex = 31;
+			this->AutoLootComboBox->TabIndex = 6;
 			// 
 			// MPTextBox
 			// 
@@ -779,8 +748,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->MPTextBox->MaxLength = 10;
 			this->MPTextBox->Name = L"MPTextBox";
 			this->MPTextBox->Size = System::Drawing::Size(102, 20);
-			this->MPTextBox->TabIndex = 22;
-			this->MPTextBox->Text = L"200";
+			this->MPTextBox->TabIndex = 11;
 			// 
 			// AutoLootCheckBox
 			// 
@@ -788,7 +756,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->AutoLootCheckBox->Location = System::Drawing::Point(6, 45);
 			this->AutoLootCheckBox->Name = L"AutoLootCheckBox";
 			this->AutoLootCheckBox->Size = System::Drawing::Size(72, 17);
-			this->AutoLootCheckBox->TabIndex = 30;
+			this->AutoLootCheckBox->TabIndex = 4;
 			this->AutoLootCheckBox->Text = L"Auto Loot";
 			this->AutoLootCheckBox->UseVisualStyleBackColor = true;
 			this->AutoLootCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoLootCheckBox_CheckedChanged);
@@ -800,7 +768,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->MPComboBox->Location = System::Drawing::Point(202, 91);
 			this->MPComboBox->Name = L"MPComboBox";
 			this->MPComboBox->Size = System::Drawing::Size(115, 21);
-			this->MPComboBox->TabIndex = 23;
+			this->MPComboBox->TabIndex = 12;
 			// 
 			// AttackDelayLabel
 			// 
@@ -818,7 +786,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->AttackComboBox->Location = System::Drawing::Point(241, 16);
 			this->AttackComboBox->Name = L"AttackComboBox";
 			this->AttackComboBox->Size = System::Drawing::Size(76, 21);
-			this->AttackComboBox->TabIndex = 26;
+			this->AttackComboBox->TabIndex = 3;
 			// 
 			// AttackTrackBar
 			// 
@@ -828,7 +796,7 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->AttackTrackBar->Minimum = 1;
 			this->AttackTrackBar->Name = L"AttackTrackBar";
 			this->AttackTrackBar->Size = System::Drawing::Size(102, 18);
-			this->AttackTrackBar->TabIndex = 27;
+			this->AttackTrackBar->TabIndex = 2;
 			this->AttackTrackBar->TickFrequency = 10;
 			this->AttackTrackBar->TickStyle = System::Windows::Forms::TickStyle::None;
 			this->AttackTrackBar->Value = 1;
@@ -921,9 +889,9 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			// 
 			// HacksTab
 			// 
-			this->HacksTab->Controls->Add(this->GeneralHacksGroupBox);
-			this->HacksTab->Controls->Add(this->MobHacksGroupBox);
-			this->HacksTab->Controls->Add(this->CharacterHacksGroupBox);
+			this->HacksTab->Controls->Add(this->gbMiscHacks);
+			this->HacksTab->Controls->Add(this->gbCharHacks);
+			this->HacksTab->Controls->Add(this->MobHacks);
 			this->HacksTab->Location = System::Drawing::Point(4, 22);
 			this->HacksTab->Name = L"HacksTab";
 			this->HacksTab->Padding = System::Windows::Forms::Padding(3);
@@ -932,345 +900,177 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->HacksTab->Text = L"Hacks";
 			this->HacksTab->UseVisualStyleBackColor = true;
 			// 
-			// GeneralHacksGroupBox
+			// gbMiscHacks
 			// 
-			this->GeneralHacksGroupBox->Controls->Add(this->FLACCCheckBox);
-			this->GeneralHacksGroupBox->Controls->Add(this->NoBackGroundCheckBox);
-			this->GeneralHacksGroupBox->Controls->Add(this->UncensorCheckBox);
-			this->GeneralHacksGroupBox->Controls->Add(this->CPUHackCheckBox);
-			this->GeneralHacksGroupBox->Controls->Add(this->HideDamageCheckBox);
-			this->GeneralHacksGroupBox->Controls->Add(this->PinTyperCheckBox);
-			this->GeneralHacksGroupBox->Location = System::Drawing::Point(7, 186);
-			this->GeneralHacksGroupBox->Name = L"GeneralHacksGroupBox";
-			this->GeneralHacksGroupBox->Size = System::Drawing::Size(313, 88);
-			this->GeneralHacksGroupBox->TabIndex = 2;
-			this->GeneralHacksGroupBox->TabStop = false;
-			this->GeneralHacksGroupBox->Text = L"General Hacks";
+			this->gbMiscHacks->Controls->Add(this->cbPinTyper);
+			this->gbMiscHacks->Controls->Add(this->cbJDA);
+			this->gbMiscHacks->Controls->Add(this->cbNoBG);
+			this->gbMiscHacks->Location = System::Drawing::Point(7, 289);
+			this->gbMiscHacks->Name = L"gbMiscHacks";
+			this->gbMiscHacks->Size = System::Drawing::Size(310, 98);
+			this->gbMiscHacks->TabIndex = 2;
+			this->gbMiscHacks->TabStop = false;
+			this->gbMiscHacks->Text = L"Other";
 			// 
-			// FLACCCheckBox
+			// cbPinTyper
 			// 
-			this->FLACCCheckBox->AutoSize = true;
-			this->FLACCCheckBox->Location = System::Drawing::Point(164, 65);
-			this->FLACCCheckBox->Name = L"FLACCCheckBox";
-			this->FLACCCheckBox->Size = System::Drawing::Size(59, 17);
-			this->FLACCCheckBox->TabIndex = 7;
-			this->FLACCCheckBox->Text = L"FLACC";
-			this->FLACCCheckBox->UseVisualStyleBackColor = true;
-			this->FLACCCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::FLACCCheckBox_CheckedChanged);
+			this->cbPinTyper->AutoSize = true;
+			this->cbPinTyper->Location = System::Drawing::Point(6, 65);
+			this->cbPinTyper->Name = L"cbPinTyper";
+			this->cbPinTyper->Size = System::Drawing::Size(71, 17);
+			this->cbPinTyper->TabIndex = 2;
+			this->cbPinTyper->Text = L"Pin Typer";
+			this->cbPinTyper->UseVisualStyleBackColor = true;
+			this->cbPinTyper->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbPinTyper_CheckedChanged);
 			// 
-			// NoBackGroundCheckBox
+			// cbJDA
 			// 
-			this->NoBackGroundCheckBox->AutoSize = true;
-			this->NoBackGroundCheckBox->Location = System::Drawing::Point(6, 65);
-			this->NoBackGroundCheckBox->Name = L"NoBackGroundCheckBox";
-			this->NoBackGroundCheckBox->Size = System::Drawing::Size(145, 17);
-			this->NoBackGroundCheckBox->TabIndex = 6;
-			this->NoBackGroundCheckBox->Text = L"No Background + Clouds";
-			this->NoBackGroundCheckBox->UseVisualStyleBackColor = true;
-			this->NoBackGroundCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NoBackGroundCheckBox_CheckedChanged);
+			this->cbJDA->AutoSize = true;
+			this->cbJDA->Location = System::Drawing::Point(6, 42);
+			this->cbJDA->Name = L"cbJDA";
+			this->cbJDA->Size = System::Drawing::Size(46, 17);
+			this->cbJDA->TabIndex = 1;
+			this->cbJDA->Text = L"JDA";
+			this->cbJDA->UseVisualStyleBackColor = true;
+			this->cbJDA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbJDA_CheckedChanged);
 			// 
-			// UncensorCheckBox
+			// cbNoBG
 			// 
-			this->UncensorCheckBox->AutoSize = true;
-			this->UncensorCheckBox->Location = System::Drawing::Point(6, 42);
-			this->UncensorCheckBox->Name = L"UncensorCheckBox";
-			this->UncensorCheckBox->Size = System::Drawing::Size(78, 17);
-			this->UncensorCheckBox->TabIndex = 5;
-			this->UncensorCheckBox->Text = L"Uncensore";
-			this->UncensorCheckBox->UseVisualStyleBackColor = true;
-			this->UncensorCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::UncensorCheckBox_CheckedChanged);
+			this->cbNoBG->AutoSize = true;
+			this->cbNoBG->Location = System::Drawing::Point(6, 19);
+			this->cbNoBG->Name = L"cbNoBG";
+			this->cbNoBG->Size = System::Drawing::Size(145, 17);
+			this->cbNoBG->TabIndex = 0;
+			this->cbNoBG->Text = L"No Background + Clouds";
+			this->cbNoBG->UseVisualStyleBackColor = true;
+			this->cbNoBG->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoBG_CheckedChanged);
 			// 
-			// CPUHackCheckBox
+			// gbCharHacks
 			// 
-			this->CPUHackCheckBox->AutoSize = true;
-			this->CPUHackCheckBox->Location = System::Drawing::Point(164, 19);
-			this->CPUHackCheckBox->Name = L"CPUHackCheckBox";
-			this->CPUHackCheckBox->Size = System::Drawing::Size(77, 17);
-			this->CPUHackCheckBox->TabIndex = 4;
-			this->CPUHackCheckBox->Text = L"CPU Hack";
-			this->CPUHackCheckBox->UseVisualStyleBackColor = true;
-			this->CPUHackCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CPUHackCheckBox_CheckedChanged);
+			this->gbCharHacks->Controls->Add(this->cbUnlimitedMorph);
+			this->gbCharHacks->Controls->Add(this->cbDojangGodmode);
+			this->gbCharHacks->Controls->Add(this->cbNoKB);
+			this->gbCharHacks->Controls->Add(this->cbInstantAirLoot);
+			this->gbCharHacks->Controls->Add(this->cbFusionAttack);
+			this->gbCharHacks->Controls->Add(this->cbPerfectLoot);
+			this->gbCharHacks->Location = System::Drawing::Point(7, 3);
+			this->gbCharHacks->Name = L"gbCharHacks";
+			this->gbCharHacks->Size = System::Drawing::Size(310, 118);
+			this->gbCharHacks->TabIndex = 1;
+			this->gbCharHacks->TabStop = false;
+			this->gbCharHacks->Text = L"Character";
 			// 
-			// HideDamageCheckBox
+			// cbDojangGodmode
 			// 
-			this->HideDamageCheckBox->AutoSize = true;
-			this->HideDamageCheckBox->Enabled = false;
-			this->HideDamageCheckBox->Location = System::Drawing::Point(164, 42);
-			this->HideDamageCheckBox->Name = L"HideDamageCheckBox";
-			this->HideDamageCheckBox->Size = System::Drawing::Size(91, 17);
-			this->HideDamageCheckBox->TabIndex = 3;
-			this->HideDamageCheckBox->Text = L"Hide Damage";
-			this->HideDamageCheckBox->UseVisualStyleBackColor = true;
-			this->HideDamageCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::HideDamageCheckBox_CheckedChanged);
+			this->cbDojangGodmode->AutoSize = true;
+			this->cbDojangGodmode->Location = System::Drawing::Point(6, 42);
+			this->cbDojangGodmode->Name = L"cbDojangGodmode";
+			this->cbDojangGodmode->Size = System::Drawing::Size(109, 17);
+			this->cbDojangGodmode->TabIndex = 6;
+			this->cbDojangGodmode->Text = L"Dojang Godmode";
+			this->cbDojangGodmode->UseVisualStyleBackColor = true;
+			this->cbDojangGodmode->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbDojangGodmode_CheckedChanged);
 			// 
-			// PinTyperCheckBox
+			// cbNoKB
 			// 
-			this->PinTyperCheckBox->AutoSize = true;
-			this->PinTyperCheckBox->Location = System::Drawing::Point(6, 19);
-			this->PinTyperCheckBox->Name = L"PinTyperCheckBox";
-			this->PinTyperCheckBox->Size = System::Drawing::Size(71, 17);
-			this->PinTyperCheckBox->TabIndex = 0;
-			this->PinTyperCheckBox->Text = L"Pin Typer";
-			this->PinTyperCheckBox->UseVisualStyleBackColor = true;
-			this->PinTyperCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::PinTyperCheckBox_CheckedChanged);
+			this->cbNoKB->AutoSize = true;
+			this->cbNoKB->Location = System::Drawing::Point(6, 65);
+			this->cbNoKB->Name = L"cbNoKB";
+			this->cbNoKB->Size = System::Drawing::Size(98, 17);
+			this->cbNoKB->TabIndex = 5;
+			this->cbNoKB->Text = L"No Knockback";
+			this->cbNoKB->UseVisualStyleBackColor = true;
+			this->cbNoKB->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoKB_CheckedChanged);
 			// 
-			// MobHacksGroupBox
+			// cbInstantAirLoot
 			// 
-			this->MobHacksGroupBox->Controls->Add(this->AutoAggroCheckBox);
-			this->MobHacksGroupBox->Controls->Add(this->RainingMobsCheckBox);
-			this->MobHacksGroupBox->Controls->Add(this->MobLagCheckBox);
-			this->MobHacksGroupBox->Controls->Add(this->NoMobsCheckBox);
-			this->MobHacksGroupBox->Controls->Add(this->VacRightCheckBox);
-			this->MobHacksGroupBox->Controls->Add(this->FastMobsCheckBox);
-			this->MobHacksGroupBox->Controls->Add(this->FullMobDisarmCheckBox);
-			this->MobHacksGroupBox->Location = System::Drawing::Point(7, 280);
-			this->MobHacksGroupBox->Name = L"MobHacksGroupBox";
-			this->MobHacksGroupBox->Size = System::Drawing::Size(313, 111);
-			this->MobHacksGroupBox->TabIndex = 1;
-			this->MobHacksGroupBox->TabStop = false;
-			this->MobHacksGroupBox->Text = L"Mob Hacks";
+			this->cbInstantAirLoot->AutoSize = true;
+			this->cbInstantAirLoot->Location = System::Drawing::Point(159, 42);
+			this->cbInstantAirLoot->Name = L"cbInstantAirLoot";
+			this->cbInstantAirLoot->Size = System::Drawing::Size(97, 17);
+			this->cbInstantAirLoot->TabIndex = 2;
+			this->cbInstantAirLoot->Text = L"Instant Air Loot";
+			this->cbInstantAirLoot->UseVisualStyleBackColor = true;
+			this->cbInstantAirLoot->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbInstantAirLoot_CheckedChanged);
 			// 
-			// AutoAggroCheckBox
+			// cbFusionAttack
 			// 
-			this->AutoAggroCheckBox->AutoSize = true;
-			this->AutoAggroCheckBox->Location = System::Drawing::Point(6, 65);
-			this->AutoAggroCheckBox->Name = L"AutoAggroCheckBox";
-			this->AutoAggroCheckBox->Size = System::Drawing::Size(79, 17);
-			this->AutoAggroCheckBox->TabIndex = 8;
-			this->AutoAggroCheckBox->Text = L"Auto Aggro";
-			this->AutoAggroCheckBox->UseVisualStyleBackColor = true;
-			this->AutoAggroCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoAggroCheckBox_CheckedChanged);
+			this->cbFusionAttack->AutoSize = true;
+			this->cbFusionAttack->Location = System::Drawing::Point(6, 19);
+			this->cbFusionAttack->Name = L"cbFusionAttack";
+			this->cbFusionAttack->Size = System::Drawing::Size(91, 17);
+			this->cbFusionAttack->TabIndex = 0;
+			this->cbFusionAttack->Text = L"Fusion Attack";
+			this->cbFusionAttack->UseVisualStyleBackColor = true;
+			this->cbFusionAttack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbFusionAttack_CheckedChanged);
 			// 
-			// RainingMobsCheckBox
+			// cbPerfectLoot
 			// 
-			this->RainingMobsCheckBox->AutoSize = true;
-			this->RainingMobsCheckBox->Location = System::Drawing::Point(164, 42);
-			this->RainingMobsCheckBox->Name = L"RainingMobsCheckBox";
-			this->RainingMobsCheckBox->Size = System::Drawing::Size(91, 17);
-			this->RainingMobsCheckBox->TabIndex = 5;
-			this->RainingMobsCheckBox->Text = L"Raining Mobs";
-			this->RainingMobsCheckBox->UseVisualStyleBackColor = true;
-			this->RainingMobsCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::RainingMobsCheckBox_CheckedChanged);
+			this->cbPerfectLoot->AutoSize = true;
+			this->cbPerfectLoot->Location = System::Drawing::Point(159, 19);
+			this->cbPerfectLoot->Name = L"cbPerfectLoot";
+			this->cbPerfectLoot->Size = System::Drawing::Size(84, 17);
+			this->cbPerfectLoot->TabIndex = 1;
+			this->cbPerfectLoot->Text = L"Perfect Loot";
+			this->cbPerfectLoot->UseVisualStyleBackColor = true;
+			this->cbPerfectLoot->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbPerfectLoot_CheckedChanged);
 			// 
-			// MobLagCheckBox
+			// MobHacks
 			// 
-			this->MobLagCheckBox->AutoSize = true;
-			this->MobLagCheckBox->Location = System::Drawing::Point(164, 19);
-			this->MobLagCheckBox->Name = L"MobLagCheckBox";
-			this->MobLagCheckBox->Size = System::Drawing::Size(68, 17);
-			this->MobLagCheckBox->TabIndex = 4;
-			this->MobLagCheckBox->Text = L"Mob Lag";
-			this->MobLagCheckBox->UseVisualStyleBackColor = true;
-			this->MobLagCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::MobLagCheckBox_CheckedChanged);
+			this->MobHacks->Controls->Add(this->cbMobDisarm);
+			this->MobHacks->Controls->Add(this->cbJumpRight);
+			this->MobHacks->Controls->Add(this->cbWalkRight);
+			this->MobHacks->Controls->Add(this->cbVacRight);
+			this->MobHacks->Location = System::Drawing::Point(7, 127);
+			this->MobHacks->Name = L"MobHacks";
+			this->MobHacks->Size = System::Drawing::Size(310, 156);
+			this->MobHacks->TabIndex = 0;
+			this->MobHacks->TabStop = false;
+			this->MobHacks->Text = L"Mob";
 			// 
-			// NoMobsCheckBox
+			// cbMobDisarm
 			// 
-			this->NoMobsCheckBox->AutoSize = true;
-			this->NoMobsCheckBox->Location = System::Drawing::Point(164, 65);
-			this->NoMobsCheckBox->Name = L"NoMobsCheckBox";
-			this->NoMobsCheckBox->Size = System::Drawing::Size(69, 17);
-			this->NoMobsCheckBox->TabIndex = 3;
-			this->NoMobsCheckBox->Text = L"No Mobs";
-			this->NoMobsCheckBox->UseVisualStyleBackColor = true;
-			this->NoMobsCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NoMobsCheckBox_CheckedChanged);
+			this->cbMobDisarm->AutoSize = true;
+			this->cbMobDisarm->Location = System::Drawing::Point(6, 88);
+			this->cbMobDisarm->Name = L"cbMobDisarm";
+			this->cbMobDisarm->Size = System::Drawing::Size(101, 17);
+			this->cbMobDisarm->TabIndex = 5;
+			this->cbMobDisarm->Text = L"Full Mob Disarm";
+			this->cbMobDisarm->UseVisualStyleBackColor = true;
+			this->cbMobDisarm->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbMobDisarm_CheckedChanged);
 			// 
-			// VacRightCheckBox
+			// cbJumpRight
 			// 
-			this->VacRightCheckBox->AutoSize = true;
-			this->VacRightCheckBox->Location = System::Drawing::Point(6, 19);
-			this->VacRightCheckBox->Name = L"VacRightCheckBox";
-			this->VacRightCheckBox->Size = System::Drawing::Size(73, 17);
-			this->VacRightCheckBox->TabIndex = 2;
-			this->VacRightCheckBox->Text = L"Vac Right";
-			this->VacRightCheckBox->UseVisualStyleBackColor = true;
-			this->VacRightCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::VacRightCheckBox_CheckedChanged);
+			this->cbJumpRight->AutoSize = true;
+			this->cbJumpRight->Location = System::Drawing::Point(6, 65);
+			this->cbJumpRight->Name = L"cbJumpRight";
+			this->cbJumpRight->Size = System::Drawing::Size(131, 17);
+			this->cbJumpRight->TabIndex = 4;
+			this->cbJumpRight->Text = L"Jump Unrandom Right";
+			this->cbJumpRight->UseVisualStyleBackColor = true;
+			this->cbJumpRight->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbJumpRight_CheckedChanged);
 			// 
-			// FastMobsCheckBox
+			// cbWalkRight
 			// 
-			this->FastMobsCheckBox->AutoSize = true;
-			this->FastMobsCheckBox->Location = System::Drawing::Point(6, 42);
-			this->FastMobsCheckBox->Name = L"FastMobsCheckBox";
-			this->FastMobsCheckBox->Size = System::Drawing::Size(75, 17);
-			this->FastMobsCheckBox->TabIndex = 1;
-			this->FastMobsCheckBox->Text = L"Fast Mobs";
-			this->FastMobsCheckBox->UseVisualStyleBackColor = true;
-			this->FastMobsCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::FastMobsCheckBox_CheckedChanged);
+			this->cbWalkRight->AutoSize = true;
+			this->cbWalkRight->Location = System::Drawing::Point(6, 42);
+			this->cbWalkRight->Name = L"cbWalkRight";
+			this->cbWalkRight->Size = System::Drawing::Size(131, 17);
+			this->cbWalkRight->TabIndex = 2;
+			this->cbWalkRight->Text = L"Walk Unrandom Right";
+			this->cbWalkRight->UseVisualStyleBackColor = true;
+			this->cbWalkRight->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbWalkRight_CheckedChanged);
 			// 
-			// FullMobDisarmCheckBox
+			// cbVacRight
 			// 
-			this->FullMobDisarmCheckBox->AutoSize = true;
-			this->FullMobDisarmCheckBox->Location = System::Drawing::Point(6, 88);
-			this->FullMobDisarmCheckBox->Name = L"FullMobDisarmCheckBox";
-			this->FullMobDisarmCheckBox->Size = System::Drawing::Size(101, 17);
-			this->FullMobDisarmCheckBox->TabIndex = 0;
-			this->FullMobDisarmCheckBox->Text = L"Full Mob Disarm";
-			this->FullMobDisarmCheckBox->UseVisualStyleBackColor = true;
-			this->FullMobDisarmCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::FullMobDisarmCheckBox_CheckedChanged);
-			// 
-			// CharacterHacksGroupBox
-			// 
-			this->CharacterHacksGroupBox->Controls->Add(this->FMACheckBox);
-			this->CharacterHacksGroupBox->Controls->Add(this->NDMilleCheckBox);
-			this->CharacterHacksGroupBox->Controls->Add(this->InstantAirLootCheckBox);
-			this->CharacterHacksGroupBox->Controls->Add(this->FusionAttackCheckBox);
-			this->CharacterHacksGroupBox->Controls->Add(this->NoSwearsCheckBox);
-			this->CharacterHacksGroupBox->Controls->Add(this->NoSkillMovementCheckBox);
-			this->CharacterHacksGroupBox->Controls->Add(this->UnlimitedMorphCheckBox);
-			this->CharacterHacksGroupBox->Controls->Add(this->NDAllAttacksCheckBox);
-			this->CharacterHacksGroupBox->Controls->Add(this->NoCharKBCheckBox);
-			this->CharacterHacksGroupBox->Controls->Add(this->SevenMissCheckBox);
-			this->CharacterHacksGroupBox->Controls->Add(this->NDMiningCheckBox);
-			this->CharacterHacksGroupBox->Controls->Add(this->PerfectLootCheckBox);
-			this->CharacterHacksGroupBox->Controls->Add(this->JumpDownAnywhereCheckBox);
-			this->CharacterHacksGroupBox->Location = System::Drawing::Point(7, 6);
-			this->CharacterHacksGroupBox->Name = L"CharacterHacksGroupBox";
-			this->CharacterHacksGroupBox->Size = System::Drawing::Size(313, 174);
-			this->CharacterHacksGroupBox->TabIndex = 0;
-			this->CharacterHacksGroupBox->TabStop = false;
-			this->CharacterHacksGroupBox->Text = L"Character Hacks";
-			// 
-			// FMACheckBox
-			// 
-			this->FMACheckBox->AutoSize = true;
-			this->FMACheckBox->Location = System::Drawing::Point(6, 152);
-			this->FMACheckBox->Name = L"FMACheckBox";
-			this->FMACheckBox->Size = System::Drawing::Size(48, 17);
-			this->FMACheckBox->TabIndex = 11;
-			this->FMACheckBox->Text = L"FMA";
-			this->FMACheckBox->UseVisualStyleBackColor = true;
-			this->FMACheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::FMACheckBox_CheckedChanged);
-			// 
-			// NDMilleCheckBox
-			// 
-			this->NDMilleCheckBox->AutoSize = true;
-			this->NDMilleCheckBox->Location = System::Drawing::Point(164, 152);
-			this->NDMilleCheckBox->Name = L"NDMilleCheckBox";
-			this->NDMilleCheckBox->Size = System::Drawing::Size(66, 17);
-			this->NDMilleCheckBox->TabIndex = 10;
-			this->NDMilleCheckBox->Text = L"ND Mille";
-			this->NDMilleCheckBox->UseVisualStyleBackColor = true;
-			this->NDMilleCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NDMilleCheckBox_CheckedChanged);
-			// 
-			// InstantAirLootCheckBox
-			// 
-			this->InstantAirLootCheckBox->AutoSize = true;
-			this->InstantAirLootCheckBox->Location = System::Drawing::Point(164, 42);
-			this->InstantAirLootCheckBox->Name = L"InstantAirLootCheckBox";
-			this->InstantAirLootCheckBox->Size = System::Drawing::Size(97, 17);
-			this->InstantAirLootCheckBox->TabIndex = 9;
-			this->InstantAirLootCheckBox->Text = L"Instant Air Loot";
-			this->InstantAirLootCheckBox->UseVisualStyleBackColor = true;
-			this->InstantAirLootCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::InstantAirLootCheckBox_CheckedChanged);
-			// 
-			// FusionAttackCheckBox
-			// 
-			this->FusionAttackCheckBox->AutoSize = true;
-			this->FusionAttackCheckBox->Location = System::Drawing::Point(6, 130);
-			this->FusionAttackCheckBox->Name = L"FusionAttackCheckBox";
-			this->FusionAttackCheckBox->Size = System::Drawing::Size(91, 17);
-			this->FusionAttackCheckBox->TabIndex = 7;
-			this->FusionAttackCheckBox->Text = L"Fusion Attack";
-			this->FusionAttackCheckBox->UseVisualStyleBackColor = true;
-			this->FusionAttackCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::FusionAttackCheckBox_CheckedChanged);
-			// 
-			// NoSwearsCheckBox
-			// 
-			this->NoSwearsCheckBox->AutoSize = true;
-			this->NoSwearsCheckBox->Location = System::Drawing::Point(164, 110);
-			this->NoSwearsCheckBox->Name = L"NoSwearsCheckBox";
-			this->NoSwearsCheckBox->Size = System::Drawing::Size(78, 17);
-			this->NoSwearsCheckBox->TabIndex = 6;
-			this->NoSwearsCheckBox->Text = L"No Swears";
-			this->NoSwearsCheckBox->UseVisualStyleBackColor = true;
-			this->NoSwearsCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NoSwearsCheckBox_CheckedChanged);
-			// 
-			// NoSkillMovementCheckBox
-			// 
-			this->NoSkillMovementCheckBox->AutoSize = true;
-			this->NoSkillMovementCheckBox->Location = System::Drawing::Point(164, 130);
-			this->NoSkillMovementCheckBox->Name = L"NoSkillMovementCheckBox";
-			this->NoSkillMovementCheckBox->Size = System::Drawing::Size(115, 17);
-			this->NoSkillMovementCheckBox->TabIndex = 5;
-			this->NoSkillMovementCheckBox->Text = L"No Skill Movement";
-			this->NoSkillMovementCheckBox->UseVisualStyleBackColor = true;
-			this->NoSkillMovementCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NoSkillMovementCheckBox_CheckedChanged);
-			// 
-			// UnlimitedMorphCheckBox
-			// 
-			this->UnlimitedMorphCheckBox->AutoSize = true;
-			this->UnlimitedMorphCheckBox->Location = System::Drawing::Point(6, 65);
-			this->UnlimitedMorphCheckBox->Name = L"UnlimitedMorphCheckBox";
-			this->UnlimitedMorphCheckBox->Size = System::Drawing::Size(102, 17);
-			this->UnlimitedMorphCheckBox->TabIndex = 2;
-			this->UnlimitedMorphCheckBox->Text = L"Unlimited Morph";
-			this->UnlimitedMorphCheckBox->UseVisualStyleBackColor = true;
-			this->UnlimitedMorphCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::UnlimitedMorphCheckBox_CheckedChanged);
-			// 
-			// NDAllAttacksCheckBox
-			// 
-			this->NDAllAttacksCheckBox->AutoSize = true;
-			this->NDAllAttacksCheckBox->Location = System::Drawing::Point(6, 42);
-			this->NDAllAttacksCheckBox->Name = L"NDAllAttacksCheckBox";
-			this->NDAllAttacksCheckBox->Size = System::Drawing::Size(101, 17);
-			this->NDAllAttacksCheckBox->TabIndex = 1;
-			this->NDAllAttacksCheckBox->Text = L"ND - All Attacks";
-			this->NDAllAttacksCheckBox->UseVisualStyleBackColor = true;
-			this->NDAllAttacksCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NDAllAttacksCheckBox_CheckedChanged);
-			// 
-			// NoCharKBCheckBox
-			// 
-			this->NoCharKBCheckBox->AutoSize = true;
-			this->NoCharKBCheckBox->Location = System::Drawing::Point(6, 19);
-			this->NoCharKBCheckBox->Name = L"NoCharKBCheckBox";
-			this->NoCharKBCheckBox->Size = System::Drawing::Size(82, 17);
-			this->NoCharKBCheckBox->TabIndex = 0;
-			this->NoCharKBCheckBox->Text = L"No Char KB";
-			this->NoCharKBCheckBox->UseVisualStyleBackColor = true;
-			this->NoCharKBCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NoCharKBCheckBox_CheckedChanged);
-			// 
-			// SevenMissCheckBox
-			// 
-			this->SevenMissCheckBox->AutoSize = true;
-			this->SevenMissCheckBox->Location = System::Drawing::Point(6, 110);
-			this->SevenMissCheckBox->Name = L"SevenMissCheckBox";
-			this->SevenMissCheckBox->Size = System::Drawing::Size(102, 17);
-			this->SevenMissCheckBox->TabIndex = 0;
-			this->SevenMissCheckBox->Text = L"7Miss Godmode";
-			this->SevenMissCheckBox->UseVisualStyleBackColor = true;
-			this->SevenMissCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::SevenMissCheckBox_CheckedChanged);
-			// 
-			// NDMiningCheckBox
-			// 
-			this->NDMiningCheckBox->AutoSize = true;
-			this->NDMiningCheckBox->Location = System::Drawing::Point(164, 87);
-			this->NDMiningCheckBox->Name = L"NDMiningCheckBox";
-			this->NDMiningCheckBox->Size = System::Drawing::Size(76, 17);
-			this->NDMiningCheckBox->TabIndex = 4;
-			this->NDMiningCheckBox->Text = L"ND Mining";
-			this->NDMiningCheckBox->UseVisualStyleBackColor = true;
-			this->NDMiningCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NDMiningCheckBox_CheckedChanged);
-			// 
-			// PerfectLootCheckBox
-			// 
-			this->PerfectLootCheckBox->AutoSize = true;
-			this->PerfectLootCheckBox->Location = System::Drawing::Point(164, 19);
-			this->PerfectLootCheckBox->Name = L"PerfectLootCheckBox";
-			this->PerfectLootCheckBox->Size = System::Drawing::Size(84, 17);
-			this->PerfectLootCheckBox->TabIndex = 2;
-			this->PerfectLootCheckBox->Text = L"Perfect Loot";
-			this->PerfectLootCheckBox->UseVisualStyleBackColor = true;
-			this->PerfectLootCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::PerfectLootCheckBox_CheckedChanged);
-			// 
-			// JumpDownAnywhereCheckBox
-			// 
-			this->JumpDownAnywhereCheckBox->AutoSize = true;
-			this->JumpDownAnywhereCheckBox->Location = System::Drawing::Point(164, 65);
-			this->JumpDownAnywhereCheckBox->Name = L"JumpDownAnywhereCheckBox";
-			this->JumpDownAnywhereCheckBox->Size = System::Drawing::Size(46, 17);
-			this->JumpDownAnywhereCheckBox->TabIndex = 1;
-			this->JumpDownAnywhereCheckBox->Text = L"JDA";
-			this->JumpDownAnywhereCheckBox->UseVisualStyleBackColor = true;
-			this->JumpDownAnywhereCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::JumpDownAnywhereCheckBox_CheckedChanged);
+			this->cbVacRight->AutoSize = true;
+			this->cbVacRight->Location = System::Drawing::Point(6, 19);
+			this->cbVacRight->Name = L"cbVacRight";
+			this->cbVacRight->Size = System::Drawing::Size(73, 17);
+			this->cbVacRight->TabIndex = 3;
+			this->cbVacRight->Text = L"Vac Right";
+			this->cbVacRight->UseVisualStyleBackColor = true;
+			this->cbVacRight->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbVacRight_CheckedChanged);
 			// 
 			// PacketSenderTab
 			// 
@@ -1576,7 +1376,6 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			this->SPControlCheckBox->Text = L"Enable";
 			this->SPControlCheckBox->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			this->SPControlCheckBox->UseVisualStyleBackColor = true;
-			this->SPControlCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::SPControlCheckBox_CheckedChanged);
 			// 
 			// SPControlYTextBox
 			// 
@@ -1782,6 +1581,17 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			// 
 			this->SpamPacketsTimer->Tick += gcnew System::EventHandler(this, &MainForm::SpamPacketsTimer_Tick);
 			// 
+			// cbUnlimitedMorph
+			// 
+			this->cbUnlimitedMorph->AutoSize = true;
+			this->cbUnlimitedMorph->Location = System::Drawing::Point(159, 65);
+			this->cbUnlimitedMorph->Name = L"cbUnlimitedMorph";
+			this->cbUnlimitedMorph->Size = System::Drawing::Size(102, 17);
+			this->cbUnlimitedMorph->TabIndex = 7;
+			this->cbUnlimitedMorph->Text = L"Unlimited Morph";
+			this->cbUnlimitedMorph->UseVisualStyleBackColor = true;
+			this->cbUnlimitedMorph->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbUnlimitedMorph_CheckedChanged);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1810,12 +1620,12 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->MPBackground))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->HPBackground))->EndInit();
 			this->HacksTab->ResumeLayout(false);
-			this->GeneralHacksGroupBox->ResumeLayout(false);
-			this->GeneralHacksGroupBox->PerformLayout();
-			this->MobHacksGroupBox->ResumeLayout(false);
-			this->MobHacksGroupBox->PerformLayout();
-			this->CharacterHacksGroupBox->ResumeLayout(false);
-			this->CharacterHacksGroupBox->PerformLayout();
+			this->gbMiscHacks->ResumeLayout(false);
+			this->gbMiscHacks->PerformLayout();
+			this->gbCharHacks->ResumeLayout(false);
+			this->gbCharHacks->PerformLayout();
+			this->MobHacks->ResumeLayout(false);
+			this->MobHacks->PerformLayout();
 			this->PacketSenderTab->ResumeLayout(false);
 			this->EditPacketGroupBox->ResumeLayout(false);
 			this->EditPacketGroupBox->PerformLayout();
@@ -1838,23 +1648,12 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 #pragma region custom voids
 	private: System::Void RefreshComboBoxes();
 	private: System::Void RefreshSPControlListView();
+	private: System::Void SaveSettings();
+	private: System::Void LoadSettings();
 #pragma endregion
 #pragma region CheckBoxes
-	private: System::Void PinTyperCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void MobCountLabel_Click(System::Object^  sender, System::EventArgs^  e){}
 	private: System::Void StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void FullMobDisarmCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void NoCharKBCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void JumpDownAnywhereCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void FastMobsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void PerfectLootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void NDAllAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void UnlimitedMorphCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void HideDamageCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void CPUHackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void NDMiningCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void UncensorCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void MainForm_Load(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void MPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
@@ -1865,38 +1664,36 @@ private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
 	private: System::Void AutoSkill2CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void AutoSkill3CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void AutoSkill4CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void PointerTubiCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void SevenMissCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void NoSkillMovementCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void PointerTubiCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);;
 	private: System::Void CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void NoSwearsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void VacRightCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void FusionAttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void NoBackGroundCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);	
-	private: System::Void NoMobsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void MobLagCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void InstantAirLootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void RainingMobsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void NDMilleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void FLACCCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);	
 	private: System::Void SendPacketButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void MainTabControl_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
 	private: System::Void AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void DeletePacketButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void FMACheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SpamsPacketButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SelectPacketForEditingComboBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void AutoAggroCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void SPControlCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SavePacketsButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void SPControlDeleteItem_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void GetSPControlCoordsButton_Click(System::Object^  sender, System::EventArgs^  e);
-	};
+	private: System::Void cbFusionAttack_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void cbNoKB_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void cbPerfectLoot_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void cbInstantAirLoot_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void cbVacRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void cbWalkRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void cbJumpRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void cbMobDisarm_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void cbNoBG_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void cbJDA_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void cbPinTyper_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void cbDojangGodmode_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void cbUnlimitedMorph_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+};
 	}
 #pragma endregion

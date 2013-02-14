@@ -7,9 +7,13 @@
 #include "Pointers.h"
 #include "SendPacket.h"
 #include <msclr/marshal_cppstd.h>
+#include <fstream>
 #include "Packet.h"
 #include "SPControl.h"
 #include "Hacks.h"
+
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ini_parser.hpp>
 using namespace std;
 using namespace WatyBotRevamp;
 using namespace msclr::interop;
@@ -17,6 +21,7 @@ using namespace System::IO;
 
 //Fill the list of packets
 string WatyBotWorkingDirectory = "WatyBot\\";
+string SettingsFileName = WatyBotWorkingDirectory + "settings.ini";
 string PacketFileName = WatyBotWorkingDirectory + "packets.xml";
 string SPControlFileName = WatyBotWorkingDirectory + "spcontrol.xml";
 
@@ -91,18 +96,18 @@ void NextChannel()
 #pragma endregion
 
 #pragma region Pointers Reading
-	int getMobCount(){		return (int) ReadPointer(MobBasePtr, MobCountOffset);}
-	int getItemCount(){		return (int) ReadPointer(ItemBasePtr, ItemCountOffset);}
+	int getMobCount(){			return (int) ReadPointer(MobBasePtr, MobCountOffset);}
+	int getItemCount(){			return (int) ReadPointer(ItemBasePtr, ItemCountOffset);}
 	int getPeopleCount(){		return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);}
-	int getCharX(){			return (int) ReadPointer(CharBasePtr,XOffset);}
-	int getCharY(){			return (int) ReadPointer(CharBasePtr,XOffset + 4);}
+	int getCharX(){				return (int) ReadPointer(CharBasePtr,XOffset);}
+	int getCharY(){				return (int) ReadPointer(CharBasePtr,XOffset + 4);}
 	int getCharHP(){			WritePointer(SettingsBasePtr, HPAlertOffset, 20);return (int) ReadPointer(StatsBasePtr, HPOffset);}
 	int getCharMP(){			WritePointer(SettingsBasePtr, MPAlertOffset, 20);return (int) ReadPointer(StatsBasePtr, MPOffset);}
 	double getCharEXP(){		return ReadDoublePointer(StatsBasePtr, EXPOffset);}
-	int getMapID(){			return (int) ReadPointer(InfoBasePtr, MapIDOffset);}
+	int getMapID(){				return (int) 0;}//ReadPointer(InfoBasePtr, MapIDOffset);}
 	int getAttackCount(){		return (int) ReadPointer(CharBasePtr, AttackCountOffset);}
-	int getTubiValue(){				return (int) ReadPointer(ServerBasePtr, TubiOffset);}
-	int getBreathValue(){			return (int) ReadPointer(CharBasePtr, BreathOffset);}
+	int getTubiValue(){			return (int) ReadPointer(ServerBasePtr, TubiOffset);}
+	int getBreathValue(){		return (int) ReadPointer(CharBasePtr, BreathOffset);}
 #pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/Skill/CC/UnlimitedAttack Voids
 void AutoHP()
@@ -299,115 +304,58 @@ void AutoCCAttacks()
 }
 #pragma endregion
 #pragma region HackCheckBoxes
-void MainForm::FullMobDisarmCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::cbFusionAttack_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::FullMobDisarm.Enable(this->FullMobDisarmCheckBox->Checked);
+	Hacks::cmFusionAttack.Enable(cbFusionAttack->Checked);
 }
-void MainForm::PinTyperCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::cbNoKB_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::PinTyper.Enable(this->PinTyperCheckBox->Checked);
+	Hacks::cmNoKB.Enable(cbNoKB->Checked);
 }
-void MainForm::NoCharKBCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::cbPerfectLoot_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::NoCharKB.Enable(this->NoCharKBCheckBox->Checked);
+	Hacks::cmPerfectLoot.Enable(cbPerfectLoot->Checked);
 }
-void MainForm::JumpDownAnywhereCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::cbInstantAirLoot_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::JDA.Enable(this->JumpDownAnywhereCheckBox->Checked);
+	Hacks::cmInstantAirLoot.Enable(cbInstantAirLoot->Checked);
 }
-void MainForm::FastMobsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::cbVacRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::FastMobs.Enable(this->FastMobsCheckBox->Checked);
+	Hacks::cmVacRight.Enable(cbVacRight->Checked);
 }
-void MainForm::PerfectLootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::cbWalkRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::PerfectLoot.Enable(this->PerfectLootCheckBox->Checked);
+	Hacks::cmWalkRight.Enable(cbWalkRight->Checked);
 }
-void MainForm::NDAllAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::cbJumpRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::NDAllAttacks.Enable(this->NDAllAttacksCheckBox->Checked);
+	Hacks::cmJumpRight.Enable(cbJumpRight->Checked);
 }
-void MainForm::UnlimitedMorphCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::cbMobDisarm_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::UnlimitedMorph.Enable(this->UnlimitedMorphCheckBox->Checked);
+	Hacks::cmMobDisarm.Enable(cbMobDisarm->Checked);
 }
-void MainForm::HideDamageCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::cbNoBG_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::HideDamage.Enable(this->HideDamageCheckBox->Checked);
+	Hacks::cmNoBG.Enable(cbNoBG->Checked);
 }
-void MainForm::CPUHackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::cbJDA_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::CPUHack.Enable(this->CPUHackCheckBox->Checked);
+	Hacks::cmJDA.Enable(cbJDA->Checked);
 }
-void MainForm::NDMiningCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::cbPinTyper_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::NDMining.Enable(this->NDMiningCheckBox->Checked);
+	Hacks::cmPinTyper.Enable(cbPinTyper->Checked);
 }
-void MainForm::UncensorCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::cbDojangGodmode_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::Uncensor.Enable(this->UncensorCheckBox->Checked);
+	Hacks::cmDojangGodmode.Enable(cbDojangGodmode->Checked);
 }
-void MainForm::SevenMissCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::cbUnlimitedMorph_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::Miss7GodMode.Enable(this->SevenMissCheckBox->Checked);
+	Hacks::cmUnlimitedMorph.Enable(cbUnlimitedMorph->Checked);
 }
-void MainForm::NoSkillMovementCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	Hacks::NoSkillMovement.Enable(this->NoSkillMovementCheckBox->Checked);
-}
-void MainForm::NoSwearsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	Hacks::NoSwears.Enable(this->NoSwearsCheckBox->Checked);
-}
-void MainForm::VacRightCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	Hacks::VacRight.Enable(this->VacRightCheckBox->Checked);
-}
-void MainForm::FusionAttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	Hacks::FusionAttack.Enable(this->FusionAttackCheckBox->Checked);
-}	
-void MainForm::NoBackGroundCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	Hacks::NoBackground.Enable(this->NoBackGroundCheckBox->Checked);
-}
-void MainForm::NoMobsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	Hacks::NoMobs.Enable(this->NoMobsCheckBox->Checked);
-}
-void MainForm::MobLagCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	Hacks::MobLag.Enable(this->MobLagCheckBox->Checked);
-}
-void MainForm::InstantAirLootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	Hacks::InstantAirLoot.Enable(this->InstantAirLootCheckBox->Checked);
-}
-void MainForm::RainingMobsCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	Hacks::RainingMobs.Enable(this->RainingMobsCheckBox->Checked);
-}
-void MainForm::NDMilleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	Hacks::NDMille.Enable(this->NDMilleCheckBox->Checked);
-}
-void MainForm::FLACCCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	Hacks::FLACC.Enable(this->FLACCCheckBox->Checked);
-}
-void MainForm::FMACheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	Hacks::FMA.Enable(this->FMACheckBox->Checked);
-}
-void MainForm::AutoAggroCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	Hacks::AutoAggro.Enable(this->AutoAggroCheckBox->Checked);
-}
-void MainForm::SPControlCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	Hacks::SPControlCodeCave.Enable(this->SPControlCheckBox->Checked);
-}
-
 #pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
 void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -523,25 +471,23 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	//Initialize all Comboboxes and textboxes
 	Globals::KeyNames = gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9"};
 	this->HPComboBox->Items->AddRange(Globals::KeyNames);
-	this->HPComboBox->SelectedIndex = 8;
-	this->HPTextBox->Text = Convert::ToString(9000);
 	this->MPComboBox->Items->AddRange(Globals::KeyNames);
-	this->MPComboBox->SelectedIndex = 9;
-	this->MPTextBox->Text = Convert::ToString(100);
     this->AttackComboBox->Items->AddRange(Globals::KeyNames);
-	this->AttackComboBox->SelectedIndex = 2;
-	this->AttackTrackBar->Value = 25;
 	this->AutoLootComboBox->Items->AddRange(Globals::KeyNames);
-	this->AutoLootComboBox->SelectedIndex = 35;
 	this->AutoSkill1ComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill2ComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill3ComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill4ComboBox->Items->AddRange(Globals::KeyNames);
+
 	if(!Directory::Exists("WatyBot"))Directory::CreateDirectory("WatyBot");
-	if(File::Exists(marshal_as<String^>(PacketFileName))) ReadPacketXML(PacketFileName);
+	if(File::Exists(marshal_as<String^>(PacketFileName)))
+		ReadPacketXML(PacketFileName);
 	RefreshComboBoxes();
-	if(File::Exists(marshal_as<String^>(SPControlFileName))) SPControl::ReadXML(SPControlFileName);
+	if(File::Exists(marshal_as<String^>(SPControlFileName)))
+		SPControl::ReadXML(SPControlFileName);
 	RefreshSPControlListView();
+	if(File::Exists(marshal_as<String^>(SettingsFileName)))
+		LoadSettings();
 
 }
 void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
@@ -586,6 +532,7 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 {
 	SPControl::WriteXML(SPControlFileName);
 	WritePacketXML(PacketFileName);
+	SaveSettings();
 	switch(MessageBoxA(NULL, "Close MapleStory too?", "Terminate Maple?", MB_ICONQUESTION | MB_YESNO))
 	{
 	case IDYES:
@@ -720,7 +667,6 @@ void MainForm::GetSPControlCoordsButton_Click(System::Object^  sender, System::E
 	this->SPControlYTextBox->Text = Convert::ToString(getCharY());
 	this->SPControlMapIDTextBox->Text = Convert::ToString(getMapID());
 }
-
 void MainForm::RefreshSPControlListView()
 {
 	SPControlListView->Items->Clear();
@@ -736,4 +682,90 @@ void MainForm::RefreshSPControlListView()
 		item->SubItems->Add(Convert::ToString(SPControlv.at(i).y));
 		SPControlListView->Items->Add(item);
 	}
+}
+
+//Loading/Saving AutoBot settings
+void MainForm::SaveSettings()
+{
+	File::Delete(marshal_as<String^>(SettingsFileName));
+	ofstream file(SettingsFileName);
+	using boost::property_tree::ptree;
+	ptree pt;
+
+
+	pt.add("AutoAttackDelay", this->AttackTrackBar->Value);
+	pt.add("AutoAttackKey", this->AttackComboBox->SelectedIndex);
+
+	pt.add("AutoLootKey", this->AutoLootComboBox->SelectedIndex);
+
+	if(this->HPTextBox->Text != String::Empty)
+		pt.add("AutoHPValue", Convert::ToInt32(this->HPTextBox->Text));
+	pt.add("AutoHPKey", this->HPComboBox->SelectedIndex);
+	if(this->MPTextBox->Text != String::Empty)
+		pt.add("AutoMPValue", Convert::ToInt32(this->MPTextBox->Text));
+	pt.add("AutoMPKey", this->MPComboBox->SelectedIndex);
+
+	if(this->AutoSkill1TextBox->Text != String::Empty)
+		pt.add("AutoSkill1Value", Convert::ToInt32(this->AutoSkill1TextBox->Text));
+	pt.add("AutoSkill1Key", this->AutoSkill1ComboBox->SelectedIndex);
+	if(this->AutoSkill2TextBox->Text != String::Empty)
+		pt.add("AutoSkill2Value", Convert::ToInt32(this->AutoSkill2TextBox->Text));
+	pt.add("AutoSkill2Key", this->AutoSkill2ComboBox->SelectedIndex);
+	if(this->AutoSkill3TextBox->Text != String::Empty)
+		pt.add("AutoSkill3Value", Convert::ToInt32(this->AutoSkill3TextBox->Text));
+	pt.add("AutoSkill3Key", this->AutoSkill3ComboBox->SelectedIndex);
+	if(this->AutoSkill4TextBox->Text != String::Empty)
+		pt.add("AutoSkill4Value", Convert::ToInt32(this->AutoSkill4TextBox->Text));
+	pt.add("AutoSkill4Key", this->AutoSkill4ComboBox->SelectedIndex);
+
+	if(this->CCPeopleTextBox->Text != String::Empty)
+		pt.add("AutoCCPeople", Convert::ToInt32(CCPeopleTextBox->Text));
+	if(this->CCTimedTextBox->Text != String::Empty)
+		pt.add("AutoCCTimed", Convert::ToInt32(CCTimedTextBox->Text));
+	if(this->CCAttacksTextBox->Text != String::Empty)
+		pt.add("AutoCCAttacks", Convert::ToInt32(CCAttacksTextBox->Text));
+
+	write_ini(file, pt);
+
+}
+void MainForm::LoadSettings()
+{
+	ifstream file(SettingsFileName);
+	using boost::property_tree::ptree;
+	ptree pt;
+
+	read_ini(file,pt);
+
+	try
+	{
+		this->AttackTrackBar->Value = pt.get<int>("AutoAttackDelay");
+		this->AttackComboBox->SelectedIndex = pt.get<int>("AutoAttackKey");
+		this->AutoLootComboBox->SelectedIndex = pt.get<int>("AutoLootKey");
+		this->HPTextBox->Text = marshal_as<String^>(pt.get<string>("AutoHPValue"));
+		this->HPComboBox->SelectedIndex = pt.get<int>("AutoHPKey");
+		this->MPTextBox->Text = marshal_as<String^>(pt.get<string>("AutoMPValue"));
+		this->MPComboBox->SelectedIndex = pt.get<int>("AutoMPKey");
+	}
+	catch(...){}
+
+	try
+	{		
+		this->AutoSkill1ComboBox->SelectedIndex = pt.get<int>("AutoSkill1Key");
+		this->AutoSkill2ComboBox->SelectedIndex = pt.get<int>("AutoSkill2Key");
+		this->AutoSkill3ComboBox->SelectedIndex = pt.get<int>("AutoSkill3Key");
+		this->AutoSkill4ComboBox->SelectedIndex = pt.get<int>("AutoSkill4Key");
+		this->AutoSkill1TextBox->Text = marshal_as<String^>(pt.get<string>("AutoSkill1Value"));
+		this->AutoSkill2TextBox->Text = marshal_as<String^>(pt.get<string>("AutoSkill2Value"));
+		this->AutoSkill3TextBox->Text = marshal_as<String^>(pt.get<string>("AutoSkill3Value"));
+		this->AutoSkill4TextBox->Text = marshal_as<String^>(pt.get<string>("AutoSkill4Value"));
+	}
+	catch(...){}
+
+	try
+	{
+		this->CCPeopleTextBox->Text = marshal_as<String^>(pt.get<string>("AutoCCPeople"));
+		this->CCTimedTextBox->Text = marshal_as<String^>(pt.get<string>("AutoCCTimed"));
+		this->CCAttacksTextBox->Text = marshal_as<String^>(pt.get<string>("AutoCCAttacks"));
+	}
+	catch(...){}
 }
