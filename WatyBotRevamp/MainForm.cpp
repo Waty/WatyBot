@@ -356,6 +356,22 @@ void MainForm::cbUnlimitedMorph_CheckedChanged(System::Object^  sender, System::
 {
 	Hacks::cmUnlimitedMorph.Enable(cbUnlimitedMorph->Checked);
 }
+void MainForm::cbFasterMobs_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmFasterMobs.Enable(cbFasterMobs->Checked);
+}
+void MainForm::cbNDAllAttacks_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmNDAllAttacks.Enable(cbNDAllAttacks->Checked);
+}
+void MainForm::cbNoMobs_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmNoMobs.Enable(cbNoMobs->Checked);
+}
+void MainForm::cbAutoAggro_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmAutoAggro.Enable(cbAutoAggro->Checked);
+}
 #pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
 void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)

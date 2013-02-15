@@ -14,7 +14,7 @@
 #define PetFullness 0xB4
  
 #define InfoBasePtr 0x011EA2C8
-#define MapIDOffset 0x3F
+#define MapIDOffset 0xError
 #define CharXOffset 0xB5C
  
 #define StatsBasePtr 0x011E5AE8
@@ -48,7 +48,6 @@
 #define ItemBasePtr 0x011E9F84
 #define ItemCountOffset 0x14
  
-#define SendAddy 0x004CA210
-#define SendClassAddy 0x00490347
+#define SendAddy 0x004CA29D0
+#define SendClassAddy 0x00490F27
 #define ClientSocketAddy 0x011E1238
- 

@@ -223,6 +223,10 @@ private: System::Windows::Forms::CheckBox^  cbNoKB;
 private: System::Windows::Forms::CheckBox^  cbMobDisarm;
 private: System::Windows::Forms::CheckBox^  cbDojangGodmode;
 private: System::Windows::Forms::CheckBox^  cbUnlimitedMorph;
+private: System::Windows::Forms::CheckBox^  cbFasterMobs;
+private: System::Windows::Forms::CheckBox^  cbNDAllAttacks;
+private: System::Windows::Forms::CheckBox^  cbNoMobs;
+private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 
 
 	private: System::ComponentModel::IContainer^  components;
@@ -299,12 +303,16 @@ private: System::Windows::Forms::CheckBox^  cbUnlimitedMorph;
 			this->cbJDA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoBG = (gcnew System::Windows::Forms::CheckBox());
 			this->gbCharHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbNDAllAttacks = (gcnew System::Windows::Forms::CheckBox());
+			this->cbUnlimitedMorph = (gcnew System::Windows::Forms::CheckBox());
 			this->cbDojangGodmode = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoKB = (gcnew System::Windows::Forms::CheckBox());
 			this->cbInstantAirLoot = (gcnew System::Windows::Forms::CheckBox());
 			this->cbFusionAttack = (gcnew System::Windows::Forms::CheckBox());
 			this->cbPerfectLoot = (gcnew System::Windows::Forms::CheckBox());
 			this->MobHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbNoMobs = (gcnew System::Windows::Forms::CheckBox());
+			this->cbFasterMobs = (gcnew System::Windows::Forms::CheckBox());
 			this->cbMobDisarm = (gcnew System::Windows::Forms::CheckBox());
 			this->cbJumpRight = (gcnew System::Windows::Forms::CheckBox());
 			this->cbWalkRight = (gcnew System::Windows::Forms::CheckBox());
@@ -364,7 +372,7 @@ private: System::Windows::Forms::CheckBox^  cbUnlimitedMorph;
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SpamPacketsTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->cbUnlimitedMorph = (gcnew System::Windows::Forms::CheckBox());
+			this->cbAutoAggro = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -947,6 +955,7 @@ private: System::Windows::Forms::CheckBox^  cbUnlimitedMorph;
 			// 
 			// gbCharHacks
 			// 
+			this->gbCharHacks->Controls->Add(this->cbNDAllAttacks);
 			this->gbCharHacks->Controls->Add(this->cbUnlimitedMorph);
 			this->gbCharHacks->Controls->Add(this->cbDojangGodmode);
 			this->gbCharHacks->Controls->Add(this->cbNoKB);
@@ -959,6 +968,28 @@ private: System::Windows::Forms::CheckBox^  cbUnlimitedMorph;
 			this->gbCharHacks->TabIndex = 1;
 			this->gbCharHacks->TabStop = false;
 			this->gbCharHacks->Text = L"Character";
+			// 
+			// cbNDAllAttacks
+			// 
+			this->cbNDAllAttacks->AutoSize = true;
+			this->cbNDAllAttacks->Location = System::Drawing::Point(6, 88);
+			this->cbNDAllAttacks->Name = L"cbNDAllAttacks";
+			this->cbNDAllAttacks->Size = System::Drawing::Size(101, 17);
+			this->cbNDAllAttacks->TabIndex = 8;
+			this->cbNDAllAttacks->Text = L"ND - All Attacks";
+			this->cbNDAllAttacks->UseVisualStyleBackColor = true;
+			this->cbNDAllAttacks->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNDAllAttacks_CheckedChanged);
+			// 
+			// cbUnlimitedMorph
+			// 
+			this->cbUnlimitedMorph->AutoSize = true;
+			this->cbUnlimitedMorph->Location = System::Drawing::Point(159, 65);
+			this->cbUnlimitedMorph->Name = L"cbUnlimitedMorph";
+			this->cbUnlimitedMorph->Size = System::Drawing::Size(102, 17);
+			this->cbUnlimitedMorph->TabIndex = 7;
+			this->cbUnlimitedMorph->Text = L"Unlimited Morph";
+			this->cbUnlimitedMorph->UseVisualStyleBackColor = true;
+			this->cbUnlimitedMorph->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbUnlimitedMorph_CheckedChanged);
 			// 
 			// cbDojangGodmode
 			// 
@@ -1017,6 +1048,9 @@ private: System::Windows::Forms::CheckBox^  cbUnlimitedMorph;
 			// 
 			// MobHacks
 			// 
+			this->MobHacks->Controls->Add(this->cbAutoAggro);
+			this->MobHacks->Controls->Add(this->cbNoMobs);
+			this->MobHacks->Controls->Add(this->cbFasterMobs);
 			this->MobHacks->Controls->Add(this->cbMobDisarm);
 			this->MobHacks->Controls->Add(this->cbJumpRight);
 			this->MobHacks->Controls->Add(this->cbWalkRight);
@@ -1027,6 +1061,28 @@ private: System::Windows::Forms::CheckBox^  cbUnlimitedMorph;
 			this->MobHacks->TabIndex = 0;
 			this->MobHacks->TabStop = false;
 			this->MobHacks->Text = L"Mob";
+			// 
+			// cbNoMobs
+			// 
+			this->cbNoMobs->AutoSize = true;
+			this->cbNoMobs->Location = System::Drawing::Point(6, 133);
+			this->cbNoMobs->Name = L"cbNoMobs";
+			this->cbNoMobs->Size = System::Drawing::Size(69, 17);
+			this->cbNoMobs->TabIndex = 7;
+			this->cbNoMobs->Text = L"No Mobs";
+			this->cbNoMobs->UseVisualStyleBackColor = true;
+			this->cbNoMobs->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoMobs_CheckedChanged);
+			// 
+			// cbFasterMobs
+			// 
+			this->cbFasterMobs->AutoSize = true;
+			this->cbFasterMobs->Location = System::Drawing::Point(6, 111);
+			this->cbFasterMobs->Name = L"cbFasterMobs";
+			this->cbFasterMobs->Size = System::Drawing::Size(84, 17);
+			this->cbFasterMobs->TabIndex = 6;
+			this->cbFasterMobs->Text = L"Faster Mobs";
+			this->cbFasterMobs->UseVisualStyleBackColor = true;
+			this->cbFasterMobs->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbFasterMobs_CheckedChanged);
 			// 
 			// cbMobDisarm
 			// 
@@ -1581,16 +1637,16 @@ private: System::Windows::Forms::CheckBox^  cbUnlimitedMorph;
 			// 
 			this->SpamPacketsTimer->Tick += gcnew System::EventHandler(this, &MainForm::SpamPacketsTimer_Tick);
 			// 
-			// cbUnlimitedMorph
+			// cbAutoAggro
 			// 
-			this->cbUnlimitedMorph->AutoSize = true;
-			this->cbUnlimitedMorph->Location = System::Drawing::Point(159, 65);
-			this->cbUnlimitedMorph->Name = L"cbUnlimitedMorph";
-			this->cbUnlimitedMorph->Size = System::Drawing::Size(102, 17);
-			this->cbUnlimitedMorph->TabIndex = 7;
-			this->cbUnlimitedMorph->Text = L"Unlimited Morph";
-			this->cbUnlimitedMorph->UseVisualStyleBackColor = true;
-			this->cbUnlimitedMorph->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbUnlimitedMorph_CheckedChanged);
+			this->cbAutoAggro->AutoSize = true;
+			this->cbAutoAggro->Location = System::Drawing::Point(159, 19);
+			this->cbAutoAggro->Name = L"cbAutoAggro";
+			this->cbAutoAggro->Size = System::Drawing::Size(79, 17);
+			this->cbAutoAggro->TabIndex = 8;
+			this->cbAutoAggro->Text = L"Auto Aggro";
+			this->cbAutoAggro->UseVisualStyleBackColor = true;
+			this->cbAutoAggro->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbAutoAggro_CheckedChanged);
 			// 
 			// MainForm
 			// 
@@ -1694,6 +1750,10 @@ private: System::Windows::Forms::CheckBox^  cbUnlimitedMorph;
 	private: System::Void cbPinTyper_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void cbDojangGodmode_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void cbUnlimitedMorph_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbFasterMobs_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbNDAllAttacks_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbNoMobs_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbAutoAggro_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 };
 	}
 #pragma endregion
