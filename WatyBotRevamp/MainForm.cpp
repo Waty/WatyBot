@@ -372,6 +372,11 @@ void MainForm::cbAutoAggro_CheckedChanged(System::Object^  sender, System::Event
 {
 	Hacks::cmAutoAggro.Enable(cbAutoAggro->Checked);
 }
+void MainForm::cbSitHack_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmSitHack.Enable(cbSitHack->Checked);
+}
+
 #pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
 void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)

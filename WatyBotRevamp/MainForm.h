@@ -227,6 +227,7 @@ private: System::Windows::Forms::CheckBox^  cbFasterMobs;
 private: System::Windows::Forms::CheckBox^  cbNDAllAttacks;
 private: System::Windows::Forms::CheckBox^  cbNoMobs;
 private: System::Windows::Forms::CheckBox^  cbAutoAggro;
+private: System::Windows::Forms::CheckBox^  cbSitHack;
 
 
 	private: System::ComponentModel::IContainer^  components;
@@ -311,6 +312,7 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			this->cbFusionAttack = (gcnew System::Windows::Forms::CheckBox());
 			this->cbPerfectLoot = (gcnew System::Windows::Forms::CheckBox());
 			this->MobHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbAutoAggro = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoMobs = (gcnew System::Windows::Forms::CheckBox());
 			this->cbFasterMobs = (gcnew System::Windows::Forms::CheckBox());
 			this->cbMobDisarm = (gcnew System::Windows::Forms::CheckBox());
@@ -372,7 +374,7 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SpamPacketsTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->cbAutoAggro = (gcnew System::Windows::Forms::CheckBox());
+			this->cbSitHack = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -910,6 +912,7 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			// 
 			// gbMiscHacks
 			// 
+			this->gbMiscHacks->Controls->Add(this->cbSitHack);
 			this->gbMiscHacks->Controls->Add(this->cbPinTyper);
 			this->gbMiscHacks->Controls->Add(this->cbJDA);
 			this->gbMiscHacks->Controls->Add(this->cbNoBG);
@@ -1061,6 +1064,17 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			this->MobHacks->TabIndex = 0;
 			this->MobHacks->TabStop = false;
 			this->MobHacks->Text = L"Mob";
+			// 
+			// cbAutoAggro
+			// 
+			this->cbAutoAggro->AutoSize = true;
+			this->cbAutoAggro->Location = System::Drawing::Point(159, 19);
+			this->cbAutoAggro->Name = L"cbAutoAggro";
+			this->cbAutoAggro->Size = System::Drawing::Size(79, 17);
+			this->cbAutoAggro->TabIndex = 8;
+			this->cbAutoAggro->Text = L"Auto Aggro";
+			this->cbAutoAggro->UseVisualStyleBackColor = true;
+			this->cbAutoAggro->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbAutoAggro_CheckedChanged);
 			// 
 			// cbNoMobs
 			// 
@@ -1637,16 +1651,16 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			// 
 			this->SpamPacketsTimer->Tick += gcnew System::EventHandler(this, &MainForm::SpamPacketsTimer_Tick);
 			// 
-			// cbAutoAggro
+			// cbSitHack
 			// 
-			this->cbAutoAggro->AutoSize = true;
-			this->cbAutoAggro->Location = System::Drawing::Point(159, 19);
-			this->cbAutoAggro->Name = L"cbAutoAggro";
-			this->cbAutoAggro->Size = System::Drawing::Size(79, 17);
-			this->cbAutoAggro->TabIndex = 8;
-			this->cbAutoAggro->Text = L"Auto Aggro";
-			this->cbAutoAggro->UseVisualStyleBackColor = true;
-			this->cbAutoAggro->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbAutoAggro_CheckedChanged);
+			this->cbSitHack->AutoSize = true;
+			this->cbSitHack->Location = System::Drawing::Point(159, 19);
+			this->cbSitHack->Name = L"cbSitHack";
+			this->cbSitHack->Size = System::Drawing::Size(67, 17);
+			this->cbSitHack->TabIndex = 3;
+			this->cbSitHack->Text = L"Sit Hack";
+			this->cbSitHack->UseVisualStyleBackColor = true;
+			this->cbSitHack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbSitHack_CheckedChanged);
 			// 
 			// MainForm
 			// 
@@ -1754,6 +1768,7 @@ private: System::Void cbFasterMobs_CheckedChanged(System::Object^  sender, Syste
 private: System::Void cbNDAllAttacks_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNoMobs_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbAutoAggro_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbSitHack_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 };
 	}
 #pragma endregion

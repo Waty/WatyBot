@@ -133,4 +133,9 @@ namespace Hacks
 	DWORD dwNoKB = 0x008864BB;
 	BYTE bNoKB[] = {0x00};
 	CMemory cmNoKB(dwNoKB, bNoKB, 1);
+
+	/////	Sit Everywhere
+	DWORD dwSit = 0x00B6CE11;
+	BYTE bSit[] = {0x75};
+	CMemory cmSitHack(dwSit, bSit, 1);
 }
