@@ -1,3 +1,4 @@
+extern int getMapID();
 namespace Hacks
 {
 	//Updated to V87.2
@@ -138,4 +139,42 @@ namespace Hacks
 	DWORD dwSit = 0x00B6CE11;
 	BYTE bSit[] = {0x75};
 	CMemory cmSitHack(dwSit, bSit, 1);
+
+	/////	Spawn Control
+	DWORD dwSPControl = 0x00B9107A;
+	DWORD dwSPControlRet = dwSPControl + 6;
+	int spawn_x, spawn_y;
+
+	BOOL WINAPI GetCoords()
+	{
+		int iMapID = getMapID();
+		for(unsigned int i = 0; i < SPControlv.size(); i++)
+		{
+			if( iMapID == SPControlv.at(i).mapID )
+			{
+				spawn_x = SPControlv.at(i).x;
+				spawn_y = SPControlv.at(i).y;
+				return TRUE;
+			}
+		}
+		return FALSE;
+	}
+	CodeCave(SPControl)
+	{
+		push eax
+		call GetCoords
+		cmp eax,FALSE
+		pop eax
+		je SpawnNormal //if eax == false, jump to SpawnNormal
+		mov ebx,[spawn_x]
+		mov ebp,[spawn_y]
+        jmp [dwSPControlRet]
+ 
+		SpawnNormal:
+        mov ebx,[eax+0x0C]
+        mov ebp,[eax+0x10]
+        jmp [dwSPControlRet]
+	}
+	EndCodeCave
+	CMemory cmSPControl(dwSPControl, CaveSPControl, 1, true);
 }

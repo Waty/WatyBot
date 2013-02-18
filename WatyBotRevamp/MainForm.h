@@ -174,7 +174,8 @@ private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
 
 private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 private: System::Windows::Forms::TabPage^  SPControlTabPage;
-private: System::Windows::Forms::CheckBox^  SPControlCheckBox;
+private: System::Windows::Forms::CheckBox^  cbSPControl;
+
 private: System::Windows::Forms::TextBox^  CCAttacksTextBox;
 		 
 private: System::Windows::Forms::CheckBox^  CCAttacksCheckBox;
@@ -300,6 +301,7 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			this->HPBackground = (gcnew System::Windows::Forms::PictureBox());
 			this->HacksTab = (gcnew System::Windows::Forms::TabPage());
 			this->gbMiscHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbSitHack = (gcnew System::Windows::Forms::CheckBox());
 			this->cbPinTyper = (gcnew System::Windows::Forms::CheckBox());
 			this->cbJDA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoBG = (gcnew System::Windows::Forms::CheckBox());
@@ -348,7 +350,7 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			this->GetSPControlCoordsButton = (gcnew System::Windows::Forms::Button());
 			this->SPControlAddButton = (gcnew System::Windows::Forms::Button());
 			this->SPControlMapIDLabel = (gcnew System::Windows::Forms::Label());
-			this->SPControlCheckBox = (gcnew System::Windows::Forms::CheckBox());
+			this->cbSPControl = (gcnew System::Windows::Forms::CheckBox());
 			this->SPControlYTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->SPControlNameLabel = (gcnew System::Windows::Forms::Label());
 			this->SPControlXTextBox = (gcnew System::Windows::Forms::TextBox());
@@ -374,7 +376,6 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SpamPacketsTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->cbSitHack = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -923,6 +924,17 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			this->gbMiscHacks->TabStop = false;
 			this->gbMiscHacks->Text = L"Other";
 			// 
+			// cbSitHack
+			// 
+			this->cbSitHack->AutoSize = true;
+			this->cbSitHack->Location = System::Drawing::Point(159, 19);
+			this->cbSitHack->Name = L"cbSitHack";
+			this->cbSitHack->Size = System::Drawing::Size(67, 17);
+			this->cbSitHack->TabIndex = 3;
+			this->cbSitHack->Text = L"Sit Hack";
+			this->cbSitHack->UseVisualStyleBackColor = true;
+			this->cbSitHack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbSitHack_CheckedChanged);
+			// 
 			// cbPinTyper
 			// 
 			this->cbPinTyper->AutoSize = true;
@@ -1159,9 +1171,9 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			// 
 			// SavePacketsButton
 			// 
-			this->SavePacketsButton->Location = System::Drawing::Point(6, 367);
+			this->SavePacketsButton->Location = System::Drawing::Point(6, 356);
 			this->SavePacketsButton->Name = L"SavePacketsButton";
-			this->SavePacketsButton->Size = System::Drawing::Size(314, 23);
+			this->SavePacketsButton->Size = System::Drawing::Size(314, 35);
 			this->SavePacketsButton->TabIndex = 7;
 			this->SavePacketsButton->Text = L"Save Packets";
 			this->SavePacketsButton->UseVisualStyleBackColor = true;
@@ -1173,9 +1185,9 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			this->EditPacketGroupBox->Controls->Add(this->EditPacketPacketTextBox);
 			this->EditPacketGroupBox->Controls->Add(this->EditPacketNameTextBox);
 			this->EditPacketGroupBox->Controls->Add(this->SelectPacketForEditingComboBox);
-			this->EditPacketGroupBox->Location = System::Drawing::Point(6, 180);
+			this->EditPacketGroupBox->Location = System::Drawing::Point(6, 208);
 			this->EditPacketGroupBox->Name = L"EditPacketGroupBox";
-			this->EditPacketGroupBox->Size = System::Drawing::Size(314, 72);
+			this->EditPacketGroupBox->Size = System::Drawing::Size(314, 76);
 			this->EditPacketGroupBox->TabIndex = 6;
 			this->EditPacketGroupBox->TabStop = false;
 			this->EditPacketGroupBox->Text = L"Edit Packet";
@@ -1218,7 +1230,7 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			// 
 			this->DeletePacketsGroupBox->Controls->Add(this->DeletePacketComboBox);
 			this->DeletePacketsGroupBox->Controls->Add(this->DeletePacketButton);
-			this->DeletePacketsGroupBox->Location = System::Drawing::Point(6, 258);
+			this->DeletePacketsGroupBox->Location = System::Drawing::Point(6, 299);
 			this->DeletePacketsGroupBox->Name = L"DeletePacketsGroupBox";
 			this->DeletePacketsGroupBox->Size = System::Drawing::Size(314, 51);
 			this->DeletePacketsGroupBox->TabIndex = 5;
@@ -1251,9 +1263,9 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			this->AddPacketsGroupBox->Controls->Add(this->AddPacketNameTextBox);
 			this->AddPacketsGroupBox->Controls->Add(this->AddPacketPacketLabel);
 			this->AddPacketsGroupBox->Controls->Add(this->AddPacketNameLabel);
-			this->AddPacketsGroupBox->Location = System::Drawing::Point(6, 85);
+			this->AddPacketsGroupBox->Location = System::Drawing::Point(6, 101);
 			this->AddPacketsGroupBox->Name = L"AddPacketsGroupBox";
-			this->AddPacketsGroupBox->Size = System::Drawing::Size(314, 89);
+			this->AddPacketsGroupBox->Size = System::Drawing::Size(314, 94);
 			this->AddPacketsGroupBox->TabIndex = 4;
 			this->AddPacketsGroupBox->TabStop = false;
 			this->AddPacketsGroupBox->Text = L"Add Packets";
@@ -1309,16 +1321,16 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			this->SendPacketGroupBox->Controls->Add(this->SpamPacketTimesTextBox);
 			this->SendPacketGroupBox->Controls->Add(this->PacketSelectBox);
 			this->SendPacketGroupBox->Controls->Add(this->SendPacketButton);
-			this->SendPacketGroupBox->Location = System::Drawing::Point(6, 6);
+			this->SendPacketGroupBox->Location = System::Drawing::Point(6, 8);
 			this->SendPacketGroupBox->Name = L"SendPacketGroupBox";
-			this->SendPacketGroupBox->Size = System::Drawing::Size(314, 73);
+			this->SendPacketGroupBox->Size = System::Drawing::Size(314, 79);
 			this->SendPacketGroupBox->TabIndex = 3;
 			this->SendPacketGroupBox->TabStop = false;
 			this->SendPacketGroupBox->Text = L"Packet Sender";
 			// 
 			// SpamsPacketButton
 			// 
-			this->SpamsPacketButton->Location = System::Drawing::Point(6, 46);
+			this->SpamsPacketButton->Location = System::Drawing::Point(6, 48);
 			this->SpamsPacketButton->Name = L"SpamsPacketButton";
 			this->SpamsPacketButton->Size = System::Drawing::Size(100, 20);
 			this->SpamsPacketButton->TabIndex = 8;
@@ -1329,7 +1341,7 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			// SpamPacketsDelayLabel
 			// 
 			this->SpamPacketsDelayLabel->AutoSize = true;
-			this->SpamPacketsDelayLabel->Location = System::Drawing::Point(260, 50);
+			this->SpamPacketsDelayLabel->Location = System::Drawing::Point(260, 52);
 			this->SpamPacketsDelayLabel->Name = L"SpamPacketsDelayLabel";
 			this->SpamPacketsDelayLabel->Size = System::Drawing::Size(48, 13);
 			this->SpamPacketsDelayLabel->TabIndex = 7;
@@ -1337,7 +1349,7 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			// 
 			// SpamPacketsDelayTextBox
 			// 
-			this->SpamPacketsDelayTextBox->Location = System::Drawing::Point(224, 46);
+			this->SpamPacketsDelayTextBox->Location = System::Drawing::Point(224, 48);
 			this->SpamPacketsDelayTextBox->Name = L"SpamPacketsDelayTextBox";
 			this->SpamPacketsDelayTextBox->Size = System::Drawing::Size(30, 20);
 			this->SpamPacketsDelayTextBox->TabIndex = 6;
@@ -1345,7 +1357,7 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			// SpamPacketTimesLabel
 			// 
 			this->SpamPacketTimesLabel->AutoSize = true;
-			this->SpamPacketTimesLabel->Location = System::Drawing::Point(158, 50);
+			this->SpamPacketTimesLabel->Location = System::Drawing::Point(158, 52);
 			this->SpamPacketTimesLabel->Name = L"SpamPacketTimesLabel";
 			this->SpamPacketTimesLabel->Size = System::Drawing::Size(60, 13);
 			this->SpamPacketTimesLabel->TabIndex = 5;
@@ -1353,7 +1365,7 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			// 
 			// SpamPacketTimesTextBox
 			// 
-			this->SpamPacketTimesTextBox->Location = System::Drawing::Point(113, 46);
+			this->SpamPacketTimesTextBox->Location = System::Drawing::Point(113, 48);
 			this->SpamPacketTimesTextBox->Name = L"SpamPacketTimesTextBox";
 			this->SpamPacketTimesTextBox->Size = System::Drawing::Size(41, 20);
 			this->SpamPacketTimesTextBox->TabIndex = 4;
@@ -1393,7 +1405,7 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			this->SPControlGroupBox->Controls->Add(this->GetSPControlCoordsButton);
 			this->SPControlGroupBox->Controls->Add(this->SPControlAddButton);
 			this->SPControlGroupBox->Controls->Add(this->SPControlMapIDLabel);
-			this->SPControlGroupBox->Controls->Add(this->SPControlCheckBox);
+			this->SPControlGroupBox->Controls->Add(this->cbSPControl);
 			this->SPControlGroupBox->Controls->Add(this->SPControlYTextBox);
 			this->SPControlGroupBox->Controls->Add(this->SPControlNameLabel);
 			this->SPControlGroupBox->Controls->Add(this->SPControlXTextBox);
@@ -1437,15 +1449,16 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			this->SPControlMapIDLabel->Text = L"MapID";
 			this->SPControlMapIDLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
-			// SPControlCheckBox
+			// cbSPControl
 			// 
-			this->SPControlCheckBox->Location = System::Drawing::Point(235, 63);
-			this->SPControlCheckBox->Name = L"SPControlCheckBox";
-			this->SPControlCheckBox->Size = System::Drawing::Size(66, 17);
-			this->SPControlCheckBox->TabIndex = 27;
-			this->SPControlCheckBox->Text = L"Enable";
-			this->SPControlCheckBox->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			this->SPControlCheckBox->UseVisualStyleBackColor = true;
+			this->cbSPControl->Location = System::Drawing::Point(235, 63);
+			this->cbSPControl->Name = L"cbSPControl";
+			this->cbSPControl->Size = System::Drawing::Size(66, 17);
+			this->cbSPControl->TabIndex = 27;
+			this->cbSPControl->Text = L"Enable";
+			this->cbSPControl->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->cbSPControl->UseVisualStyleBackColor = true;
+			this->cbSPControl->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbSPControl_CheckedChanged);
 			// 
 			// SPControlYTextBox
 			// 
@@ -1651,17 +1664,6 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			// 
 			this->SpamPacketsTimer->Tick += gcnew System::EventHandler(this, &MainForm::SpamPacketsTimer_Tick);
 			// 
-			// cbSitHack
-			// 
-			this->cbSitHack->AutoSize = true;
-			this->cbSitHack->Location = System::Drawing::Point(159, 19);
-			this->cbSitHack->Name = L"cbSitHack";
-			this->cbSitHack->Size = System::Drawing::Size(67, 17);
-			this->cbSitHack->TabIndex = 3;
-			this->cbSitHack->Text = L"Sit Hack";
-			this->cbSitHack->UseVisualStyleBackColor = true;
-			this->cbSitHack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbSitHack_CheckedChanged);
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1675,7 +1677,7 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot - V1.8 - CCPLZ! - EMS 86.1";
+			this->Text = L"WatyBot - V1.9 - CCPLZ! - EMS 87.2";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
@@ -1769,6 +1771,7 @@ private: System::Void cbNDAllAttacks_CheckedChanged(System::Object^  sender, Sys
 private: System::Void cbNoMobs_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbAutoAggro_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbSitHack_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbSPControl_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 };
 	}
 #pragma endregion

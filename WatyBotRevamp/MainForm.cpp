@@ -88,7 +88,7 @@ bool SendPacketFunction(String^ strPacket, String^&strError){
 }
 void NextChannel()
 {
-	String^ CCString = "3E 00 0* ** ** 5B 00 ";
+	String^ CCString = "3F 00 0* ** ** 5B 00 ";
     String^ strError = String::Empty;
 	if(!SendPacketFunction(CCString->Replace(" ", ""),strError))
         MessageBox::Show(strError);
@@ -104,7 +104,7 @@ void NextChannel()
 	int getCharHP(){			WritePointer(SettingsBasePtr, HPAlertOffset, 20);return (int) ReadPointer(StatsBasePtr, HPOffset);}
 	int getCharMP(){			WritePointer(SettingsBasePtr, MPAlertOffset, 20);return (int) ReadPointer(StatsBasePtr, MPOffset);}
 	double getCharEXP(){		return ReadDoublePointer(StatsBasePtr, EXPOffset);}
-	int getMapID(){				return (int) 0;}//ReadPointer(InfoBasePtr, MapIDOffset);}
+	int getMapID(){				return (int) ReadPointer(InfoBasePtr, MapIDOffset);}
 	int getAttackCount(){		return (int) ReadPointer(CharBasePtr, AttackCountOffset);}
 	int getTubiValue(){			return (int) ReadPointer(ServerBasePtr, TubiOffset);}
 	int getBreathValue(){		return (int) ReadPointer(CharBasePtr, BreathOffset);}
@@ -662,6 +662,11 @@ void MainForm::RefreshComboBoxes()
 }
 
 //controls on SPControl Tab
+void MainForm::cbSPControl_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmSPControl.Enable(cbSPControl->Checked);
+}
+
 void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	SPControl::AddSPControl(marshal_as<string>(SPControlNameTextBox->Text), Convert::ToInt32(SPControlMapIDTextBox->Text), Convert::ToInt32(SPControlXTextBox->Text), Convert::ToInt32(SPControlYTextBox->Text));
