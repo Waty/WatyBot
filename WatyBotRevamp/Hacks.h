@@ -1,4 +1,6 @@
 extern int getMapID();
+extern int getCharX();
+extern int getCharY();
 namespace Hacks
 {
 	//Updated to V87.2
@@ -166,6 +168,8 @@ namespace Hacks
 		cmp eax,FALSE
 		pop eax
 		je SpawnNormal //if eax == false, jump to SpawnNormal
+
+		//Spawn on controlled location
 		mov ebx,[spawn_x]
 		mov ebp,[spawn_y]
         jmp [dwSPControlRet]
@@ -177,4 +181,53 @@ namespace Hacks
 	}
 	EndCodeCave
 	CMemory cmSPControl(dwSPControl, CaveSPControl, 1, true);
+
+	/////	50 Seconds Godmode
+	DWORD dw50SecGM1 = 0x00ba845e;
+	DWORD dw50SecGM2 = 0x00ba8477+2;
+	BYTE b50SecGM1[] = {0x7E};
+	BYTE b50SecGM2[] = {0xD4, 0x36};
+	CMemory cm50SecGM(dw50SecGM1, b50SecGM1, 1, dw50SecGM2, b50SecGM2, 2);
+
+	/////	Logo Skipper
+	DWORD dwLogoSkipper = 0x0069F2F0;
+	BYTE bLogoSkipper[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0xE9, 0xA5, 0xE2, 0xFF, 0xFF, 0x90, 0x90, 0x90, 0x90, 0x90};
+	CMemory cmLogoSkipper(dwLogoSkipper, bLogoSkipper, sizeof(bLogoSkipper));
+
+	/////	(semi) Item Vac
+	DWORD dwItemVac = 0x006D2664; // E8 ? ? ? ? 8B C8 8B 44 24 ? 89 38 5F 89 48 ? 5E C2 04 00 CC CC CC CC CC CC CC 56 - 4th result
+	DWORD dwItemVacCall = 0x006E6790;
+	int itemvac_x = 0;
+	int itemvac_y = 0;
+	VOID WINAPI getItemVacCoords()
+	{
+		itemvac_x = getCharX();
+		itemvac_y = getCharY();
+	}
+	CodeCave(ItemVac)
+	{
+		call dwItemVacCall //Original Opcode
+		call getItemVacCoords
+		mov ecx,eax
+		mov eax,[esp+0x0C]
+		mov edi,[itemvac_x]
+		mov [eax],edi //X
+		pop edi
+		mov esi,[itemvac_y]
+		mov [eax+04],esi //Y
+		pop esi
+		ret 0004
+	}
+	EndCodeCave 
+	CMemory cmItemVac(dwItemVac, CaveItemVac, 0, true);
+
+	/////	View Swears
+	DWORD NoSwearsAddy = 0x0087888B;	//74 ? 80 3e 00 75 ? 0f b6 13
+	BYTE bNoSwears[] = {0x90, 0x90};
+	CMemory cmNoSwears(NoSwearsAddy, bNoSwears, 2);
+
+	/////	FMA
+	DWORD FMAAddy = 0x74989260;
+	BYTE bFMA[] = {0xE9, 0x9B, 0x6D, 0xFC, 0x9A};
+	CMemory cmFMA(FMAAddy, bFMA, sizeof(bFMA));
 }

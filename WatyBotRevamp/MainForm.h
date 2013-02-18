@@ -229,6 +229,11 @@ private: System::Windows::Forms::CheckBox^  cbNDAllAttacks;
 private: System::Windows::Forms::CheckBox^  cbNoMobs;
 private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 private: System::Windows::Forms::CheckBox^  cbSitHack;
+private: System::Windows::Forms::CheckBox^  cb50SecGM;
+private: System::Windows::Forms::CheckBox^  cbLogoSkipper;
+private: System::Windows::Forms::CheckBox^  cbViewSwears;
+private: System::Windows::Forms::CheckBox^  cbItemVac;
+private: System::Windows::Forms::CheckBox^  cbFMA;
 
 
 	private: System::ComponentModel::IContainer^  components;
@@ -301,11 +306,15 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			this->HPBackground = (gcnew System::Windows::Forms::PictureBox());
 			this->HacksTab = (gcnew System::Windows::Forms::TabPage());
 			this->gbMiscHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbViewSwears = (gcnew System::Windows::Forms::CheckBox());
+			this->cbLogoSkipper = (gcnew System::Windows::Forms::CheckBox());
 			this->cbSitHack = (gcnew System::Windows::Forms::CheckBox());
 			this->cbPinTyper = (gcnew System::Windows::Forms::CheckBox());
 			this->cbJDA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoBG = (gcnew System::Windows::Forms::CheckBox());
 			this->gbCharHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbItemVac = (gcnew System::Windows::Forms::CheckBox());
+			this->cb50SecGM = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNDAllAttacks = (gcnew System::Windows::Forms::CheckBox());
 			this->cbUnlimitedMorph = (gcnew System::Windows::Forms::CheckBox());
 			this->cbDojangGodmode = (gcnew System::Windows::Forms::CheckBox());
@@ -376,6 +385,7 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SpamPacketsTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->cbFMA = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -913,6 +923,8 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			// 
 			// gbMiscHacks
 			// 
+			this->gbMiscHacks->Controls->Add(this->cbViewSwears);
+			this->gbMiscHacks->Controls->Add(this->cbLogoSkipper);
 			this->gbMiscHacks->Controls->Add(this->cbSitHack);
 			this->gbMiscHacks->Controls->Add(this->cbPinTyper);
 			this->gbMiscHacks->Controls->Add(this->cbJDA);
@@ -923,6 +935,28 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			this->gbMiscHacks->TabIndex = 2;
 			this->gbMiscHacks->TabStop = false;
 			this->gbMiscHacks->Text = L"Other";
+			// 
+			// cbViewSwears
+			// 
+			this->cbViewSwears->AutoSize = true;
+			this->cbViewSwears->Location = System::Drawing::Point(159, 65);
+			this->cbViewSwears->Name = L"cbViewSwears";
+			this->cbViewSwears->Size = System::Drawing::Size(87, 17);
+			this->cbViewSwears->TabIndex = 5;
+			this->cbViewSwears->Text = L"View Swears";
+			this->cbViewSwears->UseVisualStyleBackColor = true;
+			this->cbViewSwears->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbViewSwears_CheckedChanged);
+			// 
+			// cbLogoSkipper
+			// 
+			this->cbLogoSkipper->AutoSize = true;
+			this->cbLogoSkipper->Location = System::Drawing::Point(159, 42);
+			this->cbLogoSkipper->Name = L"cbLogoSkipper";
+			this->cbLogoSkipper->Size = System::Drawing::Size(89, 17);
+			this->cbLogoSkipper->TabIndex = 4;
+			this->cbLogoSkipper->Text = L"Logo Skipper";
+			this->cbLogoSkipper->UseVisualStyleBackColor = true;
+			this->cbLogoSkipper->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbLogoSkipper_CheckedChanged);
 			// 
 			// cbSitHack
 			// 
@@ -970,6 +1004,9 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			// 
 			// gbCharHacks
 			// 
+			this->gbCharHacks->Controls->Add(this->cbFMA);
+			this->gbCharHacks->Controls->Add(this->cbItemVac);
+			this->gbCharHacks->Controls->Add(this->cb50SecGM);
 			this->gbCharHacks->Controls->Add(this->cbNDAllAttacks);
 			this->gbCharHacks->Controls->Add(this->cbUnlimitedMorph);
 			this->gbCharHacks->Controls->Add(this->cbDojangGodmode);
@@ -979,10 +1016,32 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			this->gbCharHacks->Controls->Add(this->cbPerfectLoot);
 			this->gbCharHacks->Location = System::Drawing::Point(7, 3);
 			this->gbCharHacks->Name = L"gbCharHacks";
-			this->gbCharHacks->Size = System::Drawing::Size(310, 118);
+			this->gbCharHacks->Size = System::Drawing::Size(310, 140);
 			this->gbCharHacks->TabIndex = 1;
 			this->gbCharHacks->TabStop = false;
 			this->gbCharHacks->Text = L"Character";
+			// 
+			// cbItemVac
+			// 
+			this->cbItemVac->AutoSize = true;
+			this->cbItemVac->Location = System::Drawing::Point(6, 111);
+			this->cbItemVac->Name = L"cbItemVac";
+			this->cbItemVac->Size = System::Drawing::Size(68, 17);
+			this->cbItemVac->TabIndex = 10;
+			this->cbItemVac->Text = L"Item Vac";
+			this->cbItemVac->UseVisualStyleBackColor = true;
+			this->cbItemVac->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbItemVac_CheckedChanged);
+			// 
+			// cb50SecGM
+			// 
+			this->cb50SecGM->AutoSize = true;
+			this->cb50SecGM->Location = System::Drawing::Point(6, 42);
+			this->cb50SecGM->Name = L"cb50SecGM";
+			this->cb50SecGM->Size = System::Drawing::Size(132, 17);
+			this->cb50SecGM->TabIndex = 9;
+			this->cb50SecGM->Text = L"50 Seconds Godmode";
+			this->cb50SecGM->UseVisualStyleBackColor = true;
+			this->cb50SecGM->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cb50SecGM_CheckedChanged);
 			// 
 			// cbNDAllAttacks
 			// 
@@ -1009,7 +1068,7 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			// cbDojangGodmode
 			// 
 			this->cbDojangGodmode->AutoSize = true;
-			this->cbDojangGodmode->Location = System::Drawing::Point(6, 42);
+			this->cbDojangGodmode->Location = System::Drawing::Point(6, 19);
 			this->cbDojangGodmode->Name = L"cbDojangGodmode";
 			this->cbDojangGodmode->Size = System::Drawing::Size(109, 17);
 			this->cbDojangGodmode->TabIndex = 6;
@@ -1042,7 +1101,7 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			// cbFusionAttack
 			// 
 			this->cbFusionAttack->AutoSize = true;
-			this->cbFusionAttack->Location = System::Drawing::Point(6, 19);
+			this->cbFusionAttack->Location = System::Drawing::Point(159, 88);
 			this->cbFusionAttack->Name = L"cbFusionAttack";
 			this->cbFusionAttack->Size = System::Drawing::Size(91, 17);
 			this->cbFusionAttack->TabIndex = 0;
@@ -1070,9 +1129,9 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			this->MobHacks->Controls->Add(this->cbJumpRight);
 			this->MobHacks->Controls->Add(this->cbWalkRight);
 			this->MobHacks->Controls->Add(this->cbVacRight);
-			this->MobHacks->Location = System::Drawing::Point(7, 127);
+			this->MobHacks->Location = System::Drawing::Point(7, 149);
 			this->MobHacks->Name = L"MobHacks";
-			this->MobHacks->Size = System::Drawing::Size(310, 156);
+			this->MobHacks->Size = System::Drawing::Size(310, 134);
 			this->MobHacks->TabIndex = 0;
 			this->MobHacks->TabStop = false;
 			this->MobHacks->Text = L"Mob";
@@ -1091,7 +1150,7 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			// cbNoMobs
 			// 
 			this->cbNoMobs->AutoSize = true;
-			this->cbNoMobs->Location = System::Drawing::Point(6, 133);
+			this->cbNoMobs->Location = System::Drawing::Point(159, 42);
 			this->cbNoMobs->Name = L"cbNoMobs";
 			this->cbNoMobs->Size = System::Drawing::Size(69, 17);
 			this->cbNoMobs->TabIndex = 7;
@@ -1664,6 +1723,17 @@ private: System::Windows::Forms::CheckBox^  cbSitHack;
 			// 
 			this->SpamPacketsTimer->Tick += gcnew System::EventHandler(this, &MainForm::SpamPacketsTimer_Tick);
 			// 
+			// cbFMA
+			// 
+			this->cbFMA->AutoSize = true;
+			this->cbFMA->Location = System::Drawing::Point(159, 111);
+			this->cbFMA->Name = L"cbFMA";
+			this->cbFMA->Size = System::Drawing::Size(48, 17);
+			this->cbFMA->TabIndex = 11;
+			this->cbFMA->Text = L"FMA";
+			this->cbFMA->UseVisualStyleBackColor = true;
+			this->cbFMA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbFMA_CheckedChanged);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1772,6 +1842,11 @@ private: System::Void cbNoMobs_CheckedChanged(System::Object^  sender, System::E
 private: System::Void cbAutoAggro_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbSitHack_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbSPControl_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cb50SecGM_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbLogoSkipper_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbViewSwears_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbItemVac_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbFMA_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 };
 	}
 #pragma endregion

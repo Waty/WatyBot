@@ -376,6 +376,28 @@ void MainForm::cbSitHack_CheckedChanged(System::Object^  sender, System::EventAr
 {
 	Hacks::cmSitHack.Enable(cbSitHack->Checked);
 }
+void MainForm::cb50SecGM_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cm50SecGM.Enable(cb50SecGM->Checked);
+}
+void MainForm::cbLogoSkipper_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmLogoSkipper.Enable(cbLogoSkipper->Checked);
+}
+void MainForm::cbViewSwears_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmNoSwears.Enable(cbViewSwears->Checked);
+}
+void MainForm::cbItemVac_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::itemvac_x = getCharX();
+	Hacks::itemvac_y = getCharY();
+	Hacks::cmItemVac.Enable(cbItemVac->Checked);
+}
+void MainForm::cbFMA_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmFMA.Enable(cbFMA->Checked);
+}
 
 #pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
@@ -554,7 +576,7 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 	SPControl::WriteXML(SPControlFileName);
 	WritePacketXML(PacketFileName);
 	SaveSettings();
-	switch(MessageBoxA(NULL, "Close MapleStory too?", "Terminate Maple?", MB_ICONQUESTION | MB_YESNO))
+	switch(MessageBoxA(NULL, "Close MapleStory too?", "Terminate Maple?", MB_ICONQUESTION | MB_YESNOCANCEL))
 	{
 	case IDYES:
 		{
@@ -562,6 +584,11 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 			ExitProcess(0);
 		}
 		break;
+	case IDCANCEL:
+		{
+			e->Cancel = true;
+		}
+
 	}
 }
 
