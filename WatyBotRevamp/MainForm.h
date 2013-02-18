@@ -313,6 +313,7 @@ private: System::Windows::Forms::CheckBox^  cbFMA;
 			this->cbJDA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoBG = (gcnew System::Windows::Forms::CheckBox());
 			this->gbCharHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbFMA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbItemVac = (gcnew System::Windows::Forms::CheckBox());
 			this->cb50SecGM = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNDAllAttacks = (gcnew System::Windows::Forms::CheckBox());
@@ -385,7 +386,6 @@ private: System::Windows::Forms::CheckBox^  cbFMA;
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SpamPacketsTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->cbFMA = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1020,6 +1020,17 @@ private: System::Windows::Forms::CheckBox^  cbFMA;
 			this->gbCharHacks->TabIndex = 1;
 			this->gbCharHacks->TabStop = false;
 			this->gbCharHacks->Text = L"Character";
+			// 
+			// cbFMA
+			// 
+			this->cbFMA->AutoSize = true;
+			this->cbFMA->Location = System::Drawing::Point(159, 111);
+			this->cbFMA->Name = L"cbFMA";
+			this->cbFMA->Size = System::Drawing::Size(48, 17);
+			this->cbFMA->TabIndex = 11;
+			this->cbFMA->Text = L"FMA";
+			this->cbFMA->UseVisualStyleBackColor = true;
+			this->cbFMA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbFMA_CheckedChanged);
 			// 
 			// cbItemVac
 			// 
@@ -1723,17 +1734,6 @@ private: System::Windows::Forms::CheckBox^  cbFMA;
 			// 
 			this->SpamPacketsTimer->Tick += gcnew System::EventHandler(this, &MainForm::SpamPacketsTimer_Tick);
 			// 
-			// cbFMA
-			// 
-			this->cbFMA->AutoSize = true;
-			this->cbFMA->Location = System::Drawing::Point(159, 111);
-			this->cbFMA->Name = L"cbFMA";
-			this->cbFMA->Size = System::Drawing::Size(48, 17);
-			this->cbFMA->TabIndex = 11;
-			this->cbFMA->Text = L"FMA";
-			this->cbFMA->UseVisualStyleBackColor = true;
-			this->cbFMA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbFMA_CheckedChanged);
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1747,7 +1747,7 @@ private: System::Windows::Forms::CheckBox^  cbFMA;
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot - V1.9 - CCPLZ! - EMS 87.2";
+			this->Text = L"WatyBot - V2.0 - CCPLZ! - EMS 87.2";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
