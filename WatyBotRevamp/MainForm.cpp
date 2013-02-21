@@ -105,14 +105,10 @@ void NextChannel()
 {
 	while(getBreathValue() > 0)
 		Sleep(100);
-	Sleep(100);
-	
-	Random^ random = gcnew Random();
-	CField_SendTransferChannelRequest(5);
-	/*String^ CCString = "3F 00 0* ** ** 5B 00";
-    String^ strError = String::Empty;
-	if(!SendPacketFunction(CCString->Replace(" ", ""),strError))
-        MessageBox::Show(strError);*/
+	Sleep(250);
+	channel++;
+	if(channel == 14) channel = 0;
+	CField_SendTransferChannelRequest(channel);
 }
 #pragma endregion
 
@@ -344,49 +340,71 @@ void MainForm::cbCPUHack_CheckedChanged(System::Object^  sender, System::EventAr
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
 void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	if(this->HPTextBox->Text->Empty)
+	if(HPCheckBox->Checked)
 	{
-		MessageBox::Show("Input was not valid");
-		HPCheckBox->Checked = false;
+		try
+		{
+			int::Parse(tbHPValue->Text);
+			tbHPValue->Enabled = false;
+			HPComboBox->Enabled = false;
+		}
+		catch(Exception^ exception)
+		{
+			::MessageBox::Show(exception->ToString());
+			HPCheckBox->Checked = false;
+			tbHPValue->Enabled = true;
+			HPComboBox->Enabled = true;
+		}
 	}
-	else
-	{
-		this->HPComboBox->Enabled = !this->HPCheckBox->Checked;
-		this->HPTextBox->Enabled = !this->HPCheckBox->Checked;
-	}		
 }
 void MainForm::MPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{		
-	if(this->MPTextBox->Text == "")
+{
+	if(MPCheckBox->Checked)
 	{
-		MessageBox::Show("Input was not valid");
-		MPCheckBox->Checked = false;
-	}
-	else
-	{
-		this->MPComboBox->Enabled = !this->MPCheckBox->Checked;
-		this->MPTextBox->Enabled = !this->MPCheckBox->Checked;
+		try
+		{
+			int::Parse(tbMPValue->Text);
+			tbMPValue->Enabled = false;
+			MPComboBox->Enabled = false;
+		}
+		catch(Exception^ exception)
+		{
+			::MessageBox::Show(exception->ToString());
+			MPCheckBox->Checked = false;
+			tbMPValue->Enabled = true;
+			MPComboBox->Enabled = true;
+		}
 	}
 }
 void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	this->AttackComboBox->Enabled = !this->AttackCheckBox->Checked;
-	this->tbAttackDelay->Enabled = !this->AttackCheckBox->Checked;
-	this->tbSAWSIL->Enabled = !this->AttackCheckBox->Checked;
-	
-	if(!tbAttackDelay->Text->Empty)
-		this->AttackTimer->Interval = Convert::ToInt32(this->tbAttackDelay->Text);
-	this->AttackTimer->Enabled = this->AttackCheckBox->Checked;
+	try
+	{
+		this->AttackTimer->Interval = int::Parse(this->tbAttackDelay->Text);
+		this->AttackComboBox->Enabled = !this->AttackCheckBox->Checked;
+		this->tbAttackDelay->Enabled = !this->AttackCheckBox->Checked;
+		this->tbSAWSIL->Enabled = !this->AttackCheckBox->Checked;
+		this->AttackTimer->Enabled = this->AttackCheckBox->Checked;
+	}
+	catch(Exception^ ex)
+	{
+		::MessageBox::Show("Please Report the following error: " + ex->ToString());
+	}
 }
 void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	this->LootComboBox->Enabled = !this->LootCheckBox->Checked;
-	this->tbLootDelay->Enabled = !this->LootCheckBox->Checked;
-	this->tbSAWSIL->Enabled = !this->LootCheckBox->Checked;
-	
-	if(!tbLootDelay->Text->Empty)
-		this->LootTimer->Interval = Convert::ToInt32(this->tbLootDelay->Text);
-	this->LootTimer->Enabled = this->LootCheckBox->Checked;
+	try
+	{
+		this->LootTimer->Interval = int::Parse(this->tbLootDelay->Text);
+		this->LootComboBox->Enabled = !this->LootCheckBox->Checked;
+		this->tbLootDelay->Enabled = !this->LootCheckBox->Checked;
+		this->tbSLWIB->Enabled = !this->LootCheckBox->Checked;
+		this->LootTimer->Enabled = this->LootCheckBox->Checked;
+	}
+	catch(Exception^ ex)
+	{
+		::MessageBox::Show("Please Report the following error: " + ex->ToString());
+	}
 }
 void MainForm::AttackTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
@@ -493,8 +511,6 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 
 	NewThread(getMSHWND);
 
-	//AttachConsole(GetCurrentProcessId());
-
 	if(!Directory::Exists("WatyBot"))Directory::CreateDirectory("WatyBot");
 	if(File::Exists(marshal_as<String^>(PacketFileName)))
 		ReadPacketXML(PacketFileName);
@@ -515,16 +531,16 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	this->TubiPointerLabel->Text =	"Tubi: "	+getTubiValue();
 	this->BreathLabel->Text =		"Breath: "	+ getBreathValue();
 	
-	AutoPot();
-	RedrawStatBars();
+	MainForm::AutoPot();
+	MainForm::RedrawStatBars();
 }
 void MainForm::AutoPot()
 {
 	if(HPCheckBox->Checked)
-	{		
+	{
 		int HPKey = KeyCodes[HPComboBox->SelectedIndex];
 		LPARAM HPlParam = (MapVirtualKey(HPKey, 0) << 16) + 1;
-		if(getCharHP() <= Convert::ToInt32(HPCheckBox->Text))
+		if(getCharHP() <= Convert::ToInt32(tbHPValue->Text))
 		{
 			PostMessage(MapleStoryHWND, WM_KEYDOWN, HPKey, HPlParam);
 		}
@@ -533,7 +549,7 @@ void MainForm::AutoPot()
 	{
 		int MPKey = KeyCodes[MPComboBox->SelectedIndex];
 		LPARAM MPlParam = (MapVirtualKey(MPKey, 0) << 16) + 1;
-		if(getCharMP() <= Convert::ToInt32(MPCheckBox->Text))
+		if(getCharMP() <= Convert::ToInt32(tbMPValue->Text))
 		{
 			PostMessage(MapleStoryHWND, WM_KEYDOWN, MPKey, MPlParam);
 		}
@@ -756,11 +772,11 @@ void MainForm::SaveSettings()
 	pt.add("LootDelay", Convert::ToInt32(this->tbLootDelay->Text));
 	pt.add("LootKey", this->LootComboBox->SelectedIndex);
 
-	if(this->HPTextBox->Text != String::Empty)
-		pt.add("AutoHPValue", Convert::ToInt32(this->HPTextBox->Text));
+	if(this->tbHPValue->Text != String::Empty)
+		pt.add("AutoHPValue", Convert::ToInt32(this->tbHPValue->Text));
 	pt.add("AutoHPKey", this->HPComboBox->SelectedIndex);
-	if(this->MPTextBox->Text != String::Empty)
-		pt.add("AutoMPValue", Convert::ToInt32(this->MPTextBox->Text));
+	if(this->tbMPValue->Text != String::Empty)
+		pt.add("AutoMPValue", Convert::ToInt32(this->tbMPValue->Text));
 	pt.add("AutoMPKey", this->MPComboBox->SelectedIndex);
 
 	if(this->AutoSkill1TextBox->Text != String::Empty)
@@ -799,9 +815,9 @@ void MainForm::LoadSettings()
 	this->AttackComboBox->SelectedIndex = pt.get<int>("AutoAttackKey", 0);
 	this->LootComboBox->SelectedIndex = pt.get<int>("LootKey");
 	this->tbLootDelay->Text = marshal_as<String^>(pt.get<string>("LootDelay", "50"));
-	this->HPTextBox->Text = marshal_as<String^>(pt.get<string>("AutoHPValue", "9000"));
+	this->tbHPValue->Text = marshal_as<String^>(pt.get<string>("AutoHPValue", "9000"));
 	this->HPComboBox->SelectedIndex = pt.get<int>("AutoHPKey");
-	this->MPTextBox->Text = marshal_as<String^>(pt.get<string>("AutoMPValue", "100"));
+	this->tbMPValue->Text = marshal_as<String^>(pt.get<string>("AutoMPValue", "100"));
 	this->MPComboBox->SelectedIndex = pt.get<int>("AutoMPKey");
 	this->AutoSkill1ComboBox->SelectedIndex = pt.get<int>("AutoSkill1Key");
 	this->AutoSkill2ComboBox->SelectedIndex = pt.get<int>("AutoSkill2Key");

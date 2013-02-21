@@ -78,11 +78,13 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::CheckBox^  HPCheckBox;
 
 	private: System::Windows::Forms::ComboBox^  HPComboBox;
-	private: System::Windows::Forms::TextBox^  HPTextBox;
+	private: System::Windows::Forms::TextBox^  tbHPValue;
+
 
 
 	private: System::Windows::Forms::ComboBox^  MPComboBox;
-	private: System::Windows::Forms::TextBox^  MPTextBox;
+	private: System::Windows::Forms::TextBox^  tbMPValue;
+
 	private: System::Windows::Forms::CheckBox^  MPCheckBox;
 	private: System::Windows::Forms::ComboBox^  AttackComboBox;
 
@@ -328,12 +330,12 @@ private: System::Windows::Forms::Timer^  LootTimer;
 			this->AutoSkill1CheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->HPCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->AutoSkill1TextBox = (gcnew System::Windows::Forms::TextBox());
-			this->HPTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->tbHPValue = (gcnew System::Windows::Forms::TextBox());
 			this->AutoSkill1ComboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->HPComboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->MPCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->LootComboBox = (gcnew System::Windows::Forms::ComboBox());
-			this->MPTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->tbMPValue = (gcnew System::Windows::Forms::TextBox());
 			this->LootCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->MPComboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->lAttackMS = (gcnew System::Windows::Forms::Label());
@@ -525,12 +527,12 @@ private: System::Windows::Forms::Timer^  LootTimer;
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill1CheckBox);
 			this->AutoBotGroupBox->Controls->Add(this->HPCheckBox);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill1TextBox);
-			this->AutoBotGroupBox->Controls->Add(this->HPTextBox);
+			this->AutoBotGroupBox->Controls->Add(this->tbHPValue);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill1ComboBox);
 			this->AutoBotGroupBox->Controls->Add(this->HPComboBox);
 			this->AutoBotGroupBox->Controls->Add(this->MPCheckBox);
 			this->AutoBotGroupBox->Controls->Add(this->LootComboBox);
-			this->AutoBotGroupBox->Controls->Add(this->MPTextBox);
+			this->AutoBotGroupBox->Controls->Add(this->tbMPValue);
 			this->AutoBotGroupBox->Controls->Add(this->LootCheckBox);
 			this->AutoBotGroupBox->Controls->Add(this->MPComboBox);
 			this->AutoBotGroupBox->Controls->Add(this->lAttackMS);
@@ -809,13 +811,13 @@ private: System::Windows::Forms::Timer^  LootTimer;
 			this->AutoSkill1TextBox->Size = System::Drawing::Size(102, 20);
 			this->AutoSkill1TextBox->TabIndex = 14;
 			// 
-			// HPTextBox
+			// tbHPValue
 			// 
-			this->HPTextBox->Location = System::Drawing::Point(91, 69);
-			this->HPTextBox->MaxLength = 10;
-			this->HPTextBox->Name = L"HPTextBox";
-			this->HPTextBox->Size = System::Drawing::Size(102, 20);
-			this->HPTextBox->TabIndex = 8;
+			this->tbHPValue->Location = System::Drawing::Point(91, 69);
+			this->tbHPValue->MaxLength = 10;
+			this->tbHPValue->Name = L"tbHPValue";
+			this->tbHPValue->Size = System::Drawing::Size(102, 20);
+			this->tbHPValue->TabIndex = 8;
 			// 
 			// AutoSkill1ComboBox
 			// 
@@ -855,13 +857,13 @@ private: System::Windows::Forms::Timer^  LootTimer;
 			this->LootComboBox->Size = System::Drawing::Size(76, 21);
 			this->LootComboBox->TabIndex = 6;
 			// 
-			// MPTextBox
+			// tbMPValue
 			// 
-			this->MPTextBox->Location = System::Drawing::Point(91, 94);
-			this->MPTextBox->MaxLength = 10;
-			this->MPTextBox->Name = L"MPTextBox";
-			this->MPTextBox->Size = System::Drawing::Size(102, 20);
-			this->MPTextBox->TabIndex = 11;
+			this->tbMPValue->Location = System::Drawing::Point(91, 94);
+			this->tbMPValue->MaxLength = 10;
+			this->tbMPValue->Name = L"tbMPValue";
+			this->tbMPValue->Size = System::Drawing::Size(102, 20);
+			this->tbMPValue->TabIndex = 11;
 			// 
 			// LootCheckBox
 			// 
@@ -1265,11 +1267,12 @@ private: System::Windows::Forms::Timer^  LootTimer;
 			// cbAutoAggro
 			// 
 			this->cbAutoAggro->AutoSize = true;
+			this->cbAutoAggro->Enabled = false;
 			this->cbAutoAggro->Location = System::Drawing::Point(159, 19);
 			this->cbAutoAggro->Name = L"cbAutoAggro";
-			this->cbAutoAggro->Size = System::Drawing::Size(79, 17);
+			this->cbAutoAggro->Size = System::Drawing::Size(139, 17);
 			this->cbAutoAggro->TabIndex = 8;
-			this->cbAutoAggro->Text = L"Auto Aggro";
+			this->cbAutoAggro->Text = L"Auto Aggro (patched\?\?)";
 			this->cbAutoAggro->UseVisualStyleBackColor = true;
 			this->cbAutoAggro->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbAutoAggro_CheckedChanged);
 			// 
@@ -1880,7 +1883,7 @@ private: System::Windows::Forms::Timer^  LootTimer;
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot - V2.1 - CCPLZ! - EMS 87.2";
+			this->Text = L"WatyBot - V2.1.1 - CCPLZ! - EMS 87.2";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);

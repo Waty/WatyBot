@@ -51,6 +51,8 @@ HWND FindProcessWindow()
    return NULL;
 }
 
+int channel;
+
 bool CCing;
 int CCPeopleInt, CCTimedInt, CCAttacksInt;
 bool CCPeopleBool, CCTimedBool, CCAttacksBool;

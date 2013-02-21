@@ -24,9 +24,9 @@ namespace Hacks
 	CMemory cmDojangGodmode(DojangAddy, CaveDojang, 0, true);
 
 	/////	Auto Aggro
-	DWORD dwAggroAddy = 0x00C36A4F;
+	DWORD dwAggroAddy = 0x00C3755F;
 	DWORD dwAggroRet = dwAggroAddy + 5;
-	DWORD dwAggroCall = 0x00C2D550;
+	DWORD dwAggroCall = 0x00C2E020;
 	CodeCave(Aggro)
 	{
 		call dwAggroCall
@@ -232,7 +232,7 @@ namespace Hacks
 	CMemory cmFMA(FMAAddy, bFMA, 1);
 
 	/////	Ghoul's Scare Mob Lagg
-	DWORD dwScareMobs = 0x00705D5F;
+	DWORD dwScareMobs = 0x0070609F;
 	BYTE bScareMobs[] = {0x75};
 	CMemory cmScareMobs(dwScareMobs, bScareMobs, 1);
 
