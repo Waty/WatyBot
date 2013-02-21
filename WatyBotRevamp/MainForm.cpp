@@ -31,6 +31,21 @@ public:
 	static array <System::Object^> ^KeyNames;
 };
 
+#pragma region Pointers Reading
+	int getMobCount(){			return (int) ReadPointer(MobBasePtr, MobCountOffset);}
+	int getItemCount(){			return (int) ReadPointer(ItemBasePtr, ItemCountOffset);}
+	int getPeopleCount(){		return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);}
+	int getCharX(){				return (int) ReadPointer(CharBasePtr,XOffset);}
+	int getCharY(){				return (int) ReadPointer(CharBasePtr,XOffset + 4);}
+	int getCharHP(){			WritePointer(SettingsBasePtr, HPAlertOffset, 20);return (int) ReadPointer(StatsBasePtr, HPOffset);}
+	int getCharMP(){			WritePointer(SettingsBasePtr, MPAlertOffset, 20);return (int) ReadPointer(StatsBasePtr, MPOffset);}
+	double getCharEXP(){		return ReadDoublePointer(StatsBasePtr, EXPOffset);}
+	int getMapID(){				return (int) ReadPointer(InfoBasePtr, MapIDOffset);}
+	int getAttackCount(){		return (int) ReadPointer(CharBasePtr, AttackCountOffset);}
+	int getTubiValue(){			return (int) ReadPointer(ServerBasePtr, TubiOffset);}
+	int getBreathValue(){		return (int) ReadPointer(CharBasePtr, BreathOffset);}
+#pragma endregion
+
 #pragma region Packetsending stuff
 bool isGoodPacket(String^ strPacket, String^&strError)
 {
@@ -88,93 +103,28 @@ bool SendPacketFunction(String^ strPacket, String^&strError){
 }
 void NextChannel()
 {
-	String^ CCString = "3F 00 0* ** ** 5B 00 ";
+	while(getBreathValue() > 0)
+		Sleep(100);
+	Sleep(100);
+	
+	Random^ random = gcnew Random();
+	CField_SendTransferChannelRequest(5);
+	/*String^ CCString = "3F 00 0* ** ** 5B 00";
     String^ strError = String::Empty;
 	if(!SendPacketFunction(CCString->Replace(" ", ""),strError))
-        MessageBox::Show(strError);
+        MessageBox::Show(strError);*/
 }
 #pragma endregion
 
-#pragma region Pointers Reading
-	int getMobCount(){			return (int) ReadPointer(MobBasePtr, MobCountOffset);}
-	int getItemCount(){			return (int) ReadPointer(ItemBasePtr, ItemCountOffset);}
-	int getPeopleCount(){		return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);}
-	int getCharX(){				return (int) ReadPointer(CharBasePtr,XOffset);}
-	int getCharY(){				return (int) ReadPointer(CharBasePtr,XOffset + 4);}
-	int getCharHP(){			WritePointer(SettingsBasePtr, HPAlertOffset, 20);return (int) ReadPointer(StatsBasePtr, HPOffset);}
-	int getCharMP(){			WritePointer(SettingsBasePtr, MPAlertOffset, 20);return (int) ReadPointer(StatsBasePtr, MPOffset);}
-	double getCharEXP(){		return ReadDoublePointer(StatsBasePtr, EXPOffset);}
-	int getMapID(){				return (int) ReadPointer(InfoBasePtr, MapIDOffset);}
-	int getAttackCount(){		return (int) ReadPointer(CharBasePtr, AttackCountOffset);}
-	int getTubiValue(){			return (int) ReadPointer(ServerBasePtr, TubiOffset);}
-	int getBreathValue(){		return (int) ReadPointer(CharBasePtr, BreathOffset);}
-#pragma endregion
-#pragma region AutoHP/MP/Attack/Loot/Skill/CC/UnlimitedAttack Voids
-void AutoHP()
+#pragma region Skill/CC/UnlimitedAttack Voids
+void getMSHWND()
 {
-	while(AutoHPBool)
+	while(MapleStoryHWND == NULL)
 	{
-		if(getCharHP() < UserSetHP)
-		{
-			MapleHWND = FindWindow(TEXT("MapleStoryClass"), 0);
-			LPARAM lParam = (MapVirtualKey(UserSetHPKey, 0) << 16) + 1;
-			UsingPot = true;
-			Sleep(50);
-			PostMessage(MapleHWND, WM_KEYDOWN, UserSetHPKey, lParam);
-			Sleep(50);
-			PostMessage(MapleHWND, WM_KEYUP, UserSetHPKey, lParam);
-			UsingPot = false;
-			Sleep(10);
-		}
+		MapleStoryHWND = FindProcessWindow();
+		Sleep(1500);
 	}
-}
-void AutoMP()
-{
-	while(AutoMPBool)
-	{
-		if(getCharMP() < UserSetMP)
-		{
-			MapleHWND = FindWindow(TEXT("MapleStoryClass"), 0);
-			LPARAM lParam = (MapVirtualKey(UserSetMPKey, 0) << 16) + 1;
-			UsingPot = true;
-			Sleep(50);
-			PostMessage(MapleHWND, WM_KEYDOWN, UserSetMPKey, lParam);
-			Sleep(50);
-			PostMessage(MapleHWND, WM_KEYUP, UserSetMPKey, lParam);
-			UsingPot = false;
-			Sleep(10);
-		}
-	}
-}
-void AutoLoot()
-{
-	while(AutoLootBool)
-	{
-		if(getItemCount() > 0 && !UsingPot && !UsingAutoSkill)
-		{
-			MapleHWND = FindWindow(TEXT("MapleStoryClass"), 0);
-			LPARAM lParam = (MapVirtualKey(UserSetLootKey, 0) << 16) + 1;
-			if(PointerTubiBool)WritePointer(ServerBasePtr, TubiOffset, 0);
-			PostMessage(MapleHWND, WM_KEYDOWN, UserSetLootKey, lParam);
-			Sleep(50);
-		}
-		else(Sleep(500));
-	}
-}
-void AutoAttack()
-{
-	while(AutoAttackBool)
-	{
-		if(getMobCount() > 0 && !UsingPot && !UsingAutoSkill && !CCing){
-			MapleHWND = FindWindow(TEXT("MapleStoryClass"), 0);
-			LPARAM lParam = (MapVirtualKey(UserSetAttackKey, 0) << 16) + 1;
-			PostMessage(MapleHWND, WM_KEYDOWN, UserSetAttackKey, lParam);
-			Sleep(50);			
-			PostMessage(MapleHWND, WM_KEYUP, UserSetAttackKey, lParam);
-			Sleep(UserSetAttackDelay);
-		}
-		else(Sleep(500));
-	}
+	Console::WriteLine("MapleStoryHWND != NULL");
 }
 void AutoSkill1()
 {
@@ -183,11 +133,10 @@ void AutoSkill1()
 		while(UsingAutoSkill) Sleep(1000);
 		if(!CCing)
 		{
-			MapleHWND = FindWindow(TEXT("MapleStoryClass"), 0);
 			LPARAM lParam = (MapVirtualKey(UserSetSkill1Key, 0) << 16) + 1;
 			UsingAutoSkill = true;
 			Sleep(1000);
-			PostMessage(MapleHWND, WM_KEYDOWN, UserSetSkill1Key, lParam);
+			PostMessage(MapleStoryHWND, WM_KEYDOWN, UserSetSkill1Key, lParam);
 			Sleep(50);			
 			UsingAutoSkill = false;
 			Sleep(UserSetSkill1Delay);
@@ -201,11 +150,10 @@ void AutoSkill2()
 		while(UsingAutoSkill) Sleep(1000);
 		if(!CCing)
 		{
-			MapleHWND = FindWindow(TEXT("MapleStoryClass"), 0);
 			LPARAM lParam = (MapVirtualKey(UserSetSkill2Key, 0) << 16) + 1;
 			UsingAutoSkill = true;
 			Sleep(1000);
-			PostMessage(MapleHWND, WM_KEYDOWN, UserSetSkill2Key, lParam);
+			PostMessage(MapleStoryHWND, WM_KEYDOWN, UserSetSkill2Key, lParam);
 			Sleep(50);
 			UsingAutoSkill = false;
 			Sleep(UserSetSkill2Delay);
@@ -219,11 +167,10 @@ void AutoSkill3()
 		if(!CCing)
 		{
 			while(UsingAutoSkill) Sleep(1000);
-			MapleHWND = FindWindow(TEXT("MapleStoryClass"), 0);
 			LPARAM lParam = (MapVirtualKey(UserSetSkill3Key, 0) << 16) + 1;
 			UsingAutoSkill = true;
 			Sleep(1000);
-			PostMessage(MapleHWND, WM_KEYDOWN, UserSetSkill3Key, lParam);
+			PostMessage(MapleStoryHWND, WM_KEYDOWN, UserSetSkill3Key, lParam);
 			Sleep(50);
 			UsingAutoSkill = false;
 			Sleep(UserSetSkill3Delay);
@@ -238,22 +185,14 @@ void AutoSkill4()
 		if(!CCing)
 		{
 			while(UsingAutoSkill) Sleep(1000);
-			MapleHWND = FindWindow(TEXT("MapleStoryClass"), 0);
 			LPARAM lParam = (MapVirtualKey(UserSetSkill4Key, 0) << 16) + 1;
 			UsingAutoSkill = true;
 			Sleep(1000);
-			PostMessage(MapleHWND, WM_KEYDOWN, UserSetSkill4Key, lParam);
+			PostMessage(MapleStoryHWND, WM_KEYDOWN, UserSetSkill4Key, lParam);
 			Sleep(50);
 			UsingAutoSkill = false;
 			Sleep(UserSetSkill4Delay);
 		}
-	}
-}
-void CatchABreath()
-{
-	while(getBreathValue() > 0)
-	{
-		Sleep(100);
 	}
 }
 void AutoCCPeople()
@@ -263,11 +202,8 @@ void AutoCCPeople()
 		if(getPeopleCount() >= CCPeopleInt)
 		{
 			CCing = true;
-			while(getBreathValue() > 0)
-				CatchABreath();
-				Sleep(100);
 			NextChannel();
-			Sleep(500);
+			Sleep(1000);
 			CCing = false;
 		}
 	}
@@ -278,11 +214,8 @@ void AutoCCTimed()
 	{
 		Sleep(CCTimedInt * 1000);
 		CCing = true;
-		while(getBreathValue() > 0)
-			CatchABreath();
-		Sleep(100);
 		NextChannel();
-		Sleep(500);
+		Sleep(1000);
 		CCing = false;
 	}
 }
@@ -293,11 +226,8 @@ void AutoCCAttacks()
 		if(getAttackCount() >= CCAttacksInt)
 		{
 			CCing = true;
-			while(getBreathValue() > 0)
-				CatchABreath();
-				Sleep(100);
 			NextChannel();
-			Sleep(500);
+			Sleep(1000);
 			CCing = false;
 		}
 	}
@@ -398,48 +328,87 @@ void MainForm::cbFMA_CheckedChanged(System::Object^  sender, System::EventArgs^ 
 {
 	Hacks::cmFMA.Enable(cbFMA->Checked);
 }
-
+void MainForm::cbScareMobs_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmScareMobs.Enable(cbScareMobs->Checked);
+}
+void MainForm::cbFLACC_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmFLACC.Enable(cbFLACC->Checked);
+}
+void MainForm::cbCPUHack_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmCPUHack.Enable(cbCPUHack->Checked);
+}
 #pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
 void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	this->HPComboBox->Enabled = !this->HPCheckBox->Checked;
-	this->HPTextBox->Enabled = !this->HPCheckBox->Checked;
-	AutoHPBool = this->HPCheckBox->Checked;
-	UserSetHPKey = KeyCodes[this->HPComboBox->SelectedIndex];
-	if(this->HPTextBox->Text != "")UserSetHP = Convert::ToInt32(this->HPTextBox->Text);
-	if(this->HPCheckBox->Checked) NewThread(AutoHP);		
+	if(this->HPTextBox->Text->Empty)
+	{
+		MessageBox::Show("Input was not valid");
+		HPCheckBox->Checked = false;
+	}
+	else
+	{
+		this->HPComboBox->Enabled = !this->HPCheckBox->Checked;
+		this->HPTextBox->Enabled = !this->HPCheckBox->Checked;
+	}		
 }
 void MainForm::MPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {		
-	this->MPComboBox->Enabled = !this->MPCheckBox->Checked;
-	this->MPTextBox->Enabled = !this->MPCheckBox->Checked;
-	AutoMPBool = this->MPCheckBox->Checked;
-	UserSetMPKey = KeyCodes[this->MPComboBox->SelectedIndex];
-	if(this->MPTextBox->Text != "")UserSetMP = Convert::ToInt32(this->MPTextBox->Text);
-	if(this->MPCheckBox->Checked) NewThread(AutoMP);
+	if(this->MPTextBox->Text == "")
+	{
+		MessageBox::Show("Input was not valid");
+		MPCheckBox->Checked = false;
+	}
+	else
+	{
+		this->MPComboBox->Enabled = !this->MPCheckBox->Checked;
+		this->MPTextBox->Enabled = !this->MPCheckBox->Checked;
+	}
 }
 void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->AttackComboBox->Enabled = !this->AttackCheckBox->Checked;
-	this->AttackTrackBar->Enabled = !this->AttackCheckBox->Checked;
-	this->AttackDelayLabel->Enabled = !this->AttackCheckBox->Checked;
-	AutoAttackBool = this->AttackCheckBox->Checked;
-	UserSetAttackKey = KeyCodes[this->AttackComboBox->SelectedIndex];
-	UserSetAttackDelay = this->AttackTrackBar->Value;
-	if(this->AttackCheckBox->Checked) NewThread(AutoAttack);
+	this->tbAttackDelay->Enabled = !this->AttackCheckBox->Checked;
+	this->tbSAWSIL->Enabled = !this->AttackCheckBox->Checked;
+	
+	if(!tbAttackDelay->Text->Empty)
+		this->AttackTimer->Interval = Convert::ToInt32(this->tbAttackDelay->Text);
+	this->AttackTimer->Enabled = this->AttackCheckBox->Checked;
 }
-void MainForm::AutoLootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	this->AutoLootComboBox->Enabled = !this->AutoLootCheckBox->Checked;
-	this->PointerTubiCheckBox->Enabled = !this->AutoLootCheckBox->Checked;
-	AutoLootBool = this->AutoLootCheckBox->Checked;
-	UserSetLootKey = KeyCodes[this->AutoLootComboBox->SelectedIndex];
-	if(this->AutoLootCheckBox->Checked) NewThread(AutoLoot);
+	this->LootComboBox->Enabled = !this->LootCheckBox->Checked;
+	this->tbLootDelay->Enabled = !this->LootCheckBox->Checked;
+	this->tbSAWSIL->Enabled = !this->LootCheckBox->Checked;
+	
+	if(!tbLootDelay->Text->Empty)
+		this->LootTimer->Interval = Convert::ToInt32(this->tbLootDelay->Text);
+	this->LootTimer->Enabled = this->LootCheckBox->Checked;
 }
-void MainForm::PointerTubiCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::AttackTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
-	PointerTubiBool = this->PointerTubiCheckBox->Checked;
+	int AttackKey = KeyCodes[AttackComboBox->SelectedIndex];
+	LPARAM AttacklParam = (MapVirtualKey(AttackKey, 0) << 16) + 1;
+
+	if(getMobCount() > Convert::ToInt32(tbSAWSIL->Text) && !UsingAutoSkill && !UsingPot && !CCing)
+	{
+		PostMessage(MapleStoryHWND, WM_KEYDOWN, AttackKey, AttacklParam);
+		Sleep(50);
+		PostMessage(MapleStoryHWND, WM_KEYUP, AttackKey, AttacklParam);
+	}
+}
+void MainForm::LootTimer_Tick(System::Object^  sender, System::EventArgs^  e)
+{
+	
+	int LootKey = KeyCodes[LootComboBox->SelectedIndex];
+	LPARAM LootlParam = (MapVirtualKey(LootKey, 0) << 16) + 1;
+	if(getItemCount() > Convert::ToInt32(tbSLWIB->Text) && !UsingAutoSkill && !UsingPot && !CCing)
+	{
+		PostMessage(MapleStoryHWND, WM_KEYDOWN, LootKey, LootlParam);
+	}
 }
 void MainForm::AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -516,11 +485,15 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	this->HPComboBox->Items->AddRange(Globals::KeyNames);
 	this->MPComboBox->Items->AddRange(Globals::KeyNames);
     this->AttackComboBox->Items->AddRange(Globals::KeyNames);
-	this->AutoLootComboBox->Items->AddRange(Globals::KeyNames);
+	this->LootComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill1ComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill2ComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill3ComboBox->Items->AddRange(Globals::KeyNames);
 	this->AutoSkill4ComboBox->Items->AddRange(Globals::KeyNames);
+
+	NewThread(getMSHWND);
+
+	//AttachConsole(GetCurrentProcessId());
 
 	if(!Directory::Exists("WatyBot"))Directory::CreateDirectory("WatyBot");
 	if(File::Exists(marshal_as<String^>(PacketFileName)))
@@ -531,7 +504,6 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	RefreshSPControlListView();
 	if(File::Exists(marshal_as<String^>(SettingsFileName)))
 		LoadSettings();
-
 }
 void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
@@ -540,13 +512,37 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	this->CharPosLabel->Text =		"CharPos: ("+ getCharX() +","+ getCharY()+")";
 	this->ItemCountLabel->Text =	"Items: "	+ getItemCount();
 	this->AttackCountLabel->Text =	"Attacks: " + getAttackCount();
-	this->AttackDelayLabel->Text =	this->AttackTrackBar->Value + " ms";
 	this->TubiPointerLabel->Text =	"Tubi: "	+getTubiValue();
 	this->BreathLabel->Text =		"Breath: "	+ getBreathValue();
 	
-#pragma region HP/MP/EXP Bars Drawing
-	if(getCharHP() >= MaxHP)	MaxHP = getCharHP();
-	if(getCharMP() >= MaxMP)	MaxMP = getCharMP();
+	AutoPot();
+	RedrawStatBars();
+}
+void MainForm::AutoPot()
+{
+	if(HPCheckBox->Checked)
+	{		
+		int HPKey = KeyCodes[HPComboBox->SelectedIndex];
+		LPARAM HPlParam = (MapVirtualKey(HPKey, 0) << 16) + 1;
+		if(getCharHP() <= Convert::ToInt32(HPCheckBox->Text))
+		{
+			PostMessage(MapleStoryHWND, WM_KEYDOWN, HPKey, HPlParam);
+		}
+	}
+	if(MPCheckBox->Checked)
+	{
+		int MPKey = KeyCodes[MPComboBox->SelectedIndex];
+		LPARAM MPlParam = (MapVirtualKey(MPKey, 0) << 16) + 1;
+		if(getCharMP() <= Convert::ToInt32(MPCheckBox->Text))
+		{
+			PostMessage(MapleStoryHWND, WM_KEYDOWN, MPKey, MPlParam);
+		}
+	}
+}
+void MainForm::RedrawStatBars()
+{
+	if(getCharHP() >= MaxHP || getCharHP() < 0)	MaxHP = getCharHP();
+	if(getCharMP() >= MaxMP || getCharMP() < 0)	MaxMP = getCharMP();
 	
 	this->HPLabel->Text = "HP: " + getCharHP() + "/" + MaxHP;
 	this->MPLabel->Text = "MP: " + getCharMP() + "/" + MaxMP;
@@ -561,7 +557,6 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	this->MPForeground->Width = MPBarLength;
 	double EXPBarLength = (getCharEXP()/100) * lengtOfBars;
 	this->EXPForeground->Width = EXPBarLength;
-#pragma endregion
 }
 void MainForm::FixStatsButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
@@ -634,10 +629,20 @@ void MainForm::SavePacketEditButton_Click(System::Object^  sender, System::Event
 }
 void MainForm::SpamsPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	this->SpamPacketsTimer->Interval = Convert::ToInt32(this->SpamPacketsDelayTextBox->Text);
-	this->SendPacketGroupBox->Enabled = false;
-	SpammedPackets = 0;
-	this->SpamPacketsTimer->Enabled = true;
+	if(SpamPacketsDelayTextBox->Text != String::Empty && SpamPacketTimesTextBox->Text != String::Empty && PacketSelectBox->SelectedIndex >-1)
+	{
+		this->SpamPacketsTimer->Interval = Convert::ToInt32(this->SpamPacketsDelayTextBox->Text);
+		SpammedPackets = 0;
+		this->SpamPacketsTimer->Enabled = true;
+		this->bStopSpamming->Visible = true;
+		this->bStartSpamming->Visible = false;
+	}
+}
+void MainForm::bStopSpamming_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	SpamPacketsTimer->Enabled = false;
+	this->bStopSpamming->Visible = false;
+	this->bStartSpamming->Visible = true;
 }
 void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {	
@@ -656,9 +661,10 @@ void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^
 	SpammedPackets++;
 	if(SpammedPackets >= Convert::ToInt32(this->SpamPacketTimesTextBox->Text))
 	{
-		this->SpamPacketsTimer->Enabled = false;
-		MessageBox::Show("Finished Spamming packets!");
-		this->SendPacketGroupBox->Enabled = true;
+		MessageBox::Show("Finished Spamming packets!");		
+		SpamPacketsTimer->Enabled = false;
+		this->bStopSpamming->Visible = false;
+		this->bStartSpamming->Visible = true;
 	}
 }
 void MainForm::SavePacketsButton_Click(System::Object^  sender, System::EventArgs^  e)
@@ -693,7 +699,6 @@ void MainForm::cbSPControl_CheckedChanged(System::Object^  sender, System::Event
 {
 	Hacks::cmSPControl.Enable(cbSPControl->Checked);
 }
-
 void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	SPControl::AddSPControl(marshal_as<string>(SPControlNameTextBox->Text), Convert::ToInt32(SPControlMapIDTextBox->Text), Convert::ToInt32(SPControlXTextBox->Text), Convert::ToInt32(SPControlYTextBox->Text));
@@ -744,12 +749,12 @@ void MainForm::SaveSettings()
 	ofstream file(SettingsFileName);
 	using boost::property_tree::ptree;
 	ptree pt;
-
-
-	pt.add("AutoAttackDelay", this->AttackTrackBar->Value);
+	
+	pt.add("AutoAttackDelay", Convert::ToInt32(this->tbAttackDelay->Text));
 	pt.add("AutoAttackKey", this->AttackComboBox->SelectedIndex);
-
-	pt.add("AutoLootKey", this->AutoLootComboBox->SelectedIndex);
+	
+	pt.add("LootDelay", Convert::ToInt32(this->tbLootDelay->Text));
+	pt.add("LootKey", this->LootComboBox->SelectedIndex);
 
 	if(this->HPTextBox->Text != String::Empty)
 		pt.add("AutoHPValue", Convert::ToInt32(this->HPTextBox->Text));
@@ -788,37 +793,26 @@ void MainForm::LoadSettings()
 	ptree pt;
 
 	read_ini(file,pt);
-
 	try
 	{
-		this->AttackTrackBar->Value = pt.get<int>("AutoAttackDelay");
-		this->AttackComboBox->SelectedIndex = pt.get<int>("AutoAttackKey");
-		this->AutoLootComboBox->SelectedIndex = pt.get<int>("AutoLootKey");
-		this->HPTextBox->Text = marshal_as<String^>(pt.get<string>("AutoHPValue"));
-		this->HPComboBox->SelectedIndex = pt.get<int>("AutoHPKey");
-		this->MPTextBox->Text = marshal_as<String^>(pt.get<string>("AutoMPValue"));
-		this->MPComboBox->SelectedIndex = pt.get<int>("AutoMPKey");
-	}
-	catch(...){}
-
-	try
-	{		
-		this->AutoSkill1ComboBox->SelectedIndex = pt.get<int>("AutoSkill1Key");
-		this->AutoSkill2ComboBox->SelectedIndex = pt.get<int>("AutoSkill2Key");
-		this->AutoSkill3ComboBox->SelectedIndex = pt.get<int>("AutoSkill3Key");
-		this->AutoSkill4ComboBox->SelectedIndex = pt.get<int>("AutoSkill4Key");
-		this->AutoSkill1TextBox->Text = marshal_as<String^>(pt.get<string>("AutoSkill1Value"));
-		this->AutoSkill2TextBox->Text = marshal_as<String^>(pt.get<string>("AutoSkill2Value"));
-		this->AutoSkill3TextBox->Text = marshal_as<String^>(pt.get<string>("AutoSkill3Value"));
-		this->AutoSkill4TextBox->Text = marshal_as<String^>(pt.get<string>("AutoSkill4Value"));
-	}
-	catch(...){}
-
-	try
-	{
-		this->CCPeopleTextBox->Text = marshal_as<String^>(pt.get<string>("AutoCCPeople"));
-		this->CCTimedTextBox->Text = marshal_as<String^>(pt.get<string>("AutoCCTimed"));
-		this->CCAttacksTextBox->Text = marshal_as<String^>(pt.get<string>("AutoCCAttacks"));
-	}
-	catch(...){}
+	this->tbAttackDelay->Text = marshal_as<String^>(pt.get<string>("AutoAttackDelay", "50"));
+	this->AttackComboBox->SelectedIndex = pt.get<int>("AutoAttackKey", 0);
+	this->LootComboBox->SelectedIndex = pt.get<int>("LootKey");
+	this->tbLootDelay->Text = marshal_as<String^>(pt.get<string>("LootDelay", "50"));
+	this->HPTextBox->Text = marshal_as<String^>(pt.get<string>("AutoHPValue", "9000"));
+	this->HPComboBox->SelectedIndex = pt.get<int>("AutoHPKey");
+	this->MPTextBox->Text = marshal_as<String^>(pt.get<string>("AutoMPValue", "100"));
+	this->MPComboBox->SelectedIndex = pt.get<int>("AutoMPKey");
+	this->AutoSkill1ComboBox->SelectedIndex = pt.get<int>("AutoSkill1Key");
+	this->AutoSkill2ComboBox->SelectedIndex = pt.get<int>("AutoSkill2Key");
+	this->AutoSkill3ComboBox->SelectedIndex = pt.get<int>("AutoSkill3Key");
+	this->AutoSkill4ComboBox->SelectedIndex = pt.get<int>("AutoSkill4Key");
+	this->AutoSkill1TextBox->Text = marshal_as<String^>(pt.get<string>("AutoSkill1Value", 0));
+	this->AutoSkill2TextBox->Text = marshal_as<String^>(pt.get<string>("AutoSkill2Value", 0));
+	this->AutoSkill3TextBox->Text = marshal_as<String^>(pt.get<string>("AutoSkill3Value", 0));
+	this->AutoSkill4TextBox->Text = marshal_as<String^>(pt.get<string>("AutoSkill4Value", 0));
+	this->CCPeopleTextBox->Text = marshal_as<String^>(pt.get<string>("AutoCCPeople", 0));
+	this->CCTimedTextBox->Text = marshal_as<String^>(pt.get<string>("AutoCCTimed", 0));
+	this->CCAttacksTextBox->Text = marshal_as<String^>(pt.get<string>("AutoCCAttacks", 0));
+	}catch(...){};
 }

@@ -5,6 +5,9 @@
 #define CodeCave(name) void __declspec(naked) Cave##name(){_asm
 #define EndCodeCave }
 
+typedef void (__fastcall* PFN_CField_SendTransferChannelRequest)(unsigned char nChannel);
+PFN_CField_SendTransferChannelRequest CField_SendTransferChannelRequest = reinterpret_cast<PFN_CField_SendTransferChannelRequest>(0x00567AC0);
+
 unsigned long ReadPointer(unsigned long ulBase, int iOffset)
 {
 	__try { return *(unsigned long*)(*(unsigned long*)ulBase + iOffset); }
@@ -20,30 +23,42 @@ void WritePointer(unsigned long ulBase, int iOffset, int iValue)
   __try { *(int*)(*(unsigned long*)ulBase + iOffset) = iValue;}
   __except (EXCEPTION_EXECUTE_HANDLER) {}
 }
+HWND FindProcessWindow()
+{
+   TCHAR szBuffer[200];
+   DWORD dwTemp;
+
+   for (HWND hWnd = GetTopWindow(NULL); hWnd != NULL; hWnd = GetNextWindow(hWnd, GW_HWNDNEXT))
+   {
+      GetWindowThreadProcessId(hWnd, &dwTemp);
+
+      if (dwTemp != GetCurrentProcessId())
+      {
+         continue;
+      }
+
+      if (!GetClassName(hWnd, szBuffer, sizeof(szBuffer) / sizeof(TCHAR)))
+      {
+         continue;
+      }
+
+      if (!wcscmp(szBuffer, L"MapleStoryClass"))
+      {
+         return hWnd;
+      }
+   }
+
+   return NULL;
+}
 
 bool CCing;
 int CCPeopleInt, CCTimedInt, CCAttacksInt;
 bool CCPeopleBool, CCTimedBool, CCAttacksBool;
 
-HWND MapleHWND;
+HWND MapleStoryHWND;
 
-bool PointerTubiBool;
+int UserSetLootDelay;
 #pragma region AutoHp/MP/Skill/Attack
-bool AutoHPBool;
-int UserSetHP;
-BYTE UserSetHPKey;
-
-bool AutoMPBool;
-int UserSetMP;
-BYTE UserSetMPKey;
-
-bool AutoLootBool;
-BYTE UserSetLootKey;
-
-bool AutoAttackBool;
-BYTE UserSetAttackKey;
-int UserSetAttackDelay;
-
 bool AutoSkill1Bool;
 BYTE UserSetSkill1Key;
 int UserSetSkill1Delay;
