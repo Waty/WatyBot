@@ -309,6 +309,8 @@ void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventA
 	{
 		try
 		{
+			iHPKey = KeyCodes[HPComboBox->SelectedIndex];
+			HPlParam = (MapVirtualKey(iHPKey, 0) << 16) + 1;
 			int::Parse(tbHPValue->Text);
 			tbHPValue->Enabled = false;
 			HPComboBox->Enabled = false;
@@ -321,6 +323,13 @@ void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventA
 			HPComboBox->Enabled = true;
 		}
 	}
+	else
+	{
+		HPCheckBox->Checked = false;
+		tbHPValue->Enabled = true;
+		HPComboBox->Enabled = true;
+	}
+
 }
 void MainForm::MPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -328,6 +337,8 @@ void MainForm::MPCheckBox_CheckedChanged(System::Object^  sender, System::EventA
 	{
 		try
 		{
+			iMPKey = KeyCodes[MPComboBox->SelectedIndex];
+			MPlParam = (MapVirtualKey(iMPKey, 0) << 16) + 1;
 			int::Parse(tbMPValue->Text);
 			tbMPValue->Enabled = false;
 			MPComboBox->Enabled = false;
@@ -339,6 +350,12 @@ void MainForm::MPCheckBox_CheckedChanged(System::Object^  sender, System::EventA
 			tbMPValue->Enabled = true;
 			MPComboBox->Enabled = true;
 		}
+	}
+	else
+	{
+		MPCheckBox->Checked = false;
+		tbMPValue->Enabled = true;
+		MPComboBox->Enabled = true;
 	}
 }
 void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -459,6 +476,7 @@ void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 		{
 			CCTimedTimer->Interval = int::Parse(CCTimedTextBox->Text);
 			CCTimedTextBox->Enabled = false;
+			CCTimedTimer->Enabled = true;
 		}
 		catch(Exception^ ex)
 		{
@@ -548,20 +566,16 @@ void MainForm::AutoPot()
 {
 	if(HPCheckBox->Checked)
 	{
-		int HPKey = KeyCodes[HPComboBox->SelectedIndex];
-		LPARAM HPlParam = (MapVirtualKey(HPKey, 0) << 16) + 1;
-		if(getCharHP() <= Convert::ToInt32(tbHPValue->Text))
+		if(getCharHP() <= iHPValue)
 		{
-			PostMessage(MapleStoryHWND, WM_KEYDOWN, HPKey, HPlParam);
+			PostMessage(MapleStoryHWND, WM_KEYDOWN, iHPKey, HPlParam);
 		}
 	}
 	if(MPCheckBox->Checked)
 	{
-		int MPKey = KeyCodes[MPComboBox->SelectedIndex];
-		LPARAM MPlParam = (MapVirtualKey(MPKey, 0) << 16) + 1;
-		if(getCharMP() <= Convert::ToInt32(tbMPValue->Text))
+		if(getCharMP() <= iMPValue)
 		{
-			PostMessage(MapleStoryHWND, WM_KEYDOWN, MPKey, MPlParam);
+			PostMessage(MapleStoryHWND, WM_KEYDOWN, iMPKey, MPlParam);
 		}
 	}
 }

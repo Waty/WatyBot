@@ -1887,7 +1887,7 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot - V2.1.3 - CCPLZ! - EMS 87.2";
+			this->Text = L"WatyBot - V2.1.4 - CCPLZ! - EMS 87.2";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);

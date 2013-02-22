@@ -5,7 +5,7 @@
 #define CodeCave(name) void __declspec(naked) Cave##name(){_asm
 #define EndCodeCave }
 
-typedef void (__fastcall* PFN_CField_SendTransferChannelRequest)(unsigned char nChannel);
+typedef void (__stdcall* PFN_CField_SendTransferChannelRequest)(unsigned char nChannel);
 PFN_CField_SendTransferChannelRequest CField_SendTransferChannelRequest = reinterpret_cast<PFN_CField_SendTransferChannelRequest>(0x00567AC0);
 
 unsigned long ReadPointer(unsigned long ulBase, int iOffset)
@@ -55,13 +55,12 @@ int channel;
 
 int iCCPeople;
 int iCCAttacks;
-int iHPValue;
-int iMPValue;
+int iHPValue, iHPKey;
+LPARAM HPlParam, MPlParam;
+int iMPValue, iMPKey;
 
 HWND MapleStoryHWND;
 
-
-#pragma region AutoHp/MP/Skill/Attack
 bool AutoSkill1Bool;
 BYTE UserSetSkill1Key;
 int UserSetSkill1Delay;
@@ -81,7 +80,6 @@ int UserSetSkill4Delay;
 bool UsingPot;
 bool UsingAutoSkill;
 bool CCing;
-#pragma endregion
 
 int MaxHP, MaxMP;
 int KeyCodes[] = {VK_SHIFT, VK_SPACE, VK_CONTROL, VK_MENU, VK_INSERT, VK_DELETE, VK_HOME, VK_END, VK_PRIOR, VK_NEXT, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B, 0x4C, 0x4D, 0x4E, 0x4F, 0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5A, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39};
