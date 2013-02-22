@@ -53,13 +53,14 @@ HWND FindProcessWindow()
 
 int channel;
 
-bool CCing;
-int CCPeopleInt, CCTimedInt, CCAttacksInt;
-bool CCPeopleBool, CCTimedBool, CCAttacksBool;
+int iCCPeople;
+int iCCAttacks;
+int iHPValue;
+int iMPValue;
 
 HWND MapleStoryHWND;
 
-int UserSetLootDelay;
+
 #pragma region AutoHp/MP/Skill/Attack
 bool AutoSkill1Bool;
 BYTE UserSetSkill1Key;
@@ -79,7 +80,7 @@ int UserSetSkill4Delay;
 
 bool UsingPot;
 bool UsingAutoSkill;
-bool UnlimitedAttackBool;
+bool CCing;
 #pragma endregion
 
 int MaxHP, MaxMP;

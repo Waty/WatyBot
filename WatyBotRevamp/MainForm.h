@@ -274,6 +274,9 @@ private: System::Windows::Forms::TextBox^  tbSAWSIL;
 
 private: System::Windows::Forms::Timer^  AttackTimer;
 private: System::Windows::Forms::Timer^  LootTimer;
+private: System::Windows::Forms::Timer^  CCTimedTimer;
+
+
 
 
 
@@ -437,6 +440,7 @@ private: System::Windows::Forms::Timer^  LootTimer;
 			this->SpamPacketsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1883,7 +1887,7 @@ private: System::Windows::Forms::Timer^  LootTimer;
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot - V2.1.1 - CCPLZ! - EMS 87.2";
+			this->Text = L"WatyBot - V2.1.3 - CCPLZ! - EMS 87.2";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
@@ -1929,6 +1933,7 @@ private: System::Windows::Forms::Timer^  LootTimer;
 	private: System::Void SaveSettings();
 	private: System::Void LoadSettings();
 	private: System::Void AutoPot();
+	private: System::Void AutoCC();
 #pragma endregion
 #pragma region CheckBoxes
 	private: System::Void StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e);

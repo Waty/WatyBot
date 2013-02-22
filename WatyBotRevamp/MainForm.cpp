@@ -103,12 +103,14 @@ bool SendPacketFunction(String^ strPacket, String^&strError){
 }
 void NextChannel()
 {
-	while(getBreathValue() > 0)
-		Sleep(100);
-	Sleep(250);
+	CCing = true;
+	while(getBreathValue() > 0)	Sleep(250);
+	Sleep(500);
 	channel++;
 	if(channel == 14) channel = 0;
 	CField_SendTransferChannelRequest(channel);
+	Sleep(1000);
+	CCing = false;
 }
 #pragma endregion
 
@@ -188,43 +190,6 @@ void AutoSkill4()
 			Sleep(50);
 			UsingAutoSkill = false;
 			Sleep(UserSetSkill4Delay);
-		}
-	}
-}
-void AutoCCPeople()
-{
-	while(CCPeopleBool)
-	{
-		if(getPeopleCount() >= CCPeopleInt)
-		{
-			CCing = true;
-			NextChannel();
-			Sleep(1000);
-			CCing = false;
-		}
-	}
-}
-void AutoCCTimed()
-{
-	while(CCTimedBool)
-	{
-		Sleep(CCTimedInt * 1000);
-		CCing = true;
-		NextChannel();
-		Sleep(1000);
-		CCing = false;
-	}
-}
-void AutoCCAttacks()
-{
-	while(CCAttacksBool)
-	{
-		if(getAttackCount() >= CCAttacksInt)
-		{
-			CCing = true;
-			NextChannel();
-			Sleep(1000);
-			CCing = false;
 		}
 	}
 }
@@ -466,27 +431,71 @@ void MainForm::AutoSkill4CheckBox_CheckedChanged(System::Object^  sender, System
 }
 void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	this->CCPeopleTextBox->Enabled = !this->CCPeopleCheckBox->Checked;
-	this->CCPeopleLabel->Enabled = !this->CCPeopleCheckBox->Checked;
-	if(this->CCPeopleTextBox->Text != "") CCPeopleInt = Convert::ToInt32(CCPeopleTextBox->Text);
-	CCPeopleBool = this->CCPeopleCheckBox->Checked;
-	NewThread(AutoCCPeople);
+	if(CCPeopleCheckBox->Checked)
+	{
+		try
+		{
+			iCCPeople = int::Parse(CCPeopleTextBox->Text);
+			CCPeopleTextBox->Enabled = false;
+		}
+		catch(Exception^ ex)
+		{
+			CCPeopleCheckBox->Checked = false;
+			CCPeopleCheckBox->Enabled = true;
+			AttachConsole(GetCurrentProcessId());
+			Console::WriteLine(ex->ToString());
+		}
+	}
+	else
+	{
+		CCPeopleTextBox->Enabled = true;
+	}
 }
 void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	this->CCTimedTextBox->Enabled = !this->CCTimedCheckBox->Checked;
-	this->CCTimedLabel->Enabled = !this->CCTimedCheckBox->Checked;
-	if(this->CCTimedTextBox->Text != "") CCTimedInt = Convert::ToInt32(CCTimedTextBox->Text);
-	CCTimedBool = this->CCTimedCheckBox->Checked;
-	NewThread(AutoCCTimed);
+	if(CCTimedCheckBox->Checked)
+	{
+		try
+		{
+			CCTimedTimer->Interval = int::Parse(CCTimedTextBox->Text);
+			CCTimedTextBox->Enabled = false;
+		}
+		catch(Exception^ ex)
+		{
+			CCTimedCheckBox->Checked = false;
+			CCTimedTimer->Enabled = false;
+			CCTimedCheckBox->Enabled = true;
+			AttachConsole(GetCurrentProcessId());
+			Console::WriteLine(ex->ToString());
+		}
+	}
+	else
+	{
+		CCTimedTextBox->Enabled = true;
+		CCTimedTimer->Enabled = false;
+	}
 }
 void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	this->CCAttacksTextBox->Enabled = !this->CCAttacksCheckBox->Checked;
-	this->CCAttacksLabel->Enabled = !this->CCAttacksCheckBox->Checked;
-	if(this->CCAttacksTextBox->Text != "") CCAttacksInt = Convert::ToInt32(CCAttacksTextBox->Text);
-	CCAttacksBool = this->CCAttacksCheckBox->Checked;
-	NewThread(AutoCCAttacks);
+	if(CCAttacksCheckBox->Checked)
+	{
+		try
+		{
+			iCCAttacks = int::Parse(CCAttacksTextBox->Text);
+			CCAttacksTextBox->Enabled = false;
+		}
+		catch(Exception^ ex)
+		{
+			CCAttacksCheckBox->Checked = false;
+			CCAttacksCheckBox->Enabled = true;
+			AttachConsole(GetCurrentProcessId());
+			Console::WriteLine(ex->ToString());
+		}
+	}
+	else
+	{
+		CCAttacksTextBox->Enabled = true;
+	}
 }
 #pragma endregion
 void Main(void)
@@ -532,6 +541,7 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	this->BreathLabel->Text =		"Breath: "	+ getBreathValue();
 	
 	MainForm::AutoPot();
+	MainForm::AutoCC();
 	MainForm::RedrawStatBars();
 }
 void MainForm::AutoPot()
@@ -552,6 +562,23 @@ void MainForm::AutoPot()
 		if(getCharMP() <= Convert::ToInt32(tbMPValue->Text))
 		{
 			PostMessage(MapleStoryHWND, WM_KEYDOWN, MPKey, MPlParam);
+		}
+	}
+}
+void MainForm::AutoCC()
+{
+	if(CCPeopleCheckBox->Checked)
+	{
+		if(getPeopleCount() >= iCCPeople)
+		{
+			NextChannel();
+		}
+	}
+	if(CCAttacksCheckBox->Checked)
+	{
+		if(getAttackCount() >= iCCAttacks)
+		{
+			NextChannel();
 		}
 	}
 }
