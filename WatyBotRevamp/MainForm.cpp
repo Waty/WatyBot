@@ -311,7 +311,7 @@ void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventA
 		{
 			iHPKey = KeyCodes[HPComboBox->SelectedIndex];
 			HPlParam = (MapVirtualKey(iHPKey, 0) << 16) + 1;
-			int::Parse(tbHPValue->Text);
+			iHPValue = int::Parse(tbHPValue->Text);
 			tbHPValue->Enabled = false;
 			HPComboBox->Enabled = false;
 		}
@@ -325,7 +325,6 @@ void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventA
 	}
 	else
 	{
-		HPCheckBox->Checked = false;
 		tbHPValue->Enabled = true;
 		HPComboBox->Enabled = true;
 	}
@@ -339,7 +338,7 @@ void MainForm::MPCheckBox_CheckedChanged(System::Object^  sender, System::EventA
 		{
 			iMPKey = KeyCodes[MPComboBox->SelectedIndex];
 			MPlParam = (MapVirtualKey(iMPKey, 0) << 16) + 1;
-			int::Parse(tbMPValue->Text);
+			iMPValue = int::Parse(tbMPValue->Text);
 			tbMPValue->Enabled = false;
 			MPComboBox->Enabled = false;
 		}
@@ -353,7 +352,6 @@ void MainForm::MPCheckBox_CheckedChanged(System::Object^  sender, System::EventA
 	}
 	else
 	{
-		MPCheckBox->Checked = false;
 		tbMPValue->Enabled = true;
 		MPComboBox->Enabled = true;
 	}
