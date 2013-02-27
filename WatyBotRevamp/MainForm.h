@@ -237,7 +237,8 @@ private: System::Windows::Forms::CheckBox^  cbUnlimitedMorph;
 private: System::Windows::Forms::CheckBox^  cbFasterMobs;
 private: System::Windows::Forms::CheckBox^  cbNDAllAttacks;
 private: System::Windows::Forms::CheckBox^  cbNoMobs;
-private: System::Windows::Forms::CheckBox^  cbAutoAggro;
+private: System::Windows::Forms::CheckBox^  cbUA;
+
 private: System::Windows::Forms::CheckBox^  cbSitHack;
 private: System::Windows::Forms::CheckBox^  cb50SecGM;
 private: System::Windows::Forms::CheckBox^  cbLogoSkipper;
@@ -375,7 +376,7 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			this->cbPerfectLoot = (gcnew System::Windows::Forms::CheckBox());
 			this->MobHacks = (gcnew System::Windows::Forms::GroupBox());
 			this->cbScareMobs = (gcnew System::Windows::Forms::CheckBox());
-			this->cbAutoAggro = (gcnew System::Windows::Forms::CheckBox());
+			this->cbUA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoMobs = (gcnew System::Windows::Forms::CheckBox());
 			this->cbFasterMobs = (gcnew System::Windows::Forms::CheckBox());
 			this->cbMobDisarm = (gcnew System::Windows::Forms::CheckBox());
@@ -1243,7 +1244,7 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			// MobHacks
 			// 
 			this->MobHacks->Controls->Add(this->cbScareMobs);
-			this->MobHacks->Controls->Add(this->cbAutoAggro);
+			this->MobHacks->Controls->Add(this->cbUA);
 			this->MobHacks->Controls->Add(this->cbNoMobs);
 			this->MobHacks->Controls->Add(this->cbFasterMobs);
 			this->MobHacks->Controls->Add(this->cbMobDisarm);
@@ -1268,17 +1269,16 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			this->cbScareMobs->UseVisualStyleBackColor = true;
 			this->cbScareMobs->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbScareMobs_CheckedChanged);
 			// 
-			// cbAutoAggro
+			// cbUA
 			// 
-			this->cbAutoAggro->AutoSize = true;
-			this->cbAutoAggro->Enabled = false;
-			this->cbAutoAggro->Location = System::Drawing::Point(159, 19);
-			this->cbAutoAggro->Name = L"cbAutoAggro";
-			this->cbAutoAggro->Size = System::Drawing::Size(139, 17);
-			this->cbAutoAggro->TabIndex = 8;
-			this->cbAutoAggro->Text = L"Auto Aggro (patched\?\?)";
-			this->cbAutoAggro->UseVisualStyleBackColor = true;
-			this->cbAutoAggro->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbAutoAggro_CheckedChanged);
+			this->cbUA->AutoSize = true;
+			this->cbUA->Location = System::Drawing::Point(159, 19);
+			this->cbUA->Name = L"cbUA";
+			this->cbUA->Size = System::Drawing::Size(103, 17);
+			this->cbUA->TabIndex = 8;
+			this->cbUA->Text = L"Unlimited Attack";
+			this->cbUA->UseVisualStyleBackColor = true;
+			this->cbUA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbUA_CheckedChanged);
 			// 
 			// cbNoMobs
 			// 
@@ -1887,7 +1887,7 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot - V2.1.4 - CCPLZ! - EMS 87.2";
+			this->Text = L"WatyBot - V2.2 - CCPLZ! - EMS 87.2";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
@@ -1980,7 +1980,7 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 private: System::Void cbFasterMobs_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNDAllAttacks_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNoMobs_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbAutoAggro_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbUA_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbSitHack_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbSPControl_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cb50SecGM_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
