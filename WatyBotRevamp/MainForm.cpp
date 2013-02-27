@@ -19,7 +19,6 @@ using namespace WatyBotRevamp;
 using namespace msclr::interop;
 using namespace System::IO;
 
-//Fill the list of packets
 string WatyBotWorkingDirectory = "WatyBot\\";
 string SettingsFileName = WatyBotWorkingDirectory + "settings.ini";
 string PacketFileName = WatyBotWorkingDirectory + "packets.xml";
@@ -32,20 +31,79 @@ public:
 };
 
 #pragma region Pointers Reading
-	int getMobCount(){			return (int) ReadPointer(MobBasePtr, MobCountOffset);}
-	int getItemCount(){			return (int) ReadPointer(ItemBasePtr, ItemCountOffset);}
-	int getPeopleCount(){		return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);}
-	int getCharX(){				return (int) ReadPointer(CharBasePtr,XOffset);}
-	int getCharY(){				return (int) ReadPointer(CharBasePtr,XOffset + 4);}
-	int getCharHP(){			WritePointer(SettingsBasePtr, HPAlertOffset, 20);return (int) ReadPointer(StatsBasePtr, HPOffset);}
-	int getCharMP(){			WritePointer(SettingsBasePtr, MPAlertOffset, 20);return (int) ReadPointer(StatsBasePtr, MPOffset);}
-	double getCharEXP(){		return ReadDoublePointer(StatsBasePtr, EXPOffset);}
-	int getMapID(){				return (int) ReadPointer(InfoBasePtr, MapIDOffset);}
-	int getAttackCount(){		return (int) ReadPointer(CharBasePtr, AttackCountOffset);}
-	int getTubiValue(){			return (int) ReadPointer(ServerBasePtr, TubiOffset);}
-	int getBreathValue(){		return (int) ReadPointer(CharBasePtr, BreathOffset);}
-	int getChannel(){			return (int) ReadPointer(ServerBasePtr, ChannelOffset);}
-
+	int getMobCount()
+	{
+		if(*(int*)WallBasePtr)	return (int) ReadPointer(MobBasePtr, MobCountOffset);
+		else return 0;
+	}
+	int getItemCount()
+	{
+		if(*(int*)WallBasePtr)	return (int) ReadPointer(ItemBasePtr, ItemCountOffset);
+		else return 0;
+	}
+	int getPeopleCount()
+	{
+		if(*(int*)WallBasePtr)	return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);
+		else return 0;
+	}
+	int getCharX()
+	{
+		if(*(int*)WallBasePtr)	return (int) ReadPointer(CharBasePtr,XOffset);
+		else return 0;
+	}
+	int getCharY()
+	{
+		if(*(int*)WallBasePtr)	return (int) ReadPointer(CharBasePtr,XOffset + 4);
+		else return 0;
+	}
+	int getCharHP()
+	{
+		if(*(int*)WallBasePtr)
+		{
+			WritePointer(SettingsBasePtr, HPAlertOffset, 20);
+			return (int) ReadPointer(StatsBasePtr, HPOffset);
+		}
+		else return 0;
+	}
+	int getCharMP()
+	{
+		if(*(int*)WallBasePtr)
+		{
+			WritePointer(SettingsBasePtr, MPAlertOffset, 20);
+			return (int) ReadPointer(StatsBasePtr, MPOffset);
+		}
+		else return 0;
+	}
+	double getCharEXP()
+	{
+		if(*(int*)WallBasePtr)	return ReadDoublePointer(StatsBasePtr, EXPOffset);
+		else return 0;
+	}
+	int getMapID()
+	{
+		if(*(int*)WallBasePtr)	return (int) ReadPointer(InfoBasePtr, MapIDOffset);
+		else return 0;
+	}
+	int getAttackCount()
+	{
+		if(*(int*)WallBasePtr)	return (int) ReadPointer(CharBasePtr, AttackCountOffset);
+		else return 0;
+	}
+	int getTubiValue()
+	{
+		if(*(int*)WallBasePtr)	return (int) ReadPointer(ServerBasePtr, TubiOffset);
+		else return 0;
+	}
+	int getBreathValue()
+	{
+		if(*(int*)WallBasePtr)	return (int) ReadPointer(CharBasePtr, BreathOffset);
+		else return 0;
+	}
+	int getChannel()
+	{
+		if(*(int*)WallBasePtr)	return (int) ReadPointer(ServerBasePtr, ChannelOffset);
+		else return 0;
+	}
 #pragma endregion
 
 #pragma region Packetsending stuff
