@@ -4,6 +4,8 @@
 #define jmp(frm, to) (int)(((int)to - (int)frm) - 5);
 #define CodeCave(name) void __declspec(naked) Cave##name(){_asm
 #define EndCodeCave }
+#define ID_CC 0
+#define ID_CS 1
 
 typedef void (__stdcall* PFN_CField_SendTransferChannelRequest)(unsigned char nChannel);
 PFN_CField_SendTransferChannelRequest CField_SendTransferChannelRequest = reinterpret_cast<PFN_CField_SendTransferChannelRequest>(0x00567AC0);
@@ -50,8 +52,6 @@ HWND FindProcessWindow()
 
    return NULL;
 }
-
-int channel;
 
 int iCCPeople;
 int iCCAttacks;

@@ -276,6 +276,12 @@ private: System::Windows::Forms::TextBox^  tbSAWSIL;
 private: System::Windows::Forms::Timer^  AttackTimer;
 private: System::Windows::Forms::Timer^  LootTimer;
 private: System::Windows::Forms::Timer^  CCTimedTimer;
+private: System::Windows::Forms::ComboBox^  TimedComboBox;
+private: System::Windows::Forms::ComboBox^  AttacksComboBox;
+
+
+private: System::Windows::Forms::ComboBox^  PeopleComboBox;
+
 
 
 
@@ -305,6 +311,9 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			this->MainTabControl = (gcnew System::Windows::Forms::TabControl());
 			this->AutoBotTab = (gcnew System::Windows::Forms::TabPage());
 			this->AutoBotGroupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->TimedComboBox = (gcnew System::Windows::Forms::ComboBox());
+			this->AttacksComboBox = (gcnew System::Windows::Forms::ComboBox());
+			this->PeopleComboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->lSLWIB = (gcnew System::Windows::Forms::Label());
 			this->lSAWSIL = (gcnew System::Windows::Forms::Label());
 			this->tbSLWIB = (gcnew System::Windows::Forms::TextBox());
@@ -503,6 +512,9 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			// 
 			// AutoBotGroupBox
 			// 
+			this->AutoBotGroupBox->Controls->Add(this->TimedComboBox);
+			this->AutoBotGroupBox->Controls->Add(this->AttacksComboBox);
+			this->AutoBotGroupBox->Controls->Add(this->PeopleComboBox);
 			this->AutoBotGroupBox->Controls->Add(this->lSLWIB);
 			this->AutoBotGroupBox->Controls->Add(this->lSAWSIL);
 			this->AutoBotGroupBox->Controls->Add(this->tbSLWIB);
@@ -548,6 +560,36 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			this->AutoBotGroupBox->TabIndex = 36;
 			this->AutoBotGroupBox->TabStop = false;
 			this->AutoBotGroupBox->Text = L"Autobot";
+			// 
+			// TimedComboBox
+			// 
+			this->TimedComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->TimedComboBox->FormattingEnabled = true;
+			this->TimedComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(2) {L"CC", L"CS"});
+			this->TimedComboBox->Location = System::Drawing::Point(47, 253);
+			this->TimedComboBox->Name = L"TimedComboBox";
+			this->TimedComboBox->Size = System::Drawing::Size(38, 21);
+			this->TimedComboBox->TabIndex = 67;
+			// 
+			// AttacksComboBox
+			// 
+			this->AttacksComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->AttacksComboBox->FormattingEnabled = true;
+			this->AttacksComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(2) {L"CC", L"CS"});
+			this->AttacksComboBox->Location = System::Drawing::Point(47, 280);
+			this->AttacksComboBox->Name = L"AttacksComboBox";
+			this->AttacksComboBox->Size = System::Drawing::Size(38, 21);
+			this->AttacksComboBox->TabIndex = 66;
+			// 
+			// PeopleComboBox
+			// 
+			this->PeopleComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->PeopleComboBox->FormattingEnabled = true;
+			this->PeopleComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(2) {L"CC", L"CS"});
+			this->PeopleComboBox->Location = System::Drawing::Point(47, 225);
+			this->PeopleComboBox->Name = L"PeopleComboBox";
+			this->PeopleComboBox->Size = System::Drawing::Size(38, 21);
+			this->PeopleComboBox->TabIndex = 65;
 			// 
 			// lSLWIB
 			// 
@@ -613,7 +655,7 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			// CCAttacksLabel
 			// 
 			this->CCAttacksLabel->AutoSize = true;
-			this->CCAttacksLabel->Location = System::Drawing::Point(199, 281);
+			this->CCAttacksLabel->Location = System::Drawing::Point(199, 280);
 			this->CCAttacksLabel->Name = L"CCAttacksLabel";
 			this->CCAttacksLabel->Size = System::Drawing::Size(43, 13);
 			this->CCAttacksLabel->TabIndex = 56;
@@ -631,7 +673,7 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			// CCPeopleLabel
 			// 
 			this->CCPeopleLabel->AutoSize = true;
-			this->CCPeopleLabel->Location = System::Drawing::Point(199, 227);
+			this->CCPeopleLabel->Location = System::Drawing::Point(199, 226);
 			this->CCPeopleLabel->Name = L"CCPeopleLabel";
 			this->CCPeopleLabel->Size = System::Drawing::Size(40, 13);
 			this->CCPeopleLabel->TabIndex = 54;
@@ -639,7 +681,7 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			// 
 			// CCAttacksTextBox
 			// 
-			this->CCAttacksTextBox->Location = System::Drawing::Point(91, 278);
+			this->CCAttacksTextBox->Location = System::Drawing::Point(91, 280);
 			this->CCAttacksTextBox->Name = L"CCAttacksTextBox";
 			this->CCAttacksTextBox->Size = System::Drawing::Size(102, 20);
 			this->CCAttacksTextBox->TabIndex = 30;
@@ -649,15 +691,15 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			this->CCAttacksCheckBox->AutoSize = true;
 			this->CCAttacksCheckBox->Location = System::Drawing::Point(6, 280);
 			this->CCAttacksCheckBox->Name = L"CCAttacksCheckBox";
-			this->CCAttacksCheckBox->Size = System::Drawing::Size(65, 17);
+			this->CCAttacksCheckBox->Size = System::Drawing::Size(48, 17);
 			this->CCAttacksCheckBox->TabIndex = 29;
-			this->CCAttacksCheckBox->Text = L"Auto CC";
+			this->CCAttacksCheckBox->Text = L"Auto";
 			this->CCAttacksCheckBox->UseVisualStyleBackColor = true;
 			this->CCAttacksCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCAttacksCheckBox_CheckedChanged);
 			// 
 			// CCTimedTextBox
 			// 
-			this->CCTimedTextBox->Location = System::Drawing::Point(91, 251);
+			this->CCTimedTextBox->Location = System::Drawing::Point(91, 253);
 			this->CCTimedTextBox->Name = L"CCTimedTextBox";
 			this->CCTimedTextBox->Size = System::Drawing::Size(102, 20);
 			this->CCTimedTextBox->TabIndex = 28;
@@ -667,9 +709,9 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			this->CCTimedCheckBox->AutoSize = true;
 			this->CCTimedCheckBox->Location = System::Drawing::Point(6, 253);
 			this->CCTimedCheckBox->Name = L"CCTimedCheckBox";
-			this->CCTimedCheckBox->Size = System::Drawing::Size(65, 17);
+			this->CCTimedCheckBox->Size = System::Drawing::Size(48, 17);
 			this->CCTimedCheckBox->TabIndex = 27;
-			this->CCTimedCheckBox->Text = L"Auto CC";
+			this->CCTimedCheckBox->Text = L"Auto";
 			this->CCTimedCheckBox->UseVisualStyleBackColor = true;
 			this->CCTimedCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCTimeCheckBox_CheckedChanged);
 			// 
@@ -677,6 +719,10 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			// 
 			this->AutoSkill4ComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->AutoSkill4ComboBox->FormattingEnabled = true;
+			this->AutoSkill4ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9"});
 			this->AutoSkill4ComboBox->Location = System::Drawing::Point(202, 197);
 			this->AutoSkill4ComboBox->Name = L"AutoSkill4ComboBox";
 			this->AutoSkill4ComboBox->Size = System::Drawing::Size(115, 21);
@@ -684,7 +730,7 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			// 
 			// CCPeopleTextBox
 			// 
-			this->CCPeopleTextBox->Location = System::Drawing::Point(91, 224);
+			this->CCPeopleTextBox->Location = System::Drawing::Point(91, 226);
 			this->CCPeopleTextBox->Name = L"CCPeopleTextBox";
 			this->CCPeopleTextBox->Size = System::Drawing::Size(102, 20);
 			this->CCPeopleTextBox->TabIndex = 26;
@@ -705,9 +751,9 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			this->CCPeopleCheckBox->AutoSize = true;
 			this->CCPeopleCheckBox->Location = System::Drawing::Point(6, 226);
 			this->CCPeopleCheckBox->Name = L"CCPeopleCheckBox";
-			this->CCPeopleCheckBox->Size = System::Drawing::Size(65, 17);
+			this->CCPeopleCheckBox->Size = System::Drawing::Size(48, 17);
 			this->CCPeopleCheckBox->TabIndex = 25;
-			this->CCPeopleCheckBox->Text = L"Auto CC";
+			this->CCPeopleCheckBox->Text = L"Auto";
 			this->CCPeopleCheckBox->UseVisualStyleBackColor = true;
 			this->CCPeopleCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCPeopleCheckBox_CheckedChanged);
 			// 
@@ -742,6 +788,10 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			// 
 			this->AutoSkill3ComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->AutoSkill3ComboBox->FormattingEnabled = true;
+			this->AutoSkill3ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9"});
 			this->AutoSkill3ComboBox->Location = System::Drawing::Point(202, 171);
 			this->AutoSkill3ComboBox->Name = L"AutoSkill3ComboBox";
 			this->AutoSkill3ComboBox->Size = System::Drawing::Size(115, 21);
@@ -770,6 +820,10 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			// 
 			this->AutoSkill2ComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->AutoSkill2ComboBox->FormattingEnabled = true;
+			this->AutoSkill2ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9"});
 			this->AutoSkill2ComboBox->Location = System::Drawing::Point(202, 145);
 			this->AutoSkill2ComboBox->Name = L"AutoSkill2ComboBox";
 			this->AutoSkill2ComboBox->Size = System::Drawing::Size(115, 21);
@@ -828,6 +882,10 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			// 
 			this->AutoSkill1ComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->AutoSkill1ComboBox->FormattingEnabled = true;
+			this->AutoSkill1ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9"});
 			this->AutoSkill1ComboBox->Location = System::Drawing::Point(202, 119);
 			this->AutoSkill1ComboBox->Name = L"AutoSkill1ComboBox";
 			this->AutoSkill1ComboBox->Size = System::Drawing::Size(115, 21);
@@ -837,6 +895,10 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			// 
 			this->HPComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->HPComboBox->FormattingEnabled = true;
+			this->HPComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9"});
 			this->HPComboBox->Location = System::Drawing::Point(202, 69);
 			this->HPComboBox->Name = L"HPComboBox";
 			this->HPComboBox->Size = System::Drawing::Size(115, 21);
@@ -857,6 +919,10 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			// 
 			this->LootComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->LootComboBox->FormattingEnabled = true;
+			this->LootComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9"});
 			this->LootComboBox->Location = System::Drawing::Point(241, 42);
 			this->LootComboBox->Name = L"LootComboBox";
 			this->LootComboBox->Size = System::Drawing::Size(76, 21);
@@ -885,6 +951,10 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			// 
 			this->MPComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->MPComboBox->FormattingEnabled = true;
+			this->MPComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9"});
 			this->MPComboBox->Location = System::Drawing::Point(202, 94);
 			this->MPComboBox->Name = L"MPComboBox";
 			this->MPComboBox->Size = System::Drawing::Size(115, 21);
@@ -903,6 +973,10 @@ private: System::Windows::Forms::Timer^  CCTimedTimer;
 			// 
 			this->AttackComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->AttackComboBox->FormattingEnabled = true;
+			this->AttackComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9"});
 			this->AttackComboBox->Location = System::Drawing::Point(241, 14);
 			this->AttackComboBox->Name = L"AttackComboBox";
 			this->AttackComboBox->Size = System::Drawing::Size(76, 21);

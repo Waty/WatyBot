@@ -24,12 +24,6 @@ string SettingsFileName = WatyBotWorkingDirectory + "settings.ini";
 string PacketFileName = WatyBotWorkingDirectory + "packets.xml";
 string SPControlFileName = WatyBotWorkingDirectory + "spcontrol.xml";
 
-public ref class Globals
-{
-public:
-	static array <System::Object^> ^KeyNames;
-};
-
 #pragma region Pointers Reading
 	int getMobCount()
 	{
@@ -163,26 +157,37 @@ bool SendPacketFunction(String^ strPacket, String^&strError){
 }
 void NextChannel()
 {
-	CCing = true;
-	while(getBreathValue() > 0)	Sleep(250);
-	Sleep(500);
-	channel++;
+	int channel = getChannel() + 1;
 	if(channel == 14) channel = 0;
-	try 
-	{
-		CField_SendTransferChannelRequest(channel);
-	}
-	catch (...)
-	{
-		CField_SendTransferChannelRequest(channel);
-	}
 
+	while(getChannel() != channel)
+	{
+		CCing = true;
+		while(getBreathValue() > 0)	Sleep(250);
+		Sleep(500);
+		try 
+		{
+			CField_SendTransferChannelRequest(channel);
+		}
+		catch (...)
+		{
+			CField_SendTransferChannelRequest(channel);
+		}
+	}
 	Sleep(1000);
 	CCing = false;
 }
+void CashShop()
+{
+	CCing = true;
+	while(getBreathValue() > 0)	Sleep(250);
+	Sleep(500);
+	//SendPacketFunction("12 121 212 121 2",  NULL;
+}
+
 #pragma endregion
 
-#pragma region Skill/CC/UnlimitedAttack Voids
+#pragma region Skill Voids
 void getMSHWND()
 {
 	while(MapleStoryHWND == NULL)
@@ -588,17 +593,7 @@ void Main(void)
 }
 void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 {
-	//Initialize all Comboboxes and textboxes
-	Globals::KeyNames = gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9"};
-	this->HPComboBox->Items->AddRange(Globals::KeyNames);
-	this->MPComboBox->Items->AddRange(Globals::KeyNames);
-    this->AttackComboBox->Items->AddRange(Globals::KeyNames);
-	this->LootComboBox->Items->AddRange(Globals::KeyNames);
-	this->AutoSkill1ComboBox->Items->AddRange(Globals::KeyNames);
-	this->AutoSkill2ComboBox->Items->AddRange(Globals::KeyNames);
-	this->AutoSkill3ComboBox->Items->AddRange(Globals::KeyNames);
-	this->AutoSkill4ComboBox->Items->AddRange(Globals::KeyNames);
-
+	//Get the hwnd of maplestory
 	NewThread(getMSHWND);
 
 	if(!Directory::Exists("WatyBot"))Directory::CreateDirectory("WatyBot");
@@ -648,14 +643,20 @@ void MainForm::AutoCC()
 	{
 		if(getPeopleCount() >= iCCPeople)
 		{
-			NewThread(NextChannel);
+			if(PeopleComboBox->SelectedIndex == ID_CC)
+				NewThread(NextChannel);
+			else
+				NewThread(CashShop);
 		}
 	}
 	if(CCAttacksCheckBox->Checked)
 	{
 		if(getAttackCount() >= iCCAttacks)
 		{
-			NewThread(NextChannel);
+			if(AttacksComboBox->SelectedIndex == ID_CC)
+				NewThread(NextChannel);
+			else
+				NewThread(CashShop);
 		}
 	}
 }
@@ -691,7 +692,7 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 	SPControl::WriteXML(SPControlFileName);
 	WritePacketXML(PacketFileName);
 	SaveSettings();
-	switch(MessageBoxA(NULL, "Close MapleStory too?", "Terminate Maple?", MB_ICONQUESTION | MB_YESNOCANCEL))
+	switch(MessageBoxA(MapleStoryHWND, "Close MapleStory too?", "Terminate Maple?", MB_ICONQUESTION | MB_YESNOCANCEL))
 	{
 	case IDYES:
 		{
@@ -711,7 +712,7 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	String^ strError = String::Empty;
-	if(PacketSelectBox->SelectedIndex < 0)	MessageBoxA(0,"Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
+	if(PacketSelectBox->SelectedIndex < 0)	MessageBoxA(MapleStoryHWND, "Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
 	else if(!SendPacketFunction(marshal_as<String^>(vPacket.at(PacketSelectBox->SelectedIndex).data)->Replace(" ", ""),strError)) MessageBox::Show(strError);
 }
 void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
@@ -724,7 +725,7 @@ void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^
 void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	//delete packet from vector
-	switch (MessageBoxA(0, "Are you sure you want to delete this packet???", "Sure?", MB_ICONQUESTION | MB_YESNO))
+	switch (MessageBoxA(MapleStoryHWND, "Are you sure you want to delete this packet???", "Sure?", MB_ICONQUESTION | MB_YESNO))
 		case IDYES:
 	{
 		DeletePacket(DeletePacketComboBox->SelectedIndex);
@@ -770,7 +771,7 @@ void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^
 	if(PacketSelectBox->SelectedIndex < 0)
 	{
 		this->SpamPacketsTimer->Enabled = false;
-		MessageBoxA(0,"Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
+		MessageBoxA(MapleStoryHWND, "Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
 	}
 	else if(!SendPacketFunction(marshal_as<String^>(vPacket.at(PacketSelectBox->SelectedIndex).data)->Replace(" ", ""),strError))
 	{
@@ -830,7 +831,7 @@ void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventA
 	ListViewItem^ L = this->SPControlListView->SelectedItems[0];
 	if(SPControlListView->SelectedItems->Count > 0)
 	{
-		switch( MessageBoxA(NULL, "Are you sure you want to delete this???", "Are you sure?", MB_ICONQUESTION | MB_YESNO))
+		switch( MessageBoxA(MapleStoryHWND, "Are you sure you want to delete this???", "Are you sure?", MB_ICONQUESTION | MB_YESNO))
 		case IDYES:
 		{
 			SPControlv.erase(SPControlv.begin() + SPControlListView->Items->IndexOf(L));
