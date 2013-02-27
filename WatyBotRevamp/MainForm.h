@@ -1,6 +1,7 @@
 #pragma region ...
 #pragma once
 #include <Windows.h>
+#include <string>
 
 namespace WatyBotRevamp {
 
@@ -2008,49 +2009,51 @@ private: System::Windows::Forms::ComboBox^  PeopleComboBox;
 	private: System::Void LoadSettings();
 	private: System::Void AutoPot();
 	private: System::Void AutoCC();
+	private: System::Void CashShop();
+	private: System::Void SendMyPacket(std::string packet);
 #pragma endregion
 #pragma region CheckBoxes
-	private: System::Void StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void MainForm_Load(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void MPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void StatFixButton_Click(System::Object^  sender, System::EventArgs^  e){}
-	private: System::Void LootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void FixStatsButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void AutoSkill2CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void AutoSkill3CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void AutoSkill4CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);	
-	private: System::Void SendPacketButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void MainTabControl_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
-	private: System::Void AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void DeletePacketButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void SpamsPacketButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void SelectPacketForEditingComboBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void SavePacketsButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void SPControlDeleteItem_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void GetSPControlCoordsButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void cbFusionAttack_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void cbNoKB_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void cbPerfectLoot_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void cbInstantAirLoot_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void cbVacRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void cbWalkRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void cbJumpRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void cbMobDisarm_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void cbNoBG_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void cbJDA_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void cbPinTyper_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void cbDojangGodmode_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void cbUnlimitedMorph_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e);
+private: System::Void HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void MainForm_Load(System::Object^  sender, System::EventArgs^  e);
+private: System::Void MPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void StatFixButton_Click(System::Object^  sender, System::EventArgs^  e){}
+private: System::Void LootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void FixStatsButton_Click(System::Object^  sender, System::EventArgs^  e);
+private: System::Void AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void AutoSkill2CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void AutoSkill3CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void AutoSkill4CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);	
+private: System::Void SendPacketButton_Click(System::Object^  sender, System::EventArgs^  e);
+private: System::Void MainTabControl_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
+private: System::Void AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e);
+private: System::Void DeletePacketButton_Click(System::Object^  sender, System::EventArgs^  e);
+private: System::Void SpamsPacketButton_Click(System::Object^  sender, System::EventArgs^  e);
+private: System::Void SelectPacketForEditingComboBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e);
+private: System::Void SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^  e);
+private: System::Void CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void SavePacketsButton_Click(System::Object^  sender, System::EventArgs^  e);
+private: System::Void SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e);
+private: System::Void SPControlDeleteItem_Click(System::Object^  sender, System::EventArgs^  e);
+private: System::Void GetSPControlCoordsButton_Click(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbFusionAttack_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbNoKB_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbPerfectLoot_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbInstantAirLoot_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbVacRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbWalkRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbJumpRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbMobDisarm_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbNoBG_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbJDA_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbPinTyper_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbDojangGodmode_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbUnlimitedMorph_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbFasterMobs_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNDAllAttacks_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNoMobs_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
@@ -2069,5 +2072,5 @@ private: System::Void cbCPUHack_CheckedChanged(System::Object^  sender, System::
 private: System::Void LootTimer_Tick(System::Object^  sender, System::EventArgs^  e);
 private: System::Void AttackTimer_Tick(System::Object^  sender, System::EventArgs^  e);
 };
-	}
+}
 #pragma endregion

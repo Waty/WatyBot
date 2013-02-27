@@ -177,12 +177,24 @@ void NextChannel()
 	Sleep(1000);
 	CCing = false;
 }
-void CashShop()
+void MainForm::SendMyPacket(std::string packet)
+{
+	String^ strError = String::Empty;
+	SendPacketFunction(marshal_as<String^>(packet), strError);
+}
+
+void MainForm::CashShop()
 {
 	CCing = true;
 	while(getBreathValue() > 0)	Sleep(250);
 	Sleep(500);
-	//SendPacketFunction("12 121 212 121 2",  NULL;
+	SendMyPacket("40 00 ** ** ** 00 00");
+	Sleep(250);
+	while(getMapID() == 0)
+	{
+		SendMyPacket("3E 00");
+		Sleep(500);
+	}
 }
 
 #pragma endregion
@@ -646,7 +658,7 @@ void MainForm::AutoCC()
 			if(PeopleComboBox->SelectedIndex == ID_CC)
 				NewThread(NextChannel);
 			else
-				NewThread(CashShop);
+				CashShop();
 		}
 	}
 	if(CCAttacksCheckBox->Checked)
@@ -656,7 +668,7 @@ void MainForm::AutoCC()
 			if(AttacksComboBox->SelectedIndex == ID_CC)
 				NewThread(NextChannel);
 			else
-				NewThread(CashShop);
+				CashShop();
 		}
 	}
 }
