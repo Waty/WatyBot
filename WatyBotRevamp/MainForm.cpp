@@ -44,6 +44,8 @@ public:
 	int getAttackCount(){		return (int) ReadPointer(CharBasePtr, AttackCountOffset);}
 	int getTubiValue(){			return (int) ReadPointer(ServerBasePtr, TubiOffset);}
 	int getBreathValue(){		return (int) ReadPointer(CharBasePtr, BreathOffset);}
+	int getChannel(){			return (int) ReadPointer(ServerBasePtr, ChannelOffset);}
+
 #pragma endregion
 
 #pragma region Packetsending stuff
@@ -108,7 +110,15 @@ void NextChannel()
 	Sleep(500);
 	channel++;
 	if(channel == 14) channel = 0;
-	CField_SendTransferChannelRequest(channel);
+	try 
+	{
+		CField_SendTransferChannelRequest(channel);
+	}
+	catch (...)
+	{
+		CField_SendTransferChannelRequest(channel);
+	}
+
 	Sleep(1000);
 	CCing = false;
 }
@@ -122,7 +132,6 @@ void getMSHWND()
 		MapleStoryHWND = FindProcessWindow();
 		Sleep(1500);
 	}
-	Console::WriteLine("MapleStoryHWND != NULL");
 }
 void AutoSkill1()
 {
@@ -259,10 +268,10 @@ void MainForm::cbNoMobs_CheckedChanged(System::Object^  sender, System::EventArg
 {
 	Hacks::cmNoMobs.Enable(cbNoMobs->Checked);
 }
-void MainForm::cbAutoAggro_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+/*void MainForm::cbAutoAggro_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	Hacks::cmAutoAggro.Enable(cbAutoAggro->Checked);
-}
+}*/
 void MainForm::cbSitHack_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	Hacks::cmSitHack.Enable(cbSitHack->Checked);
@@ -300,6 +309,10 @@ void MainForm::cbFLACC_CheckedChanged(System::Object^  sender, System::EventArgs
 void MainForm::cbCPUHack_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	Hacks::cmCPUHack.Enable(cbCPUHack->Checked);
+}
+void MainForm::cbUA_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmUA.Enable(cbUA->Checked);
 }
 #pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
@@ -368,7 +381,7 @@ void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 	}
 	catch(Exception^ ex)
 	{
-		::MessageBox::Show("Please Report the following error: " + ex->ToString());
+		::MessageBox::Show("You typed an non number in the textbox, please change the number to a valid decimal. \nIf it didn't work, Please Report the following error: " + ex->ToString());
 	}
 }
 void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -453,12 +466,10 @@ void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::
 			iCCPeople = int::Parse(CCPeopleTextBox->Text);
 			CCPeopleTextBox->Enabled = false;
 		}
-		catch(Exception^ ex)
+		catch(...)
 		{
 			CCPeopleCheckBox->Checked = false;
 			CCPeopleCheckBox->Enabled = true;
-			AttachConsole(GetCurrentProcessId());
-			Console::WriteLine(ex->ToString());
 		}
 	}
 	else
@@ -476,13 +487,11 @@ void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 			CCTimedTextBox->Enabled = false;
 			CCTimedTimer->Enabled = true;
 		}
-		catch(Exception^ ex)
+		catch(...)
 		{
 			CCTimedCheckBox->Checked = false;
 			CCTimedTimer->Enabled = false;
 			CCTimedCheckBox->Enabled = true;
-			AttachConsole(GetCurrentProcessId());
-			Console::WriteLine(ex->ToString());
 		}
 	}
 	else
@@ -500,12 +509,10 @@ void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System:
 			iCCAttacks = int::Parse(CCAttacksTextBox->Text);
 			CCAttacksTextBox->Enabled = false;
 		}
-		catch(Exception^ ex)
+		catch(...)
 		{
 			CCAttacksCheckBox->Checked = false;
 			CCAttacksCheckBox->Enabled = true;
-			AttachConsole(GetCurrentProcessId());
-			Console::WriteLine(ex->ToString());
 		}
 	}
 	else
@@ -583,14 +590,14 @@ void MainForm::AutoCC()
 	{
 		if(getPeopleCount() >= iCCPeople)
 		{
-			NextChannel();
+			NewThread(NextChannel);
 		}
 	}
 	if(CCAttacksCheckBox->Checked)
 	{
 		if(getAttackCount() >= iCCAttacks)
 		{
-			NextChannel();
+			NewThread(NextChannel);
 		}
 	}
 }
