@@ -11,3 +11,9 @@ I've made a wiki for that kind of questions
 If you want to compile WatyBot yourself, you need to have the folowing:
 * Boost
 * Visual Studio (2012)
+
+### Installing Boost
+Installing Boost is easy if you're only going to use it for compiling WatyBot
+* Download the latest Boost from http://www.boost.org/
+* Extract boost to C:\boost
+* And you're done!
