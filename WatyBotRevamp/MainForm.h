@@ -282,6 +282,8 @@ private: System::Windows::Forms::ComboBox^  AttacksComboBox;
 
 
 private: System::Windows::Forms::ComboBox^  PeopleComboBox;
+private: System::Windows::Forms::GroupBox^  groupBox1;
+private: System::Windows::Forms::CheckBox^  cbHotKeyAttack;
 
 
 
@@ -452,6 +454,8 @@ private: System::Windows::Forms::ComboBox^  PeopleComboBox;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->cbHotKeyAttack = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -475,6 +479,7 @@ private: System::Windows::Forms::ComboBox^  PeopleComboBox;
 			this->SPControlContextMenu->SuspendLayout();
 			this->InfoTab->SuspendLayout();
 			this->bgPointers->SuspendLayout();
+			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -1539,6 +1544,7 @@ private: System::Windows::Forms::ComboBox^  PeopleComboBox;
 			// 
 			// AddPacketButton
 			// 
+			this->AddPacketButton->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 			this->AddPacketButton->Location = System::Drawing::Point(6, 59);
 			this->AddPacketButton->Name = L"AddPacketButton";
 			this->AddPacketButton->Size = System::Drawing::Size(302, 23);
@@ -1845,6 +1851,7 @@ private: System::Windows::Forms::ComboBox^  PeopleComboBox;
 			// 
 			// InfoTab
 			// 
+			this->InfoTab->Controls->Add(this->groupBox1);
 			this->InfoTab->Controls->Add(this->bgPointers);
 			this->InfoTab->Location = System::Drawing::Point(4, 22);
 			this->InfoTab->Name = L"InfoTab";
@@ -1863,7 +1870,7 @@ private: System::Windows::Forms::ComboBox^  PeopleComboBox;
 			this->bgPointers->Controls->Add(this->PeopleCountLabel);
 			this->bgPointers->Controls->Add(this->ItemCountLabel);
 			this->bgPointers->Controls->Add(this->CharPosLabel);
-			this->bgPointers->Location = System::Drawing::Point(6, 6);
+			this->bgPointers->Location = System::Drawing::Point(6, 294);
 			this->bgPointers->Name = L"bgPointers";
 			this->bgPointers->Size = System::Drawing::Size(313, 75);
 			this->bgPointers->TabIndex = 25;
@@ -1949,6 +1956,26 @@ private: System::Windows::Forms::ComboBox^  PeopleComboBox;
 			// 
 			this->LootTimer->Tick += gcnew System::EventHandler(this, &MainForm::LootTimer_Tick);
 			// 
+			// groupBox1
+			// 
+			this->groupBox1->Controls->Add(this->cbHotKeyAttack);
+			this->groupBox1->Location = System::Drawing::Point(6, 7);
+			this->groupBox1->Name = L"groupBox1";
+			this->groupBox1->Size = System::Drawing::Size(313, 281);
+			this->groupBox1->TabIndex = 26;
+			this->groupBox1->TabStop = false;
+			this->groupBox1->Text = L"Hot Keys";
+			// 
+			// cbHotKeyAttack
+			// 
+			this->cbHotKeyAttack->AutoSize = true;
+			this->cbHotKeyAttack->Location = System::Drawing::Point(7, 20);
+			this->cbHotKeyAttack->Name = L"cbHotKeyAttack";
+			this->cbHotKeyAttack->Size = System::Drawing::Size(128, 17);
+			this->cbHotKeyAttack->TabIndex = 0;
+			this->cbHotKeyAttack->Text = L"Auto Attack on CTRL";
+			this->cbHotKeyAttack->UseVisualStyleBackColor = true;
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -1997,6 +2024,8 @@ private: System::Windows::Forms::ComboBox^  PeopleComboBox;
 			this->InfoTab->ResumeLayout(false);
 			this->bgPointers->ResumeLayout(false);
 			this->bgPointers->PerformLayout();
+			this->groupBox1->ResumeLayout(false);
+			this->groupBox1->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -2011,6 +2040,7 @@ private: System::Windows::Forms::ComboBox^  PeopleComboBox;
 	private: System::Void AutoCC();
 	private: System::Void CashShop();
 	private: System::Void SendMyPacket(std::string packet);
+	private: System::Void HotKeys();
 #pragma endregion
 #pragma region CheckBoxes
 private: System::Void StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e);

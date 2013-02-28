@@ -24,6 +24,17 @@ string SettingsFileName = WatyBotWorkingDirectory + "settings.ini";
 string PacketFileName = WatyBotWorkingDirectory + "packets.xml";
 string SPControlFileName = WatyBotWorkingDirectory + "spcontrol.xml";
 
+void MainForm::HotKeys()
+{
+	if(GetAsyncKeyState(VK_CONTROL))
+	{
+		if(this->cbHotKeyAttack->Checked)
+		{
+			this->AttackCheckBox->Checked = !this->AttackCheckBox->Checked;
+			Sleep(250);
+		}
+	}
+}
 #pragma region Pointers Reading
 	int getMobCount()
 	{
@@ -631,6 +642,7 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	MainForm::AutoPot();
 	MainForm::AutoCC();
 	MainForm::RedrawStatBars();
+	MainForm::HotKeys();
 }
 void MainForm::AutoPot()
 {
