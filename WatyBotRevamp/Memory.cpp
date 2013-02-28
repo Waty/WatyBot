@@ -92,7 +92,7 @@ void CMemory::WriteMem()
 		memcpy_s(oldMem, bCount, (void*)ulAddress, bCount);
 		
 		//Write Memory
-		memcpy((void*)this->ulAddress, (void*)this->bMem, bCount);
+		memcpy_s((void*)this->ulAddress, bCount, (void*)this->bMem, bCount);
 	}
 	
 	if(this->Type == cType::twoaddys)
@@ -104,8 +104,8 @@ void CMemory::WriteMem()
 		memcpy_s(oldMem2, bCount2, (void*)ulAddress2, bCount2);
 
 		//Write Memory
-		memcpy((void*)this->ulAddress, (void*)this->bMem, bCount);
-		memcpy((void*)this->ulAddress2, (void*)this->bMem2, bCount2);
+		memcpy_s((void*)this->ulAddress, bCount, (void*)this->bMem, bCount);
+		memcpy_s((void*)this->ulAddress2, bCount2, (void*)this->bMem2, bCount2);
 
 	}
 
@@ -120,9 +120,9 @@ void CMemory::WriteMem()
 		memcpy_s(oldMem3, bCount3, (void*)ulAddress3, bCount3);
 
 		//Write Memory
-		memcpy((void*)this->ulAddress, (void*)this->bMem, this->bCount);
-		memcpy((void*)this->ulAddress2, (void*)this->bMem2, this->bCount2);
-		memcpy((void*)this->ulAddress3, (void*)this->bMem3, this->bCount3);
+		memcpy_s((void*)this->ulAddress, bCount, (void*)this->bMem, bCount);
+		memcpy_s((void*)this->ulAddress2, bCount2, (void*)this->bMem2, bCount2);
+		memcpy_s((void*)this->ulAddress3, bCount3, (void*)this->bMem3, bCount3);
 	}
 
 	if(this->Type == cType::asmtype)
@@ -140,20 +140,20 @@ void CMemory::RestoreMem()
 {
 	if(this->Type == cType::singleaddy || this->Type == cType::asmtype)
 	{
-		memcpy((void*)this->ulAddress, (void*)this->oldMem, bCount);
+		memcpy_s((void*)this->ulAddress, bCount, (void*)this->oldMem, bCount);
 	}
 	
 	if (this->Type == cType::twoaddys)
 	{
-		memcpy((void*)this->ulAddress, (void*)this->oldMem, bCount);
-		memcpy((void*)this->ulAddress2, (void*)this->oldMem2, bCount2);
+		memcpy_s((void*)this->ulAddress, bCount, (void*)this->oldMem, bCount);
+		memcpy_s((void*)this->ulAddress2, bCount2, (void*)this->oldMem2, bCount2);
 	}
 
 	if (this->Type == cType::threeaddys)
 	{
-		memcpy((void*)this->ulAddress, (void*)this->oldMem, bCount);
-		memcpy((void*)this->ulAddress2, (void*)this->oldMem2, bCount2);
-		memcpy((void*)this->ulAddress3, (void*)this->oldMem3, bCount3);
+		memcpy_s((void*)this->ulAddress, bCount, (void*)this->oldMem, bCount);
+		memcpy_s((void*)this->ulAddress2, bCount2, (void*)this->oldMem2, bCount2);
+		memcpy_s((void*)this->ulAddress3, bCount3, (void*)this->oldMem3, bCount3);
 	}
 
 }
