@@ -443,6 +443,7 @@ private: System::Windows::Forms::ComboBox^  comboBox1;
 			this->deleteSPControlToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeyAttack = (gcnew System::Windows::Forms::CheckBox());
 			this->bgPointers = (gcnew System::Windows::Forms::GroupBox());
 			this->BreathLabel = (gcnew System::Windows::Forms::Label());
@@ -457,7 +458,6 @@ private: System::Windows::Forms::ComboBox^  comboBox1;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1874,6 +1874,19 @@ private: System::Windows::Forms::ComboBox^  comboBox1;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Hot Keys";
 			// 
+			// comboBox1
+			// 
+			this->comboBox1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9"});
+			this->comboBox1->Location = System::Drawing::Point(130, 19);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(177, 21);
+			this->comboBox1->TabIndex = 10;
+			// 
 			// cbHotKeyAttack
 			// 
 			this->cbHotKeyAttack->AutoSize = true;
@@ -1979,19 +1992,6 @@ private: System::Windows::Forms::ComboBox^  comboBox1;
 			// 
 			this->LootTimer->Tick += gcnew System::EventHandler(this, &MainForm::LootTimer_Tick);
 			// 
-			// comboBox1
-			// 
-			this->comboBox1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
-				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
-				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9"});
-			this->comboBox1->Location = System::Drawing::Point(130, 19);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(177, 21);
-			this->comboBox1->TabIndex = 10;
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2005,7 +2005,7 @@ private: System::Windows::Forms::ComboBox^  comboBox1;
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot - V2.2 - CCPLZ! - EMS 87.2";
+			this->Text = L"WatyBot - V2.2 - CCPLZ! - EMS 88.1";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
