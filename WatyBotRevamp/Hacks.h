@@ -254,13 +254,17 @@ namespace Hacks
 	CodeCave(UA)
 	{
 		mov [eax],edi //orig code
+ 
 		push ebx
 		mov ebx,[0x011E2228] // Char Base Pointer
 		cmp dword ptr [ebx+0x7034], 0x5A // Attack Count offset
-		jl Return
+		jl UAexit
 		add [eax],0x08
-
-Return:
+ 
+		UAexit:
+		pop ebx
+		pop edi
+		mov [eax+0x04],ecx
 		jmp dwUARet
 	}
 	EndCodeCave
