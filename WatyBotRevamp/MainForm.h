@@ -284,6 +284,7 @@ private: System::Windows::Forms::ComboBox^  AttacksComboBox;
 private: System::Windows::Forms::ComboBox^  PeopleComboBox;
 private: System::Windows::Forms::GroupBox^  groupBox1;
 private: System::Windows::Forms::CheckBox^  cbHotKeyAttack;
+private: System::Windows::Forms::ComboBox^  comboBox1;
 
 
 
@@ -441,6 +442,8 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyAttack;
 			this->SPControlContextMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->deleteSPControlToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
+			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->cbHotKeyAttack = (gcnew System::Windows::Forms::CheckBox());
 			this->bgPointers = (gcnew System::Windows::Forms::GroupBox());
 			this->BreathLabel = (gcnew System::Windows::Forms::Label());
 			this->TubiPointerLabel = (gcnew System::Windows::Forms::Label());
@@ -454,8 +457,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyAttack;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
-			this->cbHotKeyAttack = (gcnew System::Windows::Forms::CheckBox());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -478,8 +480,8 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyAttack;
 			this->SPControlGroupBox->SuspendLayout();
 			this->SPControlContextMenu->SuspendLayout();
 			this->InfoTab->SuspendLayout();
-			this->bgPointers->SuspendLayout();
 			this->groupBox1->SuspendLayout();
+			this->bgPointers->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -1861,6 +1863,27 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyAttack;
 			this->InfoTab->Text = L"Info";
 			this->InfoTab->UseVisualStyleBackColor = true;
 			// 
+			// groupBox1
+			// 
+			this->groupBox1->Controls->Add(this->comboBox1);
+			this->groupBox1->Controls->Add(this->cbHotKeyAttack);
+			this->groupBox1->Location = System::Drawing::Point(6, 7);
+			this->groupBox1->Name = L"groupBox1";
+			this->groupBox1->Size = System::Drawing::Size(313, 281);
+			this->groupBox1->TabIndex = 26;
+			this->groupBox1->TabStop = false;
+			this->groupBox1->Text = L"Hot Keys";
+			// 
+			// cbHotKeyAttack
+			// 
+			this->cbHotKeyAttack->AutoSize = true;
+			this->cbHotKeyAttack->Location = System::Drawing::Point(6, 23);
+			this->cbHotKeyAttack->Name = L"cbHotKeyAttack";
+			this->cbHotKeyAttack->Size = System::Drawing::Size(118, 17);
+			this->cbHotKeyAttack->TabIndex = 0;
+			this->cbHotKeyAttack->Text = L"Auto Attack Toggle";
+			this->cbHotKeyAttack->UseVisualStyleBackColor = true;
+			// 
 			// bgPointers
 			// 
 			this->bgPointers->Controls->Add(this->BreathLabel);
@@ -1956,25 +1979,18 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyAttack;
 			// 
 			this->LootTimer->Tick += gcnew System::EventHandler(this, &MainForm::LootTimer_Tick);
 			// 
-			// groupBox1
+			// comboBox1
 			// 
-			this->groupBox1->Controls->Add(this->cbHotKeyAttack);
-			this->groupBox1->Location = System::Drawing::Point(6, 7);
-			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(313, 281);
-			this->groupBox1->TabIndex = 26;
-			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Hot Keys";
-			// 
-			// cbHotKeyAttack
-			// 
-			this->cbHotKeyAttack->AutoSize = true;
-			this->cbHotKeyAttack->Location = System::Drawing::Point(7, 20);
-			this->cbHotKeyAttack->Name = L"cbHotKeyAttack";
-			this->cbHotKeyAttack->Size = System::Drawing::Size(128, 17);
-			this->cbHotKeyAttack->TabIndex = 0;
-			this->cbHotKeyAttack->Text = L"Auto Attack on CTRL";
-			this->cbHotKeyAttack->UseVisualStyleBackColor = true;
+			this->comboBox1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9"});
+			this->comboBox1->Location = System::Drawing::Point(130, 19);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(177, 21);
+			this->comboBox1->TabIndex = 10;
 			// 
 			// MainForm
 			// 
@@ -2022,10 +2038,10 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyAttack;
 			this->SPControlGroupBox->PerformLayout();
 			this->SPControlContextMenu->ResumeLayout(false);
 			this->InfoTab->ResumeLayout(false);
-			this->bgPointers->ResumeLayout(false);
-			this->bgPointers->PerformLayout();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
+			this->bgPointers->ResumeLayout(false);
+			this->bgPointers->PerformLayout();
 			this->ResumeLayout(false);
 
 		}

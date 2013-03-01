@@ -26,9 +26,9 @@ string SPControlFileName = WatyBotWorkingDirectory + "spcontrol.xml";
 
 void MainForm::HotKeys()
 {
-	if(GetAsyncKeyState(VK_CONTROL))
+	if(this->cbHotKeyAttack->Checked)
 	{
-		if(this->cbHotKeyAttack->Checked)
+		if(GetAsyncKeyState(KeyCodes[comboBox1->SelectedIndex]))
 		{
 			this->AttackCheckBox->Checked = !this->AttackCheckBox->Checked;
 			Sleep(250);
