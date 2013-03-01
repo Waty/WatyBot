@@ -269,4 +269,9 @@ namespace Hacks
 	}
 	EndCodeCave
 	CMemory cmUA(dwUA, CaveUA, 1, true);
+
+	/////	Disable Final Attack
+	DWORD dwDFA = 0x00BC6E80;
+	BYTE bDFA[] = {0xC3};
+	CMemory cmDFA(dwDFA, bDFA, 1);
 }

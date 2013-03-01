@@ -382,6 +382,7 @@ void MainForm::cbItemVac_CheckedChanged(System::Object^  sender, System::EventAr
 }
 void MainForm::cbFMA_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
+	Hacks::cmDFA.Enable(cbFMA->Checked);
 	Hacks::cmFMA.Enable(cbFMA->Checked);
 }
 void MainForm::cbScareMobs_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
