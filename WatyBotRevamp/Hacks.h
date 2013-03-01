@@ -250,7 +250,7 @@ namespace Hacks
 
 	/////	Unlimited Attack
 	DWORD dwUA = 0x004DA7AF;
-	DWORD dwUARet = 0x004DA7AF + 6;
+	DWORD dwUARet = 0x004DA7AF + 5;
 	CodeCave(UA)
 	{
 		mov [eax],edi //orig code
