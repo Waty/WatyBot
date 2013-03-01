@@ -185,7 +185,7 @@ void NextChannel()
 			CField_SendTransferChannelRequest(channel);
 		}
 	}
-	Sleep(1000);
+	Sleep(2000);
 	CCing = false;
 }
 void MainForm::SendMyPacket(std::string packet)
@@ -193,7 +193,6 @@ void MainForm::SendMyPacket(std::string packet)
 	String^ strError = String::Empty;
 	SendPacketFunction(marshal_as<String^>(packet), strError);
 }
-
 void MainForm::CashShop()
 {
 	CCing = true;
@@ -206,6 +205,8 @@ void MainForm::CashShop()
 		SendMyPacket("3E 00");
 		Sleep(500);
 	}
+	Sleep(2000);
+	CCing = false;
 }
 
 #pragma endregion
