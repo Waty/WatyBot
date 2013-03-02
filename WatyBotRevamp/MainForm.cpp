@@ -368,10 +368,10 @@ void MainForm::cbNoMobs_CheckedChanged(System::Object^  sender, System::EventArg
 {
 	Hacks::cmNoMobs.Enable(cbNoMobs->Checked);
 }
-/*void MainForm::cbAutoAggro_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::cbAutoAggro_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	Hacks::cmAutoAggro.Enable(cbAutoAggro->Checked);
-}*/
+}
 void MainForm::cbSitHack_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	Hacks::cmSitHack.Enable(cbSitHack->Checked);
@@ -396,7 +396,8 @@ void MainForm::cbItemVac_CheckedChanged(System::Object^  sender, System::EventAr
 }
 void MainForm::cbFMA_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::cmDFA.Enable(cbFMA->Checked);
+	cbNFA->Checked = cbFMA->Checked;
+	cbNFA->Enabled = !cbFMA->Checked;
 	Hacks::cmFMA.Enable(cbFMA->Checked);
 }
 void MainForm::cbScareMobs_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -414,6 +415,10 @@ void MainForm::cbCPUHack_CheckedChanged(System::Object^  sender, System::EventAr
 void MainForm::cbUA_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	Hacks::cmUA.Enable(cbUA->Checked);
+}
+void MainForm::cbNFA_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmDFA.Enable(cbNFA->Checked);
 }
 #pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
