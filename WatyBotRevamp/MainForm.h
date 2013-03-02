@@ -641,6 +641,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			// 
 			this->nudSkill4Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
 			this->nudSkill4Value->Location = System::Drawing::Point(91, 196);
+			this->nudSkill4Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000, 0, 0, 0});
 			this->nudSkill4Value->Name = L"nudSkill4Value";
 			this->nudSkill4Value->Size = System::Drawing::Size(107, 20);
 			this->nudSkill4Value->TabIndex = 77;
@@ -649,6 +650,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			// 
 			this->nudSkill3Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
 			this->nudSkill3Value->Location = System::Drawing::Point(91, 171);
+			this->nudSkill3Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000, 0, 0, 0});
 			this->nudSkill3Value->Name = L"nudSkill3Value";
 			this->nudSkill3Value->Size = System::Drawing::Size(107, 20);
 			this->nudSkill3Value->TabIndex = 76;
@@ -657,6 +659,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			// 
 			this->nudSkill2Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
 			this->nudSkill2Value->Location = System::Drawing::Point(91, 144);
+			this->nudSkill2Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000, 0, 0, 0});
 			this->nudSkill2Value->Name = L"nudSkill2Value";
 			this->nudSkill2Value->Size = System::Drawing::Size(107, 20);
 			this->nudSkill2Value->TabIndex = 75;
@@ -665,6 +668,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			// 
 			this->nudSkill1Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
 			this->nudSkill1Value->Location = System::Drawing::Point(91, 119);
+			this->nudSkill1Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000, 0, 0, 0});
 			this->nudSkill1Value->Name = L"nudSkill1Value";
 			this->nudSkill1Value->Size = System::Drawing::Size(107, 20);
 			this->nudSkill1Value->TabIndex = 74;
@@ -2095,7 +2099,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
 			this->Text = L"WatyBot - V2.2 - CCPLZ! - EMS 88.1";
-			this->TopMost = true;
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
