@@ -2015,8 +2015,9 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			// nudSAWSIL
 			// 
 			this->nudSAWSIL->Location = System::Drawing::Point(202, 14);
+			this->nudSAWSIL->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {25, 0, 0, 0});
 			this->nudSAWSIL->Name = L"nudSAWSIL";
-			this->nudSAWSIL->Size = System::Drawing::Size(33, 20);
+			this->nudSAWSIL->Size = System::Drawing::Size(35, 20);
 			this->nudSAWSIL->TabIndex = 68;
 			this->nudSAWSIL->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
 			// 
@@ -2025,25 +2026,27 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			this->nudSLWIB->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
 			this->nudSLWIB->Location = System::Drawing::Point(202, 42);
 			this->nudSLWIB->Name = L"nudSLWIB";
-			this->nudSLWIB->Size = System::Drawing::Size(33, 20);
+			this->nudSLWIB->Size = System::Drawing::Size(35, 20);
 			this->nudSLWIB->TabIndex = 69;
 			this->nudSLWIB->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
 			// 
 			// nudAttackDelay
 			// 
 			this->nudAttackDelay->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
-			this->nudAttackDelay->Location = System::Drawing::Point(88, 15);
+			this->nudAttackDelay->Location = System::Drawing::Point(86, 15);
+			this->nudAttackDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1500, 0, 0, 0});
 			this->nudAttackDelay->Name = L"nudAttackDelay";
-			this->nudAttackDelay->Size = System::Drawing::Size(41, 20);
+			this->nudAttackDelay->Size = System::Drawing::Size(43, 20);
 			this->nudAttackDelay->TabIndex = 70;
 			this->nudAttackDelay->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
 			// 
 			// nudLootDelay
 			// 
 			this->nudLootDelay->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
-			this->nudLootDelay->Location = System::Drawing::Point(88, 42);
+			this->nudLootDelay->Location = System::Drawing::Point(86, 42);
+			this->nudLootDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1500, 0, 0, 0});
 			this->nudLootDelay->Name = L"nudLootDelay";
-			this->nudLootDelay->Size = System::Drawing::Size(41, 20);
+			this->nudLootDelay->Size = System::Drawing::Size(43, 20);
 			this->nudLootDelay->TabIndex = 71;
 			this->nudLootDelay->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
 			// 
