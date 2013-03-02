@@ -248,18 +248,18 @@ namespace Hacks
 	BYTE bCPU[] = {0x90, 0x90, 0x90, 0x90, 0x90};
 	CMemory cmCPUHack(dwCPU1, bCPU, 5, dwCPU2, bCPU, 5, dwCPU3, bCPU, 5);
 
-	/////	Unlimited Attack
+	/////Unlimited Attack
 	DWORD dwUA = 0x004DA7AF;
-	DWORD dwUARet = 0x004DA7AF + 5;
+	DWORD dwUARet = 0x004DA7AF + 6;
 	CodeCave(UA)
 	{
 		mov [eax],edi //orig code
  
 		push ebx
-		mov ebx,[0x011E2228] // Char Base Pointer
+		mov ebx, dword ptr [0x011E2228] // Char Base Pointer
 		cmp dword ptr [ebx+0x7034], 0x5A // Attack Count offset
 		jl UAexit
-		add [eax],0x08
+		add dword ptr [eax],0x08
  
 		UAexit:
 		pop ebx
