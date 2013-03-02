@@ -269,9 +269,9 @@ private: System::Windows::Forms::TextBox^  tbLootDelay;
 private: System::Windows::Forms::TextBox^  tbAttackDelay;
 private: System::Windows::Forms::Label^  lSLWIB;
 private: System::Windows::Forms::Label^  lSAWSIL;
-private: System::Windows::Forms::TextBox^  tbSLWIB;
 
-private: System::Windows::Forms::TextBox^  tbSAWSIL;
+
+
 
 
 private: System::Windows::Forms::Timer^  AttackTimer;
@@ -289,6 +289,8 @@ private: System::Windows::Forms::ComboBox^  ddbHotKeyLoot;
 
 private: System::Windows::Forms::CheckBox^  cbHotKeyLoot;
 private: System::Windows::Forms::Label^  lMapID;
+private: System::Windows::Forms::NumericUpDown^  nudSLWIB;
+private: System::Windows::Forms::NumericUpDown^  nudSAWSIL;
 
 
 
@@ -325,8 +327,6 @@ private: System::Windows::Forms::Label^  lMapID;
 			this->PeopleComboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->lSLWIB = (gcnew System::Windows::Forms::Label());
 			this->lSAWSIL = (gcnew System::Windows::Forms::Label());
-			this->tbSLWIB = (gcnew System::Windows::Forms::TextBox());
-			this->tbSAWSIL = (gcnew System::Windows::Forms::TextBox());
 			this->tbLootDelay = (gcnew System::Windows::Forms::TextBox());
 			this->tbAttackDelay = (gcnew System::Windows::Forms::TextBox());
 			this->lLootMS = (gcnew System::Windows::Forms::Label());
@@ -448,9 +448,12 @@ private: System::Windows::Forms::Label^  lMapID;
 			this->deleteSPControlToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->ddbHotKeyLoot = (gcnew System::Windows::Forms::ComboBox());
+			this->cbHotKeyLoot = (gcnew System::Windows::Forms::CheckBox());
 			this->ddbHotKeyAttack = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeyAttack = (gcnew System::Windows::Forms::CheckBox());
 			this->bgPointers = (gcnew System::Windows::Forms::GroupBox());
+			this->lMapID = (gcnew System::Windows::Forms::Label());
 			this->BreathLabel = (gcnew System::Windows::Forms::Label());
 			this->TubiPointerLabel = (gcnew System::Windows::Forms::Label());
 			this->MobCountLabel = (gcnew System::Windows::Forms::Label());
@@ -463,9 +466,8 @@ private: System::Windows::Forms::Label^  lMapID;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->ddbHotKeyLoot = (gcnew System::Windows::Forms::ComboBox());
-			this->cbHotKeyLoot = (gcnew System::Windows::Forms::CheckBox());
-			this->lMapID = (gcnew System::Windows::Forms::Label());
+			this->nudSAWSIL = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudSLWIB = (gcnew System::Windows::Forms::NumericUpDown());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -490,6 +492,8 @@ private: System::Windows::Forms::Label^  lMapID;
 			this->InfoTab->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			this->bgPointers->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSAWSIL))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSLWIB))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -528,13 +532,13 @@ private: System::Windows::Forms::Label^  lMapID;
 			// 
 			// AutoBotGroupBox
 			// 
+			this->AutoBotGroupBox->Controls->Add(this->nudSLWIB);
+			this->AutoBotGroupBox->Controls->Add(this->nudSAWSIL);
 			this->AutoBotGroupBox->Controls->Add(this->TimedComboBox);
 			this->AutoBotGroupBox->Controls->Add(this->AttacksComboBox);
 			this->AutoBotGroupBox->Controls->Add(this->PeopleComboBox);
 			this->AutoBotGroupBox->Controls->Add(this->lSLWIB);
 			this->AutoBotGroupBox->Controls->Add(this->lSAWSIL);
-			this->AutoBotGroupBox->Controls->Add(this->tbSLWIB);
-			this->AutoBotGroupBox->Controls->Add(this->tbSAWSIL);
 			this->AutoBotGroupBox->Controls->Add(this->tbLootDelay);
 			this->AutoBotGroupBox->Controls->Add(this->tbAttackDelay);
 			this->AutoBotGroupBox->Controls->Add(this->lLootMS);
@@ -626,22 +630,6 @@ private: System::Windows::Forms::Label^  lMapID;
 			this->lSAWSIL->Size = System::Drawing::Size(46, 13);
 			this->lSAWSIL->TabIndex = 63;
 			this->lSAWSIL->Text = L"SAWSIL";
-			// 
-			// tbSLWIB
-			// 
-			this->tbSLWIB->Location = System::Drawing::Point(202, 42);
-			this->tbSLWIB->Name = L"tbSLWIB";
-			this->tbSLWIB->Size = System::Drawing::Size(33, 20);
-			this->tbSLWIB->TabIndex = 62;
-			this->tbSLWIB->Text = L"50";
-			// 
-			// tbSAWSIL
-			// 
-			this->tbSAWSIL->Location = System::Drawing::Point(202, 15);
-			this->tbSAWSIL->Name = L"tbSAWSIL";
-			this->tbSAWSIL->Size = System::Drawing::Size(33, 20);
-			this->tbSAWSIL->TabIndex = 61;
-			this->tbSAWSIL->Text = L"5";
 			// 
 			// tbLootDelay
 			// 
@@ -1884,6 +1872,29 @@ private: System::Windows::Forms::Label^  lMapID;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Hot Keys";
 			// 
+			// ddbHotKeyLoot
+			// 
+			this->ddbHotKeyLoot->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbHotKeyLoot->FormattingEnabled = true;
+			this->ddbHotKeyLoot->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9"});
+			this->ddbHotKeyLoot->Location = System::Drawing::Point(85, 48);
+			this->ddbHotKeyLoot->Name = L"ddbHotKeyLoot";
+			this->ddbHotKeyLoot->Size = System::Drawing::Size(80, 21);
+			this->ddbHotKeyLoot->TabIndex = 12;
+			// 
+			// cbHotKeyLoot
+			// 
+			this->cbHotKeyLoot->AutoSize = true;
+			this->cbHotKeyLoot->Location = System::Drawing::Point(6, 50);
+			this->cbHotKeyLoot->Name = L"cbHotKeyLoot";
+			this->cbHotKeyLoot->Size = System::Drawing::Size(69, 17);
+			this->cbHotKeyLoot->TabIndex = 11;
+			this->cbHotKeyLoot->Text = L"AutoLoot";
+			this->cbHotKeyLoot->UseVisualStyleBackColor = true;
+			// 
 			// ddbHotKeyAttack
 			// 
 			this->ddbHotKeyAttack->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
@@ -1923,6 +1934,15 @@ private: System::Windows::Forms::Label^  lMapID;
 			this->bgPointers->TabIndex = 25;
 			this->bgPointers->TabStop = false;
 			this->bgPointers->Text = L"Pointers";
+			// 
+			// lMapID
+			// 
+			this->lMapID->AutoSize = true;
+			this->lMapID->Location = System::Drawing::Point(6, 68);
+			this->lMapID->Name = L"lMapID";
+			this->lMapID->Size = System::Drawing::Size(75, 13);
+			this->lMapID->TabIndex = 27;
+			this->lMapID->Text = L"MapID: 12345";
 			// 
 			// BreathLabel
 			// 
@@ -2004,37 +2024,22 @@ private: System::Windows::Forms::Label^  lMapID;
 			// 
 			this->LootTimer->Tick += gcnew System::EventHandler(this, &MainForm::LootTimer_Tick);
 			// 
-			// ddbHotKeyLoot
+			// nudSAWSIL
 			// 
-			this->ddbHotKeyLoot->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->ddbHotKeyLoot->FormattingEnabled = true;
-			this->ddbHotKeyLoot->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
-				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
-				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9"});
-			this->ddbHotKeyLoot->Location = System::Drawing::Point(85, 48);
-			this->ddbHotKeyLoot->Name = L"ddbHotKeyLoot";
-			this->ddbHotKeyLoot->Size = System::Drawing::Size(80, 21);
-			this->ddbHotKeyLoot->TabIndex = 12;
+			this->nudSAWSIL->Location = System::Drawing::Point(202, 14);
+			this->nudSAWSIL->Name = L"nudSAWSIL";
+			this->nudSAWSIL->Size = System::Drawing::Size(33, 20);
+			this->nudSAWSIL->TabIndex = 68;
+			this->nudSAWSIL->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
 			// 
-			// cbHotKeyLoot
+			// nudSLWIB
 			// 
-			this->cbHotKeyLoot->AutoSize = true;
-			this->cbHotKeyLoot->Location = System::Drawing::Point(6, 50);
-			this->cbHotKeyLoot->Name = L"cbHotKeyLoot";
-			this->cbHotKeyLoot->Size = System::Drawing::Size(69, 17);
-			this->cbHotKeyLoot->TabIndex = 11;
-			this->cbHotKeyLoot->Text = L"AutoLoot";
-			this->cbHotKeyLoot->UseVisualStyleBackColor = true;
-			// 
-			// lMapID
-			// 
-			this->lMapID->AutoSize = true;
-			this->lMapID->Location = System::Drawing::Point(6, 68);
-			this->lMapID->Name = L"lMapID";
-			this->lMapID->Size = System::Drawing::Size(75, 13);
-			this->lMapID->TabIndex = 27;
-			this->lMapID->Text = L"MapID: 12345";
+			this->nudSLWIB->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
+			this->nudSLWIB->Location = System::Drawing::Point(202, 42);
+			this->nudSLWIB->Name = L"nudSLWIB";
+			this->nudSLWIB->Size = System::Drawing::Size(33, 20);
+			this->nudSLWIB->TabIndex = 69;
+			this->nudSLWIB->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
 			// 
 			// MainForm
 			// 
@@ -2087,6 +2092,8 @@ private: System::Windows::Forms::Label^  lMapID;
 			this->groupBox1->PerformLayout();
 			this->bgPointers->ResumeLayout(false);
 			this->bgPointers->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSAWSIL))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSLWIB))->EndInit();
 			this->ResumeLayout(false);
 
 		}

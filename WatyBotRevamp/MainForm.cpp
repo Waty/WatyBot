@@ -477,7 +477,7 @@ void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 		this->AttackTimer->Interval = int::Parse(this->tbAttackDelay->Text);
 		this->AttackComboBox->Enabled = !this->AttackCheckBox->Checked;
 		this->tbAttackDelay->Enabled = !this->AttackCheckBox->Checked;
-		this->tbSAWSIL->Enabled = !this->AttackCheckBox->Checked;
+		this->nudSAWSIL->Enabled = !this->AttackCheckBox->Checked;
 		this->AttackTimer->Enabled = this->AttackCheckBox->Checked;
 	}
 	catch(Exception^ ex)
@@ -492,7 +492,7 @@ void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::Even
 		this->LootTimer->Interval = int::Parse(this->tbLootDelay->Text);
 		this->LootComboBox->Enabled = !this->LootCheckBox->Checked;
 		this->tbLootDelay->Enabled = !this->LootCheckBox->Checked;
-		this->tbSLWIB->Enabled = !this->LootCheckBox->Checked;
+		this->nudSLWIB->Enabled = !this->LootCheckBox->Checked;
 		this->LootTimer->Enabled = this->LootCheckBox->Checked;
 	}
 	catch(Exception^ ex)
@@ -505,7 +505,7 @@ void MainForm::AttackTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	int AttackKey = KeyCodes[AttackComboBox->SelectedIndex];
 	LPARAM AttacklParam = (MapVirtualKey(AttackKey, 0) << 16) + 1;
 
-	if(getMobCount() > Convert::ToInt32(tbSAWSIL->Text) && !UsingAutoSkill && !UsingPot && !CCing && InGame())
+	if(getMobCount() > Convert::ToInt32(nudSAWSIL->Value) && !UsingAutoSkill && !UsingPot && !CCing && InGame())
 	{
 		PostMessage(MapleStoryHWND, WM_KEYDOWN, AttackKey, AttacklParam);
 		Sleep(50);
@@ -517,7 +517,7 @@ void MainForm::LootTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	
 	int LootKey = KeyCodes[LootComboBox->SelectedIndex];
 	LPARAM LootlParam = (MapVirtualKey(LootKey, 0) << 16) + 1;
-	if(getItemCount() > Convert::ToInt32(tbSLWIB->Text) && !UsingAutoSkill && !UsingPot && !CCing && InGame())
+	if(getItemCount() > Convert::ToInt32(nudSLWIB->Value) && !UsingAutoSkill && !UsingPot && !CCing && InGame())
 	{
 		WritePointer(ServerBasePtr, TubiOffset, 0);
 		PostMessage(MapleStoryHWND, WM_KEYDOWN, LootKey, LootlParam);
