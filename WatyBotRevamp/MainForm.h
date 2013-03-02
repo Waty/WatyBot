@@ -309,6 +309,8 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill3Value;
 private: System::Windows::Forms::NumericUpDown^  nudSkill2Value;
 
 private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
+private: System::Windows::Forms::CheckBox^  cbNFA;
+private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 
 
 
@@ -404,7 +406,9 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			this->cbJDA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoBG = (gcnew System::Windows::Forms::CheckBox());
 			this->gbCharHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbNFA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbFMA = (gcnew System::Windows::Forms::CheckBox());
+			this->cbUA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbItemVac = (gcnew System::Windows::Forms::CheckBox());
 			this->cb50SecGM = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNDAllAttacks = (gcnew System::Windows::Forms::CheckBox());
@@ -416,7 +420,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			this->cbPerfectLoot = (gcnew System::Windows::Forms::CheckBox());
 			this->MobHacks = (gcnew System::Windows::Forms::GroupBox());
 			this->cbScareMobs = (gcnew System::Windows::Forms::CheckBox());
-			this->cbUA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoMobs = (gcnew System::Windows::Forms::CheckBox());
 			this->cbFasterMobs = (gcnew System::Windows::Forms::CheckBox());
 			this->cbMobDisarm = (gcnew System::Windows::Forms::CheckBox());
@@ -488,6 +491,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->cbAutoAggro = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -619,7 +623,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			this->nudCCAttacks->Name = L"nudCCAttacks";
 			this->nudCCAttacks->Size = System::Drawing::Size(107, 20);
 			this->nudCCAttacks->TabIndex = 80;
-			this->nudCCAttacks->ValueChanged += gcnew System::EventHandler(this, &MainForm::nudCCAttacks_ValueChanged);
 			// 
 			// nudCCTimed
 			// 
@@ -627,7 +630,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			this->nudCCTimed->Name = L"nudCCTimed";
 			this->nudCCTimed->Size = System::Drawing::Size(107, 20);
 			this->nudCCTimed->TabIndex = 79;
-			this->nudCCTimed->ValueChanged += gcnew System::EventHandler(this, &MainForm::nudCCTimed_ValueChanged);
 			// 
 			// nudCCPeople
 			// 
@@ -635,7 +637,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			this->nudCCPeople->Name = L"nudCCPeople";
 			this->nudCCPeople->Size = System::Drawing::Size(107, 20);
 			this->nudCCPeople->TabIndex = 78;
-			this->nudCCPeople->ValueChanged += gcnew System::EventHandler(this, &MainForm::nudCCPeople_ValueChanged);
 			// 
 			// nudSkill4Value
 			// 
@@ -1253,7 +1254,9 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			// 
 			// gbCharHacks
 			// 
+			this->gbCharHacks->Controls->Add(this->cbNFA);
 			this->gbCharHacks->Controls->Add(this->cbFMA);
+			this->gbCharHacks->Controls->Add(this->cbUA);
 			this->gbCharHacks->Controls->Add(this->cbItemVac);
 			this->gbCharHacks->Controls->Add(this->cb50SecGM);
 			this->gbCharHacks->Controls->Add(this->cbNDAllAttacks);
@@ -1270,21 +1273,43 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			this->gbCharHacks->TabStop = false;
 			this->gbCharHacks->Text = L"Character";
 			// 
+			// cbNFA
+			// 
+			this->cbNFA->AutoSize = true;
+			this->cbNFA->Location = System::Drawing::Point(159, 109);
+			this->cbNFA->Name = L"cbNFA";
+			this->cbNFA->Size = System::Drawing::Size(99, 17);
+			this->cbNFA->TabIndex = 12;
+			this->cbNFA->Text = L"No Final Attack";
+			this->cbNFA->UseVisualStyleBackColor = true;
+			this->cbNFA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNFA_CheckedChanged);
+			// 
 			// cbFMA
 			// 
 			this->cbFMA->AutoSize = true;
-			this->cbFMA->Location = System::Drawing::Point(159, 111);
+			this->cbFMA->Location = System::Drawing::Point(159, 91);
 			this->cbFMA->Name = L"cbFMA";
-			this->cbFMA->Size = System::Drawing::Size(48, 17);
+			this->cbFMA->Size = System::Drawing::Size(100, 17);
 			this->cbFMA->TabIndex = 11;
-			this->cbFMA->Text = L"FMA";
+			this->cbFMA->Text = L"Full Map Attack";
 			this->cbFMA->UseVisualStyleBackColor = true;
 			this->cbFMA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbFMA_CheckedChanged);
+			// 
+			// cbUA
+			// 
+			this->cbUA->AutoSize = true;
+			this->cbUA->Location = System::Drawing::Point(6, 109);
+			this->cbUA->Name = L"cbUA";
+			this->cbUA->Size = System::Drawing::Size(103, 17);
+			this->cbUA->TabIndex = 8;
+			this->cbUA->Text = L"Unlimited Attack";
+			this->cbUA->UseVisualStyleBackColor = true;
+			this->cbUA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbUA_CheckedChanged);
 			// 
 			// cbItemVac
 			// 
 			this->cbItemVac->AutoSize = true;
-			this->cbItemVac->Location = System::Drawing::Point(6, 111);
+			this->cbItemVac->Location = System::Drawing::Point(6, 91);
 			this->cbItemVac->Name = L"cbItemVac";
 			this->cbItemVac->Size = System::Drawing::Size(68, 17);
 			this->cbItemVac->TabIndex = 10;
@@ -1295,7 +1320,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			// cb50SecGM
 			// 
 			this->cb50SecGM->AutoSize = true;
-			this->cb50SecGM->Location = System::Drawing::Point(6, 42);
+			this->cb50SecGM->Location = System::Drawing::Point(6, 37);
 			this->cb50SecGM->Name = L"cb50SecGM";
 			this->cb50SecGM->Size = System::Drawing::Size(132, 17);
 			this->cb50SecGM->TabIndex = 9;
@@ -1306,7 +1331,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			// cbNDAllAttacks
 			// 
 			this->cbNDAllAttacks->AutoSize = true;
-			this->cbNDAllAttacks->Location = System::Drawing::Point(6, 88);
+			this->cbNDAllAttacks->Location = System::Drawing::Point(6, 73);
 			this->cbNDAllAttacks->Name = L"cbNDAllAttacks";
 			this->cbNDAllAttacks->Size = System::Drawing::Size(101, 17);
 			this->cbNDAllAttacks->TabIndex = 8;
@@ -1317,7 +1342,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			// cbUnlimitedMorph
 			// 
 			this->cbUnlimitedMorph->AutoSize = true;
-			this->cbUnlimitedMorph->Location = System::Drawing::Point(159, 65);
+			this->cbUnlimitedMorph->Location = System::Drawing::Point(159, 56);
 			this->cbUnlimitedMorph->Name = L"cbUnlimitedMorph";
 			this->cbUnlimitedMorph->Size = System::Drawing::Size(102, 17);
 			this->cbUnlimitedMorph->TabIndex = 7;
@@ -1339,7 +1364,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			// cbNoKB
 			// 
 			this->cbNoKB->AutoSize = true;
-			this->cbNoKB->Location = System::Drawing::Point(6, 65);
+			this->cbNoKB->Location = System::Drawing::Point(6, 56);
 			this->cbNoKB->Name = L"cbNoKB";
 			this->cbNoKB->Size = System::Drawing::Size(98, 17);
 			this->cbNoKB->TabIndex = 5;
@@ -1350,7 +1375,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			// cbInstantAirLoot
 			// 
 			this->cbInstantAirLoot->AutoSize = true;
-			this->cbInstantAirLoot->Location = System::Drawing::Point(159, 42);
+			this->cbInstantAirLoot->Location = System::Drawing::Point(159, 37);
 			this->cbInstantAirLoot->Name = L"cbInstantAirLoot";
 			this->cbInstantAirLoot->Size = System::Drawing::Size(97, 17);
 			this->cbInstantAirLoot->TabIndex = 2;
@@ -1361,7 +1386,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			// cbFusionAttack
 			// 
 			this->cbFusionAttack->AutoSize = true;
-			this->cbFusionAttack->Location = System::Drawing::Point(159, 88);
+			this->cbFusionAttack->Location = System::Drawing::Point(159, 73);
 			this->cbFusionAttack->Name = L"cbFusionAttack";
 			this->cbFusionAttack->Size = System::Drawing::Size(91, 17);
 			this->cbFusionAttack->TabIndex = 0;
@@ -1382,8 +1407,8 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			// 
 			// MobHacks
 			// 
+			this->MobHacks->Controls->Add(this->cbAutoAggro);
 			this->MobHacks->Controls->Add(this->cbScareMobs);
-			this->MobHacks->Controls->Add(this->cbUA);
 			this->MobHacks->Controls->Add(this->cbNoMobs);
 			this->MobHacks->Controls->Add(this->cbFasterMobs);
 			this->MobHacks->Controls->Add(this->cbMobDisarm);
@@ -1407,17 +1432,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			this->cbScareMobs->Text = L"Scare Mobs";
 			this->cbScareMobs->UseVisualStyleBackColor = true;
 			this->cbScareMobs->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbScareMobs_CheckedChanged);
-			// 
-			// cbUA
-			// 
-			this->cbUA->AutoSize = true;
-			this->cbUA->Location = System::Drawing::Point(159, 19);
-			this->cbUA->Name = L"cbUA";
-			this->cbUA->Size = System::Drawing::Size(103, 17);
-			this->cbUA->TabIndex = 8;
-			this->cbUA->Text = L"Unlimited Attack";
-			this->cbUA->UseVisualStyleBackColor = true;
-			this->cbUA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbUA_CheckedChanged);
 			// 
 			// cbNoMobs
 			// 
@@ -2085,6 +2099,17 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			// 
 			this->LootTimer->Tick += gcnew System::EventHandler(this, &MainForm::LootTimer_Tick);
 			// 
+			// cbAutoAggro
+			// 
+			this->cbAutoAggro->AutoSize = true;
+			this->cbAutoAggro->Location = System::Drawing::Point(159, 19);
+			this->cbAutoAggro->Name = L"cbAutoAggro";
+			this->cbAutoAggro->Size = System::Drawing::Size(79, 17);
+			this->cbAutoAggro->TabIndex = 10;
+			this->cbAutoAggro->Text = L"Auto Aggro";
+			this->cbAutoAggro->UseVisualStyleBackColor = true;
+			this->cbAutoAggro->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbAutoAggro_CheckedChanged);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2223,12 +2248,8 @@ private: System::Void cbFLACC_CheckedChanged(System::Object^  sender, System::Ev
 private: System::Void cbCPUHack_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void LootTimer_Tick(System::Object^  sender, System::EventArgs^  e);
 private: System::Void AttackTimer_Tick(System::Object^  sender, System::EventArgs^  e);
-private: System::Void nudCCPeople_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
-		 }
-private: System::Void nudCCTimed_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
-		 }
-private: System::Void nudCCAttacks_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
-		 }
+private: System::Void cbNFA_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbAutoAggro_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion
