@@ -257,6 +257,7 @@ namespace Hacks
  
 		push ebx
 		mov ebx, dword ptr [0x011E2228] // Char Base Pointer
+		mov ebx,[ebx]
 		cmp dword ptr [ebx+0x7034], 0x5A // Attack Count offset
 		jl UAexit
 		add dword ptr [eax],0x08
