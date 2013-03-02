@@ -514,6 +514,7 @@ void MainForm::LootTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	LPARAM LootlParam = (MapVirtualKey(LootKey, 0) << 16) + 1;
 	if(getItemCount() > Convert::ToInt32(tbSLWIB->Text) && !UsingAutoSkill && !UsingPot && !CCing)
 	{
+		WritePointer(ServerBasePtr, TubiOffset, 0);
 		PostMessage(MapleStoryHWND, WM_KEYDOWN, LootKey, LootlParam);
 	}
 }
