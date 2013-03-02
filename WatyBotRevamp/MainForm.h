@@ -284,7 +284,12 @@ private: System::Windows::Forms::ComboBox^  AttacksComboBox;
 private: System::Windows::Forms::ComboBox^  PeopleComboBox;
 private: System::Windows::Forms::GroupBox^  groupBox1;
 private: System::Windows::Forms::CheckBox^  cbHotKeyAttack;
-private: System::Windows::Forms::ComboBox^  comboBox1;
+private: System::Windows::Forms::ComboBox^  ddbHotKeyAttack;
+private: System::Windows::Forms::ComboBox^  ddbHotKeyLoot;
+
+private: System::Windows::Forms::CheckBox^  cbHotKeyLoot;
+private: System::Windows::Forms::Label^  lMapID;
+
 
 
 
@@ -443,7 +448,7 @@ private: System::Windows::Forms::ComboBox^  comboBox1;
 			this->deleteSPControlToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->ddbHotKeyAttack = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeyAttack = (gcnew System::Windows::Forms::CheckBox());
 			this->bgPointers = (gcnew System::Windows::Forms::GroupBox());
 			this->BreathLabel = (gcnew System::Windows::Forms::Label());
@@ -458,6 +463,9 @@ private: System::Windows::Forms::ComboBox^  comboBox1;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->ddbHotKeyLoot = (gcnew System::Windows::Forms::ComboBox());
+			this->cbHotKeyLoot = (gcnew System::Windows::Forms::CheckBox());
+			this->lMapID = (gcnew System::Windows::Forms::Label());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1865,40 +1873,43 @@ private: System::Windows::Forms::ComboBox^  comboBox1;
 			// 
 			// groupBox1
 			// 
-			this->groupBox1->Controls->Add(this->comboBox1);
+			this->groupBox1->Controls->Add(this->ddbHotKeyLoot);
+			this->groupBox1->Controls->Add(this->cbHotKeyLoot);
+			this->groupBox1->Controls->Add(this->ddbHotKeyAttack);
 			this->groupBox1->Controls->Add(this->cbHotKeyAttack);
 			this->groupBox1->Location = System::Drawing::Point(6, 7);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(313, 281);
+			this->groupBox1->Size = System::Drawing::Size(172, 331);
 			this->groupBox1->TabIndex = 26;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Hot Keys";
 			// 
-			// comboBox1
+			// ddbHotKeyAttack
 			// 
-			this->comboBox1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->ddbHotKeyAttack->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbHotKeyAttack->FormattingEnabled = true;
+			this->ddbHotKeyAttack->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9"});
-			this->comboBox1->Location = System::Drawing::Point(130, 19);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(177, 21);
-			this->comboBox1->TabIndex = 10;
+			this->ddbHotKeyAttack->Location = System::Drawing::Point(85, 21);
+			this->ddbHotKeyAttack->Name = L"ddbHotKeyAttack";
+			this->ddbHotKeyAttack->Size = System::Drawing::Size(80, 21);
+			this->ddbHotKeyAttack->TabIndex = 10;
 			// 
 			// cbHotKeyAttack
 			// 
 			this->cbHotKeyAttack->AutoSize = true;
 			this->cbHotKeyAttack->Location = System::Drawing::Point(6, 23);
 			this->cbHotKeyAttack->Name = L"cbHotKeyAttack";
-			this->cbHotKeyAttack->Size = System::Drawing::Size(118, 17);
+			this->cbHotKeyAttack->Size = System::Drawing::Size(79, 17);
 			this->cbHotKeyAttack->TabIndex = 0;
-			this->cbHotKeyAttack->Text = L"Auto Attack Toggle";
+			this->cbHotKeyAttack->Text = L"AutoAttack";
 			this->cbHotKeyAttack->UseVisualStyleBackColor = true;
 			// 
 			// bgPointers
 			// 
+			this->bgPointers->Controls->Add(this->lMapID);
 			this->bgPointers->Controls->Add(this->BreathLabel);
 			this->bgPointers->Controls->Add(this->TubiPointerLabel);
 			this->bgPointers->Controls->Add(this->MobCountLabel);
@@ -1906,16 +1917,17 @@ private: System::Windows::Forms::ComboBox^  comboBox1;
 			this->bgPointers->Controls->Add(this->PeopleCountLabel);
 			this->bgPointers->Controls->Add(this->ItemCountLabel);
 			this->bgPointers->Controls->Add(this->CharPosLabel);
-			this->bgPointers->Location = System::Drawing::Point(6, 294);
+			this->bgPointers->Location = System::Drawing::Point(184, 7);
 			this->bgPointers->Name = L"bgPointers";
-			this->bgPointers->Size = System::Drawing::Size(313, 75);
+			this->bgPointers->Size = System::Drawing::Size(136, 331);
 			this->bgPointers->TabIndex = 25;
 			this->bgPointers->TabStop = false;
+			this->bgPointers->Text = L"Pointers";
 			// 
 			// BreathLabel
 			// 
 			this->BreathLabel->AutoSize = true;
-			this->BreathLabel->Location = System::Drawing::Point(181, 42);
+			this->BreathLabel->Location = System::Drawing::Point(6, 107);
 			this->BreathLabel->Name = L"BreathLabel";
 			this->BreathLabel->Size = System::Drawing::Size(44, 13);
 			this->BreathLabel->TabIndex = 26;
@@ -1924,7 +1936,7 @@ private: System::Windows::Forms::ComboBox^  comboBox1;
 			// TubiPointerLabel
 			// 
 			this->TubiPointerLabel->AutoSize = true;
-			this->TubiPointerLabel->Location = System::Drawing::Point(181, 29);
+			this->TubiPointerLabel->Location = System::Drawing::Point(6, 94);
 			this->TubiPointerLabel->Name = L"TubiPointerLabel";
 			this->TubiPointerLabel->Size = System::Drawing::Size(28, 13);
 			this->TubiPointerLabel->TabIndex = 25;
@@ -1942,7 +1954,7 @@ private: System::Windows::Forms::ComboBox^  comboBox1;
 			// AttackCountLabel
 			// 
 			this->AttackCountLabel->AutoSize = true;
-			this->AttackCountLabel->Location = System::Drawing::Point(181, 16);
+			this->AttackCountLabel->Location = System::Drawing::Point(6, 81);
 			this->AttackCountLabel->Name = L"AttackCountLabel";
 			this->AttackCountLabel->Size = System::Drawing::Size(61, 13);
 			this->AttackCountLabel->TabIndex = 24;
@@ -1992,6 +2004,38 @@ private: System::Windows::Forms::ComboBox^  comboBox1;
 			// 
 			this->LootTimer->Tick += gcnew System::EventHandler(this, &MainForm::LootTimer_Tick);
 			// 
+			// ddbHotKeyLoot
+			// 
+			this->ddbHotKeyLoot->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbHotKeyLoot->FormattingEnabled = true;
+			this->ddbHotKeyLoot->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9"});
+			this->ddbHotKeyLoot->Location = System::Drawing::Point(85, 48);
+			this->ddbHotKeyLoot->Name = L"ddbHotKeyLoot";
+			this->ddbHotKeyLoot->Size = System::Drawing::Size(80, 21);
+			this->ddbHotKeyLoot->TabIndex = 12;
+			// 
+			// cbHotKeyLoot
+			// 
+			this->cbHotKeyLoot->AutoSize = true;
+			this->cbHotKeyLoot->Location = System::Drawing::Point(6, 50);
+			this->cbHotKeyLoot->Name = L"cbHotKeyLoot";
+			this->cbHotKeyLoot->Size = System::Drawing::Size(69, 17);
+			this->cbHotKeyLoot->TabIndex = 11;
+			this->cbHotKeyLoot->Text = L"AutoLoot";
+			this->cbHotKeyLoot->UseVisualStyleBackColor = true;
+			// 
+			// lMapID
+			// 
+			this->lMapID->AutoSize = true;
+			this->lMapID->Location = System::Drawing::Point(6, 68);
+			this->lMapID->Name = L"lMapID";
+			this->lMapID->Size = System::Drawing::Size(75, 13);
+			this->lMapID->TabIndex = 27;
+			this->lMapID->Text = L"MapID: 12345";
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2006,6 +2050,7 @@ private: System::Windows::Forms::ComboBox^  comboBox1;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
 			this->Text = L"WatyBot - V2.2 - CCPLZ! - EMS 88.1";
+			this->TopMost = true;
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
