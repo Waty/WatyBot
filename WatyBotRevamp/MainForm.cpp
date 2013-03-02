@@ -474,9 +474,9 @@ void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 {
 	try
 	{
-		this->AttackTimer->Interval = int::Parse(this->tbAttackDelay->Text);
+		this->AttackTimer->Interval = Convert::ToInt32(this->nudAttackDelay->Value);
 		this->AttackComboBox->Enabled = !this->AttackCheckBox->Checked;
-		this->tbAttackDelay->Enabled = !this->AttackCheckBox->Checked;
+		this->nudAttackDelay->Enabled = !this->AttackCheckBox->Checked;
 		this->nudSAWSIL->Enabled = !this->AttackCheckBox->Checked;
 		this->AttackTimer->Enabled = this->AttackCheckBox->Checked;
 	}
@@ -489,9 +489,9 @@ void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::Even
 {
 	try
 	{
-		this->LootTimer->Interval = int::Parse(this->tbLootDelay->Text);
+		this->LootTimer->Interval = Convert::ToInt32(this->nudLootDelay->Value);
 		this->LootComboBox->Enabled = !this->LootCheckBox->Checked;
-		this->tbLootDelay->Enabled = !this->LootCheckBox->Checked;
+		this->nudLootDelay->Enabled = !this->LootCheckBox->Checked;
 		this->nudSLWIB->Enabled = !this->LootCheckBox->Checked;
 		this->LootTimer->Enabled = this->LootCheckBox->Checked;
 	}
@@ -912,10 +912,10 @@ void MainForm::SaveSettings()
 	using boost::property_tree::ptree;
 	ptree pt;
 	
-	pt.add("AutoAttackDelay", Convert::ToInt32(this->tbAttackDelay->Text));
+	pt.add("AutoAttackDelay", Convert::ToInt32(this->nudAttackDelay->Value));
 	pt.add("AutoAttackKey", this->AttackComboBox->SelectedIndex);
 	
-	pt.add("LootDelay", Convert::ToInt32(this->tbLootDelay->Text));
+	pt.add("LootDelay", Convert::ToInt32(this->nudLootDelay->Value));
 	pt.add("LootKey", this->LootComboBox->SelectedIndex);
 
 	if(this->tbHPValue->Text != String::Empty)
@@ -957,24 +957,24 @@ void MainForm::LoadSettings()
 	read_ini(file,pt);
 	try
 	{
-	this->tbAttackDelay->Text = marshal_as<String^>(pt.get<string>("AutoAttackDelay", "50"));
-	this->AttackComboBox->SelectedIndex = pt.get<int>("AutoAttackKey", 0);
-	this->LootComboBox->SelectedIndex = pt.get<int>("LootKey");
-	this->tbLootDelay->Text = marshal_as<String^>(pt.get<string>("LootDelay", "50"));
-	this->tbHPValue->Text = marshal_as<String^>(pt.get<string>("AutoHPValue", "9000"));
-	this->HPComboBox->SelectedIndex = pt.get<int>("AutoHPKey");
-	this->tbMPValue->Text = marshal_as<String^>(pt.get<string>("AutoMPValue", "100"));
-	this->MPComboBox->SelectedIndex = pt.get<int>("AutoMPKey");
-	this->AutoSkill1ComboBox->SelectedIndex = pt.get<int>("AutoSkill1Key");
-	this->AutoSkill2ComboBox->SelectedIndex = pt.get<int>("AutoSkill2Key");
-	this->AutoSkill3ComboBox->SelectedIndex = pt.get<int>("AutoSkill3Key");
-	this->AutoSkill4ComboBox->SelectedIndex = pt.get<int>("AutoSkill4Key");
-	this->AutoSkill1TextBox->Text = marshal_as<String^>(pt.get<string>("AutoSkill1Value", 0));
-	this->AutoSkill2TextBox->Text = marshal_as<String^>(pt.get<string>("AutoSkill2Value", 0));
-	this->AutoSkill3TextBox->Text = marshal_as<String^>(pt.get<string>("AutoSkill3Value", 0));
-	this->AutoSkill4TextBox->Text = marshal_as<String^>(pt.get<string>("AutoSkill4Value", 0));
-	this->CCPeopleTextBox->Text = marshal_as<String^>(pt.get<string>("AutoCCPeople", 0));
-	this->CCTimedTextBox->Text = marshal_as<String^>(pt.get<string>("AutoCCTimed", 0));
-	this->CCAttacksTextBox->Text = marshal_as<String^>(pt.get<string>("AutoCCAttacks", 0));
+		this->nudAttackDelay->Text = pt.get<int>("AutoAttackDelay", 50).ToString();
+		this->AttackComboBox->SelectedIndex = pt.get<int>("AutoAttackKey");
+		this->LootComboBox->SelectedIndex = pt.get<int>("LootKey");
+		this->nudLootDelay->Text = pt.get<int>("LootDelay", 50).ToString();
+		this->tbHPValue->Text = pt.get<int>("AutoHPValue", 9000).ToString();
+		this->HPComboBox->SelectedIndex = pt.get<int>("AutoHPKey");
+		this->tbMPValue->Text = pt.get<int>("AutoMPValue", 100).ToString();
+		this->MPComboBox->SelectedIndex = pt.get<int>("AutoMPKey");
+		this->AutoSkill1ComboBox->SelectedIndex = pt.get<int>("AutoSkill1Key");
+		this->AutoSkill2ComboBox->SelectedIndex = pt.get<int>("AutoSkill2Key");
+		this->AutoSkill3ComboBox->SelectedIndex = pt.get<int>("AutoSkill3Key");
+		this->AutoSkill4ComboBox->SelectedIndex = pt.get<int>("AutoSkill4Key");
+		this->AutoSkill1TextBox->Text = pt.get<int>("AutoSkill1Value", 0).ToString();
+		this->AutoSkill2TextBox->Text = pt.get<int>("AutoSkill2Value", 0).ToString();
+		this->AutoSkill3TextBox->Text = pt.get<int>("AutoSkill3Value", 0).ToString();
+		this->AutoSkill4TextBox->Text = pt.get<int>("AutoSkill4Value", 0).ToString();
+		this->CCPeopleTextBox->Text = pt.get<int>("AutoCCPeople", 0).ToString();
+		this->CCTimedTextBox->Text = pt.get<int>("AutoCCTimed", 0).ToString();
+		this->CCAttacksTextBox->Text = pt.get<int>("AutoCCAttacks", 0).ToString();
 	}catch(...){};
 }

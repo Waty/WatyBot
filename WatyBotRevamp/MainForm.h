@@ -264,9 +264,9 @@ private: System::Windows::Forms::Label^  lLootMS;
 
 
 private: System::Windows::Forms::CheckBox^  cbCPUHack;
-private: System::Windows::Forms::TextBox^  tbLootDelay;
 
-private: System::Windows::Forms::TextBox^  tbAttackDelay;
+
+
 private: System::Windows::Forms::Label^  lSLWIB;
 private: System::Windows::Forms::Label^  lSAWSIL;
 
@@ -291,6 +291,8 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyLoot;
 private: System::Windows::Forms::Label^  lMapID;
 private: System::Windows::Forms::NumericUpDown^  nudSLWIB;
 private: System::Windows::Forms::NumericUpDown^  nudSAWSIL;
+private: System::Windows::Forms::NumericUpDown^  nudLootDelay;
+private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 
 
 
@@ -327,8 +329,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSAWSIL;
 			this->PeopleComboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->lSLWIB = (gcnew System::Windows::Forms::Label());
 			this->lSAWSIL = (gcnew System::Windows::Forms::Label());
-			this->tbLootDelay = (gcnew System::Windows::Forms::TextBox());
-			this->tbAttackDelay = (gcnew System::Windows::Forms::TextBox());
 			this->lLootMS = (gcnew System::Windows::Forms::Label());
 			this->CCAttacksLabel = (gcnew System::Windows::Forms::Label());
 			this->CCTimedLabel = (gcnew System::Windows::Forms::Label());
@@ -468,6 +468,8 @@ private: System::Windows::Forms::NumericUpDown^  nudSAWSIL;
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->nudSAWSIL = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudSLWIB = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudAttackDelay = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudLootDelay = (gcnew System::Windows::Forms::NumericUpDown());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -494,6 +496,8 @@ private: System::Windows::Forms::NumericUpDown^  nudSAWSIL;
 			this->bgPointers->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSAWSIL))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSLWIB))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAttackDelay))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLootDelay))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -532,6 +536,8 @@ private: System::Windows::Forms::NumericUpDown^  nudSAWSIL;
 			// 
 			// AutoBotGroupBox
 			// 
+			this->AutoBotGroupBox->Controls->Add(this->nudLootDelay);
+			this->AutoBotGroupBox->Controls->Add(this->nudAttackDelay);
 			this->AutoBotGroupBox->Controls->Add(this->nudSLWIB);
 			this->AutoBotGroupBox->Controls->Add(this->nudSAWSIL);
 			this->AutoBotGroupBox->Controls->Add(this->TimedComboBox);
@@ -539,8 +545,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSAWSIL;
 			this->AutoBotGroupBox->Controls->Add(this->PeopleComboBox);
 			this->AutoBotGroupBox->Controls->Add(this->lSLWIB);
 			this->AutoBotGroupBox->Controls->Add(this->lSAWSIL);
-			this->AutoBotGroupBox->Controls->Add(this->tbLootDelay);
-			this->AutoBotGroupBox->Controls->Add(this->tbAttackDelay);
 			this->AutoBotGroupBox->Controls->Add(this->lLootMS);
 			this->AutoBotGroupBox->Controls->Add(this->CCAttacksLabel);
 			this->AutoBotGroupBox->Controls->Add(this->CCTimedLabel);
@@ -630,22 +634,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSAWSIL;
 			this->lSAWSIL->Size = System::Drawing::Size(46, 13);
 			this->lSAWSIL->TabIndex = 63;
 			this->lSAWSIL->Text = L"SAWSIL";
-			// 
-			// tbLootDelay
-			// 
-			this->tbLootDelay->Location = System::Drawing::Point(91, 42);
-			this->tbLootDelay->Name = L"tbLootDelay";
-			this->tbLootDelay->Size = System::Drawing::Size(33, 20);
-			this->tbLootDelay->TabIndex = 60;
-			this->tbLootDelay->Text = L"1000";
-			// 
-			// tbAttackDelay
-			// 
-			this->tbAttackDelay->Location = System::Drawing::Point(91, 16);
-			this->tbAttackDelay->Name = L"tbAttackDelay";
-			this->tbAttackDelay->Size = System::Drawing::Size(33, 20);
-			this->tbAttackDelay->TabIndex = 59;
-			this->tbAttackDelay->Text = L"1000";
 			// 
 			// lLootMS
 			// 
@@ -2041,6 +2029,24 @@ private: System::Windows::Forms::NumericUpDown^  nudSAWSIL;
 			this->nudSLWIB->TabIndex = 69;
 			this->nudSLWIB->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
 			// 
+			// nudAttackDelay
+			// 
+			this->nudAttackDelay->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
+			this->nudAttackDelay->Location = System::Drawing::Point(88, 15);
+			this->nudAttackDelay->Name = L"nudAttackDelay";
+			this->nudAttackDelay->Size = System::Drawing::Size(41, 20);
+			this->nudAttackDelay->TabIndex = 70;
+			this->nudAttackDelay->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
+			// 
+			// nudLootDelay
+			// 
+			this->nudLootDelay->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
+			this->nudLootDelay->Location = System::Drawing::Point(88, 42);
+			this->nudLootDelay->Name = L"nudLootDelay";
+			this->nudLootDelay->Size = System::Drawing::Size(41, 20);
+			this->nudLootDelay->TabIndex = 71;
+			this->nudLootDelay->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2094,6 +2100,8 @@ private: System::Windows::Forms::NumericUpDown^  nudSAWSIL;
 			this->bgPointers->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSAWSIL))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSLWIB))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAttackDelay))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLootDelay))->EndInit();
 			this->ResumeLayout(false);
 
 		}
