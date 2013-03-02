@@ -118,7 +118,12 @@ void MainForm::HotKeys()
 		else return 0;
 	}
 #pragma endregion
-
+	
+bool InGame()
+{
+	if(getMapID() > 0) return true;
+	else return false;
+}
 #pragma region Packetsending stuff
 bool isGoodPacket(String^ strPacket, String^&strError)
 {
@@ -500,7 +505,7 @@ void MainForm::AttackTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	int AttackKey = KeyCodes[AttackComboBox->SelectedIndex];
 	LPARAM AttacklParam = (MapVirtualKey(AttackKey, 0) << 16) + 1;
 
-	if(getMobCount() > Convert::ToInt32(tbSAWSIL->Text) && !UsingAutoSkill && !UsingPot && !CCing)
+	if(getMobCount() > Convert::ToInt32(tbSAWSIL->Text) && !UsingAutoSkill && !UsingPot && !CCing && InGame())
 	{
 		PostMessage(MapleStoryHWND, WM_KEYDOWN, AttackKey, AttacklParam);
 		Sleep(50);
@@ -512,7 +517,7 @@ void MainForm::LootTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	
 	int LootKey = KeyCodes[LootComboBox->SelectedIndex];
 	LPARAM LootlParam = (MapVirtualKey(LootKey, 0) << 16) + 1;
-	if(getItemCount() > Convert::ToInt32(tbSLWIB->Text) && !UsingAutoSkill && !UsingPot && !CCing)
+	if(getItemCount() > Convert::ToInt32(tbSLWIB->Text) && !UsingAutoSkill && !UsingPot && !CCing && InGame())
 	{
 		WritePointer(ServerBasePtr, TubiOffset, 0);
 		PostMessage(MapleStoryHWND, WM_KEYDOWN, LootKey, LootlParam);
