@@ -79,12 +79,12 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::CheckBox^  HPCheckBox;
 
 	private: System::Windows::Forms::ComboBox^  HPComboBox;
-	private: System::Windows::Forms::TextBox^  tbHPValue;
+
 
 
 
 	private: System::Windows::Forms::ComboBox^  MPComboBox;
-	private: System::Windows::Forms::TextBox^  tbMPValue;
+
 
 	private: System::Windows::Forms::CheckBox^  MPCheckBox;
 	private: System::Windows::Forms::ComboBox^  AttackComboBox;
@@ -114,19 +114,19 @@ namespace WatyBotRevamp {
 
 	private: System::Windows::Forms::CheckBox^  AutoSkill1CheckBox;
 
-	private: System::Windows::Forms::TextBox^  AutoSkill1TextBox;
+
 	private: System::Windows::Forms::ComboBox^  AutoSkill1ComboBox;
 	private: System::Windows::Forms::GroupBox^  AutoBotGroupBox;
 
 private: System::Windows::Forms::CheckBox^  AutoSkill4CheckBox;
-private: System::Windows::Forms::TextBox^  AutoSkill4TextBox;
+
 private: System::Windows::Forms::ComboBox^  AutoSkill4ComboBox;
 
 private: System::Windows::Forms::CheckBox^  AutoSkill3CheckBox;
-private: System::Windows::Forms::TextBox^  AutoSkill3TextBox;
+
 private: System::Windows::Forms::ComboBox^  AutoSkill3ComboBox;
 private: System::Windows::Forms::CheckBox^  AutoSkill2CheckBox;
-private: System::Windows::Forms::TextBox^  AutoSkill2TextBox;
+
 private: System::Windows::Forms::ComboBox^  AutoSkill2ComboBox;
 private: System::Windows::Forms::Label^  TubiPointerLabel;
 
@@ -136,7 +136,7 @@ private: System::Windows::Forms::Label^  TubiPointerLabel;
 private: System::Windows::Forms::Label^  BreathLabel;
 private: System::Windows::Forms::CheckBox^  CCPeopleCheckBox;
 
-private: System::Windows::Forms::TextBox^  CCPeopleTextBox;
+
 
 
 
@@ -186,11 +186,11 @@ private: System::Windows::Forms::Timer^  SpamPacketsTimer;
 private: System::Windows::Forms::TabPage^  SPControlTabPage;
 private: System::Windows::Forms::CheckBox^  cbSPControl;
 
-private: System::Windows::Forms::TextBox^  CCAttacksTextBox;
+
 		 
 private: System::Windows::Forms::CheckBox^  CCAttacksCheckBox;
 		 
-private: System::Windows::Forms::TextBox^  CCTimedTextBox;
+
 		 
 private: System::Windows::Forms::CheckBox^  CCTimedCheckBox;
 private: System::Windows::Forms::Label^  CCTimedLabel;
@@ -293,6 +293,24 @@ private: System::Windows::Forms::NumericUpDown^  nudSLWIB;
 private: System::Windows::Forms::NumericUpDown^  nudSAWSIL;
 private: System::Windows::Forms::NumericUpDown^  nudLootDelay;
 private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
+private: System::Windows::Forms::NumericUpDown^  nudMPValue;
+
+private: System::Windows::Forms::NumericUpDown^  nudHPValue;
+private: System::Windows::Forms::NumericUpDown^  nudCCAttacks;
+
+private: System::Windows::Forms::NumericUpDown^  nudCCTimed;
+
+private: System::Windows::Forms::NumericUpDown^  nudCCPeople;
+
+private: System::Windows::Forms::NumericUpDown^  nudSkill4Value;
+
+private: System::Windows::Forms::NumericUpDown^  nudSkill3Value;
+
+private: System::Windows::Forms::NumericUpDown^  nudSkill2Value;
+
+private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
+
+
 
 
 
@@ -324,6 +342,12 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			this->MainTabControl = (gcnew System::Windows::Forms::TabControl());
 			this->AutoBotTab = (gcnew System::Windows::Forms::TabPage());
 			this->AutoBotGroupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->nudMPValue = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudHPValue = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudLootDelay = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudAttackDelay = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudSLWIB = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudSAWSIL = (gcnew System::Windows::Forms::NumericUpDown());
 			this->TimedComboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->AttacksComboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->PeopleComboBox = (gcnew System::Windows::Forms::ComboBox());
@@ -333,31 +357,22 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			this->CCAttacksLabel = (gcnew System::Windows::Forms::Label());
 			this->CCTimedLabel = (gcnew System::Windows::Forms::Label());
 			this->CCPeopleLabel = (gcnew System::Windows::Forms::Label());
-			this->CCAttacksTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->CCAttacksCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->CCTimedTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->CCTimedCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->AutoSkill4ComboBox = (gcnew System::Windows::Forms::ComboBox());
-			this->CCPeopleTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->AutoSkill4CheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->CCPeopleCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->AutoSkill4TextBox = (gcnew System::Windows::Forms::TextBox());
 			this->AutoSkill3CheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->AutoSkill3TextBox = (gcnew System::Windows::Forms::TextBox());
 			this->AutoSkill3ComboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->AutoSkill2CheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->AutoSkill2TextBox = (gcnew System::Windows::Forms::TextBox());
 			this->AutoSkill2ComboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->AttackCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->AutoSkill1CheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->HPCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->AutoSkill1TextBox = (gcnew System::Windows::Forms::TextBox());
-			this->tbHPValue = (gcnew System::Windows::Forms::TextBox());
 			this->AutoSkill1ComboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->HPComboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->MPCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->LootComboBox = (gcnew System::Windows::Forms::ComboBox());
-			this->tbMPValue = (gcnew System::Windows::Forms::TextBox());
 			this->LootCheckBox = (gcnew System::Windows::Forms::CheckBox());
 			this->MPComboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->lAttackMS = (gcnew System::Windows::Forms::Label());
@@ -466,13 +481,22 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->nudSAWSIL = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudSLWIB = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudAttackDelay = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudLootDelay = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudSkill2Value = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudSkill1Value = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudSkill4Value = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudSkill3Value = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudCCTimed = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudCCPeople = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudCCAttacks = (gcnew System::Windows::Forms::NumericUpDown());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudMPValue))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudHPValue))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLootDelay))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAttackDelay))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSLWIB))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSAWSIL))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->EXPForeground))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->MPForeground))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->HPForeground))->BeginInit();
@@ -494,10 +518,13 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			this->InfoTab->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			this->bgPointers->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSAWSIL))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSLWIB))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAttackDelay))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLootDelay))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill2Value))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill1Value))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill4Value))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill3Value))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCTimed))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCPeople))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCAttacks))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -536,6 +563,15 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			// 
 			// AutoBotGroupBox
 			// 
+			this->AutoBotGroupBox->Controls->Add(this->nudCCAttacks);
+			this->AutoBotGroupBox->Controls->Add(this->nudCCTimed);
+			this->AutoBotGroupBox->Controls->Add(this->nudCCPeople);
+			this->AutoBotGroupBox->Controls->Add(this->nudSkill4Value);
+			this->AutoBotGroupBox->Controls->Add(this->nudSkill3Value);
+			this->AutoBotGroupBox->Controls->Add(this->nudSkill2Value);
+			this->AutoBotGroupBox->Controls->Add(this->nudSkill1Value);
+			this->AutoBotGroupBox->Controls->Add(this->nudMPValue);
+			this->AutoBotGroupBox->Controls->Add(this->nudHPValue);
 			this->AutoBotGroupBox->Controls->Add(this->nudLootDelay);
 			this->AutoBotGroupBox->Controls->Add(this->nudAttackDelay);
 			this->AutoBotGroupBox->Controls->Add(this->nudSLWIB);
@@ -549,31 +585,22 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			this->AutoBotGroupBox->Controls->Add(this->CCAttacksLabel);
 			this->AutoBotGroupBox->Controls->Add(this->CCTimedLabel);
 			this->AutoBotGroupBox->Controls->Add(this->CCPeopleLabel);
-			this->AutoBotGroupBox->Controls->Add(this->CCAttacksTextBox);
 			this->AutoBotGroupBox->Controls->Add(this->CCAttacksCheckBox);
-			this->AutoBotGroupBox->Controls->Add(this->CCTimedTextBox);
 			this->AutoBotGroupBox->Controls->Add(this->CCTimedCheckBox);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill4ComboBox);
-			this->AutoBotGroupBox->Controls->Add(this->CCPeopleTextBox);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill4CheckBox);
 			this->AutoBotGroupBox->Controls->Add(this->CCPeopleCheckBox);
-			this->AutoBotGroupBox->Controls->Add(this->AutoSkill4TextBox);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill3CheckBox);
-			this->AutoBotGroupBox->Controls->Add(this->AutoSkill3TextBox);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill3ComboBox);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill2CheckBox);
-			this->AutoBotGroupBox->Controls->Add(this->AutoSkill2TextBox);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill2ComboBox);
 			this->AutoBotGroupBox->Controls->Add(this->AttackCheckBox);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill1CheckBox);
 			this->AutoBotGroupBox->Controls->Add(this->HPCheckBox);
-			this->AutoBotGroupBox->Controls->Add(this->AutoSkill1TextBox);
-			this->AutoBotGroupBox->Controls->Add(this->tbHPValue);
 			this->AutoBotGroupBox->Controls->Add(this->AutoSkill1ComboBox);
 			this->AutoBotGroupBox->Controls->Add(this->HPComboBox);
 			this->AutoBotGroupBox->Controls->Add(this->MPCheckBox);
 			this->AutoBotGroupBox->Controls->Add(this->LootComboBox);
-			this->AutoBotGroupBox->Controls->Add(this->tbMPValue);
 			this->AutoBotGroupBox->Controls->Add(this->LootCheckBox);
 			this->AutoBotGroupBox->Controls->Add(this->MPComboBox);
 			this->AutoBotGroupBox->Controls->Add(this->lAttackMS);
@@ -585,12 +612,66 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			this->AutoBotGroupBox->TabStop = false;
 			this->AutoBotGroupBox->Text = L"Autobot";
 			// 
+			// nudMPValue
+			// 
+			this->nudMPValue->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudMPValue->Location = System::Drawing::Point(91, 94);
+			this->nudMPValue->Name = L"nudMPValue";
+			this->nudMPValue->Size = System::Drawing::Size(107, 20);
+			this->nudMPValue->TabIndex = 73;
+			// 
+			// nudHPValue
+			// 
+			this->nudHPValue->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudHPValue->Location = System::Drawing::Point(91, 69);
+			this->nudHPValue->Name = L"nudHPValue";
+			this->nudHPValue->Size = System::Drawing::Size(107, 20);
+			this->nudHPValue->TabIndex = 72;
+			// 
+			// nudLootDelay
+			// 
+			this->nudLootDelay->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
+			this->nudLootDelay->Location = System::Drawing::Point(89, 43);
+			this->nudLootDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1500, 0, 0, 0});
+			this->nudLootDelay->Name = L"nudLootDelay";
+			this->nudLootDelay->Size = System::Drawing::Size(44, 20);
+			this->nudLootDelay->TabIndex = 71;
+			this->nudLootDelay->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
+			// 
+			// nudAttackDelay
+			// 
+			this->nudAttackDelay->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
+			this->nudAttackDelay->Location = System::Drawing::Point(89, 16);
+			this->nudAttackDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1500, 0, 0, 0});
+			this->nudAttackDelay->Name = L"nudAttackDelay";
+			this->nudAttackDelay->Size = System::Drawing::Size(44, 20);
+			this->nudAttackDelay->TabIndex = 70;
+			this->nudAttackDelay->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
+			// 
+			// nudSLWIB
+			// 
+			this->nudSLWIB->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
+			this->nudSLWIB->Location = System::Drawing::Point(202, 42);
+			this->nudSLWIB->Name = L"nudSLWIB";
+			this->nudSLWIB->Size = System::Drawing::Size(35, 20);
+			this->nudSLWIB->TabIndex = 69;
+			this->nudSLWIB->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
+			// 
+			// nudSAWSIL
+			// 
+			this->nudSAWSIL->Location = System::Drawing::Point(202, 14);
+			this->nudSAWSIL->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {25, 0, 0, 0});
+			this->nudSAWSIL->Name = L"nudSAWSIL";
+			this->nudSAWSIL->Size = System::Drawing::Size(35, 20);
+			this->nudSAWSIL->TabIndex = 68;
+			this->nudSAWSIL->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
+			// 
 			// TimedComboBox
 			// 
 			this->TimedComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->TimedComboBox->FormattingEnabled = true;
 			this->TimedComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(2) {L"CC", L"CS"});
-			this->TimedComboBox->Location = System::Drawing::Point(47, 253);
+			this->TimedComboBox->Location = System::Drawing::Point(47, 251);
 			this->TimedComboBox->Name = L"TimedComboBox";
 			this->TimedComboBox->Size = System::Drawing::Size(38, 21);
 			this->TimedComboBox->TabIndex = 67;
@@ -600,7 +681,7 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			this->AttacksComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->AttacksComboBox->FormattingEnabled = true;
 			this->AttacksComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(2) {L"CC", L"CS"});
-			this->AttacksComboBox->Location = System::Drawing::Point(47, 280);
+			this->AttacksComboBox->Location = System::Drawing::Point(47, 278);
 			this->AttacksComboBox->Name = L"AttacksComboBox";
 			this->AttacksComboBox->Size = System::Drawing::Size(38, 21);
 			this->AttacksComboBox->TabIndex = 66;
@@ -619,7 +700,7 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			// 
 			this->lSLWIB->AutoSize = true;
 			this->lSLWIB->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7));
-			this->lSLWIB->Location = System::Drawing::Point(156, 47);
+			this->lSLWIB->Location = System::Drawing::Point(159, 46);
 			this->lSLWIB->Name = L"lSLWIB";
 			this->lSLWIB->Size = System::Drawing::Size(39, 13);
 			this->lSLWIB->TabIndex = 64;
@@ -629,7 +710,7 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			// 
 			this->lSAWSIL->AutoSize = true;
 			this->lSAWSIL->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7));
-			this->lSAWSIL->Location = System::Drawing::Point(150, 19);
+			this->lSAWSIL->Location = System::Drawing::Point(159, 21);
 			this->lSAWSIL->Name = L"lSAWSIL";
 			this->lSAWSIL->Size = System::Drawing::Size(46, 13);
 			this->lSAWSIL->TabIndex = 63;
@@ -638,7 +719,7 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			// lLootMS
 			// 
 			this->lLootMS->AutoSize = true;
-			this->lLootMS->Location = System::Drawing::Point(130, 46);
+			this->lLootMS->Location = System::Drawing::Point(133, 47);
 			this->lLootMS->Name = L"lLootMS";
 			this->lLootMS->Size = System::Drawing::Size(20, 13);
 			this->lLootMS->TabIndex = 58;
@@ -671,13 +752,6 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			this->CCPeopleLabel->TabIndex = 54;
 			this->CCPeopleLabel->Text = L"People";
 			// 
-			// CCAttacksTextBox
-			// 
-			this->CCAttacksTextBox->Location = System::Drawing::Point(91, 280);
-			this->CCAttacksTextBox->Name = L"CCAttacksTextBox";
-			this->CCAttacksTextBox->Size = System::Drawing::Size(102, 20);
-			this->CCAttacksTextBox->TabIndex = 30;
-			// 
 			// CCAttacksCheckBox
 			// 
 			this->CCAttacksCheckBox->AutoSize = true;
@@ -688,13 +762,6 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			this->CCAttacksCheckBox->Text = L"Auto";
 			this->CCAttacksCheckBox->UseVisualStyleBackColor = true;
 			this->CCAttacksCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCAttacksCheckBox_CheckedChanged);
-			// 
-			// CCTimedTextBox
-			// 
-			this->CCTimedTextBox->Location = System::Drawing::Point(91, 253);
-			this->CCTimedTextBox->Name = L"CCTimedTextBox";
-			this->CCTimedTextBox->Size = System::Drawing::Size(102, 20);
-			this->CCTimedTextBox->TabIndex = 28;
 			// 
 			// CCTimedCheckBox
 			// 
@@ -720,13 +787,6 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			this->AutoSkill4ComboBox->Size = System::Drawing::Size(115, 21);
 			this->AutoSkill4ComboBox->TabIndex = 24;
 			// 
-			// CCPeopleTextBox
-			// 
-			this->CCPeopleTextBox->Location = System::Drawing::Point(91, 226);
-			this->CCPeopleTextBox->Name = L"CCPeopleTextBox";
-			this->CCPeopleTextBox->Size = System::Drawing::Size(102, 20);
-			this->CCPeopleTextBox->TabIndex = 26;
-			// 
 			// AutoSkill4CheckBox
 			// 
 			this->AutoSkill4CheckBox->AutoSize = true;
@@ -749,14 +809,6 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			this->CCPeopleCheckBox->UseVisualStyleBackColor = true;
 			this->CCPeopleCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCPeopleCheckBox_CheckedChanged);
 			// 
-			// AutoSkill4TextBox
-			// 
-			this->AutoSkill4TextBox->Location = System::Drawing::Point(91, 197);
-			this->AutoSkill4TextBox->MaxLength = 10;
-			this->AutoSkill4TextBox->Name = L"AutoSkill4TextBox";
-			this->AutoSkill4TextBox->Size = System::Drawing::Size(102, 20);
-			this->AutoSkill4TextBox->TabIndex = 23;
-			// 
 			// AutoSkill3CheckBox
 			// 
 			this->AutoSkill3CheckBox->AutoSize = true;
@@ -767,14 +819,6 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			this->AutoSkill3CheckBox->Text = L"Auto Skill 3";
 			this->AutoSkill3CheckBox->UseVisualStyleBackColor = true;
 			this->AutoSkill3CheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill3CheckBox_CheckedChanged);
-			// 
-			// AutoSkill3TextBox
-			// 
-			this->AutoSkill3TextBox->Location = System::Drawing::Point(91, 171);
-			this->AutoSkill3TextBox->MaxLength = 10;
-			this->AutoSkill3TextBox->Name = L"AutoSkill3TextBox";
-			this->AutoSkill3TextBox->Size = System::Drawing::Size(102, 20);
-			this->AutoSkill3TextBox->TabIndex = 20;
 			// 
 			// AutoSkill3ComboBox
 			// 
@@ -799,14 +843,6 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			this->AutoSkill2CheckBox->Text = L"Auto Skill 2";
 			this->AutoSkill2CheckBox->UseVisualStyleBackColor = true;
 			this->AutoSkill2CheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill2CheckBox_CheckedChanged);
-			// 
-			// AutoSkill2TextBox
-			// 
-			this->AutoSkill2TextBox->Location = System::Drawing::Point(91, 145);
-			this->AutoSkill2TextBox->MaxLength = 10;
-			this->AutoSkill2TextBox->Name = L"AutoSkill2TextBox";
-			this->AutoSkill2TextBox->Size = System::Drawing::Size(102, 20);
-			this->AutoSkill2TextBox->TabIndex = 17;
 			// 
 			// AutoSkill2ComboBox
 			// 
@@ -853,22 +889,6 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			this->HPCheckBox->Text = L"Auto HP";
 			this->HPCheckBox->UseVisualStyleBackColor = true;
 			this->HPCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::HPCheckBox_CheckedChanged);
-			// 
-			// AutoSkill1TextBox
-			// 
-			this->AutoSkill1TextBox->Location = System::Drawing::Point(91, 119);
-			this->AutoSkill1TextBox->MaxLength = 10;
-			this->AutoSkill1TextBox->Name = L"AutoSkill1TextBox";
-			this->AutoSkill1TextBox->Size = System::Drawing::Size(102, 20);
-			this->AutoSkill1TextBox->TabIndex = 14;
-			// 
-			// tbHPValue
-			// 
-			this->tbHPValue->Location = System::Drawing::Point(91, 69);
-			this->tbHPValue->MaxLength = 10;
-			this->tbHPValue->Name = L"tbHPValue";
-			this->tbHPValue->Size = System::Drawing::Size(102, 20);
-			this->tbHPValue->TabIndex = 8;
 			// 
 			// AutoSkill1ComboBox
 			// 
@@ -920,14 +940,6 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			this->LootComboBox->Size = System::Drawing::Size(76, 21);
 			this->LootComboBox->TabIndex = 6;
 			// 
-			// tbMPValue
-			// 
-			this->tbMPValue->Location = System::Drawing::Point(91, 94);
-			this->tbMPValue->MaxLength = 10;
-			this->tbMPValue->Name = L"tbMPValue";
-			this->tbMPValue->Size = System::Drawing::Size(102, 20);
-			this->tbMPValue->TabIndex = 11;
-			// 
 			// LootCheckBox
 			// 
 			this->LootCheckBox->AutoSize = true;
@@ -955,7 +967,7 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			// lAttackMS
 			// 
 			this->lAttackMS->AutoSize = true;
-			this->lAttackMS->Location = System::Drawing::Point(130, 19);
+			this->lAttackMS->Location = System::Drawing::Point(133, 20);
 			this->lAttackMS->Name = L"lAttackMS";
 			this->lAttackMS->Size = System::Drawing::Size(20, 13);
 			this->lAttackMS->TabIndex = 28;
@@ -2012,43 +2024,61 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			// 
 			this->LootTimer->Tick += gcnew System::EventHandler(this, &MainForm::LootTimer_Tick);
 			// 
-			// nudSAWSIL
+			// nudSkill2Value
 			// 
-			this->nudSAWSIL->Location = System::Drawing::Point(202, 14);
-			this->nudSAWSIL->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {25, 0, 0, 0});
-			this->nudSAWSIL->Name = L"nudSAWSIL";
-			this->nudSAWSIL->Size = System::Drawing::Size(35, 20);
-			this->nudSAWSIL->TabIndex = 68;
-			this->nudSAWSIL->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
+			this->nudSkill2Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudSkill2Value->Location = System::Drawing::Point(91, 144);
+			this->nudSkill2Value->Name = L"nudSkill2Value";
+			this->nudSkill2Value->Size = System::Drawing::Size(107, 20);
+			this->nudSkill2Value->TabIndex = 75;
 			// 
-			// nudSLWIB
+			// nudSkill1Value
 			// 
-			this->nudSLWIB->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
-			this->nudSLWIB->Location = System::Drawing::Point(202, 42);
-			this->nudSLWIB->Name = L"nudSLWIB";
-			this->nudSLWIB->Size = System::Drawing::Size(35, 20);
-			this->nudSLWIB->TabIndex = 69;
-			this->nudSLWIB->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
+			this->nudSkill1Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudSkill1Value->Location = System::Drawing::Point(91, 119);
+			this->nudSkill1Value->Name = L"nudSkill1Value";
+			this->nudSkill1Value->Size = System::Drawing::Size(107, 20);
+			this->nudSkill1Value->TabIndex = 74;
 			// 
-			// nudAttackDelay
+			// nudSkill4Value
 			// 
-			this->nudAttackDelay->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
-			this->nudAttackDelay->Location = System::Drawing::Point(86, 15);
-			this->nudAttackDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1500, 0, 0, 0});
-			this->nudAttackDelay->Name = L"nudAttackDelay";
-			this->nudAttackDelay->Size = System::Drawing::Size(43, 20);
-			this->nudAttackDelay->TabIndex = 70;
-			this->nudAttackDelay->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
+			this->nudSkill4Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudSkill4Value->Location = System::Drawing::Point(91, 196);
+			this->nudSkill4Value->Name = L"nudSkill4Value";
+			this->nudSkill4Value->Size = System::Drawing::Size(107, 20);
+			this->nudSkill4Value->TabIndex = 77;
 			// 
-			// nudLootDelay
+			// nudSkill3Value
 			// 
-			this->nudLootDelay->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
-			this->nudLootDelay->Location = System::Drawing::Point(86, 42);
-			this->nudLootDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1500, 0, 0, 0});
-			this->nudLootDelay->Name = L"nudLootDelay";
-			this->nudLootDelay->Size = System::Drawing::Size(43, 20);
-			this->nudLootDelay->TabIndex = 71;
-			this->nudLootDelay->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
+			this->nudSkill3Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudSkill3Value->Location = System::Drawing::Point(91, 171);
+			this->nudSkill3Value->Name = L"nudSkill3Value";
+			this->nudSkill3Value->Size = System::Drawing::Size(107, 20);
+			this->nudSkill3Value->TabIndex = 76;
+			// 
+			// nudCCTimed
+			// 
+			this->nudCCTimed->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudCCTimed->Location = System::Drawing::Point(91, 253);
+			this->nudCCTimed->Name = L"nudCCTimed";
+			this->nudCCTimed->Size = System::Drawing::Size(107, 20);
+			this->nudCCTimed->TabIndex = 79;
+			// 
+			// nudCCPeople
+			// 
+			this->nudCCPeople->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudCCPeople->Location = System::Drawing::Point(91, 225);
+			this->nudCCPeople->Name = L"nudCCPeople";
+			this->nudCCPeople->Size = System::Drawing::Size(107, 20);
+			this->nudCCPeople->TabIndex = 78;
+			// 
+			// nudCCAttacks
+			// 
+			this->nudCCAttacks->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudCCAttacks->Location = System::Drawing::Point(91, 279);
+			this->nudCCAttacks->Name = L"nudCCAttacks";
+			this->nudCCAttacks->Size = System::Drawing::Size(107, 20);
+			this->nudCCAttacks->TabIndex = 80;
 			// 
 			// MainForm
 			// 
@@ -2071,6 +2101,12 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			this->AutoBotTab->ResumeLayout(false);
 			this->AutoBotGroupBox->ResumeLayout(false);
 			this->AutoBotGroupBox->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudMPValue))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudHPValue))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLootDelay))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAttackDelay))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSLWIB))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSAWSIL))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->EXPForeground))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->MPForeground))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->HPForeground))->EndInit();
@@ -2101,10 +2137,13 @@ private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
 			this->groupBox1->PerformLayout();
 			this->bgPointers->ResumeLayout(false);
 			this->bgPointers->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSAWSIL))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSLWIB))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAttackDelay))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLootDelay))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill2Value))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill1Value))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill4Value))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill3Value))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCTimed))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCPeople))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCAttacks))->EndInit();
 			this->ResumeLayout(false);
 
 		}

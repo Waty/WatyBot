@@ -425,21 +425,21 @@ void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventA
 		{
 			iHPKey = KeyCodes[HPComboBox->SelectedIndex];
 			HPlParam = (MapVirtualKey(iHPKey, 0) << 16) + 1;
-			iHPValue = int::Parse(tbHPValue->Text);
-			tbHPValue->Enabled = false;
+			iHPValue = Convert::ToInt32(nudHPValue->Value);
+			nudHPValue->Enabled = false;
 			HPComboBox->Enabled = false;
 		}
 		catch(Exception^ exception)
 		{
 			::MessageBox::Show(exception->ToString());
 			HPCheckBox->Checked = false;
-			tbHPValue->Enabled = true;
+			nudHPValue->Enabled = true;
 			HPComboBox->Enabled = true;
 		}
 	}
 	else
 	{
-		tbHPValue->Enabled = true;
+		nudHPValue->Enabled = true;
 		HPComboBox->Enabled = true;
 	}
 
@@ -452,21 +452,21 @@ void MainForm::MPCheckBox_CheckedChanged(System::Object^  sender, System::EventA
 		{
 			iMPKey = KeyCodes[MPComboBox->SelectedIndex];
 			MPlParam = (MapVirtualKey(iMPKey, 0) << 16) + 1;
-			iMPValue = int::Parse(tbMPValue->Text);
-			tbMPValue->Enabled = false;
+			iMPValue = Convert::ToInt32(nudMPValue->Value);
+			nudMPValue->Enabled = false;
 			MPComboBox->Enabled = false;
 		}
 		catch(Exception^ exception)
 		{
 			::MessageBox::Show(exception->ToString());
 			MPCheckBox->Checked = false;
-			tbMPValue->Enabled = true;
+			nudMPValue->Enabled = true;
 			MPComboBox->Enabled = true;
 		}
 	}
 	else
 	{
-		tbMPValue->Enabled = true;
+		nudMPValue->Enabled = true;
 		MPComboBox->Enabled = true;
 	}
 }
@@ -526,37 +526,37 @@ void MainForm::LootTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 void MainForm::AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->AutoSkill1ComboBox->Enabled = !this->AutoSkill1CheckBox->Checked;
-	this->AutoSkill1TextBox->Enabled = !this->AutoSkill1CheckBox->Checked;
+	this->nudSkill1Value->Enabled = !this->AutoSkill1CheckBox->Checked;
 	AutoSkill1Bool = this->AutoSkill1CheckBox->Checked;
-	if(this->AutoSkill1CheckBox->Checked) NewThread(AutoSkill1);
 	UserSetSkill1Key = KeyCodes[this->AutoSkill1ComboBox->SelectedIndex];
-	if(this->AutoSkill1TextBox->Text != "")UserSetSkill1Delay = Convert::ToInt32(this->AutoSkill1TextBox->Text) * 1000;
+	UserSetSkill1Delay = Convert::ToInt32(this->nudSkill1Value->Value) * 1000;
+	if(this->AutoSkill1CheckBox->Checked) NewThread(AutoSkill1);
 }
 void MainForm::AutoSkill2CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->AutoSkill2ComboBox->Enabled = !this->AutoSkill2CheckBox->Checked;
-	this->AutoSkill2TextBox->Enabled = !this->AutoSkill2CheckBox->Checked;
+	this->nudSkill2Value->Enabled = !this->AutoSkill2CheckBox->Checked;
 	AutoSkill2Bool = this->AutoSkill2CheckBox->Checked;
 	UserSetSkill2Key = KeyCodes[this->AutoSkill2ComboBox->SelectedIndex];
-	if(this->AutoSkill2TextBox->Text != "")UserSetSkill2Delay = Convert::ToInt32(this->AutoSkill2TextBox->Text) * 1000;
+	UserSetSkill2Delay = Convert::ToInt32(this->nudSkill2Value->Value) * 1000;
 	if(this->AutoSkill2CheckBox->Checked) NewThread(AutoSkill2);
 }
 void MainForm::AutoSkill3CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->AutoSkill3ComboBox->Enabled = !this->AutoSkill3CheckBox->Checked;
-	this->AutoSkill3TextBox->Enabled = !this->AutoSkill3CheckBox->Checked;
+	this->nudSkill3Value->Enabled = !this->AutoSkill3CheckBox->Checked;
 	AutoSkill3Bool = this->AutoSkill3CheckBox->Checked;
 	UserSetSkill3Key = KeyCodes[this->AutoSkill3ComboBox->SelectedIndex];
-	if(this->AutoSkill3TextBox->Text != "")UserSetSkill3Delay = Convert::ToInt32(this->AutoSkill3TextBox->Text) * 1000;
+	UserSetSkill3Delay = Convert::ToInt32(this->nudSkill3Value->Value) * 1000;
 	if(this->AutoSkill3CheckBox->Checked) NewThread(AutoSkill3);
 }
 void MainForm::AutoSkill4CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->AutoSkill4ComboBox->Enabled = !this->AutoSkill4CheckBox->Checked;
-	this->AutoSkill4TextBox->Enabled = !this->AutoSkill4CheckBox->Checked;
+	this->nudSkill4Value->Enabled = !this->AutoSkill4CheckBox->Checked;
 	AutoSkill4Bool = this->AutoSkill4CheckBox->Checked;
 	UserSetSkill4Key = KeyCodes[this->AutoSkill4ComboBox->SelectedIndex];
-	if(this->AutoSkill4TextBox->Text != "")UserSetSkill4Delay = Convert::ToInt32(this->AutoSkill4TextBox->Text) * 1000;
+	UserSetSkill4Delay = Convert::ToInt32(this->nudSkill4Value->Value) * 1000;
 	if(this->AutoSkill4CheckBox->Checked) NewThread(AutoSkill4);
 }
 void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -565,8 +565,8 @@ void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::
 	{
 		try
 		{
-			iCCPeople = int::Parse(CCPeopleTextBox->Text);
-			CCPeopleTextBox->Enabled = false;
+			iCCPeople = Convert::ToInt32(nudCCPeople->Value);
+			nudCCPeople->Enabled = false;
 		}
 		catch(...)
 		{
@@ -576,7 +576,7 @@ void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::
 	}
 	else
 	{
-		CCPeopleTextBox->Enabled = true;
+		nudCCPeople->Enabled = true;
 	}
 }
 void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -585,8 +585,8 @@ void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 	{
 		try
 		{
-			CCTimedTimer->Interval = int::Parse(CCTimedTextBox->Text);
-			CCTimedTextBox->Enabled = false;
+			CCTimedTimer->Interval = Convert::ToInt32(nudCCTimed->Value);
+			nudCCTimed->Enabled = false;
 			CCTimedTimer->Enabled = true;
 		}
 		catch(...)
@@ -598,7 +598,7 @@ void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 	}
 	else
 	{
-		CCTimedTextBox->Enabled = true;
+		nudCCTimed->Enabled = true;
 		CCTimedTimer->Enabled = false;
 	}
 }
@@ -608,8 +608,8 @@ void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System:
 	{
 		try
 		{
-			iCCAttacks = int::Parse(CCAttacksTextBox->Text);
-			CCAttacksTextBox->Enabled = false;
+			iCCAttacks = Convert::ToInt32(nudCCAttacks->Value);
+			nudCCAttacks->Enabled = false;
 		}
 		catch(...)
 		{
@@ -619,7 +619,7 @@ void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System:
 	}
 	else
 	{
-		CCAttacksTextBox->Enabled = true;
+		nudCCAttacks->Enabled = true;
 	}
 }
 #pragma endregion
@@ -918,32 +918,24 @@ void MainForm::SaveSettings()
 	pt.add("LootDelay", Convert::ToInt32(this->nudLootDelay->Value));
 	pt.add("LootKey", this->LootComboBox->SelectedIndex);
 
-	if(this->tbHPValue->Text != String::Empty)
-		pt.add("AutoHPValue", Convert::ToInt32(this->tbHPValue->Text));
+	pt.add("AutoHPValue", Convert::ToInt32(this->nudHPValue->Value));
 	pt.add("AutoHPKey", this->HPComboBox->SelectedIndex);
-	if(this->tbMPValue->Text != String::Empty)
-		pt.add("AutoMPValue", Convert::ToInt32(this->tbMPValue->Text));
+	pt.add("AutoMPValue", Convert::ToInt32(this->nudMPValue->Value));
 	pt.add("AutoMPKey", this->MPComboBox->SelectedIndex);
 
-	if(this->AutoSkill1TextBox->Text != String::Empty)
-		pt.add("AutoSkill1Value", Convert::ToInt32(this->AutoSkill1TextBox->Text));
+	
+	pt.add("AutoSkill1Value", Convert::ToInt32(this->nudSkill1Value->Value));
 	pt.add("AutoSkill1Key", this->AutoSkill1ComboBox->SelectedIndex);
-	if(this->AutoSkill2TextBox->Text != String::Empty)
-		pt.add("AutoSkill2Value", Convert::ToInt32(this->AutoSkill2TextBox->Text));
+	pt.add("AutoSkill2Value", Convert::ToInt32(this->nudSkill2Value->Value));
 	pt.add("AutoSkill2Key", this->AutoSkill2ComboBox->SelectedIndex);
-	if(this->AutoSkill3TextBox->Text != String::Empty)
-		pt.add("AutoSkill3Value", Convert::ToInt32(this->AutoSkill3TextBox->Text));
+	pt.add("AutoSkill3Value", Convert::ToInt32(this->nudSkill3Value->Value));
 	pt.add("AutoSkill3Key", this->AutoSkill3ComboBox->SelectedIndex);
-	if(this->AutoSkill4TextBox->Text != String::Empty)
-		pt.add("AutoSkill4Value", Convert::ToInt32(this->AutoSkill4TextBox->Text));
+	pt.add("AutoSkill4Value", Convert::ToInt32(this->nudSkill4Value->Value));
 	pt.add("AutoSkill4Key", this->AutoSkill4ComboBox->SelectedIndex);
 
-	if(this->CCPeopleTextBox->Text != String::Empty)
-		pt.add("AutoCCPeople", Convert::ToInt32(CCPeopleTextBox->Text));
-	if(this->CCTimedTextBox->Text != String::Empty)
-		pt.add("AutoCCTimed", Convert::ToInt32(CCTimedTextBox->Text));
-	if(this->CCAttacksTextBox->Text != String::Empty)
-		pt.add("AutoCCAttacks", Convert::ToInt32(CCAttacksTextBox->Text));
+	pt.add("AutoCCPeople", Convert::ToInt32(nudCCPeople->Value));
+	pt.add("AutoCCTimed", Convert::ToInt32(nudCCTimed->Value));
+	pt.add("AutoCCAttacks", Convert::ToInt32(nudCCAttacks->Value));
 
 	write_ini(file, pt);
 
@@ -961,20 +953,20 @@ void MainForm::LoadSettings()
 		this->AttackComboBox->SelectedIndex = pt.get<int>("AutoAttackKey");
 		this->LootComboBox->SelectedIndex = pt.get<int>("LootKey");
 		this->nudLootDelay->Text = pt.get<int>("LootDelay", 50).ToString();
-		this->tbHPValue->Text = pt.get<int>("AutoHPValue", 9000).ToString();
+		this->nudHPValue->Text = pt.get<int>("AutoHPValue", 9000).ToString();
 		this->HPComboBox->SelectedIndex = pt.get<int>("AutoHPKey");
-		this->tbMPValue->Text = pt.get<int>("AutoMPValue", 100).ToString();
+		this->nudMPValue->Text = pt.get<int>("AutoMPValue", 100).ToString();
 		this->MPComboBox->SelectedIndex = pt.get<int>("AutoMPKey");
 		this->AutoSkill1ComboBox->SelectedIndex = pt.get<int>("AutoSkill1Key");
 		this->AutoSkill2ComboBox->SelectedIndex = pt.get<int>("AutoSkill2Key");
 		this->AutoSkill3ComboBox->SelectedIndex = pt.get<int>("AutoSkill3Key");
 		this->AutoSkill4ComboBox->SelectedIndex = pt.get<int>("AutoSkill4Key");
-		this->AutoSkill1TextBox->Text = pt.get<int>("AutoSkill1Value", 0).ToString();
-		this->AutoSkill2TextBox->Text = pt.get<int>("AutoSkill2Value", 0).ToString();
-		this->AutoSkill3TextBox->Text = pt.get<int>("AutoSkill3Value", 0).ToString();
-		this->AutoSkill4TextBox->Text = pt.get<int>("AutoSkill4Value", 0).ToString();
-		this->CCPeopleTextBox->Text = pt.get<int>("AutoCCPeople", 0).ToString();
-		this->CCTimedTextBox->Text = pt.get<int>("AutoCCTimed", 0).ToString();
-		this->CCAttacksTextBox->Text = pt.get<int>("AutoCCAttacks", 0).ToString();
+		this->nudSkill1Value->Text = pt.get<int>("AutoSkill1Value", 0).ToString();
+		this->nudSkill2Value->Text = pt.get<int>("AutoSkill2Value", 0).ToString();
+		this->nudSkill3Value->Text = pt.get<int>("AutoSkill3Value", 0).ToString();
+		this->nudSkill4Value->Text = pt.get<int>("AutoSkill4Value", 0).ToString();
+		this->nudCCPeople->Text = pt.get<int>("AutoCCPeople", 0).ToString();
+		this->nudCCTimed->Text = pt.get<int>("AutoCCTimed", 0).ToString();
+		this->nudCCAttacks->Text = pt.get<int>("AutoCCAttacks", 0).ToString();
 	}catch(...){};
 }
