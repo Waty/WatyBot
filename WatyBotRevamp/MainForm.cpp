@@ -219,7 +219,7 @@ void MainForm::CashShop()
 
 #pragma endregion
 
-#pragma region Skill Voids
+#pragma region Threads
 void getMSHWND()
 {
 	while(MapleStoryHWND == NULL)
