@@ -28,9 +28,17 @@ void MainForm::HotKeys()
 {
 	if(this->cbHotKeyAttack->Checked)
 	{
-		if(GetAsyncKeyState(KeyCodes[comboBox1->SelectedIndex]))
+		if(GetAsyncKeyState(KeyCodes[ddbHotKeyAttack->SelectedIndex]))
 		{
 			this->AttackCheckBox->Checked = !this->AttackCheckBox->Checked;
+			Sleep(250);
+		}
+	}
+	if(this->cbHotKeyLoot->Checked)
+	{
+		if(GetAsyncKeyState(KeyCodes[ddbHotKeyLoot->SelectedIndex]))
+		{
+			this->LootCheckBox->Checked = !this->LootCheckBox->Checked;
 			Sleep(250);
 		}
 	}
@@ -638,8 +646,9 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	this->CharPosLabel->Text =		"CharPos: ("+ getCharX() +","+ getCharY()+")";
 	this->ItemCountLabel->Text =	"Items: "	+ getItemCount();
 	this->AttackCountLabel->Text =	"Attacks: " + getAttackCount();
-	this->TubiPointerLabel->Text =	"Tubi: "	+getTubiValue();
+	this->TubiPointerLabel->Text =	"Tubi: "	+ getTubiValue();
 	this->BreathLabel->Text =		"Breath: "	+ getBreathValue();
+	this->lMapID->Text =			"MapID: "	+ getMapID();
 	
 	MainForm::AutoPot();
 	MainForm::AutoCC();
