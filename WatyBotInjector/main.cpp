@@ -136,7 +136,7 @@ int main()
 		cout << "Run me as administrator!" << endl;
 		system("pause");
 	}
-	else if(StartProcess())
+	if(StartProcess())
 	{
 		cout << "MapleStory started!" << endl;
 
