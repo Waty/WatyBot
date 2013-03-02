@@ -342,6 +342,13 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			this->MainTabControl = (gcnew System::Windows::Forms::TabControl());
 			this->AutoBotTab = (gcnew System::Windows::Forms::TabPage());
 			this->AutoBotGroupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->nudCCAttacks = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudCCTimed = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudCCPeople = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudSkill4Value = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudSkill3Value = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudSkill2Value = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudSkill1Value = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudMPValue = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudHPValue = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudLootDelay = (gcnew System::Windows::Forms::NumericUpDown());
@@ -481,16 +488,16 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->nudSkill2Value = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudSkill1Value = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudSkill4Value = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudSkill3Value = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudCCTimed = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudCCPeople = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudCCAttacks = (gcnew System::Windows::Forms::NumericUpDown());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCAttacks))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCTimed))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCPeople))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill4Value))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill3Value))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill2Value))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill1Value))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudMPValue))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudHPValue))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLootDelay))->BeginInit();
@@ -518,13 +525,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			this->InfoTab->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			this->bgPointers->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill2Value))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill1Value))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill4Value))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill3Value))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCTimed))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCPeople))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCAttacks))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -611,6 +611,63 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			this->AutoBotGroupBox->TabIndex = 36;
 			this->AutoBotGroupBox->TabStop = false;
 			this->AutoBotGroupBox->Text = L"Autobot";
+			// 
+			// nudCCAttacks
+			// 
+			this->nudCCAttacks->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
+			this->nudCCAttacks->Location = System::Drawing::Point(91, 279);
+			this->nudCCAttacks->Name = L"nudCCAttacks";
+			this->nudCCAttacks->Size = System::Drawing::Size(107, 20);
+			this->nudCCAttacks->TabIndex = 80;
+			this->nudCCAttacks->ValueChanged += gcnew System::EventHandler(this, &MainForm::nudCCAttacks_ValueChanged);
+			// 
+			// nudCCTimed
+			// 
+			this->nudCCTimed->Location = System::Drawing::Point(91, 253);
+			this->nudCCTimed->Name = L"nudCCTimed";
+			this->nudCCTimed->Size = System::Drawing::Size(107, 20);
+			this->nudCCTimed->TabIndex = 79;
+			this->nudCCTimed->ValueChanged += gcnew System::EventHandler(this, &MainForm::nudCCTimed_ValueChanged);
+			// 
+			// nudCCPeople
+			// 
+			this->nudCCPeople->Location = System::Drawing::Point(91, 225);
+			this->nudCCPeople->Name = L"nudCCPeople";
+			this->nudCCPeople->Size = System::Drawing::Size(107, 20);
+			this->nudCCPeople->TabIndex = 78;
+			this->nudCCPeople->ValueChanged += gcnew System::EventHandler(this, &MainForm::nudCCPeople_ValueChanged);
+			// 
+			// nudSkill4Value
+			// 
+			this->nudSkill4Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudSkill4Value->Location = System::Drawing::Point(91, 196);
+			this->nudSkill4Value->Name = L"nudSkill4Value";
+			this->nudSkill4Value->Size = System::Drawing::Size(107, 20);
+			this->nudSkill4Value->TabIndex = 77;
+			// 
+			// nudSkill3Value
+			// 
+			this->nudSkill3Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudSkill3Value->Location = System::Drawing::Point(91, 171);
+			this->nudSkill3Value->Name = L"nudSkill3Value";
+			this->nudSkill3Value->Size = System::Drawing::Size(107, 20);
+			this->nudSkill3Value->TabIndex = 76;
+			// 
+			// nudSkill2Value
+			// 
+			this->nudSkill2Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudSkill2Value->Location = System::Drawing::Point(91, 144);
+			this->nudSkill2Value->Name = L"nudSkill2Value";
+			this->nudSkill2Value->Size = System::Drawing::Size(107, 20);
+			this->nudSkill2Value->TabIndex = 75;
+			// 
+			// nudSkill1Value
+			// 
+			this->nudSkill1Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudSkill1Value->Location = System::Drawing::Point(91, 119);
+			this->nudSkill1Value->Name = L"nudSkill1Value";
+			this->nudSkill1Value->Size = System::Drawing::Size(107, 20);
+			this->nudSkill1Value->TabIndex = 74;
 			// 
 			// nudMPValue
 			// 
@@ -2024,62 +2081,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			// 
 			this->LootTimer->Tick += gcnew System::EventHandler(this, &MainForm::LootTimer_Tick);
 			// 
-			// nudSkill2Value
-			// 
-			this->nudSkill2Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
-			this->nudSkill2Value->Location = System::Drawing::Point(91, 144);
-			this->nudSkill2Value->Name = L"nudSkill2Value";
-			this->nudSkill2Value->Size = System::Drawing::Size(107, 20);
-			this->nudSkill2Value->TabIndex = 75;
-			// 
-			// nudSkill1Value
-			// 
-			this->nudSkill1Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
-			this->nudSkill1Value->Location = System::Drawing::Point(91, 119);
-			this->nudSkill1Value->Name = L"nudSkill1Value";
-			this->nudSkill1Value->Size = System::Drawing::Size(107, 20);
-			this->nudSkill1Value->TabIndex = 74;
-			// 
-			// nudSkill4Value
-			// 
-			this->nudSkill4Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
-			this->nudSkill4Value->Location = System::Drawing::Point(91, 196);
-			this->nudSkill4Value->Name = L"nudSkill4Value";
-			this->nudSkill4Value->Size = System::Drawing::Size(107, 20);
-			this->nudSkill4Value->TabIndex = 77;
-			// 
-			// nudSkill3Value
-			// 
-			this->nudSkill3Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
-			this->nudSkill3Value->Location = System::Drawing::Point(91, 171);
-			this->nudSkill3Value->Name = L"nudSkill3Value";
-			this->nudSkill3Value->Size = System::Drawing::Size(107, 20);
-			this->nudSkill3Value->TabIndex = 76;
-			// 
-			// nudCCTimed
-			// 
-			this->nudCCTimed->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
-			this->nudCCTimed->Location = System::Drawing::Point(91, 253);
-			this->nudCCTimed->Name = L"nudCCTimed";
-			this->nudCCTimed->Size = System::Drawing::Size(107, 20);
-			this->nudCCTimed->TabIndex = 79;
-			// 
-			// nudCCPeople
-			// 
-			this->nudCCPeople->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
-			this->nudCCPeople->Location = System::Drawing::Point(91, 225);
-			this->nudCCPeople->Name = L"nudCCPeople";
-			this->nudCCPeople->Size = System::Drawing::Size(107, 20);
-			this->nudCCPeople->TabIndex = 78;
-			// 
-			// nudCCAttacks
-			// 
-			this->nudCCAttacks->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
-			this->nudCCAttacks->Location = System::Drawing::Point(91, 279);
-			this->nudCCAttacks->Name = L"nudCCAttacks";
-			this->nudCCAttacks->Size = System::Drawing::Size(107, 20);
-			this->nudCCAttacks->TabIndex = 80;
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2101,6 +2102,13 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			this->AutoBotTab->ResumeLayout(false);
 			this->AutoBotGroupBox->ResumeLayout(false);
 			this->AutoBotGroupBox->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCAttacks))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCTimed))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCPeople))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill4Value))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill3Value))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill2Value))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill1Value))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudMPValue))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudHPValue))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLootDelay))->EndInit();
@@ -2137,13 +2145,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 			this->groupBox1->PerformLayout();
 			this->bgPointers->ResumeLayout(false);
 			this->bgPointers->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill2Value))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill1Value))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill4Value))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill3Value))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCTimed))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCPeople))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCAttacks))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -2219,6 +2220,12 @@ private: System::Void cbFLACC_CheckedChanged(System::Object^  sender, System::Ev
 private: System::Void cbCPUHack_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void LootTimer_Tick(System::Object^  sender, System::EventArgs^  e);
 private: System::Void AttackTimer_Tick(System::Object^  sender, System::EventArgs^  e);
+private: System::Void nudCCPeople_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
+		 }
+private: System::Void nudCCTimed_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
+		 }
+private: System::Void nudCCAttacks_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
+		 }
 };
 }
 #pragma endregion
