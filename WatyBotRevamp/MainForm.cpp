@@ -42,6 +42,22 @@ void MainForm::HotKeys()
 			Sleep(250);
 		}
 	}
+	if(this->cbHotKeyFMA->Checked)
+	{
+		if(GetAsyncKeyState(KeyCodes[ddbHotKeyFMA->SelectedIndex]))
+		{
+			this->cbFMA->Checked = !this->cbFMA->Checked;
+			Sleep(250);
+		}
+	}
+	if(this->cbHotKeyCCPeople->Checked)
+	{
+		if(GetAsyncKeyState(KeyCodes[ddbHotKeyCCPeople->SelectedIndex]))
+		{
+			this->CCPeopleCheckBox->Checked = !this->CCPeopleCheckBox->Checked;
+			Sleep(250);
+		}
+	}
 }
 #pragma region Pointers Reading
 	int getMobCount()

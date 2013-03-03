@@ -104,7 +104,8 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::Label^  CharPosLabel;
 	private: System::Windows::Forms::Label^  PeopleCountLabel;
 	private: System::Windows::Forms::Label^  MobCountLabel;
-	private: System::Windows::Forms::GroupBox^  bgPointers;
+	private: System::Windows::Forms::GroupBox^  gbPointers;
+
 	private: System::Windows::Forms::CheckBox^  LootCheckBox;
 	private: System::Windows::Forms::ComboBox^  LootComboBox;
 
@@ -282,7 +283,8 @@ private: System::Windows::Forms::ComboBox^  AttacksComboBox;
 
 
 private: System::Windows::Forms::ComboBox^  PeopleComboBox;
-private: System::Windows::Forms::GroupBox^  groupBox1;
+private: System::Windows::Forms::GroupBox^  gbHotKeys;
+
 private: System::Windows::Forms::CheckBox^  cbHotKeyAttack;
 private: System::Windows::Forms::ComboBox^  ddbHotKeyAttack;
 private: System::Windows::Forms::ComboBox^  ddbHotKeyLoot;
@@ -312,6 +314,10 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 private: System::Windows::Forms::CheckBox^  cbNFA;
 private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 private: System::Windows::Forms::Button^  bSaveSettings;
+private: System::Windows::Forms::ComboBox^  ddbHotKeyFMA;
+private: System::Windows::Forms::CheckBox^  cbHotKeyFMA;
+private: System::Windows::Forms::ComboBox^  ddbHotKeyCCPeople;
+private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 
 
 
@@ -474,12 +480,13 @@ private: System::Windows::Forms::Button^  bSaveSettings;
 			this->SPControlContextMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->deleteSPControlToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
-			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->bSaveSettings = (gcnew System::Windows::Forms::Button());
+			this->gbHotKeys = (gcnew System::Windows::Forms::GroupBox());
 			this->ddbHotKeyLoot = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeyLoot = (gcnew System::Windows::Forms::CheckBox());
 			this->ddbHotKeyAttack = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeyAttack = (gcnew System::Windows::Forms::CheckBox());
-			this->bgPointers = (gcnew System::Windows::Forms::GroupBox());
+			this->gbPointers = (gcnew System::Windows::Forms::GroupBox());
 			this->lMapID = (gcnew System::Windows::Forms::Label());
 			this->BreathLabel = (gcnew System::Windows::Forms::Label());
 			this->TubiPointerLabel = (gcnew System::Windows::Forms::Label());
@@ -493,7 +500,10 @@ private: System::Windows::Forms::Button^  bSaveSettings;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->bSaveSettings = (gcnew System::Windows::Forms::Button());
+			this->ddbHotKeyFMA = (gcnew System::Windows::Forms::ComboBox());
+			this->cbHotKeyFMA = (gcnew System::Windows::Forms::CheckBox());
+			this->ddbHotKeyCCPeople = (gcnew System::Windows::Forms::ComboBox());
+			this->cbHotKeyCCPeople = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -529,8 +539,8 @@ private: System::Windows::Forms::Button^  bSaveSettings;
 			this->SPControlGroupBox->SuspendLayout();
 			this->SPControlContextMenu->SuspendLayout();
 			this->InfoTab->SuspendLayout();
-			this->groupBox1->SuspendLayout();
-			this->bgPointers->SuspendLayout();
+			this->gbHotKeys->SuspendLayout();
+			this->gbPointers->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -1940,8 +1950,8 @@ private: System::Windows::Forms::Button^  bSaveSettings;
 			// InfoTab
 			// 
 			this->InfoTab->Controls->Add(this->bSaveSettings);
-			this->InfoTab->Controls->Add(this->groupBox1);
-			this->InfoTab->Controls->Add(this->bgPointers);
+			this->InfoTab->Controls->Add(this->gbHotKeys);
+			this->InfoTab->Controls->Add(this->gbPointers);
 			this->InfoTab->Location = System::Drawing::Point(4, 22);
 			this->InfoTab->Name = L"InfoTab";
 			this->InfoTab->Padding = System::Windows::Forms::Padding(3);
@@ -1950,18 +1960,32 @@ private: System::Windows::Forms::Button^  bSaveSettings;
 			this->InfoTab->Text = L"Info";
 			this->InfoTab->UseVisualStyleBackColor = true;
 			// 
-			// groupBox1
+			// bSaveSettings
 			// 
-			this->groupBox1->Controls->Add(this->ddbHotKeyLoot);
-			this->groupBox1->Controls->Add(this->cbHotKeyLoot);
-			this->groupBox1->Controls->Add(this->ddbHotKeyAttack);
-			this->groupBox1->Controls->Add(this->cbHotKeyAttack);
-			this->groupBox1->Location = System::Drawing::Point(6, 7);
-			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(172, 331);
-			this->groupBox1->TabIndex = 26;
-			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Hot Keys";
+			this->bSaveSettings->Location = System::Drawing::Point(6, 344);
+			this->bSaveSettings->Name = L"bSaveSettings";
+			this->bSaveSettings->Size = System::Drawing::Size(314, 28);
+			this->bSaveSettings->TabIndex = 27;
+			this->bSaveSettings->Text = L"Save Settings";
+			this->bSaveSettings->UseVisualStyleBackColor = true;
+			this->bSaveSettings->Click += gcnew System::EventHandler(this, &MainForm::bSaveSettings_Click);
+			// 
+			// gbHotKeys
+			// 
+			this->gbHotKeys->Controls->Add(this->ddbHotKeyCCPeople);
+			this->gbHotKeys->Controls->Add(this->cbHotKeyCCPeople);
+			this->gbHotKeys->Controls->Add(this->ddbHotKeyFMA);
+			this->gbHotKeys->Controls->Add(this->cbHotKeyFMA);
+			this->gbHotKeys->Controls->Add(this->ddbHotKeyLoot);
+			this->gbHotKeys->Controls->Add(this->cbHotKeyLoot);
+			this->gbHotKeys->Controls->Add(this->ddbHotKeyAttack);
+			this->gbHotKeys->Controls->Add(this->cbHotKeyAttack);
+			this->gbHotKeys->Location = System::Drawing::Point(6, 7);
+			this->gbHotKeys->Name = L"gbHotKeys";
+			this->gbHotKeys->Size = System::Drawing::Size(172, 331);
+			this->gbHotKeys->TabIndex = 26;
+			this->gbHotKeys->TabStop = false;
+			this->gbHotKeys->Text = L"Hot Keys";
 			// 
 			// ddbHotKeyLoot
 			// 
@@ -2009,22 +2033,22 @@ private: System::Windows::Forms::Button^  bSaveSettings;
 			this->cbHotKeyAttack->Text = L"AutoAttack";
 			this->cbHotKeyAttack->UseVisualStyleBackColor = true;
 			// 
-			// bgPointers
+			// gbPointers
 			// 
-			this->bgPointers->Controls->Add(this->lMapID);
-			this->bgPointers->Controls->Add(this->BreathLabel);
-			this->bgPointers->Controls->Add(this->TubiPointerLabel);
-			this->bgPointers->Controls->Add(this->MobCountLabel);
-			this->bgPointers->Controls->Add(this->AttackCountLabel);
-			this->bgPointers->Controls->Add(this->PeopleCountLabel);
-			this->bgPointers->Controls->Add(this->ItemCountLabel);
-			this->bgPointers->Controls->Add(this->CharPosLabel);
-			this->bgPointers->Location = System::Drawing::Point(184, 7);
-			this->bgPointers->Name = L"bgPointers";
-			this->bgPointers->Size = System::Drawing::Size(136, 331);
-			this->bgPointers->TabIndex = 25;
-			this->bgPointers->TabStop = false;
-			this->bgPointers->Text = L"Pointers";
+			this->gbPointers->Controls->Add(this->lMapID);
+			this->gbPointers->Controls->Add(this->BreathLabel);
+			this->gbPointers->Controls->Add(this->TubiPointerLabel);
+			this->gbPointers->Controls->Add(this->MobCountLabel);
+			this->gbPointers->Controls->Add(this->AttackCountLabel);
+			this->gbPointers->Controls->Add(this->PeopleCountLabel);
+			this->gbPointers->Controls->Add(this->ItemCountLabel);
+			this->gbPointers->Controls->Add(this->CharPosLabel);
+			this->gbPointers->Location = System::Drawing::Point(184, 7);
+			this->gbPointers->Name = L"gbPointers";
+			this->gbPointers->Size = System::Drawing::Size(136, 331);
+			this->gbPointers->TabIndex = 25;
+			this->gbPointers->TabStop = false;
+			this->gbPointers->Text = L"Pointers";
 			// 
 			// lMapID
 			// 
@@ -2119,15 +2143,51 @@ private: System::Windows::Forms::Button^  bSaveSettings;
 			// 
 			this->CCTimedTimer->Tick += gcnew System::EventHandler(this, &MainForm::CCTimedTimer_Tick);
 			// 
-			// bSaveSettings
+			// ddbHotKeyFMA
 			// 
-			this->bSaveSettings->Location = System::Drawing::Point(6, 344);
-			this->bSaveSettings->Name = L"bSaveSettings";
-			this->bSaveSettings->Size = System::Drawing::Size(314, 28);
-			this->bSaveSettings->TabIndex = 27;
-			this->bSaveSettings->Text = L"Save Settings";
-			this->bSaveSettings->UseVisualStyleBackColor = true;
-			this->bSaveSettings->Click += gcnew System::EventHandler(this, &MainForm::bSaveSettings_Click);
+			this->ddbHotKeyFMA->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbHotKeyFMA->FormattingEnabled = true;
+			this->ddbHotKeyFMA->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9"});
+			this->ddbHotKeyFMA->Location = System::Drawing::Point(85, 75);
+			this->ddbHotKeyFMA->Name = L"ddbHotKeyFMA";
+			this->ddbHotKeyFMA->Size = System::Drawing::Size(80, 21);
+			this->ddbHotKeyFMA->TabIndex = 14;
+			// 
+			// cbHotKeyFMA
+			// 
+			this->cbHotKeyFMA->AutoSize = true;
+			this->cbHotKeyFMA->Location = System::Drawing::Point(6, 77);
+			this->cbHotKeyFMA->Name = L"cbHotKeyFMA";
+			this->cbHotKeyFMA->Size = System::Drawing::Size(48, 17);
+			this->cbHotKeyFMA->TabIndex = 13;
+			this->cbHotKeyFMA->Text = L"FMA";
+			this->cbHotKeyFMA->UseVisualStyleBackColor = true;
+			// 
+			// ddbHotKeyCCPeople
+			// 
+			this->ddbHotKeyCCPeople->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbHotKeyCCPeople->FormattingEnabled = true;
+			this->ddbHotKeyCCPeople->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9"});
+			this->ddbHotKeyCCPeople->Location = System::Drawing::Point(85, 102);
+			this->ddbHotKeyCCPeople->Name = L"ddbHotKeyCCPeople";
+			this->ddbHotKeyCCPeople->Size = System::Drawing::Size(80, 21);
+			this->ddbHotKeyCCPeople->TabIndex = 16;
+			// 
+			// cbHotKeyCCPeople
+			// 
+			this->cbHotKeyCCPeople->AutoSize = true;
+			this->cbHotKeyCCPeople->Location = System::Drawing::Point(6, 104);
+			this->cbHotKeyCCPeople->Name = L"cbHotKeyCCPeople";
+			this->cbHotKeyCCPeople->Size = System::Drawing::Size(76, 17);
+			this->cbHotKeyCCPeople->TabIndex = 15;
+			this->cbHotKeyCCPeople->Text = L"CC People";
+			this->cbHotKeyCCPeople->UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 
@@ -2188,10 +2248,10 @@ private: System::Windows::Forms::Button^  bSaveSettings;
 			this->SPControlGroupBox->PerformLayout();
 			this->SPControlContextMenu->ResumeLayout(false);
 			this->InfoTab->ResumeLayout(false);
-			this->groupBox1->ResumeLayout(false);
-			this->groupBox1->PerformLayout();
-			this->bgPointers->ResumeLayout(false);
-			this->bgPointers->PerformLayout();
+			this->gbHotKeys->ResumeLayout(false);
+			this->gbHotKeys->PerformLayout();
+			this->gbPointers->ResumeLayout(false);
+			this->gbPointers->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
