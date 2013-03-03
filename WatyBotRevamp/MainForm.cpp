@@ -919,32 +919,46 @@ void MainForm::SaveSettings()
 	ofstream file(SettingsFileName);
 	using boost::property_tree::ptree;
 	ptree pt;
-	
+
+	//Auto Bot Tab
 	pt.add("AutoAttackDelay", Convert::ToInt32(this->nudAttackDelay->Value));
+	pt.add("SAWSIL", Convert::ToInt32(this->nudSAWSIL->Value));
 	pt.add("AutoAttackKey", this->AttackComboBox->SelectedIndex);
-	
+
 	pt.add("LootDelay", Convert::ToInt32(this->nudLootDelay->Value));
+	pt.add("SLWIB", Convert::ToInt32(this->nudSLWIB->Value));
 	pt.add("LootKey", this->LootComboBox->SelectedIndex);
 
 	pt.add("AutoHPValue", Convert::ToInt32(this->nudHPValue->Value));
 	pt.add("AutoHPKey", this->HPComboBox->SelectedIndex);
+
 	pt.add("AutoMPValue", Convert::ToInt32(this->nudMPValue->Value));
 	pt.add("AutoMPKey", this->MPComboBox->SelectedIndex);
 
-	
 	pt.add("AutoSkill1Value", Convert::ToInt32(this->nudSkill1Value->Value));
 	pt.add("AutoSkill1Key", this->AutoSkill1ComboBox->SelectedIndex);
+
 	pt.add("AutoSkill2Value", Convert::ToInt32(this->nudSkill2Value->Value));
 	pt.add("AutoSkill2Key", this->AutoSkill2ComboBox->SelectedIndex);
+
 	pt.add("AutoSkill3Value", Convert::ToInt32(this->nudSkill3Value->Value));
 	pt.add("AutoSkill3Key", this->AutoSkill3ComboBox->SelectedIndex);
+
 	pt.add("AutoSkill4Value", Convert::ToInt32(this->nudSkill4Value->Value));
 	pt.add("AutoSkill4Key", this->AutoSkill4ComboBox->SelectedIndex);
 
 	pt.add("AutoCCPeople", Convert::ToInt32(nudCCPeople->Value));
-	pt.add("AutoCCTimed", Convert::ToInt32(nudCCTimed->Value));
-	pt.add("AutoCCAttacks", Convert::ToInt32(nudCCAttacks->Value));
+	pt.add("CC_CS_People", this->PeopleComboBox->SelectedIndex);
 
+	pt.add("AutoCCTimed", Convert::ToInt32(nudCCTimed->Value));
+	pt.add("CC_CS_Timed", this->TimedComboBox->SelectedIndex);
+
+	pt.add("AutoCCAttacks", Convert::ToInt32(nudCCAttacks->Value));
+	pt.add("CC_CS_Attacks", this->AttacksComboBox->SelectedIndex);
+
+	//Info Tab
+	pt.add("AttackHotKey", this->ddbHotKeyAttack->SelectedIndex);
+	pt.add("LootHotKey", this->ddbHotKeyLoot->SelectedIndex);
 	write_ini(file, pt);
 
 }
@@ -957,24 +971,44 @@ void MainForm::LoadSettings()
 	read_ini(file,pt);
 	try
 	{
+		//Auto Bot Tab
 		this->nudAttackDelay->Text = pt.get<int>("AutoAttackDelay", 50).ToString();
+		this->nudSAWSIL->Text = pt.get<int>("SAWSIL", 1).ToString();
 		this->AttackComboBox->SelectedIndex = pt.get<int>("AutoAttackKey");
-		this->LootComboBox->SelectedIndex = pt.get<int>("LootKey");
+		
 		this->nudLootDelay->Text = pt.get<int>("LootDelay", 50).ToString();
+		this->nudSLWIB->Text = pt.get<int>("SLWIB", 1).ToString();
+		this->LootComboBox->SelectedIndex = pt.get<int>("LootKey");
+
 		this->nudHPValue->Text = pt.get<int>("AutoHPValue", 9000).ToString();
 		this->HPComboBox->SelectedIndex = pt.get<int>("AutoHPKey");
+
 		this->nudMPValue->Text = pt.get<int>("AutoMPValue", 100).ToString();
 		this->MPComboBox->SelectedIndex = pt.get<int>("AutoMPKey");
+
 		this->AutoSkill1ComboBox->SelectedIndex = pt.get<int>("AutoSkill1Key");
-		this->AutoSkill2ComboBox->SelectedIndex = pt.get<int>("AutoSkill2Key");
-		this->AutoSkill3ComboBox->SelectedIndex = pt.get<int>("AutoSkill3Key");
-		this->AutoSkill4ComboBox->SelectedIndex = pt.get<int>("AutoSkill4Key");
 		this->nudSkill1Value->Text = pt.get<int>("AutoSkill1Value", 0).ToString();
+
+		this->AutoSkill2ComboBox->SelectedIndex = pt.get<int>("AutoSkill2Key");
 		this->nudSkill2Value->Text = pt.get<int>("AutoSkill2Value", 0).ToString();
+
+		this->AutoSkill3ComboBox->SelectedIndex = pt.get<int>("AutoSkill3Key");
 		this->nudSkill3Value->Text = pt.get<int>("AutoSkill3Value", 0).ToString();
+
+		this->AutoSkill4ComboBox->SelectedIndex = pt.get<int>("AutoSkill4Key");
 		this->nudSkill4Value->Text = pt.get<int>("AutoSkill4Value", 0).ToString();
+
 		this->nudCCPeople->Text = pt.get<int>("AutoCCPeople", 0).ToString();
+		this->PeopleComboBox->SelectedIndex = pt.get<int>("CC_CS_People");
+
 		this->nudCCTimed->Text = pt.get<int>("AutoCCTimed", 0).ToString();
+		this->TimedComboBox->SelectedIndex = pt.get<int>("CC_CS_Timed");
+
 		this->nudCCAttacks->Text = pt.get<int>("AutoCCAttacks", 0).ToString();
+		this->AttacksComboBox->SelectedIndex = pt.get<int>("CC_CS_Attacks");
+
+		//Info Tab
+		this->ddbHotKeyAttack->SelectedIndex = pt.get<int>("AttackHotKey");
+		this->ddbHotKeyLoot->SelectedIndex = pt.get<int>("LootHotKey");
 	}catch(...){};
 }
