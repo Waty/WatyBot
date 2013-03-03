@@ -5,7 +5,7 @@
  
 DWORD dwMSSendMethod = SendAddy;// + 5;
 DWORD dwMSSendObject = *(PDWORD)(SendClassAddy+2);
-DWORD dwMSSendRetVal = SendAddy-11;
+DWORD dwMSSendRetVal = SendAddy-13;
  
 // MapleStory Send method
 //21st Century
