@@ -977,6 +977,8 @@ void MainForm::SaveSettings()
 	//Info Tab
 	pt.add("AttackHotKey", this->ddbHotKeyAttack->SelectedIndex);
 	pt.add("LootHotKey", this->ddbHotKeyLoot->SelectedIndex);
+	pt.add("FMAHotKey", this->ddbHotKeyFMA->SelectedIndex);
+	pt.add("CCPeopleHotKey", this->ddbHotKeyCCPeople->SelectedIndex);
 	write_ini(file, pt);
 
 }
@@ -1028,6 +1030,8 @@ void MainForm::LoadSettings()
 		//Info Tab
 		this->ddbHotKeyAttack->SelectedIndex = pt.get<int>("AttackHotKey");
 		this->ddbHotKeyLoot->SelectedIndex = pt.get<int>("LootHotKey");
+		this->ddbHotKeyFMA->SelectedIndex = pt.get<int>("FMAHotKey");
+		this->ddbHotKeyCCPeople->SelectedIndex = pt.get<int>("CCPeopleHotKey");
 	}catch(...){};
 }
 void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e)
