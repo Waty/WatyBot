@@ -311,6 +311,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSkill2Value;
 private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
 private: System::Windows::Forms::CheckBox^  cbNFA;
 private: System::Windows::Forms::CheckBox^  cbAutoAggro;
+private: System::Windows::Forms::Button^  bSaveSettings;
 
 
 
@@ -492,6 +493,7 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->bSaveSettings = (gcnew System::Windows::Forms::Button());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1937,6 +1939,7 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			// 
 			// InfoTab
 			// 
+			this->InfoTab->Controls->Add(this->bSaveSettings);
 			this->InfoTab->Controls->Add(this->groupBox1);
 			this->InfoTab->Controls->Add(this->bgPointers);
 			this->InfoTab->Location = System::Drawing::Point(4, 22);
@@ -2116,6 +2119,16 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			// 
 			this->CCTimedTimer->Tick += gcnew System::EventHandler(this, &MainForm::CCTimedTimer_Tick);
 			// 
+			// bSaveSettings
+			// 
+			this->bSaveSettings->Location = System::Drawing::Point(6, 344);
+			this->bSaveSettings->Name = L"bSaveSettings";
+			this->bSaveSettings->Size = System::Drawing::Size(314, 28);
+			this->bSaveSettings->TabIndex = 27;
+			this->bSaveSettings->Text = L"Save Settings";
+			this->bSaveSettings->UseVisualStyleBackColor = true;
+			this->bSaveSettings->Click += gcnew System::EventHandler(this, &MainForm::bSaveSettings_Click);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2129,7 +2142,7 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot - V2.2 - CCPLZ! - EMS 88.1";
+			this->Text = L"WatyBot - V2.2 - CCPLZ! - EMS 88.2";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
@@ -2256,6 +2269,7 @@ private: System::Void AttackTimer_Tick(System::Object^  sender, System::EventArg
 private: System::Void cbNFA_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbAutoAggro_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void CCTimedTimer_Tick(System::Object^  sender, System::EventArgs^  e);
+private: System::Void bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion

@@ -1012,3 +1012,7 @@ void MainForm::LoadSettings()
 		this->ddbHotKeyLoot->SelectedIndex = pt.get<int>("LootHotKey");
 	}catch(...){};
 }
+void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	MainForm::SaveSettings();
+}
