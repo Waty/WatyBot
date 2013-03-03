@@ -642,7 +642,7 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			// 
 			this->nudSkill4Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
 			this->nudSkill4Value->Location = System::Drawing::Point(91, 196);
-			this->nudSkill4Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000, 0, 0, 0});
+			this->nudSkill4Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
 			this->nudSkill4Value->Name = L"nudSkill4Value";
 			this->nudSkill4Value->Size = System::Drawing::Size(107, 20);
 			this->nudSkill4Value->TabIndex = 77;
@@ -651,7 +651,7 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			// 
 			this->nudSkill3Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
 			this->nudSkill3Value->Location = System::Drawing::Point(91, 171);
-			this->nudSkill3Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000, 0, 0, 0});
+			this->nudSkill3Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
 			this->nudSkill3Value->Name = L"nudSkill3Value";
 			this->nudSkill3Value->Size = System::Drawing::Size(107, 20);
 			this->nudSkill3Value->TabIndex = 76;
@@ -660,7 +660,7 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			// 
 			this->nudSkill2Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
 			this->nudSkill2Value->Location = System::Drawing::Point(91, 144);
-			this->nudSkill2Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000, 0, 0, 0});
+			this->nudSkill2Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
 			this->nudSkill2Value->Name = L"nudSkill2Value";
 			this->nudSkill2Value->Size = System::Drawing::Size(107, 20);
 			this->nudSkill2Value->TabIndex = 75;
@@ -669,7 +669,7 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			// 
 			this->nudSkill1Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
 			this->nudSkill1Value->Location = System::Drawing::Point(91, 119);
-			this->nudSkill1Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000, 0, 0, 0});
+			this->nudSkill1Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
 			this->nudSkill1Value->Name = L"nudSkill1Value";
 			this->nudSkill1Value->Size = System::Drawing::Size(107, 20);
 			this->nudSkill1Value->TabIndex = 74;
@@ -678,6 +678,7 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			// 
 			this->nudMPValue->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
 			this->nudMPValue->Location = System::Drawing::Point(91, 94);
+			this->nudMPValue->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
 			this->nudMPValue->Name = L"nudMPValue";
 			this->nudMPValue->Size = System::Drawing::Size(107, 20);
 			this->nudMPValue->TabIndex = 73;
@@ -686,6 +687,7 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			// 
 			this->nudHPValue->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
 			this->nudHPValue->Location = System::Drawing::Point(91, 69);
+			this->nudHPValue->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
 			this->nudHPValue->Name = L"nudHPValue";
 			this->nudHPValue->Size = System::Drawing::Size(107, 20);
 			this->nudHPValue->TabIndex = 72;
