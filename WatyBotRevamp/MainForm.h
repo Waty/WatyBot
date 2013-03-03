@@ -419,6 +419,7 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			this->cbFusionAttack = (gcnew System::Windows::Forms::CheckBox());
 			this->cbPerfectLoot = (gcnew System::Windows::Forms::CheckBox());
 			this->MobHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbAutoAggro = (gcnew System::Windows::Forms::CheckBox());
 			this->cbScareMobs = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoMobs = (gcnew System::Windows::Forms::CheckBox());
 			this->cbFasterMobs = (gcnew System::Windows::Forms::CheckBox());
@@ -491,7 +492,6 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->cbAutoAggro = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1422,6 +1422,17 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			this->MobHacks->TabStop = false;
 			this->MobHacks->Text = L"Mob";
 			// 
+			// cbAutoAggro
+			// 
+			this->cbAutoAggro->AutoSize = true;
+			this->cbAutoAggro->Location = System::Drawing::Point(159, 19);
+			this->cbAutoAggro->Name = L"cbAutoAggro";
+			this->cbAutoAggro->Size = System::Drawing::Size(79, 17);
+			this->cbAutoAggro->TabIndex = 10;
+			this->cbAutoAggro->Text = L"Auto Aggro";
+			this->cbAutoAggro->UseVisualStyleBackColor = true;
+			this->cbAutoAggro->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbAutoAggro_CheckedChanged);
+			// 
 			// cbScareMobs
 			// 
 			this->cbScareMobs->AutoSize = true;
@@ -2099,16 +2110,9 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 			// 
 			this->LootTimer->Tick += gcnew System::EventHandler(this, &MainForm::LootTimer_Tick);
 			// 
-			// cbAutoAggro
+			// CCTimedTimer
 			// 
-			this->cbAutoAggro->AutoSize = true;
-			this->cbAutoAggro->Location = System::Drawing::Point(159, 19);
-			this->cbAutoAggro->Name = L"cbAutoAggro";
-			this->cbAutoAggro->Size = System::Drawing::Size(79, 17);
-			this->cbAutoAggro->TabIndex = 10;
-			this->cbAutoAggro->Text = L"Auto Aggro";
-			this->cbAutoAggro->UseVisualStyleBackColor = true;
-			this->cbAutoAggro->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbAutoAggro_CheckedChanged);
+			this->CCTimedTimer->Tick += gcnew System::EventHandler(this, &MainForm::CCTimedTimer_Tick);
 			// 
 			// MainForm
 			// 
@@ -2186,7 +2190,6 @@ private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 	private: System::Void AutoPot();
 	private: System::Void AutoCC();
 	private: System::Void CashShop();
-	private: System::Void SendMyPacket(std::string packet);
 	private: System::Void HotKeys();
 #pragma endregion
 #pragma region CheckBoxes
@@ -2250,6 +2253,7 @@ private: System::Void LootTimer_Tick(System::Object^  sender, System::EventArgs^
 private: System::Void AttackTimer_Tick(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNFA_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbAutoAggro_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void CCTimedTimer_Tick(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion

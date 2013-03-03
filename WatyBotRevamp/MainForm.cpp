@@ -145,7 +145,7 @@ bool isGoodPacket(String^ strPacket, String^&strError)
         if (strPacket[i] >= 'A' && strPacket[i] <= 'F') continue;
         if (strPacket[i] == '*') continue;
  
-        strError = "Invalid character detected in packet";
+        strError = "Invalid character detected in packet" + strPacket[i];
    
         return false;
     }
@@ -195,30 +195,24 @@ void NextChannel()
 		}
 		catch (...)
 		{
+			Sleep(200);
 			CField_SendTransferChannelRequest(channel);
 		}
 	}
 	Sleep(2000);
 	CCing = false;
 }
-void MainForm::SendMyPacket(std::string packet)
-{
-	String^ strError = String::Empty;
-	SendPacketFunction(marshal_as<String^>(packet), strError);
-}
+
 void MainForm::CashShop()
 {
 	CCing = true;
 	while(getBreathValue() > 0)	Sleep(250);
 	Sleep(500);
-	SendMyPacket("40 00 ** ** ** 00 00");
+	String^ strError = String::Empty;
+	if(SendPacketFunction(marshal_as<String^>(Packets::CashShop)->Replace(" ", ""), strError));
+	else ::MessageBox::Show("Failed Sending Packet" + strError);
 	Sleep(250);
-	while(getMapID() == 0)
-	{
-		SendMyPacket("3E 00");
-		Sleep(500);
-	}
-	Sleep(2000);
+
 	CCing = false;
 }
 
@@ -398,6 +392,8 @@ void MainForm::cbFMA_CheckedChanged(System::Object^  sender, System::EventArgs^ 
 {
 	cbNFA->Checked = cbFMA->Checked;
 	cbNFA->Enabled = !cbFMA->Checked;
+	cbItemVac->Checked = cbFMA->Checked;
+	cbItemVac->Enabled = !cbFMA->Checked;
 	Hacks::cmFMA.Enable(cbFMA->Checked);
 }
 void MainForm::cbScareMobs_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -588,24 +584,22 @@ void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 {
 	if(CCTimedCheckBox->Checked)
 	{
-		try
-		{
-			CCTimedTimer->Interval = Convert::ToInt32(nudCCTimed->Value);
-			nudCCTimed->Enabled = false;
-			CCTimedTimer->Enabled = true;
-		}
-		catch(...)
-		{
-			CCTimedCheckBox->Checked = false;
-			CCTimedTimer->Enabled = false;
-			CCTimedCheckBox->Enabled = true;
-		}
+		CCTimedTimer->Interval = Convert::ToInt32(nudCCTimed->Value * 1000);
+		nudCCTimed->Enabled = false;
+		CCTimedTimer->Enabled = true;
 	}
 	else
 	{
 		nudCCTimed->Enabled = true;
 		CCTimedTimer->Enabled = false;
 	}
+}
+void MainForm::CCTimedTimer_Tick(System::Object^  sender, System::EventArgs^  e)
+{
+	if(TimedComboBox->SelectedIndex == ID_CC)
+		NewThread(NextChannel);
+	else if(TimedComboBox->SelectedIndex == ID_CS)
+		CashShop();
 }
 void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -691,7 +685,7 @@ void MainForm::AutoCC()
 		{
 			if(PeopleComboBox->SelectedIndex == ID_CC)
 				NewThread(NextChannel);
-			else
+			else if(PeopleComboBox->SelectedIndex == ID_CS)
 				CashShop();
 		}
 	}
@@ -701,7 +695,7 @@ void MainForm::AutoCC()
 		{
 			if(AttacksComboBox->SelectedIndex == ID_CC)
 				NewThread(NextChannel);
-			else
+			else if(AttacksComboBox->SelectedIndex == ID_CS)
 				CashShop();
 		}
 	}
@@ -868,8 +862,17 @@ void MainForm::cbSPControl_CheckedChanged(System::Object^  sender, System::Event
 }
 void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	SPControl::AddSPControl(marshal_as<string>(SPControlNameTextBox->Text), Convert::ToInt32(SPControlMapIDTextBox->Text), Convert::ToInt32(SPControlXTextBox->Text), Convert::ToInt32(SPControlYTextBox->Text));
-	RefreshSPControlListView();
+	string name = marshal_as<string>(SPControlNameTextBox->Text);
+	int mapid = Convert::ToInt32(SPControlMapIDTextBox->Text);
+	int x = Convert::ToInt32(SPControlXTextBox->Text);
+	int y = Convert::ToInt32(SPControlYTextBox->Text);
+	if(name == "" || !mapid || !x || !y)
+		MessageBoxA(MapleStoryHWND, "You forgot to fill in a textbox...", "Error", MB_OK || MB_ICONERROR);
+	else
+	{
+		SPControl::AddSPControl(name, mapid, x, x);
+		RefreshSPControlListView();
+	}
 }
 void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
