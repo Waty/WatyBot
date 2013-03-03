@@ -127,6 +127,8 @@ bool InGame()
 #pragma region Packetsending stuff
 bool isGoodPacket(String^ strPacket, String^&strError)
 {
+	strPacket->Replace(" ", "");
+
     if(strPacket == String::Empty)
 	{
         strError = "Packet is Empty";
