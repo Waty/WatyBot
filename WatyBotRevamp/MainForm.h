@@ -482,6 +482,10 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
 			this->bSaveSettings = (gcnew System::Windows::Forms::Button());
 			this->gbHotKeys = (gcnew System::Windows::Forms::GroupBox());
+			this->ddbHotKeyCCPeople = (gcnew System::Windows::Forms::ComboBox());
+			this->cbHotKeyCCPeople = (gcnew System::Windows::Forms::CheckBox());
+			this->ddbHotKeyFMA = (gcnew System::Windows::Forms::ComboBox());
+			this->cbHotKeyFMA = (gcnew System::Windows::Forms::CheckBox());
 			this->ddbHotKeyLoot = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeyLoot = (gcnew System::Windows::Forms::CheckBox());
 			this->ddbHotKeyAttack = (gcnew System::Windows::Forms::ComboBox());
@@ -500,10 +504,6 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->ddbHotKeyFMA = (gcnew System::Windows::Forms::ComboBox());
-			this->cbHotKeyFMA = (gcnew System::Windows::Forms::CheckBox());
-			this->ddbHotKeyCCPeople = (gcnew System::Windows::Forms::ComboBox());
-			this->cbHotKeyCCPeople = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -707,7 +707,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			// nudLootDelay
 			// 
 			this->nudLootDelay->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
-			this->nudLootDelay->Location = System::Drawing::Point(89, 43);
+			this->nudLootDelay->Location = System::Drawing::Point(91, 43);
 			this->nudLootDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1500, 0, 0, 0});
 			this->nudLootDelay->Name = L"nudLootDelay";
 			this->nudLootDelay->Size = System::Drawing::Size(44, 20);
@@ -717,7 +717,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			// nudAttackDelay
 			// 
 			this->nudAttackDelay->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
-			this->nudAttackDelay->Location = System::Drawing::Point(89, 16);
+			this->nudAttackDelay->Location = System::Drawing::Point(91, 15);
 			this->nudAttackDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1500, 0, 0, 0});
 			this->nudAttackDelay->Name = L"nudAttackDelay";
 			this->nudAttackDelay->Size = System::Drawing::Size(44, 20);
@@ -795,7 +795,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			// lLootMS
 			// 
 			this->lLootMS->AutoSize = true;
-			this->lLootMS->Location = System::Drawing::Point(133, 47);
+			this->lLootMS->Location = System::Drawing::Point(135, 47);
 			this->lLootMS->Name = L"lLootMS";
 			this->lLootMS->Size = System::Drawing::Size(20, 13);
 			this->lLootMS->TabIndex = 58;
@@ -1043,7 +1043,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			// lAttackMS
 			// 
 			this->lAttackMS->AutoSize = true;
-			this->lAttackMS->Location = System::Drawing::Point(133, 20);
+			this->lAttackMS->Location = System::Drawing::Point(135, 20);
 			this->lAttackMS->Name = L"lAttackMS";
 			this->lAttackMS->Size = System::Drawing::Size(20, 13);
 			this->lAttackMS->TabIndex = 28;
@@ -1987,6 +1987,52 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			this->gbHotKeys->TabStop = false;
 			this->gbHotKeys->Text = L"Hot Keys";
 			// 
+			// ddbHotKeyCCPeople
+			// 
+			this->ddbHotKeyCCPeople->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbHotKeyCCPeople->FormattingEnabled = true;
+			this->ddbHotKeyCCPeople->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9"});
+			this->ddbHotKeyCCPeople->Location = System::Drawing::Point(85, 102);
+			this->ddbHotKeyCCPeople->Name = L"ddbHotKeyCCPeople";
+			this->ddbHotKeyCCPeople->Size = System::Drawing::Size(80, 21);
+			this->ddbHotKeyCCPeople->TabIndex = 16;
+			// 
+			// cbHotKeyCCPeople
+			// 
+			this->cbHotKeyCCPeople->AutoSize = true;
+			this->cbHotKeyCCPeople->Location = System::Drawing::Point(6, 104);
+			this->cbHotKeyCCPeople->Name = L"cbHotKeyCCPeople";
+			this->cbHotKeyCCPeople->Size = System::Drawing::Size(76, 17);
+			this->cbHotKeyCCPeople->TabIndex = 15;
+			this->cbHotKeyCCPeople->Text = L"CC People";
+			this->cbHotKeyCCPeople->UseVisualStyleBackColor = true;
+			// 
+			// ddbHotKeyFMA
+			// 
+			this->ddbHotKeyFMA->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbHotKeyFMA->FormattingEnabled = true;
+			this->ddbHotKeyFMA->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9"});
+			this->ddbHotKeyFMA->Location = System::Drawing::Point(85, 75);
+			this->ddbHotKeyFMA->Name = L"ddbHotKeyFMA";
+			this->ddbHotKeyFMA->Size = System::Drawing::Size(80, 21);
+			this->ddbHotKeyFMA->TabIndex = 14;
+			// 
+			// cbHotKeyFMA
+			// 
+			this->cbHotKeyFMA->AutoSize = true;
+			this->cbHotKeyFMA->Location = System::Drawing::Point(6, 77);
+			this->cbHotKeyFMA->Name = L"cbHotKeyFMA";
+			this->cbHotKeyFMA->Size = System::Drawing::Size(48, 17);
+			this->cbHotKeyFMA->TabIndex = 13;
+			this->cbHotKeyFMA->Text = L"FMA";
+			this->cbHotKeyFMA->UseVisualStyleBackColor = true;
+			// 
 			// ddbHotKeyLoot
 			// 
 			this->ddbHotKeyLoot->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
@@ -2143,52 +2189,6 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			// 
 			this->CCTimedTimer->Tick += gcnew System::EventHandler(this, &MainForm::CCTimedTimer_Tick);
 			// 
-			// ddbHotKeyFMA
-			// 
-			this->ddbHotKeyFMA->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->ddbHotKeyFMA->FormattingEnabled = true;
-			this->ddbHotKeyFMA->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
-				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
-				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9"});
-			this->ddbHotKeyFMA->Location = System::Drawing::Point(85, 75);
-			this->ddbHotKeyFMA->Name = L"ddbHotKeyFMA";
-			this->ddbHotKeyFMA->Size = System::Drawing::Size(80, 21);
-			this->ddbHotKeyFMA->TabIndex = 14;
-			// 
-			// cbHotKeyFMA
-			// 
-			this->cbHotKeyFMA->AutoSize = true;
-			this->cbHotKeyFMA->Location = System::Drawing::Point(6, 77);
-			this->cbHotKeyFMA->Name = L"cbHotKeyFMA";
-			this->cbHotKeyFMA->Size = System::Drawing::Size(48, 17);
-			this->cbHotKeyFMA->TabIndex = 13;
-			this->cbHotKeyFMA->Text = L"FMA";
-			this->cbHotKeyFMA->UseVisualStyleBackColor = true;
-			// 
-			// ddbHotKeyCCPeople
-			// 
-			this->ddbHotKeyCCPeople->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->ddbHotKeyCCPeople->FormattingEnabled = true;
-			this->ddbHotKeyCCPeople->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
-				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
-				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9"});
-			this->ddbHotKeyCCPeople->Location = System::Drawing::Point(85, 102);
-			this->ddbHotKeyCCPeople->Name = L"ddbHotKeyCCPeople";
-			this->ddbHotKeyCCPeople->Size = System::Drawing::Size(80, 21);
-			this->ddbHotKeyCCPeople->TabIndex = 16;
-			// 
-			// cbHotKeyCCPeople
-			// 
-			this->cbHotKeyCCPeople->AutoSize = true;
-			this->cbHotKeyCCPeople->Location = System::Drawing::Point(6, 104);
-			this->cbHotKeyCCPeople->Name = L"cbHotKeyCCPeople";
-			this->cbHotKeyCCPeople->Size = System::Drawing::Size(76, 17);
-			this->cbHotKeyCCPeople->TabIndex = 15;
-			this->cbHotKeyCCPeople->Text = L"CC People";
-			this->cbHotKeyCCPeople->UseVisualStyleBackColor = true;
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2202,7 +2202,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot - V2.2 - CCPLZ! - EMS 88.2";
+			this->Text = L"WatyBot - V2.3 Béta - CCPLZ! - EMS 88.2";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
