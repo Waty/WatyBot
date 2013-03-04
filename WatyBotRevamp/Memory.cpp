@@ -87,16 +87,31 @@ void CMemory::WriteMem()
 {
 	if(this->Type == cType::singleaddy)
 	{
+		//VirtualProtect start
+		DWORD dwOldProtect;
+		VirtualProtect((void*)ulAddress, bCount, PAGE_EXECUTE_READWRITE, &dwOldProtect);
+
 		//Backup Old Bytes
 		oldMem = new BYTE[bCount];
 		memcpy_s(oldMem, bCount, (void*)ulAddress, bCount);
 		
 		//Write Memory
 		memcpy_s((void*)this->ulAddress, bCount, (void*)this->bMem, bCount);
+
+		//VirtualProtect stop
+		VirtualProtect((void*)ulAddress, bCount, dwOldProtect, &dwOldProtect);
 	}
 	
-	if(this->Type == cType::twoaddys)
+	else if(this->Type == cType::twoaddys)
 	{
+		//VirtualProtect1 start
+		DWORD dwOldProtect1;
+		VirtualProtect((void*)ulAddress, bCount, PAGE_EXECUTE_READWRITE, &dwOldProtect1);
+		
+		//VirtualProtect2 start
+		DWORD dwOldProtect2;
+		VirtualProtect((void*)ulAddress2, bCount2, PAGE_EXECUTE_READWRITE, &dwOldProtect2);
+
 		//Backup Old Bytes
 		oldMem = new BYTE[bCount];
 		oldMem2 = new BYTE[bCount2];
@@ -107,10 +122,27 @@ void CMemory::WriteMem()
 		memcpy_s((void*)this->ulAddress, bCount, (void*)this->bMem, bCount);
 		memcpy_s((void*)this->ulAddress2, bCount2, (void*)this->bMem2, bCount2);
 
+		//VirtualProtect1 stop
+		VirtualProtect((void*)ulAddress, bCount, dwOldProtect1, &dwOldProtect1);
+
+		//VirtualProtect2 stop
+		VirtualProtect((void*)ulAddress2, bCount2, dwOldProtect2, &dwOldProtect2);
 	}
 
-	if(this->Type == cType::threeaddys)
+	else if(this->Type == cType::threeaddys)
 	{
+		//VirtualProtect1 start
+		DWORD dwOldProtect1;
+		VirtualProtect((void*)ulAddress, bCount, PAGE_EXECUTE_READWRITE, &dwOldProtect1);
+		
+		//VirtualProtect2 start
+		DWORD dwOldProtect2;
+		VirtualProtect((void*)ulAddress2, bCount2, PAGE_EXECUTE_READWRITE, &dwOldProtect2);
+		
+		//VirtualProtect3 start
+		DWORD dwOldProtect3;
+		VirtualProtect((void*)ulAddress3, bCount3, PAGE_EXECUTE_READWRITE, &dwOldProtect3);
+
 		//Backup Old Bytes
 		oldMem = new BYTE[bCount];
 		oldMem2 = new BYTE[bCount2];
@@ -123,16 +155,31 @@ void CMemory::WriteMem()
 		memcpy_s((void*)this->ulAddress, bCount, (void*)this->bMem, bCount);
 		memcpy_s((void*)this->ulAddress2, bCount2, (void*)this->bMem2, bCount2);
 		memcpy_s((void*)this->ulAddress3, bCount3, (void*)this->bMem3, bCount3);
+
+		//VirtualProtect1 stop
+		VirtualProtect((void*)ulAddress, bCount, dwOldProtect1, &dwOldProtect1);
+
+		//VirtualProtect2 stop
+		VirtualProtect((void*)ulAddress2, bCount2, dwOldProtect2, &dwOldProtect2);
+
+		//VirtualProtect3 stop
+		VirtualProtect((void*)ulAddress3, bCount3, dwOldProtect3, &dwOldProtect3);
 	}
 
-	if(this->Type == cType::asmtype)
+	else if(this->Type == cType::asmtype)
 	{
+		//VirtualProtect start
+		DWORD dwOldProtect;
+		VirtualProtect((void*)ulAddress, bCount, PAGE_EXECUTE_READWRITE, &dwOldProtect);
+
 		//Backing up old mem
-		SIZE_T memSize = iNops + 5;
-		oldMem = new BYTE[memSize];
-		memcpy(oldMem, (void*)ulAddress, memSize);
+		oldMem = new BYTE[iNops + 5];
+		memcpy(oldMem, (void*)ulAddress, iNops + 5);
 
 		JumpCall(this->ulDestination, this->iNops);
+
+		//VirtualProtect stop
+		VirtualProtect((void*)ulAddress, bCount, dwOldProtect, &dwOldProtect);
 	}
 }
 
@@ -140,20 +187,64 @@ void CMemory::RestoreMem()
 {
 	if(this->Type == cType::singleaddy || this->Type == cType::asmtype)
 	{
+		//VirtualProtect start
+		DWORD dwOldProtect;
+		VirtualProtect((void*)ulAddress, bCount, PAGE_EXECUTE_READWRITE, &dwOldProtect);
+
+		//Write Memory
 		memcpy_s((void*)this->ulAddress, bCount, (void*)this->oldMem, bCount);
+
+		//VirtualProtect stop
+		VirtualProtect((void*)ulAddress, bCount, dwOldProtect, &dwOldProtect);
 	}
 	
 	if (this->Type == cType::twoaddys)
 	{
+		//VirtualProtect1 start
+		DWORD dwOldProtect1;
+		VirtualProtect((void*)ulAddress, bCount, PAGE_EXECUTE_READWRITE, &dwOldProtect1);
+		
+		//VirtualProtect2 start
+		DWORD dwOldProtect2;
+		VirtualProtect((void*)ulAddress2, bCount2, PAGE_EXECUTE_READWRITE, &dwOldProtect2);
+		
+		//Write Memory
 		memcpy_s((void*)this->ulAddress, bCount, (void*)this->oldMem, bCount);
 		memcpy_s((void*)this->ulAddress2, bCount2, (void*)this->oldMem2, bCount2);
+
+		//VirtualProtect1 stop
+		VirtualProtect((void*)ulAddress, bCount, dwOldProtect1, &dwOldProtect1);
+
+		//VirtualProtect2 stop
+		VirtualProtect((void*)ulAddress2, bCount2, dwOldProtect2, &dwOldProtect2);
 	}
 
 	if (this->Type == cType::threeaddys)
 	{
+		//VirtualProtect1 start
+		DWORD dwOldProtect1;
+		VirtualProtect((void*)ulAddress, bCount, PAGE_EXECUTE_READWRITE, &dwOldProtect1);
+		
+		//VirtualProtect2 start
+		DWORD dwOldProtect2;
+		VirtualProtect((void*)ulAddress2, bCount2, PAGE_EXECUTE_READWRITE, &dwOldProtect2);
+		
+		//VirtualProtect3 start
+		DWORD dwOldProtect3;
+		VirtualProtect((void*)ulAddress3, bCount3, PAGE_EXECUTE_READWRITE, &dwOldProtect3);
+
+		//Write Memory
 		memcpy_s((void*)this->ulAddress, bCount, (void*)this->oldMem, bCount);
 		memcpy_s((void*)this->ulAddress2, bCount2, (void*)this->oldMem2, bCount2);
 		memcpy_s((void*)this->ulAddress3, bCount3, (void*)this->oldMem3, bCount3);
-	}
 
+		//VirtualProtect1 stop
+		VirtualProtect((void*)ulAddress, bCount, dwOldProtect1, &dwOldProtect1);
+
+		//VirtualProtect2 stop
+		VirtualProtect((void*)ulAddress2, bCount2, dwOldProtect2, &dwOldProtect2);
+
+		//VirtualProtect3 stop
+		VirtualProtect((void*)ulAddress3, bCount3, dwOldProtect3, &dwOldProtect3);
+	}
 }
