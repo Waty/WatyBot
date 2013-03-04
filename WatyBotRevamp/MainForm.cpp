@@ -888,7 +888,7 @@ void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventAr
 		MessageBoxA(MapleStoryHWND, "You forgot to fill in a textbox...", "Error", MB_OK || MB_ICONERROR);
 	else
 	{
-		SPControl::AddSPControl(name, mapid, x, x);
+		SPControl::AddSPControl(name, mapid, x, y);
 		RefreshSPControlListView();
 	}
 }
