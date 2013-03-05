@@ -137,8 +137,11 @@ void MainForm::HotKeys()
 	
 bool InGame()
 {
-	if(getMapID() > 0) return true;
-	else return false;
+	if(getMapID() != 0)
+		return true;
+
+	else
+		return false;
 }
 #pragma region Packetsending stuff
 bool isGoodPacket(String^ strPacket, String^&strError)
@@ -493,6 +496,9 @@ void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 {
 	try
 	{
+		AutoBotVars::AttackKey = KeyCodes[AttackComboBox->SelectedIndex];
+		AutoBotVars::AttacklParam = (MapVirtualKey(AutoBotVars::AttackKey, 0) << 16) + 1;
+
 		this->AttackTimer->Interval = Convert::ToInt32(this->nudAttackDelay->Value);
 		this->AttackComboBox->Enabled = !this->AttackCheckBox->Checked;
 		this->nudAttackDelay->Enabled = !this->AttackCheckBox->Checked;
@@ -508,6 +514,9 @@ void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::Even
 {
 	try
 	{
+		AutoBotVars::LootKey = KeyCodes[LootComboBox->SelectedIndex];
+		AutoBotVars::LootlParam = (MapVirtualKey(AutoBotVars::LootKey, 0) << 16) + 1;
+
 		this->LootTimer->Interval = Convert::ToInt32(this->nudLootDelay->Value);
 		this->LootComboBox->Enabled = !this->LootCheckBox->Checked;
 		this->nudLootDelay->Enabled = !this->LootCheckBox->Checked;
@@ -521,25 +530,20 @@ void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::Even
 }
 void MainForm::AttackTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
-	int AttackKey = KeyCodes[AttackComboBox->SelectedIndex];
-	LPARAM AttacklParam = (MapVirtualKey(AttackKey, 0) << 16) + 1;
-
 	if(getMobCount() > Convert::ToInt32(nudSAWSIL->Value) && !UsingAutoSkill && !UsingPot && !CCing && InGame())
 	{
-		PostMessage(MapleStoryHWND, WM_KEYDOWN, AttackKey, AttacklParam);
+		PostMessage(MapleStoryHWND, WM_KEYDOWN, AutoBotVars::AttackKey, AutoBotVars::AttacklParam);
 		Sleep(50);
-		PostMessage(MapleStoryHWND, WM_KEYUP, AttackKey, AttacklParam);
+		PostMessage(MapleStoryHWND, WM_KEYUP, AutoBotVars::AttackKey, AutoBotVars::AttacklParam);
 	}
 }
 void MainForm::LootTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
 	
-	int LootKey = KeyCodes[LootComboBox->SelectedIndex];
-	LPARAM LootlParam = (MapVirtualKey(LootKey, 0) << 16) + 1;
 	if(getItemCount() > Convert::ToInt32(nudSLWIB->Value) && !UsingAutoSkill && !UsingPot && !CCing && InGame())
 	{
 		WritePointer(ServerBasePtr, TubiOffset, 0);
-		PostMessage(MapleStoryHWND, WM_KEYDOWN, LootKey, LootlParam);
+		PostMessage(MapleStoryHWND, WM_KEYDOWN, AutoBotVars::LootKey, AutoBotVars::LootlParam);
 	}
 }
 void MainForm::AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)

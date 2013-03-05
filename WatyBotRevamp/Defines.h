@@ -93,3 +93,12 @@ namespace Packets
 {
 	std::string CashShop = "40 00 ** ** ** 00 00";
 }
+
+namespace AutoBotVars
+{
+	int AttackKey;
+	LPARAM AttacklParam;
+
+	int LootKey;
+	LPARAM LootlParam;
+}
