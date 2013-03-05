@@ -984,6 +984,9 @@ void MainForm::SaveSettings()
 	pt.add("LootHotKey", this->ddbHotKeyLoot->SelectedIndex);
 	pt.add("FMAHotKey", this->ddbHotKeyFMA->SelectedIndex);
 	pt.add("CCPeopleHotKey", this->ddbHotKeyCCPeople->SelectedIndex);
+
+	//Hacks Tab
+	pt.add("PinTyper", this->cbPinTyper->Checked);
 	write_ini(file, pt);
 
 }
@@ -1037,6 +1040,9 @@ void MainForm::LoadSettings()
 		this->ddbHotKeyLoot->SelectedIndex = pt.get<int>("LootHotKey");
 		this->ddbHotKeyFMA->SelectedIndex = pt.get<int>("FMAHotKey");
 		this->ddbHotKeyCCPeople->SelectedIndex = pt.get<int>("CCPeopleHotKey");
+
+		//Hacks Tab
+		this->cbPinTyper->Checked = pt.get<bool>("PinTyper", false);
 	}catch(...){};
 }
 void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e)
