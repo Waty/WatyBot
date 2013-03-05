@@ -228,7 +228,7 @@ void MainForm::CashShop()
 	Sleep(500);
 	String^ strError = String::Empty;
 	if(SendPacketFunction(marshal_as<String^>(Packets::CashShop)->Replace(" ", ""), strError));
-	else ::MessageBox::Show("Failed Sending Packet" + strError);
+	else ShowError("Failed Sending Packet" + strError);
 	Sleep(250);
 
 	CCing = false;
@@ -450,7 +450,7 @@ void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventA
 		}
 		catch(Exception^ exception)
 		{
-			::MessageBox::Show(exception->ToString());
+			ShowError(exception->ToString());
 			HPCheckBox->Checked = false;
 			nudHPValue->Enabled = true;
 			HPComboBox->Enabled = true;
@@ -477,7 +477,7 @@ void MainForm::MPCheckBox_CheckedChanged(System::Object^  sender, System::EventA
 		}
 		catch(Exception^ exception)
 		{
-			::MessageBox::Show(exception->ToString());
+			ShowError(exception->ToString());
 			MPCheckBox->Checked = false;
 			nudMPValue->Enabled = true;
 			MPComboBox->Enabled = true;
@@ -501,7 +501,7 @@ void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 	}
 	catch(Exception^ ex)
 	{
-		::MessageBox::Show("You typed an non number in the textbox, please change the number to a valid decimal. \nIf it didn't work, Please Report the following error: " + ex->ToString());
+		ShowError("The following error occurred:\n " + ex->ToString());
 	}
 }
 void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -516,7 +516,7 @@ void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::Even
 	}
 	catch(Exception^ ex)
 	{
-		::MessageBox::Show("Please Report the following error: " + ex->ToString());
+		ShowError("Please Report the following error: " + ex->ToString());
 	}
 }
 void MainForm::AttackTimer_Tick(System::Object^  sender, System::EventArgs^  e)
@@ -770,13 +770,13 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	String^ strError = String::Empty;
-	if(PacketSelectBox->SelectedIndex < 0)	MessageBoxA(MapleStoryHWND, "Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
-	else if(!SendPacketFunction(marshal_as<String^>(vPacket.at(PacketSelectBox->SelectedIndex).data)->Replace(" ", ""),strError)) MessageBox::Show(strError);
+	if(PacketSelectBox->SelectedIndex < 0)	ShowError("Please select a packet before sending");
+	else if(!SendPacketFunction(marshal_as<String^>(vPacket.at(PacketSelectBox->SelectedIndex).data)->Replace(" ", ""),strError)) ShowError(strError);
 }
 void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	AddPacket(marshal_as<string>(this->AddPacketNameTextBox->Text), marshal_as<string>(this->AddPacketPacketTextBox->Text));
-	MessageBox::Show("Packet was added!");
+	ShowInfo("Packet was added!");
 
 	RefreshComboBoxes();
 }
@@ -787,7 +787,7 @@ void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventAr
 		case IDYES:
 	{
 		DeletePacket(DeletePacketComboBox->SelectedIndex);
-		MessageBox::Show("Packet was deleted succesfully!");
+		ShowInfo("Packet was deleted succesfully!");
 		RefreshComboBoxes();
 		break;
 	}	
@@ -829,21 +829,21 @@ void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^
 	if(PacketSelectBox->SelectedIndex < 0)
 	{
 		this->SpamPacketsTimer->Enabled = false;
-		MessageBoxA(MapleStoryHWND, "Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
+		ShowWarning("Please select a packet before sending");
 	}
 	else if(!SendPacketFunction(marshal_as<String^>(vPacket.at(PacketSelectBox->SelectedIndex).data)->Replace(" ", ""),strError))
 	{
 		this->SpamPacketsTimer->Enabled = false;
-		MessageBox::Show(strError);
+		ShowError(strError);
 	}
 
 	SpammedPackets++;
 	if(SpammedPackets >= Convert::ToInt32(this->SpamPacketTimesTextBox->Text))
-	{
-		MessageBox::Show("Finished Spamming packets!");		
+	{	
 		SpamPacketsTimer->Enabled = false;
 		this->bStopSpamming->Visible = false;
 		this->bStartSpamming->Visible = true;
+		ShowInfo("Finished Spamming packets!");	
 	}
 }
 void MainForm::SavePacketsButton_Click(System::Object^  sender, System::EventArgs^  e)
@@ -885,7 +885,7 @@ void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventAr
 	int x = Convert::ToInt32(SPControlXTextBox->Text);
 	int y = Convert::ToInt32(SPControlYTextBox->Text);
 	if(name == "" || !mapid || !x || !y)
-		MessageBoxA(MapleStoryHWND, "You forgot to fill in a textbox...", "Error", MB_OK || MB_ICONERROR);
+		ShowWarning("You forgot to fill in a textbox...");
 	else
 	{
 		SPControl::AddSPControl(name, mapid, x, y);

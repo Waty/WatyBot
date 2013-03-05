@@ -8,6 +8,10 @@
 #define ID_CC 0
 #define ID_CS 1
 
+#define ShowInfo(Message)		MessageBox::Show(Message, "Information", MessageBoxButtons::OK, MessageBoxIcon::Information)
+#define ShowError(Message)		MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
+#define ShowWarning(Message)	MessageBox::Show(Message, "Warning", MessageBoxButtons::OK, MessageBoxIcon::Warning)
+
 typedef void (__stdcall* PFN_CField_SendTransferChannelRequest)(unsigned char nChannel);
 PFN_CField_SendTransferChannelRequest CField_SendTransferChannelRequest = reinterpret_cast<PFN_CField_SendTransferChannelRequest>(0x00567AC0);
 
