@@ -769,6 +769,7 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 //Controls on the PacketSender tab
 void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
+	SendKey(VK_DOWN);
 	String^ strError = String::Empty;
 	if(PacketSelectBox->SelectedIndex < 0)	MessageBoxA(MapleStoryHWND, "Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
 	else if(!SendPacketFunction(marshal_as<String^>(vPacket.at(PacketSelectBox->SelectedIndex).data)->Replace(" ", ""),strError)) MessageBox::Show(strError);

@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#define SendKey(KeyPress) PostMessage(MapleHWND, WM_KEYDOWN, KeyPress, (MapVirtualKey(KeyPress, 0) << 16) + 1);
+#define SendKey(KeyPress) PostMessage(MapleStoryHWND, WM_KEYDOWN, KeyPress, (MapVirtualKey(KeyPress, 0) << 16) + 1);
 #define NewThread(Function) CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)&Function, NULL, NULL, NULL)
 #define jmp(frm, to) (int)(((int)to - (int)frm) - 5);
 #define CodeCave(name) void __declspec(naked) Cave##name(){_asm
