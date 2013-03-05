@@ -769,7 +769,6 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 //Controls on the PacketSender tab
 void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	SendKey(VK_DOWN);
 	String^ strError = String::Empty;
 	if(PacketSelectBox->SelectedIndex < 0)	MessageBoxA(MapleStoryHWND, "Please select a packet before sending", 0, MB_OK | MB_ICONERROR);
 	else if(!SendPacketFunction(marshal_as<String^>(vPacket.at(PacketSelectBox->SelectedIndex).data)->Replace(" ", ""),strError)) MessageBox::Show(strError);
@@ -910,6 +909,11 @@ void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventA
 }
 void MainForm::GetSPControlCoordsButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
+	for(int i = 0; i < 10; i++)
+	{
+		SendKey(VK_DOWN);
+		Sleep(10);
+	}
 	this->SPControlXTextBox->Text = Convert::ToString(getCharX());
 	this->SPControlYTextBox->Text = Convert::ToString(getCharY());
 	this->SPControlMapIDTextBox->Text = Convert::ToString(getMapID());
