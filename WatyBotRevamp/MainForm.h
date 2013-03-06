@@ -752,7 +752,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeySendPacket;
 			// 
 			this->TimedComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->TimedComboBox->FormattingEnabled = true;
-			this->TimedComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(2) {L"CC", L"CS"});
+			this->TimedComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(3) {L"CC", L"CS", L"DC"});
 			this->TimedComboBox->Location = System::Drawing::Point(47, 251);
 			this->TimedComboBox->Name = L"TimedComboBox";
 			this->TimedComboBox->Size = System::Drawing::Size(38, 21);
@@ -762,7 +762,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeySendPacket;
 			// 
 			this->AttacksComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->AttacksComboBox->FormattingEnabled = true;
-			this->AttacksComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(2) {L"CC", L"CS"});
+			this->AttacksComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(3) {L"CC", L"CS", L"DC"});
 			this->AttacksComboBox->Location = System::Drawing::Point(47, 278);
 			this->AttacksComboBox->Name = L"AttacksComboBox";
 			this->AttacksComboBox->Size = System::Drawing::Size(38, 21);
@@ -772,7 +772,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeySendPacket;
 			// 
 			this->PeopleComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->PeopleComboBox->FormattingEnabled = true;
-			this->PeopleComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(2) {L"CC", L"CS"});
+			this->PeopleComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(3) {L"CC", L"CS", L"DC"});
 			this->PeopleComboBox->Location = System::Drawing::Point(47, 225);
 			this->PeopleComboBox->Name = L"PeopleComboBox";
 			this->PeopleComboBox->Size = System::Drawing::Size(38, 21);

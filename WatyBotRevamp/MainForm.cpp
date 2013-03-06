@@ -111,8 +111,6 @@ bool InGame()
 #pragma region Packetsending stuff
 bool isGoodPacket(String^ strPacket, String^&strError)
 {
-	strPacket->Replace(" ", "");
-
     if(strPacket == String::Empty)
 	{
         strError = "Packet is Empty";
@@ -137,10 +135,12 @@ bool isGoodPacket(String^ strPacket, String^&strError)
     }
     return true;
 }
-bool SendPacketFunction(String^ strPacket, String^&strError){
+bool SendPacketFunction(String^ packet, String^&strError){	
+	String^strPacket = packet->Replace(" ", "");
+
     if(!isGoodPacket(strPacket, strError))
         return false;
- 
+
     Random^ randObj = gcnew Random();
     String^ rawBytes = String::Empty;
  
@@ -589,10 +589,23 @@ void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 }
 void MainForm::CCTimedTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
-	if(TimedComboBox->SelectedIndex == ID_CC)
+	String^ strError = String::Empty;
+	switch(TimedComboBox->SelectedIndex)
+	{
+	case ID_CC:
 		NewThread(NextChannel);
-	else if(TimedComboBox->SelectedIndex == ID_CS)
-		CashShop();
+		break;
+
+	case ID_CS:
+		MainForm::CashShop();
+		break;
+
+	case ID_DC:
+		CCTimedCheckBox->Checked = false;
+		while(!SendPacketFunction(marshal_as<String^>(Packets::ChangeCharacter), strError));
+		ShowInfo("DC'd because the time is over");
+		break;
+	}	
 }
 void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -676,20 +689,46 @@ void MainForm::AutoCC()
 	{
 		if(getPeopleCount() >= iCCPeople)
 		{
-			if(PeopleComboBox->SelectedIndex == ID_CC)
+			String^ strError = String::Empty;
+			switch(PeopleComboBox->SelectedIndex)
+			{
+			case ID_CC:
 				NewThread(NextChannel);
-			else if(PeopleComboBox->SelectedIndex == ID_CS)
-				CashShop();
+				break;
+
+			case ID_CS:
+				MainForm::CashShop();
+				break;
+
+			case ID_DC:
+				CCTimedCheckBox->Checked = false;
+				while(!SendPacketFunction(marshal_as<String^>(Packets::ChangeCharacter), strError));
+				ShowInfo("DC'd because someone entered the map");
+				break;
+			}
 		}
 	}
 	if(CCAttacksCheckBox->Checked)
 	{
 		if(getAttackCount() >= iCCAttacks)
 		{
-			if(AttacksComboBox->SelectedIndex == ID_CC)
+			String^ strError = String::Empty;
+			switch(AttacksComboBox->SelectedIndex)
+			{
+			case ID_CC:
 				NewThread(NextChannel);
-			else if(AttacksComboBox->SelectedIndex == ID_CS)
-				CashShop();
+				break;
+
+			case ID_CS:
+				MainForm::CashShop();
+				break;
+
+			case ID_DC:
+				CCTimedCheckBox->Checked = false;
+				while(!SendPacketFunction(marshal_as<String^>(Packets::ChangeCharacter), strError));
+				ShowInfo("DC'd because you attacked " + iCCAttacks + " times");
+				break;
+			}
 		}
 	}
 }

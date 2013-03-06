@@ -7,6 +7,7 @@
 #define EndCodeCave }
 #define ID_CC 0
 #define ID_CS 1
+#define ID_DC 2
 
 #define ShowInfo(Message)		MessageBox::Show(Message, "Information", MessageBoxButtons::OK, MessageBoxIcon::Information)
 #define ShowError(Message)		MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
@@ -93,6 +94,7 @@ namespace Packets
 {
 	std::string EnterCashShop = "40 00 ** ** ** 00 00";
 	std::string LeaveCashShop = "3E 00";
+	std::string ChangeCharacter = "2C 01 01 00 **";
 }
 
 namespace AutoBotVars
