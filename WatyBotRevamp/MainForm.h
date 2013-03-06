@@ -322,6 +322,7 @@ private: System::Windows::Forms::CheckBox^  cbNDMining;
 private: System::Windows::Forms::ComboBox^  ddbHotKeySendPacket;
 private: System::Windows::Forms::CheckBox^  cbHotKeySendPacket;
 private: System::Windows::Forms::Label^  lCharacterpID;
+private: System::Windows::Forms::CheckBox^  cbHideDamage;
 
 
 
@@ -512,6 +513,7 @@ private: System::Windows::Forms::Label^  lCharacterpID;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->cbHideDamage = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1171,6 +1173,7 @@ private: System::Windows::Forms::Label^  lCharacterpID;
 			// 
 			// gbMiscHacks
 			// 
+			this->gbMiscHacks->Controls->Add(this->cbHideDamage);
 			this->gbMiscHacks->Controls->Add(this->cbCPUHack);
 			this->gbMiscHacks->Controls->Add(this->cbFLACC);
 			this->gbMiscHacks->Controls->Add(this->cbViewSwears);
@@ -1189,7 +1192,7 @@ private: System::Windows::Forms::Label^  lCharacterpID;
 			// cbCPUHack
 			// 
 			this->cbCPUHack->AutoSize = true;
-			this->cbCPUHack->Location = System::Drawing::Point(159, 88);
+			this->cbCPUHack->Location = System::Drawing::Point(159, 73);
 			this->cbCPUHack->Name = L"cbCPUHack";
 			this->cbCPUHack->Size = System::Drawing::Size(77, 17);
 			this->cbCPUHack->TabIndex = 7;
@@ -1200,7 +1203,7 @@ private: System::Windows::Forms::Label^  lCharacterpID;
 			// cbFLACC
 			// 
 			this->cbFLACC->AutoSize = true;
-			this->cbFLACC->Location = System::Drawing::Point(6, 88);
+			this->cbFLACC->Location = System::Drawing::Point(6, 73);
 			this->cbFLACC->Name = L"cbFLACC";
 			this->cbFLACC->Size = System::Drawing::Size(107, 17);
 			this->cbFLACC->TabIndex = 6;
@@ -1211,7 +1214,7 @@ private: System::Windows::Forms::Label^  lCharacterpID;
 			// cbViewSwears
 			// 
 			this->cbViewSwears->AutoSize = true;
-			this->cbViewSwears->Location = System::Drawing::Point(159, 65);
+			this->cbViewSwears->Location = System::Drawing::Point(159, 55);
 			this->cbViewSwears->Name = L"cbViewSwears";
 			this->cbViewSwears->Size = System::Drawing::Size(87, 17);
 			this->cbViewSwears->TabIndex = 5;
@@ -1222,7 +1225,7 @@ private: System::Windows::Forms::Label^  lCharacterpID;
 			// cbLogoSkipper
 			// 
 			this->cbLogoSkipper->AutoSize = true;
-			this->cbLogoSkipper->Location = System::Drawing::Point(159, 42);
+			this->cbLogoSkipper->Location = System::Drawing::Point(159, 37);
 			this->cbLogoSkipper->Name = L"cbLogoSkipper";
 			this->cbLogoSkipper->Size = System::Drawing::Size(89, 17);
 			this->cbLogoSkipper->TabIndex = 4;
@@ -1244,7 +1247,7 @@ private: System::Windows::Forms::Label^  lCharacterpID;
 			// cbPinTyper
 			// 
 			this->cbPinTyper->AutoSize = true;
-			this->cbPinTyper->Location = System::Drawing::Point(6, 65);
+			this->cbPinTyper->Location = System::Drawing::Point(6, 55);
 			this->cbPinTyper->Name = L"cbPinTyper";
 			this->cbPinTyper->Size = System::Drawing::Size(71, 17);
 			this->cbPinTyper->TabIndex = 2;
@@ -1255,7 +1258,7 @@ private: System::Windows::Forms::Label^  lCharacterpID;
 			// cbJDA
 			// 
 			this->cbJDA->AutoSize = true;
-			this->cbJDA->Location = System::Drawing::Point(6, 42);
+			this->cbJDA->Location = System::Drawing::Point(6, 37);
 			this->cbJDA->Name = L"cbJDA";
 			this->cbJDA->Size = System::Drawing::Size(46, 17);
 			this->cbJDA->TabIndex = 1;
@@ -2244,6 +2247,17 @@ private: System::Windows::Forms::Label^  lCharacterpID;
 			// 
 			this->CCTimedTimer->Tick += gcnew System::EventHandler(this, &MainForm::CCTimedTimer_Tick);
 			// 
+			// cbHideDamage
+			// 
+			this->cbHideDamage->AutoSize = true;
+			this->cbHideDamage->Location = System::Drawing::Point(6, 91);
+			this->cbHideDamage->Name = L"cbHideDamage";
+			this->cbHideDamage->Size = System::Drawing::Size(91, 17);
+			this->cbHideDamage->TabIndex = 8;
+			this->cbHideDamage->Text = L"Hide Damage";
+			this->cbHideDamage->UseVisualStyleBackColor = true;
+			this->cbHideDamage->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbHideDamage_CheckedChanged);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2385,6 +2399,7 @@ private: System::Void cbAutoAggro_CheckedChanged(System::Object^  sender, System
 private: System::Void CCTimedTimer_Tick(System::Object^  sender, System::EventArgs^  e);
 private: System::Void bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNDMining_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbHideDamage_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion

@@ -413,6 +413,10 @@ void MainForm::cbNDMining_CheckedChanged(System::Object^  sender, System::EventA
 {
 	Hacks::cmNDMining.Enable(cbNDMining->Checked);
 }
+void MainForm::cbHideDamage_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmHideDamage.Enable(cbHideDamage->Checked);
+}
 #pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
 void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
