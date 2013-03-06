@@ -770,19 +770,19 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 	SPControl::WriteXML(SPControlFileName);
 	WritePacketXML(PacketFileName);
 	SaveSettings();
-	switch(MessageBoxA(MapleStoryHWND, "Close MapleStory too?", "Terminate Maple?", MB_ICONQUESTION | MB_YESNOCANCEL))
+
+	::DialogResult dlResult = MessageBox::Show("Close MapleStory too?", "Terminate Maple?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question);
+	switch(dlResult)
 	{
-	case IDYES:
-		{
+		case ::DialogResult::Yes:
 			TerminateProcess(GetCurrentProcess(), 0);
 			ExitProcess(0);
-		}
-		break;
-	case IDCANCEL:
+			break;
+		
+		case ::DialogResult::Cancel:
 		{
 			e->Cancel = true;
 		}
-
 	}
 }
 
@@ -803,9 +803,9 @@ void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^
 void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	//delete packet from vector
-	switch (MessageBoxA(MapleStoryHWND, "Are you sure you want to delete this packet???", "Sure?", MB_ICONQUESTION | MB_YESNO))
-		case IDYES:
+	switch(MessageBox::Show("Are you sure you want to delete this packet?", "Please Confirm", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
 	{
+	case ::DialogResult::Yes:
 		DeletePacket(DeletePacketComboBox->SelectedIndex);
 		ShowInfo("Packet was deleted succesfully!");
 		RefreshComboBoxes();
@@ -918,9 +918,9 @@ void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventA
 	ListViewItem^ L = this->SPControlListView->SelectedItems[0];
 	if(SPControlListView->SelectedItems->Count > 0)
 	{
-		switch( MessageBoxA(MapleStoryHWND, "Are you sure you want to delete this???", "Are you sure?", MB_ICONQUESTION | MB_YESNO))
-		case IDYES:
+		switch(MessageBox::Show("Are you sure you want to delete this location?", "Please Confirm", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
 		{
+		case ::DialogResult::Yes:
 			SPControlv.erase(SPControlv.begin() + SPControlListView->Items->IndexOf(L));
 			RefreshSPControlListView();
 			break;
