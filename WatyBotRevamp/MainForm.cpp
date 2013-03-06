@@ -212,13 +212,10 @@ void NextChannel()
 		Sleep(500);
 		try 
 		{
-			CField_SendTransferChannelRequest(channel);
+			if(WallBasePtr) CField_SendTransferChannelRequest(channel);
 		}
-		catch (...)
-		{
-			Sleep(200);
-			CField_SendTransferChannelRequest(channel);
-		}
+		catch (...){}
+		Sleep(1000);
 	}
 	Sleep(2000);
 	CCing = false;
@@ -230,8 +227,13 @@ void MainForm::CashShop()
 	while(getBreathValue() > 0)	Sleep(250);
 	Sleep(500);
 	String^ strError = String::Empty;
-	if(SendPacketFunction(marshal_as<String^>(Packets::CashShop)->Replace(" ", ""), strError));
-	else ShowError("Failed Sending Packet" + strError);
+	if(SendPacketFunction(marshal_as<String^>(Packets::EnterCashShop), strError))
+	{
+		Sleep(2000);
+		if(!SendPacketFunction(marshal_as<String^>(Packets::LeaveCashShop), strError))
+			ShowError("Failed to leave the CashShop: " + strError);
+	}
+	else ShowError("Failed Entering the CashShop: " + strError);
 	Sleep(250);
 
 	CCing = false;
