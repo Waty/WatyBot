@@ -439,6 +439,10 @@ void MainForm::cbNFA_CheckedChanged(System::Object^  sender, System::EventArgs^ 
 {
 	Hacks::cmDFA.Enable(cbNFA->Checked);
 }
+void MainForm::cbNDMining_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmNDMining.Enable(cbNDMining->Checked);
+}
 #pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
 void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)

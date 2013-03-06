@@ -318,6 +318,7 @@ private: System::Windows::Forms::ComboBox^  ddbHotKeyFMA;
 private: System::Windows::Forms::CheckBox^  cbHotKeyFMA;
 private: System::Windows::Forms::ComboBox^  ddbHotKeyCCPeople;
 private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
+private: System::Windows::Forms::CheckBox^  cbNDMining;
 
 
 
@@ -504,6 +505,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->cbNDMining = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1268,6 +1270,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			// 
 			// gbCharHacks
 			// 
+			this->gbCharHacks->Controls->Add(this->cbNDMining);
 			this->gbCharHacks->Controls->Add(this->cbNFA);
 			this->gbCharHacks->Controls->Add(this->cbFMA);
 			this->gbCharHacks->Controls->Add(this->cbUA);
@@ -1282,7 +1285,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			this->gbCharHacks->Controls->Add(this->cbPerfectLoot);
 			this->gbCharHacks->Location = System::Drawing::Point(7, 3);
 			this->gbCharHacks->Name = L"gbCharHacks";
-			this->gbCharHacks->Size = System::Drawing::Size(310, 132);
+			this->gbCharHacks->Size = System::Drawing::Size(310, 147);
 			this->gbCharHacks->TabIndex = 1;
 			this->gbCharHacks->TabStop = false;
 			this->gbCharHacks->Text = L"Character";
@@ -1429,9 +1432,9 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			this->MobHacks->Controls->Add(this->cbJumpRight);
 			this->MobHacks->Controls->Add(this->cbWalkRight);
 			this->MobHacks->Controls->Add(this->cbVacRight);
-			this->MobHacks->Location = System::Drawing::Point(7, 141);
+			this->MobHacks->Location = System::Drawing::Point(7, 156);
 			this->MobHacks->Name = L"MobHacks";
-			this->MobHacks->Size = System::Drawing::Size(310, 110);
+			this->MobHacks->Size = System::Drawing::Size(310, 95);
 			this->MobHacks->TabIndex = 0;
 			this->MobHacks->TabStop = false;
 			this->MobHacks->Text = L"Mob";
@@ -1450,7 +1453,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			// cbScareMobs
 			// 
 			this->cbScareMobs->AutoSize = true;
-			this->cbScareMobs->Location = System::Drawing::Point(159, 65);
+			this->cbScareMobs->Location = System::Drawing::Point(159, 55);
 			this->cbScareMobs->Name = L"cbScareMobs";
 			this->cbScareMobs->Size = System::Drawing::Size(83, 17);
 			this->cbScareMobs->TabIndex = 9;
@@ -1461,7 +1464,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			// cbNoMobs
 			// 
 			this->cbNoMobs->AutoSize = true;
-			this->cbNoMobs->Location = System::Drawing::Point(159, 42);
+			this->cbNoMobs->Location = System::Drawing::Point(159, 37);
 			this->cbNoMobs->Name = L"cbNoMobs";
 			this->cbNoMobs->Size = System::Drawing::Size(69, 17);
 			this->cbNoMobs->TabIndex = 7;
@@ -1472,7 +1475,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			// cbFasterMobs
 			// 
 			this->cbFasterMobs->AutoSize = true;
-			this->cbFasterMobs->Location = System::Drawing::Point(159, 88);
+			this->cbFasterMobs->Location = System::Drawing::Point(159, 73);
 			this->cbFasterMobs->Name = L"cbFasterMobs";
 			this->cbFasterMobs->Size = System::Drawing::Size(84, 17);
 			this->cbFasterMobs->TabIndex = 6;
@@ -1483,7 +1486,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			// cbMobDisarm
 			// 
 			this->cbMobDisarm->AutoSize = true;
-			this->cbMobDisarm->Location = System::Drawing::Point(6, 88);
+			this->cbMobDisarm->Location = System::Drawing::Point(6, 73);
 			this->cbMobDisarm->Name = L"cbMobDisarm";
 			this->cbMobDisarm->Size = System::Drawing::Size(101, 17);
 			this->cbMobDisarm->TabIndex = 5;
@@ -1494,7 +1497,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			// cbJumpRight
 			// 
 			this->cbJumpRight->AutoSize = true;
-			this->cbJumpRight->Location = System::Drawing::Point(6, 65);
+			this->cbJumpRight->Location = System::Drawing::Point(6, 55);
 			this->cbJumpRight->Name = L"cbJumpRight";
 			this->cbJumpRight->Size = System::Drawing::Size(131, 17);
 			this->cbJumpRight->TabIndex = 4;
@@ -1505,7 +1508,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			// cbWalkRight
 			// 
 			this->cbWalkRight->AutoSize = true;
-			this->cbWalkRight->Location = System::Drawing::Point(6, 42);
+			this->cbWalkRight->Location = System::Drawing::Point(6, 37);
 			this->cbWalkRight->Name = L"cbWalkRight";
 			this->cbWalkRight->Size = System::Drawing::Size(131, 17);
 			this->cbWalkRight->TabIndex = 2;
@@ -2189,6 +2192,17 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 			// 
 			this->CCTimedTimer->Tick += gcnew System::EventHandler(this, &MainForm::CCTimedTimer_Tick);
 			// 
+			// cbNDMining
+			// 
+			this->cbNDMining->AutoSize = true;
+			this->cbNDMining->Location = System::Drawing::Point(6, 125);
+			this->cbNDMining->Name = L"cbNDMining";
+			this->cbNDMining->Size = System::Drawing::Size(104, 17);
+			this->cbNDMining->TabIndex = 13;
+			this->cbNDMining->Text = L"No Delay Mining";
+			this->cbNDMining->UseVisualStyleBackColor = true;
+			this->cbNDMining->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNDMining_CheckedChanged);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2330,6 +2344,7 @@ private: System::Void cbNFA_CheckedChanged(System::Object^  sender, System::Even
 private: System::Void cbAutoAggro_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void CCTimedTimer_Tick(System::Object^  sender, System::EventArgs^  e);
 private: System::Void bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbNDMining_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion
