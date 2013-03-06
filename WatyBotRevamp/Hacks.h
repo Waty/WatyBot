@@ -289,4 +289,9 @@ namespace Hacks
 	DWORD dwHideDamage = 0x006E2D17;
 	BYTE bHideDamage[] = {0x7F};
 	CMemory cmHideDamage(dwHideDamage, bHideDamage, 1);
+
+	/////	Mercedes Combos without comboing
+	DWORD dwMercedesCombo = 0x00BB952B;
+	BYTE bMercedesCombo[] = {0xEB};
+	CMemory cmMercedesCombo(dwMercedesCombo, bMercedesCombo, 1);
 }

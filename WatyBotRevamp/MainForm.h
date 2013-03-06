@@ -323,6 +323,8 @@ private: System::Windows::Forms::ComboBox^  ddbHotKeySendPacket;
 private: System::Windows::Forms::CheckBox^  cbHotKeySendPacket;
 private: System::Windows::Forms::Label^  lCharacterpID;
 private: System::Windows::Forms::CheckBox^  cbHideDamage;
+private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
+
 
 
 
@@ -409,6 +411,7 @@ private: System::Windows::Forms::CheckBox^  cbHideDamage;
 			this->HPBackground = (gcnew System::Windows::Forms::PictureBox());
 			this->HacksTab = (gcnew System::Windows::Forms::TabPage());
 			this->gbMiscHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbHideDamage = (gcnew System::Windows::Forms::CheckBox());
 			this->cbCPUHack = (gcnew System::Windows::Forms::CheckBox());
 			this->cbFLACC = (gcnew System::Windows::Forms::CheckBox());
 			this->cbViewSwears = (gcnew System::Windows::Forms::CheckBox());
@@ -513,7 +516,7 @@ private: System::Windows::Forms::CheckBox^  cbHideDamage;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->cbHideDamage = (gcnew System::Windows::Forms::CheckBox());
+			this->cbMercedesCombo = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1189,6 +1192,17 @@ private: System::Windows::Forms::CheckBox^  cbHideDamage;
 			this->gbMiscHacks->TabStop = false;
 			this->gbMiscHacks->Text = L"Other";
 			// 
+			// cbHideDamage
+			// 
+			this->cbHideDamage->AutoSize = true;
+			this->cbHideDamage->Location = System::Drawing::Point(6, 91);
+			this->cbHideDamage->Name = L"cbHideDamage";
+			this->cbHideDamage->Size = System::Drawing::Size(91, 17);
+			this->cbHideDamage->TabIndex = 8;
+			this->cbHideDamage->Text = L"Hide Damage";
+			this->cbHideDamage->UseVisualStyleBackColor = true;
+			this->cbHideDamage->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbHideDamage_CheckedChanged);
+			// 
 			// cbCPUHack
 			// 
 			this->cbCPUHack->AutoSize = true;
@@ -1279,6 +1293,7 @@ private: System::Windows::Forms::CheckBox^  cbHideDamage;
 			// 
 			// gbCharHacks
 			// 
+			this->gbCharHacks->Controls->Add(this->cbMercedesCombo);
 			this->gbCharHacks->Controls->Add(this->cbNDMining);
 			this->gbCharHacks->Controls->Add(this->cbNFA);
 			this->gbCharHacks->Controls->Add(this->cbFMA);
@@ -2247,16 +2262,16 @@ private: System::Windows::Forms::CheckBox^  cbHideDamage;
 			// 
 			this->CCTimedTimer->Tick += gcnew System::EventHandler(this, &MainForm::CCTimedTimer_Tick);
 			// 
-			// cbHideDamage
+			// cbMercedesCombo
 			// 
-			this->cbHideDamage->AutoSize = true;
-			this->cbHideDamage->Location = System::Drawing::Point(6, 91);
-			this->cbHideDamage->Name = L"cbHideDamage";
-			this->cbHideDamage->Size = System::Drawing::Size(91, 17);
-			this->cbHideDamage->TabIndex = 8;
-			this->cbHideDamage->Text = L"Hide Damage";
-			this->cbHideDamage->UseVisualStyleBackColor = true;
-			this->cbHideDamage->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbHideDamage_CheckedChanged);
+			this->cbMercedesCombo->AutoSize = true;
+			this->cbMercedesCombo->Location = System::Drawing::Point(159, 125);
+			this->cbMercedesCombo->Name = L"cbMercedesCombo";
+			this->cbMercedesCombo->Size = System::Drawing::Size(137, 17);
+			this->cbMercedesCombo->TabIndex = 14;
+			this->cbMercedesCombo->Text = L"Mercedes Perfect Skills";
+			this->cbMercedesCombo->UseVisualStyleBackColor = true;
+			this->cbMercedesCombo->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbMercedesCombo_CheckedChanged);
 			// 
 			// MainForm
 			// 
@@ -2400,6 +2415,7 @@ private: System::Void CCTimedTimer_Tick(System::Object^  sender, System::EventAr
 private: System::Void bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNDMining_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbHideDamage_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbMercedesCombo_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion

@@ -417,6 +417,10 @@ void MainForm::cbHideDamage_CheckedChanged(System::Object^  sender, System::Even
 {
 	Hacks::cmHideDamage.Enable(cbHideDamage->Checked);
 }
+void MainForm::cbMercedesCombo_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmMercedesCombo.Enable(cbMercedesCombo->Checked);
+}
 #pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
 void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
