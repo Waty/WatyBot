@@ -91,7 +91,8 @@ int KeyCodes[] = {VK_SHIFT, VK_SPACE, VK_CONTROL, VK_MENU, VK_INSERT, VK_DELETE,
 
 namespace Packets
 {
-	std::string CashShop = "40 00 ** ** ** 00 00";
+	std::string EnterCashShop = "40 00 ** ** ** 00 00";
+	std::string LeaveCashShop = "3E 00";
 }
 
 namespace AutoBotVars
