@@ -271,13 +271,13 @@ namespace Hacks
 	EndCodeCave
 	CMemory cmUA(dwUA, CaveUA, 1, true);
 
-	/////	Disable Final Attack
+	/////	Disable Final Attack Luna
 	DWORD dwDFA = 0x00BC6E80;
 	BYTE bDFA[] = {0xC3};
 	CMemory cmDFA(dwDFA, bDFA, 1);
 	
 	/////	ND Mining
-	DWORD dwNDMining1 = 00B74A22;
+	DWORD dwNDMining1 = 0x00B74A22;
 	BYTE bNDMining1[] = {0x90, 0x90};
 	DWORD dwNDMining2 = 0x00B74AFB;
 	BYTE bNDMining2[] = {0xEB};
