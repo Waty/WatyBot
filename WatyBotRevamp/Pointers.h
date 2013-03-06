@@ -9,6 +9,7 @@
 #define PetOffset 0x5050
 #define Pet1Offset 0x4
 #define PetFullness 0xB4
+#define pIDOffset 0x29D8
  
 #define InfoBasePtr 0x011EB3A8
 #define MapIDOffset 0xC9C // new aob so could be wrong
