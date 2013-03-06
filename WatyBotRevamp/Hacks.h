@@ -275,4 +275,13 @@ namespace Hacks
 	DWORD dwDFA = 0x00BC6E80;
 	BYTE bDFA[] = {0xC3};
 	CMemory cmDFA(dwDFA, bDFA, 1);
+	
+	/////	ND Mining
+	DWORD dwNDMining1 = 00B74A22;
+	BYTE bNDMining1[] = {0x90, 0x90};
+	DWORD dwNDMining2 = 0x00B74AFB;
+	BYTE bNDMining2[] = {0xEB};
+	DWORD dwNDMining3 = 0x00B850D7;
+	BYTE bNDMining3[] = {0x90, 0x90};
+	CMemory cmNDMining(dwNDMining1, bNDMining1, 2, dwNDMining2, bNDMining2, 1, dwNDMining3, bNDMining3, 2,
 }
