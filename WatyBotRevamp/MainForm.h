@@ -421,6 +421,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbJDA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoBG = (gcnew System::Windows::Forms::CheckBox());
 			this->gbCharHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbMercedesCombo = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNDMining = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNFA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbFMA = (gcnew System::Windows::Forms::CheckBox());
@@ -516,7 +517,6 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->cbMercedesCombo = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1313,6 +1313,17 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->gbCharHacks->TabIndex = 1;
 			this->gbCharHacks->TabStop = false;
 			this->gbCharHacks->Text = L"Character";
+			// 
+			// cbMercedesCombo
+			// 
+			this->cbMercedesCombo->AutoSize = true;
+			this->cbMercedesCombo->Location = System::Drawing::Point(159, 125);
+			this->cbMercedesCombo->Name = L"cbMercedesCombo";
+			this->cbMercedesCombo->Size = System::Drawing::Size(137, 17);
+			this->cbMercedesCombo->TabIndex = 14;
+			this->cbMercedesCombo->Text = L"Mercedes Perfect Skills";
+			this->cbMercedesCombo->UseVisualStyleBackColor = true;
+			this->cbMercedesCombo->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbMercedesCombo_CheckedChanged);
 			// 
 			// cbNDMining
 			// 
@@ -2262,17 +2273,6 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			// 
 			this->CCTimedTimer->Tick += gcnew System::EventHandler(this, &MainForm::CCTimedTimer_Tick);
 			// 
-			// cbMercedesCombo
-			// 
-			this->cbMercedesCombo->AutoSize = true;
-			this->cbMercedesCombo->Location = System::Drawing::Point(159, 125);
-			this->cbMercedesCombo->Name = L"cbMercedesCombo";
-			this->cbMercedesCombo->Size = System::Drawing::Size(137, 17);
-			this->cbMercedesCombo->TabIndex = 14;
-			this->cbMercedesCombo->Text = L"Mercedes Perfect Skills";
-			this->cbMercedesCombo->UseVisualStyleBackColor = true;
-			this->cbMercedesCombo->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbMercedesCombo_CheckedChanged);
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2286,7 +2286,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot - V2.3 Béta 2 - CCPLZ! - EMS 88.2";
+			this->Text = L"WatyBot - V2.3 - CCPLZ! - EMS 88.2";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
