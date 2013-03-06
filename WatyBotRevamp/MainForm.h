@@ -319,6 +319,8 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyFMA;
 private: System::Windows::Forms::ComboBox^  ddbHotKeyCCPeople;
 private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 private: System::Windows::Forms::CheckBox^  cbNDMining;
+private: System::Windows::Forms::ComboBox^  ddbHotKeySendPacket;
+private: System::Windows::Forms::CheckBox^  cbHotKeySendPacket;
 
 
 
@@ -506,6 +508,8 @@ private: System::Windows::Forms::CheckBox^  cbNDMining;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->ddbHotKeySendPacket = (gcnew System::Windows::Forms::ComboBox());
+			this->cbHotKeySendPacket = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1986,6 +1990,8 @@ private: System::Windows::Forms::CheckBox^  cbNDMining;
 			// 
 			// gbHotKeys
 			// 
+			this->gbHotKeys->Controls->Add(this->ddbHotKeySendPacket);
+			this->gbHotKeys->Controls->Add(this->cbHotKeySendPacket);
 			this->gbHotKeys->Controls->Add(this->ddbHotKeyCCPeople);
 			this->gbHotKeys->Controls->Add(this->cbHotKeyCCPeople);
 			this->gbHotKeys->Controls->Add(this->ddbHotKeyFMA);
@@ -1996,7 +2002,7 @@ private: System::Windows::Forms::CheckBox^  cbNDMining;
 			this->gbHotKeys->Controls->Add(this->cbHotKeyAttack);
 			this->gbHotKeys->Location = System::Drawing::Point(6, 7);
 			this->gbHotKeys->Name = L"gbHotKeys";
-			this->gbHotKeys->Size = System::Drawing::Size(172, 331);
+			this->gbHotKeys->Size = System::Drawing::Size(189, 331);
 			this->gbHotKeys->TabIndex = 26;
 			this->gbHotKeys->TabStop = false;
 			this->gbHotKeys->Text = L"Hot Keys";
@@ -2009,7 +2015,7 @@ private: System::Windows::Forms::CheckBox^  cbNDMining;
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9"});
-			this->ddbHotKeyCCPeople->Location = System::Drawing::Point(85, 102);
+			this->ddbHotKeyCCPeople->Location = System::Drawing::Point(100, 102);
 			this->ddbHotKeyCCPeople->Name = L"ddbHotKeyCCPeople";
 			this->ddbHotKeyCCPeople->Size = System::Drawing::Size(80, 21);
 			this->ddbHotKeyCCPeople->TabIndex = 16;
@@ -2032,7 +2038,7 @@ private: System::Windows::Forms::CheckBox^  cbNDMining;
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9"});
-			this->ddbHotKeyFMA->Location = System::Drawing::Point(85, 75);
+			this->ddbHotKeyFMA->Location = System::Drawing::Point(100, 75);
 			this->ddbHotKeyFMA->Name = L"ddbHotKeyFMA";
 			this->ddbHotKeyFMA->Size = System::Drawing::Size(80, 21);
 			this->ddbHotKeyFMA->TabIndex = 14;
@@ -2055,7 +2061,7 @@ private: System::Windows::Forms::CheckBox^  cbNDMining;
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9"});
-			this->ddbHotKeyLoot->Location = System::Drawing::Point(85, 48);
+			this->ddbHotKeyLoot->Location = System::Drawing::Point(100, 48);
 			this->ddbHotKeyLoot->Name = L"ddbHotKeyLoot";
 			this->ddbHotKeyLoot->Size = System::Drawing::Size(80, 21);
 			this->ddbHotKeyLoot->TabIndex = 12;
@@ -2078,7 +2084,7 @@ private: System::Windows::Forms::CheckBox^  cbNDMining;
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9"});
-			this->ddbHotKeyAttack->Location = System::Drawing::Point(85, 21);
+			this->ddbHotKeyAttack->Location = System::Drawing::Point(100, 21);
 			this->ddbHotKeyAttack->Name = L"ddbHotKeyAttack";
 			this->ddbHotKeyAttack->Size = System::Drawing::Size(80, 21);
 			this->ddbHotKeyAttack->TabIndex = 10;
@@ -2103,9 +2109,9 @@ private: System::Windows::Forms::CheckBox^  cbNDMining;
 			this->gbPointers->Controls->Add(this->PeopleCountLabel);
 			this->gbPointers->Controls->Add(this->ItemCountLabel);
 			this->gbPointers->Controls->Add(this->CharPosLabel);
-			this->gbPointers->Location = System::Drawing::Point(184, 7);
+			this->gbPointers->Location = System::Drawing::Point(195, 7);
 			this->gbPointers->Name = L"gbPointers";
-			this->gbPointers->Size = System::Drawing::Size(136, 331);
+			this->gbPointers->Size = System::Drawing::Size(125, 331);
 			this->gbPointers->TabIndex = 25;
 			this->gbPointers->TabStop = false;
 			this->gbPointers->Text = L"Pointers";
@@ -2202,6 +2208,29 @@ private: System::Windows::Forms::CheckBox^  cbNDMining;
 			// CCTimedTimer
 			// 
 			this->CCTimedTimer->Tick += gcnew System::EventHandler(this, &MainForm::CCTimedTimer_Tick);
+			// 
+			// ddbHotKeySendPacket
+			// 
+			this->ddbHotKeySendPacket->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbHotKeySendPacket->FormattingEnabled = true;
+			this->ddbHotKeySendPacket->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", 
+				L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", 
+				L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", 
+				L"5", L"6", L"7", L"8", L"9"});
+			this->ddbHotKeySendPacket->Location = System::Drawing::Point(100, 129);
+			this->ddbHotKeySendPacket->Name = L"ddbHotKeySendPacket";
+			this->ddbHotKeySendPacket->Size = System::Drawing::Size(80, 21);
+			this->ddbHotKeySendPacket->TabIndex = 18;
+			// 
+			// cbHotKeySendPacket
+			// 
+			this->cbHotKeySendPacket->AutoSize = true;
+			this->cbHotKeySendPacket->Location = System::Drawing::Point(6, 131);
+			this->cbHotKeySendPacket->Name = L"cbHotKeySendPacket";
+			this->cbHotKeySendPacket->Size = System::Drawing::Size(88, 17);
+			this->cbHotKeySendPacket->TabIndex = 17;
+			this->cbHotKeySendPacket->Text = L"Send Packet";
+			this->cbHotKeySendPacket->UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 

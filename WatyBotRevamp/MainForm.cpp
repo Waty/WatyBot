@@ -24,41 +24,6 @@ string SettingsFileName = WatyBotWorkingDirectory + "settings.ini";
 string PacketFileName = WatyBotWorkingDirectory + "packets.xml";
 string SPControlFileName = WatyBotWorkingDirectory + "spcontrol.xml";
 
-void MainForm::HotKeys()
-{
-	if(this->cbHotKeyAttack->Checked)
-	{
-		if(GetAsyncKeyState(KeyCodes[ddbHotKeyAttack->SelectedIndex]))
-		{
-			this->AttackCheckBox->Checked = !this->AttackCheckBox->Checked;
-			Sleep(250);
-		}
-	}
-	if(this->cbHotKeyLoot->Checked)
-	{
-		if(GetAsyncKeyState(KeyCodes[ddbHotKeyLoot->SelectedIndex]))
-		{
-			this->LootCheckBox->Checked = !this->LootCheckBox->Checked;
-			Sleep(250);
-		}
-	}
-	if(this->cbHotKeyFMA->Checked)
-	{
-		if(GetAsyncKeyState(KeyCodes[ddbHotKeyFMA->SelectedIndex]))
-		{
-			this->cbFMA->Checked = !this->cbFMA->Checked;
-			Sleep(250);
-		}
-	}
-	if(this->cbHotKeyCCPeople->Checked)
-	{
-		if(GetAsyncKeyState(KeyCodes[ddbHotKeyCCPeople->SelectedIndex]))
-		{
-			this->CCPeopleCheckBox->Checked = !this->CCPeopleCheckBox->Checked;
-			Sleep(250);
-		}
-	}
-}
 #pragma region Pointers Reading
 	int getMobCount()
 	{
@@ -781,7 +746,7 @@ void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs
 {
 	String^ strError = String::Empty;
 	if(PacketSelectBox->SelectedIndex < 0)	ShowError("Please select a packet before sending");
-	else if(!SendPacketFunction(marshal_as<String^>(vPacket.at(PacketSelectBox->SelectedIndex).data)->Replace(" ", ""),strError)) ShowError(strError);
+	else if(!SendPacketFunction(marshal_as<String^>(vPacket.at(PacketSelectBox->SelectedIndex).data),strError)) ShowError(strError);
 }
 void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
@@ -841,7 +806,7 @@ void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^
 		this->SpamPacketsTimer->Enabled = false;
 		ShowWarning("Please select a packet before sending");
 	}
-	else if(!SendPacketFunction(marshal_as<String^>(vPacket.at(PacketSelectBox->SelectedIndex).data)->Replace(" ", ""),strError))
+	else if(!SendPacketFunction(marshal_as<String^>(vPacket.at(PacketSelectBox->SelectedIndex).data),strError))
 	{
 		this->SpamPacketsTimer->Enabled = false;
 		ShowError(strError);
@@ -1058,4 +1023,52 @@ void MainForm::LoadSettings()
 void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	MainForm::SaveSettings();
+}
+
+
+//Hot Keys
+void MainForm::HotKeys()
+{
+	if(this->cbHotKeyAttack->Checked)
+	{
+		if(GetAsyncKeyState(KeyCodes[ddbHotKeyAttack->SelectedIndex]))
+		{
+			this->AttackCheckBox->Checked = !this->AttackCheckBox->Checked;
+			Sleep(250);
+		}
+	}
+	if(this->cbHotKeyLoot->Checked)
+	{
+		if(GetAsyncKeyState(KeyCodes[ddbHotKeyLoot->SelectedIndex]))
+		{
+			this->LootCheckBox->Checked = !this->LootCheckBox->Checked;
+			Sleep(250);
+		}
+	}
+	if(this->cbHotKeyFMA->Checked)
+	{
+		if(GetAsyncKeyState(KeyCodes[ddbHotKeyFMA->SelectedIndex]))
+		{
+			this->cbFMA->Checked = !this->cbFMA->Checked;
+			Sleep(250);
+		}
+	}
+	if(this->cbHotKeyCCPeople->Checked)
+	{
+		if(GetAsyncKeyState(KeyCodes[ddbHotKeyCCPeople->SelectedIndex]))
+		{
+			this->CCPeopleCheckBox->Checked = !this->CCPeopleCheckBox->Checked;
+			Sleep(250);
+		}
+	}
+	if(this->cbHotKeySendPacket->Checked)
+	{
+		if(GetAsyncKeyState(KeyCodes[ddbHotKeySendPacket->SelectedIndex]))
+		{
+			String^ strError = String::Empty;
+			if(PacketSelectBox->SelectedIndex < 0)	ShowError("Please select a packet before sending");
+			else if(!SendPacketFunction(marshal_as<String^>(vPacket.at(PacketSelectBox->SelectedIndex).data),strError)) ShowError(strError);
+			Sleep(250);
+		}
+	}
 }
