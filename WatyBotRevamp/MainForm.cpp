@@ -98,6 +98,11 @@ string SPControlFileName = WatyBotWorkingDirectory + "spcontrol.xml";
 		if(*(int*)WallBasePtr)	return (int) ReadPointer(ServerBasePtr, ChannelOffset);
 		else return 0;
 	}
+	int getCharpID()
+	{
+		if(*(int*)WallBasePtr)	return (int) ReadPointer(CharBasePtr, pIDOffset);
+		else return 0;
+	}
 #pragma endregion
 	
 bool InGame()
@@ -660,6 +665,7 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	this->TubiPointerLabel->Text =	"Tubi: "	+ getTubiValue();
 	this->BreathLabel->Text =		"Breath: "	+ getBreathValue();
 	this->lMapID->Text =			"MapID: "	+ getMapID();
+	this->lCharacterpID->Text =		"Char pID: "+ getCharpID();
 	
 	MainForm::AutoPot();
 	MainForm::AutoCC();
@@ -750,10 +756,6 @@ void MainForm::RedrawStatBars()
 	this->MPForeground->Width = MPBarLength;
 	double EXPBarLength = (getCharEXP()/100) * lengtOfBars;
 	this->EXPForeground->Width = EXPBarLength;
-}
-void MainForm::FixStatsButton_Click(System::Object^  sender, System::EventArgs^  e)
-{
-	MaxHP = 0, MaxMP = 0;
 }
 void MainForm::MainTabControl_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
 {

@@ -321,6 +321,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
 private: System::Windows::Forms::CheckBox^  cbNDMining;
 private: System::Windows::Forms::ComboBox^  ddbHotKeySendPacket;
 private: System::Windows::Forms::CheckBox^  cbHotKeySendPacket;
+private: System::Windows::Forms::Label^  lCharacterpID;
 
 
 
@@ -510,6 +511,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeySendPacket;
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->ddbHotKeySendPacket = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeySendPacket = (gcnew System::Windows::Forms::CheckBox());
+			this->lCharacterpID = (gcnew System::Windows::Forms::Label());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -2101,6 +2103,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeySendPacket;
 			// 
 			// gbPointers
 			// 
+			this->gbPointers->Controls->Add(this->lCharacterpID);
 			this->gbPointers->Controls->Add(this->lMapID);
 			this->gbPointers->Controls->Add(this->BreathLabel);
 			this->gbPointers->Controls->Add(this->TubiPointerLabel);
@@ -2232,6 +2235,15 @@ private: System::Windows::Forms::CheckBox^  cbHotKeySendPacket;
 			this->cbHotKeySendPacket->Text = L"Send Packet";
 			this->cbHotKeySendPacket->UseVisualStyleBackColor = true;
 			// 
+			// lCharacterpID
+			// 
+			this->lCharacterpID->AutoSize = true;
+			this->lCharacterpID->Location = System::Drawing::Point(6, 120);
+			this->lCharacterpID->Name = L"lCharacterpID";
+			this->lCharacterpID->Size = System::Drawing::Size(79, 13);
+			this->lCharacterpID->TabIndex = 28;
+			this->lCharacterpID->Text = L"Character pID: ";
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2318,7 +2330,6 @@ private: System::Void MPCheckBox_CheckedChanged(System::Object^  sender, System:
 private: System::Void AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void StatFixButton_Click(System::Object^  sender, System::EventArgs^  e){}
 private: System::Void LootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void FixStatsButton_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void AutoSkill2CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void AutoSkill3CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
