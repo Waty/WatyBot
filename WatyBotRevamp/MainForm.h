@@ -487,6 +487,8 @@ private: System::Windows::Forms::Label^  lCharacterpID;
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
 			this->bSaveSettings = (gcnew System::Windows::Forms::Button());
 			this->gbHotKeys = (gcnew System::Windows::Forms::GroupBox());
+			this->ddbHotKeySendPacket = (gcnew System::Windows::Forms::ComboBox());
+			this->cbHotKeySendPacket = (gcnew System::Windows::Forms::CheckBox());
 			this->ddbHotKeyCCPeople = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeyCCPeople = (gcnew System::Windows::Forms::CheckBox());
 			this->ddbHotKeyFMA = (gcnew System::Windows::Forms::ComboBox());
@@ -496,6 +498,7 @@ private: System::Windows::Forms::Label^  lCharacterpID;
 			this->ddbHotKeyAttack = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeyAttack = (gcnew System::Windows::Forms::CheckBox());
 			this->gbPointers = (gcnew System::Windows::Forms::GroupBox());
+			this->lCharacterpID = (gcnew System::Windows::Forms::Label());
 			this->lMapID = (gcnew System::Windows::Forms::Label());
 			this->BreathLabel = (gcnew System::Windows::Forms::Label());
 			this->TubiPointerLabel = (gcnew System::Windows::Forms::Label());
@@ -509,9 +512,6 @@ private: System::Windows::Forms::Label^  lCharacterpID;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->ddbHotKeySendPacket = (gcnew System::Windows::Forms::ComboBox());
-			this->cbHotKeySendPacket = (gcnew System::Windows::Forms::CheckBox());
-			this->lCharacterpID = (gcnew System::Windows::Forms::Label());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -2009,6 +2009,29 @@ private: System::Windows::Forms::Label^  lCharacterpID;
 			this->gbHotKeys->TabStop = false;
 			this->gbHotKeys->Text = L"Hot Keys";
 			// 
+			// ddbHotKeySendPacket
+			// 
+			this->ddbHotKeySendPacket->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbHotKeySendPacket->FormattingEnabled = true;
+			this->ddbHotKeySendPacket->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", 
+				L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", 
+				L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", 
+				L"5", L"6", L"7", L"8", L"9"});
+			this->ddbHotKeySendPacket->Location = System::Drawing::Point(100, 129);
+			this->ddbHotKeySendPacket->Name = L"ddbHotKeySendPacket";
+			this->ddbHotKeySendPacket->Size = System::Drawing::Size(80, 21);
+			this->ddbHotKeySendPacket->TabIndex = 18;
+			// 
+			// cbHotKeySendPacket
+			// 
+			this->cbHotKeySendPacket->AutoSize = true;
+			this->cbHotKeySendPacket->Location = System::Drawing::Point(6, 131);
+			this->cbHotKeySendPacket->Name = L"cbHotKeySendPacket";
+			this->cbHotKeySendPacket->Size = System::Drawing::Size(88, 17);
+			this->cbHotKeySendPacket->TabIndex = 17;
+			this->cbHotKeySendPacket->Text = L"Send Packet";
+			this->cbHotKeySendPacket->UseVisualStyleBackColor = true;
+			// 
 			// ddbHotKeyCCPeople
 			// 
 			this->ddbHotKeyCCPeople->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
@@ -2119,6 +2142,15 @@ private: System::Windows::Forms::Label^  lCharacterpID;
 			this->gbPointers->TabStop = false;
 			this->gbPointers->Text = L"Pointers";
 			// 
+			// lCharacterpID
+			// 
+			this->lCharacterpID->AutoSize = true;
+			this->lCharacterpID->Location = System::Drawing::Point(6, 120);
+			this->lCharacterpID->Name = L"lCharacterpID";
+			this->lCharacterpID->Size = System::Drawing::Size(79, 13);
+			this->lCharacterpID->TabIndex = 28;
+			this->lCharacterpID->Text = L"Character pID: ";
+			// 
 			// lMapID
 			// 
 			this->lMapID->AutoSize = true;
@@ -2212,38 +2244,6 @@ private: System::Windows::Forms::Label^  lCharacterpID;
 			// 
 			this->CCTimedTimer->Tick += gcnew System::EventHandler(this, &MainForm::CCTimedTimer_Tick);
 			// 
-			// ddbHotKeySendPacket
-			// 
-			this->ddbHotKeySendPacket->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->ddbHotKeySendPacket->FormattingEnabled = true;
-			this->ddbHotKeySendPacket->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", 
-				L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", 
-				L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", 
-				L"5", L"6", L"7", L"8", L"9"});
-			this->ddbHotKeySendPacket->Location = System::Drawing::Point(100, 129);
-			this->ddbHotKeySendPacket->Name = L"ddbHotKeySendPacket";
-			this->ddbHotKeySendPacket->Size = System::Drawing::Size(80, 21);
-			this->ddbHotKeySendPacket->TabIndex = 18;
-			// 
-			// cbHotKeySendPacket
-			// 
-			this->cbHotKeySendPacket->AutoSize = true;
-			this->cbHotKeySendPacket->Location = System::Drawing::Point(6, 131);
-			this->cbHotKeySendPacket->Name = L"cbHotKeySendPacket";
-			this->cbHotKeySendPacket->Size = System::Drawing::Size(88, 17);
-			this->cbHotKeySendPacket->TabIndex = 17;
-			this->cbHotKeySendPacket->Text = L"Send Packet";
-			this->cbHotKeySendPacket->UseVisualStyleBackColor = true;
-			// 
-			// lCharacterpID
-			// 
-			this->lCharacterpID->AutoSize = true;
-			this->lCharacterpID->Location = System::Drawing::Point(6, 120);
-			this->lCharacterpID->Name = L"lCharacterpID";
-			this->lCharacterpID->Size = System::Drawing::Size(79, 13);
-			this->lCharacterpID->TabIndex = 28;
-			this->lCharacterpID->Text = L"Character pID: ";
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2257,7 +2257,7 @@ private: System::Windows::Forms::Label^  lCharacterpID;
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot - V2.3 Béta - CCPLZ! - EMS 88.2";
+			this->Text = L"WatyBot - V2.3 Béta 2 - CCPLZ! - EMS 88.2";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);

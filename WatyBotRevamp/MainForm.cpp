@@ -1066,7 +1066,6 @@ void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  
 	MainForm::SaveSettings();
 }
 
-
 //Hot Keys
 void MainForm::HotKeys()
 {
