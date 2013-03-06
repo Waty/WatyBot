@@ -283,5 +283,5 @@ namespace Hacks
 	BYTE bNDMining2[] = {0xEB};
 	DWORD dwNDMining3 = 0x00B850D7;
 	BYTE bNDMining3[] = {0x90, 0x90};
-	CMemory cmNDMining(dwNDMining1, bNDMining1, 2, dwNDMining2, bNDMining2, 1, dwNDMining3, bNDMining3, 2,
+	CMemory cmNDMining(dwNDMining1, bNDMining1, 2, dwNDMining2, bNDMining2, 1, dwNDMining3, bNDMining3, 2);
 }
