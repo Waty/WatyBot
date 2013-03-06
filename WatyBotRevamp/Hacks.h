@@ -236,8 +236,8 @@ namespace Hacks
 	BYTE bScareMobs[] = {0x75};
 	CMemory cmScareMobs(dwScareMobs, bScareMobs, 1);
 
-	/////	FLACC
-	DWORD dwFLACC = 0x00C2992A;
+	/////	Always Face Left
+	DWORD dwFLACC = 0x00C2A42A;
 	BYTE bFLACC[] = {0xB8, 0x05, 0x00, 0x00, 0x00, 0x90};
 	CMemory cmFLACC(dwFLACC, bFLACC, 6);
 

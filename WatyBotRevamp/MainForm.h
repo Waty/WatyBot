@@ -414,6 +414,7 @@ private: System::Windows::Forms::CheckBox^  cbNDMining;
 			this->cbJDA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoBG = (gcnew System::Windows::Forms::CheckBox());
 			this->gbCharHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbNDMining = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNFA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbFMA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbUA = (gcnew System::Windows::Forms::CheckBox());
@@ -505,7 +506,6 @@ private: System::Windows::Forms::CheckBox^  cbNDMining;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->cbNDMining = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1196,9 +1196,9 @@ private: System::Windows::Forms::CheckBox^  cbNDMining;
 			this->cbFLACC->AutoSize = true;
 			this->cbFLACC->Location = System::Drawing::Point(6, 88);
 			this->cbFLACC->Name = L"cbFLACC";
-			this->cbFLACC->Size = System::Drawing::Size(59, 17);
+			this->cbFLACC->Size = System::Drawing::Size(107, 17);
 			this->cbFLACC->TabIndex = 6;
-			this->cbFLACC->Text = L"FLACC";
+			this->cbFLACC->Text = L"Always Face Left";
 			this->cbFLACC->UseVisualStyleBackColor = true;
 			this->cbFLACC->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbFLACC_CheckedChanged);
 			// 
@@ -1289,6 +1289,17 @@ private: System::Windows::Forms::CheckBox^  cbNDMining;
 			this->gbCharHacks->TabIndex = 1;
 			this->gbCharHacks->TabStop = false;
 			this->gbCharHacks->Text = L"Character";
+			// 
+			// cbNDMining
+			// 
+			this->cbNDMining->AutoSize = true;
+			this->cbNDMining->Location = System::Drawing::Point(6, 125);
+			this->cbNDMining->Name = L"cbNDMining";
+			this->cbNDMining->Size = System::Drawing::Size(104, 17);
+			this->cbNDMining->TabIndex = 13;
+			this->cbNDMining->Text = L"No Delay Mining";
+			this->cbNDMining->UseVisualStyleBackColor = true;
+			this->cbNDMining->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNDMining_CheckedChanged);
 			// 
 			// cbNFA
 			// 
@@ -2191,17 +2202,6 @@ private: System::Windows::Forms::CheckBox^  cbNDMining;
 			// CCTimedTimer
 			// 
 			this->CCTimedTimer->Tick += gcnew System::EventHandler(this, &MainForm::CCTimedTimer_Tick);
-			// 
-			// cbNDMining
-			// 
-			this->cbNDMining->AutoSize = true;
-			this->cbNDMining->Location = System::Drawing::Point(6, 125);
-			this->cbNDMining->Name = L"cbNDMining";
-			this->cbNDMining->Size = System::Drawing::Size(104, 17);
-			this->cbNDMining->TabIndex = 13;
-			this->cbNDMining->Text = L"No Delay Mining";
-			this->cbNDMining->UseVisualStyleBackColor = true;
-			this->cbNDMining->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNDMining_CheckedChanged);
 			// 
 			// MainForm
 			// 
