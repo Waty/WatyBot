@@ -1398,7 +1398,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbNDAllAttacks->Name = L"cbNDAllAttacks";
 			this->cbNDAllAttacks->Size = System::Drawing::Size(101, 17);
 			this->cbNDAllAttacks->TabIndex = 8;
-			this->cbNDAllAttacks->Text = L"ND - All Attacks";
+			this->cbNDAllAttacks->Text = L"gND + Unlimited MP";
 			this->cbNDAllAttacks->UseVisualStyleBackColor = true;
 			this->cbNDAllAttacks->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNDAllAttacks_CheckedChanged);
 			// 
