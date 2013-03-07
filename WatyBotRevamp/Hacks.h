@@ -89,9 +89,9 @@ namespace Hacks
 	CMemory cmUnlimitedMorph(dwMorph1, bMorph1, 2, dwMorph2, bMorph1, 1);
 
 	/////	ND - All Attacks
-	DWORD dwNDAllAttacks = 0x00B41E20;
-	BYTE bNDAllAttacks[] = {0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3, 0x90};
-	CMemory cmNDAllAttacks(dwNDAllAttacks, bNDAllAttacks, sizeof(bNDAllAttacks));
+	DWORD dwNDAllAttacks = 0x00BAA306;
+	BYTE bNDAllAttacks[] = {0x74};
+	CMemory cmNDAllAttacks(dwNDAllAttacks, bNDAllAttacks, 1);
 
 	/////	Jump Down Anywhere
 	DWORD dwJDA1 = 0x00B76E79;
