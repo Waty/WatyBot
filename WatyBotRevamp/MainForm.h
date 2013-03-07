@@ -324,6 +324,7 @@ private: System::Windows::Forms::CheckBox^  cbHotKeySendPacket;
 private: System::Windows::Forms::Label^  lCharacterpID;
 private: System::Windows::Forms::CheckBox^  cbHideDamage;
 private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
+private: System::Windows::Forms::ToolTip^  InfoToolTip;
 
 
 
@@ -517,6 +518,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->AttackTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->InfoToolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1200,6 +1202,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbHideDamage->Size = System::Drawing::Size(91, 17);
 			this->cbHideDamage->TabIndex = 8;
 			this->cbHideDamage->Text = L"Hide Damage";
+			this->InfoToolTip->SetToolTip(this->cbHideDamage, L"Hides all the damage you do, use if you DC because you have to much hits");
 			this->cbHideDamage->UseVisualStyleBackColor = true;
 			this->cbHideDamage->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbHideDamage_CheckedChanged);
 			// 
@@ -1211,6 +1214,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbCPUHack->Size = System::Drawing::Size(77, 17);
 			this->cbCPUHack->TabIndex = 7;
 			this->cbCPUHack->Text = L"CPU Hack";
+			this->InfoToolTip->SetToolTip(this->cbCPUHack, L"Reduces CPU usage");
 			this->cbCPUHack->UseVisualStyleBackColor = true;
 			this->cbCPUHack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbCPUHack_CheckedChanged);
 			// 
@@ -1222,6 +1226,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbFLACC->Size = System::Drawing::Size(107, 17);
 			this->cbFLACC->TabIndex = 6;
 			this->cbFLACC->Text = L"Always Face Left";
+			this->InfoToolTip->SetToolTip(this->cbFLACC, L"You will face left when you stand still");
 			this->cbFLACC->UseVisualStyleBackColor = true;
 			this->cbFLACC->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbFLACC_CheckedChanged);
 			// 
@@ -1233,6 +1238,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbViewSwears->Size = System::Drawing::Size(87, 17);
 			this->cbViewSwears->TabIndex = 5;
 			this->cbViewSwears->Text = L"View Swears";
+			this->InfoToolTip->SetToolTip(this->cbViewSwears, L"Makes you able to view words without ***");
 			this->cbViewSwears->UseVisualStyleBackColor = true;
 			this->cbViewSwears->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbViewSwears_CheckedChanged);
 			// 
@@ -1244,6 +1250,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbLogoSkipper->Size = System::Drawing::Size(89, 17);
 			this->cbLogoSkipper->TabIndex = 4;
 			this->cbLogoSkipper->Text = L"Logo Skipper";
+			this->InfoToolTip->SetToolTip(this->cbLogoSkipper, L"Skips the logo, making your ms start faster");
 			this->cbLogoSkipper->UseVisualStyleBackColor = true;
 			this->cbLogoSkipper->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbLogoSkipper_CheckedChanged);
 			// 
@@ -1255,6 +1262,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbSitHack->Size = System::Drawing::Size(67, 17);
 			this->cbSitHack->TabIndex = 3;
 			this->cbSitHack->Text = L"Sit Hack";
+			this->InfoToolTip->SetToolTip(this->cbSitHack, L"Makes your char sit");
 			this->cbSitHack->UseVisualStyleBackColor = true;
 			this->cbSitHack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbSitHack_CheckedChanged);
 			// 
@@ -1266,6 +1274,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbPinTyper->Size = System::Drawing::Size(71, 17);
 			this->cbPinTyper->TabIndex = 2;
 			this->cbPinTyper->Text = L"Pin Typer";
+			this->InfoToolTip->SetToolTip(this->cbPinTyper, L"Lets you type your pin instead of clicking it");
 			this->cbPinTyper->UseVisualStyleBackColor = true;
 			this->cbPinTyper->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbPinTyper_CheckedChanged);
 			// 
@@ -1277,6 +1286,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbJDA->Size = System::Drawing::Size(46, 17);
 			this->cbJDA->TabIndex = 1;
 			this->cbJDA->Text = L"JDA";
+			this->InfoToolTip->SetToolTip(this->cbJDA, L"Lets you JumpDownAnywhere");
 			this->cbJDA->UseVisualStyleBackColor = true;
 			this->cbJDA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbJDA_CheckedChanged);
 			// 
@@ -1288,6 +1298,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbNoBG->Size = System::Drawing::Size(145, 17);
 			this->cbNoBG->TabIndex = 0;
 			this->cbNoBG->Text = L"No Background + Clouds";
+			this->InfoToolTip->SetToolTip(this->cbNoBG, L"After CCing your background and clouds are gone");
 			this->cbNoBG->UseVisualStyleBackColor = true;
 			this->cbNoBG->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoBG_CheckedChanged);
 			// 
@@ -1322,6 +1333,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbMercedesCombo->Size = System::Drawing::Size(137, 17);
 			this->cbMercedesCombo->TabIndex = 14;
 			this->cbMercedesCombo->Text = L"Mercedes Perfect Skills";
+			this->InfoToolTip->SetToolTip(this->cbMercedesCombo, L"Let\'s you do combo skill without comboing");
 			this->cbMercedesCombo->UseVisualStyleBackColor = true;
 			this->cbMercedesCombo->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbMercedesCombo_CheckedChanged);
 			// 
@@ -1333,6 +1345,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbNDMining->Size = System::Drawing::Size(104, 17);
 			this->cbNDMining->TabIndex = 13;
 			this->cbNDMining->Text = L"No Delay Mining";
+			this->InfoToolTip->SetToolTip(this->cbNDMining, L"Removes the delay on mining");
 			this->cbNDMining->UseVisualStyleBackColor = true;
 			this->cbNDMining->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNDMining_CheckedChanged);
 			// 
@@ -1344,6 +1357,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbNFA->Size = System::Drawing::Size(99, 17);
 			this->cbNFA->TabIndex = 12;
 			this->cbNFA->Text = L"No Final Attack";
+			this->InfoToolTip->SetToolTip(this->cbNFA, L"Removes your ability to have a FinalAttack, use it with FMA to not get DC\'d");
 			this->cbNFA->UseVisualStyleBackColor = true;
 			this->cbNFA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNFA_CheckedChanged);
 			// 
@@ -1355,6 +1369,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbFMA->Size = System::Drawing::Size(100, 17);
 			this->cbFMA->TabIndex = 11;
 			this->cbFMA->Text = L"Full Map Attack";
+			this->InfoToolTip->SetToolTip(this->cbFMA, L"Let\'s you hit the whole map that\'s vissible for you");
 			this->cbFMA->UseVisualStyleBackColor = true;
 			this->cbFMA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbFMA_CheckedChanged);
 			// 
@@ -1366,6 +1381,8 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbUA->Size = System::Drawing::Size(103, 17);
 			this->cbUA->TabIndex = 8;
 			this->cbUA->Text = L"Unlimited Attack";
+			this->InfoToolTip->SetToolTip(this->cbUA, L"Let\'s you attack without stopping after 100 attacks, (very small chance on a A/B)" 
+				L"");
 			this->cbUA->UseVisualStyleBackColor = true;
 			this->cbUA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbUA_CheckedChanged);
 			// 
@@ -1377,6 +1394,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbItemVac->Size = System::Drawing::Size(68, 17);
 			this->cbItemVac->TabIndex = 10;
 			this->cbItemVac->Text = L"Item Vac";
+			this->InfoToolTip->SetToolTip(this->cbItemVac, L"All the items drop below your feet");
 			this->cbItemVac->UseVisualStyleBackColor = true;
 			this->cbItemVac->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbItemVac_CheckedChanged);
 			// 
@@ -1388,6 +1406,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cb50SecGM->Size = System::Drawing::Size(132, 17);
 			this->cb50SecGM->TabIndex = 9;
 			this->cb50SecGM->Text = L"50 Seconds Godmode";
+			this->InfoToolTip->SetToolTip(this->cb50SecGM, L"After you get hit you have godmode for 50 seconds");
 			this->cb50SecGM->UseVisualStyleBackColor = true;
 			this->cb50SecGM->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cb50SecGM_CheckedChanged);
 			// 
@@ -1396,9 +1415,10 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbNDAllAttacks->AutoSize = true;
 			this->cbNDAllAttacks->Location = System::Drawing::Point(6, 73);
 			this->cbNDAllAttacks->Name = L"cbNDAllAttacks";
-			this->cbNDAllAttacks->Size = System::Drawing::Size(101, 17);
+			this->cbNDAllAttacks->Size = System::Drawing::Size(146, 17);
 			this->cbNDAllAttacks->TabIndex = 8;
-			this->cbNDAllAttacks->Text = L"gND + Unlimited MP";
+			this->cbNDAllAttacks->Text = L"General No Delay No MP";
+			this->InfoToolTip->SetToolTip(this->cbNDAllAttacks, L"Removes the delay and MP cost of your attacks");
 			this->cbNDAllAttacks->UseVisualStyleBackColor = true;
 			this->cbNDAllAttacks->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNDAllAttacks_CheckedChanged);
 			// 
@@ -1410,6 +1430,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbUnlimitedMorph->Size = System::Drawing::Size(102, 17);
 			this->cbUnlimitedMorph->TabIndex = 7;
 			this->cbUnlimitedMorph->Text = L"Unlimited Morph";
+			this->InfoToolTip->SetToolTip(this->cbUnlimitedMorph, L"Kaizers can get in their final form without having the morph gauge filled");
 			this->cbUnlimitedMorph->UseVisualStyleBackColor = true;
 			this->cbUnlimitedMorph->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbUnlimitedMorph_CheckedChanged);
 			// 
@@ -1421,6 +1442,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbDojangGodmode->Size = System::Drawing::Size(109, 17);
 			this->cbDojangGodmode->TabIndex = 6;
 			this->cbDojangGodmode->Text = L"Dojang Godmode";
+			this->InfoToolTip->SetToolTip(this->cbDojangGodmode, L"Let\'s you get missed 7 times before taking a hit");
 			this->cbDojangGodmode->UseVisualStyleBackColor = true;
 			this->cbDojangGodmode->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbDojangGodmode_CheckedChanged);
 			// 
@@ -1432,6 +1454,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbNoKB->Size = System::Drawing::Size(98, 17);
 			this->cbNoKB->TabIndex = 5;
 			this->cbNoKB->Text = L"No Knockback";
+			this->InfoToolTip->SetToolTip(this->cbNoKB, L"You won\'t get Knocked Back when you get hit");
 			this->cbNoKB->UseVisualStyleBackColor = true;
 			this->cbNoKB->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoKB_CheckedChanged);
 			// 
@@ -1443,6 +1466,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbInstantAirLoot->Size = System::Drawing::Size(97, 17);
 			this->cbInstantAirLoot->TabIndex = 2;
 			this->cbInstantAirLoot->Text = L"Instant Air Loot";
+			this->InfoToolTip->SetToolTip(this->cbInstantAirLoot, L"Let\'s you loot instantly, doesn\'t work with Perfect Loot");
 			this->cbInstantAirLoot->UseVisualStyleBackColor = true;
 			this->cbInstantAirLoot->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbInstantAirLoot_CheckedChanged);
 			// 
@@ -1454,6 +1478,8 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbFusionAttack->Size = System::Drawing::Size(91, 17);
 			this->cbFusionAttack->TabIndex = 0;
 			this->cbFusionAttack->Text = L"Fusion Attack";
+			this->InfoToolTip->SetToolTip(this->cbFusionAttack, L"If you have an atack that hits 10 mobs 2 times, with fusion you will hit 1 mob 20" 
+				L" times");
 			this->cbFusionAttack->UseVisualStyleBackColor = true;
 			this->cbFusionAttack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbFusionAttack_CheckedChanged);
 			// 
@@ -1465,6 +1491,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbPerfectLoot->Size = System::Drawing::Size(84, 17);
 			this->cbPerfectLoot->TabIndex = 1;
 			this->cbPerfectLoot->Text = L"Perfect Loot";
+			this->InfoToolTip->SetToolTip(this->cbPerfectLoot, L"Removes drop and loot animation and loots faster");
 			this->cbPerfectLoot->UseVisualStyleBackColor = true;
 			this->cbPerfectLoot->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbPerfectLoot_CheckedChanged);
 			// 
@@ -1493,6 +1520,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbAutoAggro->Size = System::Drawing::Size(79, 17);
 			this->cbAutoAggro->TabIndex = 10;
 			this->cbAutoAggro->Text = L"Auto Aggro";
+			this->InfoToolTip->SetToolTip(this->cbAutoAggro, L"Let\'s all mobs get aggresive at you");
 			this->cbAutoAggro->UseVisualStyleBackColor = true;
 			this->cbAutoAggro->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbAutoAggro_CheckedChanged);
 			// 
@@ -1504,6 +1532,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbScareMobs->Size = System::Drawing::Size(83, 17);
 			this->cbScareMobs->TabIndex = 9;
 			this->cbScareMobs->Text = L"Scare Mobs";
+			this->InfoToolTip->SetToolTip(this->cbScareMobs, L"Freezes mobs");
 			this->cbScareMobs->UseVisualStyleBackColor = true;
 			this->cbScareMobs->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbScareMobs_CheckedChanged);
 			// 
@@ -1515,6 +1544,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbNoMobs->Size = System::Drawing::Size(69, 17);
 			this->cbNoMobs->TabIndex = 7;
 			this->cbNoMobs->Text = L"No Mobs";
+			this->InfoToolTip->SetToolTip(this->cbNoMobs, L"After ccing with NoMobs enabled, there will be no more mobs in the map");
 			this->cbNoMobs->UseVisualStyleBackColor = true;
 			this->cbNoMobs->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoMobs_CheckedChanged);
 			// 
@@ -1526,6 +1556,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbFasterMobs->Size = System::Drawing::Size(84, 17);
 			this->cbFasterMobs->TabIndex = 6;
 			this->cbFasterMobs->Text = L"Faster Mobs";
+			this->InfoToolTip->SetToolTip(this->cbFasterMobs, L"Mobs walk faster");
 			this->cbFasterMobs->UseVisualStyleBackColor = true;
 			this->cbFasterMobs->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbFasterMobs_CheckedChanged);
 			// 
@@ -1537,6 +1568,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbMobDisarm->Size = System::Drawing::Size(101, 17);
 			this->cbMobDisarm->TabIndex = 5;
 			this->cbMobDisarm->Text = L"Full Mob Disarm";
+			this->InfoToolTip->SetToolTip(this->cbMobDisarm, L"Makes mobs unable to use magical attack and other skills");
 			this->cbMobDisarm->UseVisualStyleBackColor = true;
 			this->cbMobDisarm->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbMobDisarm_CheckedChanged);
 			// 
@@ -1548,6 +1580,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbJumpRight->Size = System::Drawing::Size(131, 17);
 			this->cbJumpRight->TabIndex = 4;
 			this->cbJumpRight->Text = L"Jump Unrandom Right";
+			this->InfoToolTip->SetToolTip(this->cbJumpRight, L"All jumping mobs jump right");
 			this->cbJumpRight->UseVisualStyleBackColor = true;
 			this->cbJumpRight->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbJumpRight_CheckedChanged);
 			// 
@@ -1559,6 +1592,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbWalkRight->Size = System::Drawing::Size(131, 17);
 			this->cbWalkRight->TabIndex = 2;
 			this->cbWalkRight->Text = L"Walk Unrandom Right";
+			this->InfoToolTip->SetToolTip(this->cbWalkRight, L"All walking mobs walk right");
 			this->cbWalkRight->UseVisualStyleBackColor = true;
 			this->cbWalkRight->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbWalkRight_CheckedChanged);
 			// 
@@ -1570,6 +1604,7 @@ private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 			this->cbVacRight->Size = System::Drawing::Size(73, 17);
 			this->cbVacRight->TabIndex = 3;
 			this->cbVacRight->Text = L"Vac Right";
+			this->InfoToolTip->SetToolTip(this->cbVacRight, L"Everyone in the map walk right, you too!");
 			this->cbVacRight->UseVisualStyleBackColor = true;
 			this->cbVacRight->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbVacRight_CheckedChanged);
 			// 
