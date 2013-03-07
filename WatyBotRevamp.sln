@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WatyBotRevamp", "WatyBotRevamp\WatyBotRevamp.vcxproj", "{E5812690-3792-4563-90DD-CABC4B18A6DB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WatyBotInjector", "WatyBotInjector\WatyBotInjector.vcxproj", "{26B0D4D4-27B8-4A92-B453-732E7D44348A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WatyBotUpdater", "WatyBotUpdater\WatyBotUpdater.vcxproj", "{23ABC1B9-9091-4276-BA72-17FCB82A2F05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,16 @@ Global
 		{26B0D4D4-27B8-4A92-B453-732E7D44348A}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{26B0D4D4-27B8-4A92-B453-732E7D44348A}.Release|Win32.ActiveCfg = Release|Win32
 		{26B0D4D4-27B8-4A92-B453-732E7D44348A}.Release|Win32.Build.0 = Release|Win32
+		{23ABC1B9-9091-4276-BA72-17FCB82A2F05}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{23ABC1B9-9091-4276-BA72-17FCB82A2F05}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{23ABC1B9-9091-4276-BA72-17FCB82A2F05}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{23ABC1B9-9091-4276-BA72-17FCB82A2F05}.Debug|Win32.ActiveCfg = Debug|Win32
+		{23ABC1B9-9091-4276-BA72-17FCB82A2F05}.Debug|Win32.Build.0 = Debug|Win32
+		{23ABC1B9-9091-4276-BA72-17FCB82A2F05}.Release|Any CPU.ActiveCfg = Release|Win32
+		{23ABC1B9-9091-4276-BA72-17FCB82A2F05}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{23ABC1B9-9091-4276-BA72-17FCB82A2F05}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{23ABC1B9-9091-4276-BA72-17FCB82A2F05}.Release|Win32.ActiveCfg = Release|Win32
+		{23ABC1B9-9091-4276-BA72-17FCB82A2F05}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
