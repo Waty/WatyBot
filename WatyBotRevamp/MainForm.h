@@ -331,6 +331,10 @@ private: System::Windows::Forms::Timer^  Skill3Timer;
 private: System::Windows::Forms::Timer^  Skill4Timer;
 private: System::Windows::Forms::NumericUpDown^  nudLoadDelay;
 private: System::Windows::Forms::Label^  lLoadDelay;
+private: System::Windows::Forms::CheckBox^  cbVami;
+private: System::Windows::Forms::Label^  lKBCoords;
+
+private: System::Windows::Forms::Label^  lKnockBack;
 
 
 
@@ -418,6 +422,7 @@ private: System::Windows::Forms::Label^  lLoadDelay;
 			this->HPBackground = (gcnew System::Windows::Forms::PictureBox());
 			this->HacksTab = (gcnew System::Windows::Forms::TabPage());
 			this->gbMiscHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbVami = (gcnew System::Windows::Forms::CheckBox());
 			this->cbHideDamage = (gcnew System::Windows::Forms::CheckBox());
 			this->cbCPUHack = (gcnew System::Windows::Forms::CheckBox());
 			this->cbFLACC = (gcnew System::Windows::Forms::CheckBox());
@@ -499,6 +504,8 @@ private: System::Windows::Forms::Label^  lLoadDelay;
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
 			this->bSaveSettings = (gcnew System::Windows::Forms::Button());
 			this->gbHotKeys = (gcnew System::Windows::Forms::GroupBox());
+			this->nudLoadDelay = (gcnew System::Windows::Forms::NumericUpDown());
+			this->lLoadDelay = (gcnew System::Windows::Forms::Label());
 			this->ddbHotKeySendPacket = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeySendPacket = (gcnew System::Windows::Forms::CheckBox());
 			this->ddbHotKeyCCPeople = (gcnew System::Windows::Forms::ComboBox());
@@ -529,8 +536,8 @@ private: System::Windows::Forms::Label^  lLoadDelay;
 			this->Skill2Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->Skill3Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->Skill4Timer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->lLoadDelay = (gcnew System::Windows::Forms::Label());
-			this->nudLoadDelay = (gcnew System::Windows::Forms::NumericUpDown());
+			this->lKnockBack = (gcnew System::Windows::Forms::Label());
+			this->lKBCoords = (gcnew System::Windows::Forms::Label());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -567,8 +574,8 @@ private: System::Windows::Forms::Label^  lLoadDelay;
 			this->SPControlContextMenu->SuspendLayout();
 			this->InfoTab->SuspendLayout();
 			this->gbHotKeys->SuspendLayout();
-			this->gbPointers->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->BeginInit();
+			this->gbPointers->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -1191,6 +1198,7 @@ private: System::Windows::Forms::Label^  lLoadDelay;
 			// 
 			// gbMiscHacks
 			// 
+			this->gbMiscHacks->Controls->Add(this->cbVami);
 			this->gbMiscHacks->Controls->Add(this->cbHideDamage);
 			this->gbMiscHacks->Controls->Add(this->cbCPUHack);
 			this->gbMiscHacks->Controls->Add(this->cbFLACC);
@@ -1206,6 +1214,17 @@ private: System::Windows::Forms::Label^  lLoadDelay;
 			this->gbMiscHacks->TabIndex = 2;
 			this->gbMiscHacks->TabStop = false;
 			this->gbMiscHacks->Text = L"Other";
+			// 
+			// cbVami
+			// 
+			this->cbVami->AutoSize = true;
+			this->cbVami->Location = System::Drawing::Point(159, 91);
+			this->cbVami->Name = L"cbVami";
+			this->cbVami->Size = System::Drawing::Size(49, 17);
+			this->cbVami->TabIndex = 9;
+			this->cbVami->Text = L"Vami";
+			this->cbVami->UseVisualStyleBackColor = true;
+			this->cbVami->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbVami_CheckedChanged);
 			// 
 			// cbHideDamage
 			// 
@@ -2089,6 +2108,23 @@ private: System::Windows::Forms::Label^  lLoadDelay;
 			this->gbHotKeys->TabStop = false;
 			this->gbHotKeys->Text = L"Hot Keys";
 			// 
+			// nudLoadDelay
+			// 
+			this->nudLoadDelay->Location = System::Drawing::Point(131, 311);
+			this->nudLoadDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
+			this->nudLoadDelay->Name = L"nudLoadDelay";
+			this->nudLoadDelay->Size = System::Drawing::Size(58, 20);
+			this->nudLoadDelay->TabIndex = 30;
+			// 
+			// lLoadDelay
+			// 
+			this->lLoadDelay->AutoSize = true;
+			this->lLoadDelay->Location = System::Drawing::Point(3, 315);
+			this->lLoadDelay->Name = L"lLoadDelay";
+			this->lLoadDelay->Size = System::Drawing::Size(130, 13);
+			this->lLoadDelay->TabIndex = 29;
+			this->lLoadDelay->Text = L"Delay of loading Settings: ";
+			// 
 			// ddbHotKeySendPacket
 			// 
 			this->ddbHotKeySendPacket->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
@@ -2206,6 +2242,8 @@ private: System::Windows::Forms::Label^  lLoadDelay;
 			// 
 			// gbPointers
 			// 
+			this->gbPointers->Controls->Add(this->lKBCoords);
+			this->gbPointers->Controls->Add(this->lKnockBack);
 			this->gbPointers->Controls->Add(this->lCharacterpID);
 			this->gbPointers->Controls->Add(this->lMapID);
 			this->gbPointers->Controls->Add(this->BreathLabel);
@@ -2340,22 +2378,23 @@ private: System::Windows::Forms::Label^  lLoadDelay;
 			// 
 			this->Skill4Timer->Tick += gcnew System::EventHandler(this, &MainForm::Skill4Timer_Tick);
 			// 
-			// lLoadDelay
+			// lKnockBack
 			// 
-			this->lLoadDelay->AutoSize = true;
-			this->lLoadDelay->Location = System::Drawing::Point(3, 315);
-			this->lLoadDelay->Name = L"lLoadDelay";
-			this->lLoadDelay->Size = System::Drawing::Size(130, 13);
-			this->lLoadDelay->TabIndex = 29;
-			this->lLoadDelay->Text = L"Delay of loading Settings: ";
+			this->lKnockBack->AutoSize = true;
+			this->lKnockBack->Location = System::Drawing::Point(6, 133);
+			this->lKnockBack->Name = L"lKnockBack";
+			this->lKnockBack->Size = System::Drawing::Size(69, 13);
+			this->lKnockBack->TabIndex = 29;
+			this->lKnockBack->Text = L"KnockBack: ";
 			// 
-			// nudLoadDelay
+			// lKBCoords
 			// 
-			this->nudLoadDelay->Location = System::Drawing::Point(131, 311);
-			this->nudLoadDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
-			this->nudLoadDelay->Name = L"nudLoadDelay";
-			this->nudLoadDelay->Size = System::Drawing::Size(58, 20);
-			this->nudLoadDelay->TabIndex = 30;
+			this->lKBCoords->AutoSize = true;
+			this->lKBCoords->Location = System::Drawing::Point(6, 146);
+			this->lKBCoords->Name = L"lKBCoords";
+			this->lKBCoords->Size = System::Drawing::Size(105, 13);
+			this->lKBCoords->TabIndex = 30;
+			this->lKBCoords->Text = L"KBCoords: (123,123)";
 			// 
 			// MainForm
 			// 
@@ -2418,9 +2457,9 @@ private: System::Windows::Forms::Label^  lLoadDelay;
 			this->InfoTab->ResumeLayout(false);
 			this->gbHotKeys->ResumeLayout(false);
 			this->gbHotKeys->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->EndInit();
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -2505,6 +2544,7 @@ private: System::Void Skill1Timer_Tick(System::Object^  sender, System::EventArg
 private: System::Void Skill2Timer_Tick(System::Object^  sender, System::EventArgs^  e);
 private: System::Void Skill3Timer_Tick(System::Object^  sender, System::EventArgs^  e);
 private: System::Void Skill4Timer_Tick(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbVami_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion

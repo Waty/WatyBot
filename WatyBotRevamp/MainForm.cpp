@@ -103,6 +103,21 @@ string SPControlFileName = WatyBotWorkingDirectory + "spcontrol.xml";
 		if(*(int*)WallBasePtr)	return (int) ReadPointer(CharBasePtr, pIDOffset);
 		else return 0;
 	}
+	int getKnockBack()
+	{
+		if(*(int*)WallBasePtr)	return (int) ReadPointer(getCharpID(), KnockBackOffset);
+		else return 0;
+	}
+	int getKnockBackX()
+	{
+		if(*(int*)WallBasePtr)	return (int) ReadPointer(getCharpID(), KnockBackXOffset);
+		else return 0;
+	}
+	int getKnockBackY()
+	{
+		if(*(int*)WallBasePtr)	return (int) ReadPointer(getCharpID(), KnockBackYOffset);
+		else return 0;
+	}
 #pragma endregion
 	
 bool InGame()
@@ -351,6 +366,20 @@ void MainForm::cbHideDamage_CheckedChanged(System::Object^  sender, System::Even
 void MainForm::cbMercedesCombo_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	Hacks::cmMercedesCombo.Enable(cbMercedesCombo->Checked);
+}
+void Vami()
+{
+	int iKBX = (0 > getCharX()) ? 1081139200 : 3228622848;
+	int iKBY = (0 > getCharY()) ? 1081139200 : 3228622848;
+
+	int pID = ReadPointer(CharBasePtr, pIDOffset);
+	WritePointer(pID, KnockBackXOffset, iKBX);
+	WritePointer(pID, KnockBackYOffset, iKBY);
+	WritePointer(pID, KnockBackOffset, 1);
+}
+void MainForm::cbVami_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	NewThread(Vami);
 }
 #pragma endregion
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
@@ -668,15 +697,17 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 }
 void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
-	this->MobCountLabel->Text =		"Mobs: "	+ getMobCount();
-	this->PeopleCountLabel->Text =	"People: "	+ getPeopleCount();
-	this->CharPosLabel->Text =		"CharPos: ("+ getCharX() +","+ getCharY()+")";
-	this->ItemCountLabel->Text =	"Items: "	+ getItemCount();
-	this->AttackCountLabel->Text =	"Attacks: " + getAttackCount();
-	this->TubiPointerLabel->Text =	"Tubi: "	+ getTubiValue();
-	this->BreathLabel->Text =		"Breath: "	+ getBreathValue();
-	this->lMapID->Text =			"MapID: "	+ getMapID();
-	this->lCharacterpID->Text =		"Char pID: "+ getCharpID();
+	this->MobCountLabel->Text =		"Mobs: "		+ getMobCount();
+	this->PeopleCountLabel->Text =	"People: "		+ getPeopleCount();
+	this->CharPosLabel->Text =		"CharPos: ("	+ getCharX() +","+ getCharY()+")";
+	this->ItemCountLabel->Text =	"Items: "		+ getItemCount();
+	this->AttackCountLabel->Text =	"Attacks: "		+ getAttackCount();
+	this->TubiPointerLabel->Text =	"Tubi: "		+ getTubiValue();
+	this->BreathLabel->Text =		"Breath: "		+ getBreathValue();
+	this->lMapID->Text =			"MapID: "		+ getMapID();
+	this->lCharacterpID->Text =		"Char pID: "	+ getCharpID();
+	this->lKnockBack->Text =		"KnockBack: "	+ getKnockBack();
+	this->lKBCoords->Text =			"KB: (" + getKnockBackX() + "," + getKnockBackY() + ")";
 	
 	MainForm::AutoPot();
 	MainForm::AutoCC();
