@@ -329,6 +329,8 @@ private: System::Windows::Forms::Timer^  Skill1Timer;
 private: System::Windows::Forms::Timer^  Skill2Timer;
 private: System::Windows::Forms::Timer^  Skill3Timer;
 private: System::Windows::Forms::Timer^  Skill4Timer;
+private: System::Windows::Forms::NumericUpDown^  nudLoadDelay;
+private: System::Windows::Forms::Label^  lLoadDelay;
 
 
 
@@ -527,6 +529,8 @@ private: System::Windows::Forms::Timer^  Skill4Timer;
 			this->Skill2Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->Skill3Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->Skill4Timer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->lLoadDelay = (gcnew System::Windows::Forms::Label());
+			this->nudLoadDelay = (gcnew System::Windows::Forms::NumericUpDown());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -564,6 +568,7 @@ private: System::Windows::Forms::Timer^  Skill4Timer;
 			this->InfoTab->SuspendLayout();
 			this->gbHotKeys->SuspendLayout();
 			this->gbPointers->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -2064,6 +2069,8 @@ private: System::Windows::Forms::Timer^  Skill4Timer;
 			// 
 			// gbHotKeys
 			// 
+			this->gbHotKeys->Controls->Add(this->nudLoadDelay);
+			this->gbHotKeys->Controls->Add(this->lLoadDelay);
 			this->gbHotKeys->Controls->Add(this->ddbHotKeySendPacket);
 			this->gbHotKeys->Controls->Add(this->cbHotKeySendPacket);
 			this->gbHotKeys->Controls->Add(this->ddbHotKeyCCPeople);
@@ -2332,6 +2339,22 @@ private: System::Windows::Forms::Timer^  Skill4Timer;
 			// 
 			this->Skill4Timer->Tick += gcnew System::EventHandler(this, &MainForm::Skill4Timer_Tick);
 			// 
+			// lLoadDelay
+			// 
+			this->lLoadDelay->AutoSize = true;
+			this->lLoadDelay->Location = System::Drawing::Point(3, 315);
+			this->lLoadDelay->Name = L"lLoadDelay";
+			this->lLoadDelay->Size = System::Drawing::Size(130, 13);
+			this->lLoadDelay->TabIndex = 29;
+			this->lLoadDelay->Text = L"Delay of loading Settings: ";
+			// 
+			// nudLoadDelay
+			// 
+			this->nudLoadDelay->Location = System::Drawing::Point(131, 311);
+			this->nudLoadDelay->Name = L"nudLoadDelay";
+			this->nudLoadDelay->Size = System::Drawing::Size(58, 20);
+			this->nudLoadDelay->TabIndex = 30;
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2395,6 +2418,7 @@ private: System::Windows::Forms::Timer^  Skill4Timer;
 			this->gbHotKeys->PerformLayout();
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->EndInit();
 			this->ResumeLayout(false);
 
 		}

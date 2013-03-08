@@ -1028,8 +1028,9 @@ void MainForm::SaveSettings()
 
 	//Hacks Tab
 	pt.add("PinTyper", this->cbPinTyper->Checked);
-	write_ini(file, pt);
+	pt.add("LoadSettingsDelay", Convert::ToInt32(this->nudLoadDelay->Value));
 
+	write_ini(file, pt);
 }
 void MainForm::LoadSettings()
 {
@@ -1081,7 +1082,10 @@ void MainForm::LoadSettings()
 		this->ddbHotKeyLoot->SelectedIndex = pt.get<int>("LootHotKey");
 		this->ddbHotKeyFMA->SelectedIndex = pt.get<int>("FMAHotKey");
 		this->ddbHotKeyCCPeople->SelectedIndex = pt.get<int>("CCPeopleHotKey");
+		this->nudLoadDelay->Text = pt.get<int>("LoadSettingsDelay", 1000).ToString();
 
+
+		Sleep(Convert::ToInt32(nudLoadDelay->Value));
 		//Hacks Tab
 		this->cbPinTyper->Checked = pt.get<bool>("PinTyper", false);
 	}catch(...){};
