@@ -1333,7 +1333,7 @@ private: System::Windows::Forms::ToolTip^  InfoToolTip;
 			this->cbMercedesCombo->Size = System::Drawing::Size(137, 17);
 			this->cbMercedesCombo->TabIndex = 14;
 			this->cbMercedesCombo->Text = L"Mercedes Perfect Skills";
-			this->InfoToolTip->SetToolTip(this->cbMercedesCombo, L"Let\'s you do combo skill without comboing");
+			this->InfoToolTip->SetToolTip(this->cbMercedesCombo, L"Lets you use Aerial Barrage, Parting Shot, etc, without using Rising Rush first");
 			this->cbMercedesCombo->UseVisualStyleBackColor = true;
 			this->cbMercedesCombo->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbMercedesCombo_CheckedChanged);
 			// 
@@ -1415,10 +1415,10 @@ private: System::Windows::Forms::ToolTip^  InfoToolTip;
 			this->cbNDAllAttacks->AutoSize = true;
 			this->cbNDAllAttacks->Location = System::Drawing::Point(6, 73);
 			this->cbNDAllAttacks->Name = L"cbNDAllAttacks";
-			this->cbNDAllAttacks->Size = System::Drawing::Size(146, 17);
+			this->cbNDAllAttacks->Size = System::Drawing::Size(110, 17);
 			this->cbNDAllAttacks->TabIndex = 8;
-			this->cbNDAllAttacks->Text = L"General No Delay No MP";
-			this->InfoToolTip->SetToolTip(this->cbNDAllAttacks, L"Removes the delay and MP cost of your attacks");
+			this->cbNDAllAttacks->Text = L"General No Delay";
+			this->InfoToolTip->SetToolTip(this->cbNDAllAttacks, L"Removes the attackanimation and the delay between attacks");
 			this->cbNDAllAttacks->UseVisualStyleBackColor = true;
 			this->cbNDAllAttacks->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNDAllAttacks_CheckedChanged);
 			// 
