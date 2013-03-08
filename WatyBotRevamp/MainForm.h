@@ -2351,6 +2351,7 @@ private: System::Windows::Forms::Label^  lLoadDelay;
 			// nudLoadDelay
 			// 
 			this->nudLoadDelay->Location = System::Drawing::Point(131, 311);
+			this->nudLoadDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
 			this->nudLoadDelay->Name = L"nudLoadDelay";
 			this->nudLoadDelay->Size = System::Drawing::Size(58, 20);
 			this->nudLoadDelay->TabIndex = 30;
