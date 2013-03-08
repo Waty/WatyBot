@@ -104,4 +104,10 @@ namespace AutoBotVars
 
 	int LootKey;
 	LPARAM LootlParam;
+
+	enum AutoSkillType{Key, Packet};
+	AutoSkillType Skill1Type;
+	AutoSkillType Skill2Type;
+	AutoSkillType Skill3Type;
+	AutoSkillType Skill4Type;
 }

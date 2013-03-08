@@ -222,19 +222,29 @@ void getMSHWND()
 }
 void AutoSkill1()
 {
+	using namespace AutoBotVars;
 	while(AutoSkill1Bool)
 	{
-		while(UsingAutoSkill) Sleep(1000);
-		if(!CCing)
+		if(Skill1Type = Key)
 		{
-			LPARAM lParam = (MapVirtualKey(UserSetSkill1Key, 0) << 16) + 1;
-			UsingAutoSkill = true;
-			Sleep(1000);
-			PostMessage(MapleStoryHWND, WM_KEYDOWN, UserSetSkill1Key, lParam);
-			Sleep(50);			
-			UsingAutoSkill = false;
-			Sleep(UserSetSkill1Delay);
+			while(UsingAutoSkill) Sleep(1000);
+			if(!CCing)
+			{
+				LPARAM lParam = (MapVirtualKey(UserSetSkill1Key, 0) << 16) + 1;
+				UsingAutoSkill = true;
+				Sleep(1000);
+				PostMessage(MapleStoryHWND, WM_KEYDOWN, UserSetSkill1Key, lParam);
+				Sleep(50);			
+				UsingAutoSkill = false;
+			}
 		}
+		else
+		{
+			String^ test;
+			String^ test2;
+			SendPacketFunction(test, test2);
+		}
+		Sleep(UserSetSkill1Delay);
 	}
 }
 void AutoSkill2()
@@ -535,8 +545,14 @@ void MainForm::AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System
 	this->AutoSkill1ComboBox->Enabled = !this->AutoSkill1CheckBox->Checked;
 	this->nudSkill1Value->Enabled = !this->AutoSkill1CheckBox->Checked;
 	AutoSkill1Bool = this->AutoSkill1CheckBox->Checked;
-	UserSetSkill1Key = KeyCodes[this->AutoSkill1ComboBox->SelectedIndex];
-	UserSetSkill1Delay = Convert::ToInt32(this->nudSkill1Value->Value) * 1000;
+	if(AutoSkill1ComboBox->SelectedIndex > 45) Skill1Type = AutoSkillType::Packet;
+	else
+	{
+		Skill1Type = AutoSkillType::Key;
+		UserSetSkill1Key = KeyCodes[this->AutoSkill1ComboBox->SelectedIndex];
+		UserSetSkill1Delay = Convert::ToInt32(this->nudSkill1Value->Value) * 1000;
+	}
+
 	if(this->AutoSkill1CheckBox->Checked) NewThread(AutoSkill1);
 }
 void MainForm::AutoSkill2CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -882,6 +898,16 @@ void MainForm::RefreshComboBoxes()
 	this->PacketSelectBox->Items->Clear();
 	this->SelectPacketForEditingComboBox->Items->Clear();
 	this->DeletePacketComboBox->Items->Clear();
+	this->AutoSkill1ComboBox->Items->Clear();
+	this->AutoSkill2ComboBox->Items->Clear();
+	this->AutoSkill3ComboBox->Items->Clear();
+	this->AutoSkill4ComboBox->Items->Clear();
+
+	//Add Keys to the autoskillcomboboxes
+	this->AutoSkill1ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9"});
+	this->AutoSkill2ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9"});
+	this->AutoSkill3ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9"});
+	this->AutoSkill4ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9"});
 
 	//refresh comboboxes
 	for(unsigned int i=0; i < vPacket.size(); i++)
@@ -892,9 +918,13 @@ void MainForm::RefreshComboBoxes()
 			this->PacketSelectBox->Items->Add(PacketName);
 			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
 			this->DeletePacketComboBox->Items->Add(PacketName);
+			this->AutoSkill1ComboBox->Items->Add(PacketName);
+			this->AutoSkill2ComboBox->Items->Add(PacketName);
+			this->AutoSkill3ComboBox->Items->Add(PacketName);
+			this->AutoSkill4ComboBox->Items->Add(PacketName);
 		}
 		catch(...){};
-	}
+	}	
 }
 
 //controls on SPControl Tab
