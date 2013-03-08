@@ -65,22 +65,6 @@ int iMPValue, iMPKey;
 
 HWND MapleStoryHWND;
 
-bool AutoSkill1Bool;
-BYTE UserSetSkill1Key;
-int UserSetSkill1Delay;
-
-bool AutoSkill2Bool;
-BYTE UserSetSkill2Key;
-int UserSetSkill2Delay;
-
-bool AutoSkill3Bool;
-BYTE UserSetSkill3Key;
-int UserSetSkill3Delay;
-
-bool AutoSkill4Bool;
-BYTE UserSetSkill4Key;
-int UserSetSkill4Delay;
-
 bool UsingPot;
 bool UsingAutoSkill;
 bool CCing;

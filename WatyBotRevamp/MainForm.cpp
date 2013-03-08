@@ -220,58 +220,6 @@ void getMSHWND()
 		Sleep(1500);
 	}
 }
-void AutoSkill2()
-{
-	while(AutoSkill2Bool)
-	{
-		while(UsingAutoSkill) Sleep(1000);
-		if(!CCing)
-		{
-			LPARAM lParam = (MapVirtualKey(UserSetSkill2Key, 0) << 16) + 1;
-			UsingAutoSkill = true;
-			Sleep(1000);
-			PostMessage(MapleStoryHWND, WM_KEYDOWN, UserSetSkill2Key, lParam);
-			Sleep(50);
-			UsingAutoSkill = false;
-			Sleep(UserSetSkill2Delay);
-		}
-	}
-}
-void AutoSkill3()
-{
-	while(AutoSkill3Bool)
-	{
-		if(!CCing)
-		{
-			while(UsingAutoSkill) Sleep(1000);
-			LPARAM lParam = (MapVirtualKey(UserSetSkill3Key, 0) << 16) + 1;
-			UsingAutoSkill = true;
-			Sleep(1000);
-			PostMessage(MapleStoryHWND, WM_KEYDOWN, UserSetSkill3Key, lParam);
-			Sleep(50);
-			UsingAutoSkill = false;
-			Sleep(UserSetSkill3Delay);
-		}
-	}
-}
-void AutoSkill4()
-{
-	while(AutoSkill4Bool)
-	{
-		
-		if(!CCing)
-		{
-			while(UsingAutoSkill) Sleep(1000);
-			LPARAM lParam = (MapVirtualKey(UserSetSkill4Key, 0) << 16) + 1;
-			UsingAutoSkill = true;
-			Sleep(1000);
-			PostMessage(MapleStoryHWND, WM_KEYDOWN, UserSetSkill4Key, lParam);
-			Sleep(50);
-			UsingAutoSkill = false;
-			Sleep(UserSetSkill4Delay);
-		}
-	}
-}
 #pragma endregion
 #pragma region HackCheckBoxes
 void MainForm::cbFusionAttack_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -534,11 +482,10 @@ void MainForm::Skill1Timer_Tick(System::Object^  sender, System::EventArgs^  e)
 	{	//Send Key
 		while(CCing || UsingAutoSkill) Sleep(500);
 		UsingAutoSkill = true;
-		Sleep(1000);
+		Sleep(250);
 		SendKey(KeyCodes[AutoSkill1ComboBox->SelectedIndex]);
 		Sleep(50);
 		UsingAutoSkill = false;
-		Sleep(UserSetSkill2Delay);
 	}
 }
 void MainForm::Skill2Timer_Tick(System::Object^  sender, System::EventArgs^  e)
@@ -554,11 +501,10 @@ void MainForm::Skill2Timer_Tick(System::Object^  sender, System::EventArgs^  e)
 	{	//Send Key
 		while(CCing || UsingAutoSkill) Sleep(500);
 		UsingAutoSkill = true;
-		Sleep(1000);
+		Sleep(250);
 		SendKey(KeyCodes[AutoSkill2ComboBox->SelectedIndex]);
 		Sleep(50);
 		UsingAutoSkill = false;
-		Sleep(UserSetSkill2Delay);
 	}
 }
 void MainForm::Skill3Timer_Tick(System::Object^  sender, System::EventArgs^  e)
@@ -574,11 +520,10 @@ void MainForm::Skill3Timer_Tick(System::Object^  sender, System::EventArgs^  e)
 	{	//Send Key
 		while(CCing || UsingAutoSkill) Sleep(500);
 		UsingAutoSkill = true;
-		Sleep(1000);
+		Sleep(250);
 		SendKey(KeyCodes[AutoSkill3ComboBox->SelectedIndex]);
 		Sleep(50);
 		UsingAutoSkill = false;
-		Sleep(UserSetSkill2Delay);
 	}
 }
 void MainForm::Skill4Timer_Tick(System::Object^  sender, System::EventArgs^  e)
@@ -594,11 +539,10 @@ void MainForm::Skill4Timer_Tick(System::Object^  sender, System::EventArgs^  e)
 	{	//Send Key
 		while(CCing || UsingAutoSkill) Sleep(500);
 		UsingAutoSkill = true;
-		Sleep(1000);
+		Sleep(250);
 		SendKey(KeyCodes[AutoSkill4ComboBox->SelectedIndex]);
 		Sleep(50);
 		UsingAutoSkill = false;
-		Sleep(UserSetSkill2Delay);
 	}
 }
 void MainForm::AutoSkill2CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
