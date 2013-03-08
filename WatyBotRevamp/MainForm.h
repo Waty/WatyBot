@@ -2001,6 +2001,7 @@ private: System::Windows::Forms::Label^  lLoadDelay;
 			this->SPControlListView->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(4) {this->HeaderMapName, 
 				this->HeaderMapID, this->HeaderX, this->HeaderY});
 			this->SPControlListView->ContextMenuStrip = this->SPControlContextMenu;
+			this->SPControlListView->FullRowSelect = true;
 			this->SPControlListView->GridLines = true;
 			this->SPControlListView->HeaderStyle = System::Windows::Forms::ColumnHeaderStyle::Nonclickable;
 			this->SPControlListView->Location = System::Drawing::Point(7, 3);
