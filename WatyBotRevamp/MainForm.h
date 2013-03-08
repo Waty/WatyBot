@@ -325,6 +325,10 @@ private: System::Windows::Forms::Label^  lCharacterpID;
 private: System::Windows::Forms::CheckBox^  cbHideDamage;
 private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 private: System::Windows::Forms::ToolTip^  InfoToolTip;
+private: System::Windows::Forms::Timer^  Skill1Timer;
+private: System::Windows::Forms::Timer^  Skill2Timer;
+private: System::Windows::Forms::Timer^  Skill3Timer;
+private: System::Windows::Forms::Timer^  Skill4Timer;
 
 
 
@@ -519,6 +523,10 @@ private: System::Windows::Forms::ToolTip^  InfoToolTip;
 			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->InfoToolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
+			this->Skill1Timer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->Skill2Timer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->Skill3Timer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->Skill4Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -2308,6 +2316,22 @@ private: System::Windows::Forms::ToolTip^  InfoToolTip;
 			// 
 			this->CCTimedTimer->Tick += gcnew System::EventHandler(this, &MainForm::CCTimedTimer_Tick);
 			// 
+			// Skill1Timer
+			// 
+			this->Skill1Timer->Tick += gcnew System::EventHandler(this, &MainForm::Skill1Timer_Tick);
+			// 
+			// Skill2Timer
+			// 
+			this->Skill2Timer->Tick += gcnew System::EventHandler(this, &MainForm::Skill2Timer_Tick);
+			// 
+			// Skill3Timer
+			// 
+			this->Skill3Timer->Tick += gcnew System::EventHandler(this, &MainForm::Skill3Timer_Tick);
+			// 
+			// Skill4Timer
+			// 
+			this->Skill4Timer->Tick += gcnew System::EventHandler(this, &MainForm::Skill4Timer_Tick);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2451,6 +2475,10 @@ private: System::Void bSaveSettings_Click(System::Object^  sender, System::Event
 private: System::Void cbNDMining_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbHideDamage_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbMercedesCombo_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void Skill1Timer_Tick(System::Object^  sender, System::EventArgs^  e);
+private: System::Void Skill2Timer_Tick(System::Object^  sender, System::EventArgs^  e);
+private: System::Void Skill3Timer_Tick(System::Object^  sender, System::EventArgs^  e);
+private: System::Void Skill4Timer_Tick(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion

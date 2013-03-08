@@ -5,9 +5,7 @@
 #define jmp(frm, to) (int)(((int)to - (int)frm) - 5);
 #define CodeCave(name) void __declspec(naked) Cave##name(){_asm
 #define EndCodeCave }
-#define ID_CC 0
-#define ID_CS 1
-#define ID_DC 2
+enum CCType{CC, CS, DC};
 
 #define ShowInfo(Message)		MessageBox::Show(Message, "Information", MessageBoxButtons::OK, MessageBoxIcon::Information)
 #define ShowError(Message)		MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
@@ -104,10 +102,4 @@ namespace AutoBotVars
 
 	int LootKey;
 	LPARAM LootlParam;
-
-	enum AutoSkillType{Key, Packet};
-	AutoSkillType Skill1Type;
-	AutoSkillType Skill2Type;
-	AutoSkillType Skill3Type;
-	AutoSkillType Skill4Type;
 }

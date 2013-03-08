@@ -220,33 +220,6 @@ void getMSHWND()
 		Sleep(1500);
 	}
 }
-void AutoSkill1()
-{
-	using namespace AutoBotVars;
-	while(AutoSkill1Bool)
-	{
-		if(Skill1Type = Key)
-		{
-			while(UsingAutoSkill) Sleep(1000);
-			if(!CCing)
-			{
-				LPARAM lParam = (MapVirtualKey(UserSetSkill1Key, 0) << 16) + 1;
-				UsingAutoSkill = true;
-				Sleep(1000);
-				PostMessage(MapleStoryHWND, WM_KEYDOWN, UserSetSkill1Key, lParam);
-				Sleep(50);			
-				UsingAutoSkill = false;
-			}
-		}
-		else
-		{
-			String^ test;
-			String^ test2;
-			SendPacketFunction(test, test2);
-		}
-		Sleep(UserSetSkill1Delay);
-	}
-}
 void AutoSkill2()
 {
 	while(AutoSkill2Bool)
@@ -544,43 +517,113 @@ void MainForm::AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System
 {
 	this->AutoSkill1ComboBox->Enabled = !this->AutoSkill1CheckBox->Checked;
 	this->nudSkill1Value->Enabled = !this->AutoSkill1CheckBox->Checked;
-	AutoSkill1Bool = this->AutoSkill1CheckBox->Checked;
-	if(AutoSkill1ComboBox->SelectedIndex > 45) Skill1Type = AutoSkillType::Packet;
-	else
-	{
-		Skill1Type = AutoSkillType::Key;
-		UserSetSkill1Key = KeyCodes[this->AutoSkill1ComboBox->SelectedIndex];
-		UserSetSkill1Delay = Convert::ToInt32(this->nudSkill1Value->Value) * 1000;
-	}
 
-	if(this->AutoSkill1CheckBox->Checked) NewThread(AutoSkill1);
+	this->Skill1Timer->Interval = Convert::ToInt32(nudSkill1Value->Value) * 1000;
+	this->Skill1Timer->Enabled = this->AutoSkill1CheckBox->Checked;
+}
+void MainForm::Skill1Timer_Tick(System::Object^  sender, System::EventArgs^  e)
+{
+	//Send Packet
+	if(AutoSkill1ComboBox->SelectedIndex > 45)
+	{
+		String^ strError;
+		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill1ComboBox->SelectedIndex - 46).data), strError))
+			ShowError(strError);
+	}
+	else
+	{	//Send Key
+		while(CCing || UsingAutoSkill) Sleep(500);
+		UsingAutoSkill = true;
+		Sleep(1000);
+		SendKey(KeyCodes[AutoSkill1ComboBox->SelectedIndex]);
+		Sleep(50);
+		UsingAutoSkill = false;
+		Sleep(UserSetSkill2Delay);
+	}
+}
+void MainForm::Skill2Timer_Tick(System::Object^  sender, System::EventArgs^  e)
+{
+	//Send Packet
+	if(AutoSkill2ComboBox->SelectedIndex > 45)
+	{
+		String^ strError;
+		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill2ComboBox->SelectedIndex - 46).data), strError))
+			ShowError(strError);
+	}
+	else
+	{	//Send Key
+		while(CCing || UsingAutoSkill) Sleep(500);
+		UsingAutoSkill = true;
+		Sleep(1000);
+		SendKey(KeyCodes[AutoSkill2ComboBox->SelectedIndex]);
+		Sleep(50);
+		UsingAutoSkill = false;
+		Sleep(UserSetSkill2Delay);
+	}
+}
+void MainForm::Skill3Timer_Tick(System::Object^  sender, System::EventArgs^  e)
+{
+	//Send Packet
+	if(AutoSkill3ComboBox->SelectedIndex > 45)
+	{
+		String^ strError;
+		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill3ComboBox->SelectedIndex - 46).data), strError))
+			ShowError(strError);
+	}
+	else
+	{	//Send Key
+		while(CCing || UsingAutoSkill) Sleep(500);
+		UsingAutoSkill = true;
+		Sleep(1000);
+		SendKey(KeyCodes[AutoSkill3ComboBox->SelectedIndex]);
+		Sleep(50);
+		UsingAutoSkill = false;
+		Sleep(UserSetSkill2Delay);
+	}
+}
+void MainForm::Skill4Timer_Tick(System::Object^  sender, System::EventArgs^  e)
+{
+	//Send Packet
+	if(AutoSkill4ComboBox->SelectedIndex > 45)
+	{
+		String^ strError;
+		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill4ComboBox->SelectedIndex - 46).data), strError))
+			ShowError(strError);
+	}
+	else
+	{	//Send Key
+		while(CCing || UsingAutoSkill) Sleep(500);
+		UsingAutoSkill = true;
+		Sleep(1000);
+		SendKey(KeyCodes[AutoSkill4ComboBox->SelectedIndex]);
+		Sleep(50);
+		UsingAutoSkill = false;
+		Sleep(UserSetSkill2Delay);
+	}
 }
 void MainForm::AutoSkill2CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->AutoSkill2ComboBox->Enabled = !this->AutoSkill2CheckBox->Checked;
 	this->nudSkill2Value->Enabled = !this->AutoSkill2CheckBox->Checked;
-	AutoSkill2Bool = this->AutoSkill2CheckBox->Checked;
-	UserSetSkill2Key = KeyCodes[this->AutoSkill2ComboBox->SelectedIndex];
-	UserSetSkill2Delay = Convert::ToInt32(this->nudSkill2Value->Value) * 1000;
-	if(this->AutoSkill2CheckBox->Checked) NewThread(AutoSkill2);
+
+	this->Skill2Timer->Interval = Convert::ToInt32(nudSkill2Value->Value) * 1000;
+	this->Skill2Timer->Enabled = this->AutoSkill2CheckBox->Checked;
 }
 void MainForm::AutoSkill3CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->AutoSkill3ComboBox->Enabled = !this->AutoSkill3CheckBox->Checked;
 	this->nudSkill3Value->Enabled = !this->AutoSkill3CheckBox->Checked;
-	AutoSkill3Bool = this->AutoSkill3CheckBox->Checked;
-	UserSetSkill3Key = KeyCodes[this->AutoSkill3ComboBox->SelectedIndex];
-	UserSetSkill3Delay = Convert::ToInt32(this->nudSkill3Value->Value) * 1000;
-	if(this->AutoSkill3CheckBox->Checked) NewThread(AutoSkill3);
+
+	this->Skill3Timer->Interval = Convert::ToInt32(nudSkill3Value->Value) * 1000;
+	this->Skill3Timer->Enabled = this->AutoSkill3CheckBox->Checked;
 }
 void MainForm::AutoSkill4CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->AutoSkill4ComboBox->Enabled = !this->AutoSkill4CheckBox->Checked;
 	this->nudSkill4Value->Enabled = !this->AutoSkill4CheckBox->Checked;
-	AutoSkill4Bool = this->AutoSkill4CheckBox->Checked;
-	UserSetSkill4Key = KeyCodes[this->AutoSkill4ComboBox->SelectedIndex];
-	UserSetSkill4Delay = Convert::ToInt32(this->nudSkill4Value->Value) * 1000;
-	if(this->AutoSkill4CheckBox->Checked) NewThread(AutoSkill4);
+
+	this->Skill4Timer->Interval = Convert::ToInt32(nudSkill4Value->Value) * 1000;
+	this->Skill4Timer->Enabled = this->AutoSkill4CheckBox->Checked;
 }
 void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -621,15 +664,15 @@ void MainForm::CCTimedTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	String^ strError = String::Empty;
 	switch(TimedComboBox->SelectedIndex)
 	{
-	case ID_CC:
+	case CC:
 		NewThread(NextChannel);
 		break;
 
-	case ID_CS:
+	case CS:
 		MainForm::CashShop();
 		break;
 
-	case ID_DC:
+	case DC:
 		CCTimedCheckBox->Checked = false;
 		while(!SendPacketFunction(marshal_as<String^>(Packets::ChangeCharacter), strError));
 		ShowInfo("DC'd because the time is over");
@@ -722,15 +765,15 @@ void MainForm::AutoCC()
 			String^ strError = String::Empty;
 			switch(PeopleComboBox->SelectedIndex)
 			{
-			case ID_CC:
+			case CC:
 				NewThread(NextChannel);
 				break;
 
-			case ID_CS:
+			case CS:
 				MainForm::CashShop();
 				break;
 
-			case ID_DC:
+			case DC:
 				CCTimedCheckBox->Checked = false;
 				while(!SendPacketFunction(marshal_as<String^>(Packets::ChangeCharacter), strError));
 				ShowInfo("DC'd because someone entered the map");
@@ -745,15 +788,15 @@ void MainForm::AutoCC()
 			String^ strError = String::Empty;
 			switch(AttacksComboBox->SelectedIndex)
 			{
-			case ID_CC:
+			case CC:
 				NewThread(NextChannel);
 				break;
 
-			case ID_CS:
+			case CS:
 				MainForm::CashShop();
 				break;
 
-			case ID_DC:
+			case DC:
 				CCTimedCheckBox->Checked = false;
 				while(!SendPacketFunction(marshal_as<String^>(Packets::ChangeCharacter), strError));
 				ShowInfo("DC'd because you attacked " + iCCAttacks + " times");
