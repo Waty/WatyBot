@@ -338,6 +338,7 @@ private: System::Windows::Forms::Label^  lKnockBack;
 private: System::Windows::Forms::CheckBox^  cbPVP;
 private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 private: System::Windows::Forms::NumericUpDown^  nudPVPDelay;
+private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 
 
 
@@ -438,6 +439,7 @@ private: System::Windows::Forms::NumericUpDown^  nudPVPDelay;
 			this->cbJDA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoBG = (gcnew System::Windows::Forms::CheckBox());
 			this->gbCharHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->nudPVPDelay = (gcnew System::Windows::Forms::NumericUpDown());
 			this->ddbPVPSkills = (gcnew System::Windows::Forms::ComboBox());
 			this->cbPVP = (gcnew System::Windows::Forms::CheckBox());
 			this->cbMercedesCombo = (gcnew System::Windows::Forms::CheckBox());
@@ -545,7 +547,7 @@ private: System::Windows::Forms::NumericUpDown^  nudPVPDelay;
 			this->Skill2Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->Skill3Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->Skill4Timer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->nudPVPDelay = (gcnew System::Windows::Forms::NumericUpDown());
+			this->bwNextChannel = (gcnew System::ComponentModel::BackgroundWorker());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -571,6 +573,7 @@ private: System::Windows::Forms::NumericUpDown^  nudPVPDelay;
 			this->HacksTab->SuspendLayout();
 			this->gbMiscHacks->SuspendLayout();
 			this->gbCharHacks->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPVPDelay))->BeginInit();
 			this->MobHacks->SuspendLayout();
 			this->PacketSenderTab->SuspendLayout();
 			this->EditPacketGroupBox->SuspendLayout();
@@ -584,7 +587,6 @@ private: System::Windows::Forms::NumericUpDown^  nudPVPDelay;
 			this->gbHotKeys->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->BeginInit();
 			this->gbPointers->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPVPDelay))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -1369,6 +1371,15 @@ private: System::Windows::Forms::NumericUpDown^  nudPVPDelay;
 			this->gbCharHacks->TabIndex = 1;
 			this->gbCharHacks->TabStop = false;
 			this->gbCharHacks->Text = L"Character";
+			// 
+			// nudPVPDelay
+			// 
+			this->nudPVPDelay->Location = System::Drawing::Point(111, 143);
+			this->nudPVPDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
+			this->nudPVPDelay->Name = L"nudPVPDelay";
+			this->nudPVPDelay->Size = System::Drawing::Size(42, 20);
+			this->nudPVPDelay->TabIndex = 17;
+			this->InfoToolTip->SetToolTip(this->nudPVPDelay, L"Delay in miliseconds for PvP Skill Injection");
 			// 
 			// ddbPVPSkills
 			// 
@@ -2434,14 +2445,9 @@ private: System::Windows::Forms::NumericUpDown^  nudPVPDelay;
 			// 
 			this->Skill4Timer->Tick += gcnew System::EventHandler(this, &MainForm::Skill4Timer_Tick);
 			// 
-			// nudPVPDelay
+			// bwNextChannel
 			// 
-			this->nudPVPDelay->Location = System::Drawing::Point(111, 143);
-			this->nudPVPDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
-			this->nudPVPDelay->Name = L"nudPVPDelay";
-			this->nudPVPDelay->Size = System::Drawing::Size(42, 20);
-			this->nudPVPDelay->TabIndex = 17;
-			this->InfoToolTip->SetToolTip(this->nudPVPDelay, L"Delay in miliseconds for PvP Skill Injection");
+			this->bwNextChannel->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::bwNextChannel_DoWork);
 			// 
 			// MainForm
 			// 
@@ -2487,6 +2493,7 @@ private: System::Windows::Forms::NumericUpDown^  nudPVPDelay;
 			this->gbMiscHacks->PerformLayout();
 			this->gbCharHacks->ResumeLayout(false);
 			this->gbCharHacks->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPVPDelay))->EndInit();
 			this->MobHacks->ResumeLayout(false);
 			this->MobHacks->PerformLayout();
 			this->PacketSenderTab->ResumeLayout(false);
@@ -2507,7 +2514,6 @@ private: System::Windows::Forms::NumericUpDown^  nudPVPDelay;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->EndInit();
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPVPDelay))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -2594,6 +2600,7 @@ private: System::Void Skill3Timer_Tick(System::Object^  sender, System::EventArg
 private: System::Void Skill4Timer_Tick(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbVami_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void bwNextChannel_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
 };
 }
 #pragma endregion

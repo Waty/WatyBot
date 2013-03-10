@@ -185,11 +185,10 @@ bool SendPacketFunction(String^ packet, String^&strError){
 	finally {delete [] lpBytes;}
     return true;
 }
-void NextChannel()
+void MainForm::bwNextChannel_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
+	srand (time(NULL));
 	int channel = rand()%14;
-	if(channel == 14) channel = 0;
-
 	while(getChannel() != channel)
 	{
 		CCing = true;
@@ -659,7 +658,8 @@ void MainForm::CCTimedTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	switch(TimedComboBox->SelectedIndex)
 	{
 	case CC:
-		NewThread(NextChannel);
+		if(!bwNextChannel->IsBusy)
+			bwNextChannel->RunWorkerAsync();
 		break;
 
 	case CS:
@@ -762,7 +762,8 @@ void MainForm::AutoCC()
 			switch(PeopleComboBox->SelectedIndex)
 			{
 			case CC:
-				NewThread(NextChannel);
+				if(!bwNextChannel->IsBusy)
+					bwNextChannel->RunWorkerAsync();
 				break;
 
 			case CS:
@@ -785,7 +786,8 @@ void MainForm::AutoCC()
 			switch(AttacksComboBox->SelectedIndex)
 			{
 			case CC:
-				NewThread(NextChannel);
+				if(!bwNextChannel->IsBusy)
+					bwNextChannel->RunWorkerAsync();
 				break;
 
 			case CS:
