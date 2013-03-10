@@ -11,7 +11,7 @@
 #define PetFullness 0xB4
 #define pIDOffset 0x29D8								// 8B 87 ? ? ? ? 55 55 51 8B CC 89 64 24 ? 89 01
 
-#define KnockBackOffset 0x130
+#define KnockBackOffset 0x124
 #define KnockBackXOffset (KnockBackOffset + 0xC)
 #define KnockBackYOffset (KnockBackOffset + 0x10)
  

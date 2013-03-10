@@ -335,6 +335,9 @@ private: System::Windows::Forms::CheckBox^  cbVami;
 private: System::Windows::Forms::Label^  lKBCoords;
 
 private: System::Windows::Forms::Label^  lKnockBack;
+private: System::Windows::Forms::CheckBox^  cbPVP;
+private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
+
 
 
 
@@ -433,6 +436,8 @@ private: System::Windows::Forms::Label^  lKnockBack;
 			this->cbJDA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoBG = (gcnew System::Windows::Forms::CheckBox());
 			this->gbCharHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->ddbPVPSkills = (gcnew System::Windows::Forms::ComboBox());
+			this->cbPVP = (gcnew System::Windows::Forms::CheckBox());
 			this->cbMercedesCombo = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNDMining = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNFA = (gcnew System::Windows::Forms::CheckBox());
@@ -517,6 +522,8 @@ private: System::Windows::Forms::Label^  lKnockBack;
 			this->ddbHotKeyAttack = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeyAttack = (gcnew System::Windows::Forms::CheckBox());
 			this->gbPointers = (gcnew System::Windows::Forms::GroupBox());
+			this->lKBCoords = (gcnew System::Windows::Forms::Label());
+			this->lKnockBack = (gcnew System::Windows::Forms::Label());
 			this->lCharacterpID = (gcnew System::Windows::Forms::Label());
 			this->lMapID = (gcnew System::Windows::Forms::Label());
 			this->BreathLabel = (gcnew System::Windows::Forms::Label());
@@ -536,8 +543,6 @@ private: System::Windows::Forms::Label^  lKnockBack;
 			this->Skill2Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->Skill3Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->Skill4Timer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->lKnockBack = (gcnew System::Windows::Forms::Label());
-			this->lKBCoords = (gcnew System::Windows::Forms::Label());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1208,9 +1213,9 @@ private: System::Windows::Forms::Label^  lKnockBack;
 			this->gbMiscHacks->Controls->Add(this->cbPinTyper);
 			this->gbMiscHacks->Controls->Add(this->cbJDA);
 			this->gbMiscHacks->Controls->Add(this->cbNoBG);
-			this->gbMiscHacks->Location = System::Drawing::Point(7, 257);
+			this->gbMiscHacks->Location = System::Drawing::Point(7, 260);
 			this->gbMiscHacks->Name = L"gbMiscHacks";
-			this->gbMiscHacks->Size = System::Drawing::Size(310, 110);
+			this->gbMiscHacks->Size = System::Drawing::Size(310, 111);
 			this->gbMiscHacks->TabIndex = 2;
 			this->gbMiscHacks->TabStop = false;
 			this->gbMiscHacks->Text = L"Other";
@@ -1336,6 +1341,8 @@ private: System::Windows::Forms::Label^  lKnockBack;
 			// 
 			// gbCharHacks
 			// 
+			this->gbCharHacks->Controls->Add(this->ddbPVPSkills);
+			this->gbCharHacks->Controls->Add(this->cbPVP);
 			this->gbCharHacks->Controls->Add(this->cbMercedesCombo);
 			this->gbCharHacks->Controls->Add(this->cbNDMining);
 			this->gbCharHacks->Controls->Add(this->cbNFA);
@@ -1350,12 +1357,35 @@ private: System::Windows::Forms::Label^  lKnockBack;
 			this->gbCharHacks->Controls->Add(this->cbInstantAirLoot);
 			this->gbCharHacks->Controls->Add(this->cbFusionAttack);
 			this->gbCharHacks->Controls->Add(this->cbPerfectLoot);
-			this->gbCharHacks->Location = System::Drawing::Point(7, 3);
+			this->gbCharHacks->Location = System::Drawing::Point(7, -2);
 			this->gbCharHacks->Name = L"gbCharHacks";
-			this->gbCharHacks->Size = System::Drawing::Size(310, 147);
+			this->gbCharHacks->Size = System::Drawing::Size(310, 164);
 			this->gbCharHacks->TabIndex = 1;
 			this->gbCharHacks->TabStop = false;
 			this->gbCharHacks->Text = L"Character";
+			// 
+			// ddbPVPSkills
+			// 
+			this->ddbPVPSkills->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbPVPSkills->DropDownWidth = 215;
+			this->ddbPVPSkills->FormattingEnabled = true;
+			this->ddbPVPSkills->Items->AddRange(gcnew cli::array< System::Object^  >(4) {L"Ice Attack (600% dmg, 10 mobs)", L"Ice Smash (1200% dmg, 10 mobs)", 
+				L"Ice Snow Tempest (500% x 4 dmg, 10 mobs)", L"Ice chop (900% dmg, 10 mob count)"});
+			this->ddbPVPSkills->Location = System::Drawing::Point(159, 143);
+			this->ddbPVPSkills->Name = L"ddbPVPSkills";
+			this->ddbPVPSkills->Size = System::Drawing::Size(145, 21);
+			this->ddbPVPSkills->TabIndex = 16;
+			// 
+			// cbPVP
+			// 
+			this->cbPVP->AutoSize = true;
+			this->cbPVP->Location = System::Drawing::Point(6, 144);
+			this->cbPVP->Name = L"cbPVP";
+			this->cbPVP->Size = System::Drawing::Size(111, 17);
+			this->cbPVP->TabIndex = 15;
+			this->cbPVP->Text = L"PvP Skill Injection";
+			this->cbPVP->UseVisualStyleBackColor = true;
+			this->cbPVP->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbPVP_CheckedChanged);
 			// 
 			// cbMercedesCombo
 			// 
@@ -1537,9 +1567,9 @@ private: System::Windows::Forms::Label^  lKnockBack;
 			this->MobHacks->Controls->Add(this->cbJumpRight);
 			this->MobHacks->Controls->Add(this->cbWalkRight);
 			this->MobHacks->Controls->Add(this->cbVacRight);
-			this->MobHacks->Location = System::Drawing::Point(7, 156);
+			this->MobHacks->Location = System::Drawing::Point(7, 166);
 			this->MobHacks->Name = L"MobHacks";
-			this->MobHacks->Size = System::Drawing::Size(310, 95);
+			this->MobHacks->Size = System::Drawing::Size(310, 93);
 			this->MobHacks->TabIndex = 0;
 			this->MobHacks->TabStop = false;
 			this->MobHacks->Text = L"Mob";
@@ -2260,6 +2290,24 @@ private: System::Windows::Forms::Label^  lKnockBack;
 			this->gbPointers->TabStop = false;
 			this->gbPointers->Text = L"Pointers";
 			// 
+			// lKBCoords
+			// 
+			this->lKBCoords->AutoSize = true;
+			this->lKBCoords->Location = System::Drawing::Point(6, 146);
+			this->lKBCoords->Name = L"lKBCoords";
+			this->lKBCoords->Size = System::Drawing::Size(105, 13);
+			this->lKBCoords->TabIndex = 30;
+			this->lKBCoords->Text = L"KBCoords: (123,123)";
+			// 
+			// lKnockBack
+			// 
+			this->lKnockBack->AutoSize = true;
+			this->lKnockBack->Location = System::Drawing::Point(6, 133);
+			this->lKnockBack->Name = L"lKnockBack";
+			this->lKnockBack->Size = System::Drawing::Size(69, 13);
+			this->lKnockBack->TabIndex = 29;
+			this->lKnockBack->Text = L"KnockBack: ";
+			// 
 			// lCharacterpID
 			// 
 			this->lCharacterpID->AutoSize = true;
@@ -2377,24 +2425,6 @@ private: System::Windows::Forms::Label^  lKnockBack;
 			// Skill4Timer
 			// 
 			this->Skill4Timer->Tick += gcnew System::EventHandler(this, &MainForm::Skill4Timer_Tick);
-			// 
-			// lKnockBack
-			// 
-			this->lKnockBack->AutoSize = true;
-			this->lKnockBack->Location = System::Drawing::Point(6, 133);
-			this->lKnockBack->Name = L"lKnockBack";
-			this->lKnockBack->Size = System::Drawing::Size(69, 13);
-			this->lKnockBack->TabIndex = 29;
-			this->lKnockBack->Text = L"KnockBack: ";
-			// 
-			// lKBCoords
-			// 
-			this->lKBCoords->AutoSize = true;
-			this->lKBCoords->Location = System::Drawing::Point(6, 146);
-			this->lKBCoords->Name = L"lKBCoords";
-			this->lKBCoords->Size = System::Drawing::Size(105, 13);
-			this->lKBCoords->TabIndex = 30;
-			this->lKBCoords->Text = L"KBCoords: (123,123)";
 			// 
 			// MainForm
 			// 
@@ -2545,6 +2575,7 @@ private: System::Void Skill2Timer_Tick(System::Object^  sender, System::EventArg
 private: System::Void Skill3Timer_Tick(System::Object^  sender, System::EventArgs^  e);
 private: System::Void Skill4Timer_Tick(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbVami_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion

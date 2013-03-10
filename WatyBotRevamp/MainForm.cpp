@@ -330,7 +330,6 @@ void MainForm::cbItemVac_CheckedChanged(System::Object^  sender, System::EventAr
 void MainForm::cbFMA_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	cbNFA->Checked = cbFMA->Checked;
-	cbNFA->Enabled = !cbFMA->Checked;
 	cbItemVac->Checked = cbFMA->Checked;
 	cbItemVac->Enabled = !cbFMA->Checked;
 	Hacks::cmFMA.Enable(cbFMA->Checked);
@@ -366,6 +365,22 @@ void MainForm::cbHideDamage_CheckedChanged(System::Object^  sender, System::Even
 void MainForm::cbMercedesCombo_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	Hacks::cmMercedesCombo.Enable(cbMercedesCombo->Checked);
+}
+void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	if(ddbPVPSkills->SelectedIndex < 0)
+	{
+		cbPVP->Checked = false;
+		if(cbPVP->Checked) ShowError("Please Select a Skill");
+	}
+	else
+	{
+		Hacks::iPVPSkillID = PVPSkills[ddbPVPSkills->SelectedIndex];
+		ddbPVPSkills->Enabled = !cbPVP->Checked;
+		cbNFA->Checked = false;
+		Hacks::cmPVP1.Enable(cbPVP->Checked);
+		Hacks::cmPVP2.Enable(cbPVP->Checked);
+	}
 }
 void Vami()
 {
