@@ -308,8 +308,29 @@ namespace Hacks
 	DWORD dwPVPAddy = 0x00BC6F11; //GMS: 00D33CD1: // Set Skill Id // 8B 96 ?? ?? ?? ?? 8B 44 24 ?? 6A ?? 6A ?? 6A ?? 8D 4C 24 ?? 51 8B 0D ?? ?? ?? ?? 52 50 C7 44 24 ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B F8 85 FF 0F 8E ?? ?? ?? ?? 8B 1D ?? ?? ?? ??
 	DWORD dwPVPRet = dwPVPAddy + 6;
 	int iPVPSkillID;
+	int iPVPDelay;
+	int count;
+	BOOL WINAPI Delay()
+	{
+		if(count >= iPVPDelay)
+			return TRUE;
+		return FALSE;
+	}
 	CodeCave(PVP)
 	{
+		push eax
+		mov eax, dword ptr [count]
+		cmp eax, dword ptr [iPVPDelay]
+		//call Delay
+		//cmp eax, TRUE //increase this till it works for you
+		pop eax
+		jge InjectPvP
+		inc [count]
+		mov edx,[esi+0x00006DAC]
+		jmp dword ptr [dwPVPRet]
+ 
+		InjectPvP:
+		mov [count],0
 		mov edx,[iPVPSkillID] // Change this to the skill you want to use ~~
 		jmp dword ptr [dwPVPRet]
 	}

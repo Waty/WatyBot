@@ -337,6 +337,8 @@ private: System::Windows::Forms::Label^  lKBCoords;
 private: System::Windows::Forms::Label^  lKnockBack;
 private: System::Windows::Forms::CheckBox^  cbPVP;
 private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
+private: System::Windows::Forms::NumericUpDown^  nudPVPDelay;
+
 
 
 
@@ -543,6 +545,7 @@ private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 			this->Skill2Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->Skill3Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->Skill4Timer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->nudPVPDelay = (gcnew System::Windows::Forms::NumericUpDown());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -581,6 +584,7 @@ private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 			this->gbHotKeys->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->BeginInit();
 			this->gbPointers->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPVPDelay))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -694,7 +698,7 @@ private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 			// 
 			this->nudSkill4Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
 			this->nudSkill4Value->Location = System::Drawing::Point(91, 196);
-			this->nudSkill4Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
+			this->nudSkill4Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000, 0, 0, 0});
 			this->nudSkill4Value->Name = L"nudSkill4Value";
 			this->nudSkill4Value->Size = System::Drawing::Size(107, 20);
 			this->nudSkill4Value->TabIndex = 77;
@@ -703,7 +707,7 @@ private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 			// 
 			this->nudSkill3Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
 			this->nudSkill3Value->Location = System::Drawing::Point(91, 171);
-			this->nudSkill3Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
+			this->nudSkill3Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000, 0, 0, 0});
 			this->nudSkill3Value->Name = L"nudSkill3Value";
 			this->nudSkill3Value->Size = System::Drawing::Size(107, 20);
 			this->nudSkill3Value->TabIndex = 76;
@@ -712,7 +716,7 @@ private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 			// 
 			this->nudSkill2Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
 			this->nudSkill2Value->Location = System::Drawing::Point(91, 144);
-			this->nudSkill2Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
+			this->nudSkill2Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000, 0, 0, 0});
 			this->nudSkill2Value->Name = L"nudSkill2Value";
 			this->nudSkill2Value->Size = System::Drawing::Size(107, 20);
 			this->nudSkill2Value->TabIndex = 75;
@@ -721,7 +725,7 @@ private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 			// 
 			this->nudSkill1Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
 			this->nudSkill1Value->Location = System::Drawing::Point(91, 119);
-			this->nudSkill1Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
+			this->nudSkill1Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000, 0, 0, 0});
 			this->nudSkill1Value->Name = L"nudSkill1Value";
 			this->nudSkill1Value->Size = System::Drawing::Size(107, 20);
 			this->nudSkill1Value->TabIndex = 74;
@@ -826,7 +830,7 @@ private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 			// 
 			this->lSAWSIL->AutoSize = true;
 			this->lSAWSIL->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7));
-			this->lSAWSIL->Location = System::Drawing::Point(159, 21);
+			this->lSAWSIL->Location = System::Drawing::Point(159, 18);
 			this->lSAWSIL->Name = L"lSAWSIL";
 			this->lSAWSIL->Size = System::Drawing::Size(46, 13);
 			this->lSAWSIL->TabIndex = 63;
@@ -835,7 +839,7 @@ private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 			// lLootMS
 			// 
 			this->lLootMS->AutoSize = true;
-			this->lLootMS->Location = System::Drawing::Point(135, 47);
+			this->lLootMS->Location = System::Drawing::Point(135, 45);
 			this->lLootMS->Name = L"lLootMS";
 			this->lLootMS->Size = System::Drawing::Size(20, 13);
 			this->lLootMS->TabIndex = 58;
@@ -1083,7 +1087,7 @@ private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 			// lAttackMS
 			// 
 			this->lAttackMS->AutoSize = true;
-			this->lAttackMS->Location = System::Drawing::Point(135, 20);
+			this->lAttackMS->Location = System::Drawing::Point(135, 16);
 			this->lAttackMS->Name = L"lAttackMS";
 			this->lAttackMS->Size = System::Drawing::Size(20, 13);
 			this->lAttackMS->TabIndex = 28;
@@ -1223,11 +1227,12 @@ private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 			// cbVami
 			// 
 			this->cbVami->AutoSize = true;
+			this->cbVami->Enabled = false;
 			this->cbVami->Location = System::Drawing::Point(159, 91);
 			this->cbVami->Name = L"cbVami";
-			this->cbVami->Size = System::Drawing::Size(49, 17);
+			this->cbVami->Size = System::Drawing::Size(58, 17);
 			this->cbVami->TabIndex = 9;
-			this->cbVami->Text = L"Vami";
+			this->cbVami->Text = L"KB UA";
 			this->cbVami->UseVisualStyleBackColor = true;
 			this->cbVami->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbVami_CheckedChanged);
 			// 
@@ -1341,6 +1346,7 @@ private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 			// 
 			// gbCharHacks
 			// 
+			this->gbCharHacks->Controls->Add(this->nudPVPDelay);
 			this->gbCharHacks->Controls->Add(this->ddbPVPSkills);
 			this->gbCharHacks->Controls->Add(this->cbPVP);
 			this->gbCharHacks->Controls->Add(this->cbMercedesCombo);
@@ -1375,6 +1381,7 @@ private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 			this->ddbPVPSkills->Name = L"ddbPVPSkills";
 			this->ddbPVPSkills->Size = System::Drawing::Size(145, 21);
 			this->ddbPVPSkills->TabIndex = 16;
+			this->InfoToolTip->SetToolTip(this->ddbPVPSkills, L"Select here the skill you want to use with PvP Skill Injection");
 			// 
 			// cbPVP
 			// 
@@ -1384,6 +1391,7 @@ private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 			this->cbPVP->Size = System::Drawing::Size(111, 17);
 			this->cbPVP->TabIndex = 15;
 			this->cbPVP->Text = L"PvP Skill Injection";
+			this->InfoToolTip->SetToolTip(this->cbPVP, L"Spams a powerfull attack");
 			this->cbPVP->UseVisualStyleBackColor = true;
 			this->cbPVP->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbPVP_CheckedChanged);
 			// 
@@ -2426,6 +2434,15 @@ private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 			// 
 			this->Skill4Timer->Tick += gcnew System::EventHandler(this, &MainForm::Skill4Timer_Tick);
 			// 
+			// nudPVPDelay
+			// 
+			this->nudPVPDelay->Location = System::Drawing::Point(111, 143);
+			this->nudPVPDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
+			this->nudPVPDelay->Name = L"nudPVPDelay";
+			this->nudPVPDelay->Size = System::Drawing::Size(42, 20);
+			this->nudPVPDelay->TabIndex = 17;
+			this->InfoToolTip->SetToolTip(this->nudPVPDelay, L"Delay in miliseconds for PvP Skill Injection");
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2490,6 +2507,7 @@ private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->EndInit();
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPVPDelay))->EndInit();
 			this->ResumeLayout(false);
 
 		}

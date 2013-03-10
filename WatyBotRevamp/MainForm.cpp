@@ -370,13 +370,17 @@ void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^ 
 {
 	if(ddbPVPSkills->SelectedIndex < 0)
 	{
-		cbPVP->Checked = false;
 		if(cbPVP->Checked) ShowError("Please Select a Skill");
+		cbPVP->Checked = false;
 	}
 	else
 	{
+		//set variables
 		Hacks::iPVPSkillID = PVPSkills[ddbPVPSkills->SelectedIndex];
+		Hacks::iPVPDelay = Convert::ToInt32(nudPVPDelay->Value);
+
 		ddbPVPSkills->Enabled = !cbPVP->Checked;
+		nudPVPDelay->Enabled = !cbPVP->Checked;
 		cbNFA->Checked = false;
 		Hacks::cmPVP1.Enable(cbPVP->Checked);
 		Hacks::cmPVP2.Enable(cbPVP->Checked);
@@ -384,13 +388,15 @@ void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^ 
 }
 void Vami()
 {
-	int iKBX = (0 > getCharX()) ? 1081139200 : 3228622848;
-	int iKBY = (0 > getCharY()) ? 1081139200 : 3228622848;
-
-	int pID = ReadPointer(CharBasePtr, pIDOffset);
-	WritePointer(pID, KnockBackXOffset, iKBX);
-	WritePointer(pID, KnockBackYOffset, iKBY);
-	WritePointer(pID, KnockBackOffset, 1);
+	DWORD iKBX = (0 > getCharX()) ? 1081139200 : 3228622848;
+	DWORD iKBY = (0 > getCharY()) ? 1081139200 : 3228622848;
+	ShowInfo("Read pID Works");
+	WritePointer(ReadPointer(CharBasePtr, pIDOffset), KnockBackXOffset, iKBX);
+	ShowInfo("Write X Works");
+	WritePointer(ReadPointer(CharBasePtr, pIDOffset), KnockBackYOffset, iKBY);
+	ShowInfo("Write Y Works");
+	WritePointer(ReadPointer(CharBasePtr, pIDOffset), KnockBackOffset, 1);
+	ShowInfo("Write KB Works");
 }
 void MainForm::cbVami_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
