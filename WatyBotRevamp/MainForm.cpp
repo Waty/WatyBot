@@ -187,6 +187,10 @@ bool SendPacketFunction(String^ packet, String^&strError){
 }
 void MainForm::bwNextChannel_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
+	bool GND = cbNDAllAttacks->Checked, PVP = cbPVP->Checked;
+	if(GND) cbNDAllAttacks->Checked = false;
+	if(PVP) cbPVP->Checked = false;
+
 	srand (time(NULL));
 	int channel = rand()%14;
 	while(getChannel() != channel)
@@ -203,6 +207,9 @@ void MainForm::bwNextChannel_DoWork(System::Object^  sender, System::ComponentMo
 	}
 	Sleep(2000);
 	CCing = false;
+
+	if(GND) cbNDAllAttacks->Checked = true;
+	if(PVP) cbPVP->Checked = true;
 }
 
 void MainForm::CashShop()
