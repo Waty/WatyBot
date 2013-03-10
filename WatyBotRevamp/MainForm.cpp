@@ -187,7 +187,7 @@ bool SendPacketFunction(String^ packet, String^&strError){
 }
 void NextChannel()
 {
-	int channel = getChannel() + 1;
+	int channel = rand()%14;
 	if(channel == 14) channel = 0;
 
 	while(getChannel() != channel)
