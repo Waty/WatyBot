@@ -250,7 +250,7 @@ void getMSHWND()
 	}
 }
 #pragma endregion
-#pragma region HackCheckBoxes
+//Hack CheckBoxes
 void MainForm::cbFusionAttack_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	Hacks::cmFusionAttack.Enable(cbFusionAttack->Checked);
@@ -416,7 +416,7 @@ void MainForm::cbVami_CheckedChanged(System::Object^  sender, System::EventArgs^
 {
 	NewThread(Vami);
 }
-#pragma endregion
+
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
 void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -521,17 +521,12 @@ void MainForm::LootTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	
 	if(getItemCount() > Convert::ToInt32(nudSLWIB->Value) && !UsingAutoSkill && !UsingPot && !CCing && InGame())
 	{
-		WritePointer(ServerBasePtr, TubiOffset, 0);
-		PostMessage(MapleStoryHWND, WM_KEYDOWN, AutoBotVars::LootKey, AutoBotVars::LootlParam);
+		if((AttackCheckBox->Checked && getMobCount() < Convert::ToInt32(nudSAWSIL->Value)) || !AttackCheckBox->Checked)
+		{
+			WritePointer(ServerBasePtr, TubiOffset, 0);
+			PostMessage(MapleStoryHWND, WM_KEYDOWN, AutoBotVars::LootKey, AutoBotVars::LootlParam);
+		}
 	}
-}
-void MainForm::AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	this->AutoSkill1ComboBox->Enabled = !this->AutoSkill1CheckBox->Checked;
-	this->nudSkill1Value->Enabled = !this->AutoSkill1CheckBox->Checked;
-
-	this->Skill1Timer->Interval = Convert::ToInt32(nudSkill1Value->Value) * 1000;
-	this->Skill1Timer->Enabled = this->AutoSkill1CheckBox->Checked;
 }
 void MainForm::Skill1Timer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
@@ -608,6 +603,14 @@ void MainForm::Skill4Timer_Tick(System::Object^  sender, System::EventArgs^  e)
 		Sleep(50);
 		UsingAutoSkill = false;
 	}
+}
+void MainForm::AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	this->AutoSkill1ComboBox->Enabled = !this->AutoSkill1CheckBox->Checked;
+	this->nudSkill1Value->Enabled = !this->AutoSkill1CheckBox->Checked;
+
+	this->Skill1Timer->Interval = Convert::ToInt32(nudSkill1Value->Value) * 1000;
+	this->Skill1Timer->Enabled = this->AutoSkill1CheckBox->Checked;
 }
 void MainForm::AutoSkill2CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
