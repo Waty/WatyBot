@@ -1,26 +1,18 @@
 #include <Windows.h>
 
-extern void Main(void);
+extern void InitializeTrainer(HINSTANCE hInstance);
 
-::BOOL WINAPI DllWork ( __in ::HMODULE hModule )
+BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD fwdreason, LPVOID /*lpvReserved*/)
 {
-	Main();
-	return true;
-}
-
-::BOOL WINAPI DllMain ( __in ::HMODULE hModule, __in ::DWORD dwReason, __in __reserved ::LPVOID lpvReserved )
-{
-	::HANDLE hThread = NULL;
-
-	if ( dwReason == DLL_PROCESS_ATTACH ) 
-	{
-		if (( hThread = ::CreateThread(NULL, 0, (::LPTHREAD_START_ROUTINE)&DllWork, (::HMODULE)hModule, 0, NULL) ) == NULL ) 
-		{
-			return FALSE;
-		}
-		if ( ::CloseHandle(hThread) == FALSE )
-		{
-		}
-	}
-	return TRUE;
+    switch (fwdreason){
+        case DLL_PROCESS_ATTACH:
+            CreateThread(NULL, 0,
+                reinterpret_cast<LPTHREAD_START_ROUTINE>(InitializeTrainer),
+                reinterpret_cast<LPVOID>(hInstance), 0, 0);
+            break;
+ 
+        case DLL_PROCESS_DETACH:
+            break;
+    }
+    return TRUE;
 }
