@@ -401,16 +401,26 @@ void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^ 
 	}
 }
 void Vami()
-{
-	DWORD iKBX = (0 > getCharX()) ? 1081139200 : 3228622848;
-	DWORD iKBY = (0 > getCharY()) ? 1081139200 : 3228622848;
-	ShowInfo("Read pID Works");
-	WritePointer(ReadPointer(CharBasePtr, pIDOffset), KnockBackXOffset, iKBX);
-	ShowInfo("Write X Works");
-	WritePointer(ReadPointer(CharBasePtr, pIDOffset), KnockBackYOffset, iKBY);
-	ShowInfo("Write Y Works");
-	WritePointer(ReadPointer(CharBasePtr, pIDOffset), KnockBackOffset, 1);
-	ShowInfo("Write KB Works");
+{/*
+#define CharBasePtr 0x011E2228
+#define pIDOffset 0x29D8
+#define KnockBackOffset 0x124
+#define KnockBackXOffset (KnockBackOffset + 0xC)
+#define KnockBackYOffset (KnockBackOffset + 0x10)*/
+ 
+DWORD iKBX = (0 > getCharX()) ? 1081139200 : 3228622848;
+ShowInfo("iKbx = " + iKBX);
+DWORD iKBY = (0 > getCharY()) ? 1081139200 : 3228622848;
+ShowInfo("iKby = " + iKBY);
+ 
+unsigned long pID =ReadPointer(CharBasePtr,pIDOffset);
+ShowInfo("pID = " + pID);
+WritePointer(pID, KnockBackXOffset, iKBX);
+ShowInfo("Write X Works");
+WritePointer(pID, KnockBackYOffset, iKBY);
+ShowInfo("Write Y Works");
+WritePointer(pID, KnockBackOffset,(unsigned long) 1);
+ShowInfo("Write KB Works");
 }
 void MainForm::cbVami_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {

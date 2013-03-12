@@ -1229,7 +1229,6 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// cbVami
 			// 
 			this->cbVami->AutoSize = true;
-			this->cbVami->Enabled = false;
 			this->cbVami->Location = System::Drawing::Point(159, 91);
 			this->cbVami->Name = L"cbVami";
 			this->cbVami->Size = System::Drawing::Size(58, 17);
