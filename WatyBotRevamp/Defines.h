@@ -24,10 +24,17 @@ double ReadDoublePointer(DWORD ulBase, INT iOffset)
       __try { return (*(DOUBLE*)(*(DWORD*)ulBase + iOffset)); }
       __except (EXCEPTION_EXECUTE_HANDLER) { return 0.0; }
 }
-void WritePointer(unsigned long ulBase, int iOffset, int iValue)
+bool WritePointer(unsigned long ulBase, int iOffset, int iValue)
 {
-  __try { *(int*)(*(unsigned long*)ulBase + iOffset) = iValue;}
-  __except (EXCEPTION_EXECUTE_HANDLER) {}
+	__try
+	{
+		*(int*)(*(unsigned long*)ulBase + iOffset) = iValue;
+		return true;
+	}
+	__except (EXCEPTION_EXECUTE_HANDLER)
+	{
+		return false;
+	}
 }
 HWND FindProcessWindow()
 {

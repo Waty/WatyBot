@@ -415,8 +415,10 @@ ShowInfo("iKby = " + iKBY);
  
 unsigned long pID =ReadPointer(CharBasePtr,pIDOffset);
 ShowInfo("pID = " + pID);
-WritePointer(pID, KnockBackXOffset, iKBX);
-ShowInfo("Write X Works");
+if(WritePointer(pID, KnockBackXOffset, iKBX))
+	ShowInfo("Write X Works");
+else
+	ShowInfo("Error!");
 WritePointer(pID, KnockBackYOffset, iKBY);
 ShowInfo("Write Y Works");
 WritePointer(pID, KnockBackOffset,(unsigned long) 1);
