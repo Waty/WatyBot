@@ -13,7 +13,7 @@
 
 #define KnockBackOffset 0x124
 #define KnockBackXOffset (KnockBackOffset + 0xC)
-#define KnockBackYOffset (KnockBackOffset + 0x10)
+#define KnockBackYOffset (KnockBackOffset + 0x14)
  
 #define InfoBasePtr 0x011EB3A8
 #define MapIDOffset 0xC9C // new aob so could be wrong
