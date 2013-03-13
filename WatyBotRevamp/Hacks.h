@@ -227,7 +227,7 @@ namespace Hacks
 	CMemory cmNoSwears(NoSwearsAddy, bNoSwears, 2);
  
 	/////FMA
-	DWORD FMAAddy = 0x00708FF0;
+	DWORD FMAAddy = 0x00708FF2;
 	BYTE bFMA[] = {0xEB};
 	CMemory cmFMA(FMAAddy, bFMA, 1);
  
