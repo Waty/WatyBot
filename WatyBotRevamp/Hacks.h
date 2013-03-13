@@ -3,7 +3,7 @@ extern int getCharX();
 extern int getCharY();
 namespace Hacks
 {
-	//Updated to V88.2
+	//Updated to V89.1
 	/////Dojang Godmode
 	DWORD DojangAddy = 0x00B60DF4;
 	DWORD DojangRet = DojangAddy + 5;
@@ -227,7 +227,7 @@ namespace Hacks
 	CMemory cmNoSwears(NoSwearsAddy, bNoSwears, 2);
  
 	/////FMA
-	DWORD FMAAddy = 0x00708ff0;
+	DWORD FMAAddy = 0x00708FF0;
 	BYTE bFMA[] = {0xEB};
 	CMemory cmFMA(FMAAddy, bFMA, 1);
  
@@ -271,8 +271,8 @@ namespace Hacks
 	EndCodeCave
 	CMemory cmUA(dwUA, CaveUA, 1, true);
  
-	/////Disable Final Attack Luna NOT UPDATED
-	DWORD dwDFA = 0x00BC6E80;
+	/////Disable Final Attack Luna
+	DWORD dwDFA = 0x00BB9580;
 	BYTE bDFA[] = {0xC3};
 	CMemory cmDFA(dwDFA, bDFA, 1);
  
