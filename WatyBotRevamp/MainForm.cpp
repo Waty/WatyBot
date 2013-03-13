@@ -100,10 +100,10 @@ string SPControlFileName = WatyBotWorkingDirectory + "spcontrol.xml";
 	}
 	int getCharpID()
 	{
-		if(*(int*)WallBasePtr)	return (int) ReadPointer(CharBasePtr, pIDOffset);
-		else return 0;
+		/*if(*(int*)WallBasePtr)	return (int) ReadPointer(CharBasePtr, pIDOffset);
+		else*/ return 0;
 	}
-	int getKnockBack()
+/*	int getKnockBack()
 	{
 		if(*(int*)WallBasePtr)	return (int) ReadPointer(getCharpID(), KnockBackOffset);
 		else return 0;
@@ -117,7 +117,7 @@ string SPControlFileName = WatyBotWorkingDirectory + "spcontrol.xml";
 	{
 		if(*(int*)WallBasePtr)	return (int) ReadPointer(getCharpID(), KnockBackYOffset);
 		else return 0;
-	}
+	}*/
 #pragma endregion
 	
 bool InGame()
@@ -400,13 +400,13 @@ void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^ 
 		Hacks::cmPVP2.Enable(cbPVP->Checked);
 	}
 }
-void Vami()
+/*void Vami()
 {/*
 #define CharBasePtr 0x011E2228
 #define pIDOffset 0x29D8
 #define KnockBackOffset 0x124
 #define KnockBackXOffset (KnockBackOffset + 0xC)
-#define KnockBackYOffset (KnockBackOffset + 0x10)*/
+#define KnockBackYOffset (KnockBackOffset + 0x10)
  
 DWORD iKBX = (0 > getCharX()) ? 1081139200 : 3228622848;
 ShowInfo("iKbx = " + iKBX);
@@ -423,10 +423,10 @@ WritePointer(pID, KnockBackYOffset, iKBY);
 ShowInfo("Write Y Works");
 WritePointer(pID, KnockBackOffset,(unsigned long) 1);
 ShowInfo("Write KB Works");
-}
+}*/
 void MainForm::cbVami_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	NewThread(Vami);
+	//NewThread(Vami);
 }
 
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
@@ -757,8 +757,8 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	this->BreathLabel->Text =		"Breath: "		+ getBreathValue();
 	this->lMapID->Text =			"MapID: "		+ getMapID();
 	this->lCharacterpID->Text =		"Char pID: "	+ getCharpID();
-	this->lKnockBack->Text =		"KnockBack: "	+ getKnockBack();
-	this->lKBCoords->Text =			"KB: (" + getKnockBackX() + "," + getKnockBackY() + ")";
+/*	this->lKnockBack->Text =		"KnockBack: "	+ getKnockBack();
+	this->lKBCoords->Text =			"KB: (" + getKnockBackX() + "," + getKnockBackY() + ")";*/
 	
 	MainForm::AutoPot();
 	MainForm::AutoCC();
