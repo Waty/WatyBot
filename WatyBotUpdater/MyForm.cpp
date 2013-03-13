@@ -21,7 +21,7 @@ DWORD dwMapleSize = 0;
 void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	lpvMapleBase = reinterpret_cast<LPVOID>(0x00400000);
-	ifstream file("WatyBotUpdate\\AOBs.txt");
+	ifstream file("WatyBotUpdate\\AOBs.xml");
 	using boost::property_tree::ptree;
 	ptree pt;
 	read_xml(file, pt);
@@ -29,12 +29,12 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 
 	if(!pt.empty())
 	{
-		BOOST_FOREACH( ptree::value_type const& v, pt.get_child("aobs"))
+		BOOST_FOREACH( ptree::value_type const& v, pt.get_child("aoblist"))
 		{
 			if(v.first == "addy")
 			{
-				char* aob = v.second.get<char *>("aob");
-				String^ name = marshal_as<String^>(v.second.get<string>("name"));
+				char* aob = v.second.get<char *>("aob", NULL);
+				String^ name = marshal_as<String^>(v.second.get<string>("name", NULL));
 
 				FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
 				DWORD result = (DWORD)pf.lpvResult;
