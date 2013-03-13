@@ -74,10 +74,12 @@ namespace WatyBotUpdater {
 			this->Controls->Add(this->bUpdate);
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MyForm::MyForm_FormClosing);
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
 	private: System::Void bUpdate_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void MyForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
 	};
 }
