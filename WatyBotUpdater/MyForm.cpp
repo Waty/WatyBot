@@ -1,10 +1,20 @@
 #include "MyForm.h"
 #include "PatternFind.h"
+#include <boost/foreach.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/xml_parser.hpp>
+#include <msclr/marshal_cppstd.h>
+#include <fstream>
+
 using namespace WatyBotUpdater;
 using namespace System::IO;
+using namespace msclr::interop;
+using namespace std;
+
 #define ShowInfo(Message)		MessageBox::Show(Message, "Information", MessageBoxButtons::OK, MessageBoxIcon::Information)
-DWORD test;
-DWORD CCAddy = 0x00567AC0;
+
+
+
 
 PFSEARCH pf;
 void *lpvMapleBase = NULL;
@@ -12,27 +22,37 @@ DWORD dwMapleSize = 0;
 void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	lpvMapleBase = reinterpret_cast<LPVOID>(0x00400000);
-	if(!Directory::Exists("WatyBotUpdater"))	Directory::CreateDirectory("WatyBotUpdater");
-	if(File::Exists("UpdatedAddys"))			File::Delete("UpdatedAddys");
+	ifstream file("AOBs");
+	using boost::property_tree::ptree;
+	ptree pt;
+	read_xml(file, pt);
+	StreamWriter^ sw = File::CreateText("Addys.h");
 
-	StreamWriter^ sw = File::CreateText("UpdatedAddys.txt");
-	if(!FindPattern("6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 56 57 A1 ? ? ? ? 33 C4 50 8D 44 24 ? 64 A3 ? ? ? ? 8B 0D ? ? ? ? 85 C9", &pf, lpvMapleBase, dwMapleSize))
+	if(!pt.empty())
 	{
-		test = (DWORD)pf.lpvResult;
-		ShowInfo("CCAddy = " + test.ToString("X") + " Real Addy = " + CCAddy + "0x00567AC0");
+		BOOST_FOREACH( ptree::value_type const& v, pt.get_child("aobs"))
+		{
+			if(v.first == "addy")
+			{
+				string aob = v.second.get<string>("aob");
+				String^ name = marshal_as<String^>(v.second.get<string>("name"));
 
-		try
-		{
-			sw->WriteLine("CCAddy = " + test.ToString("X"));
+				FindPattern((char*)aob.c_str(), &pf, lpvMapleBase, dwMapleSize);
+				DWORD result = (DWORD)pf.lpvResult;
+			
+
+				//Write the found addy to the header file
+				try
+				{
+					sw->WriteLine("#define " + name + " " + result.ToString("X"));
+				}
+				finally
+				{
+					if (sw)	delete (IDisposable^)(sw);
+				}
+			}
 		}
-		finally
-		{
-			if ( sw )
-				delete (IDisposable^)(sw);
-		}
-		
 	}
-	else ShowInfo("Error");
 }
 
 void InitializeTrainer(HINSTANCE hInstance)
