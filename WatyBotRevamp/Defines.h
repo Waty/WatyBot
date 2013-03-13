@@ -1,5 +1,6 @@
 #pragma once
 #include <Windows.h>
+#include "Pointers.h"
 #include <string>
 #define SendKey(KeyPress) PostMessage(MapleStoryHWND, WM_KEYDOWN, KeyPress, (MapVirtualKey(KeyPress, 0) << 16) + 1);
 #define NewThread(Function) CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)&Function, NULL, NULL, NULL)
@@ -17,8 +18,12 @@ PFN_CField_SendTransferChannelRequest CField_SendTransferChannelRequest = reinte
 
 unsigned long ReadPointer(unsigned long ulBase, int iOffset)
 {
-	__try { return *(unsigned long*)(*(unsigned long*)ulBase + iOffset); }
-	__except (EXCEPTION_EXECUTE_HANDLER) { return 0; }
+	if(*(int*)WallBasePtr)
+	{
+		__try { return *(unsigned long*)(*(unsigned long*)ulBase + iOffset); }
+		__except (EXCEPTION_EXECUTE_HANDLER) { return 0; }
+	}
+	else return 0;
 }
 double ReadDoublePointer(DWORD ulBase, INT iOffset)
 {

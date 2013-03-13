@@ -27,76 +27,57 @@ string SPControlFileName = WatyBotWorkingDirectory + "spcontrol.xml";
 #pragma region Pointers Reading
 	int getMobCount()
 	{
-		if(*(int*)WallBasePtr)	return (int) ReadPointer(MobBasePtr, MobCountOffset);
-		else return 0;
+		return (int) ReadPointer(MobBasePtr, MobCountOffset);
 	}
 	int getItemCount()
 	{
-		if(*(int*)WallBasePtr)	return (int) ReadPointer(ItemBasePtr, ItemCountOffset);
-		else return 0;
+		return (int) ReadPointer(ItemBasePtr, ItemCountOffset);
 	}
 	int getPeopleCount()
 	{
-		if(*(int*)WallBasePtr)	return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);
-		else return 0;
+		return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);
 	}
 	int getCharX()
 	{
-		if(*(int*)WallBasePtr)	return (int) ReadPointer(CharBasePtr,XOffset);
-		else return 0;
+		return (int) ReadPointer(CharBasePtr,XOffset);
 	}
 	int getCharY()
 	{
-		if(*(int*)WallBasePtr)	return (int) ReadPointer(CharBasePtr,XOffset + 4);
-		else return 0;
+		return (int) ReadPointer(CharBasePtr,XOffset + 4);
 	}
 	int getCharHP()
 	{
-		if(*(int*)WallBasePtr)
-		{
-			WritePointer(SettingsBasePtr, HPAlertOffset, 20);
-			return (int) ReadPointer(StatsBasePtr, HPOffset);
-		}
-		else return 0;
+		WritePointer(SettingsBasePtr, HPAlertOffset, 20);
+		return (int) ReadPointer(StatsBasePtr, HPOffset);
 	}
 	int getCharMP()
 	{
-		if(*(int*)WallBasePtr)
-		{
-			WritePointer(SettingsBasePtr, MPAlertOffset, 20);
-			return (int) ReadPointer(StatsBasePtr, MPOffset);
-		}
-		else return 0;
+		WritePointer(SettingsBasePtr, MPAlertOffset, 20);
+		return (int) ReadPointer(StatsBasePtr, MPOffset);
 	}
 	double getCharEXP()
 	{
-		if(*(int*)WallBasePtr)	return ReadDoublePointer(StatsBasePtr, EXPOffset);
-		else return 0;
+		return ReadDoublePointer(StatsBasePtr, EXPOffset);
 	}
 	int getMapID()
 	{
-		if(*(int*)WallBasePtr)	return (int) ReadPointer(InfoBasePtr, MapIDOffset);
-		else return 0;
+		return (int) ReadPointer(InfoBasePtr, MapIDOffset);
 	}
 	int getAttackCount()
 	{
-		if(*(int*)WallBasePtr)	return (int) ReadPointer(CharBasePtr, AttackCountOffset);
-		else return 0;
+		return (int) ReadPointer(CharBasePtr, AttackCountOffset);
 	}
 	int getTubiValue()
 	{
-		if(*(int*)WallBasePtr)	return (int) ReadPointer(ServerBasePtr, TubiOffset);
-		else return 0;
+		return (int) ReadPointer(ServerBasePtr, TubiOffset);
 	}
 	int getBreathValue()
 	{
-		if(*(int*)WallBasePtr)	return (int) ReadPointer(CharBasePtr, BreathOffset);
-		else return 0;
+		return (int) ReadPointer(CharBasePtr, BreathOffset);
 	}
 	int getChannel()
 	{
-		if(*(int*)WallBasePtr)	return (int) ReadPointer(ServerBasePtr, ChannelOffset);
-		else return 0;
+		return (int) ReadPointer(ServerBasePtr, ChannelOffset);
 	}
 	int getCharpID()
 	{
