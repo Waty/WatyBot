@@ -13,20 +13,19 @@ using namespace std;
 
 #define ShowInfo(Message)		MessageBox::Show(Message, "Information", MessageBoxButtons::OK, MessageBoxIcon::Information)
 
-
-
-
 PFSEARCH pf;
 void *lpvMapleBase = NULL;
 DWORD dwMapleSize = 0;
+
+
 void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	lpvMapleBase = reinterpret_cast<LPVOID>(0x00400000);
-	ifstream file("AOBs");
+	ifstream file("WatyBotUpdate\\AOBs.txt");
 	using boost::property_tree::ptree;
 	ptree pt;
 	read_xml(file, pt);
-	StreamWriter^ sw = File::CreateText("Addys.h");
+	StreamWriter^ sw = File::CreateText("WatyBotUpdate\\Addys.h");
 
 	if(!pt.empty())
 	{
@@ -34,10 +33,10 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 		{
 			if(v.first == "addy")
 			{
-				string aob = v.second.get<string>("aob");
+				char* aob = v.second.get<char *>("aob");
 				String^ name = marshal_as<String^>(v.second.get<string>("name"));
 
-				FindPattern((char*)aob.c_str(), &pf, lpvMapleBase, dwMapleSize);
+				FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
 				DWORD result = (DWORD)pf.lpvResult;
 			
 
