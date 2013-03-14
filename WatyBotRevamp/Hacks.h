@@ -24,9 +24,9 @@ namespace Hacks
 	CMemory cmDojangGodmode(DojangAddy, CaveDojang, 0, true);
  
 	/////Auto Aggro
-	DWORD dwAggroAddy = 0x00C2FA3F;
+	DWORD dwAggroAddy = 0x00C3755F;
 	DWORD dwAggroRet = dwAggroAddy + 5;
-	DWORD dwAggroCall = 0x00C26470;
+	DWORD dwAggroCall = 0x00C2E020;
 	CodeCave(Aggro)
 	{
 		call dwAggroCall
