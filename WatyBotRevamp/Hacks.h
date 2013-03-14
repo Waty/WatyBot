@@ -189,8 +189,8 @@ namespace Hacks
 	BYTE b50SecGM2[] = {0xD4, 0x36};
 	CMemory cm50SecGM(dw50SecGM1, b50SecGM1, 1, dw50SecGM2, b50SecGM2, 2);
  
-	/////Logo Skipper *NOT UPDATED STILL V88.2 or???
-	DWORD dwLogoSkipper = 0x0069F2F0;
+	/////Logo Skipper
+	DWORD dwLogoSkipper = 0x0069FAA0;
 	BYTE bLogoSkipper[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0xE9, 0xA5, 0xE2, 0xFF, 0xFF, 0x90, 0x90, 0x90, 0x90, 0x90};
 	CMemory cmLogoSkipper(dwLogoSkipper, bLogoSkipper, sizeof(bLogoSkipper));
  
@@ -256,9 +256,9 @@ namespace Hacks
 		mov [eax],edi //orig code
  
 		push ebx
-		mov ebx, dword ptr [0x011D8228] // Char Base Pointer
+		mov ebx, dword ptr [CharBasePtr] // Char Base Pointer
 		mov ebx,[ebx]
-		cmp dword ptr [ebx+0x7034], 0x5A // Attack Count offset
+		cmp dword ptr [ebx+AttackCountOffset], 0x5A // Attack Count offset
 		jl UAexit
 		add dword ptr [eax],0x08
  
@@ -272,7 +272,7 @@ namespace Hacks
 	CMemory cmUA(dwUA, CaveUA, 1, true);
  
 	/////Disable Final Attack Luna
-	DWORD dwDFA = 0x00BB9580;
+	DWORD dwDFA = 0x00BBF4DD;
 	BYTE bDFA[] = {0xC3};
 	CMemory cmDFA(dwDFA, bDFA, 1);
  
