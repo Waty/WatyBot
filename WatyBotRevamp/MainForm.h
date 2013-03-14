@@ -2462,7 +2462,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"WatyBot - V2.5 - CCPLZ! - EMS 89.1";
+			this->Text = L"WatyBot - V2.5.1 - CCPLZ! - EMS 89.1";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
