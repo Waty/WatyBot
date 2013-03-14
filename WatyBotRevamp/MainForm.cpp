@@ -511,14 +511,10 @@ void MainForm::AttackTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 }
 void MainForm::LootTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
-	
 	if(getItemCount() > Convert::ToInt32(nudSLWIB->Value) && !UsingAutoSkill && !UsingPot && !CCing && InGame())
 	{
-		if((AttackCheckBox->Checked && getMobCount() < Convert::ToInt32(nudSAWSIL->Value)) || !AttackCheckBox->Checked)
-		{
-			WritePointer(ServerBasePtr, TubiOffset, 0);
-			PostMessage(MapleStoryHWND, WM_KEYDOWN, AutoBotVars::LootKey, AutoBotVars::LootlParam);
-		}
+		WritePointer(ServerBasePtr, TubiOffset, 0);
+		PostMessage(MapleStoryHWND, WM_KEYDOWN, AutoBotVars::LootKey, AutoBotVars::LootlParam);		
 	}
 }
 void MainForm::Skill1Timer_Tick(System::Object^  sender, System::EventArgs^  e)

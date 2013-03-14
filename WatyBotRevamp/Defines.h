@@ -96,6 +96,7 @@ namespace AutoBotVars
 {
 	int AttackKey;
 	LPARAM AttacklParam;
+	bool Attacking;
 
 	int LootKey;
 	LPARAM LootlParam;
