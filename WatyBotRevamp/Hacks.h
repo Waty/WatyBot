@@ -272,9 +272,9 @@ namespace Hacks
 	CMemory cmUA(dwUA, CaveUA, 1, true);
  
 	/////Disable Final Attack Luna
-	DWORD dwDFA = 0x00BBF4DD;
-	BYTE bDFA[] = {0xC3};
-	CMemory cmDFA(dwDFA, bDFA, 1);
+	DWORD dwDFA = 0x007D42A2;
+	BYTE bDFA[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
+	CMemory cmDFA(dwDFA, bDFA, 7);
  
 	/////ND Mining
 	DWORD dwNDMining1 = 0x00B6D282;
