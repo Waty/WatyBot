@@ -1701,7 +1701,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			this->PacketSenderTab->Padding = System::Windows::Forms::Padding(3);
 			this->PacketSenderTab->Size = System::Drawing::Size(326, 375);
 			this->PacketSenderTab->TabIndex = 3;
-			this->PacketSenderTab->Text = L"Packet Sender";
+			this->PacketSenderTab->Text = L"Packets";
 			this->PacketSenderTab->UseVisualStyleBackColor = true;
 			// 
 			// SavePacketsButton
@@ -1945,7 +1945,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			this->SPControlTabPage->Name = L"SPControlTabPage";
 			this->SPControlTabPage->Size = System::Drawing::Size(326, 375);
 			this->SPControlTabPage->TabIndex = 4;
-			this->SPControlTabPage->Text = L"Spawn Control";
+			this->SPControlTabPage->Text = L"SPControl";
 			this->SPControlTabPage->UseVisualStyleBackColor = true;
 			// 
 			// SPControlGroupBox
