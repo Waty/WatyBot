@@ -179,12 +179,15 @@ void MainForm::CCSwitch()
 		break;
 		
 	case DC:
-		CCTimedCheckBox->Checked = false;
-		CCPeopleCheckBox->Checked = false;
-		CCAttacksCheckBox->Checked = false;
-		SendPacketFunction(marshal_as<String^>(Packets::ChangeCharacter), strError);
-		ShowInfo("WatyBot DC'd you");
-		break;
+		if(InGame())
+		{
+			CCTimedCheckBox->Checked = false;
+			CCPeopleCheckBox->Checked = false;
+			CCAttacksCheckBox->Checked = false;
+			SendPacketFunction(marshal_as<String^>(Packets::ChangeCharacter), strError);
+			ShowInfo("WatyBot DC'd you");
+			break;
+		}
 	}
 }
 void MainForm::bwNextChannel_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
