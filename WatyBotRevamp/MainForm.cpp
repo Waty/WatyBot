@@ -180,8 +180,10 @@ void MainForm::CCSwitch()
 		
 	case DC:
 		CCTimedCheckBox->Checked = false;
+		CCPeopleCheckBox->Checked = false;
+		CCAttacksCheckBox->Checked = false;
 		SendPacketFunction(marshal_as<String^>(Packets::ChangeCharacter), strError);
-		ShowInfo("DC'd because someone entered the map");
+		ShowInfo("WatyBot DC'd you");
 		break;
 	}
 }
@@ -218,9 +220,13 @@ void MainForm::bwNextChannel_DoWork(System::Object^  sender, System::ComponentMo
 	if(GND) cbNDAllAttacks->Checked = true;
 	if(PVP)
 	{
-		AttackCheckBox->Checked = true;
-		Sleep(1000);
-		AttackCheckBox->Checked = false;
+		for(int i; i <200; i++)
+		{
+			SendKey(KeyCodes[AttackComboBox->SelectedIndex]);
+			Sleep(10);
+		}
+
+		Sleep(100);
 		cbPVP->Checked = true;
 	}
 }
@@ -766,11 +772,11 @@ void MainForm::AutoPot()
 }
 void MainForm::AutoCC()
 {
-	if(CCPeopleCheckBox->Checked)
+	if(CCPeopleCheckBox->Checked && (getPeopleCount() >= iCCPeople))
 	{
 		MainForm::CCSwitch();
 	}
-	if(CCAttacksCheckBox->Checked)
+	if(CCAttacksCheckBox->Checked && (getAttackCount() >= iCCAttacks))
 	{
 		MainForm::CCSwitch();
 	}
