@@ -191,7 +191,7 @@ void MainForm::bwNextChannel_DoWork(System::Object^  sender, System::ComponentMo
 	if(GND)
 	{
 		cbNDAllAttacks->Checked = false;
-		Sleep(5000);
+		Sleep(5500);
 	}
 	if(PVP)
 	{
@@ -213,7 +213,6 @@ void MainForm::bwNextChannel_DoWork(System::Object^  sender, System::ComponentMo
 		catch (...){}
 		Sleep(1000);
 	}
-	if(GND || PVP)Sleep(5000);
 	CCing = false;
 
 	if(GND) cbNDAllAttacks->Checked = true;
