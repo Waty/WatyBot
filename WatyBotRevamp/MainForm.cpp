@@ -109,7 +109,6 @@ bool InGame()
 	else
 		return false;
 }
-#pragma region Packetsending stuff
 bool isGoodPacket(String^ strPacket, String^&strError)
 {
     if(strPacket == String::Empty)
@@ -166,6 +165,26 @@ bool SendPacketFunction(String^ packet, String^&strError){
 	finally {delete [] lpBytes;}
     return true;
 }
+void MainForm::CCSwitch()
+{
+	String^ strError = String::Empty;
+	switch(PeopleComboBox->SelectedIndex)
+	{
+	case CC:
+		if(!bwNextChannel->IsBusy) bwNextChannel->RunWorkerAsync();
+		break;
+		
+	case CS:
+		MainForm::CashShop();
+		break;
+		
+	case DC:
+		CCTimedCheckBox->Checked = false;
+		SendPacketFunction(marshal_as<String^>(Packets::ChangeCharacter), strError);
+		ShowInfo("DC'd because someone entered the map");
+		break;
+	}
+}
 void MainForm::bwNextChannel_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
 	bool GND = cbNDAllAttacks->Checked, PVP = cbPVP->Checked;
@@ -198,9 +217,14 @@ void MainForm::bwNextChannel_DoWork(System::Object^  sender, System::ComponentMo
 	CCing = false;
 
 	if(GND) cbNDAllAttacks->Checked = true;
-	if(PVP) cbPVP->Checked = true;
+	if(PVP)
+	{
+		AttackCheckBox->Checked = true;
+		Sleep(1000);
+		AttackCheckBox->Checked = false;
+		cbPVP->Checked = true;
+	}
 }
-
 void MainForm::CashShop()
 {
 	CCing = true;
@@ -219,7 +243,6 @@ void MainForm::CashShop()
 	CCing = false;
 }
 
-#pragma endregion
 
 #pragma region Threads
 void getMSHWND()
@@ -661,24 +684,7 @@ void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 }
 void MainForm::CCTimedTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
-	String^ strError = String::Empty;
-	switch(TimedComboBox->SelectedIndex)
-	{
-	case CC:
-		if(!bwNextChannel->IsBusy)
-			bwNextChannel->RunWorkerAsync();
-		break;
-
-	case CS:
-		MainForm::CashShop();
-		break;
-
-	case DC:
-		CCTimedCheckBox->Checked = false;
-		while(!SendPacketFunction(marshal_as<String^>(Packets::ChangeCharacter), strError));
-		ShowInfo("DC'd because the time is over");
-		break;
-	}	
+	MainForm::CCSwitch();
 }
 void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -763,51 +769,11 @@ void MainForm::AutoCC()
 {
 	if(CCPeopleCheckBox->Checked)
 	{
-		if(getPeopleCount() >= iCCPeople)
-		{
-			String^ strError = String::Empty;
-			switch(PeopleComboBox->SelectedIndex)
-			{
-			case CC:
-				if(!bwNextChannel->IsBusy)
-					bwNextChannel->RunWorkerAsync();
-				break;
-
-			case CS:
-				MainForm::CashShop();
-				break;
-
-			case DC:
-				CCTimedCheckBox->Checked = false;
-				while(!SendPacketFunction(marshal_as<String^>(Packets::ChangeCharacter), strError));
-				ShowInfo("DC'd because someone entered the map");
-				break;
-			}
-		}
+		MainForm::CCSwitch();
 	}
 	if(CCAttacksCheckBox->Checked)
 	{
-		if(getAttackCount() >= iCCAttacks)
-		{
-			String^ strError = String::Empty;
-			switch(AttacksComboBox->SelectedIndex)
-			{
-			case CC:
-				if(!bwNextChannel->IsBusy)
-					bwNextChannel->RunWorkerAsync();
-				break;
-
-			case CS:
-				MainForm::CashShop();
-				break;
-
-			case DC:
-				CCTimedCheckBox->Checked = false;
-				while(!SendPacketFunction(marshal_as<String^>(Packets::ChangeCharacter), strError));
-				ShowInfo("DC'd because you attacked " + iCCAttacks + " times");
-				break;
-			}
-		}
+		MainForm::CCSwitch();
 	}
 }
 void MainForm::RedrawStatBars()
@@ -839,8 +805,7 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 	WritePacketXML(PacketFileName);
 	SaveSettings();
 
-	::DialogResult dlResult = MessageBox::Show("Close MapleStory too?", "Terminate Maple?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question);
-	switch(dlResult)
+	switch(MessageBox::Show("Close MapleStory too?", "Terminate Maple?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
 	{
 		case ::DialogResult::Yes:
 			TerminateProcess(GetCurrentProcess(), 0);
@@ -1150,7 +1115,7 @@ void MainForm::LoadSettings()
 		//Hacks Tab
 		Sleep(Convert::ToInt32(nudLoadDelay->Value));
 		this->cbPinTyper->Checked = pt.get<bool>("PinTyper", false);
-		this->cbPinTyper->Checked = pt.get<bool>("LogoSkipper", false);
+		this->cbLogoSkipper->Checked = pt.get<bool>("LogoSkipper", false);
 	}catch(...){};
 }
 void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e)

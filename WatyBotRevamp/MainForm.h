@@ -2529,6 +2529,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 	private: System::Void AutoCC();
 	private: System::Void CashShop();
 	private: System::Void HotKeys();
+	private: System::Void CCSwitch();
 #pragma endregion
 #pragma region CheckBoxes
 private: System::Void StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e);
