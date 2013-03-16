@@ -28,28 +28,22 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 	read_ini(file, pt);
 	StreamWriter^ sw = File::CreateText(marshal_as<String^>(outputfile));
 
-	if(!pt.empty())
+	BOOST_FOREACH( ptree::value_type const& v, pt)
 	{
-		BOOST_FOREACH( ptree::value_type const& v, pt)
-		{
-			ShowInfo(marshal_as<String^>(v.first) + marshal_as<String^>(v.second.data())); 
-			
-			char* aob = (char*) v.second.data().c_str();
-			String^ name = marshal_as<String^>(v.first);
-			FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
-			DWORD result = (DWORD)pf.lpvResult;
+		ShowInfo(marshal_as<String^>(v.first) + marshal_as<String^>(v.second.data())); 
+		
+		char* aob = (char*) v.second.data().c_str();
+		String^ name = marshal_as<String^>(v.first);
+		FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
+		DWORD result = (DWORD)pf.lpvResult;
+		ShowInfo(result.ToString("X"));
 
-			//Write the found addy to the header file
-			try
-			{
-				sw->WriteLine("#define " + name + " 0x" + result.ToString("X"));
-			}
-			finally
-			{
-				if(sw) delete (IDisposable^)(sw);
-			}
-		}
+		//Write the found addy to the header file
+		if(result.ToString("X") != "0")
+			sw->WriteLine("#define " + name + " 0x" + result.ToString("X"));
+		else sw->WriteLine("#define " + name + " ERROR");
 	}
+	if(sw) delete (IDisposable^)(sw);
 }
 
 void InitializeTrainer(HINSTANCE hInstance)
