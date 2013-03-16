@@ -2,7 +2,7 @@
 #include "PatternFind.h"
 #include <boost/foreach.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/xml_parser.hpp>
+#include <boost/property_tree/ini_parser.hpp>
 #include <msclr/marshal_cppstd.h>
 #include <fstream>
 
@@ -16,39 +16,37 @@ using namespace std;
 PFSEARCH pf;
 void *lpvMapleBase = NULL;
 DWORD dwMapleSize = 0;
-
+string AOBs_ini = "WatyBotUpdater\\AOBs.ini";
+string outputfile = "WatyBotUpdater\\Addys.h";
 
 void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	lpvMapleBase = reinterpret_cast<LPVOID>(0x00400000);
-	ifstream file("WatyBotUpdate\\AOBs.xml");
+	ifstream file(AOBs_ini);
 	using boost::property_tree::ptree;
 	ptree pt;
-	read_xml(file, pt);
-	StreamWriter^ sw = File::CreateText("WatyBotUpdate\\Addys.h");
+	read_ini(file, pt);
+	StreamWriter^ sw = File::CreateText(marshal_as<String^>(outputfile));
 
 	if(!pt.empty())
 	{
-		BOOST_FOREACH( ptree::value_type const& v, pt.get_child("aoblist"))
+		BOOST_FOREACH( ptree::value_type const& v, pt)
 		{
-			if(v.first == "addy")
-			{
-				char* aob = v.second.get<char *>("aob", NULL);
-				String^ name = marshal_as<String^>(v.second.get<string>("name", NULL));
-
-				FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
-				DWORD result = (DWORD)pf.lpvResult;
+			ShowInfo(marshal_as<String^>(v.first) + marshal_as<String^>(v.second.data())); 
 			
+			char* aob = (char*) v.second.data().c_str();
+			String^ name = marshal_as<String^>(v.first);
+			FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
+			DWORD result = (DWORD)pf.lpvResult;
 
-				//Write the found addy to the header file
-				try
-				{
-					sw->WriteLine("#define " + name + " " + result.ToString("X"));
-				}
-				finally
-				{
-					if (sw)	delete (IDisposable^)(sw);
-				}
+			//Write the found addy to the header file
+			try
+			{
+				sw->WriteLine("#define " + name + " 0x" + result.ToString("X"));
+			}
+			finally
+			{
+				if(sw) delete (IDisposable^)(sw);
 			}
 		}
 	}
