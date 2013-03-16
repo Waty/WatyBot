@@ -59,6 +59,9 @@
     <ClInclude Include="SPControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="E:\Games\Europe MapleStory\WatyBotUpdater\Addys.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
