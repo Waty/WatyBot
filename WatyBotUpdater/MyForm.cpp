@@ -29,14 +29,11 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 	StreamWriter^ sw = File::CreateText(marshal_as<String^>(outputfile));
 
 	BOOST_FOREACH( ptree::value_type const& v, pt)
-	{
-		ShowInfo(marshal_as<String^>(v.first) + marshal_as<String^>(v.second.data())); 
-		
+	{		
 		char* aob = (char*) v.second.data().c_str();
 		String^ name = marshal_as<String^>(v.first);
 		FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
 		DWORD result = (DWORD)pf.lpvResult;
-		ShowInfo(result.ToString("X"));
 
 		//Write the found addy to the header file
 		if(result.ToString("X") != "0")
@@ -44,6 +41,7 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 		else sw->WriteLine("#define " + name + " ERROR");
 	}
 	if(sw) delete (IDisposable^)(sw);
+	ShowInfo("Finished Updating!");
 }
 
 void InitializeTrainer(HINSTANCE hInstance)
