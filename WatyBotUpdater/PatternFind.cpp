@@ -32,7 +32,7 @@ DWORD PFAPI GetPatternCB(char *szPattern) {
 	for (DWORD i=0; i<strlen(szPattern); i++) {
 		char c = toupper(szPattern[i]);
 		if (c != ' ') {
-			if (c == '\?\?') {
+			if (c == '?') {
 				if (!first_nibble) cb++;
 				else return 0;
 			} else {
