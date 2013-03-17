@@ -68,4 +68,9 @@
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="E:\Games\Europe MapleStory\WatyBotUpdater\AOBs.ini">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
