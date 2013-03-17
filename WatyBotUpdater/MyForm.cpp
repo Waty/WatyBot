@@ -4,7 +4,6 @@
 #include <boost/property_tree/ini_parser.hpp>
 #include <msclr/marshal_cppstd.h>
 #include <fstream>
-
 using namespace WatyBotUpdater;
 using namespace System::IO;
 using namespace msclr::interop;
@@ -26,7 +25,8 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 	ptree pt;
 	read_ini(file, pt);
 	StreamWriter^ sw = File::CreateText(marshal_as<String^>(outputfile));
-
+	
+	lvAddys->Items->Clear();
 	for(ptree::value_type const& v : pt)
 	{		
 		char* aob = (char*) v.second.data().c_str();
@@ -34,10 +34,13 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 		FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
 		DWORD result = (DWORD)pf.lpvResult;
 
+		//Add the result to the ListView
+		auto lvItem = gcnew ListViewItem(name);
+		lvItem->SubItems->Add(result.ToString("X") == "0" ? "Error" : result.ToString("X"));
+		lvAddys->Items->Add(lvItem);
+
 		//Write the found addy to the header file
-		if(result.ToString("X") != "0")
-			sw->WriteLine("#define " + name + " 0x" + result.ToString("X"));
-		else sw->WriteLine("#define " + name + " 0xError");
+		sw->WriteLine("#define " + name + (result != 0 ? " 0x" + result.ToString("X") : " 0xError"));
 	}
 	if(sw) delete (IDisposable^)(sw);
 	ShowInfo("Finished Updating!");

@@ -36,6 +36,9 @@ namespace WatyBotUpdater {
 			}
 		}
 	private: System::Windows::Forms::Button^  bUpdate;
+	private: System::Windows::Forms::ListView^  lvAddys;
+	private: System::Windows::Forms::ColumnHeader^  chName;
+	private: System::Windows::Forms::ColumnHeader^  chAddy;
 	protected: 
 
 	protected: 
@@ -54,26 +57,60 @@ namespace WatyBotUpdater {
 		void InitializeComponent(void)
 		{
 			this->bUpdate = (gcnew System::Windows::Forms::Button());
+			this->lvAddys = (gcnew System::Windows::Forms::ListView());
+			this->chName = (gcnew System::Windows::Forms::ColumnHeader());
+			this->chAddy = (gcnew System::Windows::Forms::ColumnHeader());
 			this->SuspendLayout();
 			// 
 			// bUpdate
 			// 
-			this->bUpdate->Location = System::Drawing::Point(0, 0);
+			this->bUpdate->DialogResult = System::Windows::Forms::DialogResult::Cancel;
+			this->bUpdate->Location = System::Drawing::Point(2, 271);
 			this->bUpdate->Name = L"bUpdate";
-			this->bUpdate->Size = System::Drawing::Size(124, 23);
+			this->bUpdate->Size = System::Drawing::Size(234, 23);
 			this->bUpdate->TabIndex = 0;
 			this->bUpdate->Text = L"Update";
 			this->bUpdate->UseVisualStyleBackColor = true;
 			this->bUpdate->Click += gcnew System::EventHandler(this, &MyForm::bUpdate_Click);
 			// 
+			// lvAddys
+			// 
+			this->lvAddys->AllowColumnReorder = true;
+			this->lvAddys->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(2) {this->chName, this->chAddy});
+			this->lvAddys->FullRowSelect = true;
+			this->lvAddys->GridLines = true;
+			this->lvAddys->HeaderStyle = System::Windows::Forms::ColumnHeaderStyle::Nonclickable;
+			this->lvAddys->Location = System::Drawing::Point(2, 2);
+			this->lvAddys->MultiSelect = false;
+			this->lvAddys->Name = L"lvAddys";
+			this->lvAddys->Size = System::Drawing::Size(234, 267);
+			this->lvAddys->TabIndex = 1;
+			this->lvAddys->UseCompatibleStateImageBehavior = false;
+			this->lvAddys->View = System::Windows::Forms::View::Details;
+			// 
+			// chName
+			// 
+			this->chName->Text = L"Name";
+			this->chName->Width = 111;
+			// 
+			// chAddy
+			// 
+			this->chAddy->Text = L"Address";
+			this->chAddy->Width = 99;
+			// 
 			// MyForm
 			// 
+			this->AcceptButton = this->bUpdate;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(124, 23);
+			this->ClientSize = System::Drawing::Size(238, 295);
+			this->Controls->Add(this->lvAddys);
 			this->Controls->Add(this->bUpdate);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			this->MaximizeBox = false;
 			this->Name = L"MyForm";
-			this->Text = L"MyForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
+			this->Text = L"WatyBotUpdater";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MyForm::MyForm_FormClosing);
 			this->ResumeLayout(false);
 
