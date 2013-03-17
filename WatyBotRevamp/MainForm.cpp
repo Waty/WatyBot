@@ -1054,16 +1054,21 @@ void MainForm::SaveSettings()
 	pt.add("AutoCCAttacks", Convert::ToInt32(nudCCAttacks->Value));
 	pt.add("CC_CS_Attacks", this->AttacksComboBox->SelectedIndex);
 
-	//Info Tab
+	//Hot Keys
 	pt.add("AttackHotKey", this->ddbHotKeyAttack->SelectedIndex);
 	pt.add("LootHotKey", this->ddbHotKeyLoot->SelectedIndex);
 	pt.add("FMAHotKey", this->ddbHotKeyFMA->SelectedIndex);
 	pt.add("CCPeopleHotKey", this->ddbHotKeyCCPeople->SelectedIndex);
+	pt.add("SendPacketHotKey", this->ddbHotKeySendPacket->SelectedIndex);
+
+	pt.add("LoadSettingsDelay", Convert::ToInt32(this->nudLoadDelay->Value));
 
 	//Hacks Tab
+	pt.add("PvPDelay", Convert::ToInt32(this->nudPVPDelay->Value));
+	pt.add("PvPSkill", this->ddbPVPSkills->SelectedIndex);
+
 	pt.add("PinTyper", this->cbPinTyper->Checked);
 	pt.add("LogoSkipper", this->cbLogoSkipper->Checked);
-	pt.add("LoadSettingsDelay", Convert::ToInt32(this->nudLoadDelay->Value));
 
 	write_ini(file, pt);
 }
@@ -1112,15 +1117,19 @@ void MainForm::LoadSettings()
 		this->nudCCAttacks->Text = pt.get<int>("AutoCCAttacks", 0).ToString();
 		this->AttacksComboBox->SelectedIndex = pt.get<int>("CC_CS_Attacks");
 
-		//Info Tab
+		//Hot Keys
 		this->ddbHotKeyAttack->SelectedIndex = pt.get<int>("AttackHotKey");
 		this->ddbHotKeyLoot->SelectedIndex = pt.get<int>("LootHotKey");
 		this->ddbHotKeyFMA->SelectedIndex = pt.get<int>("FMAHotKey");
 		this->ddbHotKeyCCPeople->SelectedIndex = pt.get<int>("CCPeopleHotKey");
-		this->nudLoadDelay->Text = pt.get<int>("LoadSettingsDelay", 1000).ToString();
+		this->ddbHotKeySendPacket->SelectedIndex = pt.get<int>("SendPacketHotKey");
 
+		this->nudLoadDelay->Text = pt.get<int>("LoadSettingsDelay", 1000).ToString();
 		
 		//Hacks Tab
+		this->nudPVPDelay->Text = pt.get<int>("PvPDelay").ToString();
+		this->ddbPVPSkills->SelectedIndex = pt.get<int>("PvPSkill");
+
 		Sleep(Convert::ToInt32(nudLoadDelay->Value));
 		this->cbPinTyper->Checked = pt.get<bool>("PinTyper", false);
 		this->cbLogoSkipper->Checked = pt.get<bool>("LogoSkipper", false);
