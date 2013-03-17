@@ -39,6 +39,10 @@ namespace WatyBotUpdater {
 	private: System::Windows::Forms::ListView^  lvAddys;
 	private: System::Windows::Forms::ColumnHeader^  chName;
 	private: System::Windows::Forms::ColumnHeader^  chAddy;
+	private: System::Windows::Forms::Button^  bInput;
+	private: System::Windows::Forms::Button^  bOutput;
+	private: System::Windows::Forms::OpenFileDialog^  InputFileDialog;
+	private: System::Windows::Forms::SaveFileDialog^  OutputFileDialog;
 	protected: 
 
 	protected: 
@@ -60,6 +64,10 @@ namespace WatyBotUpdater {
 			this->lvAddys = (gcnew System::Windows::Forms::ListView());
 			this->chName = (gcnew System::Windows::Forms::ColumnHeader());
 			this->chAddy = (gcnew System::Windows::Forms::ColumnHeader());
+			this->bInput = (gcnew System::Windows::Forms::Button());
+			this->bOutput = (gcnew System::Windows::Forms::Button());
+			this->InputFileDialog = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->OutputFileDialog = (gcnew System::Windows::Forms::SaveFileDialog());
 			this->SuspendLayout();
 			// 
 			// bUpdate
@@ -80,10 +88,10 @@ namespace WatyBotUpdater {
 			this->lvAddys->FullRowSelect = true;
 			this->lvAddys->GridLines = true;
 			this->lvAddys->HeaderStyle = System::Windows::Forms::ColumnHeaderStyle::Nonclickable;
-			this->lvAddys->Location = System::Drawing::Point(2, 2);
+			this->lvAddys->Location = System::Drawing::Point(2, 27);
 			this->lvAddys->MultiSelect = false;
 			this->lvAddys->Name = L"lvAddys";
-			this->lvAddys->Size = System::Drawing::Size(234, 267);
+			this->lvAddys->Size = System::Drawing::Size(234, 240);
 			this->lvAddys->TabIndex = 1;
 			this->lvAddys->UseCompatibleStateImageBehavior = false;
 			this->lvAddys->View = System::Windows::Forms::View::Details;
@@ -91,12 +99,48 @@ namespace WatyBotUpdater {
 			// chName
 			// 
 			this->chName->Text = L"Name";
-			this->chName->Width = 111;
+			this->chName->Width = 115;
 			// 
 			// chAddy
 			// 
 			this->chAddy->Text = L"Address";
 			this->chAddy->Width = 99;
+			// 
+			// bInput
+			// 
+			this->bInput->Location = System::Drawing::Point(2, 2);
+			this->bInput->Name = L"bInput";
+			this->bInput->Size = System::Drawing::Size(116, 23);
+			this->bInput->TabIndex = 2;
+			this->bInput->Text = L"Input File";
+			this->bInput->UseVisualStyleBackColor = true;
+			this->bInput->Click += gcnew System::EventHandler(this, &MyForm::bInput_Click);
+			// 
+			// bOutput
+			// 
+			this->bOutput->Location = System::Drawing::Point(120, 2);
+			this->bOutput->Name = L"bOutput";
+			this->bOutput->Size = System::Drawing::Size(116, 23);
+			this->bOutput->TabIndex = 3;
+			this->bOutput->Text = L"Output File";
+			this->bOutput->UseVisualStyleBackColor = true;
+			this->bOutput->Click += gcnew System::EventHandler(this, &MyForm::bOutput_Click);
+			// 
+			// InputFileDialog
+			// 
+			this->InputFileDialog->DefaultExt = L"ini";
+			this->InputFileDialog->FileName = L"AOBs";
+			this->InputFileDialog->Filter = L"Ini files (*.ini)|*.ini";
+			this->InputFileDialog->InitialDirectory = L"WatyBotUpdater";
+			this->InputFileDialog->Title = L"Open the ini file containing all the AOB\'s";
+			// 
+			// OutputFileDialog
+			// 
+			this->OutputFileDialog->DefaultExt = L"h";
+			this->OutputFileDialog->FileName = L"Addys";
+			this->OutputFileDialog->Filter = L"Header Files (*.h)|*.h";
+			this->OutputFileDialog->InitialDirectory = L"WatyBotUpdater";
+			this->OutputFileDialog->Title = L"File You want to save the updated addys to";
 			// 
 			// MyForm
 			// 
@@ -104,6 +148,8 @@ namespace WatyBotUpdater {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(238, 295);
+			this->Controls->Add(this->bOutput);
+			this->Controls->Add(this->bInput);
 			this->Controls->Add(this->lvAddys);
 			this->Controls->Add(this->bUpdate);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
@@ -118,5 +164,7 @@ namespace WatyBotUpdater {
 #pragma endregion
 	private: System::Void bUpdate_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void MyForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
+	private: System::Void bInput_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void bOutput_Click(System::Object^  sender, System::EventArgs^  e);
 	};
 }
