@@ -1,6 +1,5 @@
 #include "MyForm.h"
 #include "PatternFind.h"
-#include <boost/foreach.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 #include <msclr/marshal_cppstd.h>
@@ -28,7 +27,7 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 	read_ini(file, pt);
 	StreamWriter^ sw = File::CreateText(marshal_as<String^>(outputfile));
 
-	BOOST_FOREACH( ptree::value_type const& v, pt)
+	for(ptree::value_type const& v : pt)
 	{		
 		char* aob = (char*) v.second.data().c_str();
 		String^ name = marshal_as<String^>(v.first);
@@ -38,7 +37,7 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 		//Write the found addy to the header file
 		if(result.ToString("X") != "0")
 			sw->WriteLine("#define " + name + " 0x" + result.ToString("X"));
-		else sw->WriteLine("#define " + name + " ERROR");
+		else sw->WriteLine("#define " + name + " 0xError");
 	}
 	if(sw) delete (IDisposable^)(sw);
 	ShowInfo("Finished Updating!");
