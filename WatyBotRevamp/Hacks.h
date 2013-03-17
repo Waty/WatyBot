@@ -103,7 +103,7 @@ namespace Hacks
 	CMemory cmJDA(dwJDA1, bJDA1, 1, dwJDA2, bJDA2, 1, dwJDA3, bJDA3, 2);
  
 	/////Full Mob Disarm
-	DWORD dwDisarm = 0x0000706D02;
+	DWORD dwDisarm = 0x00706D02;
 	BYTE bDisarm[] = {0xE9, 0x9B, 0x02, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90};
 	CMemory cmMobDisarm(dwDisarm, bDisarm, sizeof(bDisarm));
  
@@ -286,9 +286,13 @@ namespace Hacks
 	CMemory cmNDMining(dwNDMining1, bNDMining1, 2, dwNDMining2, bNDMining2, 1, dwNDMining3, bNDMining3, 2);
  
 	/////Hide Damage
-	DWORD dwHideDamage = 0x006E41C7;
-	BYTE bHideDamage[] = {0x7F};
-	CMemory cmHideDamage(dwHideDamage, bHideDamage, 1);
+	DWORD dwHideDamage1 = 0x00B3ABA3;
+	DWORD dwHideDamage2 = 0x0070140F;
+	DWORD dwHideDamage3 = 0x00701415;
+	BYTE bHideDamage1[] = {0x90, 0xE9};
+	BYTE bHideDamage2[] = {0x90, 0x90};
+	BYTE bHideDamage3[] = {0x90, 0xE9};
+	CMemory cmHideDamage(dwHideDamage1, bHideDamage1, 2, dwHideDamage2, bHideDamage2, 2, dwHideDamage3, bHideDamage3, 2);
  
 	/////Mercedes Combos without comboing
 	DWORD dwMercedesCombo = 0x00BB1B4B;
