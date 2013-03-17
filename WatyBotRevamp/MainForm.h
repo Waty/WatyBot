@@ -1365,7 +1365,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			this->gbCharHacks->Controls->Add(this->cbInstantAirLoot);
 			this->gbCharHacks->Controls->Add(this->cbFusionAttack);
 			this->gbCharHacks->Controls->Add(this->cbPerfectLoot);
-			this->gbCharHacks->Location = System::Drawing::Point(7, -2);
+			this->gbCharHacks->Location = System::Drawing::Point(7, -1);
 			this->gbCharHacks->Name = L"gbCharHacks";
 			this->gbCharHacks->Size = System::Drawing::Size(310, 164);
 			this->gbCharHacks->TabIndex = 1;
@@ -1374,7 +1374,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// 
 			// nudPVPDelay
 			// 
-			this->nudPVPDelay->Location = System::Drawing::Point(111, 143);
+			this->nudPVPDelay->Location = System::Drawing::Point(111, 138);
 			this->nudPVPDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
 			this->nudPVPDelay->Name = L"nudPVPDelay";
 			this->nudPVPDelay->Size = System::Drawing::Size(42, 20);
@@ -1388,7 +1388,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			this->ddbPVPSkills->FormattingEnabled = true;
 			this->ddbPVPSkills->Items->AddRange(gcnew cli::array< System::Object^  >(4) {L"Ice Attack (600% dmg, 10 mobs)", L"Ice Smash (1200% dmg, 10 mobs)", 
 				L"Ice Snow Tempest (500% x 4 dmg, 10 mobs)", L"Ice chop (900% dmg, 10 mob count)"});
-			this->ddbPVPSkills->Location = System::Drawing::Point(159, 143);
+			this->ddbPVPSkills->Location = System::Drawing::Point(159, 138);
 			this->ddbPVPSkills->Name = L"ddbPVPSkills";
 			this->ddbPVPSkills->Size = System::Drawing::Size(145, 21);
 			this->ddbPVPSkills->TabIndex = 16;
@@ -1397,7 +1397,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// cbPVP
 			// 
 			this->cbPVP->AutoSize = true;
-			this->cbPVP->Location = System::Drawing::Point(6, 144);
+			this->cbPVP->Location = System::Drawing::Point(6, 139);
 			this->cbPVP->Name = L"cbPVP";
 			this->cbPVP->Size = System::Drawing::Size(111, 17);
 			this->cbPVP->TabIndex = 15;
@@ -1409,7 +1409,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// cbMercedesCombo
 			// 
 			this->cbMercedesCombo->AutoSize = true;
-			this->cbMercedesCombo->Location = System::Drawing::Point(159, 125);
+			this->cbMercedesCombo->Location = System::Drawing::Point(159, 120);
 			this->cbMercedesCombo->Name = L"cbMercedesCombo";
 			this->cbMercedesCombo->Size = System::Drawing::Size(137, 17);
 			this->cbMercedesCombo->TabIndex = 14;
@@ -1421,7 +1421,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// cbNDMining
 			// 
 			this->cbNDMining->AutoSize = true;
-			this->cbNDMining->Location = System::Drawing::Point(6, 125);
+			this->cbNDMining->Location = System::Drawing::Point(6, 120);
 			this->cbNDMining->Name = L"cbNDMining";
 			this->cbNDMining->Size = System::Drawing::Size(104, 17);
 			this->cbNDMining->TabIndex = 13;
@@ -1433,7 +1433,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// cbNFA
 			// 
 			this->cbNFA->AutoSize = true;
-			this->cbNFA->Location = System::Drawing::Point(159, 109);
+			this->cbNFA->Location = System::Drawing::Point(159, 104);
 			this->cbNFA->Name = L"cbNFA";
 			this->cbNFA->Size = System::Drawing::Size(99, 17);
 			this->cbNFA->TabIndex = 12;
@@ -1445,7 +1445,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// cbFMA
 			// 
 			this->cbFMA->AutoSize = true;
-			this->cbFMA->Location = System::Drawing::Point(159, 91);
+			this->cbFMA->Location = System::Drawing::Point(159, 86);
 			this->cbFMA->Name = L"cbFMA";
 			this->cbFMA->Size = System::Drawing::Size(100, 17);
 			this->cbFMA->TabIndex = 11;
@@ -1457,7 +1457,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// cbUA
 			// 
 			this->cbUA->AutoSize = true;
-			this->cbUA->Location = System::Drawing::Point(6, 109);
+			this->cbUA->Location = System::Drawing::Point(6, 104);
 			this->cbUA->Name = L"cbUA";
 			this->cbUA->Size = System::Drawing::Size(103, 17);
 			this->cbUA->TabIndex = 8;
@@ -1470,7 +1470,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// cbItemVac
 			// 
 			this->cbItemVac->AutoSize = true;
-			this->cbItemVac->Location = System::Drawing::Point(6, 91);
+			this->cbItemVac->Location = System::Drawing::Point(6, 86);
 			this->cbItemVac->Name = L"cbItemVac";
 			this->cbItemVac->Size = System::Drawing::Size(68, 17);
 			this->cbItemVac->TabIndex = 10;
@@ -1482,7 +1482,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// cb50SecGM
 			// 
 			this->cb50SecGM->AutoSize = true;
-			this->cb50SecGM->Location = System::Drawing::Point(6, 37);
+			this->cb50SecGM->Location = System::Drawing::Point(6, 32);
 			this->cb50SecGM->Name = L"cb50SecGM";
 			this->cb50SecGM->Size = System::Drawing::Size(132, 17);
 			this->cb50SecGM->TabIndex = 9;
@@ -1494,7 +1494,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// cbNDAllAttacks
 			// 
 			this->cbNDAllAttacks->AutoSize = true;
-			this->cbNDAllAttacks->Location = System::Drawing::Point(6, 73);
+			this->cbNDAllAttacks->Location = System::Drawing::Point(6, 68);
 			this->cbNDAllAttacks->Name = L"cbNDAllAttacks";
 			this->cbNDAllAttacks->Size = System::Drawing::Size(110, 17);
 			this->cbNDAllAttacks->TabIndex = 8;
@@ -1506,7 +1506,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// cbUnlimitedMorph
 			// 
 			this->cbUnlimitedMorph->AutoSize = true;
-			this->cbUnlimitedMorph->Location = System::Drawing::Point(159, 56);
+			this->cbUnlimitedMorph->Location = System::Drawing::Point(159, 51);
 			this->cbUnlimitedMorph->Name = L"cbUnlimitedMorph";
 			this->cbUnlimitedMorph->Size = System::Drawing::Size(102, 17);
 			this->cbUnlimitedMorph->TabIndex = 7;
@@ -1518,7 +1518,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// cbDojangGodmode
 			// 
 			this->cbDojangGodmode->AutoSize = true;
-			this->cbDojangGodmode->Location = System::Drawing::Point(6, 19);
+			this->cbDojangGodmode->Location = System::Drawing::Point(6, 14);
 			this->cbDojangGodmode->Name = L"cbDojangGodmode";
 			this->cbDojangGodmode->Size = System::Drawing::Size(109, 17);
 			this->cbDojangGodmode->TabIndex = 6;
@@ -1530,7 +1530,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// cbNoKB
 			// 
 			this->cbNoKB->AutoSize = true;
-			this->cbNoKB->Location = System::Drawing::Point(6, 56);
+			this->cbNoKB->Location = System::Drawing::Point(6, 51);
 			this->cbNoKB->Name = L"cbNoKB";
 			this->cbNoKB->Size = System::Drawing::Size(98, 17);
 			this->cbNoKB->TabIndex = 5;
@@ -1542,7 +1542,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// cbInstantAirLoot
 			// 
 			this->cbInstantAirLoot->AutoSize = true;
-			this->cbInstantAirLoot->Location = System::Drawing::Point(159, 37);
+			this->cbInstantAirLoot->Location = System::Drawing::Point(159, 32);
 			this->cbInstantAirLoot->Name = L"cbInstantAirLoot";
 			this->cbInstantAirLoot->Size = System::Drawing::Size(97, 17);
 			this->cbInstantAirLoot->TabIndex = 2;
@@ -1554,7 +1554,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// cbFusionAttack
 			// 
 			this->cbFusionAttack->AutoSize = true;
-			this->cbFusionAttack->Location = System::Drawing::Point(159, 73);
+			this->cbFusionAttack->Location = System::Drawing::Point(159, 68);
 			this->cbFusionAttack->Name = L"cbFusionAttack";
 			this->cbFusionAttack->Size = System::Drawing::Size(91, 17);
 			this->cbFusionAttack->TabIndex = 0;
@@ -1567,7 +1567,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// cbPerfectLoot
 			// 
 			this->cbPerfectLoot->AutoSize = true;
-			this->cbPerfectLoot->Location = System::Drawing::Point(159, 19);
+			this->cbPerfectLoot->Location = System::Drawing::Point(159, 14);
 			this->cbPerfectLoot->Name = L"cbPerfectLoot";
 			this->cbPerfectLoot->Size = System::Drawing::Size(84, 17);
 			this->cbPerfectLoot->TabIndex = 1;

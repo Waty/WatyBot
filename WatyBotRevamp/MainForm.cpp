@@ -412,9 +412,8 @@ void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^ 
 		Hacks::cmPVP2.Enable(cbPVP->Checked);
 	}
 }
-/*void Vami()
-{/*
-#define CharBasePtr 0x011E2228
+void Vami()
+{
 #define pIDOffset 0x29D8
 #define KnockBackOffset 0x124
 #define KnockBackXOffset (KnockBackOffset + 0xC)
@@ -435,7 +434,7 @@ WritePointer(pID, KnockBackYOffset, iKBY);
 ShowInfo("Write Y Works");
 WritePointer(pID, KnockBackOffset,(unsigned long) 1);
 ShowInfo("Write KB Works");
-}*/
+}
 void MainForm::cbVami_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	//NewThread(Vami);
