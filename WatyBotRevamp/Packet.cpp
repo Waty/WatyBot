@@ -1,7 +1,6 @@
 #include "Packet.h"
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
-#include <boost/foreach.hpp>
 #include <fstream>
 
 PacketVector vPacket;
@@ -32,7 +31,7 @@ void WritePacketXML(string filename)
 	using boost::property_tree::ptree;
 	ptree pt;
 
-	BOOST_FOREACH( sPacket p, vPacket )
+	for(sPacket p : vPacket)
 	{
         ptree & node = pt.add("packetlist.packet", "");
 		node.put("name", p.name);
@@ -49,7 +48,7 @@ void ReadPacketXML(string filename)
 	read_xml(file, pt);
 	if(!pt.empty())
 	{
-		BOOST_FOREACH( ptree::value_type const& v, pt.get_child("packetlist"))
+		for(ptree::value_type const& v : pt.get_child("packetlist"))
 		{
 			if(v.first == "packet")
 			{

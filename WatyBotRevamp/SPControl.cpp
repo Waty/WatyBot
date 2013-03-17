@@ -2,7 +2,6 @@
 #include <fstream>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
-#include <boost/foreach.hpp>
 SPControlVector SPControlv;
 
 void SPControl::AddSPControl(string name, int ID, int x, int y)
@@ -36,7 +35,7 @@ void SPControl::ReadXML(string filename)
 	read_xml(file, pt);
 	if(!pt.empty())
 	{
-		BOOST_FOREACH( ptree::value_type const& v, pt.get_child("spcontrol"))
+		for(ptree::value_type const& v : pt.get_child("spcontrol"))
 		{
 			if(v.first == "location")
 			{
@@ -57,7 +56,7 @@ void SPControl::WriteXML(string filename)
 	using boost::property_tree::ptree;
 	ptree pt;
 
-	BOOST_FOREACH( SPControlStruct SP, SPControlv )
+	for(SPControlStruct SP : SPControlv)
 	{
         ptree & node = pt.add("spcontrol.location", "");
 		node.put("mapname", SP.mapName);
