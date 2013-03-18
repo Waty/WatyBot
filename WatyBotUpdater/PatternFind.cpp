@@ -96,7 +96,7 @@ BOOL PFAPI GeneratePatternBytes(char *szPattern, LPBYTE buffer) {
 }
 
 VOID PFAPI SearchPattern(PFSEARCH *ppf, LPVOID lpvBase, DWORD dwSize) {
-	ppf->lpvResult = 0;
+	ppf->dwResult = 0;
 	DWORD dwBase = reinterpret_cast<DWORD>(lpvBase);
 	for (DWORD i=dwBase; i<dwBase+dwSize; i++) {
 		bool found = true;
@@ -109,7 +109,7 @@ VOID PFAPI SearchPattern(PFSEARCH *ppf, LPVOID lpvBase, DWORD dwSize) {
 			}
 		}
 		if (found) {
-			ppf->lpvResult = reinterpret_cast<LPVOID>(i);
+			ppf->dwResult = i;
 			return;
 		}
 	}
@@ -131,7 +131,7 @@ DWORD PFAPI FindPattern(char *szPattern, PFSEARCH *ppf, LPVOID lpvBase, DWORD dw
 		return PF_OVERFLOW;
 
 	SearchPattern(ppf, lpvBase, dwSize);
-	if (!ppf->lpvResult)
+	if (!ppf->dwResult)
 		return PF_NOT_FOUND;
 
 	return PF_NONE;

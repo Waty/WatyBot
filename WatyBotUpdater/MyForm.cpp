@@ -69,7 +69,7 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 			char* aob = (char*) v.second.data().c_str();
 			String^ name = marshal_as<String^>(v.first);
 			FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
-			DWORD result = (DWORD)pf.lpvResult;
+			DWORD result = pf.dwResult;
 
 			String^ error = " 0xError";
 			String^ strresult = " 0x" + result.ToString("X");

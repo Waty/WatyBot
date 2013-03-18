@@ -14,7 +14,7 @@ struct PFSEARCH {
 	DWORD dwLength;
 	char szMask[MAX_PATTERN+1];
 	BYTE lpbData[MAX_PATTERN];
-	LPVOID lpvResult;
+	DWORD dwResult;
 };
 
 BOOL GetModuleSize(HMODULE hModule, LPVOID* lplpBase, LPDWORD lpdwSize);
