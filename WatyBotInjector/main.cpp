@@ -100,8 +100,9 @@ bool FindProcess()
 
 		if (!strcmp(szBuffer,"StartUpDlgClass"))
 		{
-			cout << "Found StartUp dialog! Injecting MSCRC...." << endl;
-			bool valid = inject(dwProcessId, "/MSCRC.dll");
+			bool valid;
+			cout << "Found StartUp dialog! Starting with injecting...." << endl;
+			valid = inject(dwProcessId, "/WatyBotUpdater.dll");
 			Sleep(1000);
 			valid = inject(dwProcessId, "/WatyBot.dll");
 			Sleep(1000);
