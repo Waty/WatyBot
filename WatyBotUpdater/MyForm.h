@@ -1,5 +1,10 @@
 #pragma once
 #include <Windows.h>
+#include <msclr/marshal_cppstd.h>
+using namespace msclr::interop;
+
+extern std::string inputfile; 
+extern std::string outputfile; 
 
 namespace WatyBotUpdater {
 
@@ -43,6 +48,8 @@ namespace WatyBotUpdater {
 	private: System::Windows::Forms::Button^  bOutput;
 	private: System::Windows::Forms::OpenFileDialog^  InputFileDialog;
 	private: System::Windows::Forms::SaveFileDialog^  OutputFileDialog;
+	private: System::Windows::Forms::ToolTip^  InfoToolTip;
+	private: System::ComponentModel::IContainer^  components;
 	protected: 
 
 	protected: 
@@ -51,7 +58,7 @@ namespace WatyBotUpdater {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -60,6 +67,7 @@ namespace WatyBotUpdater {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			this->bUpdate = (gcnew System::Windows::Forms::Button());
 			this->lvAddys = (gcnew System::Windows::Forms::ListView());
 			this->chName = (gcnew System::Windows::Forms::ColumnHeader());
@@ -68,6 +76,7 @@ namespace WatyBotUpdater {
 			this->bOutput = (gcnew System::Windows::Forms::Button());
 			this->InputFileDialog = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->OutputFileDialog = (gcnew System::Windows::Forms::SaveFileDialog());
+			this->InfoToolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->SuspendLayout();
 			// 
 			// bUpdate
@@ -158,6 +167,7 @@ namespace WatyBotUpdater {
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"WatyBotUpdater";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MyForm::MyForm_FormClosing);
+			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			this->ResumeLayout(false);
 
 		}
@@ -166,5 +176,6 @@ namespace WatyBotUpdater {
 	private: System::Void MyForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
 	private: System::Void bInput_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void bOutput_Click(System::Object^  sender, System::EventArgs^  e);
-	};
+	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e);
+};
 }

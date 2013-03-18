@@ -2,11 +2,9 @@
 #include "PatternFind.h"
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
-#include <msclr/marshal_cppstd.h>
 #include <fstream>
 using namespace WatyBotUpdater;
 using namespace System::IO;
-using namespace msclr::interop;
 using namespace std;
 using boost::property_tree::ptree;
 
@@ -21,6 +19,12 @@ void *lpvMapleBase = NULL;
 DWORD dwMapleSize = 0;
 string inputfile = "WatyBotUpdater\\AOBs.ini";
 string outputfile = "WatyBotUpdater\\Addys.h";
+
+void MyForm::MyForm_Load(System::Object^  sender, System::EventArgs^  e)
+{
+	this->InfoToolTip->SetToolTip(this->bOutput, marshal_as<String^>(outputfile));
+	this->InfoToolTip->SetToolTip(this->bInput, marshal_as<String^>(inputfile));
+}	
 
 void InitializeTrainer(HINSTANCE hInstance)
 {
@@ -67,7 +71,7 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 			FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
 			DWORD result = (DWORD)pf.lpvResult;
 
-			String^ error = "0xError";
+			String^ error = " 0xError";
 			String^ strresult = " 0x" + result.ToString("X");
 			bool succes = result == 0;
 
@@ -77,7 +81,7 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 			lvAddys->Items->Add(lvItem);
 
 			//Write the found addy to the header file
-			sw->WriteLine("#define " + name + succes ? strresult : error);
+			sw->WriteLine("#define " + name + (succes ? error : strresult));
 		}
 		if(sw) delete (IDisposable^)(sw);
 		ShowInfo("Finished Updating!");
