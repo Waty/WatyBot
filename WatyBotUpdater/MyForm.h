@@ -108,12 +108,12 @@ namespace WatyBotUpdater {
 			// chName
 			// 
 			this->chName->Text = L"Name";
-			this->chName->Width = 115;
+			this->chName->Width = 145;
 			// 
 			// chAddy
 			// 
 			this->chAddy->Text = L"Address";
-			this->chAddy->Width = 99;
+			this->chAddy->Width = 70;
 			// 
 			// bInput
 			// 
