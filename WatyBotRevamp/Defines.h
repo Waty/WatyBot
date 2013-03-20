@@ -1,6 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include "Pointers.h"
+#include "HackAddys.h"
 #include <string>
 #define SendKey(KeyPress) PostMessage(MapleStoryHWND, WM_KEYDOWN, KeyPress, (MapVirtualKey(KeyPress, 0) << 16) + 1);
 #define NewThread(Function) CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)&Function, NULL, NULL, NULL)
@@ -14,7 +15,7 @@ enum CCType{CC, CS, DC};
 #define ShowWarning(Message)	MessageBox::Show(Message, "Warning", MessageBoxButtons::OK, MessageBoxIcon::Warning)
 
 typedef void (__stdcall* PFN_CField_SendTransferChannelRequest)(unsigned char nChannel);
-auto CField_SendTransferChannelRequest = reinterpret_cast<PFN_CField_SendTransferChannelRequest>(0x00568280); //6A ?? 68 ?? ?? ?? ?? 64 A1 ?? ?? ?? ?? 50 83 EC ?? 56 57 A1 ?? ?? ?? ?? 33 C4 50 8D 44 24 ?? 64 A3 ?? ?? ?? ?? 8B 0D ?? ?? ?? ?? 85 C9
+auto CField_SendTransferChannelRequest = reinterpret_cast<PFN_CField_SendTransferChannelRequest>(CCAddy); //6A ?? 68 ?? ?? ?? ?? 64 A1 ?? ?? ?? ?? 50 83 EC ?? 56 57 A1 ?? ?? ?? ?? 33 C4 50 8D 44 24 ?? 64 A3 ?? ?? ?? ?? 8B 0D ?? ?? ?? ?? 85 C9
 
 unsigned long ReadPointer(unsigned long ulBase, int iOffset)
 {
