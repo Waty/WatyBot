@@ -441,7 +441,7 @@ void MainForm::cbVami_CheckedChanged(System::Object^  sender, System::EventArgs^
 }
 void MainForm::cbKami_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::cmKami.Enable(this->cbKami->Checked);
+//	Hacks::cmKami.Enable(this->cbKami->Checked);
 }
 
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
