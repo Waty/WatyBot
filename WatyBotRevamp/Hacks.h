@@ -9,14 +9,15 @@ namespace Hacks
 {
 	/////Dojang Godmode
 	DWORD DojangRet = DojangAddy + 5;
-	unsigned long DojangMissCount = 0;
+	DWORD dwDojangCall = DojangCall;
+	int DojangMissCount = 0;
 	CodeCave(Dojang)
 	{
 		inc [DojangMissCount]
 		cmp [DojangMissCount] , 07 //amount of misses as its under 10 no need for a 0x
 		jbe DojangExit
 		mov [DojangMissCount] , 00
-		call [DojangCall]
+		call dword ptr [dwDojangCall]
  
 		DojangExit:
 		jmp [DojangRet]
@@ -25,10 +26,11 @@ namespace Hacks
 	CMemory cmDojangGodmode(DojangAddy, CaveDojang, 0, true);
  
 	/////Auto Aggro
-	DWORD dwAggroRet = dwAggroAddy + 5;
+	DWORD dwAggroRet = AggroAddy + 5;
+	DWORD dwAggroCall = AggroCall;
 	CodeCave(Aggro)
 	{
-		call AggroCall
+		call dwAggroCall
 		mov edx,dword ptr ds:[MobBasePtr]
 		mov edx,[edx+0x29D8]
 		mov edx,[edx+0x0C]
@@ -43,7 +45,7 @@ namespace Hacks
 	CMemory cmPinTyper(PinTyperAddy1, bPinTyper, 2, PinTyperAddy2, bPinTyper, 2);
  
 	/////FusionAttack
-	DWORD dwFusionRet = dwFusionAddy + 8;
+	DWORD dwFusionRet = FusionAddy + 8;
 	CodeCave(FusionAttack)
 	{
 		Hook:
@@ -92,7 +94,7 @@ namespace Hacks
  
 	/////No Mobs			77 ? 0F B6 80 ? ? ? 00 FF 24 85 ? ? ? 00 8B 54 24 ? 52 E8 ? ? ? FF C2 08 00 - 2nd result
 	BYTE bNoMobs[] = {0xEB};
-	CMemory cmNoMobs(dwNoMobs, bNoMobs, 1);
+	CMemory cmNoMobs(NoMobsAddy, bNoMobs, 1);
  
 	/////Instant Air Loot
 	BYTE bAirLoot[] = {0x74};
@@ -119,7 +121,7 @@ namespace Hacks
 	CMemory cmSitHack(SitHackAddy, bSit, 1);
  
 	/////Spawn Control
-	DWORD dwSPControlRet = dwSPControl + 6;
+	DWORD dwSPControlRet = SPControlAddy + 6;
 	int spawn_x, spawn_y;
 	BOOL WINAPI GetCoords()
 	{
@@ -167,8 +169,7 @@ namespace Hacks
 	CMemory cmLogoSkipper(dwLogoSkipper, bLogoSkipper, sizeof(bLogoSkipper));
  
 	/////(semi) Item Vac
-	DWORD dwItemVac = 0x006D2FD4; // E8 ? ? ? ? 8B C8 8B 44 24 ? 89 38 5F 89 48 ? 5E C2 04 00 CC CC CC CC CC CC CC 56 - 4th result
-	DWORD dwItemVacCall = 0x006E7FE0;
+	DWORD dwItemVacCall = ItemVacCall;
 	int itemvac_x = 0;
 	int itemvac_y = 0;
 	VOID WINAPI getItemVacCoords()
@@ -191,38 +192,30 @@ namespace Hacks
 		ret 0004
 	}
 	EndCodeCave 
-	CMemory cmItemVac(dwItemVac, CaveItemVac, 0, true);
+	CMemory cmItemVac(ItemVacAddy, CaveItemVac, 0, true); // E8 ? ? ? ? 8B C8 8B 44 24 ? 89 38 5F 89 48 ? 5E C2 04 00 CC CC CC CC CC CC CC 56 - 4th result
  
 	/////View Swears
-	DWORD NoSwearsAddy = 0x00884B4B;//74 ? 80 3e 00 75 ? 0f b6 13
 	BYTE bNoSwears[] = {0x90, 0x90};
-	CMemory cmNoSwears(NoSwearsAddy, bNoSwears, 2);
+	CMemory cmNoSwears(ViewSwearsAddy, bNoSwears, 2);
  
 	/////FMA
-	DWORD FMAAddy = 0x00708FF2;
 	BYTE bFMA[] = {0xEB};
 	CMemory cmFMA(FMAAddy, bFMA, 1);
  
 	/////Ghoul's Scare Mob Lagg
-	DWORD dwScareMobs = 0x0070766F;
 	BYTE bScareMobs[] = {0x75};
-	CMemory cmScareMobs(dwScareMobs, bScareMobs, 1);
+	CMemory cmScareMobs(ScareMobsAddy, bScareMobs, 1);
  
 	/////Always Face Left
-	DWORD dwFLACC = 0x00C2281A;
 	BYTE bFLACC[] = {0xB8, 0x05, 0x00, 0x00, 0x00, 0x90};
-	CMemory cmFLACC(dwFLACC, bFLACC, 6);
+	CMemory cmFLACC(FLACC, bFLACC, 6);
  
 	/////CPU Hack
-	DWORD dwCPU1 = 0x006B33EB;
-	DWORD dwCPU2 = 0x006B826C;
-	DWORD dwCPU3 = 0x006BCC19;
 	BYTE bCPU[] = {0x90, 0x90, 0x90, 0x90, 0x90};
-	CMemory cmCPUHack(dwCPU1, bCPU, 5, dwCPU2, bCPU, 5, dwCPU3, bCPU, 5);
+	CMemory cmCPUHack(CPUAddy1, bCPU, 5, CPUAddy2, bCPU, 5, CPUAddy3, bCPU, 5);
  
 	/////Unlimited Attack
-	DWORD dwUA = 0x004DAFEF;
-	DWORD dwUARet = 0x004DAFEF + 6;
+	DWORD dwUARet = UAAddy + 6;
 	CodeCave(UA)
 	{
 		mov [eax],edi //orig code
@@ -240,30 +233,23 @@ namespace Hacks
 		jmp dwUARet
 	}
 	EndCodeCave
-	CMemory cmUA(dwUA, CaveUA, 1, true);
+	CMemory cmUA(UAAddy, CaveUA, 1, true);
  
 	/////Disable Final Attack Luna
-	DWORD dwDFA = 0x007D42A2;
 	BYTE bDFA[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
-	CMemory cmDFA(dwDFA, bDFA, 7);
+	CMemory cmDFA(DFAAddy, bDFA, 7);
  
 	/////ND Mining
-	DWORD dwNDMining1 = 0x00B6D282;
 	BYTE bNDMining1[] = {0x90, 0x90};
-	DWORD dwNDMining2 = 0x00B6D35B;
 	BYTE bNDMining2[] = {0xEB};
-	DWORD dwNDMining3 = 0x00B7D947;
 	BYTE bNDMining3[] = {0x90, 0x90};
-	CMemory cmNDMining(dwNDMining1, bNDMining1, 2, dwNDMining2, bNDMining2, 1, dwNDMining3, bNDMining3, 2);
+	CMemory cmNDMining(NDMiningAddy1, bNDMining1, 2, NDMiningAddy2, bNDMining2, 1, NDMiningAddy3, bNDMining3, 2);
  
 	/////Hide Damage
-	DWORD dwHideDamage1 = 0x00B3ABA3;
-	DWORD dwHideDamage2 = 0x0070140F;
-	DWORD dwHideDamage3 = 0x00701415;
 	BYTE bHideDamage1[] = {0x90, 0xE9};
 	BYTE bHideDamage2[] = {0x90, 0x90};
 	BYTE bHideDamage3[] = {0x90, 0xE9};
-	CMemory cmHideDamage(dwHideDamage1, bHideDamage1, 2, dwHideDamage2, bHideDamage2, 2, dwHideDamage3, bHideDamage3, 2);
+	CMemory cmHideDamage(HideDamageAddy1, bHideDamage1, 2, HideDamageAddy2, bHideDamage2, 2, HideDamageAddy3, bHideDamage3, 2);
  
 	/////Mercedes Combos without comboing
 	DWORD dwMercedesCombo = 0x00BB1B4B;
@@ -271,17 +257,12 @@ namespace Hacks
 	CMemory cmMercedesCombo(dwMercedesCombo, bMercedesCombo, 1);
  
 	/////PvP Disable Checks
-	DWORD dwPVP1 = 0x00BBF4E4;
 	BYTE bPVP1[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
-	DWORD dwPVP2 = 0x00BBF50B;
-	BYTE bPVP2[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
-	DWORD dwPVP3 = 0x00BBF5AC;
 	BYTE bPVP3[] = {0xEB, 0x0E};
-	CMemory cmPVP1(dwPVP1, bPVP1, 6, dwPVP2, bPVP2, 6, dwPVP3, bPVP3, 2);
+	CMemory cmPVP1(PvPChecksAddy1, bPVP1, 6, PvPChecksAddy2, bPVP1, 6, PvPChecksAddy3, bPVP3, 2);
  
 	/////PvP Set Skill ID
-	DWORD dwPVPAddy = 0x00BBF511;
-	DWORD dwPVPRet = dwPVPAddy + 6;
+	DWORD dwPVPRet = PvPInjectAddy + 6;
 	int iPVPSkillID;
 	int iPVPDelay;
 	int count;
@@ -303,8 +284,8 @@ namespace Hacks
 		jmp dword ptr [dwPVPRet]
 	}
 	EndCodeCave
-	CMemory cmPVP2(dwPVPAddy, CavePVP, 1, true);
-
+	CMemory cmPVP2(PvPInjectAddy, CavePVP, 1, true);
+	/*
 	/////	Kami
 	unsigned int uKamiHook = 0x00BB1149, uKamiReturn = uKamiHook + 5;
 	unsigned int uWallBase = 0;
@@ -372,6 +353,6 @@ namespace Hacks
 		jmp uKamiReturn
 	}
 	EndCodeCave
-	CMemory cmKami(uKamiHook, CaveKami, 0, true);
+	CMemory cmKami(uKamiHook, CaveKami, 0, true);*/
 }
 
