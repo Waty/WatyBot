@@ -1,9 +1,9 @@
-#define DojangAddy 0x00B60FC0
+#define DojangAddy 0xB60FD4
 #define DojangCall 0xC23330
 #define AggroAddy 0xC37F2F
 #define AggroCall 0xC2E9F0
 #define PinTyperAddy1 0x6919B6
-#define PinTyperAddy2 0x67FCF2
+#define PinTyperAddy2 0x693087 
 #define FusionAddy 0x709F72
 #define PerfectLootAddy1 0x4B5AA7
 #define PerfectLootAddy2 0x542CA5
@@ -30,6 +30,7 @@
 #define Godmode50SecAddy2 0xBA1CB9
 #define LogoSkipperAddy 0xError
 #define ItemVacAddy 0x006D44C4
+#define ItemVacCall 0x6E8FC0
 #define ViewSwearsAddy 0x88546B
 #define FMAAddy 0x709F62
 #define ScareMobsAddy 0x7084DF
@@ -38,7 +39,7 @@
 #define CPUAddy2 0x6B95EC
 #define CPUAddy3 0x6BDF99
 #define UAAddy 0x004DB52F
-#define DFAAddy 0xError
+#define DFAAddy 0x007D4F52
 #define NDMiningAddy1 0xB6D462
 #define NDMiningAddy2 0xB6D53B
 #define NDMiningAddy3 0xB7DB17
