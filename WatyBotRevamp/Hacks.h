@@ -1,6 +1,9 @@
+#include "MobPool.h"
 extern int getMapID();
 extern int getCharX();
 extern int getCharY();
+extern int getAttackCount();
+
 namespace Hacks
 {
 	//Updated to V89.1
@@ -255,15 +258,14 @@ namespace Hacks
 	{
 		mov [eax],edi //orig code
  
-		push ebx
-		mov ebx, dword ptr [CharBasePtr] // Char Base Pointer
-		mov ebx,[ebx]
-		cmp dword ptr [ebx+AttackCountOffset], 0x5A // Attack Count offset
+		push eax
+		call getAttackCount
+		cmp eax, 90 // Attack Count offset
 		jl UAexit
 		add dword ptr [eax],0x08
  
 		UAexit:
-		pop ebx
+		pop eax
 		pop edi
 		mov [eax+0x04],ecx
 		jmp dwUARet
@@ -300,16 +302,16 @@ namespace Hacks
 	CMemory cmMercedesCombo(dwMercedesCombo, bMercedesCombo, 1);
  
 	/////PvP Disable Checks
-	DWORD dwPVP1 = 0x00BBF4E4; //GMS: 00D33CA4: // Skip Check // 0F 84 ?? ?? ?? ?? 2B AE ?? ?? ?? ?? 0F 88 ?? ?? ?? ?? 8B 86 ?? ?? ?? ?? 50 E8 ?? ?? ?? ?? 83 C4 ?? 3B 86 ?? ?? ?? ?? 0F 85 ?? ?? ?? ?? 8B 96
+	DWORD dwPVP1 = 0x00BBF4E4;
 	BYTE bPVP1[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
-	DWORD dwPVP2 = 0x00BBF50B; //GMS: 00D33CCB: // Bypass Weapon Check // 0F 85 ?? ?? ?? ?? 8B 96 ?? ?? ?? ?? 8B 44 24 ?? 6A ?? 6A ?? 6A ?? 8D 4C 24 ?? 51 8B 0D ?? ?? ?? ?? 52 50 C7 44 ?? ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B F8 85 FF 0F 8E
+	DWORD dwPVP2 = 0x00BBF50B;
 	BYTE bPVP2[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
-	DWORD dwPVP3 = 0x00BBF5AC; //GMS: 00D33D6C: // Switch Jump // 77 ?? 0F B6 88 ?? ?? ?? ?? FF 24 8D ?? ?? ?? ?? 8B 54 24 ?? 6A ?? 6A ?? 6A ?? 6A ?? 6A ?? 6A ?? 6A ?? 6A ?? 6A ?? 6A ?? 57 52 8B CE E8 ?? ?? ?? ?? 5F
-	BYTE bPVP3[] = {0xEB, 0x0E};//GMS: 00D33D7C // Melee // 8B 54 24 ?? 6A ?? 6A ?? 6A ?? 6A ?? 6A ?? 6A ?? 6A ?? 6A ?? 6A ?? 6A ?? 57 52 8B CE E8 ?? ?? ?? ?? 5F C7 86 ?? ?? ?? ?? ?? ?? ?? ?? 5E 5D 5B 83 C4 ?? C3 8B 44 24 ?? 6A ?? 6A ?? 6A ?? 6A ?? 6A ?? 57 50 8B CE E8 ?? ?? ?? ?? 5F C7 86 ?? ?? ?? ?? ?? ?? ?? ?? 5E 5D 5B 83 C4
+	DWORD dwPVP3 = 0x00BBF5AC;
+	BYTE bPVP3[] = {0xEB, 0x0E};
 	CMemory cmPVP1(dwPVP1, bPVP1, 6, dwPVP2, bPVP2, 6, dwPVP3, bPVP3, 2);
  
 	/////PvP Set Skill ID
-	DWORD dwPVPAddy = 0x00BBF511; //GMS: 00D33CD1: // Set Skill Id // 8B 96 ?? ?? ?? ?? 8B 44 24 ?? 6A ?? 6A ?? 6A ?? 8D 4C 24 ?? 51 8B 0D ?? ?? ?? ?? 52 50 C7 44 24 ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 8B F8 85 FF 0F 8E ?? ?? ?? ?? 8B 1D ?? ?? ?? ??
+	DWORD dwPVPAddy = 0x00BBF511;
 	DWORD dwPVPRet = dwPVPAddy + 6;
 	int iPVPSkillID;
 	int iPVPDelay;
@@ -319,9 +321,8 @@ namespace Hacks
 		push eax
 		mov eax, dword ptr [count]
 		cmp eax, dword ptr [iPVPDelay]
-		//call Delay
-		//cmp eax, TRUE //increase this till it works for you
 		pop eax
+
 		jge InjectPvP
 		inc [count]
 		mov edx,[esi+0x00006DAC]
@@ -329,9 +330,79 @@ namespace Hacks
  
 		InjectPvP:
 		mov [count],0
-		mov edx,[iPVPSkillID] // Change this to the skill you want to use ~~
+		mov edx,[iPVPSkillID]
 		jmp dword ptr [dwPVPRet]
 	}
 	EndCodeCave
 	CMemory cmPVP2(dwPVPAddy, CavePVP, 1, true);
+
+	/////	Kami
+	unsigned int uKamiHook = 0x00BB1149, uKamiReturn = uKamiHook + 5;
+	unsigned int uWallBase = 0;
+	unsigned int uMobPool = 0;
+	unsigned int uCharBase = 0;
+
+	unsigned int uGetTime = 0x00BE6700; 
+
+	int nRangeX = -25,nRangeY = -5;
+
+	typedef void(__fastcall* PFN_TSecType_SetData)(void* pEcx,void* pEdx,int nValue);
+	PFN_TSecType_SetData TSecType_SetData = reinterpret_cast<PFN_TSecType_SetData>(0x00664140);
+
+
+	void __fastcall SetTeleport(int x,int y)
+	{
+		char* pCharBase = *reinterpret_cast<char**>(uCharBase);
+		if(uCharBase == 0)
+			return;
+		TSecType_SetData(reinterpret_cast<void*>(pCharBase+0x6e00),0,x);
+		TSecType_SetData(reinterpret_cast<void*>(pCharBase+0x6df4),0,y);
+		TSecType_SetData(reinterpret_cast<void*>(pCharBase+0x6ddc),0,1);
+	}
+
+	template<typename T>
+	bool IsInRange(T tMin,T tMax,T tValue)
+	{
+		return tValue >= tMin && tValue <= tMax;
+	}
+
+	bool CheckWalls(WZ_MOB::WZ_RECT* pRect,int nX,int nY)
+	{
+		return IsInRange<int>(pRect->nLeft,pRect->nRight,nX) && 
+			IsInRange<int>(pRect->nTop,pRect->nBottom,nY);
+	}
+
+	void __fastcall DoKami()
+	{
+		WZ_PHYSICAL::WZ_PHYSICAL_SPACE* physicalSpace = reinterpret_cast<WZ_PHYSICAL::WZ_PHYSICAL_SPACE*>(*reinterpret_cast<void**>(uWallBase));
+		WZ_MOB::MOB_POOL* mobPool = reinterpret_cast<WZ_MOB::MOB_POOL*>(*reinterpret_cast<void**>(uMobPool));
+	
+		WZ_MOB::MAPLE_MOB* pCurrentMob =  mobPool->pHeadMob;
+
+
+		for(int i = 0; i < mobPool->nCount;i++)
+		{
+			WZ_MOB::WZ_2D_DATA* layerData = pCurrentMob->pMobData->pLayer->p2D_Data;
+			POINT p = { layerData->nX + nRangeX , layerData->nY + nRangeY };
+
+			if(pCurrentMob->pMobData->rect.nLeft && CheckWalls(&physicalSpace->rWall,p.x,p.y))
+			{
+				SetTeleport(p.x,p.y);
+				break;
+			}
+			pCurrentMob = WZ_MOB::GetNext(pCurrentMob);
+		}
+	}
+
+	CodeCave(Kami)
+	{
+		call [uGetTime] //orig opcode (GetTime)
+		pushad
+		call DoKami
+		popad
+		jmp uKamiReturn
+	}
+	EndCodeCave
+	CMemory cmKami(uKamiHook, CaveKami, 0, true);
 }
+
