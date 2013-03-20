@@ -439,6 +439,10 @@ void MainForm::cbVami_CheckedChanged(System::Object^  sender, System::EventArgs^
 {
 	//NewThread(Vami);
 }
+void MainForm::cbKami_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmKami.Enable(this->cbKami->Checked);
+}
 
 #pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
 void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)

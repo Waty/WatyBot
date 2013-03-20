@@ -339,6 +339,7 @@ private: System::Windows::Forms::CheckBox^  cbPVP;
 private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 private: System::Windows::Forms::NumericUpDown^  nudPVPDelay;
 private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
+private: System::Windows::Forms::CheckBox^  cbKami;
 
 
 
@@ -548,6 +549,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			this->Skill3Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->Skill4Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->bwNextChannel = (gcnew System::ComponentModel::BackgroundWorker());
+			this->cbKami = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1209,6 +1211,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// 
 			// gbMiscHacks
 			// 
+			this->gbMiscHacks->Controls->Add(this->cbKami);
 			this->gbMiscHacks->Controls->Add(this->cbVami);
 			this->gbMiscHacks->Controls->Add(this->cbHideDamage);
 			this->gbMiscHacks->Controls->Add(this->cbCPUHack);
@@ -2449,6 +2452,17 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 			// 
 			this->bwNextChannel->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::bwNextChannel_DoWork);
 			// 
+			// cbKami
+			// 
+			this->cbKami->AutoSize = true;
+			this->cbKami->Location = System::Drawing::Point(261, 91);
+			this->cbKami->Name = L"cbKami";
+			this->cbKami->Size = System::Drawing::Size(49, 17);
+			this->cbKami->TabIndex = 10;
+			this->cbKami->Text = L"Kami";
+			this->cbKami->UseVisualStyleBackColor = true;
+			this->cbKami->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbKami_CheckedChanged);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2603,6 +2617,7 @@ private: System::Void Skill4Timer_Tick(System::Object^  sender, System::EventArg
 private: System::Void cbVami_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void bwNextChannel_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
+private: System::Void cbKami_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion

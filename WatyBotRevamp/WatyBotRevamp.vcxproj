@@ -125,6 +125,7 @@
     <ClInclude Include="Pointers.h" />
     <ClInclude Include="SendPacket.h" />
     <ClInclude Include="SPControl.h" />
+    <ClInclude Include="MobPool.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
