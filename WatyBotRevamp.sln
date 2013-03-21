@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WatyBotInjector", "WatyBotI
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WatyBotUpdater", "WatyBotUpdater\WatyBotUpdater.vcxproj", "{79C2A55C-464A-477D-914C-C70073F49335}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WatyBotManager", "WatyBotManager\WatyBotManager.vcxproj", "{2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,16 @@ Global
 		{79C2A55C-464A-477D-914C-C70073F49335}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{79C2A55C-464A-477D-914C-C70073F49335}.Release|Win32.ActiveCfg = Release|Win32
 		{79C2A55C-464A-477D-914C-C70073F49335}.Release|Win32.Build.0 = Release|Win32
+		{2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5}.Debug|Win32.Build.0 = Debug|Win32
+		{2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5}.Release|Any CPU.ActiveCfg = Release|Win32
+		{2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5}.Release|Win32.ActiveCfg = Release|Win32
+		{2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
