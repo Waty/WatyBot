@@ -429,6 +429,7 @@ private: System::Windows::Forms::CheckBox^  cbKami;
 			this->HPBackground = (gcnew System::Windows::Forms::PictureBox());
 			this->HacksTab = (gcnew System::Windows::Forms::TabPage());
 			this->gbMiscHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbKami = (gcnew System::Windows::Forms::CheckBox());
 			this->cbVami = (gcnew System::Windows::Forms::CheckBox());
 			this->cbHideDamage = (gcnew System::Windows::Forms::CheckBox());
 			this->cbCPUHack = (gcnew System::Windows::Forms::CheckBox());
@@ -549,7 +550,6 @@ private: System::Windows::Forms::CheckBox^  cbKami;
 			this->Skill3Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->Skill4Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->bwNextChannel = (gcnew System::ComponentModel::BackgroundWorker());
-			this->cbKami = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1229,6 +1229,18 @@ private: System::Windows::Forms::CheckBox^  cbKami;
 			this->gbMiscHacks->TabStop = false;
 			this->gbMiscHacks->Text = L"Other";
 			// 
+			// cbKami
+			// 
+			this->cbKami->AutoSize = true;
+			this->cbKami->Location = System::Drawing::Point(261, 91);
+			this->cbKami->Name = L"cbKami";
+			this->cbKami->Size = System::Drawing::Size(49, 17);
+			this->cbKami->TabIndex = 10;
+			this->cbKami->Text = L"Kami";
+			this->cbKami->UseVisualStyleBackColor = true;
+			this->cbKami->Visible = false;
+			this->cbKami->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbKami_CheckedChanged);
+			// 
 			// cbVami
 			// 
 			this->cbVami->AutoSize = true;
@@ -1239,6 +1251,7 @@ private: System::Windows::Forms::CheckBox^  cbKami;
 			this->cbVami->TabIndex = 9;
 			this->cbVami->Text = L"KB UA";
 			this->cbVami->UseVisualStyleBackColor = true;
+			this->cbVami->Visible = false;
 			this->cbVami->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbVami_CheckedChanged);
 			// 
 			// cbHideDamage
@@ -2451,17 +2464,6 @@ private: System::Windows::Forms::CheckBox^  cbKami;
 			// bwNextChannel
 			// 
 			this->bwNextChannel->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::bwNextChannel_DoWork);
-			// 
-			// cbKami
-			// 
-			this->cbKami->AutoSize = true;
-			this->cbKami->Location = System::Drawing::Point(261, 91);
-			this->cbKami->Name = L"cbKami";
-			this->cbKami->Size = System::Drawing::Size(49, 17);
-			this->cbKami->TabIndex = 10;
-			this->cbKami->Text = L"Kami";
-			this->cbKami->UseVisualStyleBackColor = true;
-			this->cbKami->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbKami_CheckedChanged);
 			// 
 			// MainForm
 			// 
