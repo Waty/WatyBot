@@ -252,9 +252,8 @@ namespace Hacks
 	CMemory cmHideDamage(HideDamageAddy1, bHideDamage1, 2, HideDamageAddy2, bHideDamage2, 2, HideDamageAddy3, bHideDamage3, 2);
  
 	/////Mercedes Combos without comboing
-	DWORD dwMercedesCombo = 0x00BB1B4B;
 	BYTE bMercedesCombo[] = {0xEB};
-	CMemory cmMercedesCombo(dwMercedesCombo, bMercedesCombo, 1);
+	CMemory cmMercedesCombo(MercedesComboAddy, bMercedesCombo, 1);
  
 	/////PvP Disable Checks
 	BYTE bPVP1[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
