@@ -220,14 +220,14 @@ namespace Hacks
 	{
 		mov [eax],edi //orig code
  
-		push eax
+		pushad
 		call getAttackCount
 		cmp eax, 90 // Attack Count offset
+		popad
 		jl UAexit
 		add dword ptr [eax],0x08
  
 		UAexit:
-		pop eax
 		pop edi
 		mov [eax+0x04],ecx
 		jmp dwUARet
