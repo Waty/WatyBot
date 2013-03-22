@@ -28,7 +28,7 @@
 #define SPControlAddy 0xB8A54A
 #define Godmode50SecAddy1 0xBA1C9E
 #define Godmode50SecAddy2 0xBA1CB9
-#define LogoSkipperAddy 0xError
+#define LogoSkipperAddy 0xf5e0b8
 #define ItemVacAddy 0x006D44C4
 #define ItemVacCall 0x6E8FC0
 #define ViewSwearsAddy 0x88546B
