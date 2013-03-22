@@ -340,6 +340,8 @@ private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 private: System::Windows::Forms::NumericUpDown^  nudPVPDelay;
 private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 private: System::Windows::Forms::CheckBox^  cbKami;
+private: System::Windows::Forms::NumericUpDown^  nudPvPCCDelay;
+private: System::Windows::Forms::Label^  lPvPCCDelay;
 
 
 
@@ -550,6 +552,8 @@ private: System::Windows::Forms::CheckBox^  cbKami;
 			this->Skill3Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->Skill4Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->bwNextChannel = (gcnew System::ComponentModel::BackgroundWorker());
+			this->lPvPCCDelay = (gcnew System::Windows::Forms::Label());
+			this->nudPvPCCDelay = (gcnew System::Windows::Forms::NumericUpDown());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -589,6 +593,7 @@ private: System::Windows::Forms::CheckBox^  cbKami;
 			this->gbHotKeys->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->BeginInit();
 			this->gbPointers->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPvPCCDelay))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -2154,6 +2159,8 @@ private: System::Windows::Forms::CheckBox^  cbKami;
 			// 
 			// gbHotKeys
 			// 
+			this->gbHotKeys->Controls->Add(this->nudPvPCCDelay);
+			this->gbHotKeys->Controls->Add(this->lPvPCCDelay);
 			this->gbHotKeys->Controls->Add(this->nudLoadDelay);
 			this->gbHotKeys->Controls->Add(this->lLoadDelay);
 			this->gbHotKeys->Controls->Add(this->ddbHotKeySendPacket);
@@ -2184,7 +2191,7 @@ private: System::Windows::Forms::CheckBox^  cbKami;
 			// lLoadDelay
 			// 
 			this->lLoadDelay->AutoSize = true;
-			this->lLoadDelay->Location = System::Drawing::Point(3, 315);
+			this->lLoadDelay->Location = System::Drawing::Point(3, 318);
 			this->lLoadDelay->Name = L"lLoadDelay";
 			this->lLoadDelay->Size = System::Drawing::Size(130, 13);
 			this->lLoadDelay->TabIndex = 29;
@@ -2333,6 +2340,7 @@ private: System::Windows::Forms::CheckBox^  cbKami;
 			this->lKBCoords->Size = System::Drawing::Size(105, 13);
 			this->lKBCoords->TabIndex = 30;
 			this->lKBCoords->Text = L"KBCoords: (123,123)";
+			this->lKBCoords->Visible = false;
 			// 
 			// lKnockBack
 			// 
@@ -2342,6 +2350,7 @@ private: System::Windows::Forms::CheckBox^  cbKami;
 			this->lKnockBack->Size = System::Drawing::Size(69, 13);
 			this->lKnockBack->TabIndex = 29;
 			this->lKnockBack->Text = L"KnockBack: ";
+			this->lKnockBack->Visible = false;
 			// 
 			// lCharacterpID
 			// 
@@ -2351,6 +2360,7 @@ private: System::Windows::Forms::CheckBox^  cbKami;
 			this->lCharacterpID->Size = System::Drawing::Size(79, 13);
 			this->lCharacterpID->TabIndex = 28;
 			this->lCharacterpID->Text = L"Character pID: ";
+			this->lCharacterpID->Visible = false;
 			// 
 			// lMapID
 			// 
@@ -2465,6 +2475,23 @@ private: System::Windows::Forms::CheckBox^  cbKami;
 			// 
 			this->bwNextChannel->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::bwNextChannel_DoWork);
 			// 
+			// lPvPCCDelay
+			// 
+			this->lPvPCCDelay->AutoSize = true;
+			this->lPvPCCDelay->Location = System::Drawing::Point(6, 292);
+			this->lPvPCCDelay->Name = L"lPvPCCDelay";
+			this->lPvPCCDelay->Size = System::Drawing::Size(74, 13);
+			this->lPvPCCDelay->TabIndex = 31;
+			this->lPvPCCDelay->Text = L"PvP CC Delay";
+			// 
+			// nudPvPCCDelay
+			// 
+			this->nudPvPCCDelay->Location = System::Drawing::Point(131, 285);
+			this->nudPvPCCDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
+			this->nudPvPCCDelay->Name = L"nudPvPCCDelay";
+			this->nudPvPCCDelay->Size = System::Drawing::Size(58, 20);
+			this->nudPvPCCDelay->TabIndex = 32;
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2530,6 +2557,7 @@ private: System::Windows::Forms::CheckBox^  cbKami;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->EndInit();
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPvPCCDelay))->EndInit();
 			this->ResumeLayout(false);
 
 		}

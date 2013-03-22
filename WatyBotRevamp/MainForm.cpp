@@ -179,49 +179,47 @@ void MainForm::CCSwitch()
 	case DC:
 		if(InGame())
 		{
-			CCTimedCheckBox->Checked = false;
-			CCPeopleCheckBox->Checked = false;
-			CCAttacksCheckBox->Checked = false;
 			SendPacketFunction(marshal_as<String^>(Packets::ChangeCharacter), strError);
 			ShowInfo("WatyBot DC'd you");
 			break;
 		}
 	}
 }
-void MainForm::bwNextChannel_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
+bool TryCC()
 {
-	bool GND = cbNDAllAttacks->Checked, PVP = cbPVP->Checked;
-	if(GND)
-	{
-		cbNDAllAttacks->Checked = false;
-		Sleep(5500);
-	}
-	if(PVP)
-	{
-		cbPVP->Checked = false;
-		Sleep(5000);
-	}
-
 	srand (time(NULL));
 	int channel = rand()%14;
-	while(getChannel() != channel)
-	{
-		CCing = true;
-		while(getBreathValue() > 0)	Sleep(250);
-		Sleep(500);
-		try 
-		{
-			if(WallBasePtr) CField_SendTransferChannelRequest(channel);
-		}
-		catch (...){}
-		Sleep(1000);
-	}
-	CCing = false;
 
-	if(GND) cbNDAllAttacks->Checked = true;
+	while(getBreathValue() > 0)	Sleep(250);
+	Sleep(500);
+	try 
+	{
+		if(WallBasePtr) CField_SendTransferChannelRequest(channel);
+	}
+	catch (...){return false;}
+
+	Sleep(500);
+	if(channel == getChannel()) return true;
+
+	else return false;
+}
+void MainForm::bwNextChannel_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
+{
+	bool PVP = cbPVP->Checked;
 	if(PVP)
 	{
-		for(int i; i <200; i++)
+		if(PVP) cbPVP->Checked = false;
+		Sleep(5500);
+	}
+
+	CCing = true;
+	while(!TryCC()) Sleep(1000);
+	CCing = false;
+
+	if(PVP)
+	{
+		Sleep(Convert::ToInt32(nudPvPCCDelay->Value));
+		for(int i = 0; i < 200; i++)
 		{
 			SendKey(KeyCodes[AttackComboBox->SelectedIndex]);
 			Sleep(10);
