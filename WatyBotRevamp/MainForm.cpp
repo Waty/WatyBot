@@ -191,7 +191,7 @@ bool TryCC()
 	int channel = rand()%14;
 
 	while(getBreathValue() > 0)	Sleep(250);
-	Sleep(500);
+	Sleep(1500);
 	try 
 	{
 		if(WallBasePtr) CField_SendTransferChannelRequest(channel);
