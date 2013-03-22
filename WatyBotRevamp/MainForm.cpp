@@ -1060,7 +1060,9 @@ void MainForm::SaveSettings()
 	pt.add("CCPeopleHotKey", this->ddbHotKeyCCPeople->SelectedIndex);
 	pt.add("SendPacketHotKey", this->ddbHotKeySendPacket->SelectedIndex);
 
+	//Info Tab
 	pt.add("LoadSettingsDelay", Convert::ToInt32(this->nudLoadDelay->Value));
+	pt.add("PvPCCDelay", Convert::ToInt32(this->nudPvPCCDelay->Value));
 
 	//Hacks Tab
 	pt.add("PvPDelay", Convert::ToInt32(this->nudPVPDelay->Value));
@@ -1123,7 +1125,9 @@ void MainForm::LoadSettings()
 		this->ddbHotKeyCCPeople->SelectedIndex = pt.get<int>("CCPeopleHotKey");
 		this->ddbHotKeySendPacket->SelectedIndex = pt.get<int>("SendPacketHotKey");
 
+		//Info Tab
 		this->nudLoadDelay->Text = pt.get<int>("LoadSettingsDelay", 1000).ToString();
+		this->nudPvPCCDelay->Text = pt.get<int>("PvPCCDelay", 2000).ToString();
 		
 		//Hacks Tab
 		this->nudPVPDelay->Text = pt.get<int>("PvPDelay").ToString();
