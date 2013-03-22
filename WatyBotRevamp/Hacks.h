@@ -164,9 +164,9 @@ namespace Hacks
 	CMemory cm50SecGM(Godmode50SecAddy1, b50SecGM1, 1, Godmode50SecAddy2, b50SecGM2, 2);
  
 	/////Logo Skipper
-	DWORD dwLogoSkipper = 0x0069FAA0;
-	BYTE bLogoSkipper[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0xE9, 0xA5, 0xE2, 0xFF, 0xFF, 0x90, 0x90, 0x90, 0x90, 0x90};
-	CMemory cmLogoSkipper(dwLogoSkipper, bLogoSkipper, sizeof(bLogoSkipper));
+	DWORD dwLogoSkipper = LogoSkipperAddy;
+	BYTE bLogoSkipper[] = {0xE0, 0xF0, 0x69};
+	CMemory cmLogoSkipper(dwLogoSkipper, bLogoSkipper, 3);
  
 	/////(semi) Item Vac
 	DWORD dwItemVacCall = ItemVacCall;
