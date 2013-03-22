@@ -1,4 +1,5 @@
 #include "MainForm.h"
+using namespace WatyBotManager;
 
 void Main()
 {
