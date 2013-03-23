@@ -52,3 +52,8 @@
 #define SendAddy 0x004CAAF0
 #define SendClassAddy 0x00490B87
 #define ClientSocketAddy 0x011DA318
+
+#define pIDOffset 0x29D8
+#define KBOffset 0x124
+#define KBXOffset (KBOffset + 0x0C)
+#define KBYOffset (KBOffset + 0x10)
