@@ -202,6 +202,7 @@ void CMemory::RestoreMem()
 
 		//Write Memory1
 		memcpy_s((void*)this->ulAddress, bCount, (void*)this->oldMem, bCount);
+		delete[] this->oldMem;
 
 		//VirtualProtect1 stop
 		VirtualProtect((void*)ulAddress, bCount, dwOldProtect, &dwOldProtect);
@@ -215,6 +216,7 @@ void CMemory::RestoreMem()
 		
 		//Write Memory
 		memcpy_s((void*)this->ulAddress2, bCount2, (void*)this->oldMem2, bCount2);
+		delete[] this->oldMem2;
 
 		//VirtualProtect2 stop
 		VirtualProtect((void*)ulAddress2, bCount2, dwOldProtect2, &dwOldProtect2);
@@ -228,6 +230,7 @@ void CMemory::RestoreMem()
 
 		//Write Memory
 		memcpy_s((void*)this->ulAddress3, bCount3, (void*)this->oldMem3, bCount3);
+		delete[] this->oldMem3;
 
 		//VirtualProtect3 stop
 		VirtualProtect((void*)ulAddress3, bCount3, dwOldProtect3, &dwOldProtect3);
@@ -241,6 +244,7 @@ void CMemory::RestoreMem()
 
 		//Write Memory
 		memcpy_s((void*)this->ulAddress4, bCount4, (void*)this->oldMem4, bCount4);
+		delete[] this->oldMem4;
 
 		//VirtualProtect4 stop
 		VirtualProtect((void*)ulAddress4, bCount4, dwOldProtect4, &dwOldProtect4);
