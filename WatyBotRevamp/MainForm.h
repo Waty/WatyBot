@@ -432,6 +432,7 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->HPBackground = (gcnew System::Windows::Forms::PictureBox());
 			this->HacksTab = (gcnew System::Windows::Forms::TabPage());
 			this->gbMiscHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbNoFadeStages = (gcnew System::Windows::Forms::CheckBox());
 			this->cbKami = (gcnew System::Windows::Forms::CheckBox());
 			this->cbVami = (gcnew System::Windows::Forms::CheckBox());
 			this->cbHideDamage = (gcnew System::Windows::Forms::CheckBox());
@@ -555,7 +556,6 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->Skill3Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->Skill4Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->bwNextChannel = (gcnew System::ComponentModel::BackgroundWorker());
-			this->cbNoFadeStages = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1237,6 +1237,18 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->gbMiscHacks->TabStop = false;
 			this->gbMiscHacks->Text = L"Other";
 			// 
+			// cbNoFadeStages
+			// 
+			this->cbNoFadeStages->AutoSize = true;
+			this->cbNoFadeStages->Location = System::Drawing::Point(159, 91);
+			this->cbNoFadeStages->Name = L"cbNoFadeStages";
+			this->cbNoFadeStages->Size = System::Drawing::Size(100, 17);
+			this->cbNoFadeStages->TabIndex = 11;
+			this->cbNoFadeStages->Text = L"No FadeStages";
+			this->InfoToolTip->SetToolTip(this->cbNoFadeStages, L"Reduces CPU usage");
+			this->cbNoFadeStages->UseVisualStyleBackColor = true;
+			this->cbNoFadeStages->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoFadeStages_CheckedChanged);
+			// 
 			// cbKami
 			// 
 			this->cbKami->AutoSize = true;
@@ -1267,9 +1279,9 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->cbHideDamage->AutoSize = true;
 			this->cbHideDamage->Location = System::Drawing::Point(6, 91);
 			this->cbHideDamage->Name = L"cbHideDamage";
-			this->cbHideDamage->Size = System::Drawing::Size(91, 17);
+			this->cbHideDamage->Size = System::Drawing::Size(147, 17);
 			this->cbHideDamage->TabIndex = 8;
-			this->cbHideDamage->Text = L"Hide Damage";
+			this->cbHideDamage->Text = L"Hide Damage/Animations";
 			this->InfoToolTip->SetToolTip(this->cbHideDamage, L"Hides all the damage you do, use if you DC because you have to much hits");
 			this->cbHideDamage->UseVisualStyleBackColor = true;
 			this->cbHideDamage->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbHideDamage_CheckedChanged);
@@ -2494,18 +2506,6 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			// bwNextChannel
 			// 
 			this->bwNextChannel->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::bwNextChannel_DoWork);
-			// 
-			// cbNoFadeStages
-			// 
-			this->cbNoFadeStages->AutoSize = true;
-			this->cbNoFadeStages->Location = System::Drawing::Point(159, 91);
-			this->cbNoFadeStages->Name = L"cbNoFadeStages";
-			this->cbNoFadeStages->Size = System::Drawing::Size(100, 17);
-			this->cbNoFadeStages->TabIndex = 11;
-			this->cbNoFadeStages->Text = L"No FadeStages";
-			this->InfoToolTip->SetToolTip(this->cbNoFadeStages, L"Reduces CPU usage");
-			this->cbNoFadeStages->UseVisualStyleBackColor = true;
-			this->cbNoFadeStages->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoFadeStages_CheckedChanged);
 			// 
 			// MainForm
 			// 
