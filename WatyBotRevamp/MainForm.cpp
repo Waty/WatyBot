@@ -388,6 +388,10 @@ void MainForm::cbMercedesCombo_CheckedChanged(System::Object^  sender, System::E
 {
 	Hacks::cmMercedesCombo.Enable(cbMercedesCombo->Checked);
 }
+void MainForm::cbNoFadestages_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmNoFadeStage.Enable(cbNoFadestages->Checked);
+}
 void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	if(ddbPVPSkills->SelectedIndex < 0)
