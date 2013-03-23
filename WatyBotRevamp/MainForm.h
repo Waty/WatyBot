@@ -342,6 +342,7 @@ private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
 private: System::Windows::Forms::CheckBox^  cbKami;
 private: System::Windows::Forms::NumericUpDown^  nudPvPCCDelay;
 private: System::Windows::Forms::Label^  lPvPCCDelay;
+private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 
 
 
@@ -517,6 +518,8 @@ private: System::Windows::Forms::Label^  lPvPCCDelay;
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
 			this->bSaveSettings = (gcnew System::Windows::Forms::Button());
 			this->gbHotKeys = (gcnew System::Windows::Forms::GroupBox());
+			this->nudPvPCCDelay = (gcnew System::Windows::Forms::NumericUpDown());
+			this->lPvPCCDelay = (gcnew System::Windows::Forms::Label());
 			this->nudLoadDelay = (gcnew System::Windows::Forms::NumericUpDown());
 			this->lLoadDelay = (gcnew System::Windows::Forms::Label());
 			this->ddbHotKeySendPacket = (gcnew System::Windows::Forms::ComboBox());
@@ -552,8 +555,7 @@ private: System::Windows::Forms::Label^  lPvPCCDelay;
 			this->Skill3Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->Skill4Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->bwNextChannel = (gcnew System::ComponentModel::BackgroundWorker());
-			this->lPvPCCDelay = (gcnew System::Windows::Forms::Label());
-			this->nudPvPCCDelay = (gcnew System::Windows::Forms::NumericUpDown());
+			this->cbNoFadeStages = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -591,9 +593,9 @@ private: System::Windows::Forms::Label^  lPvPCCDelay;
 			this->SPControlContextMenu->SuspendLayout();
 			this->InfoTab->SuspendLayout();
 			this->gbHotKeys->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPvPCCDelay))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->BeginInit();
 			this->gbPointers->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPvPCCDelay))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -1216,6 +1218,7 @@ private: System::Windows::Forms::Label^  lPvPCCDelay;
 			// 
 			// gbMiscHacks
 			// 
+			this->gbMiscHacks->Controls->Add(this->cbNoFadeStages);
 			this->gbMiscHacks->Controls->Add(this->cbKami);
 			this->gbMiscHacks->Controls->Add(this->cbVami);
 			this->gbMiscHacks->Controls->Add(this->cbHideDamage);
@@ -1237,7 +1240,7 @@ private: System::Windows::Forms::Label^  lPvPCCDelay;
 			// cbKami
 			// 
 			this->cbKami->AutoSize = true;
-			this->cbKami->Location = System::Drawing::Point(261, 91);
+			this->cbKami->Location = System::Drawing::Point(255, 37);
 			this->cbKami->Name = L"cbKami";
 			this->cbKami->Size = System::Drawing::Size(49, 17);
 			this->cbKami->TabIndex = 10;
@@ -1250,7 +1253,7 @@ private: System::Windows::Forms::Label^  lPvPCCDelay;
 			// 
 			this->cbVami->AutoSize = true;
 			this->cbVami->Enabled = false;
-			this->cbVami->Location = System::Drawing::Point(159, 91);
+			this->cbVami->Location = System::Drawing::Point(246, 14);
 			this->cbVami->Name = L"cbVami";
 			this->cbVami->Size = System::Drawing::Size(58, 17);
 			this->cbVami->TabIndex = 9;
@@ -2180,6 +2183,23 @@ private: System::Windows::Forms::Label^  lPvPCCDelay;
 			this->gbHotKeys->TabStop = false;
 			this->gbHotKeys->Text = L"Hot Keys";
 			// 
+			// nudPvPCCDelay
+			// 
+			this->nudPvPCCDelay->Location = System::Drawing::Point(131, 285);
+			this->nudPvPCCDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
+			this->nudPvPCCDelay->Name = L"nudPvPCCDelay";
+			this->nudPvPCCDelay->Size = System::Drawing::Size(58, 20);
+			this->nudPvPCCDelay->TabIndex = 32;
+			// 
+			// lPvPCCDelay
+			// 
+			this->lPvPCCDelay->AutoSize = true;
+			this->lPvPCCDelay->Location = System::Drawing::Point(6, 292);
+			this->lPvPCCDelay->Name = L"lPvPCCDelay";
+			this->lPvPCCDelay->Size = System::Drawing::Size(74, 13);
+			this->lPvPCCDelay->TabIndex = 31;
+			this->lPvPCCDelay->Text = L"PvP CC Delay";
+			// 
 			// nudLoadDelay
 			// 
 			this->nudLoadDelay->Location = System::Drawing::Point(131, 311);
@@ -2475,22 +2495,17 @@ private: System::Windows::Forms::Label^  lPvPCCDelay;
 			// 
 			this->bwNextChannel->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::bwNextChannel_DoWork);
 			// 
-			// lPvPCCDelay
+			// cbNoFadeStages
 			// 
-			this->lPvPCCDelay->AutoSize = true;
-			this->lPvPCCDelay->Location = System::Drawing::Point(6, 292);
-			this->lPvPCCDelay->Name = L"lPvPCCDelay";
-			this->lPvPCCDelay->Size = System::Drawing::Size(74, 13);
-			this->lPvPCCDelay->TabIndex = 31;
-			this->lPvPCCDelay->Text = L"PvP CC Delay";
-			// 
-			// nudPvPCCDelay
-			// 
-			this->nudPvPCCDelay->Location = System::Drawing::Point(131, 285);
-			this->nudPvPCCDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
-			this->nudPvPCCDelay->Name = L"nudPvPCCDelay";
-			this->nudPvPCCDelay->Size = System::Drawing::Size(58, 20);
-			this->nudPvPCCDelay->TabIndex = 32;
+			this->cbNoFadeStages->AutoSize = true;
+			this->cbNoFadeStages->Location = System::Drawing::Point(159, 91);
+			this->cbNoFadeStages->Name = L"cbNoFadeStages";
+			this->cbNoFadeStages->Size = System::Drawing::Size(100, 17);
+			this->cbNoFadeStages->TabIndex = 11;
+			this->cbNoFadeStages->Text = L"No FadeStages";
+			this->InfoToolTip->SetToolTip(this->cbNoFadeStages, L"Reduces CPU usage");
+			this->cbNoFadeStages->UseVisualStyleBackColor = true;
+			this->cbNoFadeStages->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoFadeStages_CheckedChanged);
 			// 
 			// MainForm
 			// 
@@ -2554,10 +2569,10 @@ private: System::Windows::Forms::Label^  lPvPCCDelay;
 			this->InfoTab->ResumeLayout(false);
 			this->gbHotKeys->ResumeLayout(false);
 			this->gbHotKeys->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPvPCCDelay))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->EndInit();
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPvPCCDelay))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -2647,6 +2662,7 @@ private: System::Void cbVami_CheckedChanged(System::Object^  sender, System::Eve
 private: System::Void cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void bwNextChannel_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
 private: System::Void cbKami_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbNoFadeStages_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion

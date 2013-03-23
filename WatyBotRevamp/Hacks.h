@@ -287,8 +287,8 @@ namespace Hacks
 	CMemory cmPVP2(PvPInjectAddy, CavePVP, 1, true);
 	
 	/////No Fadestarge
-	BYTE bNoFadeStage[] = {0xc2, 0x04, 0x00};
-	CMemory cmNoFadeStage(Fadeaddy1, bNoFadeStage, 3, Fadeaddy2, bNoFadeStage, 3);
+	BYTE bNoFadeStages[] = {0xc2, 0x04, 0x00};
+	CMemory cmNoFadeStages(Fadeaddy1, bNoFadeStages, 3, Fadeaddy2, bNoFadeStages, 3);
 	/*
 	/////	Kami
 	unsigned int uKamiHook = 0x00BB1149, uKamiReturn = uKamiHook + 5;

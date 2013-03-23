@@ -388,9 +388,9 @@ void MainForm::cbMercedesCombo_CheckedChanged(System::Object^  sender, System::E
 {
 	Hacks::cmMercedesCombo.Enable(cbMercedesCombo->Checked);
 }
-void MainForm::cbNoFadestages_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::cbNoFadeStages_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::cmNoFadeStage.Enable(cbNoFadestages->Checked);
+	Hacks::cmNoFadeStages.Enable(cbNoFadeStages->Checked);
 }
 void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
