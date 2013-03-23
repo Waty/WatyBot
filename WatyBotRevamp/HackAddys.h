@@ -53,3 +53,5 @@
 #define PvPChecksAddy3 0xBBFEAC
 #define PvPInjectAddy 0xBBFE11
 #define CCAddy 0x568800
+#define Fadeaddy1 0x826e70
+#define Fadeaddy2 0x827320
