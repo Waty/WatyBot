@@ -194,17 +194,20 @@ void CMemory::WriteMem()
 
 void CMemory::RestoreMem()
 {
-	//VirtualProtect1 start
-	DWORD dwOldProtect;
-	VirtualProtect((void*)ulAddress, bCount, PAGE_EXECUTE_READWRITE, &dwOldProtect);
+	if(this->Type == asmtype || singleaddy)
+	{
+		//VirtualProtect1 start
+		DWORD dwOldProtect;
+		VirtualProtect((void*)ulAddress, bCount, PAGE_EXECUTE_READWRITE, &dwOldProtect);
 
-	//Write Memory1
-	memcpy_s((void*)this->ulAddress, bCount, (void*)this->oldMem, bCount);
+		//Write Memory1
+		memcpy_s((void*)this->ulAddress, bCount, (void*)this->oldMem, bCount);
 
-	//VirtualProtect1 stop
-	VirtualProtect((void*)ulAddress, bCount, dwOldProtect, &dwOldProtect);
+		//VirtualProtect1 stop
+		VirtualProtect((void*)ulAddress, bCount, dwOldProtect, &dwOldProtect);
+	}
 	
-	if (this->Type >= cType::twoaddys)
+	if (this->Type == twoaddys || threeaddys || fouraddys)
 	{
 		//VirtualProtect2 start
 		DWORD dwOldProtect2;
@@ -217,7 +220,7 @@ void CMemory::RestoreMem()
 		VirtualProtect((void*)ulAddress2, bCount2, dwOldProtect2, &dwOldProtect2);
 	}
 
-	if (this->Type >= cType::threeaddys)
+	if (this->Type == threeaddys || fouraddys)
 	{
 		//VirtualProtect3 start
 		DWORD dwOldProtect3;
@@ -230,7 +233,7 @@ void CMemory::RestoreMem()
 		VirtualProtect((void*)ulAddress3, bCount3, dwOldProtect3, &dwOldProtect3);
 	}
 
-	if (this->Type >= cType::fouraddys)
+	if (this->Type == fouraddys)
 	{
 		//VirtualProtect4 start
 		DWORD dwOldProtect4;
