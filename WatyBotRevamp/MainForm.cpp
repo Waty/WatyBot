@@ -80,24 +80,24 @@ int getChannel()
 }
 int getCharpID()
 {
-	/*if(*(int*)WallBasePtr)	return (int) ReadPointer(CharBasePtr, pIDOffset);
-	else*/ return 0;
+	if(*(int*)WallBasePtr)	return (int) ReadPointer(CharBasePtr, pIDOffset);
+	else return 0;
 }
-/*	int getKnockBack()
+int getKnockBack()
 {
-	if(*(int*)WallBasePtr)	return (int) ReadPointer(getCharpID(), KnockBackOffset);
+	if(*(int*)WallBasePtr)	return (int) ReadPointer(getCharpID(), KBOffset);
 	else return 0;
 }
 int getKnockBackX()
 {
-	if(*(int*)WallBasePtr)	return (int) ReadPointer(getCharpID(), KnockBackXOffset);
+	if(*(int*)WallBasePtr)	return (int) ReadPointer(getCharpID(), KBXOffset);
 	else return 0;
 }
 int getKnockBackY()
 {
-	if(*(int*)WallBasePtr)	return (int) ReadPointer(getCharpID(), KnockBackYOffset);
+	if(*(int*)WallBasePtr)	return (int) ReadPointer(getCharpID(), KBYOffset);
 	else return 0;
-}*/
+}
 	
 bool InGame()
 {
