@@ -751,8 +751,8 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	this->BreathLabel->Text =		"Breath: "		+ getBreathValue();
 	this->lMapID->Text =			"MapID: "		+ getMapID();
 	this->lCharacterpID->Text =		"Char pID: "	+ getCharpID();
-/*	this->lKnockBack->Text =		"KnockBack: "	+ getKnockBack();
-	this->lKBCoords->Text =			"KB: (" + getKnockBackX() + "," + getKnockBackY() + ")";*/
+	this->lKnockBack->Text =		"KnockBack: "	+ getKnockBack();
+	this->lKBCoords->Text =			"KB: (" + getKnockBackX() + "," + getKnockBackY() + ")";
 	
 	MainForm::AutoPot();
 	MainForm::AutoCC();
