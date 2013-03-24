@@ -2372,7 +2372,6 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->lKBCoords->Size = System::Drawing::Size(105, 13);
 			this->lKBCoords->TabIndex = 30;
 			this->lKBCoords->Text = L"KBCoords: (123,123)";
-			this->lKBCoords->Visible = false;
 			// 
 			// lKnockBack
 			// 
@@ -2382,7 +2381,6 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->lKnockBack->Size = System::Drawing::Size(69, 13);
 			this->lKnockBack->TabIndex = 29;
 			this->lKnockBack->Text = L"KnockBack: ";
-			this->lKnockBack->Visible = false;
 			// 
 			// lCharacterpID
 			// 
@@ -2392,7 +2390,6 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->lCharacterpID->Size = System::Drawing::Size(79, 13);
 			this->lCharacterpID->TabIndex = 28;
 			this->lCharacterpID->Text = L"Character pID: ";
-			this->lCharacterpID->Visible = false;
 			// 
 			// lMapID
 			// 
