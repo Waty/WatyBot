@@ -6,7 +6,7 @@
 PacketVector vPacket;
 int SpammedPackets;
 
-void AddPacket(string name, string data)
+void PacketSender::AddPacket(string name, string data)
 {
 	sPacket p;
 	p.name = name;
@@ -14,18 +14,18 @@ void AddPacket(string name, string data)
 	vPacket.push_back(p);
 }
 
-void DeletePacket(int i)
+void PacketSender::DeletePacket(int i)
 {
 	vPacket.erase(vPacket.begin() + i);
 }
 
-void EditPacket(int i, string name, string data)
+void PacketSender::EditPacket(int i, string name, string data)
 {
 	vPacket.at(i).name = name;
 	vPacket.at(i).data = data;
 }
 
-void WritePacketXML(string filename)
+void PacketSender::Save(string filename)
 {
 	ofstream file(filename);
 	using boost::property_tree::ptree;
@@ -40,7 +40,7 @@ void WritePacketXML(string filename)
 	write_xml(file, pt);
 }
 
-void ReadPacketXML(string filename)
+void PacketSender::Load(string filename)
 {
 	ifstream file(filename);
 	using boost::property_tree::ptree;

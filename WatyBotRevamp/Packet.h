@@ -12,10 +12,13 @@ struct sPacket
 typedef vector<sPacket> PacketVector;
 extern PacketVector vPacket;
 
-extern void AddPacket(string name, string data);
-extern void DeletePacket(int index);
-extern void EditPacket(int i, string name, string data);
-extern void WritePacketXML(string filename);
-extern void ReadPacketXML(string filename);
+namespace PacketSender
+{
+	void AddPacket(string name, string data);
+	void DeletePacket(int index);
+	void EditPacket(int i, string name, string data);
+	void Save(string filename);
+	void Load(string filename);
+}
 
 extern int SpammedPackets;
