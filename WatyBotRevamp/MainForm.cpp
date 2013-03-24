@@ -438,7 +438,7 @@ void MainForm::cbKami_CheckedChanged(System::Object^  sender, System::EventArgs^
 //	Hacks::cmKami.Enable(this->cbKami->Checked);
 }
 
-#pragma region AutoHP/MP/Attack/Loot/CC GuiEvents
+//AutoHP/MP/Attack/Loot/Skill checkboxes/events
 void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	if(HPCheckBox->Checked)
@@ -711,7 +711,8 @@ void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System:
 		nudCCAttacks->Enabled = true;
 	}
 }
-#pragma endregion
+
+
 void Main(void)
 {
 	Application::EnableVisualStyles();
