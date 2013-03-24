@@ -1270,6 +1270,7 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->cbVami->TabIndex = 9;
 			this->cbVami->Text = L"KB UA";
 			this->cbVami->UseVisualStyleBackColor = true;
+			this->cbVami->Visible = false;
 			this->cbVami->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbVami_CheckedChanged);
 			// 
 			// cbHideDamage
@@ -2515,7 +2516,7 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot - V2.6 - CCPLZ! - EMS 89.1";
+			this->Text = L"WatyBot - V2.7 - CCPLZ! - EMS 89.1";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
