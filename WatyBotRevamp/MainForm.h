@@ -1264,14 +1264,12 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			// cbVami
 			// 
 			this->cbVami->AutoSize = true;
-			this->cbVami->Enabled = false;
 			this->cbVami->Location = System::Drawing::Point(246, 14);
 			this->cbVami->Name = L"cbVami";
 			this->cbVami->Size = System::Drawing::Size(58, 17);
 			this->cbVami->TabIndex = 9;
 			this->cbVami->Text = L"KB UA";
 			this->cbVami->UseVisualStyleBackColor = true;
-			this->cbVami->Visible = false;
 			this->cbVami->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbVami_CheckedChanged);
 			// 
 			// cbHideDamage

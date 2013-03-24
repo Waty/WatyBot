@@ -412,32 +412,26 @@ void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^ 
 		Hacks::cmPVP2.Enable(cbPVP->Checked);
 	}
 }
+bool doVami;
 void Vami()
-{
-#define pIDOffset 0x29D8
-#define KnockBackOffset 0x124
-#define KnockBackXOffset (KnockBackOffset + 0xC)
-#define KnockBackYOffset (KnockBackOffset + 0x10)
+{ 
+	while(doVami)
+	{
+		int destinationX = getCharX() + 1, destinationY = getCharY() + 10;
+		
+		DWORD iKBX = (destinationX > getCharX()) ? 1081139200 : 3228622848;
+		DWORD iKBY = (destinationY > getCharY()) ? 1081139200 : 3228622848;
  
-DWORD iKBX = (0 > getCharX()) ? 1081139200 : 3228622848;
-ShowInfo("iKbx = " + iKBX);
-DWORD iKBY = (0 > getCharY()) ? 1081139200 : 3228622848;
-ShowInfo("iKby = " + iKBY);
- 
-unsigned long pID =ReadPointer(CharBasePtr,pIDOffset);
-ShowInfo("pID = " + pID);
-if(WritePointer(pID, KnockBackXOffset, iKBX))
-	ShowInfo("Write X Works");
-else
-	ShowInfo("Error!");
-WritePointer(pID, KnockBackYOffset, iKBY);
-ShowInfo("Write Y Works");
-WritePointer(pID, KnockBackOffset,(unsigned long) 1);
-ShowInfo("Write KB Works");
+		unsigned long pID = ReadPointer(CharBasePtr,pIDOffset);
+		WritePointer(pID, KBXOffset, iKBX);
+		WritePointer(pID, KBYOffset, iKBY);
+		WritePointer(pID, KBOffset, 1);
+	}
 }
 void MainForm::cbVami_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	//NewThread(Vami);
+	doVami = cbVami->Checked;
+	NewThread(Vami);
 }
 void MainForm::cbKami_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -731,11 +725,10 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	NewThread(getMSHWND);
 
 	if(!Directory::Exists("WatyBot"))Directory::CreateDirectory("WatyBot");
-	if(File::Exists(marshal_as<String^>(PacketFileName)))
-		ReadPacketXML(PacketFileName);
+	if(File::Exists(marshal_as<String^>(PacketFileName)))		PacketSender::Load(PacketFileName);
 	RefreshComboBoxes();
 	if(File::Exists(marshal_as<String^>(SPControlFileName)))
-		SPControl::ReadXML(SPControlFileName);
+		SPControl::Load(SPControlFileName);
 	RefreshSPControlListView();
 	if(File::Exists(marshal_as<String^>(SettingsFileName)))
 		LoadSettings();
@@ -812,8 +805,8 @@ void MainForm::MainTabControl_SelectedIndexChanged(System::Object^  sender, Syst
 }
 void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 {
-	SPControl::WriteXML(SPControlFileName);
-	WritePacketXML(PacketFileName);
+	SPControl::Save(SPControlFileName);
+	PacketSender::Save(PacketFileName);
 	SaveSettings();
 
 	switch(MessageBox::Show("Close MapleStory too?", "Terminate Maple?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
@@ -839,7 +832,7 @@ void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs
 }
 void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	AddPacket(marshal_as<string>(this->AddPacketNameTextBox->Text), marshal_as<string>(this->AddPacketPacketTextBox->Text));
+	PacketSender::AddPacket(marshal_as<string>(this->AddPacketNameTextBox->Text), marshal_as<string>(this->AddPacketPacketTextBox->Text));
 	ShowInfo("Packet was added!");
 
 	RefreshComboBoxes();
@@ -850,7 +843,7 @@ void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventAr
 	switch(MessageBox::Show("Are you sure you want to delete this packet?", "Please Confirm", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
 	{
 	case ::DialogResult::Yes:
-		DeletePacket(DeletePacketComboBox->SelectedIndex);
+		PacketSender::DeletePacket(DeletePacketComboBox->SelectedIndex);
 		ShowInfo("Packet was deleted succesfully!");
 		RefreshComboBoxes();
 		break;
@@ -866,7 +859,7 @@ void MainForm::SelectPacketForEditingComboBox_SelectedIndexChanged(System::Objec
 }
 void MainForm::SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	EditPacket(SelectPacketForEditingComboBox->SelectedIndex, marshal_as<string>(EditPacketNameTextBox->Text), marshal_as<string>(EditPacketPacketTextBox->Text));
+	PacketSender::EditPacket(SelectPacketForEditingComboBox->SelectedIndex, marshal_as<string>(EditPacketNameTextBox->Text), marshal_as<string>(EditPacketPacketTextBox->Text));
 
 	RefreshComboBoxes();
 }
@@ -912,7 +905,7 @@ void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^
 }
 void MainForm::SavePacketsButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	WritePacketXML(PacketFileName);
+	PacketSender::Save(PacketFileName);
 }
 void MainForm::RefreshComboBoxes()
 {	
@@ -967,6 +960,7 @@ void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventAr
 	else
 	{
 		SPControl::AddSPControl(name, mapid, x, y);
+		SPControl::Save(SPControlFileName);
 		RefreshSPControlListView();
 	}
 }
@@ -1145,6 +1139,8 @@ void MainForm::LoadSettings()
 void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	MainForm::SaveSettings();
+	SPControl::Save(SPControlFileName);
+	PacketSender::Save(PacketFileName);
 }
 
 //Hot Keys
