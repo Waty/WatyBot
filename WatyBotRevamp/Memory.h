@@ -1,6 +1,6 @@
 #include <Windows.h>
 
-enum cType{singleaddy, twoaddys, threeaddys, fouraddys, asmtype}; 
+enum cType{asmtype, singleaddy, twoaddys, threeaddys, fouraddys}; 
 enum jumpType{jump, call};
 
 #pragma once
