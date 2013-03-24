@@ -27,7 +27,7 @@ void SPControl::DeleteSPControl(int i)
 	SPControlv.erase(SPControlv.begin() + i);
 }
 
-void SPControl::ReadXML(string filename)
+void SPControl::Load(string filename)
 {
 	ifstream file(filename);
 	using boost::property_tree::ptree;
@@ -50,7 +50,7 @@ void SPControl::ReadXML(string filename)
 	}
 }
 
-void SPControl::WriteXML(string filename)
+void SPControl::Save(string filename)
 {
 	ofstream file(filename);
 	using boost::property_tree::ptree;

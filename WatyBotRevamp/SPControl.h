@@ -16,10 +16,9 @@ extern SPControlVector SPControlv;
 
 namespace SPControl
 {
-
 	void AddSPControl(string MapName, int MapID, int XLocation, int YLocation);
 	void EditSPControl(int i, string mapname, int mapid, int x, int y);
 	void DeleteSPControl(int index);
-	void ReadXML(string filename);
-	void WriteXML(string filename);
+	void Save(string filename);
+	void Load(string filename);
 }
