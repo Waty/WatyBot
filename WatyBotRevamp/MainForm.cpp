@@ -179,6 +179,7 @@ void MainForm::CCSwitch()
 	case DC:
 		if(InGame())
 		{
+			this->CCPeopleCheckBox->Checked = false;
 			SendPacketFunction(marshal_as<String^>(Packets::ChangeCharacter), strError);
 			ShowInfo("WatyBot DC'd you");
 			break;
