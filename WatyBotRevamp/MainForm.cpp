@@ -192,17 +192,17 @@ bool TryCC()
 	int channel = rand()%14;
 
 	while(getBreathValue() > 0)	Sleep(250);
-	Sleep(1500);
+	Sleep(500);
 	try 
 	{
 		if(WallBasePtr) CField_SendTransferChannelRequest(channel);
 	}
 	catch (...){return false;}
 
-	Sleep(500);
-	if(channel == getChannel()) return true;
-
-	else return false;
+	Sleep(2500);
+	if(channel == getChannel()) 
+		return true;
+	return false;
 }
 void MainForm::bwNextChannel_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
