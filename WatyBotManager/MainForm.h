@@ -38,6 +38,8 @@ namespace WatyBotManager {
 	protected: 
 	private: System::Windows::Forms::TabPage^  tabPage1;
 	private: System::Windows::Forms::TabPage^  tabPage2;
+	private: System::Windows::Forms::MenuStrip^  menuStrip1;
+	private: System::Windows::Forms::ToolStripMenuItem^  startNewTabToolStripMenuItem;
 
 	private:
 		/// <summary>
@@ -55,17 +57,20 @@ namespace WatyBotManager {
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->startNewTabToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tabControl1->SuspendLayout();
+			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// tabControl1
 			// 
 			this->tabControl1->Controls->Add(this->tabPage1);
 			this->tabControl1->Controls->Add(this->tabPage2);
-			this->tabControl1->Location = System::Drawing::Point(1, 1);
+			this->tabControl1->Location = System::Drawing::Point(1, 22);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
-			this->tabControl1->Size = System::Drawing::Size(402, 227);
+			this->tabControl1->Size = System::Drawing::Size(402, 206);
 			this->tabControl1->TabIndex = 0;
 			// 
 			// tabPage1
@@ -73,7 +78,7 @@ namespace WatyBotManager {
 			this->tabPage1->Location = System::Drawing::Point(4, 22);
 			this->tabPage1->Name = L"tabPage1";
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage1->Size = System::Drawing::Size(394, 201);
+			this->tabPage1->Size = System::Drawing::Size(394, 180);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"tabPage1";
 			this->tabPage1->UseVisualStyleBackColor = true;
@@ -83,10 +88,27 @@ namespace WatyBotManager {
 			this->tabPage2->Location = System::Drawing::Point(4, 22);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage2->Size = System::Drawing::Size(394, 201);
+			this->tabPage2->Size = System::Drawing::Size(394, 175);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"tabPage2";
 			this->tabPage2->UseVisualStyleBackColor = true;
+			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->startNewTabToolStripMenuItem});
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->RenderMode = System::Windows::Forms::ToolStripRenderMode::System;
+			this->menuStrip1->Size = System::Drawing::Size(402, 24);
+			this->menuStrip1->TabIndex = 1;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// startNewTabToolStripMenuItem
+			// 
+			this->startNewTabToolStripMenuItem->Name = L"startNewTabToolStripMenuItem";
+			this->startNewTabToolStripMenuItem->Size = System::Drawing::Size(88, 20);
+			this->startNewTabToolStripMenuItem->Text = L"Start new tab";
+			this->startNewTabToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::startNewTabToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -94,14 +116,20 @@ namespace WatyBotManager {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(402, 228);
 			this->Controls->Add(this->tabControl1);
+			this->Controls->Add(this->menuStrip1);
+			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"MainForm";
 			this->Text = L"MainForm";
 			this->Resize += gcnew System::EventHandler(this, &MainForm::MainForm_Resize);
 			this->tabControl1->ResumeLayout(false);
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
 	private: System::Void MainForm_Resize(System::Object^  sender, System::EventArgs^  e);
-	};
+	private: System::Void startNewTabToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e); 
+};
 }
