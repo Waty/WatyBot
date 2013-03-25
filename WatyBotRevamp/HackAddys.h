@@ -55,3 +55,5 @@
 #define CCAddy 0x568800
 #define Fadeaddy1 0x826e70
 #define Fadeaddy2 0x827320
+#define NoCCBoxesAddy1 0x5688D4
+#define NoCCBoxesAddy2 0x56D780

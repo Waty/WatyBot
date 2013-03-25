@@ -289,8 +289,12 @@ namespace Hacks
 	/////No Fadestarge
 	BYTE bNoFadeStages[] = {0xc2, 0x04, 0x00};
 	CMemory cmNoFadeStages(Fadeaddy1, bNoFadeStages, 3, Fadeaddy2, bNoFadeStages, 3);
-	/*
-	/////	Kami
+
+	/////No CC BLue Boxes
+	BYTE bNoCCBoxes[] = {0x90, 0x90, 0x90, 0x90, 0x90};
+	CMemory cmNoCCBoxes(NoCCBoxesAddy1, bNoCCBoxes, 5, NoCCBoxesAddy2, bNoCCBoxes, 5);
+	
+	/*/////	Kami
 	unsigned int uKamiHook = 0x00BB1149, uKamiReturn = uKamiHook + 5;
 	unsigned int uWallBase = 0;
 	unsigned int uMobPool = 0;
