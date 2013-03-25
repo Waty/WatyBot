@@ -195,7 +195,8 @@ bool TryCC()
 	Sleep(500);
 	try 
 	{
-		if(WallBasePtr) CField_SendTransferChannelRequest(channel);
+		if(WallBasePtr && getBreathValue() == 0) CField_SendTransferChannelRequest(channel);
+		else return false;
 	}
 	catch (...){return false;}
 
@@ -248,8 +249,7 @@ void MainForm::CashShop()
 	CCing = false;
 }
 
-
-#pragma region Threads
+//Find Window
 void getMSHWND()
 {
 	while(MapleStoryHWND == NULL)
@@ -258,7 +258,7 @@ void getMSHWND()
 		Sleep(1500);
 	}
 }
-#pragma endregion
+
 //Hack CheckBoxes
 void MainForm::cbFusionAttack_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -437,6 +437,10 @@ void MainForm::cbVami_CheckedChanged(System::Object^  sender, System::EventArgs^
 void MainForm::cbKami_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 //	Hacks::cmKami.Enable(this->cbKami->Checked);
+}
+void MainForm::cbNoCCBlueBoxes_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmNoCCBoxes.Enable(this->cbNoCCBlueBoxes->Checked);
 }
 
 //AutoHP/MP/Attack/Loot/Skill checkboxes/events
@@ -734,6 +738,10 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	RefreshSPControlListView();
 	if(File::Exists(marshal_as<String^>(SettingsFileName)))
 		LoadSettings();
+
+	// Fix the size of the tabs
+	MainForm::Height = TabHeight[MainTabControl->SelectedTab->TabIndex];
+	MainTabControl->Height = TabHeight[MainTabControl->SelectedTab->TabIndex] - 30;
 }
 void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
@@ -803,7 +811,8 @@ void MainForm::RedrawStatBars()
 }
 void MainForm::MainTabControl_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	//MainForm::Height = TabHeight[MainTabControl->SelectedTab->TabIndex];
+	MainForm::Height = TabHeight[MainTabControl->SelectedTab->TabIndex];
+	MainTabControl->Height = TabHeight[MainTabControl->SelectedTab->TabIndex] - 30;
 }
 void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 {

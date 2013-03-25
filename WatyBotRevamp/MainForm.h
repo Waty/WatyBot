@@ -198,7 +198,7 @@ private: System::Windows::Forms::Label^  CCTimedLabel;
 		 
 private: System::Windows::Forms::Label^  CCPeopleLabel;
 private: System::Windows::Forms::Label^  CCAttacksLabel;
-private: System::Windows::Forms::Button^  SavePacketsButton;
+
 private: System::Windows::Forms::ListView^  SPControlListView;
 		 
 private: System::Windows::Forms::ColumnHeader^  HeaderMapName;
@@ -343,6 +343,8 @@ private: System::Windows::Forms::CheckBox^  cbKami;
 private: System::Windows::Forms::NumericUpDown^  nudPvPCCDelay;
 private: System::Windows::Forms::Label^  lPvPCCDelay;
 private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
+private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
+
 
 
 
@@ -432,6 +434,7 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->HPBackground = (gcnew System::Windows::Forms::PictureBox());
 			this->HacksTab = (gcnew System::Windows::Forms::TabPage());
 			this->gbMiscHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbNoCCBlueBoxes = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoFadeStages = (gcnew System::Windows::Forms::CheckBox());
 			this->cbKami = (gcnew System::Windows::Forms::CheckBox());
 			this->cbVami = (gcnew System::Windows::Forms::CheckBox());
@@ -472,7 +475,6 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->cbWalkRight = (gcnew System::Windows::Forms::CheckBox());
 			this->cbVacRight = (gcnew System::Windows::Forms::CheckBox());
 			this->PacketSenderTab = (gcnew System::Windows::Forms::TabPage());
-			this->SavePacketsButton = (gcnew System::Windows::Forms::Button());
 			this->EditPacketGroupBox = (gcnew System::Windows::Forms::GroupBox());
 			this->SavePacketEditButton = (gcnew System::Windows::Forms::Button());
 			this->EditPacketPacketTextBox = (gcnew System::Windows::Forms::TextBox());
@@ -608,7 +610,7 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->MainTabControl->Location = System::Drawing::Point(1, 1);
 			this->MainTabControl->Name = L"MainTabControl";
 			this->MainTabControl->SelectedIndex = 0;
-			this->MainTabControl->Size = System::Drawing::Size(334, 401);
+			this->MainTabControl->Size = System::Drawing::Size(334, 456);
 			this->MainTabControl->TabIndex = 0;
 			this->MainTabControl->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::MainTabControl_SelectedIndexChanged);
 			// 
@@ -627,7 +629,7 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->AutoBotTab->Location = System::Drawing::Point(4, 22);
 			this->AutoBotTab->Name = L"AutoBotTab";
 			this->AutoBotTab->Padding = System::Windows::Forms::Padding(3);
-			this->AutoBotTab->Size = System::Drawing::Size(326, 375);
+			this->AutoBotTab->Size = System::Drawing::Size(326, 430);
 			this->AutoBotTab->TabIndex = 0;
 			this->AutoBotTab->Text = L"AutoBot";
 			this->AutoBotTab->UseVisualStyleBackColor = true;
@@ -1211,13 +1213,14 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->HacksTab->Location = System::Drawing::Point(4, 22);
 			this->HacksTab->Name = L"HacksTab";
 			this->HacksTab->Padding = System::Windows::Forms::Padding(3);
-			this->HacksTab->Size = System::Drawing::Size(326, 375);
+			this->HacksTab->Size = System::Drawing::Size(326, 430);
 			this->HacksTab->TabIndex = 1;
 			this->HacksTab->Text = L"Hacks";
 			this->HacksTab->UseVisualStyleBackColor = true;
 			// 
 			// gbMiscHacks
 			// 
+			this->gbMiscHacks->Controls->Add(this->cbNoCCBlueBoxes);
 			this->gbMiscHacks->Controls->Add(this->cbNoFadeStages);
 			this->gbMiscHacks->Controls->Add(this->cbKami);
 			this->gbMiscHacks->Controls->Add(this->cbVami);
@@ -1230,12 +1233,24 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->gbMiscHacks->Controls->Add(this->cbPinTyper);
 			this->gbMiscHacks->Controls->Add(this->cbJDA);
 			this->gbMiscHacks->Controls->Add(this->cbNoBG);
-			this->gbMiscHacks->Location = System::Drawing::Point(7, 260);
+			this->gbMiscHacks->Location = System::Drawing::Point(6, 275);
 			this->gbMiscHacks->Name = L"gbMiscHacks";
-			this->gbMiscHacks->Size = System::Drawing::Size(310, 111);
+			this->gbMiscHacks->Size = System::Drawing::Size(310, 124);
 			this->gbMiscHacks->TabIndex = 2;
 			this->gbMiscHacks->TabStop = false;
 			this->gbMiscHacks->Text = L"Other";
+			// 
+			// cbNoCCBlueBoxes
+			// 
+			this->cbNoCCBlueBoxes->AutoSize = true;
+			this->cbNoCCBlueBoxes->Location = System::Drawing::Point(6, 104);
+			this->cbNoCCBlueBoxes->Name = L"cbNoCCBlueBoxes";
+			this->cbNoCCBlueBoxes->Size = System::Drawing::Size(110, 17);
+			this->cbNoCCBlueBoxes->TabIndex = 12;
+			this->cbNoCCBlueBoxes->Text = L"No CC BlueBoxes";
+			this->InfoToolTip->SetToolTip(this->cbNoCCBlueBoxes, L"Reduces CPU usage");
+			this->cbNoCCBlueBoxes->UseVisualStyleBackColor = true;
+			this->cbNoCCBlueBoxes->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoCCBlueBoxes_CheckedChanged);
 			// 
 			// cbNoFadeStages
 			// 
@@ -1276,7 +1291,7 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			// cbHideDamage
 			// 
 			this->cbHideDamage->AutoSize = true;
-			this->cbHideDamage->Location = System::Drawing::Point(6, 91);
+			this->cbHideDamage->Location = System::Drawing::Point(6, 86);
 			this->cbHideDamage->Name = L"cbHideDamage";
 			this->cbHideDamage->Size = System::Drawing::Size(147, 17);
 			this->cbHideDamage->TabIndex = 8;
@@ -1300,7 +1315,7 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			// cbFLACC
 			// 
 			this->cbFLACC->AutoSize = true;
-			this->cbFLACC->Location = System::Drawing::Point(6, 73);
+			this->cbFLACC->Location = System::Drawing::Point(6, 68);
 			this->cbFLACC->Name = L"cbFLACC";
 			this->cbFLACC->Size = System::Drawing::Size(107, 17);
 			this->cbFLACC->TabIndex = 6;
@@ -1348,7 +1363,7 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			// cbPinTyper
 			// 
 			this->cbPinTyper->AutoSize = true;
-			this->cbPinTyper->Location = System::Drawing::Point(6, 55);
+			this->cbPinTyper->Location = System::Drawing::Point(6, 50);
 			this->cbPinTyper->Name = L"cbPinTyper";
 			this->cbPinTyper->Size = System::Drawing::Size(71, 17);
 			this->cbPinTyper->TabIndex = 2;
@@ -1360,7 +1375,7 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			// cbJDA
 			// 
 			this->cbJDA->AutoSize = true;
-			this->cbJDA->Location = System::Drawing::Point(6, 37);
+			this->cbJDA->Location = System::Drawing::Point(6, 32);
 			this->cbJDA->Name = L"cbJDA";
 			this->cbJDA->Size = System::Drawing::Size(46, 17);
 			this->cbJDA->TabIndex = 1;
@@ -1372,7 +1387,7 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			// cbNoBG
 			// 
 			this->cbNoBG->AutoSize = true;
-			this->cbNoBG->Location = System::Drawing::Point(6, 19);
+			this->cbNoBG->Location = System::Drawing::Point(6, 14);
 			this->cbNoBG->Name = L"cbNoBG";
 			this->cbNoBG->Size = System::Drawing::Size(145, 17);
 			this->cbNoBG->TabIndex = 0;
@@ -1400,7 +1415,7 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->gbCharHacks->Controls->Add(this->cbInstantAirLoot);
 			this->gbCharHacks->Controls->Add(this->cbFusionAttack);
 			this->gbCharHacks->Controls->Add(this->cbPerfectLoot);
-			this->gbCharHacks->Location = System::Drawing::Point(7, -1);
+			this->gbCharHacks->Location = System::Drawing::Point(7, 6);
 			this->gbCharHacks->Name = L"gbCharHacks";
 			this->gbCharHacks->Size = System::Drawing::Size(310, 164);
 			this->gbCharHacks->TabIndex = 1;
@@ -1621,7 +1636,7 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->MobHacks->Controls->Add(this->cbJumpRight);
 			this->MobHacks->Controls->Add(this->cbWalkRight);
 			this->MobHacks->Controls->Add(this->cbVacRight);
-			this->MobHacks->Location = System::Drawing::Point(7, 166);
+			this->MobHacks->Location = System::Drawing::Point(7, 176);
 			this->MobHacks->Name = L"MobHacks";
 			this->MobHacks->Size = System::Drawing::Size(310, 93);
 			this->MobHacks->TabIndex = 0;
@@ -1726,7 +1741,6 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			// 
 			// PacketSenderTab
 			// 
-			this->PacketSenderTab->Controls->Add(this->SavePacketsButton);
 			this->PacketSenderTab->Controls->Add(this->EditPacketGroupBox);
 			this->PacketSenderTab->Controls->Add(this->DeletePacketsGroupBox);
 			this->PacketSenderTab->Controls->Add(this->AddPacketsGroupBox);
@@ -1734,20 +1748,10 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->PacketSenderTab->Location = System::Drawing::Point(4, 22);
 			this->PacketSenderTab->Name = L"PacketSenderTab";
 			this->PacketSenderTab->Padding = System::Windows::Forms::Padding(3);
-			this->PacketSenderTab->Size = System::Drawing::Size(326, 375);
-			this->PacketSenderTab->TabIndex = 3;
+			this->PacketSenderTab->Size = System::Drawing::Size(326, 430);
+			this->PacketSenderTab->TabIndex = 2;
 			this->PacketSenderTab->Text = L"Packets";
 			this->PacketSenderTab->UseVisualStyleBackColor = true;
-			// 
-			// SavePacketsButton
-			// 
-			this->SavePacketsButton->Location = System::Drawing::Point(6, 334);
-			this->SavePacketsButton->Name = L"SavePacketsButton";
-			this->SavePacketsButton->Size = System::Drawing::Size(314, 35);
-			this->SavePacketsButton->TabIndex = 7;
-			this->SavePacketsButton->Text = L"Save Packets";
-			this->SavePacketsButton->UseVisualStyleBackColor = true;
-			this->SavePacketsButton->Click += gcnew System::EventHandler(this, &MainForm::SavePacketsButton_Click);
 			// 
 			// EditPacketGroupBox
 			// 
@@ -1755,7 +1759,7 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->EditPacketGroupBox->Controls->Add(this->EditPacketPacketTextBox);
 			this->EditPacketGroupBox->Controls->Add(this->EditPacketNameTextBox);
 			this->EditPacketGroupBox->Controls->Add(this->SelectPacketForEditingComboBox);
-			this->EditPacketGroupBox->Location = System::Drawing::Point(6, 193);
+			this->EditPacketGroupBox->Location = System::Drawing::Point(6, 191);
 			this->EditPacketGroupBox->Name = L"EditPacketGroupBox";
 			this->EditPacketGroupBox->Size = System::Drawing::Size(314, 76);
 			this->EditPacketGroupBox->TabIndex = 6;
@@ -1800,7 +1804,7 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			// 
 			this->DeletePacketsGroupBox->Controls->Add(this->DeletePacketComboBox);
 			this->DeletePacketsGroupBox->Controls->Add(this->DeletePacketButton);
-			this->DeletePacketsGroupBox->Location = System::Drawing::Point(6, 275);
+			this->DeletePacketsGroupBox->Location = System::Drawing::Point(6, 273);
 			this->DeletePacketsGroupBox->Name = L"DeletePacketsGroupBox";
 			this->DeletePacketsGroupBox->Size = System::Drawing::Size(314, 51);
 			this->DeletePacketsGroupBox->TabIndex = 5;
@@ -1833,7 +1837,7 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->AddPacketsGroupBox->Controls->Add(this->AddPacketNameTextBox);
 			this->AddPacketsGroupBox->Controls->Add(this->AddPacketPacketLabel);
 			this->AddPacketsGroupBox->Controls->Add(this->AddPacketNameLabel);
-			this->AddPacketsGroupBox->Location = System::Drawing::Point(6, 93);
+			this->AddPacketsGroupBox->Location = System::Drawing::Point(6, 91);
 			this->AddPacketsGroupBox->Name = L"AddPacketsGroupBox";
 			this->AddPacketsGroupBox->Size = System::Drawing::Size(314, 94);
 			this->AddPacketsGroupBox->TabIndex = 4;
@@ -1893,7 +1897,7 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->SendPacketGroupBox->Controls->Add(this->PacketSelectBox);
 			this->SendPacketGroupBox->Controls->Add(this->SendPacketButton);
 			this->SendPacketGroupBox->Controls->Add(this->bStopSpamming);
-			this->SendPacketGroupBox->Location = System::Drawing::Point(6, 8);
+			this->SendPacketGroupBox->Location = System::Drawing::Point(6, 6);
 			this->SendPacketGroupBox->Name = L"SendPacketGroupBox";
 			this->SendPacketGroupBox->Size = System::Drawing::Size(314, 79);
 			this->SendPacketGroupBox->TabIndex = 3;
@@ -1978,8 +1982,8 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->SPControlTabPage->Controls->Add(this->SPControlListView);
 			this->SPControlTabPage->Location = System::Drawing::Point(4, 22);
 			this->SPControlTabPage->Name = L"SPControlTabPage";
-			this->SPControlTabPage->Size = System::Drawing::Size(326, 375);
-			this->SPControlTabPage->TabIndex = 4;
+			this->SPControlTabPage->Size = System::Drawing::Size(326, 430);
+			this->SPControlTabPage->TabIndex = 3;
 			this->SPControlTabPage->Text = L"SPControl";
 			this->SPControlTabPage->UseVisualStyleBackColor = true;
 			// 
@@ -2107,10 +2111,10 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->SPControlListView->FullRowSelect = true;
 			this->SPControlListView->GridLines = true;
 			this->SPControlListView->HeaderStyle = System::Windows::Forms::ColumnHeaderStyle::Nonclickable;
-			this->SPControlListView->Location = System::Drawing::Point(7, 3);
+			this->SPControlListView->Location = System::Drawing::Point(7, 12);
 			this->SPControlListView->MultiSelect = false;
 			this->SPControlListView->Name = L"SPControlListView";
-			this->SPControlListView->Size = System::Drawing::Size(310, 270);
+			this->SPControlListView->Size = System::Drawing::Size(310, 261);
 			this->SPControlListView->TabIndex = 28;
 			this->SPControlListView->UseCompatibleStateImageBehavior = false;
 			this->SPControlListView->View = System::Windows::Forms::View::Details;
@@ -2156,8 +2160,8 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->InfoTab->Location = System::Drawing::Point(4, 22);
 			this->InfoTab->Name = L"InfoTab";
 			this->InfoTab->Padding = System::Windows::Forms::Padding(3);
-			this->InfoTab->Size = System::Drawing::Size(326, 375);
-			this->InfoTab->TabIndex = 2;
+			this->InfoTab->Size = System::Drawing::Size(326, 430);
+			this->InfoTab->TabIndex = 4;
 			this->InfoTab->Text = L"Info";
 			this->InfoTab->UseVisualStyleBackColor = true;
 			// 
@@ -2508,7 +2512,7 @@ private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Control;
-			this->ClientSize = System::Drawing::Size(334, 402);
+			this->ClientSize = System::Drawing::Size(334, 485);
 			this->Controls->Add(this->MainTabControl);
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
@@ -2659,6 +2663,7 @@ private: System::Void cbPVP_CheckedChanged(System::Object^  sender, System::Even
 private: System::Void bwNextChannel_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
 private: System::Void cbKami_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNoFadeStages_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbNoCCBlueBoxes_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion
