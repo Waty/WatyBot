@@ -163,10 +163,10 @@ bool SendPacketFunction(String^ packet, String^&strError){
 	finally {delete [] lpBytes;}
     return true;
 }
-void MainForm::CCSwitch()
+void MainForm::CCSwitch(CCType type)
 {
 	String^ strError = String::Empty;
-	switch(PeopleComboBox->SelectedIndex)
+	switch(type)
 	{
 	case CC:
 		if(!bwNextChannel->IsBusy) bwNextChannel->RunWorkerAsync();
@@ -200,10 +200,7 @@ bool TryCC()
 	}
 	catch (...){return false;}
 
-	Sleep(2500);
-	if(channel == getChannel()) 
-		return true;
-	return false;
+	return true;
 }
 void MainForm::bwNextChannel_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
@@ -694,7 +691,7 @@ void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 }
 void MainForm::CCTimedTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
-	MainForm::CCSwitch();
+	MainForm::CCSwitch((CCType)TimedComboBox->SelectedIndex);
 }
 void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -783,11 +780,11 @@ void MainForm::AutoCC()
 {
 	if(CCPeopleCheckBox->Checked && (getPeopleCount() >= iCCPeople))
 	{
-		MainForm::CCSwitch();
+		MainForm::CCSwitch((CCType)PeopleComboBox->SelectedIndex);
 	}
 	if(CCAttacksCheckBox->Checked && (getAttackCount() >= iCCAttacks))
 	{
-		MainForm::CCSwitch();
+		MainForm::CCSwitch((CCType)AttackComboBox->SelectedIndex);
 	}
 }
 void MainForm::RedrawStatBars()
