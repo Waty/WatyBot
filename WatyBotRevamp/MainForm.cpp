@@ -182,6 +182,7 @@ void MainForm::CCSwitch(CCType type)
 			this->CCPeopleCheckBox->Checked = false;
 			SendPacketFunction(marshal_as<String^>(Packets::ChangeCharacter), strError);
 			ShowInfo("WatyBot DC'd you");
+			Sleep(500);
 			break;
 		}
 	}
