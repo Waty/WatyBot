@@ -84,6 +84,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="MacroManager\MacroManager.cpp" />
     <ClCompile Include="MainDll.cpp" />
     <ClCompile Include="MainForm.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
@@ -118,6 +119,11 @@
     <ClInclude Include="E:\Games\Europe MapleStory\WatyBotUpdater\Addys.h" />
     <ClInclude Include="HackAddys.h" />
     <ClInclude Include="Hacks.h" />
+    <ClInclude Include="MacroManager\BotMacro.h" />
+    <ClInclude Include="MacroManager\FunctionalMacro.h" />
+    <ClInclude Include="MacroManager\Lock.h" />
+    <ClInclude Include="MacroManager\MacroManager.h" />
+    <ClInclude Include="MacroManager\noncopyable.h" />
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
