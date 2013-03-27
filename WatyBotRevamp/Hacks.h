@@ -126,12 +126,12 @@ namespace Hacks
 	BOOL WINAPI GetCoords()
 	{
 		int iMapID = getMapID();
-		for(unsigned int i = 0; i < SPControlv.size(); i++)
+		for(SPControlStruct sp : SPControlv)
 		{
-			if( iMapID == SPControlv.at(i).mapID )
+			if( iMapID == sp.mapID )
 			{
-				spawn_x = SPControlv.at(i).x;
-				spawn_y = SPControlv.at(i).y;
+				spawn_x = sp.x;
+				spawn_y = sp.y;
 				return TRUE;
 			}
 		}
