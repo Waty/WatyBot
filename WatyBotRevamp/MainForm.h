@@ -1232,7 +1232,7 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			this->gbMiscHacks->Controls->Add(this->cbNoBG);
 			this->gbMiscHacks->Location = System::Drawing::Point(6, 275);
 			this->gbMiscHacks->Name = L"gbMiscHacks";
-			this->gbMiscHacks->Size = System::Drawing::Size(310, 124);
+			this->gbMiscHacks->Size = System::Drawing::Size(310, 127);
 			this->gbMiscHacks->TabIndex = 2;
 			this->gbMiscHacks->TabStop = false;
 			this->gbMiscHacks->Text = L"Other";
@@ -1240,7 +1240,7 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// cbNoCCBlueBoxes
 			// 
 			this->cbNoCCBlueBoxes->AutoSize = true;
-			this->cbNoCCBlueBoxes->Location = System::Drawing::Point(6, 104);
+			this->cbNoCCBlueBoxes->Location = System::Drawing::Point(7, 107);
 			this->cbNoCCBlueBoxes->Name = L"cbNoCCBlueBoxes";
 			this->cbNoCCBlueBoxes->Size = System::Drawing::Size(110, 17);
 			this->cbNoCCBlueBoxes->TabIndex = 12;
@@ -1252,7 +1252,7 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// cbNoFadeStages
 			// 
 			this->cbNoFadeStages->AutoSize = true;
-			this->cbNoFadeStages->Location = System::Drawing::Point(159, 91);
+			this->cbNoFadeStages->Location = System::Drawing::Point(160, 89);
 			this->cbNoFadeStages->Name = L"cbNoFadeStages";
 			this->cbNoFadeStages->Size = System::Drawing::Size(100, 17);
 			this->cbNoFadeStages->TabIndex = 11;
@@ -1264,7 +1264,7 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// cbHideDamage
 			// 
 			this->cbHideDamage->AutoSize = true;
-			this->cbHideDamage->Location = System::Drawing::Point(6, 86);
+			this->cbHideDamage->Location = System::Drawing::Point(7, 89);
 			this->cbHideDamage->Name = L"cbHideDamage";
 			this->cbHideDamage->Size = System::Drawing::Size(147, 17);
 			this->cbHideDamage->TabIndex = 8;
@@ -1276,7 +1276,7 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// cbCPUHack
 			// 
 			this->cbCPUHack->AutoSize = true;
-			this->cbCPUHack->Location = System::Drawing::Point(159, 73);
+			this->cbCPUHack->Location = System::Drawing::Point(160, 71);
 			this->cbCPUHack->Name = L"cbCPUHack";
 			this->cbCPUHack->Size = System::Drawing::Size(77, 17);
 			this->cbCPUHack->TabIndex = 7;
@@ -1288,7 +1288,7 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// cbFLACC
 			// 
 			this->cbFLACC->AutoSize = true;
-			this->cbFLACC->Location = System::Drawing::Point(6, 68);
+			this->cbFLACC->Location = System::Drawing::Point(7, 71);
 			this->cbFLACC->Name = L"cbFLACC";
 			this->cbFLACC->Size = System::Drawing::Size(107, 17);
 			this->cbFLACC->TabIndex = 6;
@@ -1300,7 +1300,7 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// cbViewSwears
 			// 
 			this->cbViewSwears->AutoSize = true;
-			this->cbViewSwears->Location = System::Drawing::Point(159, 55);
+			this->cbViewSwears->Location = System::Drawing::Point(160, 55);
 			this->cbViewSwears->Name = L"cbViewSwears";
 			this->cbViewSwears->Size = System::Drawing::Size(87, 17);
 			this->cbViewSwears->TabIndex = 5;
@@ -1312,7 +1312,7 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// cbLogoSkipper
 			// 
 			this->cbLogoSkipper->AutoSize = true;
-			this->cbLogoSkipper->Location = System::Drawing::Point(159, 37);
+			this->cbLogoSkipper->Location = System::Drawing::Point(160, 37);
 			this->cbLogoSkipper->Name = L"cbLogoSkipper";
 			this->cbLogoSkipper->Size = System::Drawing::Size(89, 17);
 			this->cbLogoSkipper->TabIndex = 4;
@@ -1324,7 +1324,7 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// cbSitHack
 			// 
 			this->cbSitHack->AutoSize = true;
-			this->cbSitHack->Location = System::Drawing::Point(159, 19);
+			this->cbSitHack->Location = System::Drawing::Point(160, 19);
 			this->cbSitHack->Name = L"cbSitHack";
 			this->cbSitHack->Size = System::Drawing::Size(67, 17);
 			this->cbSitHack->TabIndex = 3;
@@ -1336,7 +1336,7 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// cbPinTyper
 			// 
 			this->cbPinTyper->AutoSize = true;
-			this->cbPinTyper->Location = System::Drawing::Point(6, 50);
+			this->cbPinTyper->Location = System::Drawing::Point(7, 55);
 			this->cbPinTyper->Name = L"cbPinTyper";
 			this->cbPinTyper->Size = System::Drawing::Size(71, 17);
 			this->cbPinTyper->TabIndex = 2;
@@ -1348,7 +1348,7 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// cbJDA
 			// 
 			this->cbJDA->AutoSize = true;
-			this->cbJDA->Location = System::Drawing::Point(6, 32);
+			this->cbJDA->Location = System::Drawing::Point(7, 37);
 			this->cbJDA->Name = L"cbJDA";
 			this->cbJDA->Size = System::Drawing::Size(46, 17);
 			this->cbJDA->TabIndex = 1;
@@ -1360,7 +1360,7 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// cbNoBG
 			// 
 			this->cbNoBG->AutoSize = true;
-			this->cbNoBG->Location = System::Drawing::Point(6, 14);
+			this->cbNoBG->Location = System::Drawing::Point(7, 19);
 			this->cbNoBG->Name = L"cbNoBG";
 			this->cbNoBG->Size = System::Drawing::Size(145, 17);
 			this->cbNoBG->TabIndex = 0;
