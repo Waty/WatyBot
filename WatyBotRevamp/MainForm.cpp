@@ -829,6 +829,7 @@ void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^
 	PacketSender::AddPacket(marshal_as<string>(this->AddPacketNameTextBox->Text), marshal_as<string>(this->AddPacketPacketTextBox->Text));
 	ShowInfo("Packet was added!");
 
+	PacketSender::Save(PacketFileName);
 	RefreshComboBoxes();
 }
 void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventArgs^  e)
@@ -839,6 +840,7 @@ void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventAr
 	case ::DialogResult::Yes:
 		PacketSender::DeletePacket(DeletePacketComboBox->SelectedIndex);
 		ShowInfo("Packet was deleted succesfully!");
+		PacketSender::Save(PacketFileName);
 		RefreshComboBoxes();
 		break;
 	}	
@@ -854,7 +856,7 @@ void MainForm::SelectPacketForEditingComboBox_SelectedIndexChanged(System::Objec
 void MainForm::SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	PacketSender::EditPacket(SelectPacketForEditingComboBox->SelectedIndex, marshal_as<string>(EditPacketNameTextBox->Text), marshal_as<string>(EditPacketPacketTextBox->Text));
-
+	PacketSender::Save(PacketFileName);
 	RefreshComboBoxes();
 }
 void MainForm::SpamsPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
@@ -896,10 +898,6 @@ void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^
 		this->bStartSpamming->Visible = true;
 		ShowInfo("Finished Spamming packets!");	
 	}
-}
-void MainForm::SavePacketsButton_Click(System::Object^  sender, System::EventArgs^  e)
-{
-	PacketSender::Save(PacketFileName);
 }
 void MainForm::RefreshComboBoxes()
 {	
@@ -968,6 +966,7 @@ void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventA
 		{
 		case ::DialogResult::Yes:
 			SPControlv.erase(SPControlv.begin() + SPControlListView->Items->IndexOf(L));
+			SPControl::Save(SPControlFileName);
 			RefreshSPControlListView();
 			break;
 		}

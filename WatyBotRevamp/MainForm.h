@@ -2588,7 +2588,6 @@ private: System::Void SelectPacketForEditingComboBox_SelectedIndexChanged(System
 private: System::Void SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^  e);
 private: System::Void CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void SavePacketsButton_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void SPControlDeleteItem_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void GetSPControlCoordsButton_Click(System::Object^  sender, System::EventArgs^  e);
