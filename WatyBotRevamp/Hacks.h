@@ -293,6 +293,43 @@ namespace Hacks
 	/////No CC BLue Boxes
 	BYTE bNoCCBoxes[] = {0x90, 0x90, 0x90, 0x90, 0x90};
 	CMemory cmNoCCBoxes(NoCCBoxesAddy1, bNoCCBoxes, 5, NoCCBoxesAddy2, bNoCCBoxes, 5);
+	
+	////SS Mouse Click Fly
+	DWORD dwMouseFlyRet = MouseFlyAddy + 6;
+	DWORD dwMouseFlyCall = MouseFlyCall;
+	const DWORD dwMouseFlyOpCall = MouseFlyOpCall;
 
+	CodeCave(MouseFly)
+	{
+		call dwMouseFlyOpCall
+		pushad
+		//looking for the mouse click
+		mov ebx, [MouseBasePtr]
+		cmp dword ptr[ebx+0x9cc], 0x0c
+		jne FlyExit
+
+		//get mouselocation
+		mov ebx,[ebx+0x978]
+		mov eax,[ebx+0x8C]
+		mov ebx,[ebx+0x90]
+
+		//encrypt and set teleoffsets
+		lea ecx,[esi+0x6e00]
+		push eax
+		call dwMouseFlyCall
+		lea ecx, [esi+0x6df4]
+		push ebx
+		call dwMouseFlyCall
+		lea ecx, [esi+0x6ddc]
+		push 00000001 //Probably dont need all the proceeding 0's but wthell
+		call dwMouseFlyCall
+
+		FlyExit:
+		popad
+		jmp dwMouseFlyRet
+
+	}
+	EndCodeCave
+	CMemory cmMouseFly(MouseFlyAddy, CaveMouseFly, 1, true);
 }
 
