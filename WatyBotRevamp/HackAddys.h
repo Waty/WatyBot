@@ -57,3 +57,6 @@
 #define Fadeaddy2 0x827320
 #define NoCCBoxesAddy1 0x5688D4
 #define NoCCBoxesAddy2 0x56D780
+#define MouseFlyAddy 0xBB1A59
+#define MouseFlyOpCall 0xBE7140
+#define MouseFlyCall 0x406F60
