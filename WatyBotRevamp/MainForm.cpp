@@ -532,7 +532,7 @@ void MainForm::LootTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 void MainForm::Skill1Timer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
 	//Send Packet
-	if(AutoSkill1ComboBox->SelectedIndex > 57)
+	if(AutoSkill1ComboBox->SelectedIndex > sizeof(KeyCodes) -1)
 	{
 		String^ strError;
 		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill1ComboBox->SelectedIndex - 46).data), strError))
@@ -551,7 +551,7 @@ void MainForm::Skill1Timer_Tick(System::Object^  sender, System::EventArgs^  e)
 void MainForm::Skill2Timer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
 	//Send Packet
-	if(AutoSkill2ComboBox->SelectedIndex > 57)
+	if(AutoSkill2ComboBox->SelectedIndex > sizeof(KeyCodes) -1)
 	{
 		String^ strError;
 		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill2ComboBox->SelectedIndex - 46).data), strError))
@@ -570,7 +570,7 @@ void MainForm::Skill2Timer_Tick(System::Object^  sender, System::EventArgs^  e)
 void MainForm::Skill3Timer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
 	//Send Packet
-	if(AutoSkill3ComboBox->SelectedIndex > 57)
+	if(AutoSkill3ComboBox->SelectedIndex > sizeof(KeyCodes) -1)
 	{
 		String^ strError;
 		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill3ComboBox->SelectedIndex - 46).data), strError))
@@ -589,7 +589,7 @@ void MainForm::Skill3Timer_Tick(System::Object^  sender, System::EventArgs^  e)
 void MainForm::Skill4Timer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
 	//Send Packet
-	if(AutoSkill4ComboBox->SelectedIndex > 57)
+	if(AutoSkill4ComboBox->SelectedIndex > sizeof(KeyCodes) -1)
 	{
 		String^ strError;
 		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill4ComboBox->SelectedIndex - 46).data), strError))
