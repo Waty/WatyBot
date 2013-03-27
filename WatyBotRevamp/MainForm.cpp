@@ -395,6 +395,10 @@ void MainForm::cbNoFadeStages_CheckedChanged(System::Object^  sender, System::Ev
 {
 	Hacks::cmNoFadeStages.Enable(cbNoFadeStages->Checked);
 }
+void MainForm::cbMouseFly_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmMouseFly.Enable(cbMouseFly->Checked);
+}
 void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	if(ddbPVPSkills->SelectedIndex < 0)
