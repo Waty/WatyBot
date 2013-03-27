@@ -531,78 +531,82 @@ void MainForm::LootTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 }
 void MainForm::Skill1Timer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
-	//Send Packet
-	if(AutoSkill1ComboBox->SelectedIndex > sizeof(KeyCodes) -1)
+	if(AutoSkill1ComboBox->SelectedIndex < KeyCodesSize)
 	{
-		String^ strError;
-		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill1ComboBox->SelectedIndex - 46).data), strError))
-			ShowError(strError);
-	}
-	else
-	{	//Send Key
+		//Send Key
 		while(CCing || UsingAutoSkill) Sleep(500);
 		UsingAutoSkill = true;
 		Sleep(250);
 		SendKey(KeyCodes[AutoSkill1ComboBox->SelectedIndex]);
 		Sleep(50);
-		UsingAutoSkill = false;
+		UsingAutoSkill = false;		
+	}
+	else
+	{
+		//Send Packet
+		String^ strError;
+		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill1ComboBox->SelectedIndex - KeyCodesSize).data), strError))
+			ShowError(strError);
 	}
 }
 void MainForm::Skill2Timer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
-	//Send Packet
-	if(AutoSkill2ComboBox->SelectedIndex > sizeof(KeyCodes) -1)
+	if(AutoSkill2ComboBox->SelectedIndex < KeyCodesSize)
 	{
-		String^ strError;
-		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill2ComboBox->SelectedIndex - 46).data), strError))
-			ShowError(strError);
-	}
-	else
-	{	//Send Key
+		//Send Key
 		while(CCing || UsingAutoSkill) Sleep(500);
 		UsingAutoSkill = true;
 		Sleep(250);
 		SendKey(KeyCodes[AutoSkill2ComboBox->SelectedIndex]);
 		Sleep(50);
-		UsingAutoSkill = false;
+		UsingAutoSkill = false;		
+	}
+	else
+	{
+		//Send Packet
+		String^ strError;
+		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill2ComboBox->SelectedIndex - KeyCodesSize).data), strError))
+			ShowError(strError);
 	}
 }
 void MainForm::Skill3Timer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
-	//Send Packet
-	if(AutoSkill3ComboBox->SelectedIndex > sizeof(KeyCodes) -1)
+	if(AutoSkill3ComboBox->SelectedIndex < KeyCodesSize)
 	{
-		String^ strError;
-		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill3ComboBox->SelectedIndex - 46).data), strError))
-			ShowError(strError);
-	}
-	else
-	{	//Send Key
+		//Send Key
 		while(CCing || UsingAutoSkill) Sleep(500);
 		UsingAutoSkill = true;
 		Sleep(250);
 		SendKey(KeyCodes[AutoSkill3ComboBox->SelectedIndex]);
 		Sleep(50);
-		UsingAutoSkill = false;
+		UsingAutoSkill = false;		
+	}
+	else
+	{
+		//Send Packet
+		String^ strError;
+		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill3ComboBox->SelectedIndex - KeyCodesSize).data), strError))
+			ShowError(strError);
 	}
 }
 void MainForm::Skill4Timer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
-	//Send Packet
-	if(AutoSkill4ComboBox->SelectedIndex > sizeof(KeyCodes) -1)
+	if(AutoSkill4ComboBox->SelectedIndex < KeyCodesSize)
 	{
-		String^ strError;
-		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill4ComboBox->SelectedIndex - 46).data), strError))
-			ShowError(strError);
-	}
-	else
-	{	//Send Key
+		//Send Key
 		while(CCing || UsingAutoSkill) Sleep(500);
 		UsingAutoSkill = true;
 		Sleep(250);
 		SendKey(KeyCodes[AutoSkill4ComboBox->SelectedIndex]);
 		Sleep(50);
-		UsingAutoSkill = false;
+		UsingAutoSkill = false;		
+	}
+	else
+	{
+		//Send Packet
+		String^ strError;
+		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill4ComboBox->SelectedIndex - KeyCodesSize).data), strError))
+			ShowError(strError);
 	}
 }
 void MainForm::AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -911,17 +915,17 @@ void MainForm::RefreshComboBoxes()
 	this->AutoSkill4ComboBox->Items->Clear();
 
 	//Add Keys to the autoskillcomboboxes
-	this->AutoSkill1ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9"});
-	this->AutoSkill2ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9"});
-	this->AutoSkill3ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9"});
-	this->AutoSkill4ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9"});
+	this->AutoSkill1ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+	this->AutoSkill2ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+	this->AutoSkill3ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+	this->AutoSkill4ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 
 	//refresh comboboxes
-	for(unsigned int i=0; i < vPacket.size(); i++)
+	for(sPacket p : vPacket)
 	{
 		try
 		{
-			String^ PacketName = marshal_as<String^>(vPacket.at(i).name);
+			String^ PacketName = marshal_as<String^>(p.name);
 			this->PacketSelectBox->Items->Add(PacketName);
 			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
 			this->DeletePacketComboBox->Items->Add(PacketName);
@@ -987,12 +991,12 @@ void MainForm::RefreshSPControlListView()
 	this->SPControlMapIDTextBox->Clear();
 	this->SPControlXTextBox->Clear();
 	this->SPControlYTextBox->Clear();
-	for(unsigned int i = 0; i < SPControlv.size(); i++)
+	for(SPControlStruct sp : SPControlv)
 	{
-		ListViewItem^ item = gcnew ListViewItem(marshal_as<String^>(SPControlv.at(i).mapName));
-		item->SubItems->Add(Convert::ToString(SPControlv.at(i).mapID));
-		item->SubItems->Add(Convert::ToString(SPControlv.at(i).x));
-		item->SubItems->Add(Convert::ToString(SPControlv.at(i).y));
+		ListViewItem^ item = gcnew ListViewItem(marshal_as<String^>(sp.mapName));
+		item->SubItems->Add(Convert::ToString(sp.mapID));
+		item->SubItems->Add(Convert::ToString(sp.x));
+		item->SubItems->Add(Convert::ToString(sp.y));
 		SPControlListView->Items->Add(item);
 	}
 }
