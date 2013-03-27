@@ -417,31 +417,6 @@ void MainForm::ddbPVPSkills_SelectedIndexChanged(System::Object^  sender, System
 {
 	Hacks::iPVPSkillID = ddbPVPSkills->SelectedIndex;
 }
-bool doVami;
-void Vami()
-{ 
-	while(doVami)
-	{
-		int destinationX = getCharX() + 1, destinationY = getCharY() + 10;
-		
-		DWORD iKBX = (destinationX > getCharX()) ? 1081139200 : 3228622848;
-		DWORD iKBY = (destinationY > getCharY()) ? 1081139200 : 3228622848;
- 
-		unsigned long pID = ReadPointer(CharBasePtr,pIDOffset);
-		WritePointer(pID, KBXOffset, iKBX);
-		WritePointer(pID, KBYOffset, iKBY);
-		WritePointer(pID, KBOffset, 1);
-	}
-}
-void MainForm::cbVami_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	doVami = cbVami->Checked;
-	NewThread(Vami);
-}
-void MainForm::cbKami_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-//	Hacks::cmKami.Enable(this->cbKami->Checked);
-}
 void MainForm::cbNoCCBlueBoxes_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	Hacks::cmNoCCBoxes.Enable(this->cbNoCCBlueBoxes->Checked);

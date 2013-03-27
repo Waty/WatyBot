@@ -1,5 +1,5 @@
-#include "MobPool.h"
 #include "HackAddys.h"
+
 extern int getMapID();
 extern int getCharX();
 extern int getCharY();
@@ -293,74 +293,6 @@ namespace Hacks
 	/////No CC BLue Boxes
 	BYTE bNoCCBoxes[] = {0x90, 0x90, 0x90, 0x90, 0x90};
 	CMemory cmNoCCBoxes(NoCCBoxesAddy1, bNoCCBoxes, 5, NoCCBoxesAddy2, bNoCCBoxes, 5);
-	
-	/*/////	Kami
-	unsigned int uKamiHook = 0x00BB1149, uKamiReturn = uKamiHook + 5;
-	unsigned int uWallBase = 0;
-	unsigned int uMobPool = 0;
-	unsigned int uCharBase = 0;
 
-	unsigned int uGetTime = 0x00BE6700; 
-
-	int nRangeX = -25,nRangeY = -5;
-
-	typedef void(__fastcall* PFN_TSecType_SetData)(void* pEcx,void* pEdx,int nValue);
-	PFN_TSecType_SetData TSecType_SetData = reinterpret_cast<PFN_TSecType_SetData>(0x00664140);
-
-
-	void __fastcall SetTeleport(int x,int y)
-	{
-		char* pCharBase = *reinterpret_cast<char**>(uCharBase);
-		if(uCharBase == 0)
-			return;
-		TSecType_SetData(reinterpret_cast<void*>(pCharBase+0x6e00),0,x);
-		TSecType_SetData(reinterpret_cast<void*>(pCharBase+0x6df4),0,y);
-		TSecType_SetData(reinterpret_cast<void*>(pCharBase+0x6ddc),0,1);
-	}
-
-	template<typename T>
-	bool IsInRange(T tMin,T tMax,T tValue)
-	{
-		return tValue >= tMin && tValue <= tMax;
-	}
-
-	bool CheckWalls(WZ_MOB::WZ_RECT* pRect,int nX,int nY)
-	{
-		return IsInRange<int>(pRect->nLeft,pRect->nRight,nX) && 
-			IsInRange<int>(pRect->nTop,pRect->nBottom,nY);
-	}
-
-	void __fastcall DoKami()
-	{
-		WZ_PHYSICAL::WZ_PHYSICAL_SPACE* physicalSpace = reinterpret_cast<WZ_PHYSICAL::WZ_PHYSICAL_SPACE*>(*reinterpret_cast<void**>(uWallBase));
-		WZ_MOB::MOB_POOL* mobPool = reinterpret_cast<WZ_MOB::MOB_POOL*>(*reinterpret_cast<void**>(uMobPool));
-	
-		WZ_MOB::MAPLE_MOB* pCurrentMob =  mobPool->pHeadMob;
-
-
-		for(int i = 0; i < mobPool->nCount;i++)
-		{
-			WZ_MOB::WZ_2D_DATA* layerData = pCurrentMob->pMobData->pLayer->p2D_Data;
-			POINT p = { layerData->nX + nRangeX , layerData->nY + nRangeY };
-
-			if(pCurrentMob->pMobData->rect.nLeft && CheckWalls(&physicalSpace->rWall,p.x,p.y))
-			{
-				SetTeleport(p.x,p.y);
-				break;
-			}
-			pCurrentMob = WZ_MOB::GetNext(pCurrentMob);
-		}
-	}
-
-	CodeCave(Kami)
-	{
-		call [uGetTime] //orig opcode (GetTime)
-		pushad
-		call DoKami
-		popad
-		jmp uKamiReturn
-	}
-	EndCodeCave
-	CMemory cmKami(uKamiHook, CaveKami, 0, true);*/
 }
 

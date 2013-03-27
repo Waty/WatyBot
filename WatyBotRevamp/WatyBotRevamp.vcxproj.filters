@@ -68,9 +68,6 @@
     <ClInclude Include="E:\Games\Europe MapleStory\WatyBotUpdater\Addys.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="MobPool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="HackAddys.h">
       <Filter>Resource Files</Filter>
     </ClInclude>

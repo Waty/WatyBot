@@ -332,7 +332,7 @@ private: System::Windows::Forms::Timer^  Skill3Timer;
 private: System::Windows::Forms::Timer^  Skill4Timer;
 private: System::Windows::Forms::NumericUpDown^  nudLoadDelay;
 private: System::Windows::Forms::Label^  lLoadDelay;
-private: System::Windows::Forms::CheckBox^  cbVami;
+
 private: System::Windows::Forms::Label^  lKBCoords;
 
 private: System::Windows::Forms::Label^  lKnockBack;
@@ -340,7 +340,7 @@ private: System::Windows::Forms::CheckBox^  cbPVP;
 private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 private: System::Windows::Forms::NumericUpDown^  nudPVPDelay;
 private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
-private: System::Windows::Forms::CheckBox^  cbKami;
+
 private: System::Windows::Forms::NumericUpDown^  nudPvPCCDelay;
 private: System::Windows::Forms::Label^  lPvPCCDelay;
 private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
@@ -437,8 +437,6 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			this->gbMiscHacks = (gcnew System::Windows::Forms::GroupBox());
 			this->cbNoCCBlueBoxes = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoFadeStages = (gcnew System::Windows::Forms::CheckBox());
-			this->cbKami = (gcnew System::Windows::Forms::CheckBox());
-			this->cbVami = (gcnew System::Windows::Forms::CheckBox());
 			this->cbHideDamage = (gcnew System::Windows::Forms::CheckBox());
 			this->cbCPUHack = (gcnew System::Windows::Forms::CheckBox());
 			this->cbFLACC = (gcnew System::Windows::Forms::CheckBox());
@@ -1223,8 +1221,6 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// 
 			this->gbMiscHacks->Controls->Add(this->cbNoCCBlueBoxes);
 			this->gbMiscHacks->Controls->Add(this->cbNoFadeStages);
-			this->gbMiscHacks->Controls->Add(this->cbKami);
-			this->gbMiscHacks->Controls->Add(this->cbVami);
 			this->gbMiscHacks->Controls->Add(this->cbHideDamage);
 			this->gbMiscHacks->Controls->Add(this->cbCPUHack);
 			this->gbMiscHacks->Controls->Add(this->cbFLACC);
@@ -1264,30 +1260,6 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			this->InfoToolTip->SetToolTip(this->cbNoFadeStages, L"Reduces CPU usage");
 			this->cbNoFadeStages->UseVisualStyleBackColor = true;
 			this->cbNoFadeStages->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoFadeStages_CheckedChanged);
-			// 
-			// cbKami
-			// 
-			this->cbKami->AutoSize = true;
-			this->cbKami->Location = System::Drawing::Point(255, 37);
-			this->cbKami->Name = L"cbKami";
-			this->cbKami->Size = System::Drawing::Size(49, 17);
-			this->cbKami->TabIndex = 10;
-			this->cbKami->Text = L"Kami";
-			this->cbKami->UseVisualStyleBackColor = true;
-			this->cbKami->Visible = false;
-			this->cbKami->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbKami_CheckedChanged);
-			// 
-			// cbVami
-			// 
-			this->cbVami->AutoSize = true;
-			this->cbVami->Location = System::Drawing::Point(246, 14);
-			this->cbVami->Name = L"cbVami";
-			this->cbVami->Size = System::Drawing::Size(58, 17);
-			this->cbVami->TabIndex = 9;
-			this->cbVami->Text = L"KB UA";
-			this->cbVami->UseVisualStyleBackColor = true;
-			this->cbVami->Visible = false;
-			this->cbVami->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbVami_CheckedChanged);
 			// 
 			// cbHideDamage
 			// 
@@ -2661,10 +2633,8 @@ private: System::Void Skill1Timer_Tick(System::Object^  sender, System::EventArg
 private: System::Void Skill2Timer_Tick(System::Object^  sender, System::EventArgs^  e);
 private: System::Void Skill3Timer_Tick(System::Object^  sender, System::EventArgs^  e);
 private: System::Void Skill4Timer_Tick(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbVami_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void bwNextChannel_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
-private: System::Void cbKami_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNoFadeStages_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNoCCBlueBoxes_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void nudPVPDelay_ValueChanged(System::Object^  sender, System::EventArgs^  e);
