@@ -211,11 +211,15 @@ void MainForm::bwNextChannel_DoWork(System::Object^  sender, System::ComponentMo
 		if(PVP) cbPVP->Checked = false;
 		Sleep(5500);
 	}
-
+	bool attack = AttackCheckBox->Checked, loot = LootCheckBox->Checked;
+	AttackCheckBox->Checked = false;
+	LootCheckBox->Checked = false;
 	CCing = true;
 	while(!TryCC()) Sleep(1000);
 	CCing = false;
 
+	LootCheckBox->Checked = loot;
+	AttackCheckBox->Checked = attack;
 	if(PVP)
 	{
 		Sleep(Convert::ToInt32(nudPvPCCDelay->Value));
