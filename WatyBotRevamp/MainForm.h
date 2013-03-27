@@ -1431,6 +1431,7 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			this->nudPVPDelay->Size = System::Drawing::Size(42, 20);
 			this->nudPVPDelay->TabIndex = 17;
 			this->InfoToolTip->SetToolTip(this->nudPVPDelay, L"Delay in miliseconds for PvP Skill Injection");
+			this->nudPVPDelay->ValueChanged += gcnew System::EventHandler(this, &MainForm::nudPVPDelay_ValueChanged);
 			// 
 			// ddbPVPSkills
 			// 
@@ -1444,6 +1445,7 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			this->ddbPVPSkills->Size = System::Drawing::Size(145, 21);
 			this->ddbPVPSkills->TabIndex = 16;
 			this->InfoToolTip->SetToolTip(this->ddbPVPSkills, L"Select here the skill you want to use with PvP Skill Injection");
+			this->ddbPVPSkills->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::ddbPVPSkills_SelectedIndexChanged);
 			// 
 			// cbPVP
 			// 
@@ -2665,6 +2667,8 @@ private: System::Void bwNextChannel_DoWork(System::Object^  sender, System::Comp
 private: System::Void cbKami_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNoFadeStages_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNoCCBlueBoxes_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void nudPVPDelay_ValueChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void ddbPVPSkills_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion

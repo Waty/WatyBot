@@ -404,12 +404,18 @@ void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^ 
 		Hacks::iPVPSkillID = PVPSkills[ddbPVPSkills->SelectedIndex];
 		Hacks::iPVPDelay = Convert::ToInt32(nudPVPDelay->Value);
 
-		ddbPVPSkills->Enabled = !cbPVP->Checked;
-		nudPVPDelay->Enabled = !cbPVP->Checked;
 		cbNFA->Checked = false;
 		Hacks::cmPVP1.Enable(cbPVP->Checked);
 		Hacks::cmPVP2.Enable(cbPVP->Checked);
 	}
+}
+void MainForm::nudPVPDelay_ValueChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::iPVPDelay = Convert::ToInt32(nudPVPDelay->Value);
+}
+void MainForm::ddbPVPSkills_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::iPVPSkillID = ddbPVPSkills->SelectedIndex;
 }
 bool doVami;
 void Vami()
