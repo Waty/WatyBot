@@ -910,10 +910,10 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// 
 			this->AutoSkill4ComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->AutoSkill4ComboBox->FormattingEnabled = true;
-			this->AutoSkill4ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->AutoSkill4ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9"});
+				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->AutoSkill4ComboBox->Location = System::Drawing::Point(202, 197);
 			this->AutoSkill4ComboBox->Name = L"AutoSkill4ComboBox";
 			this->AutoSkill4ComboBox->Size = System::Drawing::Size(115, 21);
@@ -956,10 +956,10 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// 
 			this->AutoSkill3ComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->AutoSkill3ComboBox->FormattingEnabled = true;
-			this->AutoSkill3ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->AutoSkill3ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9"});
+				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->AutoSkill3ComboBox->Location = System::Drawing::Point(202, 171);
 			this->AutoSkill3ComboBox->Name = L"AutoSkill3ComboBox";
 			this->AutoSkill3ComboBox->Size = System::Drawing::Size(115, 21);
@@ -980,10 +980,10 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// 
 			this->AutoSkill2ComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->AutoSkill2ComboBox->FormattingEnabled = true;
-			this->AutoSkill2ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->AutoSkill2ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9"});
+				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->AutoSkill2ComboBox->Location = System::Drawing::Point(202, 145);
 			this->AutoSkill2ComboBox->Name = L"AutoSkill2ComboBox";
 			this->AutoSkill2ComboBox->Size = System::Drawing::Size(115, 21);
@@ -1026,10 +1026,10 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// 
 			this->AutoSkill1ComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->AutoSkill1ComboBox->FormattingEnabled = true;
-			this->AutoSkill1ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->AutoSkill1ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9"});
+				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->AutoSkill1ComboBox->Location = System::Drawing::Point(202, 119);
 			this->AutoSkill1ComboBox->Name = L"AutoSkill1ComboBox";
 			this->AutoSkill1ComboBox->Size = System::Drawing::Size(115, 21);
@@ -1039,10 +1039,10 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// 
 			this->HPComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->HPComboBox->FormattingEnabled = true;
-			this->HPComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->HPComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9"});
+				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->HPComboBox->Location = System::Drawing::Point(202, 69);
 			this->HPComboBox->Name = L"HPComboBox";
 			this->HPComboBox->Size = System::Drawing::Size(115, 21);
@@ -1063,10 +1063,10 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// 
 			this->LootComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->LootComboBox->FormattingEnabled = true;
-			this->LootComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->LootComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9"});
+				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->LootComboBox->Location = System::Drawing::Point(241, 42);
 			this->LootComboBox->Name = L"LootComboBox";
 			this->LootComboBox->Size = System::Drawing::Size(76, 21);
@@ -1087,10 +1087,10 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// 
 			this->MPComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->MPComboBox->FormattingEnabled = true;
-			this->MPComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->MPComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9"});
+				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->MPComboBox->Location = System::Drawing::Point(202, 94);
 			this->MPComboBox->Name = L"MPComboBox";
 			this->MPComboBox->Size = System::Drawing::Size(115, 21);
@@ -1109,10 +1109,10 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// 
 			this->AttackComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->AttackComboBox->FormattingEnabled = true;
-			this->AttackComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->AttackComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9"});
+				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->AttackComboBox->Location = System::Drawing::Point(241, 14);
 			this->AttackComboBox->Name = L"AttackComboBox";
 			this->AttackComboBox->Size = System::Drawing::Size(76, 21);
@@ -2211,10 +2211,10 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// 
 			this->ddbHotKeySendPacket->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbHotKeySendPacket->FormattingEnabled = true;
-			this->ddbHotKeySendPacket->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", 
+			this->ddbHotKeySendPacket->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", 
 				L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", 
 				L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", 
-				L"5", L"6", L"7", L"8", L"9"});
+				L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->ddbHotKeySendPacket->Location = System::Drawing::Point(100, 129);
 			this->ddbHotKeySendPacket->Name = L"ddbHotKeySendPacket";
 			this->ddbHotKeySendPacket->Size = System::Drawing::Size(80, 21);
@@ -2234,10 +2234,10 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// 
 			this->ddbHotKeyCCPeople->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbHotKeyCCPeople->FormattingEnabled = true;
-			this->ddbHotKeyCCPeople->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->ddbHotKeyCCPeople->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9"});
+				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->ddbHotKeyCCPeople->Location = System::Drawing::Point(100, 102);
 			this->ddbHotKeyCCPeople->Name = L"ddbHotKeyCCPeople";
 			this->ddbHotKeyCCPeople->Size = System::Drawing::Size(80, 21);
@@ -2257,10 +2257,10 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// 
 			this->ddbHotKeyFMA->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbHotKeyFMA->FormattingEnabled = true;
-			this->ddbHotKeyFMA->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->ddbHotKeyFMA->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9"});
+				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->ddbHotKeyFMA->Location = System::Drawing::Point(100, 75);
 			this->ddbHotKeyFMA->Name = L"ddbHotKeyFMA";
 			this->ddbHotKeyFMA->Size = System::Drawing::Size(80, 21);
@@ -2280,10 +2280,10 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// 
 			this->ddbHotKeyLoot->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbHotKeyLoot->FormattingEnabled = true;
-			this->ddbHotKeyLoot->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->ddbHotKeyLoot->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9"});
+				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->ddbHotKeyLoot->Location = System::Drawing::Point(100, 48);
 			this->ddbHotKeyLoot->Name = L"ddbHotKeyLoot";
 			this->ddbHotKeyLoot->Size = System::Drawing::Size(80, 21);
@@ -2303,10 +2303,10 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// 
 			this->ddbHotKeyAttack->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbHotKeyAttack->FormattingEnabled = true;
-			this->ddbHotKeyAttack->Items->AddRange(gcnew cli::array< System::Object^  >(46) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->ddbHotKeyAttack->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9"});
+				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->ddbHotKeyAttack->Location = System::Drawing::Point(100, 21);
 			this->ddbHotKeyAttack->Name = L"ddbHotKeyAttack";
 			this->ddbHotKeyAttack->Size = System::Drawing::Size(80, 21);
