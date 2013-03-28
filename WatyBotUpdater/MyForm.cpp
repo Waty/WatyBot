@@ -26,6 +26,14 @@ void MyForm::MyForm_Load(System::Object^  sender, System::EventArgs^  e)
 	this->InfoToolTip->SetToolTip(this->bInput, marshal_as<String^>(inputfile));
 }	
 
+void CreateGUI(void)
+{
+        Application::EnableVisualStyles();
+        Application::SetCompatibleTextRenderingDefault(false);
+        Application::Run(gcnew MyForm);
+        Application::Exit();
+}
+
 void InitializeTrainer(HINSTANCE hInstance)
 {
     DisableThreadLibraryCalls(hInstance);
@@ -44,12 +52,10 @@ void InitializeTrainer(HINSTANCE hInstance)
 			outputfile = pt.get<string>("outputfile");
 		}
 	}
-
-	//Run the form
-	Application::EnableVisualStyles();
-	Application::SetCompatibleTextRenderingDefault(false);
-	Application::Run(gcnew MyForm);
-	Application::Exit();
+	
+	Threading::Thread^ tMain = gcnew Threading::Thread(gcnew Threading::ThreadStart(CreateGUI));
+	tMain->SetApartmentState(Threading::ApartmentState::STA);
+	tMain->Start();
 }
 
 void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
