@@ -305,6 +305,7 @@ namespace Hacks
 		pushad
 		//looking for the mouse click
 		mov ebx, [MouseBasePtr]
+		mov ebx, [ebx]
 		cmp dword ptr[ebx+MouseAniOffset], 0x0C
 		jne FlyExit
 
