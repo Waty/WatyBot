@@ -165,7 +165,7 @@ namespace WatyBotUpdater {
 			this->MaximizeBox = false;
 			this->Name = L"MyForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
-			this->Text = L"WatyBotUpdater Bèta 1.0";
+			this->Text = L"WatyUpdater Bèta 1.0";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MyForm::MyForm_FormClosing);
 			this->ResumeLayout(false);
 
