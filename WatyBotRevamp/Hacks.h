@@ -295,34 +295,34 @@ namespace Hacks
 	CMemory cmNoCCBoxes(NoCCBoxesAddy1, bNoCCBoxes, 5, NoCCBoxesAddy2, bNoCCBoxes, 5);
 	
 	////SS Mouse Click Fly
-	DWORD dwMouseFlyRet = MouseFlyAddy + 6;
-	DWORD dwMouseFlyCall = MouseFlyCall;
-	const DWORD dwMouseFlyOpCall = MouseFlyOpCall;
+	DWORD dwMouseFlyRet = MouseFlyAddy + 5;
+	DWORD dwMouseFlyCall1 = MouseFlyCall1;
+	DWORD dwMouseFlyCall2 = MouseFlyCall2;
 
 	CodeCave(MouseFly)
 	{
-		call dwMouseFlyOpCall
+		call dwMouseFlyCall1
 		pushad
 		//looking for the mouse click
 		mov ebx, [MouseBasePtr]
-		cmp dword ptr[ebx+0x9cc], 0x0c
+		cmp dword ptr[ebx+MouseAniOffset], 0x0C
 		jne FlyExit
 
 		//get mouselocation
-		mov ebx,[ebx+0x978]
-		mov eax,[ebx+0x8C]
-		mov ebx,[ebx+0x90]
+		mov ebx,[ebx+MouseLocOffset]
+		mov eax,[ebx+MouseXOffset]
+		mov ebx,[ebx+MouseYOffset]
 
 		//encrypt and set teleoffsets
 		lea ecx,[esi+0x6e00]
 		push eax
-		call dwMouseFlyCall
+		call dwMouseFlyCall2
 		lea ecx, [esi+0x6df4]
 		push ebx
-		call dwMouseFlyCall
+		call dwMouseFlyCall2
 		lea ecx, [esi+0x6ddc]
 		push 00000001 //Probably dont need all the proceeding 0's but wthell
-		call dwMouseFlyCall
+		call dwMouseFlyCall2
 
 		FlyExit:
 		popad
@@ -330,6 +330,6 @@ namespace Hacks
 
 	}
 	EndCodeCave
-	CMemory cmMouseFly(MouseFlyAddy, CaveMouseFly, 1, true);
+	CMemory cmMouseFly(MouseFlyAddy, CaveMouseFly, 0, true);
 }
 

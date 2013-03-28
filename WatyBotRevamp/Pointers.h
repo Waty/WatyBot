@@ -23,6 +23,7 @@
 #define MouseBasePtr 0x011DEFE8
 #define MouseLocOffset 0x978
 #define MouseXOffset 0x8C
+#define MouseYOffset (MouseXOffset + 4)
 #define MouseAniOffset 0x9CC
  
 #define SettingsBasePtr 0x011DE8FC

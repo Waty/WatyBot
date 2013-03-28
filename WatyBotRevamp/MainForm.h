@@ -345,6 +345,7 @@ private: System::Windows::Forms::NumericUpDown^  nudPvPCCDelay;
 private: System::Windows::Forms::Label^  lPvPCCDelay;
 private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
+private: System::Windows::Forms::CheckBox^  cbMouseFly;
 
 
 
@@ -557,6 +558,7 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			this->Skill3Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->Skill4Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->bwNextChannel = (gcnew System::ComponentModel::BackgroundWorker());
+			this->cbMouseFly = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1219,6 +1221,7 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// 
 			// gbMiscHacks
 			// 
+			this->gbMiscHacks->Controls->Add(this->cbMouseFly);
 			this->gbMiscHacks->Controls->Add(this->cbNoCCBlueBoxes);
 			this->gbMiscHacks->Controls->Add(this->cbNoFadeStages);
 			this->gbMiscHacks->Controls->Add(this->cbHideDamage);
@@ -2482,6 +2485,17 @@ private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 			// 
 			this->bwNextChannel->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::bwNextChannel_DoWork);
 			// 
+			// cbMouseFly
+			// 
+			this->cbMouseFly->AutoSize = true;
+			this->cbMouseFly->Location = System::Drawing::Point(160, 107);
+			this->cbMouseFly->Name = L"cbMouseFly";
+			this->cbMouseFly->Size = System::Drawing::Size(74, 17);
+			this->cbMouseFly->TabIndex = 13;
+			this->cbMouseFly->Text = L"Mouse Fly";
+			this->cbMouseFly->UseVisualStyleBackColor = true;
+			this->cbMouseFly->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbMouseFly_CheckedChanged);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2638,6 +2652,7 @@ private: System::Void cbNoFadeStages_CheckedChanged(System::Object^  sender, Sys
 private: System::Void cbNoCCBlueBoxes_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void nudPVPDelay_ValueChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void ddbPVPSkills_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbMouseFly_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion
