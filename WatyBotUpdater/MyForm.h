@@ -48,7 +48,7 @@ namespace WatyBotUpdater {
 	private: System::Windows::Forms::Button^  bOutput;
 	private: System::Windows::Forms::OpenFileDialog^  InputFileDialog;
 	private: System::Windows::Forms::SaveFileDialog^  OutputFileDialog;
-	private: System::Windows::Forms::ToolTip^  InfoToolTip;
+
 	private: System::ComponentModel::IContainer^  components;
 	protected: 
 
@@ -67,7 +67,6 @@ namespace WatyBotUpdater {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->components = (gcnew System::ComponentModel::Container());
 			this->bUpdate = (gcnew System::Windows::Forms::Button());
 			this->lvAddys = (gcnew System::Windows::Forms::ListView());
 			this->chName = (gcnew System::Windows::Forms::ColumnHeader());
@@ -76,7 +75,6 @@ namespace WatyBotUpdater {
 			this->bOutput = (gcnew System::Windows::Forms::Button());
 			this->InputFileDialog = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->OutputFileDialog = (gcnew System::Windows::Forms::SaveFileDialog());
-			this->InfoToolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->SuspendLayout();
 			// 
 			// bUpdate
@@ -141,6 +139,7 @@ namespace WatyBotUpdater {
 			this->InputFileDialog->FileName = L"AOBs";
 			this->InputFileDialog->Filter = L"Ini files (*.ini)|*.ini";
 			this->InputFileDialog->InitialDirectory = L"WatyBotUpdater";
+			this->InputFileDialog->RestoreDirectory = true;
 			this->InputFileDialog->Title = L"Open the ini file containing all the AOB\'s";
 			// 
 			// OutputFileDialog
@@ -149,7 +148,8 @@ namespace WatyBotUpdater {
 			this->OutputFileDialog->FileName = L"Addys";
 			this->OutputFileDialog->Filter = L"Header Files (*.h)|*.h";
 			this->OutputFileDialog->InitialDirectory = L"WatyBotUpdater";
-			this->OutputFileDialog->Title = L"File You want to save the updated addys to";
+			this->OutputFileDialog->OverwritePrompt = false;
+			this->OutputFileDialog->Title = L"Select the file you want to save the updated addys to";
 			// 
 			// MyForm
 			// 
@@ -165,9 +165,8 @@ namespace WatyBotUpdater {
 			this->MaximizeBox = false;
 			this->Name = L"MyForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
-			this->Text = L"WatyBotUpdater";
+			this->Text = L"WatyBotUpdater Bèta 1.0";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MyForm::MyForm_FormClosing);
-			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			this->ResumeLayout(false);
 
 		}
@@ -176,6 +175,5 @@ namespace WatyBotUpdater {
 	private: System::Void MyForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
 	private: System::Void bInput_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void bOutput_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e);
 };
 }

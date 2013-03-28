@@ -20,12 +20,6 @@ DWORD dwMapleSize = 0;
 string inputfile = "WatyBotUpdater\\AOBs.ini";
 string outputfile = "WatyBotUpdater\\Addys.h";
 
-void MyForm::MyForm_Load(System::Object^  sender, System::EventArgs^  e)
-{
-	this->InfoToolTip->SetToolTip(this->bOutput, marshal_as<String^>(outputfile));
-	this->InfoToolTip->SetToolTip(this->bInput, marshal_as<String^>(inputfile));
-}	
-
 void CreateGUI(void)
 {
         Application::EnableVisualStyles();
@@ -74,20 +68,26 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 		{		
 			char* aob = (char*) v.second.data().c_str();
 			String^ name = marshal_as<String^>(v.first);
+
 			FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
 			DWORD result = pf.dwResult;
 
 			String^ error = " 0xError";
 			String^ strresult = " 0x" + result.ToString("X");
-			bool succes = result == 0;
+			bool succes = result != 0;
 
 			//Add the result to the ListView
 			auto lvItem = gcnew ListViewItem(name);
-			lvItem->SubItems->Add(succes ? error : strresult);
+			lvItem->SubItems->Add(succes ? strresult : error);
+			if(!succes)
+			{
+				lvItem->UseItemStyleForSubItems = false;
+				lvItem->SubItems[1]->BackColor = Color::Red;
+			}
 			lvAddys->Items->Add(lvItem);
 
 			//Write the found addy to the header file
-			sw->WriteLine("#define " + name + (succes ? error : strresult));
+			sw->WriteLine("#define " + name + (succes ? strresult : error));
 		}
 		if(sw) delete (IDisposable^)(sw);
 		ShowInfo("Finished Updating!");
@@ -117,7 +117,8 @@ void MyForm::bOutput_Click(System::Object^  sender, System::EventArgs^  e)
 void MyForm::MyForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 {
 	//Save Settings
-	ofstream file(settings);
+	string settingsfile = settings;
+	ofstream file(settingsfile);
 	ptree pt;
 	pt.add("outputfile", outputfile);
 	pt.add("inputfile", inputfile);
