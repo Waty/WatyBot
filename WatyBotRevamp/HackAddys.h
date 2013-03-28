@@ -1,7 +1,7 @@
 #define DojangAddy 0xB60FD4
 #define DojangCall 0xC23330
-#define AggroAddy 0xC37F2F
-#define AggroCall 0xC2E9F0
+#define AggroAddy 0xC3040F
+#define AggroCall 0xC26EE0
 #define PinTyperAddy1 0x6919B6
 #define PinTyperAddy2 0x693087 
 #define FusionAddy 0x709F72
