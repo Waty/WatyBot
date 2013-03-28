@@ -31,7 +31,7 @@ namespace Hacks
 	CodeCave(Aggro)
 	{
 		call dwAggroCall
-		mov edx,dword ptr ds:[MobBasePtr]
+		mov edx,dword ptr ds:[CharBasePtr]
 		mov edx,[edx+0x29D8]
 		mov edx,[edx+0x0C]
 		mov [esi+0x2B0],edx
