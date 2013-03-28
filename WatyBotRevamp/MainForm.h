@@ -436,6 +436,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->HPBackground = (gcnew System::Windows::Forms::PictureBox());
 			this->HacksTab = (gcnew System::Windows::Forms::TabPage());
 			this->gbMiscHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbMouseFly = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoCCBlueBoxes = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoFadeStages = (gcnew System::Windows::Forms::CheckBox());
 			this->cbHideDamage = (gcnew System::Windows::Forms::CheckBox());
@@ -558,7 +559,6 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->Skill3Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->Skill4Timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->bwNextChannel = (gcnew System::ComponentModel::BackgroundWorker());
-			this->cbMouseFly = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -1239,6 +1239,17 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->gbMiscHacks->TabIndex = 2;
 			this->gbMiscHacks->TabStop = false;
 			this->gbMiscHacks->Text = L"Other";
+			// 
+			// cbMouseFly
+			// 
+			this->cbMouseFly->AutoSize = true;
+			this->cbMouseFly->Location = System::Drawing::Point(160, 107);
+			this->cbMouseFly->Name = L"cbMouseFly";
+			this->cbMouseFly->Size = System::Drawing::Size(74, 17);
+			this->cbMouseFly->TabIndex = 13;
+			this->cbMouseFly->Text = L"Mouse Fly";
+			this->cbMouseFly->UseVisualStyleBackColor = true;
+			this->cbMouseFly->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbMouseFly_CheckedChanged);
 			// 
 			// cbNoCCBlueBoxes
 			// 
@@ -2485,17 +2496,6 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			// 
 			this->bwNextChannel->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::bwNextChannel_DoWork);
 			// 
-			// cbMouseFly
-			// 
-			this->cbMouseFly->AutoSize = true;
-			this->cbMouseFly->Location = System::Drawing::Point(160, 107);
-			this->cbMouseFly->Name = L"cbMouseFly";
-			this->cbMouseFly->Size = System::Drawing::Size(74, 17);
-			this->cbMouseFly->TabIndex = 13;
-			this->cbMouseFly->Text = L"Mouse Fly";
-			this->cbMouseFly->UseVisualStyleBackColor = true;
-			this->cbMouseFly->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbMouseFly_CheckedChanged);
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2509,7 +2509,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot - V2.7.2 - CCPLZ! - EMS 89.1";
+			this->Text = L"WatyBot - V2.8 - CCPLZ! - EMS 89.1";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
