@@ -510,8 +510,9 @@ bool SAWSIL()
 }
 bool SLWIB()
 {
-	if(getMobCount() >= AutoBotVars::iSlwib) return true;
-	return false;
+	if(getMobCount() < AutoBotVars::iSlwib) return false;
+	if(!WritePointer(ServerBasePtr, TubiOffset, 0)) return false;
+	return true;
 }
 void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
