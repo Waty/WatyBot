@@ -99,14 +99,8 @@ namespace Packets
 
 namespace AutoBotVars
 {
-	int AttackKey;
 	int iSawsil;
 	int iSlwib;
-	LPARAM AttacklParam;
-	bool Attacking;
-
-	int LootKey;
-	LPARAM LootlParam;
 }
 
 static int TabHeight[] = {431, 461, 381, 431, 431};

@@ -28,6 +28,7 @@ string SPControlFileName = WatyBotWorkingDirectory + "spcontrol.xml";
 //Macro's
 Macro::AbstractMacro* AttackMacro;
 Macro::AbstractMacro* LootMacro;
+Macro::AbstractMacro* CCMacro;
 
 int getMobCount()
 {
@@ -494,15 +495,6 @@ bool ReturnTrue()
 	return true;
 }
 
-void Attack()
-{
-	if(getMobCount() > AutoBotVars::iSawsil && !UsingAutoSkill && !UsingPot && !CCing && InGame())
-	{
-		PostMessage(MapleStoryHWND, WM_KEYDOWN, AutoBotVars::AttackKey, AutoBotVars::AttacklParam);
-		Sleep(50);
-		PostMessage(MapleStoryHWND, WM_KEYUP, AutoBotVars::AttackKey, AutoBotVars::AttacklParam);
-	}
-}
 bool SAWSIL()
 {
 	if(getMobCount() >= AutoBotVars::iSawsil) return true;
@@ -525,7 +517,6 @@ void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 	AttackMacro->SetDelay((unsigned int) nudAttackDelay->Value);
 	AttackMacro->Toggle(AttackCheckBox->Checked);
 }
-
 void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->LootComboBox->Enabled = !this->LootCheckBox->Checked;
@@ -721,12 +712,13 @@ void InitializeMacros()
 	//Start the MacroManager
 	macroMan.Start();
 
-	//Add Attack to the Manager
+	//Add the AttackMacro to the Manager
 	AttackMacro = new Macro::BotMacro(NULL, NULL, NULL, SAWSIL);
 	AttackMacro->Toggle(false);
+	AttackMacro->SetPriority(2);
 	macroMan.AddMacro(MacroIndex::eAttack, AttackMacro);
 
-	//Add Loot to the Manager
+	//Add the LootMacro to the Manager
 	LootMacro = new Macro::BotMacro(NULL, NULL, NULL, SLWIB);
 	LootMacro->Toggle(false);
 	macroMan.AddMacro(MacroIndex::eLoot, LootMacro);
