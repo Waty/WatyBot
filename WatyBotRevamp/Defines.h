@@ -101,6 +101,7 @@ namespace AutoBotVars
 {
 	int AttackKey;
 	int iSawsil;
+	int iSlwib;
 	LPARAM AttacklParam;
 	bool Attacking;
 

@@ -20,7 +20,7 @@ namespace Macro
 		virtual bool CheckCondition() = 0;
 		virtual void ProcessMacro() = 0;
 
-		bool Toogle(bool fStatus);
+		bool Toggle(bool fStatus);
 		void SetDelay(unsigned int uDelay);
 		void SetValue(int nValue);
 		void SetSecondValue(int nValue);

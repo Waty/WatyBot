@@ -1,6 +1,7 @@
 #pragma once
 #include "MacroManager.h"
-
+extern HWND MapleStoryHWND;
+#define SendKey(KeyPress) PostMessage(MapleStoryHWND, WM_KEYDOWN, KeyPress, (MapVirtualKey(KeyPress, 0) << 16) + 1);
 namespace Macro
 {
 	class BotMacro : public AbstractMacro
@@ -21,7 +22,7 @@ namespace Macro
 		}
 		void ProcessMacro()
 		{
-			//SendKey(this->nValue);
+			SendKey(this->nValue);
 			this->UpdateTime();
 		}
 	private:

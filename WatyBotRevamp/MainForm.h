@@ -276,7 +276,7 @@ private: System::Windows::Forms::Label^  lSAWSIL;
 
 
 
-private: System::Windows::Forms::Timer^  LootTimer;
+
 private: System::Windows::Forms::Timer^  CCTimedTimer;
 private: System::Windows::Forms::ComboBox^  TimedComboBox;
 private: System::Windows::Forms::ComboBox^  AttacksComboBox;
@@ -549,7 +549,6 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SpamPacketsTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->LootTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->InfoToolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->Skill1Timer = (gcnew System::Windows::Forms::Timer(this->components));
@@ -2462,10 +2461,6 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			// 
 			this->SpamPacketsTimer->Tick += gcnew System::EventHandler(this, &MainForm::SpamPacketsTimer_Tick);
 			// 
-			// LootTimer
-			// 
-			this->LootTimer->Tick += gcnew System::EventHandler(this, &MainForm::LootTimer_Tick);
-			// 
 			// CCTimedTimer
 			// 
 			this->CCTimedTimer->Tick += gcnew System::EventHandler(this, &MainForm::CCTimedTimer_Tick);
@@ -2627,7 +2622,6 @@ private: System::Void bStopSpamming_Click(System::Object^  sender, System::Event
 private: System::Void cbScareMobs_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbFLACC_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbCPUHack_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void LootTimer_Tick(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNFA_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbAutoAggro_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void CCTimedTimer_Tick(System::Object^  sender, System::EventArgs^  e);

@@ -15,6 +15,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 #include "MacroManager/FunctionalMacro.h"
+#include "MacroManager/BotMacro.h"
 using namespace WatyBotRevamp;
 using namespace msclr::interop;
 using namespace System::IO;
@@ -23,6 +24,10 @@ string WatyBotWorkingDirectory = "WatyBot\\";
 string SettingsFileName = WatyBotWorkingDirectory + "settings.ini";
 string PacketFileName = WatyBotWorkingDirectory + "packets.xml";
 string SPControlFileName = WatyBotWorkingDirectory + "spcontrol.xml";
+
+//Macro's
+Macro::AbstractMacro* AttackMacro;
+Macro::AbstractMacro* LootMacro;
 
 int getMobCount()
 {
@@ -498,51 +503,38 @@ void Attack()
 		PostMessage(MapleStoryHWND, WM_KEYUP, AutoBotVars::AttackKey, AutoBotVars::AttacklParam);
 	}
 }
-
+bool SAWSIL()
+{
+	if(getMobCount() >= AutoBotVars::iSawsil) return true;
+	return false;
+}
+bool SLWIB()
+{
+	if(getMobCount() >= AutoBotVars::iSlwib) return true;
+	return false;
+}
 void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->nudAttackDelay->Enabled = !AttackCheckBox->Checked;
 	this->nudSAWSIL->Enabled = !AttackCheckBox->Checked;
-	if(!AttackCheckBox->Checked) macroMan.RemoveMacro(eAttack);
-	else
-	{
-		ShowInfo("Starting AutoAttack");
-		AutoBotVars::AttackKey = KeyCodes[AttackComboBox->SelectedIndex];
-		AutoBotVars::AttacklParam = (MapVirtualKey(AutoBotVars::AttackKey, 0) << 16) + 1;
-		AutoBotVars::iSawsil = Convert::ToInt32(nudSAWSIL->Value);
-		Macro::AbstractMacro* m;
+	this->AttackComboBox->Enabled = !AttackCheckBox->Checked;
 
-		m = new Macro::FunctionalMacro((int) nudAttackDelay->Value, 0, ReturnTrue, Attack);
-		macroMan.AddMacro(eAttack, m);
-		macroMan.Start();
-	}
+	AutoBotVars::iSawsil = (int) nudSAWSIL->Value;
+	AttackMacro->SetValue(KeyCodes[AttackComboBox->SelectedIndex]);
+	AttackMacro->SetDelay((unsigned int) nudAttackDelay->Value);
+	AttackMacro->Toggle(AttackCheckBox->Checked);
 }
 
 void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	try
-	{
-		AutoBotVars::LootKey = KeyCodes[LootComboBox->SelectedIndex];
-		AutoBotVars::LootlParam = (MapVirtualKey(AutoBotVars::LootKey, 0) << 16) + 1;
-
-		this->LootTimer->Interval = Convert::ToInt32(this->nudLootDelay->Value);
-		this->LootComboBox->Enabled = !this->LootCheckBox->Checked;
-		this->nudLootDelay->Enabled = !this->LootCheckBox->Checked;
-		this->nudSLWIB->Enabled = !this->LootCheckBox->Checked;
-		this->LootTimer->Enabled = this->LootCheckBox->Checked;
-	}
-	catch(Exception^ ex)
-	{
-		ShowError("Please Report the following error: " + ex->ToString());
-	}
-}
-void MainForm::LootTimer_Tick(System::Object^  sender, System::EventArgs^  e)
-{
-	if(getItemCount() > Convert::ToInt32(nudSLWIB->Value) && !UsingAutoSkill && !UsingPot && !CCing && InGame())
-	{
-		WritePointer(ServerBasePtr, TubiOffset, 0);
-		PostMessage(MapleStoryHWND, WM_KEYDOWN, AutoBotVars::LootKey, AutoBotVars::LootlParam);		
-	}
+	this->LootComboBox->Enabled = !this->LootCheckBox->Checked;
+	this->nudLootDelay->Enabled = !this->LootCheckBox->Checked;
+	this->nudSLWIB->Enabled = !this->LootCheckBox->Checked;
+		
+	AutoBotVars::iSawsil = (int) nudSLWIB->Value;
+	LootMacro->SetValue(KeyCodes[LootComboBox->SelectedIndex]);
+	LootMacro->SetDelay((unsigned int) nudLootDelay->Value);
+	LootMacro->Toggle(this->LootCheckBox->Checked);
 }
 void MainForm::Skill1Timer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
@@ -723,10 +715,28 @@ void Main(void)
 	Application::Run(gcnew MainForm);
 	Application::Exit();
 }
+void InitializeMacros()
+{
+	//Start the MacroManager
+	macroMan.Start();
+
+	//Add Attack to the Manager
+	AttackMacro = new Macro::BotMacro(NULL, NULL, NULL, SAWSIL);
+	AttackMacro->Toggle(false);
+	macroMan.AddMacro(MacroIndex::eAttack, AttackMacro);
+
+	//Add Loot to the Manager
+	LootMacro = new Macro::BotMacro(NULL, NULL, NULL, SLWIB);
+	LootMacro->Toggle(false);
+	macroMan.AddMacro(MacroIndex::eLoot, LootMacro);
+}
 void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 {
 	//Get the hwnd of maplestory
 	NewThread(getMSHWND);
+
+	//Start the MacroManager
+	InitializeMacros();
 
 	if(!Directory::Exists("WatyBot"))Directory::CreateDirectory("WatyBot");
 	if(File::Exists(marshal_as<String^>(PacketFileName)))		PacketSender::Load(PacketFileName);

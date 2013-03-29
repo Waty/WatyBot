@@ -29,7 +29,7 @@ AbstractMacro::~AbstractMacro()
 }
 
 
-bool AbstractMacro::Toogle(bool fStatus)
+bool AbstractMacro::Toggle(bool fStatus)
 {
 	this->fMacroStatus = fStatus;
 	return true;
