@@ -163,7 +163,7 @@ bool SendPacketFunction(String^ packet, String^&strError){
 	finally {delete [] lpBytes;}
     return true;
 }
-void MainForm::CCSwitch(CCType type)
+void MainForm::CCSwitch(int type)
 {
 	String^ strError = String::Empty;
 	switch(type)
@@ -692,7 +692,7 @@ void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 }
 void MainForm::CCTimedTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
-	MainForm::CCSwitch((CCType)TimedComboBox->SelectedIndex);
+	MainForm::CCSwitch(TimedComboBox->SelectedIndex);
 }
 void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -781,11 +781,11 @@ void MainForm::AutoCC()
 {
 	if(CCPeopleCheckBox->Checked && (getPeopleCount() >= iCCPeople))
 	{
-		MainForm::CCSwitch((CCType)PeopleComboBox->SelectedIndex);
+		MainForm::CCSwitch(PeopleComboBox->SelectedIndex);
 	}
 	if(CCAttacksCheckBox->Checked && (getAttackCount() >= iCCAttacks))
 	{
-		MainForm::CCSwitch((CCType)AttackComboBox->SelectedIndex);
+		MainForm::CCSwitch(AttackComboBox->SelectedIndex);
 	}
 }
 void MainForm::RedrawStatBars()

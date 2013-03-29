@@ -2,7 +2,6 @@
 #pragma once
 #include <Windows.h>
 #include <string>
-extern enum CCType;
 
 namespace WatyBotRevamp {
 
@@ -2571,7 +2570,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 	private: System::Void AutoCC();
 	private: System::Void CashShop();
 	private: System::Void HotKeys();
-	private: System::Void CCSwitch(CCType type);
+	private: System::Void CCSwitch(int type);
 #pragma endregion
 #pragma region CheckBoxes
 private: System::Void StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e);
