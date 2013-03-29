@@ -177,6 +177,7 @@ namespace Hacks
 		itemvac_x = getCharX();
 		itemvac_y = getCharY();
 	}
+	/*old Codecave
 	CodeCave(ItemVac)
 	{
 		call dwItemVacCall //Original Opcode
@@ -188,6 +189,23 @@ namespace Hacks
 		pop edi
 		mov esi,[itemvac_y]
 		mov [eax+04],esi //Y
+		pop esi
+		ret 0004
+	}
+	*/
+	CodeCave(ItemVac)
+	{
+		call dwItemVacCall //Original Opcode
+		call getItemVacCoords
+		mov ecx,eax
+		mov eax,[esp+0x0C]
+		push ecx
+		mov ecx, [itemvac_x]
+		mov [eax],ecx //X
+		mov ecx, [itemvac_y]
+		mov [eax+04],ecx //Y
+		pop ecx
+		pop edi
 		pop esi
 		ret 0004
 	}
