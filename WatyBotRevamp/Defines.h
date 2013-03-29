@@ -100,6 +100,7 @@ namespace Packets
 namespace AutoBotVars
 {
 	int AttackKey;
+	int iSawsil;
 	LPARAM AttacklParam;
 	bool Attacking;
 

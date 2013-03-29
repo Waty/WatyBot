@@ -14,7 +14,7 @@
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
-using namespace std;
+#include "MacroManager/FunctionalMacro.h"
 using namespace WatyBotRevamp;
 using namespace msclr::interop;
 using namespace System::IO;
@@ -480,24 +480,44 @@ void MainForm::MPCheckBox_CheckedChanged(System::Object^  sender, System::EventA
 		MPComboBox->Enabled = true;
 	}
 }
-void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	try
-	{
-		AutoBotVars::AttackKey = KeyCodes[AttackComboBox->SelectedIndex];
-		AutoBotVars::AttacklParam = (MapVirtualKey(AutoBotVars::AttackKey, 0) << 16) + 1;
 
-		this->AttackTimer->Interval = Convert::ToInt32(this->nudAttackDelay->Value);
-		this->AttackComboBox->Enabled = !this->AttackCheckBox->Checked;
-		this->nudAttackDelay->Enabled = !this->AttackCheckBox->Checked;
-		this->nudSAWSIL->Enabled = !this->AttackCheckBox->Checked;
-		this->AttackTimer->Enabled = this->AttackCheckBox->Checked;
-	}
-	catch(Exception^ ex)
+Macro::MacroManager macroMan;
+enum MacroIndex{eAttack, eLoot};
+
+bool ReturnTrue()
+{
+	return true;
+}
+
+void Attack()
+{
+	if(getMobCount() > AutoBotVars::iSawsil && !UsingAutoSkill && !UsingPot && !CCing && InGame())
 	{
-		ShowError("The following error occurred:\n " + ex->ToString());
+		PostMessage(MapleStoryHWND, WM_KEYDOWN, AutoBotVars::AttackKey, AutoBotVars::AttacklParam);
+		Sleep(50);
+		PostMessage(MapleStoryHWND, WM_KEYUP, AutoBotVars::AttackKey, AutoBotVars::AttacklParam);
 	}
 }
+
+void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	this->nudAttackDelay->Enabled = !AttackCheckBox->Checked;
+	this->nudSAWSIL->Enabled = !AttackCheckBox->Checked;
+	if(!AttackCheckBox->Checked) macroMan.RemoveMacro(eAttack);
+	else
+	{
+		ShowInfo("Starting AutoAttack");
+		AutoBotVars::AttackKey = KeyCodes[AttackComboBox->SelectedIndex];
+		AutoBotVars::AttacklParam = (MapVirtualKey(AutoBotVars::AttackKey, 0) << 16) + 1;
+		AutoBotVars::iSawsil = Convert::ToInt32(nudSAWSIL->Value);
+		Macro::AbstractMacro* m;
+
+		m = new Macro::FunctionalMacro((int) nudAttackDelay->Value, 0, ReturnTrue, Attack);
+		macroMan.AddMacro(eAttack, m);
+		macroMan.Start();
+	}
+}
+
 void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	try
@@ -514,15 +534,6 @@ void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::Even
 	catch(Exception^ ex)
 	{
 		ShowError("Please Report the following error: " + ex->ToString());
-	}
-}
-void MainForm::AttackTimer_Tick(System::Object^  sender, System::EventArgs^  e)
-{
-	if(getMobCount() > Convert::ToInt32(nudSAWSIL->Value) && !UsingAutoSkill && !UsingPot && !CCing && InGame())
-	{
-		PostMessage(MapleStoryHWND, WM_KEYDOWN, AutoBotVars::AttackKey, AutoBotVars::AttacklParam);
-		Sleep(50);
-		PostMessage(MapleStoryHWND, WM_KEYUP, AutoBotVars::AttackKey, AutoBotVars::AttacklParam);
 	}
 }
 void MainForm::LootTimer_Tick(System::Object^  sender, System::EventArgs^  e)
@@ -803,6 +814,7 @@ void MainForm::MainTabControl_SelectedIndexChanged(System::Object^  sender, Syst
 }
 void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 {
+	macroMan.ClearMacros();
 	SPControl::Save(SPControlFileName);
 	PacketSender::Save(PacketFileName);
 	SaveSettings();
