@@ -36,7 +36,7 @@ void EmbedMapleStory(HWND hWnd)
             if(hParent)
             {
                 bChild = TRUE;
-                SetWindowPos(hMapleStory, 0, 3, -17, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+                SetWindowPos(hMapleStory, 0, -3, -26, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
             }
         }
     }

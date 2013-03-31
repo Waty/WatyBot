@@ -88,7 +88,7 @@ namespace WatyBotManager {
 			this->panel1->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
 			this->panel1->Location = System::Drawing::Point(6, 8);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(1068, 631);
+			this->panel1->Size = System::Drawing::Size(1068, 605);
 			this->panel1->TabIndex = 2;
 			// 
 			// tabPage2
