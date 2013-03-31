@@ -97,8 +97,8 @@ namespace Hacks
 	CMemory cmNoMobs(NoMobsAddy, bNoMobs, 1);
  
 	/////Instant Air Loot
-	BYTE bAirLoot[] = {0x74};
-	CMemory cmInstantAirLoot(AirLootAddy, bAirLoot, 1);
+	BYTE bAirLoot[] = {0x90, 0x90};
+	CMemory cmInstantAirLoot(AirLootAddy, bAirLoot, 2);
  
 	/////Vac Right
 	BYTE bVacRight[] = {0x75, 0x48};
