@@ -16,7 +16,7 @@
 #define NDAllAttacksAddy 0xBA3236
 #define JDAAddy1 0xB6F8B9
 #define JDAAddy2 0xB6F8F6
-#define JDAAddy3 0xB770A4
+#define JDAAddy3 0xB6f914
 #define MobDisarmAddy 0x707B72
 #define NoMobsAddy 0x0070C26D
 #define AirLootAddy 0x543EB9
