@@ -130,7 +130,7 @@ BOOL IsElevated( ) {
 int main()
 {
 	cout << "WatyBotInjector:" << endl;
-	cout << "You need to have [D.R.T]'s MSCRC.dll, WatyBot.dll and this program in the Maplestory folder!!!!" << endl;
+	cout << "You need to have WatyBot.dll and this program in the Maplestory folder!!!!" << endl;
 	cout << "Full credits to \"TheFox\"" << endl << endl;
 	if(!IsElevated())
 	{
