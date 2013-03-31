@@ -694,6 +694,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			// nudCCTimed
 			// 
 			this->nudCCTimed->Location = System::Drawing::Point(91, 253);
+			this->nudCCTimed->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {7200, 0, 0, 0});
 			this->nudCCTimed->Name = L"nudCCTimed";
 			this->nudCCTimed->Size = System::Drawing::Size(107, 20);
 			this->nudCCTimed->TabIndex = 79;
