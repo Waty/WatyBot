@@ -1424,6 +1424,13 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->ddbPVPSkills->FormattingEnabled = true;
 			this->ddbPVPSkills->Items->AddRange(gcnew cli::array< System::Object^  >(4) {L"Ice Attack (600% dmg, 10 mobs)", L"Ice Smash (1200% dmg, 10 mobs)", 
 				L"Ice Snow Tempest (500% x 4 dmg, 10 mobs)", L"Ice chop (900% dmg, 10 mob count)"});
+			/* Tazz Secret PVP Skills
+			this->ddbPVPSkills->Items->AddRange(gcnew cli::array< System::Object^  >(14) {L"Ice Attack (600% dmg, 10 mobs)", L"Ice Smash (1200% dmg, 10 mobs)", 
+				L"Ice Snow Tempest (500% x 4 dmg, 10 mobs)", L"Ice chop (900% dmg, 10 mob count)", L"Kaiser: 3rd Dragon Slash", L"Bandit 1st Job: DoubleStab", 
+				L"Bandit 2nd Job: SavageBlow", L"Bandit 3rd Job: Midnight Carneval", L"Bandit 4th Job: Assasinate", L"Warrior 1st Job: Power Strike", 
+				L"Paladin 4th Job: Blast", L"Spearman 3rd Job: Sacrifice", L"Ice/Lightning 2nd Job: Cold Beam", L"Ice/Lightning 3rd Job: Thunder Spear"});
+			this->ddbPVPSkills->Location = System::Drawing::Point(159, 138);
+			*/
 			this->ddbPVPSkills->Location = System::Drawing::Point(159, 138);
 			this->ddbPVPSkills->Name = L"ddbPVPSkills";
 			this->ddbPVPSkills->Size = System::Drawing::Size(145, 21);
