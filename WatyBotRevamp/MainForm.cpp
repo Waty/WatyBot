@@ -331,6 +331,10 @@ void MainForm::cbDojangGodmode_CheckedChanged(System::Object^  sender, System::E
 {
 	Hacks::cmDojangGodmode.Enable(cbDojangGodmode->Checked);
 }
+void MainForm::cbIceGuard_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::cmIceGuard.Enable(cbIceGuard->Checked);
+}
 void MainForm::cbUnlimitedMorph_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	Hacks::cmUnlimitedMorph.Enable(cbUnlimitedMorph->Checked);

@@ -24,7 +24,28 @@ namespace Hacks
 	}
 	EndCodeCave
 	CMemory cmDojangGodmode(DojangAddy, CaveDojang, 0, true);
- 
+
+	/////Ice GuardGM
+	DWORD IceGuardRet = IceGuardAddy + 7;
+	DWORD dwIceGuardPush = IceGuardPush;
+	int IceGuardCounter = 0;
+	CodeCave(IceGuard)
+	{
+		cmp [IceGuardCounter], 0x3E8 //Change higher for longer godmode 3E8 = 1000
+		jle blockDMG
+
+		mov [IceGuardCounter], 0
+		push 0xFF
+		push dwIceGuardPush
+		jmp IceGuardRet
+
+		blockDMG:
+		add [IceGuardCounter], 1
+		ret 0x0028
+	}
+	EndCodeCave
+	CMemory cmIceGuard(IceGuardAddy, CaveIceGuard, 2, true);
+
 	/////Auto Aggro
 	DWORD dwAggroRet = AggroAddy + 5;
 	DWORD dwAggroCall = AggroCall;

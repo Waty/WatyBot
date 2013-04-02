@@ -1,5 +1,7 @@
 #define DojangAddy 0xB60FD4
 #define DojangCall 0xC23330
+#define IceGuardAddy 0xBA0160
+#define IceGuardPush 0xDC78E5
 #define AggroAddy 0xC3040F
 #define AggroCall 0xC26EE0
 #define PinTyperAddy1 0x6919B6
