@@ -345,6 +345,9 @@ private: System::Windows::Forms::Label^  lPvPCCDelay;
 private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 private: System::Windows::Forms::CheckBox^  cbMouseFly;
+private: System::Windows::Forms::NumericUpDown^  nudIceGuard;
+
+private: System::Windows::Forms::CheckBox^  cbIceGuard;
 
 
 
@@ -448,6 +451,8 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->cbJDA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoBG = (gcnew System::Windows::Forms::CheckBox());
 			this->gbCharHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->nudIceGuard = (gcnew System::Windows::Forms::NumericUpDown());
+			this->cbIceGuard = (gcnew System::Windows::Forms::CheckBox());
 			this->nudPVPDelay = (gcnew System::Windows::Forms::NumericUpDown());
 			this->ddbPVPSkills = (gcnew System::Windows::Forms::ComboBox());
 			this->cbPVP = (gcnew System::Windows::Forms::CheckBox());
@@ -581,6 +586,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->HacksTab->SuspendLayout();
 			this->gbMiscHacks->SuspendLayout();
 			this->gbCharHacks->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudIceGuard))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPVPDelay))->BeginInit();
 			this->MobHacks->SuspendLayout();
 			this->PacketSenderTab->SuspendLayout();
@@ -608,7 +614,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->MainTabControl->Location = System::Drawing::Point(1, 1);
 			this->MainTabControl->Name = L"MainTabControl";
 			this->MainTabControl->SelectedIndex = 0;
-			this->MainTabControl->Size = System::Drawing::Size(334, 456);
+			this->MainTabControl->Size = System::Drawing::Size(334, 483);
 			this->MainTabControl->TabIndex = 0;
 			this->MainTabControl->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::MainTabControl_SelectedIndexChanged);
 			// 
@@ -627,7 +633,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->AutoBotTab->Location = System::Drawing::Point(4, 22);
 			this->AutoBotTab->Name = L"AutoBotTab";
 			this->AutoBotTab->Padding = System::Windows::Forms::Padding(3);
-			this->AutoBotTab->Size = System::Drawing::Size(326, 430);
+			this->AutoBotTab->Size = System::Drawing::Size(326, 457);
 			this->AutoBotTab->TabIndex = 0;
 			this->AutoBotTab->Text = L"AutoBot";
 			this->AutoBotTab->UseVisualStyleBackColor = true;
@@ -1212,7 +1218,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->HacksTab->Location = System::Drawing::Point(4, 22);
 			this->HacksTab->Name = L"HacksTab";
 			this->HacksTab->Padding = System::Windows::Forms::Padding(3);
-			this->HacksTab->Size = System::Drawing::Size(326, 430);
+			this->HacksTab->Size = System::Drawing::Size(326, 457);
 			this->HacksTab->TabIndex = 1;
 			this->HacksTab->Text = L"Hacks";
 			this->HacksTab->UseVisualStyleBackColor = true;
@@ -1231,7 +1237,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->gbMiscHacks->Controls->Add(this->cbPinTyper);
 			this->gbMiscHacks->Controls->Add(this->cbJDA);
 			this->gbMiscHacks->Controls->Add(this->cbNoBG);
-			this->gbMiscHacks->Location = System::Drawing::Point(6, 275);
+			this->gbMiscHacks->Location = System::Drawing::Point(7, 293);
 			this->gbMiscHacks->Name = L"gbMiscHacks";
 			this->gbMiscHacks->Size = System::Drawing::Size(310, 127);
 			this->gbMiscHacks->TabIndex = 2;
@@ -1246,6 +1252,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->cbMouseFly->Size = System::Drawing::Size(74, 17);
 			this->cbMouseFly->TabIndex = 13;
 			this->cbMouseFly->Text = L"Mouse Fly";
+			this->InfoToolTip->SetToolTip(this->cbMouseFly, L"If you enable this hack, everywhere you click, you will get teleported");
 			this->cbMouseFly->UseVisualStyleBackColor = true;
 			this->cbMouseFly->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbMouseFly_CheckedChanged);
 			// 
@@ -1257,7 +1264,8 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->cbNoCCBlueBoxes->Size = System::Drawing::Size(110, 17);
 			this->cbNoCCBlueBoxes->TabIndex = 12;
 			this->cbNoCCBlueBoxes->Text = L"No CC BlueBoxes";
-			this->InfoToolTip->SetToolTip(this->cbNoCCBlueBoxes, L"Reduces CPU usage");
+			this->InfoToolTip->SetToolTip(this->cbNoCCBlueBoxes, L"If you try to CC when breath is higher then 0, you won\'t get a breath message, bu" 
+				L"t you won\'t CC");
 			this->cbNoCCBlueBoxes->UseVisualStyleBackColor = true;
 			this->cbNoCCBlueBoxes->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoCCBlueBoxes_CheckedChanged);
 			// 
@@ -1269,7 +1277,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->cbNoFadeStages->Size = System::Drawing::Size(100, 17);
 			this->cbNoFadeStages->TabIndex = 11;
 			this->cbNoFadeStages->Text = L"No FadeStages";
-			this->InfoToolTip->SetToolTip(this->cbNoFadeStages, L"Reduces CPU usage");
+			this->InfoToolTip->SetToolTip(this->cbNoFadeStages, L"On changin map or loggin in, the game won\'t Fade out or fade in");
 			this->cbNoFadeStages->UseVisualStyleBackColor = true;
 			this->cbNoFadeStages->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoFadeStages_CheckedChanged);
 			// 
@@ -1383,6 +1391,8 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			// 
 			// gbCharHacks
 			// 
+			this->gbCharHacks->Controls->Add(this->nudIceGuard);
+			this->gbCharHacks->Controls->Add(this->cbIceGuard);
 			this->gbCharHacks->Controls->Add(this->nudPVPDelay);
 			this->gbCharHacks->Controls->Add(this->ddbPVPSkills);
 			this->gbCharHacks->Controls->Add(this->cbPVP);
@@ -1402,19 +1412,40 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->gbCharHacks->Controls->Add(this->cbPerfectLoot);
 			this->gbCharHacks->Location = System::Drawing::Point(7, 6);
 			this->gbCharHacks->Name = L"gbCharHacks";
-			this->gbCharHacks->Size = System::Drawing::Size(310, 164);
+			this->gbCharHacks->Size = System::Drawing::Size(310, 182);
 			this->gbCharHacks->TabIndex = 1;
 			this->gbCharHacks->TabStop = false;
 			this->gbCharHacks->Text = L"Character";
 			// 
+			// nudIceGuard
+			// 
+			this->nudIceGuard->Location = System::Drawing::Point(159, 30);
+			this->nudIceGuard->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000000, 0, 0, 0});
+			this->nudIceGuard->Name = L"nudIceGuard";
+			this->nudIceGuard->Size = System::Drawing::Size(145, 20);
+			this->nudIceGuard->TabIndex = 20;
+			this->InfoToolTip->SetToolTip(this->nudIceGuard, L"Another godmode, use with caution, a to high amount could AB");
+			// 
+			// cbIceGuard
+			// 
+			this->cbIceGuard->AutoSize = true;
+			this->cbIceGuard->Location = System::Drawing::Point(6, 32);
+			this->cbIceGuard->Name = L"cbIceGuard";
+			this->cbIceGuard->Size = System::Drawing::Size(73, 17);
+			this->cbIceGuard->TabIndex = 18;
+			this->cbIceGuard->Text = L"Ice Guard";
+			this->InfoToolTip->SetToolTip(this->cbIceGuard, L"Another godmode, use with caution, a to high amount could AB");
+			this->cbIceGuard->UseVisualStyleBackColor = true;
+			this->cbIceGuard->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbIceGuard_CheckedChanged);
+			// 
 			// nudPVPDelay
 			// 
-			this->nudPVPDelay->Location = System::Drawing::Point(111, 138);
+			this->nudPVPDelay->Location = System::Drawing::Point(111, 155);
 			this->nudPVPDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
 			this->nudPVPDelay->Name = L"nudPVPDelay";
 			this->nudPVPDelay->Size = System::Drawing::Size(42, 20);
 			this->nudPVPDelay->TabIndex = 17;
-			this->InfoToolTip->SetToolTip(this->nudPVPDelay, L"Delay in miliseconds for PvP Skill Injection");
+			this->InfoToolTip->SetToolTip(this->nudPVPDelay, L"Delay for PvP Skill Injection, 10 is high, 0 is low");
 			this->nudPVPDelay->ValueChanged += gcnew System::EventHandler(this, &MainForm::nudPVPDelay_ValueChanged);
 			// 
 			// ddbPVPSkills
@@ -1424,14 +1455,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->ddbPVPSkills->FormattingEnabled = true;
 			this->ddbPVPSkills->Items->AddRange(gcnew cli::array< System::Object^  >(4) {L"Ice Attack (600% dmg, 10 mobs)", L"Ice Smash (1200% dmg, 10 mobs)", 
 				L"Ice Snow Tempest (500% x 4 dmg, 10 mobs)", L"Ice chop (900% dmg, 10 mob count)"});
-			/* Tazz Secret PVP Skills
-			this->ddbPVPSkills->Items->AddRange(gcnew cli::array< System::Object^  >(14) {L"Ice Attack (600% dmg, 10 mobs)", L"Ice Smash (1200% dmg, 10 mobs)", 
-				L"Ice Snow Tempest (500% x 4 dmg, 10 mobs)", L"Ice chop (900% dmg, 10 mob count)", L"Kaiser: 3rd Dragon Slash", L"Bandit 1st Job: DoubleStab", 
-				L"Bandit 2nd Job: SavageBlow", L"Bandit 3rd Job: Midnight Carneval", L"Bandit 4th Job: Assasinate", L"Warrior 1st Job: Power Strike", 
-				L"Paladin 4th Job: Blast", L"Spearman 3rd Job: Sacrifice", L"Ice/Lightning 2nd Job: Cold Beam", L"Ice/Lightning 3rd Job: Thunder Spear"});
-			this->ddbPVPSkills->Location = System::Drawing::Point(159, 138);
-			*/
-			this->ddbPVPSkills->Location = System::Drawing::Point(159, 138);
+			this->ddbPVPSkills->Location = System::Drawing::Point(159, 155);
 			this->ddbPVPSkills->Name = L"ddbPVPSkills";
 			this->ddbPVPSkills->Size = System::Drawing::Size(145, 21);
 			this->ddbPVPSkills->TabIndex = 16;
@@ -1441,7 +1465,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			// cbPVP
 			// 
 			this->cbPVP->AutoSize = true;
-			this->cbPVP->Location = System::Drawing::Point(6, 139);
+			this->cbPVP->Location = System::Drawing::Point(6, 156);
 			this->cbPVP->Name = L"cbPVP";
 			this->cbPVP->Size = System::Drawing::Size(111, 17);
 			this->cbPVP->TabIndex = 15;
@@ -1453,7 +1477,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			// cbMercedesCombo
 			// 
 			this->cbMercedesCombo->AutoSize = true;
-			this->cbMercedesCombo->Location = System::Drawing::Point(159, 120);
+			this->cbMercedesCombo->Location = System::Drawing::Point(159, 137);
 			this->cbMercedesCombo->Name = L"cbMercedesCombo";
 			this->cbMercedesCombo->Size = System::Drawing::Size(137, 17);
 			this->cbMercedesCombo->TabIndex = 14;
@@ -1465,7 +1489,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			// cbNDMining
 			// 
 			this->cbNDMining->AutoSize = true;
-			this->cbNDMining->Location = System::Drawing::Point(6, 120);
+			this->cbNDMining->Location = System::Drawing::Point(6, 137);
 			this->cbNDMining->Name = L"cbNDMining";
 			this->cbNDMining->Size = System::Drawing::Size(104, 17);
 			this->cbNDMining->TabIndex = 13;
@@ -1477,7 +1501,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			// cbNFA
 			// 
 			this->cbNFA->AutoSize = true;
-			this->cbNFA->Location = System::Drawing::Point(159, 104);
+			this->cbNFA->Location = System::Drawing::Point(159, 121);
 			this->cbNFA->Name = L"cbNFA";
 			this->cbNFA->Size = System::Drawing::Size(99, 17);
 			this->cbNFA->TabIndex = 12;
@@ -1489,7 +1513,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			// cbFMA
 			// 
 			this->cbFMA->AutoSize = true;
-			this->cbFMA->Location = System::Drawing::Point(159, 86);
+			this->cbFMA->Location = System::Drawing::Point(159, 103);
 			this->cbFMA->Name = L"cbFMA";
 			this->cbFMA->Size = System::Drawing::Size(100, 17);
 			this->cbFMA->TabIndex = 11;
@@ -1501,7 +1525,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			// cbUA
 			// 
 			this->cbUA->AutoSize = true;
-			this->cbUA->Location = System::Drawing::Point(6, 104);
+			this->cbUA->Location = System::Drawing::Point(6, 121);
 			this->cbUA->Name = L"cbUA";
 			this->cbUA->Size = System::Drawing::Size(103, 17);
 			this->cbUA->TabIndex = 8;
@@ -1514,7 +1538,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			// cbItemVac
 			// 
 			this->cbItemVac->AutoSize = true;
-			this->cbItemVac->Location = System::Drawing::Point(6, 86);
+			this->cbItemVac->Location = System::Drawing::Point(6, 103);
 			this->cbItemVac->Name = L"cbItemVac";
 			this->cbItemVac->Size = System::Drawing::Size(68, 17);
 			this->cbItemVac->TabIndex = 10;
@@ -1526,7 +1550,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			// cb50SecGM
 			// 
 			this->cb50SecGM->AutoSize = true;
-			this->cb50SecGM->Location = System::Drawing::Point(6, 32);
+			this->cb50SecGM->Location = System::Drawing::Point(159, 14);
 			this->cb50SecGM->Name = L"cb50SecGM";
 			this->cb50SecGM->Size = System::Drawing::Size(132, 17);
 			this->cb50SecGM->TabIndex = 9;
@@ -1538,7 +1562,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			// cbNDAllAttacks
 			// 
 			this->cbNDAllAttacks->AutoSize = true;
-			this->cbNDAllAttacks->Location = System::Drawing::Point(6, 68);
+			this->cbNDAllAttacks->Location = System::Drawing::Point(6, 85);
 			this->cbNDAllAttacks->Name = L"cbNDAllAttacks";
 			this->cbNDAllAttacks->Size = System::Drawing::Size(110, 17);
 			this->cbNDAllAttacks->TabIndex = 8;
@@ -1550,7 +1574,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			// cbUnlimitedMorph
 			// 
 			this->cbUnlimitedMorph->AutoSize = true;
-			this->cbUnlimitedMorph->Location = System::Drawing::Point(159, 51);
+			this->cbUnlimitedMorph->Location = System::Drawing::Point(159, 68);
 			this->cbUnlimitedMorph->Name = L"cbUnlimitedMorph";
 			this->cbUnlimitedMorph->Size = System::Drawing::Size(102, 17);
 			this->cbUnlimitedMorph->TabIndex = 7;
@@ -1574,7 +1598,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			// cbNoKB
 			// 
 			this->cbNoKB->AutoSize = true;
-			this->cbNoKB->Location = System::Drawing::Point(6, 51);
+			this->cbNoKB->Location = System::Drawing::Point(6, 68);
 			this->cbNoKB->Name = L"cbNoKB";
 			this->cbNoKB->Size = System::Drawing::Size(98, 17);
 			this->cbNoKB->TabIndex = 5;
@@ -1586,7 +1610,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			// cbInstantAirLoot
 			// 
 			this->cbInstantAirLoot->AutoSize = true;
-			this->cbInstantAirLoot->Location = System::Drawing::Point(159, 32);
+			this->cbInstantAirLoot->Location = System::Drawing::Point(159, 50);
 			this->cbInstantAirLoot->Name = L"cbInstantAirLoot";
 			this->cbInstantAirLoot->Size = System::Drawing::Size(97, 17);
 			this->cbInstantAirLoot->TabIndex = 2;
@@ -1598,7 +1622,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			// cbFusionAttack
 			// 
 			this->cbFusionAttack->AutoSize = true;
-			this->cbFusionAttack->Location = System::Drawing::Point(159, 68);
+			this->cbFusionAttack->Location = System::Drawing::Point(159, 85);
 			this->cbFusionAttack->Name = L"cbFusionAttack";
 			this->cbFusionAttack->Size = System::Drawing::Size(91, 17);
 			this->cbFusionAttack->TabIndex = 0;
@@ -1611,7 +1635,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			// cbPerfectLoot
 			// 
 			this->cbPerfectLoot->AutoSize = true;
-			this->cbPerfectLoot->Location = System::Drawing::Point(159, 14);
+			this->cbPerfectLoot->Location = System::Drawing::Point(6, 50);
 			this->cbPerfectLoot->Name = L"cbPerfectLoot";
 			this->cbPerfectLoot->Size = System::Drawing::Size(84, 17);
 			this->cbPerfectLoot->TabIndex = 1;
@@ -1630,7 +1654,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->MobHacks->Controls->Add(this->cbJumpRight);
 			this->MobHacks->Controls->Add(this->cbWalkRight);
 			this->MobHacks->Controls->Add(this->cbVacRight);
-			this->MobHacks->Location = System::Drawing::Point(7, 176);
+			this->MobHacks->Location = System::Drawing::Point(7, 194);
 			this->MobHacks->Name = L"MobHacks";
 			this->MobHacks->Size = System::Drawing::Size(310, 93);
 			this->MobHacks->TabIndex = 0;
@@ -1742,7 +1766,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->PacketSenderTab->Location = System::Drawing::Point(4, 22);
 			this->PacketSenderTab->Name = L"PacketSenderTab";
 			this->PacketSenderTab->Padding = System::Windows::Forms::Padding(3);
-			this->PacketSenderTab->Size = System::Drawing::Size(326, 430);
+			this->PacketSenderTab->Size = System::Drawing::Size(326, 457);
 			this->PacketSenderTab->TabIndex = 2;
 			this->PacketSenderTab->Text = L"Packets";
 			this->PacketSenderTab->UseVisualStyleBackColor = true;
@@ -1976,7 +2000,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->SPControlTabPage->Controls->Add(this->SPControlListView);
 			this->SPControlTabPage->Location = System::Drawing::Point(4, 22);
 			this->SPControlTabPage->Name = L"SPControlTabPage";
-			this->SPControlTabPage->Size = System::Drawing::Size(326, 430);
+			this->SPControlTabPage->Size = System::Drawing::Size(326, 457);
 			this->SPControlTabPage->TabIndex = 3;
 			this->SPControlTabPage->Text = L"SPControl";
 			this->SPControlTabPage->UseVisualStyleBackColor = true;
@@ -2154,7 +2178,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->InfoTab->Location = System::Drawing::Point(4, 22);
 			this->InfoTab->Name = L"InfoTab";
 			this->InfoTab->Padding = System::Windows::Forms::Padding(3);
-			this->InfoTab->Size = System::Drawing::Size(326, 430);
+			this->InfoTab->Size = System::Drawing::Size(326, 457);
 			this->InfoTab->TabIndex = 4;
 			this->InfoTab->Text = L"Info";
 			this->InfoTab->UseVisualStyleBackColor = true;
@@ -2537,6 +2561,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 			this->gbMiscHacks->PerformLayout();
 			this->gbCharHacks->ResumeLayout(false);
 			this->gbCharHacks->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudIceGuard))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPVPDelay))->EndInit();
 			this->MobHacks->ResumeLayout(false);
 			this->MobHacks->PerformLayout();
@@ -2648,6 +2673,7 @@ private: System::Void cbNoCCBlueBoxes_CheckedChanged(System::Object^  sender, Sy
 private: System::Void nudPVPDelay_ValueChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void ddbPVPSkills_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbMouseFly_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbIceGuard_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion

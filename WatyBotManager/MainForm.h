@@ -92,7 +92,7 @@ namespace WatyBotManager {
 			this->panel2->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->panel2->Location = System::Drawing::Point(1044, 8);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(334, 746);
+			this->panel2->Size = System::Drawing::Size(334, 741);
 			this->panel2->TabIndex = 3;
 			// 
 			// bStartMS
@@ -130,7 +130,7 @@ namespace WatyBotManager {
 			this->ClientSize = System::Drawing::Size(1396, 818);
 			this->Controls->Add(this->tabControl1);
 			this->Name = L"MainForm";
-			this->Text = L"$W4GB0t2013YOLO";
+			this->Text = L"WatyBotManager";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->tabControl1->ResumeLayout(false);
 			this->tabPage1->ResumeLayout(false);
