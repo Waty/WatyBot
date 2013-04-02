@@ -1,15 +1,13 @@
 #include "MainForm.h"
-#include <string>
-#include <vector>
-#include <Shlwapi.h>
+#include "Tab.h"
+using namespace WatyBotManager;
 using namespace std;
 using namespace System::Diagnostics;
-using namespace WatyBotManager;
 using namespace System::IO;
 
 #define msloc "E:\\Games\\Europe MapleStory\\MapleStory.exe"
 #define dllloc "E:\\Games\\Europe Maplestory\\WatyBot.dll"
-DWORD dwProcessId;
+
 
 BOOL IsElevated( ) {
 	BOOL fRet = FALSE;
@@ -27,13 +25,6 @@ BOOL IsElevated( ) {
 	return fRet;
 }
 
-void Embed(HWND child, HWND newParent)
-{
-	HANDLE hParent;
-	hParent = SetParent(child, newParent);
-	if(hParent)
-		SetWindowPos(child, 0, -3, -26, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
-}
 
 bool inject(DWORD pID)
 {
@@ -60,48 +51,6 @@ bool inject(DWORD pID)
 	return true; 
 }
 
-HWND FindProcessWindow(int pID)
-{
-   TCHAR szBuffer[200];
-   DWORD dwTemp;
-
-   for (HWND hWnd = GetTopWindow(NULL); hWnd != NULL; hWnd = GetNextWindow(hWnd, GW_HWNDNEXT))
-   {
-      GetWindowThreadProcessId(hWnd, &dwTemp);
-
-      if (dwTemp != pID)
-		  continue;
-
-      if (!GetClassName(hWnd, szBuffer, sizeof(szBuffer) / sizeof(TCHAR)))
-		  continue;
-
-      if (!wcscmp(szBuffer, L"MapleStoryClass"))
-		  return hWnd;
-   }
-   return NULL;
-}
-
-HWND FindWatyBotHWND(int pID)
-{
-   TCHAR szBuffer[200];
-   DWORD dwTemp;
-
-   for (HWND hWnd = GetTopWindow(NULL); hWnd != NULL; hWnd = GetNextWindow(hWnd, GW_HWNDNEXT))
-   {
-      GetWindowThreadProcessId(hWnd, &dwTemp);
-
-      if (dwTemp != pID)
-		  continue;
-
-      if (!GetWindowText(hWnd, szBuffer, sizeof(szBuffer) / sizeof(TCHAR)))
-		  continue;
-
-      if (StrStr(szBuffer, L"Waty"))
-		  return hWnd;
-   }
-   return NULL;
-}
-
 [STAThread]
 void Main()
 {
@@ -114,22 +63,5 @@ void Main()
 
 void MainForm::bStartMS_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	//Start maplestory
-	Process^ maplestory = gcnew Process();
-	maplestory->StartInfo->FileName = msloc;
-	maplestory->Start();
-	WaitForInputIdle((HANDLE) maplestory->Handle.ToPointer(), INFINITE);
-
-	//Close the Launcher
-	maplestory->CloseMainWindow();
-	
-	while(FindProcessWindow(maplestory->Id) == NULL);
-	Embed(FindProcessWindow(maplestory->Id), (HWND) panel1->Handle.ToPointer());
-
-	this->Text = "Found MS HWND, Injecting";
-	inject(maplestory->Id);
-	
-	while(FindWatyBotHWND(maplestory->Id) == NULL);
-	Embed(FindWatyBotHWND(maplestory->Id), (HWND) panel2->Handle.ToPointer());
-	this->Text = "Finished embedding WatyBot";
+	Tab^ tab = gcnew Tab((HWND) panel1->Handle.ToPointer(), (HWND) panel2->Handle.ToPointer());
 }

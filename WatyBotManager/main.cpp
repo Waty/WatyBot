@@ -6,7 +6,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	Main();
 }
 
-LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM)
+/*LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM)
 {
 
 }
+*/
