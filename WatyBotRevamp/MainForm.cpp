@@ -237,6 +237,12 @@ void MainForm::bwNextChannel_DoWork(System::Object^  sender, System::ComponentMo
 }
 void MainForm::CashShop()
 {
+	bool PVP = cbPVP->Checked;
+	if(PVP)
+	{
+		if(PVP) cbPVP->Checked = false;
+		Sleep(5500);
+	}
 	CCing = true;
 	while(getBreathValue() > 0)	Sleep(250);
 	Sleep(500);
@@ -251,6 +257,19 @@ void MainForm::CashShop()
 	Sleep(250);
 
 	CCing = false;
+	
+	if(PVP)
+	{
+		Sleep(Convert::ToInt32(nudPvPCCDelay->Value));
+		for(int i = 0; i < 200; i++)
+		{
+			SendKey(KeyCodes[AttackComboBox->SelectedIndex]);
+			Sleep(10);
+		}
+
+		Sleep(100);
+		cbPVP->Checked = true;
+	}
 }
 
 //Find Window
