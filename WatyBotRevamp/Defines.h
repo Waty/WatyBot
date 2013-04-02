@@ -104,4 +104,4 @@ namespace AutoBotVars
 	int iSlwib;
 }
 
-static int TabHeight[] = {431, 461, 381, 431, 431};
+static int TabHeight[] = {431, 481, 381, 431, 431};
