@@ -39,7 +39,7 @@ void Main()
 	Application::Exit();
 }
 
-void MainForm::bStartMS_Click(System::Object^  sender, System::EventArgs^  e)
+void MainForm::menuToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	//That's how easy it now is to add a new tab :)
 	Tab^ tab = gcnew Tab((HWND) panel1->Handle.ToPointer(), (HWND) panel2->Handle.ToPointer());

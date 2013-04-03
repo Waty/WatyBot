@@ -116,5 +116,11 @@ HWND Tab::FindWatyBotHWND(int pID)
 
 void Tab::Stop()
 {
-	this->procMS->Kill();
+	try
+	{
+		this->procMS->Kill();
+	}
+	catch(Exception^ /*ex*/)
+	{
+	}
 }
