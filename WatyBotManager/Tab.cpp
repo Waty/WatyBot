@@ -1,12 +1,16 @@
 #include "Tab.h"
 #include "MainForm.h"
 #include <Shlwapi.h>
-
+using namespace WatyBotManager;
 #define msloc "E:\\Games\\Europe MapleStory\\MapleStory.exe" //Placeholder for the Automatic loaded file name
 #define dllloc "E:\\Games\\Europe Maplestory\\WatyBot.dll" //Placeholder for the Automatic loaded file name
 
-Tab::Tab(HWND hPanelMS, HWND hPanelWatyBot)
+Tab::Tab(TabPage^ tabPage, Panel^ pMS, Panel^ pWatyBot)
 {
+	this->tabPage = tabPage;
+	this->pMS = pMS;
+	this->pWatyBot = pWatyBot;
+	
 	//Start maplestory and close the Launcher
 	this->procMS = gcnew Process();
 	procMS->StartInfo->FileName = msloc;
@@ -19,7 +23,7 @@ Tab::Tab(HWND hPanelMS, HWND hPanelWatyBot)
 	//Set the variables for embedding
 	HWND hMS = FindProcessWindow(procMS->Id);
 	//Embed MS
-	Embed(hMS, hPanelMS);
+	Embed(hMS, (HWND) pMS->Handle.ToPointer());
 
 	inject(procMS->Id);
 	
@@ -30,9 +34,8 @@ Tab::Tab(HWND hPanelMS, HWND hPanelWatyBot)
 	//Sleep 2,5 seconds to make sure WatyBot has got the correct window
 	Sleep(2500);
 	//Embed WatyBot
-	Embed(hWatyBot, hPanelWatyBot);
+	Embed(hWatyBot, (HWND) pWatyBot->Handle.ToPointer());
 }
-
 
 Tab::~Tab(void)
 {

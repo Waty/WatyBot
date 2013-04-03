@@ -1,5 +1,6 @@
 #pragma once
 #include <Windows.h>
+#include "MainForm.h"
 
 using namespace System::IO;
 using namespace System;
@@ -9,11 +10,12 @@ using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Drawing;
 using namespace System::Diagnostics;
+using namespace WatyBotManager;
 
-ref class Tab
+public ref class Tab : MainForm
 {
 public:
-	Tab(HWND hPanelMS, HWND hPanelWatyBot);
+	Tab(TabPage^ , Panel^, Panel^);
 	void Stop();
 	~Tab(void);
 
@@ -24,5 +26,7 @@ private:
 	HWND FindWatyBotHWND(int pID);
 
 	Process^ procMS;
+	TabPage^ tabPage;
+	Panel^ pMS;
+	Panel^ pWatyBot;
 };
-

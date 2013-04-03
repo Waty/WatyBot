@@ -41,8 +41,36 @@ void Main()
 
 void MainForm::menuToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
+	//Initialize vars
+	Panel^ pMS = gcnew Panel;
+	Panel^ pWatyBot = gcnew Panel;
+
+	//initialize a new TabPage
+	TabPage^ tabPage = gcnew TabPage;
+	tabPage->Controls->Add(pMS);
+	tabPage->Controls->Add(pWatyBot);
+	tabPage->Location = Point(4, 22);
+	tabPage->Padding = Windows::Forms::Padding(3);
+	tabPage->Size = Drawing::Size(1375, 783);
+	tabPage->TabIndex = tabControl1->TabCount;
+	tabPage->UseVisualStyleBackColor = true;
+	tabPage->Text = "Tab " + (tabControl1->TabCount + 1);
+
+	//Initialize the Panel to embed MS in
+	pMS->BorderStyle = BorderStyle::FixedSingle;
+	pMS->Location = Point(6, 8);	
+	pMS->Size = Drawing::Size(1026, 770);
+
+	//Initialize the Panel to embed WatyBot in
+	pWatyBot->BorderStyle = BorderStyle::FixedSingle;
+	pWatyBot->Location = Point(1031, 8);
+	pWatyBot->Size = Drawing::Size(336, 770);
+
+	//Add it to the TabControl
+	tabControl1->TabPages->Add(tabPage);
+
 	//That's how easy it now is to add a new tab :)
-	Tab^ tab = gcnew Tab((HWND) panel1->Handle.ToPointer(), (HWND) panel2->Handle.ToPointer());
+	Tab^ tab = gcnew Tab(tabPage, pMS, pWatyBot);
 	Tabs.push_back(tab);
 }
 
