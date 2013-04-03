@@ -16,10 +16,11 @@ void SPControl::AddSPControl(string name, int ID, int x, int y)
 
 void SPControl::EditSPControl(int i, string mapname, int mapid, int x, int y)
 {
-	SPControlv.at(i).mapName = mapname;
-	SPControlv.at(i).mapID = mapid;
-	SPControlv.at(i).x = x;
-	SPControlv.at(i).y = y;
+	SPControlStruct SP = SPControlv.at(i);
+	SP.mapName = mapname;
+	SP.mapID = mapid;
+	SP.x = x;
+	SP.y = y;
 }
 
 void SPControl::DeleteSPControl(int i)
