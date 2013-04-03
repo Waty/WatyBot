@@ -113,3 +113,8 @@ HWND Tab::FindWatyBotHWND(int pID)
    }
    return NULL;
 }
+
+void Tab::Stop()
+{
+	this->procMS->Kill();
+}

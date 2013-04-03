@@ -14,6 +14,7 @@ ref class Tab
 {
 public:
 	Tab(HWND hPanelMS, HWND hPanelWatyBot);
+	void Stop();
 	~Tab(void);
 
 private:

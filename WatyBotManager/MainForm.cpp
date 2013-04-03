@@ -45,3 +45,11 @@ void MainForm::bStartMS_Click(System::Object^  sender, System::EventArgs^  e)
 	Tab^ tab = gcnew Tab((HWND) panel1->Handle.ToPointer(), (HWND) panel2->Handle.ToPointer());
 	Tabs.push_back(tab);
 }
+
+void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
+{
+	for(gcroot<Tab^> tab : Tabs)
+	{
+		tab->Stop();
+	}
+}
