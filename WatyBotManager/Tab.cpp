@@ -27,6 +27,8 @@ Tab::Tab(HWND hPanelMS, HWND hPanelWatyBot)
 	while(FindWatyBotHWND(procMS->Id) == NULL);
 	//Set the variables for embedding
 	HWND hWatyBot = FindWatyBotHWND(procMS->Id);
+	//Sleep 2,5 seconds to make sure WatyBot has got the correct window
+	Sleep(2500);
 	//Embed WatyBot
 	Embed(hWatyBot, hPanelWatyBot);
 }
