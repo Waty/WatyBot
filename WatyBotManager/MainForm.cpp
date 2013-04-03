@@ -8,7 +8,6 @@ using namespace System::IO;
 #define msloc "E:\\Games\\Europe MapleStory\\MapleStory.exe"
 #define dllloc "E:\\Games\\Europe Maplestory\\WatyBot.dll"
 
-
 BOOL IsElevated( ) {
 	BOOL fRet = FALSE;
 	HANDLE hToken = NULL;
@@ -25,32 +24,6 @@ BOOL IsElevated( ) {
 	return fRet;
 }
 
-
-bool inject(DWORD pID)
-{
-	if(!File::Exists(dllloc)) MessageBox::Show("File not found!");
-
-	HANDLE Proc; 
-	LPVOID RemoteString, LoadLibAddy; 
-	if(!pID) 
-		return false; 
-	Proc = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pID); 
-	if(!Proc) 
-	{ 
-		MessageBox::Show("OpenProcess() failed: " + GetLastError()); 
-		return false; 
-	} 
-	LoadLibAddy = (LPVOID)GetProcAddress(GetModuleHandle(L"kernel32.dll"), "LoadLibraryA"); 
-	// Allocate space in the process for our DLL
-	RemoteString = (LPVOID)VirtualAllocEx(Proc, NULL, strlen(dllloc), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE); 
-	// Write the string name of our DLL in the memory allocated 
-	WriteProcessMemory(Proc, (LPVOID)RemoteString, dllloc, strlen(dllloc), NULL); 
-	// Load our DLL 
-	CreateRemoteThread(Proc, NULL, NULL, (LPTHREAD_START_ROUTINE)LoadLibAddy, (LPVOID)RemoteString, NULL, NULL); 
-	CloseHandle(Proc);
-	return true; 
-}
-
 [STAThread]
 void Main()
 {
@@ -63,5 +36,6 @@ void Main()
 
 void MainForm::bStartMS_Click(System::Object^  sender, System::EventArgs^  e)
 {
+	//That's how easy it now is to add a new tab :)
 	Tab^ tab = gcnew Tab((HWND) panel1->Handle.ToPointer(), (HWND) panel2->Handle.ToPointer());
 }
