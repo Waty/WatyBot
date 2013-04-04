@@ -16,6 +16,7 @@
 #include <boost/property_tree/ini_parser.hpp>
 #include "MacroManager/FunctionalMacro.h"
 #include "MacroManager/BotMacro.h"
+#include "MacroManager/SkillMacro.h"
 using namespace WatyBotRevamp;
 using namespace msclr::interop;
 using namespace System::IO;
@@ -29,6 +30,10 @@ string SPControlFileName = WatyBotWorkingDirectory + "spcontrol.xml";
 Macro::AbstractMacro* AttackMacro;
 Macro::AbstractMacro* LootMacro;
 Macro::AbstractMacro* CCMacro;
+Macro::AbstractMacro* Skill1Macro;
+Macro::AbstractMacro* Skill2Macro;
+Macro::AbstractMacro* Skill3Macro;
+Macro::AbstractMacro* Skill4Macro;
 
 int getMobCount()
 {
@@ -513,12 +518,7 @@ void MainForm::MPCheckBox_CheckedChanged(System::Object^  sender, System::EventA
 }
 
 Macro::MacroManager macroMan;
-enum MacroIndex{eAttack, eLoot};
-
-bool ReturnTrue()
-{
-	return true;
-}
+enum MacroIndex{eAttack, eLoot, eAutoSkill1, eAutoSkill2, eAutoSkill3, eAutoSkill4};
 
 bool SAWSIL()
 {
@@ -530,6 +530,26 @@ bool SLWIB()
 	if(getMobCount() < AutoBotVars::iSlwib) return false;
 	if(!WritePointer(ServerBasePtr, TubiOffset, 0)) return false;
 	return true;
+}
+void AutoSkill(int KeyCodeIndex)
+{
+	if(KeyCodeIndex < KeyCodesSize)
+	{
+		//Send Key
+		while(CCing || UsingAutoSkill) Sleep(500);
+		UsingAutoSkill = true;
+		Sleep(250);
+		SendKey(KeyCodes[KeyCodeIndex]);
+		Sleep(50);
+		UsingAutoSkill = false;		
+	}
+	else
+	{
+		//Send Packet
+		String^ strError;
+		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(KeyCodeIndex - KeyCodesSize).data), strError))
+			ShowError(strError);
+	}
 }
 void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -553,118 +573,52 @@ void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::Even
 	LootMacro->SetDelay((unsigned int) nudLootDelay->Value);
 	LootMacro->Toggle(this->LootCheckBox->Checked);
 }
-void MainForm::Skill1Timer_Tick(System::Object^  sender, System::EventArgs^  e)
-{
-	if(AutoSkill1ComboBox->SelectedIndex < KeyCodesSize)
-	{
-		//Send Key
-		while(CCing || UsingAutoSkill) Sleep(500);
-		UsingAutoSkill = true;
-		Sleep(250);
-		SendKey(KeyCodes[AutoSkill1ComboBox->SelectedIndex]);
-		Sleep(50);
-		UsingAutoSkill = false;		
-	}
-	else
-	{
-		//Send Packet
-		String^ strError;
-		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill1ComboBox->SelectedIndex - KeyCodesSize).data), strError))
-			ShowError(strError);
-	}
-}
-void MainForm::Skill2Timer_Tick(System::Object^  sender, System::EventArgs^  e)
-{
-	if(AutoSkill2ComboBox->SelectedIndex < KeyCodesSize)
-	{
-		//Send Key
-		while(CCing || UsingAutoSkill) Sleep(500);
-		UsingAutoSkill = true;
-		Sleep(250);
-		SendKey(KeyCodes[AutoSkill2ComboBox->SelectedIndex]);
-		Sleep(50);
-		UsingAutoSkill = false;		
-	}
-	else
-	{
-		//Send Packet
-		String^ strError;
-		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill2ComboBox->SelectedIndex - KeyCodesSize).data), strError))
-			ShowError(strError);
-	}
-}
-void MainForm::Skill3Timer_Tick(System::Object^  sender, System::EventArgs^  e)
-{
-	if(AutoSkill3ComboBox->SelectedIndex < KeyCodesSize)
-	{
-		//Send Key
-		while(CCing || UsingAutoSkill) Sleep(500);
-		UsingAutoSkill = true;
-		Sleep(250);
-		SendKey(KeyCodes[AutoSkill3ComboBox->SelectedIndex]);
-		Sleep(50);
-		UsingAutoSkill = false;		
-	}
-	else
-	{
-		//Send Packet
-		String^ strError;
-		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill3ComboBox->SelectedIndex - KeyCodesSize).data), strError))
-			ShowError(strError);
-	}
-}
-void MainForm::Skill4Timer_Tick(System::Object^  sender, System::EventArgs^  e)
-{
-	if(AutoSkill4ComboBox->SelectedIndex < KeyCodesSize)
-	{
-		//Send Key
-		while(CCing || UsingAutoSkill) Sleep(500);
-		UsingAutoSkill = true;
-		Sleep(250);
-		SendKey(KeyCodes[AutoSkill4ComboBox->SelectedIndex]);
-		Sleep(50);
-		UsingAutoSkill = false;		
-	}
-	else
-	{
-		//Send Packet
-		String^ strError;
-		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(AutoSkill4ComboBox->SelectedIndex - KeyCodesSize).data), strError))
-			ShowError(strError);
-	}
-}
 void MainForm::AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->AutoSkill1ComboBox->Enabled = !this->AutoSkill1CheckBox->Checked;
 	this->nudSkill1Value->Enabled = !this->AutoSkill1CheckBox->Checked;
-
-	this->Skill1Timer->Interval = Convert::ToInt32(nudSkill1Value->Value) * 1000;
-	this->Skill1Timer->Enabled = this->AutoSkill1CheckBox->Checked;
+	if(AutoSkill1CheckBox->Checked)
+	{
+		Skill1Macro = new Macro::SkillMacro((unsigned int) nudSkill1Value->Value * 1000, 500, AutoSkill1ComboBox->SelectedIndex);
+		macroMan.AddMacro(eAutoSkill1, Skill1Macro);
+	}
+	else macroMan.RemoveMacro(eAutoSkill1);
 }
 void MainForm::AutoSkill2CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->AutoSkill2ComboBox->Enabled = !this->AutoSkill2CheckBox->Checked;
 	this->nudSkill2Value->Enabled = !this->AutoSkill2CheckBox->Checked;
-
-	this->Skill2Timer->Interval = Convert::ToInt32(nudSkill2Value->Value) * 1000;
-	this->Skill2Timer->Enabled = this->AutoSkill2CheckBox->Checked;
+	if(AutoSkill2CheckBox->Checked)
+	{
+		Skill2Macro = new Macro::SkillMacro((unsigned int) nudSkill2Value->Value * 1000, 500, AutoSkill2ComboBox->SelectedIndex);
+		macroMan.AddMacro(eAutoSkill2, Skill2Macro);
+	}
+	else macroMan.RemoveMacro(eAutoSkill2);
 }
 void MainForm::AutoSkill3CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->AutoSkill3ComboBox->Enabled = !this->AutoSkill3CheckBox->Checked;
 	this->nudSkill3Value->Enabled = !this->AutoSkill3CheckBox->Checked;
-
-	this->Skill3Timer->Interval = Convert::ToInt32(nudSkill3Value->Value) * 1000;
-	this->Skill3Timer->Enabled = this->AutoSkill3CheckBox->Checked;
+	if(AutoSkill3CheckBox->Checked)
+	{
+		Skill3Macro = new Macro::SkillMacro((unsigned int) nudSkill3Value->Value * 1000, 500, AutoSkill3ComboBox->SelectedIndex);
+		macroMan.AddMacro(eAutoSkill3, Skill3Macro);
+	}
+	else macroMan.RemoveMacro(eAutoSkill3);
 }
 void MainForm::AutoSkill4CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->AutoSkill4ComboBox->Enabled = !this->AutoSkill4CheckBox->Checked;
 	this->nudSkill4Value->Enabled = !this->AutoSkill4CheckBox->Checked;
-
-	this->Skill4Timer->Interval = Convert::ToInt32(nudSkill4Value->Value) * 1000;
-	this->Skill4Timer->Enabled = this->AutoSkill4CheckBox->Checked;
+	if(AutoSkill4CheckBox->Checked)
+	{
+		Skill4Macro = new Macro::SkillMacro((unsigned int) nudSkill4Value->Value * 1000, 500, AutoSkill4ComboBox->SelectedIndex);
+		macroMan.AddMacro(eAutoSkill4, Skill4Macro);
+	}
+	else macroMan.RemoveMacro(eAutoSkill4);
 }
+
+//Below still needs to be ported to MacroManager
 void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	if(CCPeopleCheckBox->Checked)
@@ -723,7 +677,6 @@ void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System:
 		nudCCAttacks->Enabled = true;
 	}
 }
-
 
 void Main(void)
 {
