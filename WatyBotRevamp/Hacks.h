@@ -28,19 +28,22 @@ namespace Hacks
 	/////Ice GuardGM
 	DWORD IceGuardRet = IceGuardAddy + 7;
 	DWORD dwIceGuardPush = IceGuardPush;
-	int IceGuardCounter = 0;
+	int iIceGuardCounter = 0, iIceGuardLimit;
 	CodeCave(IceGuard)
 	{
-		cmp [IceGuardCounter], 0x3E8 //Change higher for longer godmode 3E8 = 1000
+		pushad
+		mov eax, iIceGuardLimit
+		cmp [iIceGuardCounter], eax
+		popad
 		jle blockDMG
 
-		mov [IceGuardCounter], 0
+		mov [iIceGuardCounter], 0
 		push 0xFF
 		push dwIceGuardPush
 		jmp IceGuardRet
 
 		blockDMG:
-		add [IceGuardCounter], 1
+		add [iIceGuardCounter], 1
 		ret 0x0028
 	}
 	EndCodeCave

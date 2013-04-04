@@ -333,6 +333,8 @@ void MainForm::cbDojangGodmode_CheckedChanged(System::Object^  sender, System::E
 }
 void MainForm::cbIceGuard_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
+	this->nudIceGuard->Enabled = !this->cbIceGuard->Checked;
+	Hacks::iIceGuardLimit = (int)nudIceGuard->Value;
 	Hacks::cmIceGuard.Enable(cbIceGuard->Checked);
 }
 void MainForm::cbUnlimitedMorph_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
