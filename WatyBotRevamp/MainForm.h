@@ -2530,7 +2530,7 @@ private: System::Windows::Forms::CheckBox^  cbIceGuard;
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot - V2.8.1 - CCPLZ! - EMS 89.1";
+			this->Text = L"WatyBot - V2.9 - CCPLZ! - EMS 89.2";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
