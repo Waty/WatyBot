@@ -35,14 +35,17 @@ namespace WatyBotManager {
 				delete components;
 			}
 		}
-	public: System::Windows::Forms::TabControl^  tabControl1;
+	public: String^ MSLocation;
+	public: String^ WatyBotLocation;
 
-
-
-
-
+	private: System::Windows::Forms::TabControl^  tabControl1;
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 	private: System::Windows::Forms::ToolStripMenuItem^  menuToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  settingsToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  mapleStoryLocationToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  watyBotLocationToolStripMenuItem;
+	private: System::Windows::Forms::OpenFileDialog^  dlgSelectMS;
+	private: System::Windows::Forms::OpenFileDialog^  dlgSelectWatyBot;
 
 	private:
 		/// <summary>
@@ -60,6 +63,11 @@ namespace WatyBotManager {
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->menuToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->mapleStoryLocationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->watyBotLocationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dlgSelectMS = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->dlgSelectWatyBot = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -73,7 +81,8 @@ namespace WatyBotManager {
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->menuToolStripMenuItem});
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->menuToolStripMenuItem, 
+				this->settingsToolStripMenuItem});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->RenderMode = System::Windows::Forms::ToolStripRenderMode::System;
@@ -87,6 +96,42 @@ namespace WatyBotManager {
 			this->menuToolStripMenuItem->Size = System::Drawing::Size(88, 20);
 			this->menuToolStripMenuItem->Text = L"Start new MS";
 			this->menuToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::menuToolStripMenuItem_Click);
+			// 
+			// settingsToolStripMenuItem
+			// 
+			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->mapleStoryLocationToolStripMenuItem, 
+				this->watyBotLocationToolStripMenuItem});
+			this->settingsToolStripMenuItem->Name = L"settingsToolStripMenuItem";
+			this->settingsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
+			this->settingsToolStripMenuItem->Text = L"Settings";
+			// 
+			// mapleStoryLocationToolStripMenuItem
+			// 
+			this->mapleStoryLocationToolStripMenuItem->Name = L"mapleStoryLocationToolStripMenuItem";
+			this->mapleStoryLocationToolStripMenuItem->Size = System::Drawing::Size(183, 22);
+			this->mapleStoryLocationToolStripMenuItem->Text = L"MapleStory Location";
+			this->mapleStoryLocationToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::mapleStoryLocationToolStripMenuItem_Click);
+			// 
+			// watyBotLocationToolStripMenuItem
+			// 
+			this->watyBotLocationToolStripMenuItem->Name = L"watyBotLocationToolStripMenuItem";
+			this->watyBotLocationToolStripMenuItem->Size = System::Drawing::Size(183, 22);
+			this->watyBotLocationToolStripMenuItem->Text = L"WatyBot Location";
+			this->watyBotLocationToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::watyBotLocationToolStripMenuItem_Click);
+			// 
+			// dlgSelectMS
+			// 
+			this->dlgSelectMS->DefaultExt = L"exe";
+			this->dlgSelectMS->FileName = L"MapleStory.exe";
+			this->dlgSelectMS->Filter = L"MapleStory|MapleStory.exe";
+			this->dlgSelectMS->RestoreDirectory = true;
+			// 
+			// dlgSelectWatyBot
+			// 
+			this->dlgSelectWatyBot->DefaultExt = L"dll";
+			this->dlgSelectWatyBot->FileName = L"WatyBot.dll";
+			this->dlgSelectWatyBot->Filter = L"WatyBot|WatyBot.dll";
+			this->dlgSelectWatyBot->RestoreDirectory = true;
 			// 
 			// MainForm
 			// 
@@ -108,5 +153,7 @@ namespace WatyBotManager {
 #pragma endregion
 private: System::Void MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
 private: System::Void menuToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+private: System::Void mapleStoryLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+private: System::Void watyBotLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 };
 }

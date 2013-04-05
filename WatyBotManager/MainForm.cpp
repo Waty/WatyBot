@@ -7,8 +7,7 @@ using namespace std;
 using namespace System::Diagnostics;
 using namespace System::IO;
 
-#define msloc "E:\\Games\\Europe MapleStory\\MapleStory.exe"
-#define dllloc "E:\\Games\\Europe Maplestory\\WatyBot.dll"
+string dllloc;
 
 typedef vector<gcroot<Tab^>> vTabs;
 vTabs Tabs;
@@ -37,6 +36,13 @@ void Main()
 	if(IsElevated()) Application::Run(gcnew MainForm);
 	else MessageBox::Show("Run as administrator!");
 	Application::Exit();
+}
+
+void StartThread(void)
+{
+	Threading::Thread^ tMain = gcnew Threading::Thread(gcnew Threading::ThreadStart(Main));
+	tMain->SetApartmentState(Threading::ApartmentState::STA);
+	tMain->Start();
 }
 
 void MainForm::menuToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
@@ -80,4 +86,17 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 	{
 		tab->Stop();
 	}
+}
+
+void MainForm::mapleStoryLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	dlgSelectMS->ShowDialog();
+	MSLocation = dlgSelectMS->FileName;
+}
+
+void MainForm::watyBotLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	dlgSelectWatyBot->ShowDialog();
+	WatyBotLocation = dlgSelectWatyBot->FileName;
+	//dllloc = marshal_as<string>(WatyBotLocation);
 }
