@@ -89,6 +89,9 @@
     <ClInclude Include="MacroManager\SkillMacro.h">
       <Filter>MacroManager</Filter>
     </ClInclude>
+    <ClInclude Include="MacroManager\StopWatch.h">
+      <Filter>MacroManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
