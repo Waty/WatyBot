@@ -62,3 +62,6 @@
 #define MouseFlyAddy 0xBB1A59
 #define MouseFlyCall1 0xBE7140
 #define MouseFlyCall2 0x406F60
+#define ExitCSAddy 0x82A2B1 //AOB Below, 4th Result, MemoryView below: mov fs:[00000000],ecx
+// 75 15 57 FF 15 ? ? ? ? 3B F3 74 0A 8B 16 8B 02 6A 01 8B CE FF d0 8b 4c 24 ? 64 89 0D 00 00 00 00 
+#define ExitCSCall 0x5F31D0

@@ -374,5 +374,22 @@ namespace Hacks
 	}
 	EndCodeCave
 	CMemory cmMouseFly(MouseFlyAddy, CaveMouseFly, 0, true);
+
+	////Auto ExitCS Script
+	DWORD dwExitCSRet = ExitCSAddy + 9;
+	DWORD dwExitCSCall = ExitCSCall;
+
+	CodeCave(ExitCS)
+	{
+		mov fs:[00000000],ecx
+		pushad
+		call dwExitCSCall
+		popad
+
+		jmp dwExitCSRet
+
+	}
+	EndCodeCave
+	CMemory cmExitCS(ExitCSAddy, CaveExitCS, 2, true);
 }
 
