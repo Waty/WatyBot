@@ -62,10 +62,10 @@ namespace WatyBotManager {
 		{
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
-			this->menuToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->mapleStoryLocationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->watyBotLocationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->menuToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->dlgSelectMS = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->dlgSelectWatyBot = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->menuStrip1->SuspendLayout();
@@ -90,13 +90,6 @@ namespace WatyBotManager {
 			this->menuStrip1->TabIndex = 1;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
-			// menuToolStripMenuItem
-			// 
-			this->menuToolStripMenuItem->Name = L"menuToolStripMenuItem";
-			this->menuToolStripMenuItem->Size = System::Drawing::Size(88, 20);
-			this->menuToolStripMenuItem->Text = L"Start new MS";
-			this->menuToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::menuToolStripMenuItem_Click);
-			// 
 			// settingsToolStripMenuItem
 			// 
 			this->settingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->mapleStoryLocationToolStripMenuItem, 
@@ -119,6 +112,13 @@ namespace WatyBotManager {
 			this->watyBotLocationToolStripMenuItem->Text = L"WatyBot Location";
 			this->watyBotLocationToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::watyBotLocationToolStripMenuItem_Click);
 			// 
+			// menuToolStripMenuItem
+			// 
+			this->menuToolStripMenuItem->Name = L"menuToolStripMenuItem";
+			this->menuToolStripMenuItem->Size = System::Drawing::Size(88, 20);
+			this->menuToolStripMenuItem->Text = L"Start new MS";
+			this->menuToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::menuToolStripMenuItem_Click);
+			// 
 			// dlgSelectMS
 			// 
 			this->dlgSelectMS->DefaultExt = L"exe";
@@ -140,8 +140,11 @@ namespace WatyBotManager {
 			this->ClientSize = System::Drawing::Size(1387, 833);
 			this->Controls->Add(this->tabControl1);
 			this->Controls->Add(this->menuStrip1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MainMenuStrip = this->menuStrip1;
+			this->MaximizeBox = false;
 			this->Name = L"MainForm";
+			this->ShowIcon = false;
 			this->Text = L"WatyBotManager";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->menuStrip1->ResumeLayout(false);
