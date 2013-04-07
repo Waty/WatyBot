@@ -23,6 +23,7 @@ AbstractMacro::AbstractMacro(unsigned int uDelay,int nValue,int nValueSecond,uns
 	this->nValue = nValue;
 	this->nValueSecond = nValueSecond;
 	this->uCoolDown = uCoolDown;
+	this->m_stopWatch.SetDelay(milliseconds(uDelay));
 }
 AbstractMacro::~AbstractMacro()
 {
@@ -36,7 +37,7 @@ bool AbstractMacro::Toggle(bool fStatus)
 }
 void AbstractMacro::SetDelay(unsigned int uDelay)
 {
-	this->uDelay = uDelay;
+	this->m_stopWatch.SetDelay(milliseconds(uDelay));
 }
 void AbstractMacro::SetValue(int nValue)
 {
@@ -56,18 +57,17 @@ void AbstractMacro::SetPriority(int nPriority)
 }
 unsigned int AbstractMacro::GetCoolDown()
 {
-	return GetTickCount() + this->uCoolDown;
+	return this->uCoolDown;
 }
 
 bool AbstractMacro::CheckTime()
 {
-	unsigned int uCurrentDelay = GetTickCount() -  this->uOldTicks;
-	return uCurrentDelay >= this->uDelay;
+	return this->m_stopWatch.IsOver();
 }
 
 void AbstractMacro::UpdateTime()
 {
-	this->uOldTicks = GetTickCount();
+	this->m_stopWatch.Start();
 }
 
 MacroManager::MacroManager()
@@ -172,17 +172,17 @@ DWORD MacroManager::MacroThread(LPVOID lpvParameter)
 
 		for(AbstractMacro* m : pManager->m_vMacro)
 		{
-			if(pManager->m_uCoolDown > GetTickCount())
+			if(!pManager->m_stopWatch.IsOver())
 			{
-				if(m->m_nPriority != 3 && pManager->m_uCoolDown > GetTickCount())
+				if(m->m_nPriority != 3)
 					continue;
 			}
 
 			if(m->CheckCondition())
 			{
 				m->ProcessMacro();
-				pManager->m_uCoolDown = m->GetCoolDown();
-				pManager->m_lock.UnlockSection();
+				pManager->m_stopWatch.SetDelay(milliseconds(m->GetCoolDown()));
+			    pManager->m_stopWatch.Start();
 				break;
 			}
 		}
@@ -199,16 +199,17 @@ void MacroManager::DoSome()
 {
 	for(AbstractMacro* m : this->m_vMacro)
 	{
-		if(this->m_uCoolDown > GetTickCount())
+		if(!this->m_stopWatch.IsOver())
 		{
-			if(m->m_nPriority != 3 && this->m_uCoolDown > GetTickCount())
+			if(m->m_nPriority != 3)
 				continue;
 		}
 
 		if(m->CheckCondition())
 		{
 			m->ProcessMacro();
-			this->m_uCoolDown = m->GetCoolDown();
+			this->m_stopWatch.SetDelay(milliseconds(m->GetCoolDown()));
+			this->m_stopWatch.Start();
 			break;
 		}
 	}

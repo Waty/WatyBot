@@ -5,6 +5,7 @@
 #include <vector>
 #include <Windows.h>
 
+#include "StopWatch.h"
 #include "Lock.h"
 #include "noncopyable.h"
 
@@ -36,7 +37,9 @@ namespace Macro
 		bool fMacroStatus;
 		unsigned int uOldTicks,uDelay,uCoolDown;
 		int nValue,nValueSecond,m_nPriority;
-
+		
+		StopWatch<milliseconds> m_stopWatch;
+		
 		friend class MacroManager;
 
 	};
@@ -65,6 +68,7 @@ namespace Macro
 		Lock m_lock;
 		bool m_fRunning,m_fRun;
 		unsigned int m_uCoolDown;
+		StopWatch<milliseconds> m_stopWatch;
 	};
 
 }
