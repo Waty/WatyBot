@@ -112,7 +112,7 @@ void MainForm::tabControl1_MouseClick(System::Object^  sender, System::Windows::
 			Drawing::Rectangle r = tabControl1->GetTabRect(i);
 			if(r.Contains(e->Location))
 			{
-				contextMenuStrip1->Show(e->X, e->Y);
+				contextMenuStrip1->Show(tabControl1, e->X, e->Y);
 				iTabIndex = i;
 			}
 		}
