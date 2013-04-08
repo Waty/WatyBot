@@ -121,4 +121,5 @@ void MainForm::tabControl1_MouseClick(System::Object^  sender, System::Windows::
 void MainForm::removeTabToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	Tabs.at(iTabIndex)->Stop();
+	tabControl1->TabPages->RemoveAt(iTabIndex);
 }
