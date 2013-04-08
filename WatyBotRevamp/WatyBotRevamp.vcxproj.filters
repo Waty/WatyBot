@@ -13,7 +13,19 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="MacroManager">
+    <Filter Include="Classes">
+      <UniqueIdentifier>{351550c1-2891-40aa-a4ab-c543881f5b16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\SPControl">
+      <UniqueIdentifier>{9be2962f-3efe-49d7-9004-e3995e2c2283}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Packets">
+      <UniqueIdentifier>{6726158c-b3d6-40a4-bf21-0aed4542d4f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\CMemory">
+      <UniqueIdentifier>{88a9a07f-3871-4467-b9d2-ad4a3faf437e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\MacroManager">
       <UniqueIdentifier>{d05cc2aa-ac27-459a-bbdf-0178b218800a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -21,23 +33,23 @@
     <ClCompile Include="MainForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SendPacket.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Memory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MainDll.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MacroManager\MacroManager.cpp">
+      <Filter>Classes\MacroManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SendPacket.cpp">
+      <Filter>Classes\Packets</Filter>
+    </ClCompile>
     <ClCompile Include="Packet.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Classes\Packets</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory.cpp">
+      <Filter>Classes\CMemory</Filter>
     </ClCompile>
     <ClCompile Include="SPControl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MacroManager\MacroManager.cpp">
-      <Filter>MacroManager</Filter>
+      <Filter>Classes\SPControl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,12 +65,6 @@
     <ClInclude Include="SendPacket.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Memory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Packet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Hacks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -72,25 +78,31 @@
       <Filter>Resource Files</Filter>
     </ClInclude>
     <ClInclude Include="MacroManager\BotMacro.h">
-      <Filter>MacroManager</Filter>
+      <Filter>Classes\MacroManager</Filter>
     </ClInclude>
     <ClInclude Include="MacroManager\FunctionalMacro.h">
-      <Filter>MacroManager</Filter>
+      <Filter>Classes\MacroManager</Filter>
     </ClInclude>
     <ClInclude Include="MacroManager\Lock.h">
-      <Filter>MacroManager</Filter>
+      <Filter>Classes\MacroManager</Filter>
     </ClInclude>
     <ClInclude Include="MacroManager\MacroManager.h">
-      <Filter>MacroManager</Filter>
+      <Filter>Classes\MacroManager</Filter>
     </ClInclude>
     <ClInclude Include="MacroManager\noncopyable.h">
-      <Filter>MacroManager</Filter>
+      <Filter>Classes\MacroManager</Filter>
     </ClInclude>
     <ClInclude Include="MacroManager\SkillMacro.h">
-      <Filter>MacroManager</Filter>
+      <Filter>Classes\MacroManager</Filter>
     </ClInclude>
     <ClInclude Include="MacroManager\StopWatch.h">
-      <Filter>MacroManager</Filter>
+      <Filter>Classes\MacroManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet.h">
+      <Filter>Classes\Packets</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory.h">
+      <Filter>Classes\CMemory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
