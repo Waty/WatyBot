@@ -1,16 +1,11 @@
 #pragma once
 #include <Windows.h>
 #include "MainForm.h"
+
 using namespace WatyBotManager;
 
-using namespace System::IO;
-using namespace System;
-using namespace System::ComponentModel;
-using namespace System::Collections;
-using namespace System::Windows::Forms;
-using namespace System::Data;
-using namespace System::Drawing;
-using namespace System::Diagnostics;
+extern string dllloc;
+extern string msloc;
 
 public ref class Tab
 {

@@ -1,14 +1,26 @@
 #pragma once
 #include <Windows.h>
+#include <vector>
+#include <vcclr.h>
+#include <msclr\marshal_cppstd.h>
+
+using namespace std;
+using namespace msclr::interop;
+
+using namespace System;
+using namespace System::ComponentModel;
+using namespace System::Collections;
+using namespace System::Data;
+using namespace System::Drawing;
+using namespace System::Diagnostics;
+using namespace System::IO;
+using namespace System::Windows::Forms;
+
+#define ShowInfo(Message)		MessageBox::Show(Message, "Information", MessageBoxButtons::OK, MessageBoxIcon::Information)
+#define ShowError(Message)		MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
+#define ShowWarning(Message)	MessageBox::Show(Message, "Warning", MessageBoxButtons::OK, MessageBoxIcon::Warning)
 
 namespace WatyBotManager {
-
-	using namespace System;
-	using namespace System::ComponentModel;
-	using namespace System::Collections;
-	using namespace System::Windows::Forms;
-	using namespace System::Data;
-	using namespace System::Drawing;
 
 	/// <summary>
 	/// Summary for MainForm
@@ -35,8 +47,6 @@ namespace WatyBotManager {
 				delete components;
 			}
 		}
-	public: String^ MSLocation;
-	public: String^ WatyBotLocation;
 
 	private: System::Windows::Forms::TabControl^  tabControl1;
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
@@ -46,12 +56,15 @@ namespace WatyBotManager {
 	private: System::Windows::Forms::ToolStripMenuItem^  watyBotLocationToolStripMenuItem;
 	private: System::Windows::Forms::OpenFileDialog^  dlgSelectMS;
 	private: System::Windows::Forms::OpenFileDialog^  dlgSelectWatyBot;
+	private: System::Windows::Forms::ContextMenuStrip^  contextMenuStrip1;
+	private: System::Windows::Forms::ToolStripMenuItem^  removeTabToolStripMenuItem;
+	private: System::ComponentModel::IContainer^  components;
 
 	private:
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -60,6 +73,7 @@ namespace WatyBotManager {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->settingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -68,7 +82,10 @@ namespace WatyBotManager {
 			this->menuToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->dlgSelectMS = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->dlgSelectWatyBot = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->contextMenuStrip1 = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
+			this->removeTabToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
+			this->contextMenuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// tabControl1
@@ -78,6 +95,7 @@ namespace WatyBotManager {
 			this->tabControl1->SelectedIndex = 0;
 			this->tabControl1->Size = System::Drawing::Size(1383, 809);
 			this->tabControl1->TabIndex = 0;
+			this->tabControl1->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::tabControl1_MouseClick);
 			// 
 			// menuStrip1
 			// 
@@ -133,6 +151,19 @@ namespace WatyBotManager {
 			this->dlgSelectWatyBot->Filter = L"WatyBot|WatyBot.dll";
 			this->dlgSelectWatyBot->RestoreDirectory = true;
 			// 
+			// contextMenuStrip1
+			// 
+			this->contextMenuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->removeTabToolStripMenuItem});
+			this->contextMenuStrip1->Name = L"contextMenuStrip1";
+			this->contextMenuStrip1->Size = System::Drawing::Size(141, 26);
+			// 
+			// removeTabToolStripMenuItem
+			// 
+			this->removeTabToolStripMenuItem->Name = L"removeTabToolStripMenuItem";
+			this->removeTabToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->removeTabToolStripMenuItem->Text = L"Remove Tab";
+			this->removeTabToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::removeTabToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -149,6 +180,7 @@ namespace WatyBotManager {
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
+			this->contextMenuStrip1->ResumeLayout(false);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -158,5 +190,7 @@ private: System::Void MainForm_FormClosing(System::Object^  sender, System::Wind
 private: System::Void menuToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void mapleStoryLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void watyBotLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+private: System::Void tabControl1_MouseClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+private: System::Void removeTabToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 };
 }

@@ -2,9 +2,6 @@
 #include "MainForm.h"
 #include <Shlwapi.h>
 using namespace WatyBotManager;
-#define msloc "E:\\Games\\Europe MapleStory\\MapleStory.exe" //Placeholder for the Automatic loaded file name
-#define dllloc "E:\\Games\\Europe Maplestory\\WatyBot.dll" //Placeholder for the Automatic loaded file name
-
 Tab::Tab(TabPage^ tabPage, Panel^ pMS, Panel^ pWatyBot)
 {
 	this->tabPage = tabPage;
@@ -13,7 +10,7 @@ Tab::Tab(TabPage^ tabPage, Panel^ pMS, Panel^ pWatyBot)
 	
 	//Start maplestory and close the Launcher
 	this->procMS = gcnew Process();
-	procMS->StartInfo->FileName = msloc;
+	procMS->StartInfo->FileName = marshal_as<String^>(msloc);
 	procMS->Start();
 	WaitForInputIdle((HANDLE) procMS->Handle.ToPointer(), INFINITE);
 	procMS->CloseMainWindow();
@@ -52,7 +49,7 @@ void Tab::Embed(HWND child, HWND newParent)
 
 bool Tab::inject(DWORD pID)
 {
-	if(!File::Exists(dllloc)) MessageBox::Show("File not found!");
+	if(!File::Exists(marshal_as<String^>(dllloc))) MessageBox::Show("File not found!");
 
 	HANDLE Proc; 
 	LPVOID RemoteString, LoadLibAddy; 
@@ -66,9 +63,9 @@ bool Tab::inject(DWORD pID)
 	} 
 	LoadLibAddy = (LPVOID)GetProcAddress(GetModuleHandle(L"kernel32.dll"), "LoadLibraryA"); 
 	// Allocate space in the process for our DLL
-	RemoteString = (LPVOID)VirtualAllocEx(Proc, NULL, strlen(dllloc), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE); 
+	RemoteString = (LPVOID)VirtualAllocEx(Proc, NULL, strlen(dllloc.c_str()), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE); 
 	// Write the string name of our DLL in the memory allocated 
-	WriteProcessMemory(Proc, (LPVOID)RemoteString, dllloc, strlen(dllloc), NULL); 
+	WriteProcessMemory(Proc, (LPVOID)RemoteString, dllloc.c_str(), strlen(dllloc.c_str()), NULL); 
 	// Load our DLL 
 	CreateRemoteThread(Proc, NULL, NULL, (LPTHREAD_START_ROUTINE)LoadLibAddy, (LPVOID)RemoteString, NULL, NULL); 
 	CloseHandle(Proc);
