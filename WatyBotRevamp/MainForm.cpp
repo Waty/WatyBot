@@ -527,7 +527,7 @@ bool SAWSIL()
 }
 bool SLWIB()
 {
-	if(getMobCount() < AutoBotVars::iSlwib) return false;
+	if(getItemCount() < AutoBotVars::iSlwib) return false;
 	if(!WritePointer(ServerBasePtr, TubiOffset, 0)) return false;
 	return true;
 }
