@@ -291,8 +291,8 @@ namespace Hacks
 	BYTE bHideDamage1[] = {0x90, 0xE9};
 	BYTE bHideDamage2[] = {0x90, 0x90};
 	BYTE bHideDamage3[] = {0x90, 0xE9};
-	BYTE bHideDamage4[] = {0x7F};
-	CMemory cmHideDamage(HideDamageAddy1, bHideDamage1, 2, HideDamageAddy2, bHideDamage2, 2, HideDamageAddy3, bHideDamage3, 2, HideDamageAddy4, bHideDamage4, 1);
+	BYTE bHideDamage4[] = {0xC2, 0x20, 0x00, 0xE9, 0x56, 0x8B, 0xB5, 0x6C};
+	CMemory cmHideDamage(HideDamageAddy1, bHideDamage1, 2, HideDamageAddy2, bHideDamage2, 2, HideDamageAddy3, bHideDamage3, 2, HideDamageAddy4, bHideDamage4, 8);
  
 	/////Mercedes Combos without comboing
 	BYTE bMercedesCombo[] = {0xEB};

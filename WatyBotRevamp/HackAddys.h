@@ -48,7 +48,7 @@
 #define HideDamageAddy1 0xB3AD43
 #define HideDamageAddy2 0x70227F
 #define HideDamageAddy3 0x702285
-#define HideDamageAddy4 0x6E5157
+#define HideDamageAddy4 0x6E4F00
 #define MercedesComboAddy 0xBB245B
 #define PvPChecksAddy1 0xBBFDE4
 #define PvPChecksAddy2 0xBBFE0B
