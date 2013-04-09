@@ -348,6 +348,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 private: System::Windows::Forms::NumericUpDown^  nudIceGuard;
 
 private: System::Windows::Forms::CheckBox^  cbIceGuard;
+private: System::Windows::Forms::CheckBox^  cbCCHook;
 
 
 
@@ -557,6 +558,7 @@ private: System::Windows::Forms::CheckBox^  cbIceGuard;
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->InfoToolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->bwNextChannel = (gcnew System::ComponentModel::BackgroundWorker());
+			this->cbCCHook = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -636,6 +638,7 @@ private: System::Windows::Forms::CheckBox^  cbIceGuard;
 			// 
 			// AutoBotGroupBox
 			// 
+			this->AutoBotGroupBox->Controls->Add(this->cbCCHook);
 			this->AutoBotGroupBox->Controls->Add(this->nudCCAttacks);
 			this->AutoBotGroupBox->Controls->Add(this->nudCCTimed);
 			this->AutoBotGroupBox->Controls->Add(this->nudCCPeople);
@@ -2497,6 +2500,17 @@ private: System::Windows::Forms::CheckBox^  cbIceGuard;
 			// 
 			this->bwNextChannel->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::bwNextChannel_DoWork);
 			// 
+			// cbCCHook
+			// 
+			this->cbCCHook->AutoSize = true;
+			this->cbCCHook->Location = System::Drawing::Point(239, 226);
+			this->cbCCHook->Name = L"cbCCHook";
+			this->cbCCHook->Size = System::Drawing::Size(52, 17);
+			this->cbCCHook->TabIndex = 81;
+			this->cbCCHook->Text = L"Hook";
+			this->cbCCHook->UseVisualStyleBackColor = true;
+			this->cbCCHook->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbCCHook_CheckedChanged);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2650,6 +2664,7 @@ private: System::Void nudPVPDelay_ValueChanged(System::Object^  sender, System::
 private: System::Void ddbPVPSkills_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbMouseFly_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbIceGuard_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbCCHook_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion
