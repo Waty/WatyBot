@@ -758,6 +758,41 @@ void MainForm::AutoPot()
 		}
 	}
 }
+enum class CCReturns {Succes = 0, Breath = 1, Death = 2};
+CCReturns CCReturn;
+#define CCSuccesAddy 0x005688ED
+#define CCBreathAddy 0x00568955
+#define CCDeathAddy 0x005689CF
+VOID WINAPI SetCCSucces(){ CCReturn = CCReturns::Succes; };
+CodeCave(CCHookSucces)
+{
+	call SetCCSucces
+	add esp,0x20
+	ret 0004
+}
+EndCodeCave
+CMemory cmCCHookSucces(CCSuccesAddy - 3, CaveCCHookSucces, 1, true);
+
+VOID WINAPI SetCCBreath(){ CCReturn = CCReturns::Breath; };
+CodeCave(CCHookBreath)
+{
+	call SetCCBreath
+	add esp,0x20
+	ret 0004
+}
+EndCodeCave
+CMemory cmCCHookBreaths(CCBreathAddy - 3, CaveCCHookSucces, 1, true);
+
+VOID WINAPI SetCCDeath(){ CCReturn = CCReturns::Death; };
+CodeCave(CCHookDeath)
+{
+	call SetCCDeath
+	add esp,0x20
+	ret 0004
+}
+EndCodeCave
+CMemory cmCCHookDeath(CCDeathAddy - 3, CaveCCHookSucces, 1, true);
+
 void MainForm::AutoCC()
 {
 	if(CCPeopleCheckBox->Checked && (getPeopleCount() >= iCCPeople))
