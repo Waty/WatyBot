@@ -781,7 +781,7 @@ CodeCave(CCHookBreath)
 	ret 0004
 }
 EndCodeCave
-CMemory cmCCHookBreath(CCBreathAddy - 3, CaveCCHookSucces, 1, true);
+CMemory cmCCHookBreath(CCBreathAddy - 3, CaveCCHookBreath, 1, true);
 
 VOID WINAPI SetCCDeath(){ CCReturn = CCReturns::Death; ShowInfo("You're dead...."); };
 CodeCave(CCHookDeath)
@@ -791,7 +791,7 @@ CodeCave(CCHookDeath)
 	ret 0004
 }
 EndCodeCave
-CMemory cmCCHookDeath(CCDeathAddy - 3, CaveCCHookSucces, 1, true);
+CMemory cmCCHookDeath(CCDeathAddy - 3, CaveCCHookDeath, 1, true);
 
 void MainForm::cbCCHook_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
