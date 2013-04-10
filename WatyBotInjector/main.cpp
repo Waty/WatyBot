@@ -1,117 +1,43 @@
 #include <iostream>
+#include <Windows.h>
+#include <msclr/marshal_cppstd.h>
 
-#include <windows.h>
-#include <stdio.h>
-#include <tchar.h>
-
-#include <vector>
+using namespace msclr::interop;
+using namespace System::Diagnostics;
+using namespace System::IO;
+using namespace System;
+using namespace System::Windows::Forms;
+using namespace std;
 
 HANDLE hProcess = NULL;
 DWORD dwProcessId = 0;
 HWND hProcesswnd = NULL;
 
-using namespace std;
 
-bool inject(DWORD pID, string DLLFileName)
+bool inject(std::string fileName, DWORD pID)
 {
-	TCHAR Buffer[MAX_PATH];
-	DWORD dwRet;
-
-	dwRet = GetCurrentDirectory(MAX_PATH, Buffer);
-
-	std::string path(Buffer);
-
-	path.append(DLLFileName);
-	
-	DWORD dwAttr = GetFileAttributesA(path.c_str());
-	if(dwAttr == 0xFFFFFFFF)
-	{
-		if (GetLastError() == ERROR_FILE_NOT_FOUND)
-			cout << path.c_str() << " not found!" << endl << "Trying to continue with next dll" << endl;
-		else
-			cout << "Wild unknown error appeared!" << endl;
-
+	if(!pID)
 		return false;
-	}
 
 	HANDLE Proc; 
 	LPVOID RemoteString, LoadLibAddy; 
-	if(!pID) 
-		return false; 
 	Proc = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pID); 
 	if(!Proc) 
 	{ 
-		cout << "OpenProcess() failed: " << GetLastError() << endl; 
+		MessageBox::Show("OpenProcess() failed: " + GetLastError()); 
 		return false; 
 	} 
 	LoadLibAddy = (LPVOID)GetProcAddress(GetModuleHandle("kernel32.dll"), "LoadLibraryA"); 
 	// Allocate space in the process for our DLL
-	RemoteString = (LPVOID)VirtualAllocEx(Proc, NULL, strlen(path.c_str()), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE); 
+	RemoteString = (LPVOID)VirtualAllocEx(Proc, NULL, strlen(fileName.c_str()), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE); 
 	// Write the string name of our DLL in the memory allocated 
-	WriteProcessMemory(Proc, (LPVOID)RemoteString, path.c_str(), strlen(path.c_str()), NULL); 
+	WriteProcessMemory(Proc, (LPVOID)RemoteString, fileName.c_str(), strlen(fileName.c_str()), NULL); 
 	// Load our DLL 
 	CreateRemoteThread(Proc, NULL, NULL, (LPTHREAD_START_ROUTINE)LoadLibAddy, (LPVOID)RemoteString, NULL, NULL); 
-	CloseHandle(Proc); 
-
-	cout << "Injection succeed!" << endl; 
+	CloseHandle(Proc);
 	return true; 
 }
 
-bool StartProcess()
-{
-	TCHAR Buffer[MAX_PATH];
-	DWORD dwRet;
-
-	dwRet = GetCurrentDirectory(MAX_PATH, Buffer);
-
-	std::string path(Buffer);
-
-	path.append("/MapleStory.exe");
-
-	STARTUPINFO si = { sizeof(si) };
-
-	PROCESS_INFORMATION  pi;
-
-	ZeroMemory(&si, sizeof(si));
-
-	if(!CreateProcess(NULL, (LPSTR)path.c_str(),0, 0, FALSE, 0, 0, 0, &si, &pi))
-		return false;
-
-	WaitForInputIdle(pi.hProcess, INFINITE);
-
-	hProcess = pi.hProcess;
-	dwProcessId = pi.dwProcessId;
-	return true;
-}
-
-bool FindProcess()
-{
-
-	TCHAR szBuffer[200];
-	DWORD dwTemp;
-
-	for (HWND hWnd = GetTopWindow(NULL); hWnd != NULL; hWnd = GetNextWindow(hWnd, GW_HWNDNEXT))
-	{
-		GetWindowThreadProcessId(hWnd, &dwTemp);
-
-		if (dwTemp != dwProcessId){	continue; }
-
-		if (!GetClassName(hWnd, szBuffer, sizeof(szBuffer) / sizeof(TCHAR))){	continue;	}
-
-		if (!strcmp(szBuffer,"StartUpDlgClass"))
-		{
-			bool valid;
-			cout << "Found StartUp dialog! Starting with injecting...." << endl;
-			valid = inject(dwProcessId, "/WatyBotUpdater.dll");
-			Sleep(1000);
-			valid = inject(dwProcessId, "/WatyBot.dll");
-			Sleep(1000);
-			::PostMessage(hWnd,WM_KEYDOWN, VK_ESCAPE , ::MapVirtualKey(VK_ESCAPE, 0) << 16);
-			return valid;
-		}
-	}
-	return false;
-}
 BOOL IsElevated( ) {
 	BOOL fRet = FALSE;
 	HANDLE hToken = NULL;
@@ -132,28 +58,37 @@ int main()
 	cout << "WatyBotInjector:" << endl;
 	cout << "You need to have WatyBot.dll and this program in the Maplestory folder!!!!" << endl;
 	cout << "Full credits to \"TheFox\"" << endl << endl;
+
+	cout << "Checking for admin rights...." << endl;
 	if(!IsElevated())
 	{
 		cout << "Run me as administrator!" << endl;
 		system("pause");
+		return false;
 	}
-	if(StartProcess())
-	{
-		cout << "MapleStory started!" << endl;
-
-		if(FindProcess())
-			cout << "Done!" << endl;
-		else
-		{
-			cout << "Dam! Something's wrong!" << endl;
-			system("pause");
-		}
-	}
+	
+	if(File::Exists(Directory::GetCurrentDirectory() + "\\MapleStory.exe")) cout << "Found MapleStory.exe!" << endl;
 	else
 	{
-		cout << "Can't start MapleStory Y.Y!" << endl;
+		cout << "Couldn't find MapleStory.exe!";
 		system("pause");
+		return false;
 	}
-	return 1;
+
+	if(File::Exists(Directory::GetCurrentDirectory() + "\\WatyBot.dll")) cout << "Found WatyBot.dll!" << endl;
+	else
+	{		
+		cout << "Couldn't find WatyBot.dll!";
+		system("pause");
+		return false;
+	}
+
+	Process^ procMS = gcnew Process();
+	procMS->StartInfo->FileName = Directory::GetCurrentDirectory() + "\\MapleStory.exe";
+	if(!procMS->Start()) return false;
+	WaitForInputIdle((HANDLE) procMS->Handle.ToPointer(), INFINITE);
+	if(!procMS->CloseMainWindow()) return false;
+	if(!inject(marshal_as<string>(Directory::GetCurrentDirectory() + "\\WatyBot.dll"), procMS->Id)) return false;
+	return true;
 }
 
