@@ -1,5 +1,7 @@
 #pragma once
 #include "MacroManager.h"
+extern HWND MapleStoryHWND;
+#define SpamKey(KeyPress) PostMessage(MapleStoryHWND, WM_KEYDOWN, KeyPress, (MapVirtualKey(KeyPress, 0) << 16) + 1); PostMessage(MapleStoryHWND, WM_KEYUP, KeyPress, (MapVirtualKey(KeyPress, 0) << 16) + 1);
 
 namespace Macro
 {
@@ -21,7 +23,7 @@ namespace Macro
 		}
 		void ProcessMacro()
 		{
-			//SendKey(this->nValue);
+			SpamKey(this->nValue);
 			this->UpdateTime();
 		}
 	private:
