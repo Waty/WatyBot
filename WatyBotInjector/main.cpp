@@ -59,7 +59,7 @@ int main()
 	cout << "You need to have WatyBot.dll and this program in the Maplestory folder!!!!" << endl;
 	cout << "Full credits to \"TheFox\"" << endl << endl;
 
-	cout << "Checking for admin rights...." << endl;
+	cout << "Checking for admin rights..." << endl;
 	if(!IsElevated())
 	{
 		cout << "Run me as administrator!" << endl;
@@ -83,12 +83,38 @@ int main()
 		return false;
 	}
 
+	cout << "Creating a new Process..." << endl;
 	Process^ procMS = gcnew Process();
 	procMS->StartInfo->FileName = Directory::GetCurrentDirectory() + "\\MapleStory.exe";
-	if(!procMS->Start()) return false;
+
+	cout << "Trying to start MS..." << endl;
+	if(procMS->Start()) cout << "Started MS succesfull!" << endl;
+	else
+	{
+		cout << "Failed in starting MS :(" << endl;
+		system("pause");
+		return false;
+	}
+	
+	cout << "Waiting for MS..." << endl;
 	WaitForInputIdle((HANDLE) procMS->Handle.ToPointer(), INFINITE);
-	if(!procMS->CloseMainWindow()) return false;
-	if(!inject(marshal_as<string>(Directory::GetCurrentDirectory() + "\\WatyBot.dll"), procMS->Id)) return false;
+	if(procMS->CloseMainWindow()) cout << "Closed the Play screen..." << endl;
+	else
+	{
+		cout << "A Error occured while trying to close the Play screen..." << endl;
+		system("pause");
+		return false;
+	}
+	
+	cout << "Trying to inject WatyBot..." << endl;
+	if(inject(marshal_as<string>(Directory::GetCurrentDirectory() + "\\WatyBot.dll"), procMS->Id)) cout << "Injected WatyBot :)" << endl;
+	else
+	{
+		cout << "Failed in injecting WatyBot :(" << endl;		
+		system("pause");
+		return false;
+	}
+	Sleep(2500);
 	return true;
 }
 
