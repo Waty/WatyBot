@@ -60,7 +60,8 @@ int main()
 	cout << "Full credits to \"TheFox\"" << endl << endl;
 
 	cout << "Checking for admin rights..." << endl;
-	if(!IsElevated())
+	if(IsElevated()) cout << "Running with admin rights!" << endl;
+	else
 	{
 		cout << "Run me as administrator!" << endl;
 		system("pause");
