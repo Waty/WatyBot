@@ -152,7 +152,6 @@
     </ClCompile>
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="Packet.cpp" />
-    <ClCompile Include="SendPacket.cpp" />
     <ClCompile Include="SPControl.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -180,7 +179,6 @@
     <ClInclude Include="Memory.h" />
     <ClInclude Include="Packet.h" />
     <ClInclude Include="Pointers.h" />
-    <ClInclude Include="SendPacket.h" />
     <ClInclude Include="SPControl.h" />
   </ItemGroup>
   <ItemGroup>

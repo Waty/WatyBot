@@ -5,7 +5,6 @@
 #include <Windows.h>
 #include "Defines.h"
 #include "Pointers.h"
-#include "SendPacket.h"
 #include <msclr/marshal_cppstd.h>
 #include <fstream>
 #include "Packet.h"
@@ -35,7 +34,8 @@ Macro::AbstractMacro* Skill2Macro;
 Macro::AbstractMacro* Skill3Macro;
 Macro::AbstractMacro* Skill4Macro;
 
-extern std::vector<gcroot<SpawnControl::SPControlLocation^>> vSPControl;
+extern vector<gcroot<SpawnControl::SPControlLocation^>> vSPControl;
+extern vector<gcroot<Packets::CPacketData^>> vPacket;
 
 int getMobCount()
 {
@@ -120,62 +120,6 @@ bool InGame()
 	else
 		return false;
 }
-bool isGoodPacket(String^ strPacket, String^&strError)
-{
-    if(strPacket == String::Empty)
-	{
-        strError = "Packet is Empty";
-        return false;
-    }
- 
-    if((strPacket->Length)%2 == 1)
-	{
-        strError = "Packet size is not a multiple of 2";
-        return false;
-    }
- 
-    for (int i = 0; i < strPacket->Length; i++)
-    {
-        if (strPacket[i] >= '0' && strPacket[i] <= '9') continue;
-        if (strPacket[i] >= 'A' && strPacket[i] <= 'F') continue;
-        if (strPacket[i] == '*') continue;
- 
-        strError = "Invalid character detected in packet" + strPacket[i];
-   
-        return false;
-    }
-    return true;
-}
-bool SendPacketFunction(String^ packet, String^&strError){	
-	String^strPacket = packet->Replace(" ", "");
-
-    if(!isGoodPacket(strPacket, strError))
-        return false;
-
-    Random^ randObj = gcnew Random();
-    String^ rawBytes = String::Empty;
- 
-    for(int i = 0; i < strPacket->Length; i++)
-	{
-        if(strPacket[i] == '*')	rawBytes += randObj->Next(16).ToString("X");
-        else	rawBytes += strPacket[i];
-    }
- 
-    ::DWORD dwOffset = 0;
-    ::DWORD dwLength = ( rawBytes->Length / 2 );
-    ::LPBYTE lpBytes = new ::BYTE [ dwLength ];
- 
-    for ( int i = 0; ( dwOffset < dwLength ) && ( ( i + 1 ) < rawBytes->Length ); dwOffset++, i += 2 )
-        lpBytes[dwOffset] = Byte::Parse(rawBytes->Substring(i, 2), Globalization::NumberStyles::HexNumber, Globalization::CultureInfo::InvariantCulture);
- 
-    try
-	{
-		SendPacket(lpBytes, dwLength);
-	} 
-	catch ( Exception^ ){} 
-	finally {delete [] lpBytes;}
-    return true;
-}
 void MainForm::CCSwitch(int type)
 {
 	String^ strError = String::Empty;
@@ -193,7 +137,7 @@ void MainForm::CCSwitch(int type)
 		if(InGame())
 		{
 			this->CCPeopleCheckBox->Checked = false;
-			SendPacketFunction(marshal_as<String^>(Packets::ChangeCharacter), strError);
+			CPacket->Send(marshal_as<String^>(Packets::ChangeCharacter), strError);
 			ShowInfo("WatyBot DC'd you");
 			Sleep(500);
 			break;
@@ -254,10 +198,10 @@ void MainForm::CashShop()
 	while(getBreathValue() > 0)	Sleep(250);
 	Sleep(500);
 	String^ strError = String::Empty;
-	if(SendPacketFunction(marshal_as<String^>(Packets::EnterCashShop), strError))
+	if(CPacket->Send(marshal_as<String^>(Packets::EnterCashShop), strError))
 	{
 		Sleep(2000);
-		if(!SendPacketFunction(marshal_as<String^>(Packets::LeaveCashShop), strError))
+		if(!CPacket->Send(marshal_as<String^>(Packets::LeaveCashShop), strError))
 			ShowError("Failed to leave the CashShop: " + strError);
 	}
 	else ShowError("Failed Entering the CashShop: " + strError);
@@ -549,7 +493,8 @@ void AutoSkill(int KeyCodeIndex)
 	{
 		//Send Packet
 		String^ strError;
-		if(!SendPacketFunction(marshal_as<String^>(vPacket.at(KeyCodeIndex - KeyCodesSize).data), strError))
+		gcroot<Packets::CPackets^> p;
+		if(!p->Send(vPacket.at(KeyCodeIndex - KeyCodesSize)->Data, strError))
 			ShowError(strError);
 	}
 }
@@ -711,10 +656,11 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	//Start the MacroManager
 	InitializeMacros();
 
-	SPControl = gcnew SpawnControl::SPControl();
+	SPControl = gcnew SpawnControl::SPControl;
+	CPacket = gcnew Packets::CPackets;
 
 	if(!Directory::Exists("WatyBot"))	Directory::CreateDirectory("WatyBot");
-	if(File::Exists(PacketFileName))	PacketSender::Load(marshal_as<string>(PacketFileName));
+	if(File::Exists(PacketFileName))	CPacket->Load(PacketFileName);
 	if(File::Exists(SPControlFileName))	SPControl->Load(SPControlFileName);
 	if(File::Exists(SettingsFileName))	LoadSettings();
 	RefreshComboBoxes();
@@ -842,7 +788,7 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 {
 	macroMan.ClearMacros();
 	SPControl->Save(SPControlFileName);
-	PacketSender::Save(marshal_as<string>(PacketFileName));
+	CPacket->Save(PacketFileName);
 	SaveSettings();
 
 	switch(MessageBox::Show("Close MapleStory too?", "Terminate Maple?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
@@ -864,14 +810,14 @@ void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs
 {
 	String^ strError = String::Empty;
 	if(PacketSelectBox->SelectedIndex < 0)	ShowError("Please select a packet before sending");
-	else if(!SendPacketFunction(marshal_as<String^>(vPacket.at(PacketSelectBox->SelectedIndex).data),strError)) ShowError(strError);
+	else if(!CPacket->Send(vPacket.at(PacketSelectBox->SelectedIndex)->Data,strError)) ShowError(strError);
 }
 void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	PacketSender::AddPacket(marshal_as<string>(this->AddPacketNameTextBox->Text), marshal_as<string>(this->AddPacketPacketTextBox->Text));
+	CPacket->Add(this->AddPacketNameTextBox->Text, this->AddPacketPacketTextBox->Text);
 	ShowInfo("Packet was added!");
 
-	PacketSender::Save(marshal_as<string>(PacketFileName));
+	CPacket->Save(PacketFileName);
 	RefreshComboBoxes();
 }
 void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventArgs^  e)
@@ -880,9 +826,9 @@ void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventAr
 	switch(MessageBox::Show("Are you sure you want to delete this packet?", "Please Confirm", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
 	{
 	case ::DialogResult::Yes:
-		PacketSender::DeletePacket(DeletePacketComboBox->SelectedIndex);
+		CPacket->Delete(DeletePacketComboBox->SelectedIndex);
 		ShowInfo("Packet was deleted succesfully!");
-		PacketSender::Save(marshal_as<string>(PacketFileName));
+		CPacket->Save(PacketFileName);
 		RefreshComboBoxes();
 		break;
 	}	
@@ -891,14 +837,14 @@ void MainForm::SelectPacketForEditingComboBox_SelectedIndexChanged(System::Objec
 {
 	if(SelectPacketForEditingComboBox->SelectedIndex >= 0)
 	{
-		this->EditPacketNameTextBox->Text = marshal_as<String^>(vPacket.at(SelectPacketForEditingComboBox->SelectedIndex).name);
-		this->EditPacketPacketTextBox->Text = marshal_as<String^>(vPacket.at(SelectPacketForEditingComboBox->SelectedIndex).data);
+		this->EditPacketNameTextBox->Text = vPacket.at(SelectPacketForEditingComboBox->SelectedIndex)->Name;
+		this->EditPacketPacketTextBox->Text = vPacket.at(SelectPacketForEditingComboBox->SelectedIndex)->Data;
 	}
 }
 void MainForm::SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	PacketSender::EditPacket(SelectPacketForEditingComboBox->SelectedIndex, marshal_as<string>(EditPacketNameTextBox->Text), marshal_as<string>(EditPacketPacketTextBox->Text));
-	PacketSender::Save(marshal_as<string>(PacketFileName));
+	CPacket->Edit(SelectPacketForEditingComboBox->SelectedIndex, EditPacketNameTextBox->Text, EditPacketPacketTextBox->Text);
+	CPacket->Save(PacketFileName);
 	RefreshComboBoxes();
 }
 void MainForm::SpamsPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
@@ -906,7 +852,7 @@ void MainForm::SpamsPacketButton_Click(System::Object^  sender, System::EventArg
 	if(SpamPacketsDelayTextBox->Text != String::Empty && SpamPacketTimesTextBox->Text != String::Empty && PacketSelectBox->SelectedIndex >-1)
 	{
 		this->SpamPacketsTimer->Interval = Convert::ToInt32(this->SpamPacketsDelayTextBox->Text);
-		SpammedPackets = 0;
+		CPacket->SpammedPackets = 0;
 		this->SpamPacketsTimer->Enabled = true;
 		this->bStopSpamming->Visible = true;
 		this->bStartSpamming->Visible = false;
@@ -926,14 +872,14 @@ void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^
 		this->SpamPacketsTimer->Enabled = false;
 		ShowWarning("Please select a packet before sending");
 	}
-	else if(!SendPacketFunction(marshal_as<String^>(vPacket.at(PacketSelectBox->SelectedIndex).data),strError))
+	else if(!CPacket->Send(vPacket.at(PacketSelectBox->SelectedIndex)->Data,strError))
 	{
 		this->SpamPacketsTimer->Enabled = false;
 		ShowError(strError);
 	}
 
-	SpammedPackets++;
-	if(SpammedPackets >= Convert::ToInt32(this->SpamPacketTimesTextBox->Text))
+	CPacket->SpammedPackets++;
+	if(CPacket->SpammedPackets >= Convert::ToInt32(this->SpamPacketTimesTextBox->Text))
 	{	
 		SpamPacketsTimer->Enabled = false;
 		this->bStopSpamming->Visible = false;
@@ -961,11 +907,11 @@ void MainForm::RefreshComboBoxes()
 	this->AutoSkill4ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 
 	//refresh comboboxes
-	for(sPacket p : vPacket)
+	for(Packets::CPacketData^ p : vPacket)
 	{
 		try
 		{
-			String^ PacketName = marshal_as<String^>(p.name);
+			String^ PacketName = p->Name;
 			this->PacketSelectBox->Items->Add(PacketName);
 			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
 			this->DeletePacketComboBox->Items->Add(PacketName);
@@ -1175,7 +1121,7 @@ void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  
 {
 	MainForm::SaveSettings();
 	SPControl->Save(SPControlFileName);
-	PacketSender::Save(marshal_as<string>(PacketFileName));
+	CPacket->Save(PacketFileName);
 }
 
 //Hot Keys
@@ -1219,7 +1165,7 @@ void MainForm::HotKeys()
 		{
 			String^ strError = String::Empty;
 			if(PacketSelectBox->SelectedIndex < 0)	ShowError("Please select a packet before sending");
-			else if(!SendPacketFunction(marshal_as<String^>(vPacket.at(PacketSelectBox->SelectedIndex).data),strError)) ShowError(strError);
+			else if(!CPacket->Send(vPacket.at(PacketSelectBox->SelectedIndex)->Data,strError)) ShowError(strError);
 			Sleep(250);
 		}
 	}

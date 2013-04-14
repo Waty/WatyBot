@@ -39,9 +39,6 @@
     <ClCompile Include="MacroManager\MacroManager.cpp">
       <Filter>Classes\MacroManager</Filter>
     </ClCompile>
-    <ClCompile Include="SendPacket.cpp">
-      <Filter>Classes\Packets</Filter>
-    </ClCompile>
     <ClCompile Include="Packet.cpp">
       <Filter>Classes\Packets</Filter>
     </ClCompile>
@@ -97,9 +94,6 @@
     </ClInclude>
     <ClInclude Include="Memory.h">
       <Filter>Classes\CMemory</Filter>
-    </ClInclude>
-    <ClInclude Include="SendPacket.h">
-      <Filter>Classes\Packets</Filter>
     </ClInclude>
     <ClInclude Include="SPControl.h">
       <Filter>Classes\SPControl</Filter>

@@ -2,6 +2,7 @@
 #pragma once
 #include <Windows.h>
 #include "SPControl.h"
+#include "Packet.h"
 
 namespace WatyBotRevamp {
 
@@ -2594,6 +2595,7 @@ private: System::Void CashShop();
 private: System::Void HotKeys();
 private: System::Void CCSwitch(int type);
 private: SpawnControl::SPControl^ SPControl;
+private: Packets::CPackets^ CPacket;
 #pragma endregion
 #pragma region CheckBoxes
 private: System::Void StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e);

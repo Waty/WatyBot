@@ -1,24 +1,50 @@
 #pragma once
 #include <string>
 #include <vector>
+
 using namespace std;
-	
-struct sPacket
+using namespace System;
+
+/* MapleStory data packet */
+//21st Century
+struct COutPacket
 {
-	string name;
-	string data;
+  BOOL fLoopback;
+  union
+  {
+      LPBYTE lpbData;
+      LPVOID lpvData;
+      LPWORD lpwHeader;
+  };
+  DWORD dwcbData;
+  UINT uOffset;
+  BOOL fEncryptedByShanda;
 };
 
-typedef vector<sPacket> PacketVector;
-extern PacketVector vPacket;
-
-namespace PacketSender
+namespace Packets
 {
-	void AddPacket(string name, string data);
-	void DeletePacket(int index);
-	void EditPacket(int i, string name, string data);
-	void Save(string filename);
-	void Load(string filename);
+	public ref class CPacketData sealed
+	{
+	public:
+		property String^ Name;
+		property String^ Data;
+	};
+
+	public ref class CPackets sealed
+	{
+	public:
+		CPackets(){}
+		void Add(String^ name, String^ data);
+		void Delete(int index);
+		void Edit(int i, String^ name, String^ data);
+		void Save(String^ filename);
+		void Load(String^ filename);
+		bool Send(String^ packet, String^&strError);
+		property int SpammedPackets;
+
+	private:
+		bool isGoodPacket(String^ strPacket, String^&strError);
+		~CPackets(){}
+	};
 }
 
-extern int SpammedPackets;
