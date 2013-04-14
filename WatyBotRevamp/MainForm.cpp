@@ -21,10 +21,10 @@ using namespace WatyBotRevamp;
 using namespace msclr::interop;
 using namespace System::IO;
 
-string WatyBotWorkingDirectory = "WatyBot\\";
-string SettingsFileName = WatyBotWorkingDirectory + "settings.ini";
-string PacketFileName = WatyBotWorkingDirectory + "packets.xml";
-string SPControlFileName = WatyBotWorkingDirectory + "spcontrol.xml";
+#define WatyBotWorkingDirectory "WatyBot\\"
+#define SettingsFileName (WatyBotWorkingDirectory + "settings.ini")
+#define PacketFileName (WatyBotWorkingDirectory + "packets.xml")
+#define SPControlFileName (WatyBotWorkingDirectory + "spcontrol.xml")
 
 //Macro's
 Macro::AbstractMacro* AttackMacro;
@@ -34,6 +34,8 @@ Macro::AbstractMacro* Skill1Macro;
 Macro::AbstractMacro* Skill2Macro;
 Macro::AbstractMacro* Skill3Macro;
 Macro::AbstractMacro* Skill4Macro;
+
+extern std::vector<gcroot<SpawnControl::SPControlLocation^>> vSPControl;
 
 int getMobCount()
 {
@@ -709,14 +711,14 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	//Start the MacroManager
 	InitializeMacros();
 
-	if(!Directory::Exists("WatyBot"))Directory::CreateDirectory("WatyBot");
-	if(File::Exists(marshal_as<String^>(PacketFileName)))		PacketSender::Load(PacketFileName);
+	SPControl = gcnew SpawnControl::SPControl();
+
+	if(!Directory::Exists("WatyBot"))	Directory::CreateDirectory("WatyBot");
+	if(File::Exists(PacketFileName))	PacketSender::Load(marshal_as<string>(PacketFileName));
+	if(File::Exists(SPControlFileName))	SPControl->Load(SPControlFileName);
+	if(File::Exists(SettingsFileName))	LoadSettings();
 	RefreshComboBoxes();
-	if(File::Exists(marshal_as<String^>(SPControlFileName)))
-		SPControl::Load(SPControlFileName);
 	RefreshSPControlListView();
-	if(File::Exists(marshal_as<String^>(SettingsFileName)))
-		LoadSettings();
 
 	// Fix the size of the tabs
 	MainForm::Height = TabHeight[MainTabControl->SelectedTab->TabIndex];
@@ -763,6 +765,7 @@ CCReturns CCReturn;
 #define CCSuccesAddy 0x005688ED
 #define CCBreathAddy 0x00568955
 #define CCDeathAddy 0x005689CF
+
 VOID WINAPI SetCCSucces(){ CCReturn = CCReturns::Succes; ShowInfo("Succes!"); };
 CodeCave(CCHookSucces)
 {
@@ -838,8 +841,8 @@ void MainForm::MainTabControl_SelectedIndexChanged(System::Object^  sender, Syst
 void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 {
 	macroMan.ClearMacros();
-	SPControl::Save(SPControlFileName);
-	PacketSender::Save(PacketFileName);
+	SPControl->Save(SPControlFileName);
+	PacketSender::Save(marshal_as<string>(PacketFileName));
 	SaveSettings();
 
 	switch(MessageBox::Show("Close MapleStory too?", "Terminate Maple?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
@@ -868,7 +871,7 @@ void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^
 	PacketSender::AddPacket(marshal_as<string>(this->AddPacketNameTextBox->Text), marshal_as<string>(this->AddPacketPacketTextBox->Text));
 	ShowInfo("Packet was added!");
 
-	PacketSender::Save(PacketFileName);
+	PacketSender::Save(marshal_as<string>(PacketFileName));
 	RefreshComboBoxes();
 }
 void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventArgs^  e)
@@ -879,7 +882,7 @@ void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventAr
 	case ::DialogResult::Yes:
 		PacketSender::DeletePacket(DeletePacketComboBox->SelectedIndex);
 		ShowInfo("Packet was deleted succesfully!");
-		PacketSender::Save(PacketFileName);
+		PacketSender::Save(marshal_as<string>(PacketFileName));
 		RefreshComboBoxes();
 		break;
 	}	
@@ -895,7 +898,7 @@ void MainForm::SelectPacketForEditingComboBox_SelectedIndexChanged(System::Objec
 void MainForm::SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	PacketSender::EditPacket(SelectPacketForEditingComboBox->SelectedIndex, marshal_as<string>(EditPacketNameTextBox->Text), marshal_as<string>(EditPacketPacketTextBox->Text));
-	PacketSender::Save(PacketFileName);
+	PacketSender::Save(marshal_as<string>(PacketFileName));
 	RefreshComboBoxes();
 }
 void MainForm::SpamsPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
@@ -982,7 +985,7 @@ void MainForm::cbSPControl_CheckedChanged(System::Object^  sender, System::Event
 }
 void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	string name = marshal_as<string>(SPControlNameTextBox->Text);
+	String^ name = SPControlNameTextBox->Text;
 	int mapid = Convert::ToInt32(SPControlMapIDTextBox->Text);
 	int x = Convert::ToInt32(SPControlXTextBox->Text);
 	int y = Convert::ToInt32(SPControlYTextBox->Text);
@@ -990,8 +993,8 @@ void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventAr
 		ShowWarning("You forgot to fill in a textbox...");
 	else
 	{
-		SPControl::AddSPControl(name, mapid, x, y);
-		SPControl::Save(SPControlFileName);
+		SPControl->AddLocation(name, mapid, x, y);
+		SPControl->Save(SPControlFileName);
 		RefreshSPControlListView();
 	}
 }
@@ -1004,8 +1007,8 @@ void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventA
 		switch(MessageBox::Show("Are you sure you want to delete this location?", "Please Confirm", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
 		{
 		case ::DialogResult::Yes:
-			SPControlv.erase(SPControlv.begin() + SPControlListView->Items->IndexOf(L));
-			SPControl::Save(SPControlFileName);
+			SPControl->DeleteLocation(SPControlListView->Items->IndexOf(L));
+			SPControl->Save(SPControlFileName);
 			RefreshSPControlListView();
 			break;
 		}
@@ -1029,12 +1032,12 @@ void MainForm::RefreshSPControlListView()
 	this->SPControlMapIDTextBox->Clear();
 	this->SPControlXTextBox->Clear();
 	this->SPControlYTextBox->Clear();
-	for(SPControlStruct sp : SPControlv)
+	for(SpawnControl::SPControlLocation^ SP : vSPControl)
 	{
-		ListViewItem^ item = gcnew ListViewItem(marshal_as<String^>(sp.mapName));
-		item->SubItems->Add(Convert::ToString(sp.mapID));
-		item->SubItems->Add(Convert::ToString(sp.x));
-		item->SubItems->Add(Convert::ToString(sp.y));
+		ListViewItem^ item = gcnew ListViewItem(SP->Name);
+		item->SubItems->Add(Convert::ToString(SP->MapId));
+		item->SubItems->Add(Convert::ToString(SP->X));
+		item->SubItems->Add(Convert::ToString(SP->Y));
 		SPControlListView->Items->Add(item);
 	}
 }
@@ -1042,8 +1045,8 @@ void MainForm::RefreshSPControlListView()
 //Loading/Saving AutoBot settings
 void MainForm::SaveSettings()
 {
-	File::Delete(marshal_as<String^>(SettingsFileName));
-	ofstream file(SettingsFileName);
+	File::Delete(SettingsFileName);
+	ofstream file(marshal_as<string>(SettingsFileName));
 	using boost::property_tree::ptree;
 	ptree pt;
 
@@ -1105,7 +1108,7 @@ void MainForm::SaveSettings()
 }
 void MainForm::LoadSettings()
 {
-	ifstream file(SettingsFileName);
+	ifstream file(marshal_as<string>(SettingsFileName));
 	using boost::property_tree::ptree;
 	ptree pt;
 
@@ -1171,8 +1174,8 @@ void MainForm::LoadSettings()
 void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	MainForm::SaveSettings();
-	SPControl::Save(SPControlFileName);
-	PacketSender::Save(PacketFileName);
+	SPControl->Save(SPControlFileName);
+	PacketSender::Save(marshal_as<string>(PacketFileName));
 }
 
 //Hot Keys

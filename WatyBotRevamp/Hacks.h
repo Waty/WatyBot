@@ -4,6 +4,7 @@ extern int getMapID();
 extern int getCharX();
 extern int getCharY();
 extern int getAttackCount();
+extern std::vector<gcroot<SpawnControl::SPControlLocation^>> vSPControl;
 
 namespace Hacks
 {
@@ -150,12 +151,12 @@ namespace Hacks
 	BOOL WINAPI GetCoords()
 	{
 		int iMapID = getMapID();
-		for(SPControlStruct sp : SPControlv)
+		for(SpawnControl::SPControlLocation^ location : vSPControl)
 		{
-			if( iMapID == sp.mapID )
+			if( iMapID == location->MapId )
 			{
-				spawn_x = sp.x;
-				spawn_y = sp.y;
+				spawn_x = location->X;
+				spawn_y = location->Y;
 				return TRUE;
 			}
 		}
