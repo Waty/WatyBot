@@ -1,69 +1,97 @@
 #include "SPControl.h"
-#include <fstream>
+#include <string>
+#include <vector>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
-SPControlVector SPControlv;
+#include <msclr/marshal_cppstd.h>
 
-void SPControl::AddSPControl(string name, int ID, int x, int y)
+using namespace msclr::interop;
+using namespace SpawnControl;
+
+std::vector<gcroot<SPControlLocation^>> vSPControl;
+
+SPControlLocation::SPControlLocation()
 {
-	SPControlStruct SP;
-	SP.mapName = name;
-	SP.mapID = ID;
-	SP.x = x;
-	SP.y = y;
-	SPControlv.push_back(SP);
+
 }
 
-void SPControl::EditSPControl(int i, string mapname, int mapid, int x, int y)
+SPControlLocation::~SPControlLocation()
 {
-	SPControlStruct SP = SPControlv.at(i);
-	SP.mapName = mapname;
-	SP.mapID = mapid;
-	SP.x = x;
-	SP.y = y;
+
 }
 
-void SPControl::DeleteSPControl(int i)
+SPControl::SPControl()
 {
-	SPControlv.erase(SPControlv.begin() + i);
+	vSPControl.clear();
 }
 
-void SPControl::Load(string filename)
+SPControl::~SPControl()
 {
-	ifstream file(filename);
+	
+}
+
+void SPControl::Load(System::String^ filename)
+{
+	using namespace System::IO;
+	if(!File::Exists(filename)) return;
 	using boost::property_tree::ptree;
 	ptree pt;
-	read_xml(file, pt);
+	read_xml(marshal_as<std::string>(filename), pt);
 	if(!pt.empty())
 	{
 		for(ptree::value_type const& v : pt.get_child("spcontrol"))
 		{
 			if(v.first == "location")
 			{
-				SPControlStruct SP;
-				SP.mapName = v.second.get<string>("mapname");
-				SP.mapID = v.second.get<int>("mapid");
-				SP.x = v.second.get<int>("x");
-				SP.y = v.second.get<int>("y");
-				SPControlv.push_back(SP);
+				SPControlLocation^ loc = gcnew SPControlLocation();
+				loc->Name = marshal_as<System::String^>(v.second.get<std::string>("mapname"));
+				loc->MapId = v.second.get<int>("mapid");
+				loc->X = v.second.get<int>("x");
+				loc->Y = v.second.get<int>("y");
+				vSPControl.push_back(loc);
 			}	
 		}
 	}
 }
 
-void SPControl::Save(string filename)
+void SPControl::AddLocation(System::String^ name, int ID, int x, int y)
 {
-	ofstream file(filename);
+	SPControlLocation^ SP = gcnew SPControlLocation;
+	SP->Name = name;
+	SP->MapId = ID;
+	SP->X = x;
+	SP->Y = y;
+	vSPControl.push_back(SP);
+}
+
+void SPControl::EditLocation(int index, System::String^ name, int mapid, int x, int y)
+{
+	SPControlLocation^ SP = vSPControl.at(index);
+	SP->Name = name;
+	SP->MapId = mapid;
+	SP->X = x;
+	SP->Y = y;
+	
+}
+
+void SPControl::DeleteLocation(int i)
+{
+	vSPControl.erase(vSPControl.begin() + i);
+}
+
+void SPControl::Save(System::String^ filename)
+{
+	using namespace System::IO;
 	using boost::property_tree::ptree;
 	ptree pt;
 
-	for(SPControlStruct SP : SPControlv)
+	for(SPControlLocation^ SP : vSPControl)
 	{
         ptree & node = pt.add("spcontrol.location", "");
-		node.put("mapname", SP.mapName);
-		node.put("mapid", SP.mapID);
-		node.put("x", SP.x);
-		node.put("y", SP.y);
+		node.put("mapname", marshal_as<std::string>(SP->Name));
+		node.put("mapid", SP->MapId);
+		node.put("x", SP->X);
+		node.put("y", SP->Y);
     }
-	write_xml(file, pt);
+	write_xml(marshal_as<std::string>(filename), pt);
 }

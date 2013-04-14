@@ -1,24 +1,33 @@
 #pragma once
-#include <string>
-#include <vector>
-using namespace std;
 
-
-struct SPControlStruct
+namespace SpawnControl
 {
-	string mapName;
-	int mapID;
-	int x;
-	int y;
-};
-typedef vector<SPControlStruct> SPControlVector;
-extern SPControlVector SPControlv;
+	public ref class SPControlLocation sealed
+	{
+	public:
+		SPControlLocation();
+		property System::String^ Name;
+		property int MapId;
+		property int X;
+		property int Y;
+	private:
+		~SPControlLocation();
+	};
 
-namespace SPControl
-{
-	void AddSPControl(string MapName, int MapID, int XLocation, int YLocation);
-	void EditSPControl(int i, string mapname, int mapid, int x, int y);
-	void DeleteSPControl(int index);
-	void Save(string filename);
-	void Load(string filename);
+	public ref class SPControl sealed
+	{
+	public:
+		SPControl();
+		property System::String^ Title;
+		property System::String^ Description;
+
+		void Load(System::String^ filename);
+		void AddLocation(System::String^ name, int ID, int x, int y);
+		void EditLocation(int index, System::String^ name, int mapid, int x, int y);
+		void DeleteLocation(int i);
+		void Save(System::String^ filename);
+		
+	private:
+		~SPControl();
+	};
 }
