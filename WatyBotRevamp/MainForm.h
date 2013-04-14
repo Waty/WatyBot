@@ -1,7 +1,7 @@
 #pragma region ...
 #pragma once
 #include <Windows.h>
-#include <string>
+#include "SPControl.h"
 
 namespace WatyBotRevamp {
 
@@ -2593,6 +2593,7 @@ private: System::Void AutoCC();
 private: System::Void CashShop();
 private: System::Void HotKeys();
 private: System::Void CCSwitch(int type);
+private: SpawnControl::SPControl^ SPControl;
 #pragma endregion
 #pragma region CheckBoxes
 private: System::Void StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e);
