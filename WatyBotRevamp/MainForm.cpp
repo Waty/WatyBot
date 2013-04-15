@@ -33,6 +33,7 @@ Macro::AbstractMacro* Skill1Macro;
 Macro::AbstractMacro* Skill2Macro;
 Macro::AbstractMacro* Skill3Macro;
 Macro::AbstractMacro* Skill4Macro;
+Macro::AbstractMacro* TimedCCMacro;
 
 extern vector<gcroot<SpawnControl::SPControlLocation^>> vSPControl;
 extern vector<gcroot<Packets::CPacketData^>> vPacket;
@@ -526,7 +527,7 @@ void MainForm::AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System
 	this->nudSkill1Value->Enabled = !this->AutoSkill1CheckBox->Checked;
 	if(AutoSkill1CheckBox->Checked)
 	{
-		Skill1Macro = new Macro::SkillMacro((unsigned int) nudSkill1Value->Value * 1000, 500, AutoSkill1ComboBox->SelectedIndex);
+		if(Skill1Macro == nullptr) Skill1Macro = new Macro::SkillMacro((unsigned int) nudSkill1Value->Value * 1000, 500, AutoSkill1ComboBox->SelectedIndex);
 		macroMan.AddMacro(eAutoSkill1, Skill1Macro);
 	}
 	else macroMan.RemoveMacro(eAutoSkill1);
@@ -537,7 +538,7 @@ void MainForm::AutoSkill2CheckBox_CheckedChanged(System::Object^  sender, System
 	this->nudSkill2Value->Enabled = !this->AutoSkill2CheckBox->Checked;
 	if(AutoSkill2CheckBox->Checked)
 	{
-		Skill2Macro = new Macro::SkillMacro((unsigned int) nudSkill2Value->Value * 1000, 500, AutoSkill2ComboBox->SelectedIndex);
+		if(Skill2Macro == nullptr) Skill2Macro = new Macro::SkillMacro((unsigned int) nudSkill2Value->Value * 1000, 500, AutoSkill2ComboBox->SelectedIndex);
 		macroMan.AddMacro(eAutoSkill2, Skill2Macro);
 	}
 	else macroMan.RemoveMacro(eAutoSkill2);
@@ -548,7 +549,7 @@ void MainForm::AutoSkill3CheckBox_CheckedChanged(System::Object^  sender, System
 	this->nudSkill3Value->Enabled = !this->AutoSkill3CheckBox->Checked;
 	if(AutoSkill3CheckBox->Checked)
 	{
-		Skill3Macro = new Macro::SkillMacro((unsigned int) nudSkill3Value->Value * 1000, 500, AutoSkill3ComboBox->SelectedIndex);
+		if(Skill3Macro == nullptr) Skill3Macro = new Macro::SkillMacro((unsigned int) nudSkill3Value->Value * 1000, 500, AutoSkill3ComboBox->SelectedIndex);
 		macroMan.AddMacro(eAutoSkill3, Skill3Macro);
 	}
 	else macroMan.RemoveMacro(eAutoSkill3);
@@ -559,13 +560,11 @@ void MainForm::AutoSkill4CheckBox_CheckedChanged(System::Object^  sender, System
 	this->nudSkill4Value->Enabled = !this->AutoSkill4CheckBox->Checked;
 	if(AutoSkill4CheckBox->Checked)
 	{
-		Skill4Macro = new Macro::SkillMacro((unsigned int) nudSkill4Value->Value * 1000, 500, AutoSkill4ComboBox->SelectedIndex);
+		if(Skill4Macro == nullptr) Skill4Macro = new Macro::SkillMacro((unsigned int) nudSkill4Value->Value * 1000, 500, AutoSkill4ComboBox->SelectedIndex);
 		macroMan.AddMacro(eAutoSkill4, Skill4Macro);
 	}
 	else macroMan.RemoveMacro(eAutoSkill4);
 }
-
-//Below still needs to be ported to MacroManager
 void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	if(CCPeopleCheckBox->Checked)
@@ -586,6 +585,7 @@ void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::
 		nudCCPeople->Enabled = true;
 	}
 }
+
 void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	if(CCTimedCheckBox->Checked)
