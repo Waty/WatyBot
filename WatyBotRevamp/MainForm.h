@@ -2501,6 +2501,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// nudSpamAmount
 			// 
 			this->nudSpamAmount->Location = System::Drawing::Point(112, 48);
+			this->nudSpamAmount->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {2000000000, 0, 0, 0});
 			this->nudSpamAmount->Name = L"nudSpamAmount";
 			this->nudSpamAmount->Size = System::Drawing::Size(41, 20);
 			this->nudSpamAmount->TabIndex = 5;
@@ -2508,6 +2509,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// nudSpamDelay
 			// 
 			this->nudSpamDelay->Location = System::Drawing::Point(219, 50);
+			this->nudSpamDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {2000000000, 0, 0, 0});
 			this->nudSpamDelay->Name = L"nudSpamDelay";
 			this->nudSpamDelay->Size = System::Drawing::Size(41, 20);
 			this->nudSpamDelay->TabIndex = 10;
