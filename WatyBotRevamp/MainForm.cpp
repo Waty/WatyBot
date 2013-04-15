@@ -1016,6 +1016,11 @@ void MainForm::SaveSettings()
 	pt.add("CCPeopleHotKey", this->ddbHotKeyCCPeople->SelectedIndex);
 	pt.add("SendPacketHotKey", this->ddbHotKeySendPacket->SelectedIndex);
 
+	//PacketSender Tab
+	pt.add("PacketSenderIndex", this->PacketSelectBox->SelectedIndex);
+	pt.add("PacketSpamTimes", Convert::ToInt32(this->SpamPacketTimesTextBox->Text));
+	pt.add("PacketSpamDelay", Convert::ToInt32(this->SpamPacketsDelayTextBox->Text));
+
 	//Info Tab
 	pt.add("LoadSettingsDelay", Convert::ToInt32(this->nudLoadDelay->Value));
 	pt.add("PvPCCDelay", Convert::ToInt32(this->nudPvPCCDelay->Value));
@@ -1084,7 +1089,12 @@ void MainForm::LoadSettings()
 		//Info Tab
 		this->nudLoadDelay->Text = pt.get<int>("LoadSettingsDelay", 1000).ToString();
 		this->nudPvPCCDelay->Text = pt.get<int>("PvPCCDelay", 2000).ToString();
-		
+
+		//PacketSender Tab
+		this->PacketSelectBox->SelectedIndex =  pt.get<int>("PacketSenderIndex");
+		this->SpamPacketTimesTextBox->Text = pt.get<int>("PacketSpamTimes").ToString();
+		this->SpamPacketsDelayTextBox->Text = pt.get<int>("PacketSpamDelay").ToString();
+
 		//Hacks Tab
 		this->nudPVPDelay->Text = pt.get<int>("PvPDelay").ToString();
 		this->ddbPVPSkills->SelectedIndex = pt.get<int>("PvPSkill");
