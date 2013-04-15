@@ -1140,8 +1140,7 @@ void MainForm::HotKeys()
 	{
 		if(GetAsyncKeyState(KeyCodes[ddbHotKeySendPacket->SelectedIndex]))
 		{
-			if(PacketSelectBox->SelectedIndex < 0)	ShowError("Please select a packet before sending");
-			else if(!CPacket->Send());
+			CPacket->Send();
 			Sleep(250);
 		}
 	}
