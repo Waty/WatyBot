@@ -10,26 +10,6 @@ using namespace SpawnControl;
 
 std::vector<gcroot<SPControlLocation^>> vSPControl;
 
-SPControlLocation::SPControlLocation()
-{
-
-}
-
-SPControlLocation::~SPControlLocation()
-{
-
-}
-
-SPControl::SPControl()
-{
-	vSPControl.clear();
-}
-
-SPControl::~SPControl()
-{
-	
-}
-
 void SPControl::Load(System::String^ filename)
 {
 	using namespace System::IO;

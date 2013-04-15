@@ -5,19 +5,15 @@ namespace SpawnControl
 	public ref class SPControlLocation sealed
 	{
 	public:
-		SPControlLocation();
 		property System::String^ Name;
 		property int MapId;
 		property int X;
 		property int Y;
-	private:
-		~SPControlLocation();
 	};
 
 	public ref class SPControl sealed
 	{
 	public:
-		SPControl();
 		property System::String^ Title;
 		property System::String^ Description;
 
@@ -26,8 +22,5 @@ namespace SpawnControl
 		void EditLocation(int index, System::String^ name, int mapid, int x, int y);
 		void DeleteLocation(int i);
 		void Save(System::String^ filename);
-		
-	private:
-		~SPControl();
 	};
 }
