@@ -44,7 +44,7 @@ namespace Packets
 		bool Send(CPacketData^ packet);
 		//Will send the selected packet
 		bool Send();
-		void StartSpamming(int times, int delay, String^ packet);
+		void StartSpamming(int times, int delay);
 		void StopSpamming();
 		property bool IsSpamming
 		{

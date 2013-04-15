@@ -853,7 +853,7 @@ void MainForm::SpamsPacketButton_Click(System::Object^  sender, System::EventArg
 {
 	if(SpamPacketsDelayTextBox->Text != String::Empty && SpamPacketTimesTextBox->Text != String::Empty && PacketSelectBox->SelectedIndex >-1)
 	{
-		CPacket->StartSpamming(Convert::ToInt32(this->SpamPacketsDelayTextBox->Text), Convert::ToInt32(this->SpamPacketTimesTextBox->Text), CPacket->SelectedPacket->Data);
+		CPacket->StartSpamming(Convert::ToInt32(this->SpamPacketTimesTextBox->Text), Convert::ToInt32(this->SpamPacketsDelayTextBox->Text));
 	}
 }
 void MainForm::bStopSpamming_Click(System::Object^  sender, System::EventArgs^  e)

@@ -179,7 +179,7 @@ bool CPackets::Send(String^ packet, String^&strError)
 
 bool CPackets::Send(CPacketData^ packet)
 {
-	String^ strError;
+	String^ strError = String::Empty;
 	bool succes = Send(packet->Data, strError);
 	if(!succes)
 		ShowError(strError);	
@@ -196,20 +196,21 @@ bool CPackets::Send()
 	return Send(SelectedPacket);
 }
 
-void CPackets::StartSpamming(int times, int delay, String^ packet)
+void CPackets::StartSpamming(int times, int delay)
 {
-	String^ strError;
-	if(!Send(packet,strError))
+	if(!Send()) return;
+	if(delay == 0)
 	{
-		ShowInfo(strError);
-		return;
+		for(int i = 0; i < times; i++) Send();
 	}
-	m_spampacket = packet;
-	m_sendmax = times;
-	m_timessend = 1;
-	timer->Interval = delay;
-	timer->Tick += gcnew System::EventHandler(this, &CPackets::timer_tick);
-	timer->Enabled = true;
+	else
+	{
+		m_sendmax = times;
+		m_timessend = 1;
+		timer->Interval = delay;
+		timer->Tick += gcnew System::EventHandler(this, &CPackets::timer_tick);
+		timer->Enabled = true;
+	}
 }
 
 void CPackets::StopSpamming()
@@ -219,17 +220,13 @@ void CPackets::StopSpamming()
 
 void CPackets::timer_tick(System::Object^  sender, System::EventArgs^  e)
 {
-	if(m_timessend <= m_sendmax)
+	if(m_timessend >= m_sendmax)
 	{
 		timer->Enabled = false;
 		return;
 	}
 
-	String^ strError = String::Empty;
-	if(!Send(m_spampacket, strError))
-	{
-		ShowInfo(strError);
-		timer->Enabled = false;
-	}
+	if(!Send())	timer->Enabled = false;
+	
 	m_timessend++;
 }
