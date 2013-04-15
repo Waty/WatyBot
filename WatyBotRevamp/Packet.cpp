@@ -190,7 +190,7 @@ bool CPackets::Send()
 {
 	if(SelectedPacket == nullptr)
 	{
-		ShowError("Please select a packet before sending");
+		ShowError("Please select a packet");
 		return false;
 	}
 	return Send(SelectedPacket);
