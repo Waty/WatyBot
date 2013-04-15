@@ -48,6 +48,9 @@
     <ClCompile Include="SPControl.cpp">
       <Filter>Classes\SPControl</Filter>
     </ClCompile>
+    <ClCompile Include="ChangeChannel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainForm.h">
@@ -97,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="SPControl.h">
       <Filter>Classes\SPControl</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeChannel.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -125,6 +125,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ChangeChannel.cpp" />
     <ClCompile Include="MacroManager\MacroManager.cpp" />
     <ClCompile Include="MainDll.cpp" />
     <ClCompile Include="MainForm.cpp">
@@ -162,6 +163,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ChangeChannel.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="E:\Games\Europe MapleStory\WatyBotUpdater\Addys.h" />
     <ClInclude Include="HackAddys.h" />
