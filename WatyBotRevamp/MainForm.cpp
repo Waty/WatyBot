@@ -851,10 +851,7 @@ void MainForm::SavePacketEditButton_Click(System::Object^  sender, System::Event
 }
 void MainForm::SpamsPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	if(SpamPacketsDelayTextBox->Text != String::Empty && SpamPacketTimesTextBox->Text != String::Empty && PacketSelectBox->SelectedIndex >-1)
-	{
-		CPacket->StartSpamming(Convert::ToInt32(this->SpamPacketTimesTextBox->Text), Convert::ToInt32(this->SpamPacketsDelayTextBox->Text));
-	}
+	if(nudSpamDelay->Value != 0 && nudSpamAmount->Value != 0) CPacket->StartSpamming((int) nudSpamAmount->Value, (int) nudSpamDelay->Value);	
 }
 void MainForm::bStopSpamming_Click(System::Object^  sender, System::EventArgs^  e)
 {
@@ -1018,8 +1015,8 @@ void MainForm::SaveSettings()
 
 	//PacketSender Tab
 	pt.add("PacketSenderIndex", this->PacketSelectBox->SelectedIndex);
-	pt.add("PacketSpamTimes", Convert::ToInt32(this->SpamPacketTimesTextBox->Text));
-	pt.add("PacketSpamDelay", Convert::ToInt32(this->SpamPacketsDelayTextBox->Text));
+	pt.add("PacketSpamTimes", (int) nudSpamAmount->Value);
+	pt.add("PacketSpamDelay", (int) nudSpamDelay->Value);
 
 	//Info Tab
 	pt.add("LoadSettingsDelay", Convert::ToInt32(this->nudLoadDelay->Value));
@@ -1092,8 +1089,8 @@ void MainForm::LoadSettings()
 
 		//PacketSender Tab
 		this->PacketSelectBox->SelectedIndex =  pt.get<int>("PacketSenderIndex");
-		this->SpamPacketTimesTextBox->Text = pt.get<int>("PacketSpamTimes").ToString();
-		this->SpamPacketsDelayTextBox->Text = pt.get<int>("PacketSpamDelay").ToString();
+		this->nudSpamAmount->Text = pt.get<int>("PacketSpamTimes").ToString();
+		this->nudSpamDelay->Text = pt.get<int>("PacketSpamDelay").ToString();
 
 		//Hacks Tab
 		this->nudPVPDelay->Text = pt.get<int>("PvPDelay").ToString();

@@ -163,11 +163,11 @@ private: System::Windows::Forms::TextBox^  AddPacketNameTextBox;
 private: System::Windows::Forms::Label^  AddPacketPacketLabel;
 private: System::Windows::Forms::Label^  AddPacketNameLabel;
 private: System::Windows::Forms::Label^  SpamPacketTimesLabel;
-private: System::Windows::Forms::TextBox^  SpamPacketTimesTextBox;
+
 private: System::Windows::Forms::Label^  SpamPacketsDelayLabel;
 
 		 
-private: System::Windows::Forms::TextBox^  SpamPacketsDelayTextBox;
+
 private: System::Windows::Forms::Button^  bStartSpamming;
 
 
@@ -350,6 +350,8 @@ private: System::Windows::Forms::NumericUpDown^  nudIceGuard;
 
 private: System::Windows::Forms::CheckBox^  cbIceGuard;
 private: System::Windows::Forms::CheckBox^  cbCCHook;
+private: System::Windows::Forms::NumericUpDown^  nudSpamDelay;
+private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 
 
 
@@ -500,9 +502,7 @@ private: System::Windows::Forms::CheckBox^  cbCCHook;
 			this->SendPacketGroupBox = (gcnew System::Windows::Forms::GroupBox());
 			this->bStartSpamming = (gcnew System::Windows::Forms::Button());
 			this->SpamPacketsDelayLabel = (gcnew System::Windows::Forms::Label());
-			this->SpamPacketsDelayTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->SpamPacketTimesLabel = (gcnew System::Windows::Forms::Label());
-			this->SpamPacketTimesTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->PacketSelectBox = (gcnew System::Windows::Forms::ComboBox());
 			this->SendPacketButton = (gcnew System::Windows::Forms::Button());
 			this->bStopSpamming = (gcnew System::Windows::Forms::Button());
@@ -559,6 +559,8 @@ private: System::Windows::Forms::CheckBox^  cbCCHook;
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->InfoToolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->bwNextChannel = (gcnew System::ComponentModel::BackgroundWorker());
+			this->nudSpamAmount = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudSpamDelay = (gcnew System::Windows::Forms::NumericUpDown());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -600,6 +602,8 @@ private: System::Windows::Forms::CheckBox^  cbCCHook;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPvPCCDelay))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->BeginInit();
 			this->gbPointers->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamAmount))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamDelay))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -1917,11 +1921,11 @@ private: System::Windows::Forms::CheckBox^  cbCCHook;
 			// 
 			// SendPacketGroupBox
 			// 
+			this->SendPacketGroupBox->Controls->Add(this->nudSpamDelay);
+			this->SendPacketGroupBox->Controls->Add(this->nudSpamAmount);
 			this->SendPacketGroupBox->Controls->Add(this->bStartSpamming);
 			this->SendPacketGroupBox->Controls->Add(this->SpamPacketsDelayLabel);
-			this->SendPacketGroupBox->Controls->Add(this->SpamPacketsDelayTextBox);
 			this->SendPacketGroupBox->Controls->Add(this->SpamPacketTimesLabel);
-			this->SendPacketGroupBox->Controls->Add(this->SpamPacketTimesTextBox);
 			this->SendPacketGroupBox->Controls->Add(this->PacketSelectBox);
 			this->SendPacketGroupBox->Controls->Add(this->SendPacketButton);
 			this->SendPacketGroupBox->Controls->Add(this->bStopSpamming);
@@ -1951,13 +1955,6 @@ private: System::Windows::Forms::CheckBox^  cbCCHook;
 			this->SpamPacketsDelayLabel->TabIndex = 7;
 			this->SpamPacketsDelayLabel->Text = L"ms delay";
 			// 
-			// SpamPacketsDelayTextBox
-			// 
-			this->SpamPacketsDelayTextBox->Location = System::Drawing::Point(224, 48);
-			this->SpamPacketsDelayTextBox->Name = L"SpamPacketsDelayTextBox";
-			this->SpamPacketsDelayTextBox->Size = System::Drawing::Size(30, 20);
-			this->SpamPacketsDelayTextBox->TabIndex = 6;
-			// 
 			// SpamPacketTimesLabel
 			// 
 			this->SpamPacketTimesLabel->AutoSize = true;
@@ -1966,13 +1963,6 @@ private: System::Windows::Forms::CheckBox^  cbCCHook;
 			this->SpamPacketTimesLabel->Size = System::Drawing::Size(60, 13);
 			this->SpamPacketTimesLabel->TabIndex = 5;
 			this->SpamPacketTimesLabel->Text = L"Times, with";
-			// 
-			// SpamPacketTimesTextBox
-			// 
-			this->SpamPacketTimesTextBox->Location = System::Drawing::Point(113, 48);
-			this->SpamPacketTimesTextBox->Name = L"SpamPacketTimesTextBox";
-			this->SpamPacketTimesTextBox->Size = System::Drawing::Size(41, 20);
-			this->SpamPacketTimesTextBox->TabIndex = 4;
 			// 
 			// PacketSelectBox
 			// 
@@ -2508,6 +2498,20 @@ private: System::Windows::Forms::CheckBox^  cbCCHook;
 			// 
 			this->bwNextChannel->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::bwNextChannel_DoWork);
 			// 
+			// nudSpamAmount
+			// 
+			this->nudSpamAmount->Location = System::Drawing::Point(112, 48);
+			this->nudSpamAmount->Name = L"nudSpamAmount";
+			this->nudSpamAmount->Size = System::Drawing::Size(41, 20);
+			this->nudSpamAmount->TabIndex = 5;
+			// 
+			// nudSpamDelay
+			// 
+			this->nudSpamDelay->Location = System::Drawing::Point(219, 50);
+			this->nudSpamDelay->Name = L"nudSpamDelay";
+			this->nudSpamDelay->Size = System::Drawing::Size(41, 20);
+			this->nudSpamDelay->TabIndex = 10;
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2575,6 +2579,8 @@ private: System::Windows::Forms::CheckBox^  cbCCHook;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->EndInit();
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamAmount))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamDelay))->EndInit();
 			this->ResumeLayout(false);
 
 		}
