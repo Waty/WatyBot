@@ -26,6 +26,7 @@ namespace Packets
 	public ref class CPacketData sealed
 	{
 	public:
+		CPacketData(String^ Name, String^ Data);
 		property String^ Name;
 		property String^ Data;
 	};
@@ -40,10 +41,24 @@ namespace Packets
 		void Save(String^ filename);
 		void Load(String^ filename);
 		bool Send(String^ packet, String^&strError);
-		property int SpammedPackets;
-
+		bool Send(CPacketData^ packet);
+		//Will send the selected packet
+		bool Send();
+		void StartSpamming(int times, int delay, String^ packet);
+		void StopSpamming();
+		property bool IsSpamming
+		{
+			bool get(){return timer->Enabled;}
+		}
+		property CPacketData^ SelectedPacket;
+		
 	private:
 		bool isGoodPacket(String^ strPacket, String^&strError);
+		System::Windows::Forms::Timer^ timer;
+		void timer_tick(System::Object^  sender, System::EventArgs^  e);
+		property String^ m_spampacket;
+		property int m_timessend;
+		property int m_sendmax;
 		~CPackets(){}
 	};
 }

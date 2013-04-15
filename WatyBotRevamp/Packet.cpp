@@ -4,23 +4,30 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <msclr/marshal_cppstd.h>
-#include <fstream> 
+#include <fstream>
 
 using namespace Packets;
 using namespace msclr::interop;
+using namespace System::Windows::Forms;
+
+#define ShowInfo(Message)		MessageBox::Show(Message, "Information", MessageBoxButtons::OK, MessageBoxIcon::Information)
+#define ShowError(Message)		MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
 
 DWORD dwMSSendMethod = SendAddy;// + 5;
 DWORD dwMSSendObject = *(PDWORD)(SendClassAddy+2);
 DWORD dwMSSendRetVal = SendAddy - 13;
 
 vector<gcroot<CPacketData^>> vPacket;
-int SpammedPackets;
+
+CPacketData::CPacketData(String^ Name, String^ Data)
+{
+	this->Name = Name;
+	this->Data = Data;
+}
 
 void CPackets::Add(String^ name, String^ data)
 {
-	CPacketData^ packet = gcnew CPacketData;
-	packet->Name = name;
-	packet->Data = data;
+	CPacketData^ packet = gcnew CPacketData(name, data);
 	vPacket.push_back(packet);
 }
 
@@ -62,9 +69,7 @@ void CPackets::Load(String^ filename)
 		{
 			if(v.first == "packet")
 			{
-				CPacketData^ p = gcnew CPacketData;
-				p->Name = marshal_as<String^>(v.second.get<string>("name"));
-				p->Data = marshal_as<String^>(v.second.get<string>("data"));
+				CPacketData^ p = gcnew CPacketData(marshal_as<String^>(v.second.get<string>("name")), marshal_as<String^>(v.second.get<string>("data")));
 				vPacket.push_back(p);
 			}
 		}
@@ -165,4 +170,62 @@ bool CPackets::Send(String^ packet, String^&strError)
 	catch ( Exception^ ){} 
 	finally {delete [] lpBytes;}
     return true;
+}
+
+bool CPackets::Send(CPacketData^ packet)
+{
+	String^ strError;
+	bool succes = Send(packet->Data, strError);
+	if(!succes)
+		ShowError(strError);	
+	return succes;
+}
+
+bool CPackets::Send()
+{
+	if(SelectedPacket == nullptr)
+	{
+		ShowError("Please select a packet before sending");
+		return false;
+	}
+	return Send(SelectedPacket);
+}
+
+void CPackets::StartSpamming(int times, int delay, String^ packet)
+{
+	String^ strError;
+	if(!Send(packet,strError))
+	{
+		ShowInfo(strError);
+		return;
+	}
+	m_spampacket = packet;
+	m_sendmax = times;
+	m_timessend = 1;
+	timer = gcnew Windows::Forms::Timer;
+	timer->Interval = delay;
+	timer->Tick += gcnew System::EventHandler(this, &CPackets::timer_tick);
+	timer->Enabled = true;
+}
+
+void CPackets::StopSpamming()
+{
+	timer->Enabled = false;
+}
+
+void CPackets::timer_tick(System::Object^  sender, System::EventArgs^  e)
+{
+	if(m_timessend <= m_sendmax)
+	{
+		timer->Enabled = false;
+		return;
+	}
+
+	String^ strError = String::Empty;
+	if(!Send(m_spampacket, strError))
+	{
+		ShowInfo(strError);
+		timer->Enabled = false;
+	}
+	m_timessend++;
 }

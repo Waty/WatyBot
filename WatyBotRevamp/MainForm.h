@@ -184,7 +184,7 @@ private: System::Windows::Forms::TextBox^  EditPacketPacketTextBox;
 private: System::Windows::Forms::TextBox^  EditPacketNameTextBox;
 private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
 
-private: System::Windows::Forms::Timer^  SpamPacketsTimer;
+
 private: System::Windows::Forms::TabPage^  SPControlTabPage;
 private: System::Windows::Forms::CheckBox^  cbSPControl;
 
@@ -387,6 +387,7 @@ private: System::Windows::Forms::CheckBox^  cbCCHook;
 			this->MainTabControl = (gcnew System::Windows::Forms::TabControl());
 			this->AutoBotTab = (gcnew System::Windows::Forms::TabPage());
 			this->AutoBotGroupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->cbCCHook = (gcnew System::Windows::Forms::CheckBox());
 			this->nudCCAttacks = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudCCTimed = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudCCPeople = (gcnew System::Windows::Forms::NumericUpDown());
@@ -555,11 +556,9 @@ private: System::Windows::Forms::CheckBox^  cbCCHook;
 			this->ItemCountLabel = (gcnew System::Windows::Forms::Label());
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->SpamPacketsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->InfoToolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->bwNextChannel = (gcnew System::ComponentModel::BackgroundWorker());
-			this->cbCCHook = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -688,6 +687,17 @@ private: System::Windows::Forms::CheckBox^  cbCCHook;
 			this->AutoBotGroupBox->TabIndex = 36;
 			this->AutoBotGroupBox->TabStop = false;
 			this->AutoBotGroupBox->Text = L"Autobot";
+			// 
+			// cbCCHook
+			// 
+			this->cbCCHook->AutoSize = true;
+			this->cbCCHook->Location = System::Drawing::Point(239, 226);
+			this->cbCCHook->Name = L"cbCCHook";
+			this->cbCCHook->Size = System::Drawing::Size(52, 17);
+			this->cbCCHook->TabIndex = 81;
+			this->cbCCHook->Text = L"Hook";
+			this->cbCCHook->UseVisualStyleBackColor = true;
+			this->cbCCHook->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbCCHook_CheckedChanged);
 			// 
 			// nudCCAttacks
 			// 
@@ -1972,6 +1982,7 @@ private: System::Windows::Forms::CheckBox^  cbCCHook;
 			this->PacketSelectBox->Name = L"PacketSelectBox";
 			this->PacketSelectBox->Size = System::Drawing::Size(197, 21);
 			this->PacketSelectBox->TabIndex = 2;
+			this->PacketSelectBox->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::PacketSelectBox_SelectedIndexChanged);
 			// 
 			// SendPacketButton
 			// 
@@ -2489,10 +2500,6 @@ private: System::Windows::Forms::CheckBox^  cbCCHook;
 			this->StatsTimer->Enabled = true;
 			this->StatsTimer->Tick += gcnew System::EventHandler(this, &MainForm::StatsTimer_Tick);
 			// 
-			// SpamPacketsTimer
-			// 
-			this->SpamPacketsTimer->Tick += gcnew System::EventHandler(this, &MainForm::SpamPacketsTimer_Tick);
-			// 
 			// CCTimedTimer
 			// 
 			this->CCTimedTimer->Tick += gcnew System::EventHandler(this, &MainForm::CCTimedTimer_Tick);
@@ -2500,17 +2507,6 @@ private: System::Windows::Forms::CheckBox^  cbCCHook;
 			// bwNextChannel
 			// 
 			this->bwNextChannel->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::bwNextChannel_DoWork);
-			// 
-			// cbCCHook
-			// 
-			this->cbCCHook->AutoSize = true;
-			this->cbCCHook->Location = System::Drawing::Point(239, 226);
-			this->cbCCHook->Name = L"cbCCHook";
-			this->cbCCHook->Size = System::Drawing::Size(52, 17);
-			this->cbCCHook->TabIndex = 81;
-			this->cbCCHook->Text = L"Hook";
-			this->cbCCHook->UseVisualStyleBackColor = true;
-			this->cbCCHook->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbCCHook_CheckedChanged);
 			// 
 			// MainForm
 			// 
@@ -2619,7 +2615,6 @@ private: System::Void DeletePacketButton_Click(System::Object^  sender, System::
 private: System::Void SpamsPacketButton_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void SelectPacketForEditingComboBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e);
-private: System::Void SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^  e);
 private: System::Void CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void SPControlDeleteItem_Click(System::Object^  sender, System::EventArgs^  e);
@@ -2668,6 +2663,7 @@ private: System::Void ddbPVPSkills_SelectedIndexChanged(System::Object^  sender,
 private: System::Void cbMouseFly_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbIceGuard_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbCCHook_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void PacketSelectBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion

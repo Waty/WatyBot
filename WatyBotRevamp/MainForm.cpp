@@ -688,6 +688,10 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	MainForm::AutoCC();
 	MainForm::RedrawStatBars();
 	MainForm::HotKeys();
+
+	//Set the correct state of the PacketSpammer Buttons
+	bStopSpamming->Visible = CPacket->IsSpamming;
+	bStartSpamming->Visible = !CPacket->IsSpamming;
 }
 void MainForm::AutoPot()
 {
@@ -808,15 +812,12 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 //Controls on the PacketSender tab
 void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	String^ strError = String::Empty;
-	if(PacketSelectBox->SelectedIndex < 0)	ShowError("Please select a packet before sending");
-	else if(!CPacket->Send(vPacket.at(PacketSelectBox->SelectedIndex)->Data,strError)) ShowError(strError);
+	CPacket->Send();
 }
 void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	CPacket->Add(this->AddPacketNameTextBox->Text, this->AddPacketPacketTextBox->Text);
 	ShowInfo("Packet was added!");
-
 	CPacket->Save(PacketFileName);
 	RefreshComboBoxes();
 }
@@ -837,8 +838,9 @@ void MainForm::SelectPacketForEditingComboBox_SelectedIndexChanged(System::Objec
 {
 	if(SelectPacketForEditingComboBox->SelectedIndex >= 0)
 	{
-		this->EditPacketNameTextBox->Text = vPacket.at(SelectPacketForEditingComboBox->SelectedIndex)->Name;
-		this->EditPacketPacketTextBox->Text = vPacket.at(SelectPacketForEditingComboBox->SelectedIndex)->Data;
+		Packets::CPacketData^ p = vPacket.at(SelectPacketForEditingComboBox->SelectedIndex);
+		this->EditPacketNameTextBox->Text = p->Name;
+		this->EditPacketPacketTextBox->Text = p->Data;
 	}
 }
 void MainForm::SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e)
@@ -851,41 +853,16 @@ void MainForm::SpamsPacketButton_Click(System::Object^  sender, System::EventArg
 {
 	if(SpamPacketsDelayTextBox->Text != String::Empty && SpamPacketTimesTextBox->Text != String::Empty && PacketSelectBox->SelectedIndex >-1)
 	{
-		this->SpamPacketsTimer->Interval = Convert::ToInt32(this->SpamPacketsDelayTextBox->Text);
-		CPacket->SpammedPackets = 0;
-		this->SpamPacketsTimer->Enabled = true;
-		this->bStopSpamming->Visible = true;
-		this->bStartSpamming->Visible = false;
+		CPacket->StartSpamming(Convert::ToInt32(this->SpamPacketsDelayTextBox->Text), Convert::ToInt32(this->SpamPacketTimesTextBox->Text), CPacket->SelectedPacket->Data);
 	}
 }
 void MainForm::bStopSpamming_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	SpamPacketsTimer->Enabled = false;
-	this->bStopSpamming->Visible = false;
-	this->bStartSpamming->Visible = true;
+	CPacket->StopSpamming();
 }
-void MainForm::SpamPacketsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
-{	
-	String^ strError = String::Empty;
-	if(PacketSelectBox->SelectedIndex < 0)
-	{
-		this->SpamPacketsTimer->Enabled = false;
-		ShowWarning("Please select a packet before sending");
-	}
-	else if(!CPacket->Send(vPacket.at(PacketSelectBox->SelectedIndex)->Data,strError))
-	{
-		this->SpamPacketsTimer->Enabled = false;
-		ShowError(strError);
-	}
-
-	CPacket->SpammedPackets++;
-	if(CPacket->SpammedPackets >= Convert::ToInt32(this->SpamPacketTimesTextBox->Text))
-	{	
-		SpamPacketsTimer->Enabled = false;
-		this->bStopSpamming->Visible = false;
-		this->bStartSpamming->Visible = true;
-		ShowInfo("Finished Spamming packets!");	
-	}
+void MainForm::PacketSelectBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	CPacket->SelectedPacket = vPacket.at(PacketSelectBox->SelectedIndex);
 }
 void MainForm::RefreshComboBoxes()
 {	
@@ -1163,9 +1140,8 @@ void MainForm::HotKeys()
 	{
 		if(GetAsyncKeyState(KeyCodes[ddbHotKeySendPacket->SelectedIndex]))
 		{
-			String^ strError = String::Empty;
 			if(PacketSelectBox->SelectedIndex < 0)	ShowError("Please select a packet before sending");
-			else if(!CPacket->Send(vPacket.at(PacketSelectBox->SelectedIndex)->Data,strError)) ShowError(strError);
+			else if(!CPacket->Send());
 			Sleep(250);
 		}
 	}
