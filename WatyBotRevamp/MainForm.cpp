@@ -19,6 +19,7 @@
 using namespace WatyBotRevamp;
 using namespace msclr::interop;
 using namespace System::IO;
+using namespace std;
 
 #define WatyBotWorkingDirectory "WatyBot\\"
 #define SettingsFileName (WatyBotWorkingDirectory + "settings.ini")
@@ -154,7 +155,7 @@ bool TryCC()
 	Sleep(500);
 	try 
 	{
-		if(WallBasePtr && getBreathValue() == 0) CField_SendTransferChannelRequest(channel);
+		if(WallBasePtr && getBreathValue() == 0)/* CField_SendTransferChannelRequest(channel)*/;
 		else return false;
 	}
 	catch (...){return false;}
@@ -710,47 +711,12 @@ void MainForm::AutoPot()
 		}
 	}
 }
-enum class CCReturns {Succes = 0, Breath = 1, Death = 2};
-CCReturns CCReturn;
-#define CCSuccesAddy 0x005688ED
-#define CCBreathAddy 0x00568955
-#define CCDeathAddy 0x005689CF
-
-VOID WINAPI SetCCSucces(){ CCReturn = CCReturns::Succes; ShowInfo("Succes!"); };
-CodeCave(CCHookSucces)
-{
-	call SetCCSucces
-	add esp,0x20
-	ret 0004
-}
-EndCodeCave
-CMemory cmCCHookSucces(CCSuccesAddy - 3, CaveCCHookSucces, 1, true);
-
-VOID WINAPI SetCCBreath(){ CCReturn = CCReturns::Breath; ShowInfo("No Breath!"); };
-CodeCave(CCHookBreath)
-{
-	call SetCCBreath
-	add esp,0x20
-	ret 0004
-}
-EndCodeCave
-CMemory cmCCHookBreath(CCBreathAddy - 3, CaveCCHookBreath, 1, true);
-
-VOID WINAPI SetCCDeath(){ CCReturn = CCReturns::Death; ShowInfo("You're dead...."); };
-CodeCave(CCHookDeath)
-{
-	call SetCCDeath
-	add esp,0x20
-	ret 0004
-}
-EndCodeCave
-CMemory cmCCHookDeath(CCDeathAddy - 3, CaveCCHookDeath, 1, true);
 
 void MainForm::cbCCHook_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	cmCCHookSucces.Enable(this->cbCCHook->Checked);
-	cmCCHookBreath.Enable(this->cbCCHook->Checked);
-	cmCCHookDeath.Enable(this->cbCCHook->Checked);
+	//cmCCHookSucces.Enable(this->cbCCHook->Checked);
+	//cmCCHookBreath.Enable(this->cbCCHook->Checked);
+	//cmCCHookDeath.Enable(this->cbCCHook->Checked);
 }
 
 void MainForm::AutoCC()
