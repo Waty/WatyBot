@@ -91,13 +91,6 @@ static int KeyCodes[] = {VK_SHIFT, VK_SPACE, VK_CONTROL, VK_MENU, VK_INSERT, VK_
 //int PVPSkills[] = {97, 99, 100, 103, 61001005, 4001334, 4201005, 4211011, 4221001, 1001004, 1221009, 1311005, 2201004, 2211003};
 static int PVPSkills[] = {97, 99, 100, 103};
 
-namespace Packets
-{
-	std::string EnterCashShop = "40 00 ** ** ** 00 00";
-	std::string LeaveCashShop = "3E 00";
-	std::string ChangeCharacter = "2C 01 01 00 **";
-}
-
 namespace AutoBotVars
 {
 	int iSawsil;

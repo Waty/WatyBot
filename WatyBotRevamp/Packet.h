@@ -5,6 +5,10 @@
 using namespace std;
 using namespace System;
 
+#define EnterCashShop "40 00 ** ** ** 00 00"
+#define	LeaveCashShop "3E 00"
+#define ChangeCharacter "2C 01 01 00 **"
+
 /* MapleStory data packet */
 //21st Century
 struct COutPacket

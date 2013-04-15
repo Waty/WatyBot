@@ -137,7 +137,7 @@ void MainForm::CCSwitch(int type)
 		if(InGame())
 		{
 			this->CCPeopleCheckBox->Checked = false;
-			CPacket->Send(marshal_as<String^>(Packets::ChangeCharacter), strError);
+			CPacket->Send(ChangeCharacter, strError);
 			ShowInfo("WatyBot DC'd you");
 			Sleep(500);
 			break;
@@ -198,10 +198,10 @@ void MainForm::CashShop()
 	while(getBreathValue() > 0)	Sleep(250);
 	Sleep(500);
 	String^ strError = String::Empty;
-	if(CPacket->Send(marshal_as<String^>(Packets::EnterCashShop), strError))
+	if(CPacket->Send(EnterCashShop, strError))
 	{
 		Sleep(2000);
-		if(!CPacket->Send(marshal_as<String^>(Packets::LeaveCashShop), strError))
+		if(!CPacket->Send(LeaveCashShop, strError))
 			ShowError("Failed to leave the CashShop: " + strError);
 	}
 	else ShowError("Failed Entering the CashShop: " + strError);
