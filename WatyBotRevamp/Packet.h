@@ -1,32 +1,29 @@
 #pragma once
 #include <string>
+#include <Windows.h>
 #include <vector>
-
-using namespace std;
-using namespace System;
 
 #define EnterCashShop "40 00 ** ** ** 00 00"
 #define	LeaveCashShop "3E 00"
 #define ChangeCharacter "2C 01 01 00 **"
 
-/* MapleStory data packet */
-//21st Century
 struct COutPacket
 {
-  BOOL fLoopback;
-  union
-  {
-      LPBYTE lpbData;
-      LPVOID lpvData;
-      LPWORD lpwHeader;
-  };
-  DWORD dwcbData;
-  UINT uOffset;
-  BOOL fEncryptedByShanda;
+	BOOL fLoopback;
+	union
+	{
+		LPBYTE lpbData;
+		LPVOID lpvData;
+		LPWORD lpwHeader;
+	};
+	DWORD dwcbData;
+	UINT uOffset;
+	BOOL fEncryptedByShanda;
 };
 
 namespace Packets
 {
+	using namespace System;
 	public ref class CPacketData sealed
 	{
 	public:

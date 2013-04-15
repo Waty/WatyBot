@@ -9,6 +9,8 @@
 using namespace Packets;
 using namespace msclr::interop;
 using namespace System::Windows::Forms;
+using namespace System;
+using namespace std;
 
 #define ShowInfo(Message)		MessageBox::Show(Message, "Information", MessageBoxButtons::OK, MessageBoxIcon::Information)
 #define ShowError(Message)		MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
