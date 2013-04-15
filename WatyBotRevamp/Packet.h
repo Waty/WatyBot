@@ -34,7 +34,7 @@ namespace Packets
 	public ref class CPackets sealed
 	{
 	public:
-		CPackets(){}
+		CPackets();
 		void Add(String^ name, String^ data);
 		void Delete(int index);
 		void Edit(int i, String^ name, String^ data);

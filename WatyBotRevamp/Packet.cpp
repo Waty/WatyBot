@@ -25,6 +25,11 @@ CPacketData::CPacketData(String^ Name, String^ Data)
 	this->Data = Data;
 }
 
+CPackets::CPackets()
+{
+	timer = gcnew Windows::Forms::Timer;
+}
+
 void CPackets::Add(String^ name, String^ data)
 {
 	CPacketData^ packet = gcnew CPacketData(name, data);
@@ -202,7 +207,6 @@ void CPackets::StartSpamming(int times, int delay, String^ packet)
 	m_spampacket = packet;
 	m_sendmax = times;
 	m_timessend = 1;
-	timer = gcnew Windows::Forms::Timer;
 	timer->Interval = delay;
 	timer->Tick += gcnew System::EventHandler(this, &CPackets::timer_tick);
 	timer->Enabled = true;
