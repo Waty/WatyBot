@@ -311,56 +311,13 @@ void MainForm::cbNoCCBlueBoxes_CheckedChanged(System::Object^  sender, System::E
 //AutoHP/MP/Attack/Loot/Skill checkboxes/events
 void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	if(HPCheckBox->Checked)
-	{
-		try
-		{
-			iHPKey = KeyCodes[HPComboBox->SelectedIndex];
-			HPlParam = (MapVirtualKey(iHPKey, 0) << 16) + 1;
-			iHPValue = Convert::ToInt32(nudHPValue->Value);
-			nudHPValue->Enabled = false;
-			HPComboBox->Enabled = false;
-		}
-		catch(Exception^ exception)
-		{
-			ShowError(exception->ToString());
-			HPCheckBox->Checked = false;
-			nudHPValue->Enabled = true;
-			HPComboBox->Enabled = true;
-		}
-	}
-	else
-	{
-		nudHPValue->Enabled = true;
-		HPComboBox->Enabled = true;
-	}
-
+	nudHPValue->Enabled = !HPCheckBox->Checked;
+	HPComboBox->Enabled = !HPCheckBox->Checked;
 }
 void MainForm::MPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	if(MPCheckBox->Checked)
-	{
-		try
-		{
-			iMPKey = KeyCodes[MPComboBox->SelectedIndex];
-			MPlParam = (MapVirtualKey(iMPKey, 0) << 16) + 1;
-			iMPValue = Convert::ToInt32(nudMPValue->Value);
-			nudMPValue->Enabled = false;
-			MPComboBox->Enabled = false;
-		}
-		catch(Exception^ exception)
-		{
-			ShowError(exception->ToString());
-			MPCheckBox->Checked = false;
-			nudMPValue->Enabled = true;
-			MPComboBox->Enabled = true;
-		}
-	}
-	else
-	{
-		nudMPValue->Enabled = true;
-		MPComboBox->Enabled = true;
-	}
+	nudMPValue->Enabled = !MPCheckBox->Checked;
+	MPComboBox->Enabled = !MPCheckBox->Checked;
 }
 
 Macro::MacroManager macroMan;
@@ -580,16 +537,18 @@ void MainForm::AutoPot()
 {
 	if(HPCheckBox->Checked)
 	{
-		if(getCharHP() <= iHPValue)
+		if(getCharHP() <= (int) nudHPValue->Value)
 		{
-			PostMessage(MapleStoryHWND, WM_KEYDOWN, iHPKey, HPlParam);
+			int HPKey = KeyCodes[HPComboBox->SelectedIndex];
+			PostMessage(MapleStoryHWND, WM_KEYDOWN, HPKey, (MapVirtualKey(HPKey, 0) << 16) + 1);
 		}
 	}
 	if(MPCheckBox->Checked)
 	{
-		if(getCharMP() <= iMPValue)
+		if(getCharMP() <= (int) nudMPValue->Value)
 		{
-			PostMessage(MapleStoryHWND, WM_KEYDOWN, iMPKey, MPlParam);
+			int MPKey = KeyCodes[HPComboBox->SelectedIndex];
+			PostMessage(MapleStoryHWND, WM_KEYDOWN, MPKey, (MapVirtualKey(MPKey, 0) << 16) + 1);
 		}
 	}
 }
