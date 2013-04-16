@@ -466,23 +466,7 @@ void MainForm::AutoSkill4CheckBox_CheckedChanged(System::Object^  sender, System
 }
 void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	if(CCPeopleCheckBox->Checked)
-	{
-		try
-		{
-			iCCPeople = Convert::ToInt32(nudCCPeople->Value);
-			nudCCPeople->Enabled = false;
-		}
-		catch(...)
-		{
-			CCPeopleCheckBox->Checked = false;
-			CCPeopleCheckBox->Enabled = true;
-		}
-	}
-	else
-	{
-		nudCCPeople->Enabled = true;
-	}
+	nudCCPeople->Enabled = !CCPeopleCheckBox->Checked;
 }
 
 void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -619,7 +603,7 @@ void MainForm::cbCCHook_CheckedChanged(System::Object^  sender, System::EventArg
 
 void MainForm::AutoCC()
 {
-	if(CCPeopleCheckBox->Checked && (getPeopleCount() >= iCCPeople))
+	if(CCPeopleCheckBox->Checked && (getPeopleCount() >= (int) nudCCPeople->Value))
 	{
 		MainForm::CCSwitch(PeopleComboBox->SelectedIndex);
 	}
