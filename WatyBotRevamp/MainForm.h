@@ -350,7 +350,7 @@ private: System::Windows::Forms::CheckBox^  cbMouseFly;
 private: System::Windows::Forms::NumericUpDown^  nudIceGuard;
 
 private: System::Windows::Forms::CheckBox^  cbIceGuard;
-private: System::Windows::Forms::CheckBox^  cbCCHook;
+
 private: System::Windows::Forms::NumericUpDown^  nudSpamDelay;
 private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 
@@ -390,7 +390,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->MainTabControl = (gcnew System::Windows::Forms::TabControl());
 			this->AutoBotTab = (gcnew System::Windows::Forms::TabPage());
 			this->AutoBotGroupBox = (gcnew System::Windows::Forms::GroupBox());
-			this->cbCCHook = (gcnew System::Windows::Forms::CheckBox());
 			this->nudCCAttacks = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudCCTimed = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudCCPeople = (gcnew System::Windows::Forms::NumericUpDown());
@@ -641,7 +640,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// 
 			// AutoBotGroupBox
 			// 
-			this->AutoBotGroupBox->Controls->Add(this->cbCCHook);
 			this->AutoBotGroupBox->Controls->Add(this->nudCCAttacks);
 			this->AutoBotGroupBox->Controls->Add(this->nudCCTimed);
 			this->AutoBotGroupBox->Controls->Add(this->nudCCPeople);
@@ -690,17 +688,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->AutoBotGroupBox->TabIndex = 36;
 			this->AutoBotGroupBox->TabStop = false;
 			this->AutoBotGroupBox->Text = L"Autobot";
-			// 
-			// cbCCHook
-			// 
-			this->cbCCHook->AutoSize = true;
-			this->cbCCHook->Location = System::Drawing::Point(239, 226);
-			this->cbCCHook->Name = L"cbCCHook";
-			this->cbCCHook->Size = System::Drawing::Size(52, 17);
-			this->cbCCHook->TabIndex = 81;
-			this->cbCCHook->Text = L"Hook";
-			this->cbCCHook->UseVisualStyleBackColor = true;
-			this->cbCCHook->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbCCHook_CheckedChanged);
 			// 
 			// nudCCAttacks
 			// 
@@ -2658,7 +2645,6 @@ private: System::Void nudPVPDelay_ValueChanged(System::Object^  sender, System::
 private: System::Void ddbPVPSkills_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbMouseFly_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbIceGuard_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbCCHook_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void PacketSelectBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
 };
 }

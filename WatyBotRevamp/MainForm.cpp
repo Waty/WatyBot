@@ -279,6 +279,7 @@ void MainForm::cbMouseFly_CheckedChanged(System::Object^  sender, System::EventA
 }
 void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
+	CC->UsingPvP = cbPVP->Checked;
 	if(ddbPVPSkills->SelectedIndex < 0)
 	{
 		if(cbPVP->Checked) ShowError("Please Select a Skill");
@@ -537,13 +538,6 @@ void MainForm::AutoPot()
 		}
 	}
 }
-void MainForm::cbCCHook_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	//cmCCHookSucces.Enable(this->cbCCHook->Checked);
-	//cmCCHookBreath.Enable(this->cbCCHook->Checked);
-	//cmCCHookDeath.Enable(this->cbCCHook->Checked);
-}
-
 void MainForm::AutoCC()
 {
 	if(CCPeopleCheckBox->Checked && !CC->Busy && (getPeopleCount() >= (int) nudCCPeople->Value))
