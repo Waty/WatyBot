@@ -321,7 +321,7 @@ void MainForm::MPCheckBox_CheckedChanged(System::Object^  sender, System::EventA
 }
 
 Macro::MacroManager macroMan;
-enum MacroIndex{eAttack, eLoot, eAutoSkill1, eAutoSkill2, eAutoSkill3, eAutoSkill4};
+enum MacroIndex{eAttack, eLoot, eAutoSkill1, eAutoSkill2, eAutoSkill3, eAutoSkill4, eTimedCC};
 
 bool SAWSIL()
 {
@@ -425,24 +425,24 @@ void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::
 {
 	nudCCPeople->Enabled = !CCPeopleCheckBox->Checked;
 }
-
+void TimedCC()
+{
+	gcroot<CC::CChangeChannel^> CC;
+	CC->CCSwitch(CC::CChangeChannel::CCType::CC);
+}
+bool ReturnTrue(){return true;}
 void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	if(CCTimedCheckBox->Checked)
 	{
-		CCTimedTimer->Interval = Convert::ToInt32(nudCCTimed->Value * 1000);
-		nudCCTimed->Enabled = false;
-		CCTimedTimer->Enabled = true;
+		if(TimedCCMacro == nullptr) TimedCCMacro = new Macro::FunctionalMacro((unsigned int) nudSkill1Value->Value * 1000, 500, ReturnTrue, TimedCC);
+		macroMan.AddMacro(eTimedCC, TimedCCMacro);
 	}
-	else
-	{
-		nudCCTimed->Enabled = true;
-		CCTimedTimer->Enabled = false;
-	}
+	else macroMan.RemoveMacro(eTimedCC);
 }
 void MainForm::CCTimedTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
-	MainForm::CCSwitch(TimedComboBox->SelectedIndex);
+	CC->CCSwitch(CC::CChangeChannel::CCType(TimedComboBox->SelectedIndex));
 }
 void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -498,6 +498,7 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 
 	SPControl = gcnew SpawnControl::SPControl;
 	CPacket = gcnew Packets::CPackets;
+	CC = gcnew CC::CChangeChannel;
 
 	if(!Directory::Exists("WatyBot"))	Directory::CreateDirectory("WatyBot");
 	if(File::Exists(PacketFileName))	CPacket->Load(PacketFileName);
@@ -564,11 +565,11 @@ void MainForm::AutoCC()
 {
 	if(CCPeopleCheckBox->Checked && (getPeopleCount() >= (int) nudCCPeople->Value))
 	{
-		MainForm::CCSwitch(PeopleComboBox->SelectedIndex);
+		CC->CCSwitch(CC::CChangeChannel::CCType(PeopleComboBox->SelectedIndex));
 	}
 	if(CCAttacksCheckBox->Checked && (getAttackCount() >= iCCAttacks))
 	{
-		MainForm::CCSwitch(AttackComboBox->SelectedIndex);
+		CC->CCSwitch(CC::CChangeChannel::CCType(AttackComboBox->SelectedIndex));
 	}
 }
 void MainForm::RedrawStatBars()

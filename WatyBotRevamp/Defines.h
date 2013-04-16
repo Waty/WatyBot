@@ -8,7 +8,6 @@
 #define jmp(frm, to) (int)(((int)to - (int)frm) - 5);
 #define CodeCave(name) void __declspec(naked) Cave##name(){_asm
 #define EndCodeCave }
-enum CCType{CC, CS, DC};
 
 #define ShowInfo(Message)		MessageBox::Show(Message, "Information", MessageBoxButtons::OK, MessageBoxIcon::Information)
 #define ShowError(Message)		MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)

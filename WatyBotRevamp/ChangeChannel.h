@@ -3,8 +3,6 @@
 extern bool InGame();
 extern int getBreathValue();
 extern int getChannel();
-typedef void (__stdcall* PFN_CField_SendTransferChannelRequest)(unsigned char nChannel);
-auto CField_SendTransferChannelRequest = reinterpret_cast<PFN_CField_SendTransferChannelRequest>(CCAddy);
 namespace CC
 {
 	public ref class CChangeChannel sealed

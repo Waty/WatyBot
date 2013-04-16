@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include "SPControl.h"
 #include "Packet.h"
+#include "ChangeChannel.h"
 
 namespace WatyBotRevamp {
 
@@ -278,7 +279,7 @@ private: System::Windows::Forms::Label^  lSAWSIL;
 
 
 
-private: System::Windows::Forms::Timer^  CCTimedTimer;
+
 private: System::Windows::Forms::ComboBox^  TimedComboBox;
 private: System::Windows::Forms::ComboBox^  AttacksComboBox;
 
@@ -339,7 +340,7 @@ private: System::Windows::Forms::Label^  lKnockBack;
 private: System::Windows::Forms::CheckBox^  cbPVP;
 private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 private: System::Windows::Forms::NumericUpDown^  nudPVPDelay;
-private: System::ComponentModel::BackgroundWorker^  bwNextChannel;
+
 
 private: System::Windows::Forms::NumericUpDown^  nudPvPCCDelay;
 private: System::Windows::Forms::Label^  lPvPCCDelay;
@@ -500,6 +501,8 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->AddPacketPacketLabel = (gcnew System::Windows::Forms::Label());
 			this->AddPacketNameLabel = (gcnew System::Windows::Forms::Label());
 			this->SendPacketGroupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->nudSpamDelay = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudSpamAmount = (gcnew System::Windows::Forms::NumericUpDown());
 			this->bStartSpamming = (gcnew System::Windows::Forms::Button());
 			this->SpamPacketsDelayLabel = (gcnew System::Windows::Forms::Label());
 			this->SpamPacketTimesLabel = (gcnew System::Windows::Forms::Label());
@@ -556,11 +559,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->ItemCountLabel = (gcnew System::Windows::Forms::Label());
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->CCTimedTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->InfoToolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
-			this->bwNextChannel = (gcnew System::ComponentModel::BackgroundWorker());
-			this->nudSpamAmount = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudSpamDelay = (gcnew System::Windows::Forms::NumericUpDown());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
@@ -594,6 +593,8 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->DeletePacketsGroupBox->SuspendLayout();
 			this->AddPacketsGroupBox->SuspendLayout();
 			this->SendPacketGroupBox->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamDelay))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamAmount))->BeginInit();
 			this->SPControlTabPage->SuspendLayout();
 			this->SPControlGroupBox->SuspendLayout();
 			this->SPControlContextMenu->SuspendLayout();
@@ -602,8 +603,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPvPCCDelay))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->BeginInit();
 			this->gbPointers->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamAmount))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamDelay))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -1936,6 +1935,22 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->SendPacketGroupBox->TabStop = false;
 			this->SendPacketGroupBox->Text = L"Packet Sender";
 			// 
+			// nudSpamDelay
+			// 
+			this->nudSpamDelay->Location = System::Drawing::Point(219, 50);
+			this->nudSpamDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {2000000000, 0, 0, 0});
+			this->nudSpamDelay->Name = L"nudSpamDelay";
+			this->nudSpamDelay->Size = System::Drawing::Size(41, 20);
+			this->nudSpamDelay->TabIndex = 10;
+			// 
+			// nudSpamAmount
+			// 
+			this->nudSpamAmount->Location = System::Drawing::Point(112, 48);
+			this->nudSpamAmount->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {2000000000, 0, 0, 0});
+			this->nudSpamAmount->Name = L"nudSpamAmount";
+			this->nudSpamAmount->Size = System::Drawing::Size(41, 20);
+			this->nudSpamAmount->TabIndex = 5;
+			// 
 			// bStartSpamming
 			// 
 			this->bStartSpamming->Location = System::Drawing::Point(6, 48);
@@ -2490,30 +2505,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->StatsTimer->Enabled = true;
 			this->StatsTimer->Tick += gcnew System::EventHandler(this, &MainForm::StatsTimer_Tick);
 			// 
-			// CCTimedTimer
-			// 
-			this->CCTimedTimer->Tick += gcnew System::EventHandler(this, &MainForm::CCTimedTimer_Tick);
-			// 
-			// bwNextChannel
-			// 
-			this->bwNextChannel->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::bwNextChannel_DoWork);
-			// 
-			// nudSpamAmount
-			// 
-			this->nudSpamAmount->Location = System::Drawing::Point(112, 48);
-			this->nudSpamAmount->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {2000000000, 0, 0, 0});
-			this->nudSpamAmount->Name = L"nudSpamAmount";
-			this->nudSpamAmount->Size = System::Drawing::Size(41, 20);
-			this->nudSpamAmount->TabIndex = 5;
-			// 
-			// nudSpamDelay
-			// 
-			this->nudSpamDelay->Location = System::Drawing::Point(219, 50);
-			this->nudSpamDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {2000000000, 0, 0, 0});
-			this->nudSpamDelay->Name = L"nudSpamDelay";
-			this->nudSpamDelay->Size = System::Drawing::Size(41, 20);
-			this->nudSpamDelay->TabIndex = 10;
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2570,6 +2561,8 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->AddPacketsGroupBox->PerformLayout();
 			this->SendPacketGroupBox->ResumeLayout(false);
 			this->SendPacketGroupBox->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamDelay))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamAmount))->EndInit();
 			this->SPControlTabPage->ResumeLayout(false);
 			this->SPControlGroupBox->ResumeLayout(false);
 			this->SPControlGroupBox->PerformLayout();
@@ -2581,8 +2574,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->EndInit();
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamAmount))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamDelay))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -2595,11 +2586,10 @@ private: System::Void SaveSettings();
 private: System::Void LoadSettings();
 private: System::Void AutoPot();
 private: System::Void AutoCC();
-private: System::Void CashShop();
 private: System::Void HotKeys();
-private: System::Void CCSwitch(int type);
 private: SpawnControl::SPControl^ SPControl;
 private: Packets::CPackets^ CPacket;
+private: CC::CChangeChannel^ CC;
 #pragma endregion
 #pragma region CheckBoxes
 private: System::Void StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e);
@@ -2663,7 +2653,6 @@ private: System::Void cbNDMining_CheckedChanged(System::Object^  sender, System:
 private: System::Void cbHideDamage_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbMercedesCombo_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void bwNextChannel_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
 private: System::Void cbNoFadeStages_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNoCCBlueBoxes_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void nudPVPDelay_ValueChanged(System::Object^  sender, System::EventArgs^  e);

@@ -33,6 +33,9 @@ void CChangeChannel::CCSwitch(CCType type)
 
 void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
+	typedef void (__stdcall* PFN_CField_SendTransferChannelRequest)(unsigned char nChannel);
+	auto CField_SendTransferChannelRequest = reinterpret_cast<PFN_CField_SendTransferChannelRequest>(CCAddy);
+
 	if(!InGame()) e->Cancel;
 	if(UsingPvP) Sleep(5500);
 	while(getBreathValue() != 0) Sleep(100);
@@ -48,15 +51,19 @@ void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkE
 
 void CChangeChannel::CS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
+	Packets::CPackets^ p = gcnew Packets::CPackets;
 	if(!InGame()) e->Cancel;
 	if(UsingPvP) Sleep(5500);
 	while(getBreathValue() != 0) Sleep(100);
 	String^ strError = String::Empty;
-	Send(EnterhCasShop, strError);
+	p->Send(EnterCashShop, strError);
 	while(InGame()) Sleep(100);
 	Sleep(1000);
 	while(!InGame())
-		Send(LeaveCashShop, strError);
+	{
+		p->Send(LeaveCashShop, strError);
+		Sleep(1000);
+	}
 	Sleep(1000);
 }
 
