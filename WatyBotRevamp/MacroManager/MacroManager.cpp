@@ -35,6 +35,10 @@ bool AbstractMacro::Toggle(bool fStatus)
 	this->fMacroStatus = fStatus;
 	return true;
 }
+bool AbstractMacro::Running()
+{
+	return this->fMacroStatus;
+}
 void AbstractMacro::SetDelay(unsigned int uDelay)
 {
 	this->m_stopWatch.SetDelay(milliseconds(uDelay));

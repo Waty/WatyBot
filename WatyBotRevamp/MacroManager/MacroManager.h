@@ -22,6 +22,7 @@ namespace Macro
 		virtual void ProcessMacro() = 0;
 
 		bool Toggle(bool fStatus);
+		bool Running();
 		void SetDelay(unsigned int uDelay);
 		void SetValue(int nValue);
 		void SetSecondValue(int nValue);
