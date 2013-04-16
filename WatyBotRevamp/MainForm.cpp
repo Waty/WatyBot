@@ -308,7 +308,7 @@ void MainForm::cbNoCCBlueBoxes_CheckedChanged(System::Object^  sender, System::E
 	Hacks::cmNoCCBoxes.Enable(this->cbNoCCBlueBoxes->Checked);
 }
 
-//AutoHP/MP/Attack/Loot/Skill checkboxes/events
+//AutoHP/MP/CC Checkboxes
 void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	nudHPValue->Enabled = !HPCheckBox->Checked;
@@ -319,10 +319,14 @@ void MainForm::MPCheckBox_CheckedChanged(System::Object^  sender, System::EventA
 	nudMPValue->Enabled = !MPCheckBox->Checked;
 	MPComboBox->Enabled = !MPCheckBox->Checked;
 }
+void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	nudCCPeople->Enabled = !CCPeopleCheckBox->Checked;
+}
 
+//Macro's
 Macro::MacroManager macroMan;
 enum MacroIndex{eAttack, eLoot, eAutoSkill1, eAutoSkill2, eAutoSkill3, eAutoSkill4, eTimedCC};
-
 bool SAWSIL()
 {
 	if(getMobCount() >= AutoBotVars::iSawsil) return true;
@@ -355,6 +359,29 @@ void AutoSkill(int KeyCodeIndex)
 			ShowError(strError);
 	}
 }
+void TimedCC()
+{
+	gcroot<CC::CChangeChannel^> CC;
+	if(!CC->Busy)CC->CCSwitch(CC::CChangeChannel::CCType::CC);
+}
+bool ReturnTrue(){return true;}
+void InitializeMacros()
+{
+	//Start the MacroManager
+	macroMan.Start();
+
+	//Add the AttackMacro to the Manager
+	AttackMacro = new Macro::BotMacro(NULL, NULL, NULL, SAWSIL);
+	AttackMacro->Toggle(false);
+	AttackMacro->SetPriority(2);
+	macroMan.AddMacro(MacroIndex::eAttack, AttackMacro);
+
+	//Add the LootMacro to the Manager
+	LootMacro = new Macro::BotMacro(NULL, NULL, NULL, SLWIB);
+	LootMacro->Toggle(false);
+	macroMan.AddMacro(MacroIndex::eLoot, LootMacro);
+}
+
 void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->nudAttackDelay->Enabled = !AttackCheckBox->Checked;
@@ -421,16 +448,6 @@ void MainForm::AutoSkill4CheckBox_CheckedChanged(System::Object^  sender, System
 	}
 	else macroMan.RemoveMacro(eAutoSkill4);
 }
-void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	nudCCPeople->Enabled = !CCPeopleCheckBox->Checked;
-}
-void TimedCC()
-{
-	gcroot<CC::CChangeChannel^> CC;
-	CC->CCSwitch(CC::CChangeChannel::CCType::CC);
-}
-bool ReturnTrue(){return true;}
 void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	if(CCTimedCheckBox->Checked)
@@ -440,53 +457,18 @@ void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 	}
 	else macroMan.RemoveMacro(eTimedCC);
 }
-void MainForm::CCTimedTimer_Tick(System::Object^  sender, System::EventArgs^  e)
-{
-	CC->CCSwitch(CC::CChangeChannel::CCType(TimedComboBox->SelectedIndex));
-}
 void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	if(CCAttacksCheckBox->Checked)
-	{
-		try
-		{
-			iCCAttacks = Convert::ToInt32(nudCCAttacks->Value);
-			nudCCAttacks->Enabled = false;
-		}
-		catch(...)
-		{
-			CCAttacksCheckBox->Checked = false;
-			CCAttacksCheckBox->Enabled = true;
-		}
-	}
-	else
-	{
-		nudCCAttacks->Enabled = true;
-	}
+	nudCCAttacks->Enabled = !CCAttacksCheckBox->Checked;
 }
 
+//General Trainer events
 void Main(void)
 {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	Application::Run(gcnew MainForm);
 	Application::Exit();
-}
-void InitializeMacros()
-{
-	//Start the MacroManager
-	macroMan.Start();
-
-	//Add the AttackMacro to the Manager
-	AttackMacro = new Macro::BotMacro(NULL, NULL, NULL, SAWSIL);
-	AttackMacro->Toggle(false);
-	AttackMacro->SetPriority(2);
-	macroMan.AddMacro(MacroIndex::eAttack, AttackMacro);
-
-	//Add the LootMacro to the Manager
-	LootMacro = new Macro::BotMacro(NULL, NULL, NULL, SLWIB);
-	LootMacro->Toggle(false);
-	macroMan.AddMacro(MacroIndex::eLoot, LootMacro);
 }
 void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 {
@@ -533,6 +515,8 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	//Set the correct state of the PacketSpammer Buttons
 	bStopSpamming->Visible = CPacket->IsSpamming;
 	bStartSpamming->Visible = !CPacket->IsSpamming;
+
+	if(CC->UsingPvP) cbPVP->Checked = !CC->Busy;
 }
 void MainForm::AutoPot()
 {
@@ -553,7 +537,6 @@ void MainForm::AutoPot()
 		}
 	}
 }
-
 void MainForm::cbCCHook_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	//cmCCHookSucces.Enable(this->cbCCHook->Checked);
@@ -563,14 +546,11 @@ void MainForm::cbCCHook_CheckedChanged(System::Object^  sender, System::EventArg
 
 void MainForm::AutoCC()
 {
-	if(CCPeopleCheckBox->Checked && (getPeopleCount() >= (int) nudCCPeople->Value))
-	{
+	if(CCPeopleCheckBox->Checked && !CC->Busy && (getPeopleCount() >= (int) nudCCPeople->Value))
 		CC->CCSwitch(CC::CChangeChannel::CCType(PeopleComboBox->SelectedIndex));
-	}
-	if(CCAttacksCheckBox->Checked && (getAttackCount() >= iCCAttacks))
-	{
-		CC->CCSwitch(CC::CChangeChannel::CCType(AttackComboBox->SelectedIndex));
-	}
+	
+	if(CCAttacksCheckBox->Checked && !CC->Busy && (getAttackCount() >= (int) nudCCAttacks->Value))
+		CC->CCSwitch(CC::CChangeChannel::CCType(AttacksComboBox->SelectedIndex));
 }
 void MainForm::RedrawStatBars()
 {

@@ -2647,7 +2647,6 @@ private: System::Void cbFLACC_CheckedChanged(System::Object^  sender, System::Ev
 private: System::Void cbCPUHack_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNFA_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbAutoAggro_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void CCTimedTimer_Tick(System::Object^  sender, System::EventArgs^  e);
 private: System::Void bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNDMining_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbHideDamage_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
