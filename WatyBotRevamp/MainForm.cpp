@@ -1,18 +1,18 @@
 #pragma once
 #pragma warning(disable : 4793 4244)
+#include <Windows.h>
+#include <fstream>
+#include <msclr/marshal_cppstd.h>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ini_parser.hpp>
 #include "MainForm.h"
 #include "Memory.h"
-#include <Windows.h>
 #include "Defines.h"
 #include "Pointers.h"
-#include <msclr/marshal_cppstd.h>
-#include <fstream>
 #include "Packet.h"
 #include "SPControl.h"
 #include "Hacks.h"
 
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/ini_parser.hpp>
 #include "MacroManager/FunctionalMacro.h"
 #include "MacroManager/BotMacro.h"
 #include "MacroManager/SkillMacro.h"
@@ -121,108 +121,6 @@ bool InGame()
 
 	else
 		return false;
-}
-void MainForm::CCSwitch(int type)
-{
-	String^ strError = String::Empty;
-	switch(type)
-	{
-	case CC:
-		if(!bwNextChannel->IsBusy) bwNextChannel->RunWorkerAsync();
-		break;
-		
-	case CS:
-		MainForm::CashShop();
-		break;
-		
-	case DC:
-		if(InGame())
-		{
-			this->CCPeopleCheckBox->Checked = false;
-			CPacket->Send(ChangeCharacter, strError);
-			ShowInfo("WatyBot DC'd you");
-			Sleep(500);
-			break;
-		}
-	}
-}
-bool TryCC()
-{
-	srand (time(NULL));
-	int channel = rand()%14;
-
-	while(getBreathValue() > 0)	Sleep(250);
-	Sleep(500);
-	try 
-	{
-		if(WallBasePtr && getBreathValue() == 0)/* CField_SendTransferChannelRequest(channel)*/;
-		else return false;
-	}
-	catch (...){return false;}
-
-	return true;
-}
-void MainForm::bwNextChannel_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
-{
-	bool PVP = cbPVP->Checked;
-	if(PVP)
-	{
-		if(PVP) cbPVP->Checked = false;
-		Sleep(5500);
-	}
-
-	CCing = true;
-	while(!TryCC()) Sleep(1000);
-	CCing = false;
-
-	if(PVP)
-	{
-		Sleep(Convert::ToInt32(nudPvPCCDelay->Value));
-		for(int i = 0; i < 200; i++)
-		{
-			SendKey(KeyCodes[AttackComboBox->SelectedIndex]);
-			Sleep(10);
-		}
-
-		Sleep(100);
-		cbPVP->Checked = true;
-	}
-}
-void MainForm::CashShop()
-{
-	bool PVP = cbPVP->Checked;
-	if(PVP)
-	{
-		if(PVP) cbPVP->Checked = false;
-		Sleep(5500);
-	}
-	CCing = true;
-	while(getBreathValue() > 0)	Sleep(250);
-	Sleep(500);
-	String^ strError = String::Empty;
-	if(CPacket->Send(EnterCashShop, strError))
-	{
-		Sleep(2000);
-		if(!CPacket->Send(LeaveCashShop, strError))
-			ShowError("Failed to leave the CashShop: " + strError);
-	}
-	else ShowError("Failed Entering the CashShop: " + strError);
-	Sleep(250);
-
-	CCing = false;
-	
-	if(PVP)
-	{
-		Sleep(Convert::ToInt32(nudPvPCCDelay->Value));
-		for(int i = 0; i < 200; i++)
-		{
-			SendKey(KeyCodes[AttackComboBox->SelectedIndex]);
-			Sleep(10);
-		}
-
-		Sleep(100);
-		cbPVP->Checked = true;
-	}
 }
 
 //Find Window
