@@ -330,12 +330,12 @@ Macro::MacroManager macroMan;
 enum MacroIndex{eAttack, eLoot, eAutoSkill1, eAutoSkill2, eAutoSkill3, eAutoSkill4, eTimedCC};
 bool SAWSIL()
 {
-	if(getMobCount() >= AutoBotVars::iSawsil) return true;
+	if(getMobCount() >= AutoBotVars::iSawsil && InGame()) return true;
 	return false;
 }
 bool SLWIB()
 {
-	if(getItemCount() < AutoBotVars::iSlwib) return false;
+	if(getItemCount() < AutoBotVars::iSlwib || !InGame()) return false;
 	if(!WritePointer(ServerBasePtr, TubiOffset, 0)) return false;
 	return true;
 }
