@@ -48,7 +48,16 @@ void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkE
 
 void CChangeChannel::CS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
+	if(!InGame()) e->Cancel;
 	if(UsingPvP) Sleep(5500);
+	while(getBreathValue() != 0) Sleep(100);
+	String^ strError = String::Empty;
+	Send(EnterhCasShop, strError);
+	while(InGame()) Sleep(100);
+	Sleep(1000);
+	while(!InGame())
+		Send(LeaveCashShop, strError);
+	Sleep(1000);
 }
 
 void CChangeChannel::DC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
