@@ -17,6 +17,7 @@ public:
 	~CMemory();
 
 	void Enable(bool enable);
+	bool Enabled;
 
 private:
 	

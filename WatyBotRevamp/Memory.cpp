@@ -1,16 +1,19 @@
 #include "Memory.h"
 
-
+//Constructors
 CMemory::CMemory(unsigned long ulAddy, unsigned char *bytes, int size) //one addy
 {
+	this->Enabled = false;
+	this->Type = cType::singleaddy;
+
 	this->ulAddress = ulAddy;
 	this->bMem = bytes;
 	this->bCount = size;
-	this->Type = cType::singleaddy;
 }
-
 CMemory::CMemory(unsigned long ulAddres1, unsigned char* bMem1, int size, unsigned long ulAddres2, unsigned char* bMem2, int size2)
 {
+	this->Enabled = false;
+	this->Type = cType::twoaddys;
 	
 	this->ulAddress = ulAddres1;
 	this->bMem = bMem1;
@@ -19,13 +22,11 @@ CMemory::CMemory(unsigned long ulAddres1, unsigned char* bMem1, int size, unsign
 	this->ulAddress2 = ulAddres2;
 	this->bMem2 = bMem2;
 	this->bCount2 = size2;
-
-	this->Type = cType::twoaddys;
 }
-
 CMemory::CMemory(unsigned long ulAddres1, unsigned char* bMem1, int size, unsigned long ulAddres2, unsigned char* bMem2, int size2, unsigned long ulAddres3, unsigned char* bMem3, int size3)
 {
-	this->Type = cType::threeaddys;	
+	this->Enabled = false;
+	this->Type = cType::threeaddys;
 
 	this->ulAddress = ulAddres1;
 	this->bMem = bMem1;
@@ -39,10 +40,9 @@ CMemory::CMemory(unsigned long ulAddres1, unsigned char* bMem1, int size, unsign
 	this->bMem3 = bMem3;
 	this->bCount3 = size3;
 }
-
-
 CMemory::CMemory(unsigned long ulAddres1, unsigned char* bMem1, int size, unsigned long ulAddres2, unsigned char* bMem2, int size2, unsigned long ulAddres3, unsigned char* bMem3, int size3, unsigned long ulAddres4, unsigned char* bMem4, int size4)
 {
+	this->Enabled = false;
 	this->Type = cType::fouraddys;	
 
 	this->ulAddress = ulAddres1;
@@ -61,7 +61,6 @@ CMemory::CMemory(unsigned long ulAddres1, unsigned char* bMem1, int size, unsign
 	this->bMem4 = bMem4;
 	this->bCount4 = size4;
 }
-
 CMemory::CMemory(unsigned long ulAddress, void* ulDestination, SIZE_T ulNops, bool jump)
 {
 	this->Type = cType::asmtype;
@@ -69,14 +68,26 @@ CMemory::CMemory(unsigned long ulAddress, void* ulDestination, SIZE_T ulNops, bo
 	this->iNops = ulNops;
 	this->ulDestination = ulDestination;
 
-	this->jump = jumpType::jump;
+	this->jump = jump ? jumpType::jump : jumpType::call;
+}
+//Destructor
+CMemory::~CMemory(void)
+{
+	this->RestoreMem();
 }
 
+//Public Method
+void CMemory::Enable(bool enable)
+{
+	enable ? this->WriteMem() : this->RestoreMem();
+	this->Enabled = enable;
+}
+
+//Private Methods
 int CMemory::jmp(unsigned long ulSource, void* ulDestination) 
 {
 		return (int)(((int)ulDestination - (int) ulSource) - 5);
 }
-
 void CMemory::JumpCall(void* destination, SIZE_T ulNops)
 {
 	this->bCount = ulNops + 5;
@@ -92,21 +103,9 @@ void CMemory::JumpCall(void* destination, SIZE_T ulNops)
 	}
 	__except(EXCEPTION_EXECUTE_HANDLER){};
 }
-
-
-CMemory::~CMemory(void)
-{
-	this->RestoreMem();
-}
-
-void CMemory::Enable(bool enable)
-{
-	if (enable) this->WriteMem();
-	else this->RestoreMem();
-}
-
 void CMemory::WriteMem()
-{	
+{
+	if(Enabled) return;
 	if(this->Type == cType::asmtype)
 	{
 		//VirtualProtect start
@@ -193,9 +192,9 @@ void CMemory::WriteMem()
 
 
 }
-
 void CMemory::RestoreMem()
 {
+	if(!Enabled) return;
 	if(this->Type >= asmtype)
 	{
 		//VirtualProtect1 start
