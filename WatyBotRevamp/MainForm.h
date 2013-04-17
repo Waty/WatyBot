@@ -1567,7 +1567,8 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->cbNDAllAttacks->Size = System::Drawing::Size(104, 17);
 			this->cbNDAllAttacks->TabIndex = 8;
 			this->cbNDAllAttacks->Text = L"GenericNoDelay";
-			this->InfoToolTip->SetToolTip(this->cbNDAllAttacks, L"Removes the AttackAnimation and the delay between attacks, + Unlimited MP");
+			this->InfoToolTip->SetToolTip(this->cbNDAllAttacks, L"Removes the AttackAnimation and the delay between attacks, and it gives Unlimited" 
+				L" MP");
 			this->cbNDAllAttacks->UseVisualStyleBackColor = true;
 			this->cbNDAllAttacks->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNDAllAttacks_CheckedChanged);
 			// 
@@ -2574,9 +2575,6 @@ private: System::Void LoadSettings();
 private: System::Void AutoPot();
 private: System::Void AutoCC();
 private: System::Void HotKeys();
-private: SpawnControl::SPControl^ SPControl;
-private: Packets::CPackets^ CPacket;
-private: CC::CChangeChannel^ CC;
 #pragma endregion
 #pragma region CheckBoxes
 private: System::Void StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e);

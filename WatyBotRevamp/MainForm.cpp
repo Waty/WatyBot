@@ -27,14 +27,20 @@ using namespace std;
 #define SPControlFileName (WatyBotWorkingDirectory + "spcontrol.xml")
 
 //Macro's
-Macro::AbstractMacro* AttackMacro;
-Macro::AbstractMacro* LootMacro;
-Macro::AbstractMacro* CCMacro;
-Macro::AbstractMacro* Skill1Macro;
-Macro::AbstractMacro* Skill2Macro;
-Macro::AbstractMacro* Skill3Macro;
-Macro::AbstractMacro* Skill4Macro;
-Macro::AbstractMacro* TimedCCMacro;
+bool SAWSIL();
+bool SLWIB();
+void TimedCC();
+Macro::AbstractMacro* AttackMacro = new Macro::BotMacro(SAWSIL);
+Macro::AbstractMacro* LootMacro = new Macro::BotMacro(SLWIB);
+Macro::AbstractMacro* CCMacro = new Macro::FunctionalMacro(TimedCC);
+Macro::SkillMacro* Skill1Macro = new Macro::SkillMacro();
+Macro::SkillMacro* Skill2Macro = new Macro::SkillMacro();
+Macro::SkillMacro* Skill3Macro = new Macro::SkillMacro();
+Macro::SkillMacro* Skill4Macro = new Macro::SkillMacro();
+
+gcroot<ChangeChannel::CChangeChannel^> CC = gcnew ChangeChannel::CChangeChannel;
+gcroot<SpawnControl::SPControl^> SPControl= gcnew SpawnControl::SPControl;
+gcroot<Packets::CPackets^> CPacket = gcnew Packets::CPackets;
 
 extern vector<gcroot<SpawnControl::SPControlLocation^>> vSPControl;
 extern vector<gcroot<Packets::CPacketData^>> vPacket;
@@ -327,7 +333,7 @@ void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::
 
 //Macro's
 Macro::MacroManager macroMan;
-enum MacroIndex{eAttack, eLoot, eAutoSkill1, eAutoSkill2, eAutoSkill3, eAutoSkill4, eTimedCC};
+enum MacroIndex{eAttack, eLoot, eCC, eAutoSkill1, eAutoSkill2, eAutoSkill3, eAutoSkill4};
 bool SAWSIL()
 {
 	if(getMobCount() >= AutoBotVars::iSawsil && InGame()) return true;
@@ -344,7 +350,7 @@ void AutoSkill(int KeyCodeIndex)
 	if(KeyCodeIndex < KeyCodesSize)
 	{
 		//Send Key
-		while(CCing || UsingAutoSkill) Sleep(500);
+		while(CC->Busy || UsingAutoSkill) Sleep(500);
 		UsingAutoSkill = true;
 		Sleep(250);
 		SendKey(KeyCodes[KeyCodeIndex]);
@@ -355,32 +361,25 @@ void AutoSkill(int KeyCodeIndex)
 	{
 		//Send Packet
 		String^ strError;
-		gcroot<Packets::CPackets^> p;
-		if(!p->Send(vPacket.at(KeyCodeIndex - KeyCodesSize)->Data, strError))
+		if(!CPacket->Send(vPacket.at(KeyCodeIndex - KeyCodesSize)->Data, strError))
 			ShowError(strError);
 	}
 }
 void TimedCC()
 {
-	gcroot<CC::CChangeChannel^> CC;
-	if(!CC->Busy)CC->CCSwitch(CC::CChangeChannel::CCType::CC);
+	if(!CC->Busy) CC->CCSwitch(ChangeChannel::CChangeChannel::CCType::CC);
 }
-bool ReturnTrue(){return true;}
 void InitializeMacros()
 {
 	//Start the MacroManager
 	macroMan.Start();
-
-	//Add the AttackMacro to the Manager
-	AttackMacro = new Macro::BotMacro(NULL, NULL, NULL, SAWSIL);
-	AttackMacro->Toggle(false);
-	AttackMacro->SetPriority(2);
 	macroMan.AddMacro(MacroIndex::eAttack, AttackMacro);
-
-	//Add the LootMacro to the Manager
-	LootMacro = new Macro::BotMacro(NULL, NULL, NULL, SLWIB);
-	LootMacro->Toggle(false);
 	macroMan.AddMacro(MacroIndex::eLoot, LootMacro);
+	macroMan.AddMacro(MacroIndex::eCC, CCMacro);
+	macroMan.AddMacro(MacroIndex::eAutoSkill1, Skill1Macro);
+	macroMan.AddMacro(MacroIndex::eAutoSkill2, Skill2Macro);
+	macroMan.AddMacro(MacroIndex::eAutoSkill3, Skill3Macro);
+	macroMan.AddMacro(MacroIndex::eAutoSkill4, Skill4Macro);
 }
 
 void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -400,7 +399,7 @@ void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::Even
 	this->nudLootDelay->Enabled = !this->LootCheckBox->Checked;
 	this->nudSLWIB->Enabled = !this->LootCheckBox->Checked;
 		
-	AutoBotVars::iSawsil = (int) nudSLWIB->Value;
+	AutoBotVars::iSlwib = (int) nudSLWIB->Value;
 	LootMacro->SetValue(KeyCodes[LootComboBox->SelectedIndex]);
 	LootMacro->SetDelay((unsigned int) nudLootDelay->Value);
 	LootMacro->Toggle(this->LootCheckBox->Checked);
@@ -409,54 +408,38 @@ void MainForm::AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System
 {
 	this->AutoSkill1ComboBox->Enabled = !this->AutoSkill1CheckBox->Checked;
 	this->nudSkill1Value->Enabled = !this->AutoSkill1CheckBox->Checked;
-	if(AutoSkill1CheckBox->Checked)
-	{
-		if(Skill1Macro == nullptr) Skill1Macro = new Macro::SkillMacro((unsigned int) nudSkill1Value->Value * 1000, 500, AutoSkill1ComboBox->SelectedIndex);
-		macroMan.AddMacro(eAutoSkill1, Skill1Macro);
-	}
-	else macroMan.RemoveMacro(eAutoSkill1);
+	Skill1Macro->SetDelay((unsigned int) nudSkill1Value->Value * 1000);
+	Skill1Macro->SetKeyIndex(AutoSkill1ComboBox->SelectedIndex);
+	Skill1Macro->Toggle(AutoSkill1CheckBox->Checked);
 }
 void MainForm::AutoSkill2CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->AutoSkill2ComboBox->Enabled = !this->AutoSkill2CheckBox->Checked;
 	this->nudSkill2Value->Enabled = !this->AutoSkill2CheckBox->Checked;
-	if(AutoSkill2CheckBox->Checked)
-	{
-		if(Skill2Macro == nullptr) Skill2Macro = new Macro::SkillMacro((unsigned int) nudSkill2Value->Value * 1000, 500, AutoSkill2ComboBox->SelectedIndex);
-		macroMan.AddMacro(eAutoSkill2, Skill2Macro);
-	}
-	else macroMan.RemoveMacro(eAutoSkill2);
+	Skill2Macro->SetDelay((unsigned int) nudSkill2Value->Value * 1000);
+	Skill2Macro->SetKeyIndex(AutoSkill2ComboBox->SelectedIndex);
+	Skill2Macro->Toggle(AutoSkill2CheckBox->Checked);
 }
 void MainForm::AutoSkill3CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->AutoSkill3ComboBox->Enabled = !this->AutoSkill3CheckBox->Checked;
 	this->nudSkill3Value->Enabled = !this->AutoSkill3CheckBox->Checked;
-	if(AutoSkill3CheckBox->Checked)
-	{
-		if(Skill3Macro == nullptr) Skill3Macro = new Macro::SkillMacro((unsigned int) nudSkill3Value->Value * 1000, 500, AutoSkill3ComboBox->SelectedIndex);
-		macroMan.AddMacro(eAutoSkill3, Skill3Macro);
-	}
-	else macroMan.RemoveMacro(eAutoSkill3);
+	Skill3Macro->SetDelay((unsigned int) nudSkill3Value->Value * 1000);
+	Skill3Macro->SetKeyIndex(AutoSkill3ComboBox->SelectedIndex);
+	Skill3Macro->Toggle(AutoSkill3CheckBox->Checked);
 }
 void MainForm::AutoSkill4CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->AutoSkill4ComboBox->Enabled = !this->AutoSkill4CheckBox->Checked;
 	this->nudSkill4Value->Enabled = !this->AutoSkill4CheckBox->Checked;
-	if(AutoSkill4CheckBox->Checked)
-	{
-		if(Skill4Macro == nullptr) Skill4Macro = new Macro::SkillMacro((unsigned int) nudSkill4Value->Value * 1000, 500, AutoSkill4ComboBox->SelectedIndex);
-		macroMan.AddMacro(eAutoSkill4, Skill4Macro);
-	}
-	else macroMan.RemoveMacro(eAutoSkill4);
+	Skill4Macro->SetDelay((unsigned int) nudSkill4Value->Value * 1000);
+	Skill4Macro->SetKeyIndex(AutoSkill4ComboBox->SelectedIndex);
+	Skill4Macro->Toggle(AutoSkill4CheckBox->Checked);
 }
 void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	if(CCTimedCheckBox->Checked)
-	{
-		if(TimedCCMacro == nullptr) TimedCCMacro = new Macro::FunctionalMacro((unsigned int) nudSkill1Value->Value * 1000, 500, ReturnTrue, TimedCC);
-		macroMan.AddMacro(eTimedCC, TimedCCMacro);
-	}
-	else macroMan.RemoveMacro(eTimedCC);
+	CCMacro->SetDelay((unsigned int) nudCCTimed->Value);
+	CCMacro->Toggle(CCTimedCheckBox->Checked);
 }
 void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -478,10 +461,6 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 
 	//Start the MacroManager
 	InitializeMacros();
-
-	SPControl = gcnew SpawnControl::SPControl;
-	CPacket = gcnew Packets::CPackets;
-	CC = gcnew CC::CChangeChannel;
 
 	if(!Directory::Exists("WatyBot"))	Directory::CreateDirectory("WatyBot");
 	if(File::Exists(PacketFileName))	CPacket->Load(PacketFileName);
@@ -541,10 +520,10 @@ void MainForm::AutoPot()
 void MainForm::AutoCC()
 {
 	if(CCPeopleCheckBox->Checked && !CC->Busy && (getPeopleCount() >= (int) nudCCPeople->Value))
-		CC->CCSwitch(CC::CChangeChannel::CCType(PeopleComboBox->SelectedIndex));
+		CC->CCSwitch(ChangeChannel::CChangeChannel::CCType(PeopleComboBox->SelectedIndex));
 	
 	if(CCAttacksCheckBox->Checked && !CC->Busy && (getAttackCount() >= (int) nudCCAttacks->Value))
-		CC->CCSwitch(CC::CChangeChannel::CCType(AttacksComboBox->SelectedIndex));
+		CC->CCSwitch(ChangeChannel::CChangeChannel::CCType(AttacksComboBox->SelectedIndex));
 }
 void MainForm::RedrawStatBars()
 {
@@ -573,6 +552,7 @@ void MainForm::MainTabControl_SelectedIndexChanged(System::Object^  sender, Syst
 void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 {
 	macroMan.ClearMacros();
+	macroMan.Stop();
 	SPControl->Save(SPControlFileName);
 	CPacket->Save(PacketFileName);
 	SaveSettings();
@@ -585,9 +565,8 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 			break;
 		
 		case ::DialogResult::Cancel:
-		{
 			e->Cancel = true;
-		}
+			break;
 	}
 }
 

@@ -3,7 +3,7 @@
 extern bool InGame();
 extern int getBreathValue();
 extern int getChannel();
-namespace CC
+namespace ChangeChannel
 {
 	public ref class CChangeChannel sealed
 	{

@@ -11,9 +11,18 @@ namespace Macro
 		{
 			iKeyIndex = KeyIndex;	
 		}
+		SkillMacro() : AbstractMacro()
+		{
+		
+		}
 		~SkillMacro()
 		{
 
+		}
+
+		void SetKeyIndex(int index)
+		{
+			iKeyIndex = index;
 		}
 
 		bool CheckCondition()

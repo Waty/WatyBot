@@ -12,23 +12,24 @@ using namespace Macro;
 
 AbstractMacro::AbstractMacro()
 {
-	this->uDelay = 0;
 	this->nValue = 0;
 	this->nValueSecond = 0;
 	this->uCoolDown = 0;
+	this->fMacroStatus = false;
+	this->m_stopWatch.SetDelay(milliseconds(0));
 }
 AbstractMacro::AbstractMacro(unsigned int uDelay,int nValue,int nValueSecond,unsigned int uCoolDown)
 {
-	this->uDelay = uDelay;
 	this->nValue = nValue;
 	this->nValueSecond = nValueSecond;
 	this->uCoolDown = uCoolDown;
+	this->fMacroStatus = false;
 	this->m_stopWatch.SetDelay(milliseconds(uDelay));
 }
 AbstractMacro::~AbstractMacro()
 {
-}
 
+}
 
 bool AbstractMacro::Toggle(bool fStatus)
 {
@@ -148,8 +149,6 @@ bool MacroManager::Stop()
 
 	return true;
 }
-
-
 
 DWORD MacroManager::MacroThread(LPVOID lpvParameter)
 {

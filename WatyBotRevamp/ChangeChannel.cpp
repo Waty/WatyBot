@@ -2,7 +2,7 @@
 #include "Packet.h"
 #include <Windows.h>
 #include "MacroManager/MacroManager.h"
-using namespace CC;
+using namespace ChangeChannel;
 using namespace System;
 
 extern Macro::AbstractMacro* AttackMacro;

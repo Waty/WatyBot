@@ -12,6 +12,11 @@ namespace Macro
 		{
 			this->m_fCondition = fCondition;
 		}
+		BotMacro(std::function<bool()> fCondition) : AbstractMacro()
+		{
+			this->m_fCondition = fCondition;
+			this->fMacroStatus = false;
+		}
 		~BotMacro()
 		{
 

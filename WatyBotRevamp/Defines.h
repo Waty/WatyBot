@@ -77,7 +77,6 @@ HWND MapleStoryHWND;
 
 bool UsingPot;
 bool UsingAutoSkill;
-bool CCing;
 
 int MaxHP, MaxMP;
 

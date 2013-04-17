@@ -11,6 +11,12 @@ namespace Macro
 			this->m_fCondition = fCondition;
 			this->m_fProcess = fProcess;
 		}
+		FunctionalMacro(std::function<void()> fProcess) : AbstractMacro()
+		{
+			this->m_fCondition = []{return true;};
+			this->m_fProcess = fProcess;
+		}
+
 		~FunctionalMacro()
 		{
 
