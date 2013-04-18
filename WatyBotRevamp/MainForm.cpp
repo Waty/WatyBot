@@ -411,6 +411,7 @@ void MainForm::AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System
 	Skill1Macro->SetDelay((unsigned int) nudSkill1Value->Value * 1000);
 	Skill1Macro->SetKeyIndex(AutoSkill1ComboBox->SelectedIndex);
 	Skill1Macro->Toggle(AutoSkill1CheckBox->Checked);
+	AutoSkill(AutoSkill1ComboBox->SelectedIndex);
 }
 void MainForm::AutoSkill2CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -419,6 +420,7 @@ void MainForm::AutoSkill2CheckBox_CheckedChanged(System::Object^  sender, System
 	Skill2Macro->SetDelay((unsigned int) nudSkill2Value->Value * 1000);
 	Skill2Macro->SetKeyIndex(AutoSkill2ComboBox->SelectedIndex);
 	Skill2Macro->Toggle(AutoSkill2CheckBox->Checked);
+	AutoSkill(AutoSkill2ComboBox->SelectedIndex);
 }
 void MainForm::AutoSkill3CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -427,6 +429,7 @@ void MainForm::AutoSkill3CheckBox_CheckedChanged(System::Object^  sender, System
 	Skill3Macro->SetDelay((unsigned int) nudSkill3Value->Value * 1000);
 	Skill3Macro->SetKeyIndex(AutoSkill3ComboBox->SelectedIndex);
 	Skill3Macro->Toggle(AutoSkill3CheckBox->Checked);
+	AutoSkill(AutoSkill3ComboBox->SelectedIndex);
 }
 void MainForm::AutoSkill4CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -435,6 +438,7 @@ void MainForm::AutoSkill4CheckBox_CheckedChanged(System::Object^  sender, System
 	Skill4Macro->SetDelay((unsigned int) nudSkill4Value->Value * 1000);
 	Skill4Macro->SetKeyIndex(AutoSkill4ComboBox->SelectedIndex);
 	Skill4Macro->Toggle(AutoSkill4CheckBox->Checked);
+	AutoSkill(AutoSkill4ComboBox->SelectedIndex);
 }
 void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
