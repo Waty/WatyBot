@@ -30,17 +30,17 @@ using namespace std;
 bool SAWSIL();
 bool SLWIB();
 void TimedCC();
-Macro::AbstractMacro* AttackMacro = new Macro::BotMacro(SAWSIL);
-Macro::AbstractMacro* LootMacro = new Macro::BotMacro(SLWIB);
-Macro::AbstractMacro* CCMacro = new Macro::FunctionalMacro(TimedCC);
-Macro::SkillMacro* Skill1Macro = new Macro::SkillMacro();
-Macro::SkillMacro* Skill2Macro = new Macro::SkillMacro();
-Macro::SkillMacro* Skill3Macro = new Macro::SkillMacro();
-Macro::SkillMacro* Skill4Macro = new Macro::SkillMacro();
+Macro::AbstractMacro* AttackMacro;
+Macro::AbstractMacro* LootMacro;
+Macro::AbstractMacro* CCMacro;
+Macro::SkillMacro* Skill1Macro;
+Macro::SkillMacro* Skill2Macro;
+Macro::SkillMacro* Skill3Macro;
+Macro::SkillMacro* Skill4Macro;
 
-gcroot<ChangeChannel::CChangeChannel^> CC = gcnew ChangeChannel::CChangeChannel;
-gcroot<SpawnControl::SPControl^> SPControl= gcnew SpawnControl::SPControl;
-gcroot<Packets::CPackets^> CPacket = gcnew Packets::CPackets;
+gcroot<ChangeChannel::CChangeChannel^> CC;
+gcroot<SpawnControl::SPControl^> SPControl;
+gcroot<Packets::CPackets^> CPacket;
 
 extern vector<gcroot<SpawnControl::SPControlLocation^>> vSPControl;
 extern vector<gcroot<Packets::CPacketData^>> vPacket;
@@ -373,6 +373,14 @@ void InitializeMacros()
 {
 	//Start the MacroManager
 	macroMan.Start();
+	AttackMacro = new Macro::BotMacro(SAWSIL);
+	LootMacro = new Macro::BotMacro(SLWIB);
+	CCMacro = new Macro::FunctionalMacro(TimedCC);
+	Skill1Macro = new Macro::SkillMacro();
+	Skill2Macro = new Macro::SkillMacro();
+	Skill3Macro = new Macro::SkillMacro();
+	Skill4Macro = new Macro::SkillMacro();
+
 	macroMan.AddMacro(MacroIndex::eAttack, AttackMacro);
 	macroMan.AddMacro(MacroIndex::eLoot, LootMacro);
 	macroMan.AddMacro(MacroIndex::eCC, CCMacro);
@@ -462,6 +470,10 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 {
 	//Get the hwnd of maplestory
 	NewThread(getMSHWND);
+
+	CC = gcnew ChangeChannel::CChangeChannel;
+	SPControl= gcnew SpawnControl::SPControl;
+	CPacket = gcnew Packets::CPackets;
 
 	//Start the MacroManager
 	InitializeMacros();

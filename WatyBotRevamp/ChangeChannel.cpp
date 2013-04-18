@@ -51,8 +51,7 @@ void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkE
 	while(channel == CurrentChannel){srand (GetCurrentTime()); channel = rand()%14;}
 	DestinationChannel = channel;
 	CField_SendTransferChannelRequest(DestinationChannel);
-	while(!InGame()) Sleep(100);
-	Sleep(500);
+	Sleep(3000);
 	if(UsingAutoAttack) AttackMacro->Toggle(true);
 }
 
