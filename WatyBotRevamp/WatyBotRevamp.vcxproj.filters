@@ -28,6 +28,9 @@
     <Filter Include="Classes\MacroManager">
       <UniqueIdentifier>{d05cc2aa-ac27-459a-bbdf-0178b218800a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\ChangeChannel">
+      <UniqueIdentifier>{696ca6ab-1668-4da5-9064-bce6adf12b59}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainForm.cpp">
@@ -49,7 +52,7 @@
       <Filter>Classes\SPControl</Filter>
     </ClCompile>
     <ClCompile Include="ChangeChannel.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Classes\ChangeChannel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -102,7 +105,7 @@
       <Filter>Classes\SPControl</Filter>
     </ClInclude>
     <ClInclude Include="ChangeChannel.h">
-      <Filter>Header Files</Filter>
+      <Filter>Classes\ChangeChannel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
