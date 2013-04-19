@@ -4,6 +4,7 @@ extern int getMapID();
 extern int getCharX();
 extern int getCharY();
 extern int getAttackCount();
+extern BOOL WINAPI canPvP();
 extern std::vector<gcroot<SpawnControl::SPControlLocation^>> vSPControl;
 
 namespace Hacks
@@ -307,22 +308,20 @@ namespace Hacks
 	/////PvP Set Skill ID
 	DWORD dwPVPRet = PvPInjectAddy + 6;
 	int iPVPSkillID;
-	int iPVPDelay;
-	int count;
 	CodeCave(PVP)
 	{
 		push eax
-		mov eax, dword ptr [count]
-		cmp eax, dword ptr [iPVPDelay]
+		call canPvP
+		cmp eax, TRUE
 		pop eax
+		//If it returns TRUE, jump to InjectPvP
+		je InjectPvP
 
-		jge InjectPvP
-		inc [count]
+		//Else
 		mov edx,[esi+0x00006DAC]
 		jmp dword ptr [dwPVPRet]
  
 		InjectPvP:
-		mov [count],0
 		mov edx,[iPVPSkillID]
 		jmp dword ptr [dwPVPRet]
 	}

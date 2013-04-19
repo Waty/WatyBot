@@ -34,6 +34,7 @@ Macro::SkillMacro* Skill1Macro;
 Macro::SkillMacro* Skill2Macro;
 Macro::SkillMacro* Skill3Macro;
 Macro::SkillMacro* Skill4Macro;
+StopWatch<milliseconds> PvPStopWatch;
 
 gcroot<ChangeChannel::CChangeChannel^> CC;
 gcroot<SpawnControl::SPControl^> SPControl;
@@ -282,17 +283,19 @@ void MainForm::cbMouseFly_CheckedChanged(System::Object^  sender, System::EventA
 }
 void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	CC->UsingPvP = cbPVP->Checked;
 	if(ddbPVPSkills->SelectedIndex < 0)
 	{
-		if(cbPVP->Checked) ShowError("Please Select a Skill");
-		cbPVP->Checked = false;
+		if(cbPVP->Checked)
+		{
+			ShowError("Please Select a Skill");
+			cbPVP->Checked = false;
+		}
 	}
 	else
 	{
 		//set variables
 		Hacks::iPVPSkillID = PVPSkills[ddbPVPSkills->SelectedIndex];
-		Hacks::iPVPDelay = Convert::ToInt32(nudPVPDelay->Value);
+		PvPStopWatch.SetDelay(milliseconds((int) nudPVPDelay->Value));
 
 		cbNFA->Checked = false;
 		Hacks::cmPVP1.Enable(cbPVP->Checked);
@@ -301,7 +304,7 @@ void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^ 
 }
 void MainForm::nudPVPDelay_ValueChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::iPVPDelay = Convert::ToInt32(nudPVPDelay->Value);
+	PvPStopWatch.SetDelay(milliseconds((int) nudPVPDelay->Value));
 }
 void MainForm::ddbPVPSkills_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -331,18 +334,30 @@ void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::
 //Macro's
 Macro::MacroManager macroMan;
 enum MacroIndex{eAttack, eLoot, eCC, eAutoSkill1, eAutoSkill2, eAutoSkill3, eAutoSkill4};
-bool SAWSIL()
+bool canAttack()
 {
 	if(CC->Busy) return false;
 	if(getMobCount() >= AutoBotVars::iSawsil && InGame()) return true;
 	return false;
 }
-bool SLWIB()
+bool canLoot()
 {
 	if(CC->Busy) return false;
 	if(getItemCount() < AutoBotVars::iSlwib || !InGame()) return false;
 	if(!WritePointer(ServerBasePtr, TubiOffset, 0)) return false;
 	return true;
+}
+BOOL WINAPI canPvP()
+{
+	if(CC->Busy)
+		return FALSE;
+
+	if(PvPStopWatch.IsOver())
+	{
+		PvPStopWatch.Start();
+		return TRUE;
+	}
+	return FALSE;
 }
 void AutoSkill(int KeyCodeIndex)
 {
@@ -372,8 +387,8 @@ void InitializeMacros()
 {
 	//Start the MacroManager
 	macroMan.Start();
-	AttackMacro = new Macro::BotMacro(SAWSIL);
-	LootMacro = new Macro::BotMacro(SLWIB);
+	AttackMacro = new Macro::BotMacro(canAttack);
+	LootMacro = new Macro::BotMacro(canLoot);
 	CCMacro = new Macro::FunctionalMacro(TimedCC);
 	Skill1Macro = new Macro::SkillMacro();
 	Skill2Macro = new Macro::SkillMacro();
@@ -510,8 +525,6 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	//Set the correct state of the PacketSpammer Buttons
 	bStopSpamming->Visible = CPacket->IsSpamming;
 	bStartSpamming->Visible = !CPacket->IsSpamming;
-
-	if(CC->UsingPvP) cbPVP->Checked = !CC->Busy;
 }
 void MainForm::AutoPot()
 {
