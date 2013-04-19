@@ -11,9 +11,8 @@ namespace ChangeChannel
 		CChangeChannel();
 		property bool Busy
 		{
-			bool get() {return bw->IsBusy && InGame();}
+			bool get() {return bw->IsBusy;}
 		}
-		property bool UsingPvP;
 
 		enum class CCType{CC, CS, DC};
 		void CCSwitch(CCType type);
@@ -23,7 +22,7 @@ namespace ChangeChannel
 		void CC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
 		void DC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
 		void CS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
-		property int CurrentChannel;
-		property int DestinationChannel;
+		property int StartChannel;
+		property int TargetChannel;
 	};
 }

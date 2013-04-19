@@ -1,12 +1,14 @@
 #include "ChangeChannel.h"
 #include "Packet.h"
 #include <Windows.h>
-#include "MacroManager/MacroManager.h"
+#include "Memory.h"
 #include <vcclr.h>
 using namespace ChangeChannel;
 using namespace System;
-
 extern gcroot<Packets::CPackets^> CPacket;
+
+typedef void (__stdcall* PFN_CField_SendTransferChannelRequest)(unsigned char nChannel);
+auto CField_SendTransferChannelRequest = reinterpret_cast<PFN_CField_SendTransferChannelRequest>(CCAddy);
 
 CChangeChannel::CChangeChannel()
 {
@@ -38,36 +40,45 @@ void CChangeChannel::CCSwitch(CCType type)
 
 void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
-	if(!InGame()) e->Cancel;
-	typedef void (__stdcall* PFN_CField_SendTransferChannelRequest)(unsigned char nChannel);
-	auto CField_SendTransferChannelRequest = reinterpret_cast<PFN_CField_SendTransferChannelRequest>(CCAddy);
-	if(UsingPvP) Sleep(5500);
-	while(getBreathValue() != 0) Sleep(100);
-	CurrentChannel = getChannel();
+	if(!InGame())
+	{
+		e->Cancel;
+		return;
+	}
 	
-	srand (GetCurrentTime());
-	int channel = rand()%14;
-	while(channel == CurrentChannel){srand (GetCurrentTime()); channel = rand()%14;}
-	DestinationChannel = channel;
-	CField_SendTransferChannelRequest(DestinationChannel);
-	Sleep(3000);
+	//Store the currrent Channel
+	StartChannel = getChannel();
+
+	//While loop checking if you actually did CC
+	while(getChannel() == StartChannel)
+	{
+		//Generate a random int to CC to + check if it is a different channel
+		do
+		{
+			srand (GetCurrentTime());
+			TargetChannel = rand()%14;
+		}		
+		while(TargetChannel == StartChannel);
+
+		//Sleep while breath > 0
+		while(getBreathValue() > 0) Sleep(100);
+
+		//Send the CC request
+		CField_SendTransferChannelRequest(TargetChannel);
+		
+		//Sleep 3 seconds to make sure the client is ingame again
+		Sleep(3000);
+	}
 }
 
 void CChangeChannel::CS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
 	if(!InGame()) e->Cancel;
-	if(UsingPvP) Sleep(5500);
 	while(getBreathValue() != 0) Sleep(100);
 	Sleep(500);
 	String^ strError = String::Empty;
 	CPacket->Send(EnterCashShop, strError);
-	Sleep(1500);
-	while(!InGame())
-	{
-		CPacket->Send(LeaveCashShop, strError);
-		Sleep(1000);
-	}
-	Sleep(1000);
+	Sleep(3000);
 }
 
 void CChangeChannel::DC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
