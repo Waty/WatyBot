@@ -2,10 +2,11 @@
 #include "Packet.h"
 #include <Windows.h>
 #include "MacroManager/MacroManager.h"
+#include <vcclr.h>
 using namespace ChangeChannel;
 using namespace System;
 
-extern Macro::AbstractMacro* AttackMacro;
+extern gcroot<Packets::CPackets^> CPacket;
 
 CChangeChannel::CChangeChannel()
 {
@@ -37,11 +38,9 @@ void CChangeChannel::CCSwitch(CCType type)
 
 void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
+	if(!InGame()) e->Cancel;
 	typedef void (__stdcall* PFN_CField_SendTransferChannelRequest)(unsigned char nChannel);
 	auto CField_SendTransferChannelRequest = reinterpret_cast<PFN_CField_SendTransferChannelRequest>(CCAddy);
-	bool UsingAutoAttack = AttackMacro->Running();
-	if(UsingAutoAttack) AttackMacro->Toggle(false);
-	if(!InGame()) e->Cancel;
 	if(UsingPvP) Sleep(5500);
 	while(getBreathValue() != 0) Sleep(100);
 	CurrentChannel = getChannel();
@@ -52,34 +51,27 @@ void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkE
 	DestinationChannel = channel;
 	CField_SendTransferChannelRequest(DestinationChannel);
 	Sleep(3000);
-	if(UsingAutoAttack) AttackMacro->Toggle(true);
 }
 
 void CChangeChannel::CS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
-	bool UsingAutoAttack = AttackMacro->Running();
-	if(UsingAutoAttack) AttackMacro->Toggle(false);
-	Packets::CPackets^ p = gcnew Packets::CPackets;
 	if(!InGame()) e->Cancel;
 	if(UsingPvP) Sleep(5500);
 	while(getBreathValue() != 0) Sleep(100);
 	Sleep(500);
 	String^ strError = String::Empty;
-	p->Send(EnterCashShop, strError);
-	while(InGame()) Sleep(100);
-	Sleep(1000);
+	CPacket->Send(EnterCashShop, strError);
+	Sleep(1500);
 	while(!InGame())
 	{
-		p->Send(LeaveCashShop, strError);
+		CPacket->Send(LeaveCashShop, strError);
 		Sleep(1000);
 	}
 	Sleep(1000);
-	if(UsingAutoAttack) AttackMacro->Toggle(true);
 }
 
 void CChangeChannel::DC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
-	AttackMacro->Toggle(false);
 	while(InGame())
 	{
 		Packets::CPackets^ p = gcnew Packets::CPackets;

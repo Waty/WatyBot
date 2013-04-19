@@ -27,9 +27,6 @@ using namespace std;
 #define SPControlFileName (WatyBotWorkingDirectory + "spcontrol.xml")
 
 //Macro's
-bool SAWSIL();
-bool SLWIB();
-void TimedCC();
 Macro::AbstractMacro* AttackMacro;
 Macro::AbstractMacro* LootMacro;
 Macro::AbstractMacro* CCMacro;
@@ -336,11 +333,13 @@ Macro::MacroManager macroMan;
 enum MacroIndex{eAttack, eLoot, eCC, eAutoSkill1, eAutoSkill2, eAutoSkill3, eAutoSkill4};
 bool SAWSIL()
 {
+	if(CC->Busy) return false;
 	if(getMobCount() >= AutoBotVars::iSawsil && InGame()) return true;
 	return false;
 }
 bool SLWIB()
 {
+	if(CC->Busy) return false;
 	if(getItemCount() < AutoBotVars::iSlwib || !InGame()) return false;
 	if(!WritePointer(ServerBasePtr, TubiOffset, 0)) return false;
 	return true;
