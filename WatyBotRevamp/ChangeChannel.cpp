@@ -85,9 +85,8 @@ void CChangeChannel::DC(System::Object^  sender, System::ComponentModel::DoWorkE
 {
 	while(InGame())
 	{
-		Packets::CPackets^ p = gcnew Packets::CPackets;
 		String^ strError = String::Empty;
-		p->Send(ChangeCharacter, strError);
+		CPacket->Send(ChangeCharacter, strError);
 		Sleep(1000);
 	}
 }
