@@ -349,7 +349,7 @@ bool canLoot()
 }
 BOOL WINAPI canPvP()
 {
-	if(CC->Busy)
+	if(CC->Busy || UsingPot || UsingAutoSkill)
 		return FALSE;
 
 	if(PvPStopWatch.IsOver())
