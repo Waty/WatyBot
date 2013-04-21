@@ -55,7 +55,7 @@ BOOL IsElevated( ) {
 }
 int main()
 {
-	cout << "WatyBotInjector:" << endl;
+	cout << "WatyBotInjector 2.2 Beta WindowsXP Support:" << endl;
 	cout << "You need to have WatyBot.dll and this program in the Maplestory folder!!!!" << endl;
 	cout << "Full credits to \"TheFox\"" << endl << endl;
 
@@ -63,9 +63,8 @@ int main()
 	if(IsElevated()) cout << "Running with admin rights!" << endl;
 	else
 	{
-		cout << "Run me as administrator!" << endl;
-		system("pause");
-		return false;
+		cout << "Unable to find administartor rights, this is because you didn't run it as admin, or because you're on WindowsXP" << endl;
+		cout << "Continuing anyway :)" << endl;
 	}
 	
 	if(File::Exists(Directory::GetCurrentDirectory() + "\\MapleStory.exe")) cout << "Found MapleStory.exe!" << endl;
