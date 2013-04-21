@@ -690,7 +690,7 @@ void MainForm::RefreshComboBoxes()
 //controls on SPControl Tab
 void MainForm::cbSPControl_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::cmSPControl.Enable(cbSPControl->Checked);
+	Hacks::doSPControl = cbSPControl->Checked;
 }
 void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
@@ -888,6 +888,7 @@ void MainForm::LoadSettings()
 		Sleep(Convert::ToInt32(nudLoadDelay->Value));
 		this->cbPinTyper->Checked = pt.get<bool>("PinTyper", false);
 		this->cbLogoSkipper->Checked = pt.get<bool>("LogoSkipper", false);
+		Hacks::cmSPControl.Enable(true);
 	}catch(...){};
 }
 void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e)

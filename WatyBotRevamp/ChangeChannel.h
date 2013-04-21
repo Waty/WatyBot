@@ -9,6 +9,7 @@ namespace ChangeChannel
 	{
 	public:
 		CChangeChannel();
+		property bool FinishedCCing;
 		property bool Busy
 		{
 			bool get() {return bw->IsBusy;}

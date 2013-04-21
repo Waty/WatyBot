@@ -1,4 +1,5 @@
 #include "HackAddys.h"
+#include "ChangeChannel.h"
 
 extern int getMapID();
 extern int getCharX();
@@ -6,6 +7,7 @@ extern int getCharY();
 extern int getAttackCount();
 extern BOOL WINAPI canPvP();
 extern std::vector<gcroot<SpawnControl::SPControlLocation^>> vSPControl;
+extern gcroot<ChangeChannel::CChangeChannel^> CC;
 
 namespace Hacks
 {
@@ -149,8 +151,11 @@ namespace Hacks
 	/////Spawn Control
 	DWORD dwSPControlRet = SPControlAddy + 6;
 	int spawn_x, spawn_y;
+	bool doSPControl;
 	BOOL WINAPI GetCoords()
 	{
+		CC->FinishedCCing = true;
+		if(!doSPControl) return FALSE;
 		int iMapID = getMapID();
 		for(SpawnControl::SPControlLocation^ location : vSPControl)
 		{

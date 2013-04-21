@@ -50,7 +50,8 @@ void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkE
 	StartChannel = getChannel();
 
 	//While loop checking if you actually did CC
-	while(getChannel() == StartChannel)
+	FinishedCCing = false;
+	while(getChannel() == StartChannel && !FinishedCCing)
 	{
 		//Generate a random int to CC to + check if it is a different channel
 		do
@@ -65,9 +66,7 @@ void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkE
 
 		//Send the CC request
 		CField_SendTransferChannelRequest(TargetChannel);
-		
-		//Sleep 3 seconds to make sure the client is ingame again
-		Sleep(3000);
+		Sleep(1000);
 	}
 }
 
