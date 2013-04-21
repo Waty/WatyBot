@@ -49,25 +49,20 @@ void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkE
 	//Store the currrent Channel
 	StartChannel = getChannel();
 
-	//While loop checking if you actually did CC
-	FinishedCCing = false;
-	while(getChannel() == StartChannel && !FinishedCCing)
+	//Generate a random int to CC to + check if it is a different channel
+	do
 	{
-		//Generate a random int to CC to + check if it is a different channel
-		do
-		{
-			srand (GetCurrentTime());
-			TargetChannel = rand()%14;
-		}		
-		while(TargetChannel == StartChannel);
+		srand (GetCurrentTime());
+		TargetChannel = rand()%14;
+	}		
+	while(TargetChannel == StartChannel);
 
-		//Sleep while breath > 0
-		while(getBreathValue() > 0) Sleep(100);
-
-		//Send the CC request
-		CField_SendTransferChannelRequest(TargetChannel);
-		Sleep(1000);
-	}
+	//Sleep while breath > 0
+	while(getBreathValue() > 0) Sleep(100);
+	
+	//Send the CC request
+	CField_SendTransferChannelRequest(TargetChannel);
+	Sleep(2000);
 }
 
 void CChangeChannel::CS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
