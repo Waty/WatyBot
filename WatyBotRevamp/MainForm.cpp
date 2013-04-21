@@ -366,9 +366,9 @@ void AutoSkill(int KeyCodeIndex)
 		//Send Key
 		while(CC->Busy || UsingAutoSkill) Sleep(500);
 		UsingAutoSkill = true;
-		Sleep(250);
+		Sleep(500);
 		SendKey(KeyCodes[KeyCodeIndex]);
-		Sleep(50);
+		Sleep(500);
 		UsingAutoSkill = false;		
 	}
 	else
