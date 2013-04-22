@@ -1,13 +1,11 @@
 #include "HackAddys.h"
 #include "ChangeChannel.h"
+#include "MapleStory.h"
 
-extern int getMapID();
-extern int getCharX();
-extern int getCharY();
-extern int getAttackCount();
 extern BOOL WINAPI canPvP();
 extern std::vector<gcroot<SpawnControl::SPControlLocation^>> vSPControl;
 extern gcroot<ChangeChannel::CChangeChannel^> CC;
+extern gcroot<CMapleStory^> CMS;
 
 namespace Hacks
 {
@@ -156,7 +154,7 @@ namespace Hacks
 	{
 		CC->FinishedCCing = true;
 		if(!doSPControl) return FALSE;
-		int iMapID = getMapID();
+		int iMapID = CMS->MapID;
 		for(SpawnControl::SPControlLocation^ location : vSPControl)
 		{
 			if( iMapID == location->MapId )
@@ -205,8 +203,8 @@ namespace Hacks
 	int itemvac_y = 0;
 	VOID WINAPI getItemVacCoords()
 	{
-		itemvac_x = getCharX();
-		itemvac_y = getCharY();
+		itemvac_x = CMS->CharX;
+		itemvac_y = CMS->CharY;
 	}
 	/*old Codecave
 	CodeCave(ItemVac)
@@ -265,15 +263,20 @@ namespace Hacks
  
 	/////Unlimited Attack
 	DWORD dwUARet = UAAddy + 6;
+	BOOL WINAPI UA()
+	{
+		if(CMS->AttackCount > 90) return TRUE;
+		return FALSE;
+	}
 	CodeCave(UA)
 	{
 		mov [eax],edi //orig code
  
 		pushad
-		call getAttackCount
-		cmp eax, 90 // Attack Count offset
+		call UA
+		cmp eax, TRUE // Attack Count offset
 		popad
-		jl UAexit
+		jne UAexit
 		add dword ptr [eax],0x08
  
 		UAexit:

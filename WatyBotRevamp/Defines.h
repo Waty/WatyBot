@@ -13,60 +13,6 @@
 #define ShowError(Message)		MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
 #define ShowWarning(Message)	MessageBox::Show(Message, "Warning", MessageBoxButtons::OK, MessageBoxIcon::Warning)
 
-unsigned long ReadPointer(unsigned long ulBase, int iOffset)
-{
-	if(*(int*)WallBasePtr)
-	{
-		__try { return *(unsigned long*)(*(unsigned long*)ulBase + iOffset); }
-		__except (EXCEPTION_EXECUTE_HANDLER) { return 0; }
-	}
-	else return 0;
-}
-double ReadDoublePointer(DWORD ulBase, INT iOffset)
-{
-      __try { return (*(DOUBLE*)(*(DWORD*)ulBase + iOffset)); }
-      __except (EXCEPTION_EXECUTE_HANDLER) { return 0.0; }
-}
-bool WritePointer(unsigned long ulBase, int iOffset, int iValue)
-{
-	__try
-	{
-		*(int*)(*(unsigned long*)ulBase + iOffset) = iValue;
-		return true;
-	}
-	__except (EXCEPTION_EXECUTE_HANDLER)
-	{
-		return false;
-	}
-}
-HWND FindProcessWindow()
-{
-   TCHAR szBuffer[200];
-   DWORD dwTemp;
-
-   for (HWND hWnd = GetTopWindow(NULL); hWnd != NULL; hWnd = GetNextWindow(hWnd, GW_HWNDNEXT))
-   {
-      GetWindowThreadProcessId(hWnd, &dwTemp);
-
-      if (dwTemp != GetCurrentProcessId())
-      {
-         continue;
-      }
-
-      if (!GetClassName(hWnd, szBuffer, sizeof(szBuffer) / sizeof(TCHAR)))
-      {
-         continue;
-      }
-
-      if (!wcscmp(szBuffer, L"MapleStoryClass"))
-      {
-         return hWnd;
-      }
-   }
-
-   return NULL;
-}
-
 int iCCPeople;
 int iCCAttacks;
 int iHPValue, iHPKey;

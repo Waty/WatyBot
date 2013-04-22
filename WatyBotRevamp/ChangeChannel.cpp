@@ -1,11 +1,14 @@
 #include "ChangeChannel.h"
+#include "MapleStory.h"
 #include "Packet.h"
 #include <Windows.h>
 #include "Memory.h"
 #include <vcclr.h>
+
 using namespace ChangeChannel;
 using namespace System;
 extern gcroot<Packets::CPackets^> CPacket;
+extern gcroot<CMapleStory^> CMS;
 
 typedef void (__stdcall* PFN_CField_SendTransferChannelRequest)(unsigned char nChannel);
 auto CField_SendTransferChannelRequest = reinterpret_cast<PFN_CField_SendTransferChannelRequest>(CCAddy);
@@ -40,14 +43,14 @@ void CChangeChannel::CCSwitch(CCType type)
 
 void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
-	if(!InGame())
+	if(!CMS->InGame)
 	{
 		e->Cancel;
 		return;
 	}
 	
 	//Store the currrent Channel
-	StartChannel = getChannel();
+	StartChannel = CMS->Channel;
 
 	//Generate a random int to CC to + check if it is a different channel
 	do
@@ -58,7 +61,7 @@ void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkE
 	while(TargetChannel == StartChannel);
 
 	//Sleep while breath > 0
-	while(getBreathValue() > 0) Sleep(100);
+	while(CMS->Breath > 0) Sleep(100);
 	
 	//Send the CC request
 	CField_SendTransferChannelRequest(TargetChannel);
@@ -67,8 +70,8 @@ void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkE
 
 void CChangeChannel::CS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
-	if(!InGame()) e->Cancel;
-	while(getBreathValue() != 0) Sleep(100);
+	if(!CMS->InGame) e->Cancel;
+	while(CMS->Breath != 0) Sleep(100);
 	Sleep(500);
 	String^ strError = String::Empty;
 	CPacket->Send(EnterCashShop, strError);
@@ -77,7 +80,7 @@ void CChangeChannel::CS(System::Object^  sender, System::ComponentModel::DoWorkE
 
 void CChangeChannel::DC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
-	while(InGame())
+	while(CMS->InGame)
 	{
 		String^ strError = String::Empty;
 		CPacket->Send(ChangeCharacter, strError);

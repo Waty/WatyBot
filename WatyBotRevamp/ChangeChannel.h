@@ -1,8 +1,5 @@
 #pragma once
 #include "HackAddys.h"
-extern bool InGame();
-extern int getBreathValue();
-extern int getChannel();
 namespace ChangeChannel
 {
 	public ref class CChangeChannel sealed

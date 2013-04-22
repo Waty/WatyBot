@@ -31,6 +31,9 @@
     <Filter Include="Classes\ChangeChannel">
       <UniqueIdentifier>{696ca6ab-1668-4da5-9064-bce6adf12b59}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\CMapleStory">
+      <UniqueIdentifier>{f466243f-d519-45eb-8fc5-930a68bcd3d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainForm.cpp">
@@ -53,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="ChangeChannel.cpp">
       <Filter>Classes\ChangeChannel</Filter>
+    </ClCompile>
+    <ClCompile Include="MapleStory.cpp">
+      <Filter>Classes\CMapleStory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="ChangeChannel.h">
       <Filter>Classes\ChangeChannel</Filter>
+    </ClInclude>
+    <ClInclude Include="MapleStory.h">
+      <Filter>Classes\CMapleStory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

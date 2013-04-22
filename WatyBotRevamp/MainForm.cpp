@@ -12,7 +12,7 @@
 #include "Packet.h"
 #include "SPControl.h"
 #include "Hacks.h"
-
+#include "MapleStory.h"
 #include "MacroManager/FunctionalMacro.h"
 #include "MacroManager/BotMacro.h"
 #include "MacroManager/SkillMacro.h"
@@ -36,6 +36,7 @@ Macro::SkillMacro* Skill3Macro;
 Macro::SkillMacro* Skill4Macro;
 StopWatch<milliseconds> PvPStopWatch;
 
+gcroot<CMapleStory^> CMS;
 gcroot<ChangeChannel::CChangeChannel^> CC;
 gcroot<SpawnControl::SPControl^> SPControl;
 gcroot<Packets::CPackets^> CPacket;
@@ -43,95 +44,10 @@ gcroot<Packets::CPackets^> CPacket;
 extern vector<gcroot<SpawnControl::SPControlLocation^>> vSPControl;
 extern vector<gcroot<Packets::CPacketData^>> vPacket;
 
-int getMobCount()
-{
-	return (int) ReadPointer(MobBasePtr, MobCountOffset);
-}
-int getItemCount()
-{
-	return (int) ReadPointer(ItemBasePtr, ItemCountOffset);
-}
-int getPeopleCount()
-{
-	return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);
-}
-int getCharX()
-{
-	return (int) ReadPointer(CharBasePtr,XOffset);
-}
-int getCharY()
-{
-	return (int) ReadPointer(CharBasePtr,XOffset + 4);
-}
-int getCharHP()
-{
-	WritePointer(SettingsBasePtr, HPAlertOffset, 20);
-	return (int) ReadPointer(StatsBasePtr, HPOffset);
-}
-int getCharMP()
-{
-	WritePointer(SettingsBasePtr, MPAlertOffset, 20);
-	return (int) ReadPointer(StatsBasePtr, MPOffset);
-}
-double getCharEXP()
-{
-	return ReadDoublePointer(StatsBasePtr, EXPOffset);
-}
-int getMapID()
-{
-	return (int) ReadPointer(InfoBasePtr, MapIDOffset);
-}
-int getAttackCount()
-{
-	return (int) ReadPointer(CharBasePtr, AttackCountOffset);
-}
-int getTubiValue()
-{
-	return (int) ReadPointer(ServerBasePtr, TubiOffset);
-}
-int getBreathValue()
-{
-	return (int) ReadPointer(CharBasePtr, BreathOffset);
-}
-int getChannel()
-{
-	return (int) ReadPointer(ServerBasePtr, ChannelOffset);
-}
-int getCharpID()
-{
-	if(*(int*)WallBasePtr)	return (int) ReadPointer(CharBasePtr, pIDOffset);
-	else return 0;
-}
-int getKnockBack()
-{
-	if(*(int*)WallBasePtr)	return (int) ReadPointer(getCharpID(), KBOffset);
-	else return 0;
-}
-int getKnockBackX()
-{
-	if(*(int*)WallBasePtr)	return (int) ReadPointer(getCharpID(), KBXOffset);
-	else return 0;
-}
-int getKnockBackY()
-{
-	if(*(int*)WallBasePtr)	return (int) ReadPointer(getCharpID(), KBYOffset);
-	else return 0;
-}
-	
-bool InGame()
-{
-	if(getMapID() > 0)	return true;
-	return false;
-}
-
 //Find Window
 void getMSHWND()
 {
-	while(MapleStoryHWND == NULL)
-	{
-		MapleStoryHWND = FindProcessWindow();
-		Sleep(1500);
-	}
+	while(!CMS->FindProcessWindow());
 }
 
 //Hack CheckBoxes
@@ -227,8 +143,8 @@ void MainForm::cbViewSwears_CheckedChanged(System::Object^  sender, System::Even
 }
 void MainForm::cbItemVac_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::itemvac_x = getCharX();
-	Hacks::itemvac_y = getCharY();
+	Hacks::itemvac_x = CMS->CharX;
+	Hacks::itemvac_y = CMS->CharY;
 	Hacks::cmItemVac.Enable(cbItemVac->Checked);
 }
 void MainForm::cbFMA_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -334,14 +250,14 @@ enum MacroIndex{eAttack, eLoot, eCC, eAutoSkill1, eAutoSkill2, eAutoSkill3, eAut
 bool canAttack()
 {
 	if(CC->Busy) return false;
-	if(getMobCount() >= AutoBotVars::iSawsil && InGame()) return true;
+	if(CMS->MobCount >= AutoBotVars::iSawsil && CMS->InGame) return true;
 	return false;
 }
 bool canLoot()
 {
 	if(CC->Busy) return false;
-	if(getItemCount() < AutoBotVars::iSlwib || !InGame()) return false;
-	if(!WritePointer(ServerBasePtr, TubiOffset, 0)) return false;
+	if(CMS->ItemCount < AutoBotVars::iSlwib || !CMS->InGame) return false;
+	if(!CMS->WritePointer(ServerBasePtr, TubiOffset, 0)) return false;
 	return true;
 }
 BOOL WINAPI canPvP()
@@ -485,6 +401,7 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	CC = gcnew ChangeChannel::CChangeChannel;
 	SPControl= gcnew SpawnControl::SPControl;
 	CPacket = gcnew Packets::CPackets;
+	CMS = gcnew CMapleStory;
 
 	//Start the MacroManager
 	InitializeMacros();
@@ -502,17 +419,17 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 }
 void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
-	this->MobCountLabel->Text =		"Mobs: "		+ getMobCount();
-	this->PeopleCountLabel->Text =	"People: "		+ getPeopleCount();
-	this->CharPosLabel->Text =		"CharPos: ("	+ getCharX() +","+ getCharY()+")";
-	this->ItemCountLabel->Text =	"Items: "		+ getItemCount();
-	this->AttackCountLabel->Text =	"Attacks: "		+ getAttackCount();
-	this->TubiPointerLabel->Text =	"Tubi: "		+ getTubiValue();
-	this->BreathLabel->Text =		"Breath: "		+ getBreathValue();
-	this->lMapID->Text =			"MapID: "		+ getMapID();
-	this->lCharacterpID->Text =		"Char pID: "	+ getCharpID();
-	this->lKnockBack->Text =		"KnockBack: "	+ getKnockBack();
-	this->lKBCoords->Text =			"KB: (" + getKnockBackX() + "," + getKnockBackY() + ")";
+	this->MobCountLabel->Text =		"Mobs: "		+ CMS->MobCount;
+	this->PeopleCountLabel->Text =	"People: "		+ CMS->PeopleCount;
+	this->CharPosLabel->Text =		"CharPos: ("	+ CMS->CharX +","+ CMS->CharY+")";
+	this->ItemCountLabel->Text =	"Items: "		+ CMS->ItemCount;
+	this->AttackCountLabel->Text =	"Attacks: "		+ CMS->AttackCount;
+	this->TubiPointerLabel->Text =	"Tubi: "		+ CMS->Tubi;
+	this->BreathLabel->Text =		"Breath: "		+ CMS->Breath;
+	this->lMapID->Text =			"MapID: "		+ CMS->MapID;
+	this->lCharacterpID->Text =		"Char pID: "	+ CMS->CharpID;
+	this->lKnockBack->Text =		"KnockBack: "	+ CMS->KnockBack;
+	this->lKBCoords->Text =			"KB: (" + CMS->KnockBackX + "," + CMS->KnockBackY + ")";
 	
 	MainForm::AutoPot();
 	MainForm::AutoCC();
@@ -527,7 +444,7 @@ void MainForm::AutoPot()
 {
 	if(HPCheckBox->Checked)
 	{
-		if(getCharHP() <= (int) nudHPValue->Value)
+		if(CMS->CharHP <= (int) nudHPValue->Value)
 		{
 			int HPKey = KeyCodes[HPComboBox->SelectedIndex];
 			PostMessage(MapleStoryHWND, WM_KEYDOWN, HPKey, (MapVirtualKey(HPKey, 0) << 16) + 1);
@@ -535,7 +452,7 @@ void MainForm::AutoPot()
 	}
 	if(MPCheckBox->Checked)
 	{
-		if(getCharMP() <= (int) nudMPValue->Value)
+		if(CMS->CharMP <= (int) nudMPValue->Value)
 		{
 			int MPKey = KeyCodes[HPComboBox->SelectedIndex];
 			PostMessage(MapleStoryHWND, WM_KEYDOWN, MPKey, (MapVirtualKey(MPKey, 0) << 16) + 1);
@@ -544,29 +461,29 @@ void MainForm::AutoPot()
 }
 void MainForm::AutoCC()
 {
-	if(CCPeopleCheckBox->Checked && !CC->Busy && (getPeopleCount() >= (int) nudCCPeople->Value))
+	if(CCPeopleCheckBox->Checked && !CC->Busy && (CMS->PeopleCount >= (int) nudCCPeople->Value))
 		CC->CCSwitch(ChangeChannel::CChangeChannel::CCType(PeopleComboBox->SelectedIndex));
 	
-	if(CCAttacksCheckBox->Checked && !CC->Busy && (getAttackCount() >= (int) nudCCAttacks->Value))
+	if(CCAttacksCheckBox->Checked && !CC->Busy && (CMS->AttackCount >= (int) nudCCAttacks->Value))
 		CC->CCSwitch(ChangeChannel::CChangeChannel::CCType(AttacksComboBox->SelectedIndex));
 }
 void MainForm::RedrawStatBars()
 {
-	if(getCharHP() >= MaxHP || getCharHP() < 0)	MaxHP = getCharHP();
-	if(getCharMP() >= MaxMP || getCharMP() < 0)	MaxMP = getCharMP();
+	if(CMS->CharHP >= MaxHP || CMS->CharHP < 0)	MaxHP = CMS->CharHP;
+	if(CMS->CharMP >= MaxMP || CMS->CharMP < 0)	MaxMP = CMS->CharMP;
 	
-	this->HPLabel->Text = "HP: " + getCharHP() + "/" + MaxHP;
-	this->MPLabel->Text = "MP: " + getCharMP() + "/" + MaxMP;
-	this->EXPLabel->Text = "EXP: " + getCharEXP().ToString("f2") +"%";
+	this->HPLabel->Text = "HP: " + CMS->CharHP + "/" + MaxHP;
+	this->MPLabel->Text = "MP: " + CMS->CharMP + "/" + MaxMP;
+	this->EXPLabel->Text = "EXP: " + CMS->CharEXP.ToString("f2") +"%";
 	
 
 	int lengtOfBars  = 223;
 
-	double HPBarLength = ((double)getCharHP()/(double)MaxHP) * lengtOfBars;
+	double HPBarLength = ((double) CMS->CharHP / (double) MaxHP) * lengtOfBars;
 	this->HPForeground->Width = HPBarLength;
-	double MPBarLength = ((double)getCharMP()/(double)MaxMP) * lengtOfBars;
+	double MPBarLength = ((double) CMS->CharMP / (double) MaxMP) * lengtOfBars;
 	this->MPForeground->Width = MPBarLength;
-	double EXPBarLength = (getCharEXP()/100) * lengtOfBars;
+	double EXPBarLength = (CMS->CharEXP / 100) * lengtOfBars;
 	this->EXPForeground->Width = EXPBarLength;
 }
 void MainForm::MainTabControl_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
@@ -727,9 +644,9 @@ void MainForm::GetSPControlCoordsButton_Click(System::Object^  sender, System::E
 		SendKey(VK_DOWN);
 		Sleep(10);
 	}
-	this->SPControlXTextBox->Text = Convert::ToString(getCharX());
-	this->SPControlYTextBox->Text = Convert::ToString(getCharY());
-	this->SPControlMapIDTextBox->Text = Convert::ToString(getMapID());
+	this->SPControlXTextBox->Text = Convert::ToString(CMS->CharX);
+	this->SPControlYTextBox->Text = Convert::ToString(CMS->CharY);
+	this->SPControlMapIDTextBox->Text = Convert::ToString(CMS->MapID);
 }
 void MainForm::RefreshSPControlListView()
 {
