@@ -2,6 +2,11 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WatyBotRevamp", "WatyBotRevamp\WatyBotRevamp.vcxproj", "{E5812690-3792-4563-90DD-CABC4B18A6DB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{79C2A55C-464A-477D-914C-C70073F49335} = {79C2A55C-464A-477D-914C-C70073F49335}
+		{26B0D4D4-27B8-4A92-B453-732E7D44348A} = {26B0D4D4-27B8-4A92-B453-732E7D44348A}
+		{2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5} = {2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WatyBotInjector", "WatyBotInjector\WatyBotInjector.vcxproj", "{26B0D4D4-27B8-4A92-B453-732E7D44348A}"
 EndProject
@@ -80,6 +85,7 @@ Global
 		{2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5}.Release|Any CPU.ActiveCfg = Release|Win32
 		{2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5}.Release|Mixed Platforms.ActiveCfg = Release|Win32
 		{2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5}.Release|Mixed Platforms.Deploy.0 = Release|Win32
 		{2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5}.Release|Win32.ActiveCfg = Release|Win32
 		{2A0EC0D8-8AAF-46D0-A539-8C5C378CD0E5}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
