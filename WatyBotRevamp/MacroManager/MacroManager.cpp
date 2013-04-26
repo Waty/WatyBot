@@ -33,6 +33,7 @@ AbstractMacro::~AbstractMacro()
 
 bool AbstractMacro::Toggle(bool fStatus)
 {
+	this->m_stopWatch.Start();
 	this->fMacroStatus = fStatus;
 	return true;
 }
