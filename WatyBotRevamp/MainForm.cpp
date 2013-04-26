@@ -247,6 +247,11 @@ void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::
 //Macro's
 Macro::MacroManager macroMan;
 enum MacroIndex{eAttack, eLoot, eCC, eAutoSkill1, eAutoSkill2, eAutoSkill3, eAutoSkill4};
+void SpamKey(int KeyCode)
+{
+	PostMessage(CMS->MSHWND, WM_KEYDOWN, KeyCode, (MapVirtualKey(KeyCode, 0) << 16) + 1);
+	PostMessage(CMS->MSHWND, WM_KEYUP, KeyCode, (MapVirtualKey(KeyCode, 0) << 16) + 1);
+}
 bool canAttack()
 {
 	if(CC->Busy) return false;
@@ -451,7 +456,7 @@ void MainForm::AutoPot()
 		if(CMS->CharHP <= (int) nudHPValue->Value)
 		{
 			int HPKey = KeyCodes[HPComboBox->SelectedIndex];
-			PostMessage(MapleStoryHWND, WM_KEYDOWN, HPKey, (MapVirtualKey(HPKey, 0) << 16) + 1);
+			PostMessage(CMS->MSHWND, WM_KEYDOWN, HPKey, (MapVirtualKey(HPKey, 0) << 16) + 1);
 		}
 	}
 	if(MPCheckBox->Checked)
@@ -459,7 +464,7 @@ void MainForm::AutoPot()
 		if(CMS->CharMP <= (int) nudMPValue->Value)
 		{
 			int MPKey = KeyCodes[HPComboBox->SelectedIndex];
-			PostMessage(MapleStoryHWND, WM_KEYDOWN, MPKey, (MapVirtualKey(MPKey, 0) << 16) + 1);
+			PostMessage(CMS->MSHWND, WM_KEYDOWN, MPKey, (MapVirtualKey(MPKey, 0) << 16) + 1);
 		}
 	}
 }
