@@ -65,7 +65,7 @@ void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkE
 	
 	//Send the CC request
 	CField_SendTransferChannelRequest(TargetChannel);
-	Sleep(2000);
+	Sleep(5000);
 }
 
 void CChangeChannel::CS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
@@ -75,7 +75,9 @@ void CChangeChannel::CS(System::Object^  sender, System::ComponentModel::DoWorkE
 	Sleep(500);
 	String^ strError = String::Empty;
 	CPacket->Send(EnterCashShop, strError);
-	Sleep(3000);
+	Sleep(2500);
+	CPacket->Send(LeaveCashShop, strError);
+	Sleep(5000);
 }
 
 void CChangeChannel::DC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
@@ -84,7 +86,7 @@ void CChangeChannel::DC(System::Object^  sender, System::ComponentModel::DoWorkE
 	{
 		String^ strError = String::Empty;
 		CPacket->Send(ChangeCharacter, strError);
-		Sleep(1000);
+		Sleep(2500);
 	}
 }
 
