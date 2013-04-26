@@ -63,9 +63,12 @@ void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkE
 	//Sleep while breath > 0
 	while(CMS->Breath > 0) Sleep(100);
 	
-	//Send the CC request
-	CField_SendTransferChannelRequest(TargetChannel);
-	Sleep(4000);
+	while(CMS->Channel != TargetChannel && CMS->Channel != -1)
+	{
+		//Send the CC request
+		CField_SendTransferChannelRequest(TargetChannel);
+		Sleep(1000);
+	}
 }
 
 void CChangeChannel::CS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
