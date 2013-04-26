@@ -294,7 +294,7 @@ void AutoSkill(int KeyCodeIndex)
 }
 void TimedCC()
 {
-	if(!CC->Busy) CC->CCSwitch(ChangeChannel::CChangeChannel::CCType::CC);
+	CC->CCSwitch(ChangeChannel::CChangeChannel::CCType(CCMacro->GetValue()));
 }
 void InitializeMacros()
 {
@@ -381,6 +381,7 @@ void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 	this->nudCCTimed->Enabled = !this->CCTimedCheckBox->Checked;
 
 	CCMacro->SetDelay((unsigned int) nudCCTimed->Value * 1000);
+	CCMacro->SetValue(this->TimedComboBox->SelectedIndex);
 	CCMacro->Toggle(CCTimedCheckBox->Checked);
 }
 void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)

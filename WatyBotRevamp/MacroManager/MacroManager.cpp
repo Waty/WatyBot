@@ -44,6 +44,10 @@ void AbstractMacro::SetDelay(unsigned int uDelay)
 {
 	this->m_stopWatch.SetDelay(milliseconds(uDelay));
 }
+int AbstractMacro::GetValue()
+{
+	return nValue;
+}
 void AbstractMacro::SetValue(int nValue)
 {
 	this->nValue = nValue;

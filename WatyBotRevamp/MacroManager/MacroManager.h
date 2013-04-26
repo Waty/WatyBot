@@ -25,6 +25,7 @@ namespace Macro
 		bool Running();
 		void SetDelay(unsigned int uDelay);
 		void SetValue(int nValue);
+		int GetValue();
 		void SetSecondValue(int nValue);
 		void SetCoolDown(unsigned int uCoolDown);
 		void SetPriority(int nPriority);
