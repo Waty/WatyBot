@@ -380,7 +380,7 @@ void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 	this->TimedComboBox->Enabled = !this->CCTimedCheckBox->Checked;
 	this->nudCCTimed->Enabled = !this->CCTimedCheckBox->Checked;
 
-	CCMacro->SetDelay((unsigned int) nudCCTimed->Value);
+	CCMacro->SetDelay((unsigned int) nudCCTimed->Value * 1000);
 	CCMacro->Toggle(CCTimedCheckBox->Checked);
 }
 void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
