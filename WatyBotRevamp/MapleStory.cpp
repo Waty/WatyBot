@@ -15,9 +15,9 @@ unsigned long CMapleStory::ReadPointer(unsigned long ulBase, int iOffset)
 	if(*(int*)WallBasePtr)
 	{
 		__try { return *(unsigned long*)(*(unsigned long*)ulBase + iOffset); }
-		__except (EXCEPTION_EXECUTE_HANDLER) { return 0; }
+		__except (EXCEPTION_EXECUTE_HANDLER) { return -1; }
 	}
-	else return 0;
+	else return -1;
 }
 
 double CMapleStory::ReadDoublePointer(DWORD ulBase, INT iOffset)
