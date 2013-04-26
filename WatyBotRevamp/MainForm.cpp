@@ -27,9 +27,9 @@ using namespace std;
 #define SPControlFileName (WatyBotWorkingDirectory + "spcontrol.xml")
 
 //Macro's
-Macro::AbstractMacro* AttackMacro;
-Macro::AbstractMacro* LootMacro;
-Macro::AbstractMacro* CCMacro;
+Macro::BotMacro* AttackMacro;
+Macro::BotMacro* LootMacro;
+Macro::FunctionalMacro* CCMacro;
 Macro::SkillMacro* Skill1Macro;
 Macro::SkillMacro* Skill2Macro;
 Macro::SkillMacro* Skill3Macro;
@@ -377,6 +377,9 @@ void MainForm::AutoSkill4CheckBox_CheckedChanged(System::Object^  sender, System
 }
 void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
+	this->TimedComboBox->Enabled = !this->CCTimedCheckBox->Checked;
+	this->nudCCTimed->Enabled = !this->CCTimedCheckBox->Checked;
+
 	CCMacro->SetDelay((unsigned int) nudCCTimed->Value);
 	CCMacro->Toggle(CCTimedCheckBox->Checked);
 }
