@@ -3,6 +3,8 @@
 enum cType{asmtype, singleaddy, twoaddys, threeaddys, fouraddys}; 
 enum jumpType{jump, call};
 
+#define MSCRCAddy 0x00D0B264
+bool MSCRCPatched();
 #pragma once
 class CMemory
 {
@@ -16,7 +18,7 @@ public:
 	//--destructor--//
 	~CMemory();
 
-	void Enable(bool enable);
+	bool Enable(bool enable);
 	bool Enabled;
 
 private:

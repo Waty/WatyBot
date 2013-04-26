@@ -1,5 +1,10 @@
 #include "Memory.h"
 
+bool MSCRCPatched()
+{
+	return *(BYTE*)MSCRCAddy == 233;
+}
+
 //Constructors
 CMemory::CMemory(unsigned long ulAddy, unsigned char *bytes, int size) //one addy
 {
@@ -77,10 +82,12 @@ CMemory::~CMemory(void)
 }
 
 //Public Method
-void CMemory::Enable(bool enable)
+bool CMemory::Enable(bool enable)
 {
+	if(!MSCRCPatched()) return false;
 	enable ? this->WriteMem() : this->RestoreMem();
 	this->Enabled = enable;
+	return true;
 }
 
 //Private Methods
