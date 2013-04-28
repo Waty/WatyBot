@@ -467,10 +467,10 @@ void MainForm::AutoPot()
 }
 void MainForm::AutoCC()
 {
-	if(CCPeopleCheckBox->Checked && !CC->Busy && (CMS->PeopleCount >= (int) nudCCPeople->Value))
+	if(CCPeopleCheckBox->Checked && (CMS->PeopleCount >= (int) nudCCPeople->Value))
 		CC->CCSwitch(ChangeChannel::CChangeChannel::CCType(PeopleComboBox->SelectedIndex));
 	
-	if(CCAttacksCheckBox->Checked && !CC->Busy && (CMS->AttackCount >= (int) nudCCAttacks->Value))
+	if(CCAttacksCheckBox->Checked && (CMS->AttackCount >= (int) nudCCAttacks->Value))
 		CC->CCSwitch(ChangeChannel::CChangeChannel::CCType(AttacksComboBox->SelectedIndex));
 }
 void MainForm::RedrawStatBars()
