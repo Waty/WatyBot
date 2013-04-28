@@ -264,15 +264,10 @@ bool canLoot()
 }
 BOOL WINAPI canPvP()
 {
-	if(CC->Busy || UsingPot || UsingAutoSkill)
-		return FALSE;
-
-	if(PvPStopWatch.IsOver())
-	{
-		PvPStopWatch.Start();
-		return TRUE;
-	}
-	return FALSE;
+	if(CC->Busy || UsingPot || UsingAutoSkill || !PvPStopWatch.IsOver()) return FALSE;
+	
+	PvPStopWatch.Start();
+	return TRUE;
 }
 void AutoSkill(int KeyCodeIndex)
 {
