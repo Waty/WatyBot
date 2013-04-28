@@ -62,10 +62,7 @@ void MainForm::cbNoKB_CheckedChanged(System::Object^  sender, System::EventArgs^
 void MainForm::cbPerfectLoot_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	Hacks::cmPerfectLoot.Enable(cbPerfectLoot->Checked);
-}
-void MainForm::cbInstantAirLoot_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	Hacks::cmInstantAirLoot.Enable(cbInstantAirLoot->Checked);
+	Hacks::cmInstantAirLoot.Enable(cbPerfectLoot->Checked);
 }
 void MainForm::cbVacRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {

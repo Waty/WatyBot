@@ -228,7 +228,7 @@ private: System::Windows::Forms::GroupBox^  gbMiscHacks;
 private: System::Windows::Forms::CheckBox^  cbJDA;
 private: System::Windows::Forms::CheckBox^  cbNoBG;
 private: System::Windows::Forms::GroupBox^  gbCharHacks;
-private: System::Windows::Forms::CheckBox^  cbInstantAirLoot;
+
 private: System::Windows::Forms::CheckBox^  cbVacRight;
 
 private: System::Windows::Forms::CheckBox^  cbJumpRight;
@@ -472,7 +472,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->cbUnlimitedMorph = (gcnew System::Windows::Forms::CheckBox());
 			this->cbDojangGodmode = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoKB = (gcnew System::Windows::Forms::CheckBox());
-			this->cbInstantAirLoot = (gcnew System::Windows::Forms::CheckBox());
 			this->cbFusionAttack = (gcnew System::Windows::Forms::CheckBox());
 			this->cbPerfectLoot = (gcnew System::Windows::Forms::CheckBox());
 			this->MobHacks = (gcnew System::Windows::Forms::GroupBox());
@@ -1237,7 +1236,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->gbMiscHacks->Controls->Add(this->cbPinTyper);
 			this->gbMiscHacks->Controls->Add(this->cbJDA);
 			this->gbMiscHacks->Controls->Add(this->cbNoBG);
-			this->gbMiscHacks->Location = System::Drawing::Point(7, 293);
+			this->gbMiscHacks->Location = System::Drawing::Point(7, 273);
 			this->gbMiscHacks->Name = L"gbMiscHacks";
 			this->gbMiscHacks->Size = System::Drawing::Size(310, 127);
 			this->gbMiscHacks->TabIndex = 2;
@@ -1247,7 +1246,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// cbMouseFly
 			// 
 			this->cbMouseFly->AutoSize = true;
-			this->cbMouseFly->Location = System::Drawing::Point(160, 107);
+			this->cbMouseFly->Location = System::Drawing::Point(159, 107);
 			this->cbMouseFly->Name = L"cbMouseFly";
 			this->cbMouseFly->Size = System::Drawing::Size(74, 17);
 			this->cbMouseFly->TabIndex = 13;
@@ -1272,7 +1271,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// cbNoFadeStages
 			// 
 			this->cbNoFadeStages->AutoSize = true;
-			this->cbNoFadeStages->Location = System::Drawing::Point(160, 89);
+			this->cbNoFadeStages->Location = System::Drawing::Point(159, 89);
 			this->cbNoFadeStages->Name = L"cbNoFadeStages";
 			this->cbNoFadeStages->Size = System::Drawing::Size(100, 17);
 			this->cbNoFadeStages->TabIndex = 11;
@@ -1296,7 +1295,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// cbCPUHack
 			// 
 			this->cbCPUHack->AutoSize = true;
-			this->cbCPUHack->Location = System::Drawing::Point(160, 71);
+			this->cbCPUHack->Location = System::Drawing::Point(159, 71);
 			this->cbCPUHack->Name = L"cbCPUHack";
 			this->cbCPUHack->Size = System::Drawing::Size(77, 17);
 			this->cbCPUHack->TabIndex = 7;
@@ -1320,7 +1319,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// cbViewSwears
 			// 
 			this->cbViewSwears->AutoSize = true;
-			this->cbViewSwears->Location = System::Drawing::Point(160, 55);
+			this->cbViewSwears->Location = System::Drawing::Point(159, 55);
 			this->cbViewSwears->Name = L"cbViewSwears";
 			this->cbViewSwears->Size = System::Drawing::Size(87, 17);
 			this->cbViewSwears->TabIndex = 5;
@@ -1332,7 +1331,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// cbLogoSkipper
 			// 
 			this->cbLogoSkipper->AutoSize = true;
-			this->cbLogoSkipper->Location = System::Drawing::Point(160, 37);
+			this->cbLogoSkipper->Location = System::Drawing::Point(159, 37);
 			this->cbLogoSkipper->Name = L"cbLogoSkipper";
 			this->cbLogoSkipper->Size = System::Drawing::Size(89, 17);
 			this->cbLogoSkipper->TabIndex = 4;
@@ -1344,7 +1343,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// cbSitHack
 			// 
 			this->cbSitHack->AutoSize = true;
-			this->cbSitHack->Location = System::Drawing::Point(160, 19);
+			this->cbSitHack->Location = System::Drawing::Point(159, 19);
 			this->cbSitHack->Name = L"cbSitHack";
 			this->cbSitHack->Size = System::Drawing::Size(67, 17);
 			this->cbSitHack->TabIndex = 3;
@@ -1407,12 +1406,11 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->gbCharHacks->Controls->Add(this->cbUnlimitedMorph);
 			this->gbCharHacks->Controls->Add(this->cbDojangGodmode);
 			this->gbCharHacks->Controls->Add(this->cbNoKB);
-			this->gbCharHacks->Controls->Add(this->cbInstantAirLoot);
 			this->gbCharHacks->Controls->Add(this->cbFusionAttack);
 			this->gbCharHacks->Controls->Add(this->cbPerfectLoot);
 			this->gbCharHacks->Location = System::Drawing::Point(7, 6);
 			this->gbCharHacks->Name = L"gbCharHacks";
-			this->gbCharHacks->Size = System::Drawing::Size(310, 182);
+			this->gbCharHacks->Size = System::Drawing::Size(310, 162);
 			this->gbCharHacks->TabIndex = 1;
 			this->gbCharHacks->TabStop = false;
 			this->gbCharHacks->Text = L"Character";
@@ -1440,7 +1438,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// 
 			// nudPVPDelay
 			// 
-			this->nudPVPDelay->Location = System::Drawing::Point(111, 155);
+			this->nudPVPDelay->Location = System::Drawing::Point(111, 136);
 			this->nudPVPDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
 			this->nudPVPDelay->Name = L"nudPVPDelay";
 			this->nudPVPDelay->Size = System::Drawing::Size(42, 20);
@@ -1455,7 +1453,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->ddbPVPSkills->FormattingEnabled = true;
 			this->ddbPVPSkills->Items->AddRange(gcnew cli::array< System::Object^  >(4) {L"Ice Attack (600% dmg, 10 mobs)", L"Ice Smash (1200% dmg, 10 mobs)", 
 				L"Ice Snow Tempest (500% x 4 dmg, 10 mobs)", L"Ice chop (900% dmg, 10 mob count)"});
-			this->ddbPVPSkills->Location = System::Drawing::Point(159, 155);
+			this->ddbPVPSkills->Location = System::Drawing::Point(159, 136);
 			this->ddbPVPSkills->Name = L"ddbPVPSkills";
 			this->ddbPVPSkills->Size = System::Drawing::Size(145, 21);
 			this->ddbPVPSkills->TabIndex = 16;
@@ -1465,7 +1463,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// cbPVP
 			// 
 			this->cbPVP->AutoSize = true;
-			this->cbPVP->Location = System::Drawing::Point(6, 156);
+			this->cbPVP->Location = System::Drawing::Point(6, 137);
 			this->cbPVP->Name = L"cbPVP";
 			this->cbPVP->Size = System::Drawing::Size(111, 17);
 			this->cbPVP->TabIndex = 15;
@@ -1477,7 +1475,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// cbMercedesCombo
 			// 
 			this->cbMercedesCombo->AutoSize = true;
-			this->cbMercedesCombo->Location = System::Drawing::Point(159, 137);
+			this->cbMercedesCombo->Location = System::Drawing::Point(159, 118);
 			this->cbMercedesCombo->Name = L"cbMercedesCombo";
 			this->cbMercedesCombo->Size = System::Drawing::Size(137, 17);
 			this->cbMercedesCombo->TabIndex = 14;
@@ -1489,7 +1487,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// cbNDMining
 			// 
 			this->cbNDMining->AutoSize = true;
-			this->cbNDMining->Location = System::Drawing::Point(6, 137);
+			this->cbNDMining->Location = System::Drawing::Point(6, 118);
 			this->cbNDMining->Name = L"cbNDMining";
 			this->cbNDMining->Size = System::Drawing::Size(104, 17);
 			this->cbNDMining->TabIndex = 13;
@@ -1501,7 +1499,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// cbNFA
 			// 
 			this->cbNFA->AutoSize = true;
-			this->cbNFA->Location = System::Drawing::Point(159, 121);
+			this->cbNFA->Location = System::Drawing::Point(159, 102);
 			this->cbNFA->Name = L"cbNFA";
 			this->cbNFA->Size = System::Drawing::Size(99, 17);
 			this->cbNFA->TabIndex = 12;
@@ -1513,7 +1511,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// cbFMA
 			// 
 			this->cbFMA->AutoSize = true;
-			this->cbFMA->Location = System::Drawing::Point(159, 103);
+			this->cbFMA->Location = System::Drawing::Point(159, 84);
 			this->cbFMA->Name = L"cbFMA";
 			this->cbFMA->Size = System::Drawing::Size(100, 17);
 			this->cbFMA->TabIndex = 11;
@@ -1525,7 +1523,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// cbUA
 			// 
 			this->cbUA->AutoSize = true;
-			this->cbUA->Location = System::Drawing::Point(6, 121);
+			this->cbUA->Location = System::Drawing::Point(6, 102);
 			this->cbUA->Name = L"cbUA";
 			this->cbUA->Size = System::Drawing::Size(103, 17);
 			this->cbUA->TabIndex = 8;
@@ -1538,7 +1536,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// cbItemVac
 			// 
 			this->cbItemVac->AutoSize = true;
-			this->cbItemVac->Location = System::Drawing::Point(6, 103);
+			this->cbItemVac->Location = System::Drawing::Point(6, 84);
 			this->cbItemVac->Name = L"cbItemVac";
 			this->cbItemVac->Size = System::Drawing::Size(68, 17);
 			this->cbItemVac->TabIndex = 10;
@@ -1562,7 +1560,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// cbNDAllAttacks
 			// 
 			this->cbNDAllAttacks->AutoSize = true;
-			this->cbNDAllAttacks->Location = System::Drawing::Point(6, 85);
+			this->cbNDAllAttacks->Location = System::Drawing::Point(6, 66);
 			this->cbNDAllAttacks->Name = L"cbNDAllAttacks";
 			this->cbNDAllAttacks->Size = System::Drawing::Size(104, 17);
 			this->cbNDAllAttacks->TabIndex = 8;
@@ -1575,7 +1573,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// cbUnlimitedMorph
 			// 
 			this->cbUnlimitedMorph->AutoSize = true;
-			this->cbUnlimitedMorph->Location = System::Drawing::Point(159, 68);
+			this->cbUnlimitedMorph->Location = System::Drawing::Point(159, 49);
 			this->cbUnlimitedMorph->Name = L"cbUnlimitedMorph";
 			this->cbUnlimitedMorph->Size = System::Drawing::Size(102, 17);
 			this->cbUnlimitedMorph->TabIndex = 7;
@@ -1599,7 +1597,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// cbNoKB
 			// 
 			this->cbNoKB->AutoSize = true;
-			this->cbNoKB->Location = System::Drawing::Point(6, 68);
+			this->cbNoKB->Location = System::Drawing::Point(6, 49);
 			this->cbNoKB->Name = L"cbNoKB";
 			this->cbNoKB->Size = System::Drawing::Size(99, 17);
 			this->cbNoKB->TabIndex = 5;
@@ -1608,22 +1606,10 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->cbNoKB->UseVisualStyleBackColor = true;
 			this->cbNoKB->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoKB_CheckedChanged);
 			// 
-			// cbInstantAirLoot
-			// 
-			this->cbInstantAirLoot->AutoSize = true;
-			this->cbInstantAirLoot->Location = System::Drawing::Point(159, 50);
-			this->cbInstantAirLoot->Name = L"cbInstantAirLoot";
-			this->cbInstantAirLoot->Size = System::Drawing::Size(97, 17);
-			this->cbInstantAirLoot->TabIndex = 2;
-			this->cbInstantAirLoot->Text = L"Instant Air Loot";
-			this->InfoToolTip->SetToolTip(this->cbInstantAirLoot, L"Let\'s you loot instantly, doesn\'t work with Perfect Loot");
-			this->cbInstantAirLoot->UseVisualStyleBackColor = true;
-			this->cbInstantAirLoot->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbInstantAirLoot_CheckedChanged);
-			// 
 			// cbFusionAttack
 			// 
 			this->cbFusionAttack->AutoSize = true;
-			this->cbFusionAttack->Location = System::Drawing::Point(159, 85);
+			this->cbFusionAttack->Location = System::Drawing::Point(159, 66);
 			this->cbFusionAttack->Name = L"cbFusionAttack";
 			this->cbFusionAttack->Size = System::Drawing::Size(91, 17);
 			this->cbFusionAttack->TabIndex = 0;
@@ -1636,7 +1622,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// cbPerfectLoot
 			// 
 			this->cbPerfectLoot->AutoSize = true;
-			this->cbPerfectLoot->Location = System::Drawing::Point(6, 50);
+			this->cbPerfectLoot->Location = System::Drawing::Point(159, 31);
 			this->cbPerfectLoot->Name = L"cbPerfectLoot";
 			this->cbPerfectLoot->Size = System::Drawing::Size(84, 17);
 			this->cbPerfectLoot->TabIndex = 1;
@@ -1655,7 +1641,7 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->MobHacks->Controls->Add(this->cbJumpRight);
 			this->MobHacks->Controls->Add(this->cbWalkRight);
 			this->MobHacks->Controls->Add(this->cbVacRight);
-			this->MobHacks->Location = System::Drawing::Point(7, 194);
+			this->MobHacks->Location = System::Drawing::Point(7, 174);
 			this->MobHacks->Name = L"MobHacks";
 			this->MobHacks->Size = System::Drawing::Size(310, 93);
 			this->MobHacks->TabIndex = 0;
@@ -2605,7 +2591,6 @@ private: System::Void GetSPControlCoordsButton_Click(System::Object^  sender, Sy
 private: System::Void cbFusionAttack_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNoKB_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbPerfectLoot_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbInstantAirLoot_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbVacRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbWalkRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbJumpRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
