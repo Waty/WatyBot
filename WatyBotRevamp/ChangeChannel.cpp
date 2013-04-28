@@ -41,6 +41,17 @@ void CChangeChannel::CCSwitch(CCType type)
 	}
 }
 
+//Generate a random int to CC to + check if it is a different channel
+void CChangeChannel::GenerateRandomChannel()
+{
+	do
+	{
+		srand (GetCurrentTime());
+		TargetChannel = rand()%14;
+	}		
+	while(TargetChannel == StartChannel);
+}
+
 void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
 	if(!CMS->InGame)
@@ -52,22 +63,21 @@ void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkE
 	//Store the currrent Channel
 	StartChannel = CMS->Channel;
 
-	//Generate a random int to CC to + check if it is a different channel
-	do
-	{
-		srand (GetCurrentTime());
-		TargetChannel = rand()%14;
-	}		
-	while(TargetChannel == StartChannel);
+	GenerateRandomChannel();
 
 	//Sleep while breath > 0
 	while(CMS->Breath > 0) Sleep(100);
 	
+	int i = 0;
 	while(CMS->Channel != TargetChannel && CMS->Channel != -1)
 	{
+		//if the CC didn't happen after trying 10 times, Generate new random channel
+		if(i > 10) GenerateRandomChannel();
+
 		//Send the CC request
 		CField_SendTransferChannelRequest(TargetChannel);
 		Sleep(1000);
+		i++;
 	}
 }
 

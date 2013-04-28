@@ -20,6 +20,7 @@ namespace ChangeChannel
 		void CC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
 		void DC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
 		void CS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
+		void GenerateRandomChannel();
 		property int StartChannel;
 		property int TargetChannel;
 	};
