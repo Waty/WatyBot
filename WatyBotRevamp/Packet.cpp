@@ -19,8 +19,6 @@ DWORD dwMSSendMethod = SendAddy;// + 5;
 DWORD dwMSSendObject = *(PDWORD)(SendClassAddy+2);
 DWORD dwMSSendRetVal = SendAddy - 13;
 
-vector<gcroot<CPacketData^>> vPacket;
-
 CPacketData::CPacketData(String^ Name, String^ Data)
 {
 	this->Name = Name;
@@ -30,23 +28,25 @@ CPacketData::CPacketData(String^ Name, String^ Data)
 CPackets::CPackets()
 {
 	timer = gcnew Windows::Forms::Timer;
+	this->Items = gcnew ArrayList; 
 }
 
 void CPackets::Add(String^ name, String^ data)
 {
-	CPacketData^ packet = gcnew CPacketData(name, data);
-	vPacket.push_back(packet);
+	this->Items->Add(gcnew CPacketData(name, data));
 }
 
 void CPackets::Delete(int i)
 {
-	vPacket.erase(vPacket.begin() + i);
+	this->Items->RemoveAt(i);
 }
 
 void CPackets::Edit(int i, String^ name, String^ data)
 {
-	vPacket.at(i)->Name = name;
-	vPacket.at(i)->Data = data;
+	CPacketData^ p = safe_cast<CPacketData^>(this->Items[i]);
+	p->Name = name;
+	p->Data = data;
+	this->Items[i] = p;
 }
 
 void CPackets::Save(String^ filename)
@@ -55,8 +55,10 @@ void CPackets::Save(String^ filename)
 	using boost::property_tree::ptree;
 	ptree pt;
 
-	for(CPacketData^ p : vPacket)
+	IEnumerator^ enumerator = this->Items->GetEnumerator();
+	while(enumerator->MoveNext())
 	{
+		CPacketData^ p = safe_cast<CPacketData^>(enumerator->Current);
         ptree & node = pt.add("packetlist.packet", "");
 		node.put("name", marshal_as<string>(p->Name));
 		node.put("data", marshal_as<string>(p->Data));
@@ -76,8 +78,10 @@ void CPackets::Load(String^ filename)
 		{
 			if(v.first == "packet")
 			{
-				CPacketData^ p = gcnew CPacketData(marshal_as<String^>(v.second.get<string>("name")), marshal_as<String^>(v.second.get<string>("data")));
-				vPacket.push_back(p);
+				this->Items->Add(gcnew CPacketData(
+					marshal_as<String^>(v.second.get<string>("name")),
+					marshal_as<String^>(v.second.get<string>("data"))
+					));
 			}
 		}
 	}

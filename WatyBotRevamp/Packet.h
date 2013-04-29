@@ -24,6 +24,8 @@ struct COutPacket
 namespace Packets
 {
 	using namespace System;
+	using namespace System::Collections;
+
 	public ref class CPacketData sealed
 	{
 	public:
@@ -47,6 +49,7 @@ namespace Packets
 		bool Send();
 		void StartSpamming(int times, int delay);
 		void StopSpamming();
+		property ArrayList^ Items;
 		property bool IsSpamming
 		{
 			bool get(){return timer->Enabled;}

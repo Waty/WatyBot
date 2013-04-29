@@ -20,6 +20,7 @@ using namespace WatyBotRevamp;
 using namespace msclr::interop;
 using namespace System::IO;
 using namespace std;
+using namespace Packets;
 
 #define WatyBotWorkingDirectory "WatyBot\\"
 #define SettingsFileName (WatyBotWorkingDirectory + "settings.ini")
@@ -39,10 +40,9 @@ StopWatch<milliseconds> PvPStopWatch;
 gcroot<CMapleStory^> CMS;
 gcroot<ChangeChannel::CChangeChannel^> CC;
 gcroot<SpawnControl::SPControl^> SPControl;
-gcroot<Packets::CPackets^> CPacket;
+gcroot<CPackets^> CPacket;
 
 extern vector<gcroot<SpawnControl::SPControlLocation^>> vSPControl;
-extern vector<gcroot<Packets::CPacketData^>> vPacket;
 
 //Find Window
 void getMSHWND()
@@ -284,9 +284,7 @@ void AutoSkill(int KeyCodeIndex)
 	else
 	{
 		//Send Packet
-		String^ strError;
-		if(!CPacket->Send(vPacket.at(KeyCodeIndex - KeyCodesSize)->Data, strError))
-			ShowError(strError);
+		CPacket->Send(safe_cast<CPacketData^>(CPacket->Items[KeyCodeIndex - KeyCodesSize]));
 	}
 }
 void TimedCC()
@@ -401,7 +399,7 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 
 	CC = gcnew ChangeChannel::CChangeChannel;
 	SPControl= gcnew SpawnControl::SPControl;
-	CPacket = gcnew Packets::CPackets;
+	CPacket = gcnew CPackets;
 	CMS = gcnew CMapleStory;
 
 	//Start the MacroManager
@@ -542,7 +540,7 @@ void MainForm::SelectPacketForEditingComboBox_SelectedIndexChanged(System::Objec
 {
 	if(SelectPacketForEditingComboBox->SelectedIndex >= 0)
 	{
-		Packets::CPacketData^ p = vPacket.at(SelectPacketForEditingComboBox->SelectedIndex);
+		CPacketData^ p = safe_cast<CPacketData^>(CPacket->Items[SelectPacketForEditingComboBox->SelectedIndex]);
 		this->EditPacketNameTextBox->Text = p->Name;
 		this->EditPacketPacketTextBox->Text = p->Data;
 	}
@@ -563,7 +561,7 @@ void MainForm::bStopSpamming_Click(System::Object^  sender, System::EventArgs^  
 }
 void MainForm::PacketSelectBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	CPacket->SelectedPacket = vPacket.at(PacketSelectBox->SelectedIndex);
+	CPacket->SelectedPacket = safe_cast<CPacketData^>(CPacket->Items[PacketSelectBox->SelectedIndex]);
 }
 void MainForm::RefreshComboBoxes()
 {	
@@ -585,20 +583,17 @@ void MainForm::RefreshComboBoxes()
 	this->AutoSkill4ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 
 	//refresh comboboxes
-	for(Packets::CPacketData^ p : vPacket)
+	IEnumerator^ enumerator = CPacket->Items->GetEnumerator();
+	while(enumerator->MoveNext())
 	{
-		try
-		{
-			String^ PacketName = p->Name;
-			this->PacketSelectBox->Items->Add(PacketName);
-			this->SelectPacketForEditingComboBox->Items->Add(PacketName);
-			this->DeletePacketComboBox->Items->Add(PacketName);
-			this->AutoSkill1ComboBox->Items->Add(PacketName);
-			this->AutoSkill2ComboBox->Items->Add(PacketName);
-			this->AutoSkill3ComboBox->Items->Add(PacketName);
-			this->AutoSkill4ComboBox->Items->Add(PacketName);
-		}
-		catch(...){};
+		String^ PacketName = safe_cast<CPacketData^>(enumerator->Current)->Name;
+		this->PacketSelectBox->Items->Add(PacketName);
+		this->SelectPacketForEditingComboBox->Items->Add(PacketName);
+		this->DeletePacketComboBox->Items->Add(PacketName);
+		this->AutoSkill1ComboBox->Items->Add(PacketName);
+		this->AutoSkill2ComboBox->Items->Add(PacketName);
+		this->AutoSkill3ComboBox->Items->Add(PacketName);
+		this->AutoSkill4ComboBox->Items->Add(PacketName);
 	}	
 }
 
