@@ -8,10 +8,9 @@
 using namespace msclr::interop;
 using namespace SpawnControl;
 
-std::vector<gcroot<SPControlLocation^>> vSPControl;
-
 void SPControl::Load(System::String^ filename)
 {
+	if(!Locations) Locations = gcnew ArrayList;
 	using namespace System::IO;
 	if(!File::Exists(filename)) return;
 	using boost::property_tree::ptree;
@@ -28,7 +27,7 @@ void SPControl::Load(System::String^ filename)
 				loc->MapId = v.second.get<int>("mapid");
 				loc->X = v.second.get<int>("x");
 				loc->Y = v.second.get<int>("y");
-				vSPControl.push_back(loc);
+				Locations->Add(loc);
 			}	
 		}
 	}
@@ -41,12 +40,12 @@ void SPControl::AddLocation(System::String^ name, int ID, int x, int y)
 	SP->MapId = ID;
 	SP->X = x;
 	SP->Y = y;
-	vSPControl.push_back(SP);
+	Locations->Add(SP);
 }
 
 void SPControl::EditLocation(int index, System::String^ name, int mapid, int x, int y)
 {
-	SPControlLocation^ SP = vSPControl.at(index);
+	SPControlLocation^ SP = safe_cast<SPControlLocation^>(Locations[index]);
 	SP->Name = name;
 	SP->MapId = mapid;
 	SP->X = x;
@@ -56,7 +55,7 @@ void SPControl::EditLocation(int index, System::String^ name, int mapid, int x, 
 
 void SPControl::DeleteLocation(int i)
 {
-	vSPControl.erase(vSPControl.begin() + i);
+	Locations->RemoveAt(i);
 }
 
 void SPControl::Save(System::String^ filename)
@@ -65,7 +64,7 @@ void SPControl::Save(System::String^ filename)
 	using boost::property_tree::ptree;
 	ptree pt;
 
-	for(SPControlLocation^ SP : vSPControl)
+	for each(SPControlLocation^ SP in Locations)
 	{
         ptree & node = pt.add("spcontrol.location", "");
 		node.put("mapname", marshal_as<std::string>(SP->Name));

@@ -1,4 +1,5 @@
 #pragma once
+using namespace System::Collections;
 
 namespace SpawnControl
 {
@@ -16,6 +17,7 @@ namespace SpawnControl
 	public:
 		property System::String^ Title;
 		property System::String^ Description;
+		property ArrayList^ Locations;
 
 		void Load(System::String^ filename);
 		void AddLocation(System::String^ name, int ID, int x, int y);

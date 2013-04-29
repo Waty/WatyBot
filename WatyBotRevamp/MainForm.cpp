@@ -21,6 +21,7 @@ using namespace msclr::interop;
 using namespace System::IO;
 using namespace std;
 using namespace Packets;
+using namespace SpawnControl;
 
 #define WatyBotWorkingDirectory "WatyBot\\"
 #define SettingsFileName (WatyBotWorkingDirectory + "settings.ini")
@@ -39,10 +40,8 @@ StopWatch<milliseconds> PvPStopWatch;
 
 gcroot<CMapleStory^> CMS;
 gcroot<ChangeChannel::CChangeChannel^> CC;
-gcroot<SpawnControl::SPControl^> SPControl;
+gcroot<SPControl^> CSPControl;
 gcroot<CPackets^> CPacket;
-
-extern vector<gcroot<SpawnControl::SPControlLocation^>> vSPControl;
 
 //Find Window
 void getMSHWND()
@@ -398,7 +397,7 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	NewThread(getMSHWND);
 
 	CC = gcnew ChangeChannel::CChangeChannel;
-	SPControl= gcnew SpawnControl::SPControl;
+	CSPControl = gcnew SpawnControl::SPControl;
 	CPacket = gcnew CPackets;
 	CMS = gcnew CMapleStory;
 
@@ -407,7 +406,7 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 
 	if(!Directory::Exists("WatyBot"))	Directory::CreateDirectory("WatyBot");
 	if(File::Exists(PacketFileName))	CPacket->Load(PacketFileName);
-	if(File::Exists(SPControlFileName))	SPControl->Load(SPControlFileName);
+	if(File::Exists(SPControlFileName))	CSPControl->Load(SPControlFileName);
 	if(File::Exists(SettingsFileName))	LoadSettings();
 	RefreshComboBoxes();
 	RefreshSPControlListView();
@@ -494,7 +493,7 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 {
 	macroMan.ClearMacros();
 	macroMan.Stop();
-	SPControl->Save(SPControlFileName);
+	CSPControl->Save(SPControlFileName);
 	CPacket->Save(PacketFileName);
 	SaveSettings();
 
@@ -583,10 +582,9 @@ void MainForm::RefreshComboBoxes()
 	this->AutoSkill4ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 
 	//refresh comboboxes
-	IEnumerator^ enumerator = CPacket->Items->GetEnumerator();
-	while(enumerator->MoveNext())
+	for each(CPacketData^ p in	CPacket->Items) 
 	{
-		String^ PacketName = safe_cast<CPacketData^>(enumerator->Current)->Name;
+		String^ PacketName = p->Name;
 		this->PacketSelectBox->Items->Add(PacketName);
 		this->SelectPacketForEditingComboBox->Items->Add(PacketName);
 		this->DeletePacketComboBox->Items->Add(PacketName);
@@ -612,8 +610,8 @@ void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventAr
 		ShowWarning("You forgot to fill in a textbox...");
 	else
 	{
-		SPControl->AddLocation(name, mapid, x, y);
-		SPControl->Save(SPControlFileName);
+		CSPControl->AddLocation(name, mapid, x, y);
+		CSPControl->Save(SPControlFileName);
 		RefreshSPControlListView();
 	}
 }
@@ -626,8 +624,8 @@ void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventA
 		switch(MessageBox::Show("Are you sure you want to delete this location?", "Please Confirm", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
 		{
 		case ::DialogResult::Yes:
-			SPControl->DeleteLocation(SPControlListView->Items->IndexOf(L));
-			SPControl->Save(SPControlFileName);
+			CSPControl->DeleteLocation(SPControlListView->Items->IndexOf(L));
+			CSPControl->Save(SPControlFileName);
 			RefreshSPControlListView();
 			break;
 		}
@@ -651,7 +649,7 @@ void MainForm::RefreshSPControlListView()
 	this->SPControlMapIDTextBox->Clear();
 	this->SPControlXTextBox->Clear();
 	this->SPControlYTextBox->Clear();
-	for(SpawnControl::SPControlLocation^ SP : vSPControl)
+	for each(SPControlLocation^ SP in CSPControl->Locations)
 	{
 		ListViewItem^ item = gcnew ListViewItem(SP->Name);
 		item->SubItems->Add(Convert::ToString(SP->MapId));
@@ -803,7 +801,7 @@ void MainForm::LoadSettings()
 void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	MainForm::SaveSettings();
-	SPControl->Save(SPControlFileName);
+	CSPControl->Save(SPControlFileName);
 	CPacket->Save(PacketFileName);
 }
 

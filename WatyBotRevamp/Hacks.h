@@ -3,9 +3,9 @@
 #include "MapleStory.h"
 
 extern BOOL WINAPI canPvP();
-extern std::vector<gcroot<SpawnControl::SPControlLocation^>> vSPControl;
 extern gcroot<ChangeChannel::CChangeChannel^> CC;
 extern gcroot<CMapleStory^> CMS;
+extern gcroot<SpawnControl::SPControl^> CSPControl;
 
 namespace Hacks
 {
@@ -152,7 +152,7 @@ namespace Hacks
 	BOOL WINAPI GetCoords()
 	{
 		int iMapID = CMS->MapID;
-		for(SpawnControl::SPControlLocation^ location : vSPControl)
+		for each(SpawnControl::SPControlLocation^ location in CSPControl->Locations)
 		{
 			if( iMapID == location->MapId )
 			{
