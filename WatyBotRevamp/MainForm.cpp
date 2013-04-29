@@ -257,8 +257,8 @@ bool canAttack()
 }
 bool canLoot()
 {
-	if(CC->Busy) return false;
-	if(CMS->ItemCount < AutoBotVars::iSlwib || !CMS->InGame) return false;
+	if(!CMS->InGame) return false;
+	if(CMS->ItemCount < AutoBotVars::iSlwib) return false;
 	if(!CMS->WritePointer(ServerBasePtr, TubiOffset, 0)) return false;
 	return true;
 }
