@@ -397,7 +397,7 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	NewThread(getMSHWND);
 
 	CC = gcnew ChangeChannel::CChangeChannel;
-	CSPControl = gcnew SpawnControl::SPControl;
+	CSPControl = LoadSPControl(SPControlFileName);
 	CPacket = gcnew CPackets;
 	CMS = gcnew CMapleStory;
 
@@ -406,7 +406,6 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 
 	if(!Directory::Exists("WatyBot"))	Directory::CreateDirectory("WatyBot");
 	if(File::Exists(PacketFileName))	CPacket->Load(PacketFileName);
-	if(File::Exists(SPControlFileName))	CSPControl->Load(SPControlFileName);
 	if(File::Exists(SettingsFileName))	LoadSettings();
 	RefreshComboBoxes();
 	RefreshSPControlListView();
@@ -435,8 +434,9 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	MainForm::HotKeys();
 
 	//Set the correct state of the PacketSpammer Buttons
+	if(AttackMacro != nullptr){
 	bStopSpamming->Visible = CPacket->IsSpamming;
-	bStartSpamming->Visible = !CPacket->IsSpamming;
+	bStartSpamming->Visible = !CPacket->IsSpamming;}
 }
 void MainForm::AutoPot()
 {
@@ -493,7 +493,7 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 {
 	macroMan.ClearMacros();
 	macroMan.Stop();
-	CSPControl->Save(SPControlFileName);
+	SaveSPControl(SPControlFileName, CSPControl);
 	CPacket->Save(PacketFileName);
 	SaveSettings();
 
@@ -607,13 +607,14 @@ void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventAr
 	int x = Convert::ToInt32(SPControlXTextBox->Text);
 	int y = Convert::ToInt32(SPControlYTextBox->Text);
 	if(name == "" || !mapid || !x || !y)
-		ShowWarning("You forgot to fill in a textbox...");
-	else
 	{
-		CSPControl->AddLocation(name, mapid, x, y);
-		CSPControl->Save(SPControlFileName);
-		RefreshSPControlListView();
+		ShowWarning("You forgot to fill in a textbox...");
+		return;
 	}
+
+	CSPControl->AddLocation(name, mapid, x, y);
+	SaveSPControl(SPControlFileName, CSPControl);
+	RefreshSPControlListView();
 }
 void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
@@ -625,7 +626,7 @@ void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventA
 		{
 		case ::DialogResult::Yes:
 			CSPControl->DeleteLocation(SPControlListView->Items->IndexOf(L));
-			CSPControl->Save(SPControlFileName);
+			SaveSPControl(SPControlFileName, CSPControl);
 			RefreshSPControlListView();
 			break;
 		}
@@ -649,6 +650,7 @@ void MainForm::RefreshSPControlListView()
 	this->SPControlMapIDTextBox->Clear();
 	this->SPControlXTextBox->Clear();
 	this->SPControlYTextBox->Clear();
+	if(CSPControl->Locations == nullptr) return;
 	for each(SPControlLocation^ SP in CSPControl->Locations)
 	{
 		ListViewItem^ item = gcnew ListViewItem(SP->Name);
@@ -801,7 +803,7 @@ void MainForm::LoadSettings()
 void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	MainForm::SaveSettings();
-	CSPControl->Save(SPControlFileName);
+	SaveSPControl(SPControlFileName, CSPControl);
 	CPacket->Save(PacketFileName);
 }
 

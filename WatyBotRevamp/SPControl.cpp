@@ -1,36 +1,56 @@
+#include <Windows.h>
 #include "SPControl.h"
-#include <string>
-#include <vector>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/xml_parser.hpp>
-#include <msclr/marshal_cppstd.h>
-
-using namespace msclr::interop;
 using namespace SpawnControl;
+using namespace System::IO;
+using namespace System::Windows::Forms;
 
-void SPControl::Load(System::String^ filename)
+SPControl^ SpawnControl::LoadSPControl(System::String^ filename)
 {
-	if(!Locations) Locations = gcnew ArrayList;
-	using namespace System::IO;
-	if(!File::Exists(filename)) return;
-	using boost::property_tree::ptree;
-	ptree pt;
-	read_xml(marshal_as<std::string>(filename), pt);
-	if(!pt.empty())
+	if(!File::Exists(filename))
+		return gcnew SPControl;
+
+	TextReader^ reader = gcnew StreamReader(filename);
+	try
 	{
-		for(ptree::value_type const& v : pt.get_child("spcontrol"))
-		{
-			if(v.first == "location")
-			{
-				SPControlLocation^ loc = gcnew SPControlLocation();
-				loc->Name = marshal_as<System::String^>(v.second.get<std::string>("mapname"));
-				loc->MapId = v.second.get<int>("mapid");
-				loc->X = v.second.get<int>("x");
-				loc->Y = v.second.get<int>("y");
-				Locations->Add(loc);
-			}	
-		}
+		XmlSerializer^ serializer = gcnew XmlSerializer(SPControl::typeid);
+		return safe_cast<SPControl^>(serializer->Deserialize(reader));
 	}
+	catch(System::Exception^)
+	{
+		switch(MessageBox::Show("WatyBot Failed in loading your config for SPControl :( /n this can be because you just upgraded to a new version of WatyBot, or because the file got corrupted /n Do you want to delete the file to fix the problem?", "Error in loading SPControl", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
+		{
+		case ::DialogResult::Yes:
+			File::Delete(filename);
+			return gcnew SPControl;
+			break;
+
+		case ::DialogResult::No:
+			TerminateProcess(GetCurrentProcess(), 0);
+			ExitProcess(0);
+			break;
+		}
+
+	}
+	finally{reader->Close();}
+}
+
+void SpawnControl::SaveSPControl(System::String^ filename, SPControl^ sp)
+{
+	TextWriter^ writer;
+	try
+	{
+		if(!File::Exists(filename)) return;
+		XmlSerializer^ serializer = gcnew XmlSerializer( SPControl::typeid );
+		writer = gcnew StreamWriter( filename );
+		serializer->Serialize(writer, sp);
+	}
+	catch(System::Exception^){}
+	finally{writer->Close();}
+}
+
+SPControl::SPControl()
+{
+	Locations = gcnew ArrayList;
 }
 
 void SPControl::AddLocation(System::String^ name, int ID, int x, int y)
@@ -56,21 +76,4 @@ void SPControl::EditLocation(int index, System::String^ name, int mapid, int x, 
 void SPControl::DeleteLocation(int i)
 {
 	Locations->RemoveAt(i);
-}
-
-void SPControl::Save(System::String^ filename)
-{
-	using namespace System::IO;
-	using boost::property_tree::ptree;
-	ptree pt;
-
-	for each(SPControlLocation^ SP in Locations)
-	{
-        ptree & node = pt.add("spcontrol.location", "");
-		node.put("mapname", marshal_as<std::string>(SP->Name));
-		node.put("mapid", SP->MapId);
-		node.put("x", SP->X);
-		node.put("y", SP->Y);
-    }
-	write_xml(marshal_as<std::string>(filename), pt);
 }
