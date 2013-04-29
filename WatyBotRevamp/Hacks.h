@@ -149,11 +149,8 @@ namespace Hacks
 	/////Spawn Control
 	DWORD dwSPControlRet = SPControlAddy + 6;
 	int spawn_x, spawn_y;
-	bool doSPControl;
 	BOOL WINAPI GetCoords()
 	{
-		CC->FinishedCCing = true;
-		if(!doSPControl) return FALSE;
 		int iMapID = CMS->MapID;
 		for(SpawnControl::SPControlLocation^ location : vSPControl)
 		{
