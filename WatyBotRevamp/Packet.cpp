@@ -55,10 +55,8 @@ void CPackets::Save(String^ filename)
 	using boost::property_tree::ptree;
 	ptree pt;
 
-	IEnumerator^ enumerator = this->Items->GetEnumerator();
-	while(enumerator->MoveNext())
+	for each(CPacketData^ p in Items)
 	{
-		CPacketData^ p = safe_cast<CPacketData^>(enumerator->Current);
         ptree & node = pt.add("packetlist.packet", "");
 		node.put("name", marshal_as<string>(p->Name));
 		node.put("data", marshal_as<string>(p->Data));
