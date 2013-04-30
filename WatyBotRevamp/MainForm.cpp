@@ -398,14 +398,13 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 
 	CC = gcnew ChangeChannel::CChangeChannel;
 	CSPControl = LoadSPControl(SPControlFileName);
-	CPacket = gcnew CPackets;
+	CPacket = LoadPackets(PacketFileName);;
 	CMS = gcnew CMapleStory;
 
 	//Start the MacroManager
 	InitializeMacros();
 
 	if(!Directory::Exists("WatyBot"))	Directory::CreateDirectory("WatyBot");
-	if(File::Exists(PacketFileName))	CPacket->Load(PacketFileName);
 	if(File::Exists(SettingsFileName))	LoadSettings();
 	RefreshComboBoxes();
 	RefreshSPControlListView();
@@ -494,7 +493,7 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 	macroMan.ClearMacros();
 	macroMan.Stop();
 	SaveSPControl(SPControlFileName, CSPControl);
-	CPacket->Save(PacketFileName);
+	SavePackets(PacketFileName, CPacket);
 	SaveSettings();
 
 	switch(MessageBox::Show("Close MapleStory too?", "Terminate Maple?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
@@ -518,19 +517,19 @@ void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs
 void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	CPacket->Add(this->AddPacketNameTextBox->Text, this->AddPacketPacketTextBox->Text);
-	ShowInfo("Packet was added!");
-	CPacket->Save(PacketFileName);
+	SavePackets(PacketFileName, CPacket);
 	RefreshComboBoxes();
+	ShowInfo("Packet was added!");
 }
 void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	//delete packet from vector
+	//delete packet from ArrayList
 	switch(MessageBox::Show("Are you sure you want to delete this packet?", "Please Confirm", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
 	{
 	case ::DialogResult::Yes:
 		CPacket->Delete(DeletePacketComboBox->SelectedIndex);
 		ShowInfo("Packet was deleted succesfully!");
-		CPacket->Save(PacketFileName);
+		SavePackets(PacketFileName, CPacket);
 		RefreshComboBoxes();
 		break;
 	}	
@@ -547,7 +546,7 @@ void MainForm::SelectPacketForEditingComboBox_SelectedIndexChanged(System::Objec
 void MainForm::SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	CPacket->Edit(SelectPacketForEditingComboBox->SelectedIndex, EditPacketNameTextBox->Text, EditPacketPacketTextBox->Text);
-	CPacket->Save(PacketFileName);
+	SavePackets(PacketFileName, CPacket);
 	RefreshComboBoxes();
 }
 void MainForm::SpamsPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
@@ -804,7 +803,7 @@ void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  
 {
 	MainForm::SaveSettings();
 	SaveSPControl(SPControlFileName, CSPControl);
-	CPacket->Save(PacketFileName);
+	SavePackets(PacketFileName, CPacket);
 }
 
 //Hot Keys

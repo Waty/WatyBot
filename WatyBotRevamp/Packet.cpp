@@ -1,16 +1,9 @@
-#include <Windows.h>
 #include "Packet.h"
 #include "Pointers.h" // where i store stuff like SendAddy and SendClassAddy
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/xml_parser.hpp>
-#include <msclr/marshal_cppstd.h>
-#include <fstream>
 
 using namespace Packets;
-using namespace msclr::interop;
+using namespace System::IO;
 using namespace System::Windows::Forms;
-using namespace System;
-using namespace std;
 
 #define ShowInfo(Message)		MessageBox::Show(Message, "Information", MessageBoxButtons::OK, MessageBoxIcon::Information)
 #define ShowError(Message)		MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
@@ -19,10 +12,59 @@ DWORD dwMSSendMethod = SendAddy;// + 5;
 DWORD dwMSSendObject = *(PDWORD)(SendClassAddy+2);
 DWORD dwMSSendRetVal = SendAddy - 13;
 
+CPackets^ Packets::LoadPackets(String^ filename)
+{
+	if(!File::Exists(filename))
+		return gcnew CPackets;
+
+	TextReader^ reader = gcnew StreamReader(filename);
+	try
+	{
+		XmlSerializer^ serializer = gcnew XmlSerializer(CPackets::typeid);
+		return safe_cast<CPackets^>(serializer->Deserialize(reader));
+	}
+	catch(System::Exception^)
+	{
+		switch(MessageBox::Show("WatyBot Failed in loading your config for SPControl :( /n this can be because you just upgraded to a new version of WatyBot, or because the file got corrupted /n Do you want to delete the file to fix the problem?", "Error in loading SPControl", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
+		{
+		case ::DialogResult::Yes:
+			File::Delete(filename);
+			return gcnew CPackets;
+			break;
+
+		case ::DialogResult::No:
+			TerminateProcess(GetCurrentProcess(), 0);
+			ExitProcess(0);
+			break;
+		}
+
+	}
+	finally{reader->Close();}
+}
+
+void Packets::SavePackets(String^ filename, CPackets^ cpackets)
+{
+	TextWriter^ writer;
+	try
+	{
+		if(!File::Exists(filename)) return;
+		XmlSerializer^ serializer = gcnew XmlSerializer( CPackets::typeid );
+		writer = gcnew StreamWriter( filename );
+		serializer->Serialize(writer, cpackets);
+	}
+	catch(System::Exception^){}
+	finally{writer->Close();}
+}
+
 CPacketData::CPacketData(String^ Name, String^ Data)
 {
 	this->Name = Name;
 	this->Data = Data;
+}
+
+CPacketData::CPacketData()
+{
+
 }
 
 CPackets::CPackets()
@@ -47,42 +89,6 @@ void CPackets::Edit(int i, String^ name, String^ data)
 	p->Name = name;
 	p->Data = data;
 	this->Items[i] = p;
-}
-
-void CPackets::Save(String^ filename)
-{
-	ofstream file(marshal_as<string>(filename));
-	using boost::property_tree::ptree;
-	ptree pt;
-
-	for each(CPacketData^ p in Items)
-	{
-        ptree & node = pt.add("packetlist.packet", "");
-		node.put("name", marshal_as<string>(p->Name));
-		node.put("data", marshal_as<string>(p->Data));
-    }
-	write_xml(file, pt);
-}
-
-void CPackets::Load(String^ filename)
-{
-	ifstream file(marshal_as<string>(filename));
-	using boost::property_tree::ptree;
-	ptree pt;
-	read_xml(file, pt);
-	if(!pt.empty())
-	{
-		for(ptree::value_type const& v : pt.get_child("packetlist"))
-		{
-			if(v.first == "packet")
-			{
-				this->Items->Add(gcnew CPacketData(
-					marshal_as<String^>(v.second.get<string>("name")),
-					marshal_as<String^>(v.second.get<string>("data"))
-					));
-			}
-		}
-	}
 }
 
 void __declspec(naked) InjectPacket(COutPacket* pPacket)

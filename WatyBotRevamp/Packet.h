@@ -1,7 +1,8 @@
 #pragma once
-#include <string>
 #include <Windows.h>
-#include <vector>
+using namespace System;
+using namespace System::Collections;
+using namespace System::Xml::Serialization;
 
 #define EnterCashShop "40 00 ** ** ** 00 00"
 #define	LeaveCashShop "3E 00"
@@ -23,38 +24,43 @@ struct COutPacket
 
 namespace Packets
 {
-	using namespace System;
-	using namespace System::Collections;
-
 	public ref class CPacketData sealed
 	{
 	public:
 		CPacketData(String^ Name, String^ Data);
+		CPacketData();
 		property String^ Name;
 		property String^ Data;
 	};
 
+	[XmlRoot("WatyBotPackets", Namespace="https://ccplz.net/resources/watybot.6/", IsNullable=false)]
 	public ref class CPackets sealed
 	{
 	public:
 		CPackets();
-		void Add(String^ name, String^ data);
-		void Delete(int index);
-		void Edit(int i, String^ name, String^ data);
-		void Save(String^ filename);
-		void Load(String^ filename);
-		bool Send(String^ packet, String^&strError);
-		bool Send(CPacketData^ packet);
-		//Will send the selected packet
-		bool Send();
-		void StartSpamming(int times, int delay);
-		void StopSpamming();
+
+		//[XmlIgnore]
+		[XmlArrayItem(CPacketData::typeid)]
 		property ArrayList^ Items;
+
 		property bool IsSpamming
 		{
 			bool get(){return timer->Enabled;}
 		}
+		[XmlIgnore]
 		property CPacketData^ SelectedPacket;
+
+
+		void Add(String^ name, String^ data);
+		void Delete(int index);
+		void Edit(int i, String^ name, String^ data);
+		bool Send(String^ packet, String^&strError);
+		bool Send(CPacketData^ packet);
+		bool Send();
+		void StartSpamming(int times, int delay);
+		void StopSpamming();
+
+
 		
 	private:
 		bool isGoodPacket(String^ strPacket, String^&strError);
@@ -65,5 +71,7 @@ namespace Packets
 		property int m_sendmax;
 		~CPackets(){}
 	};
+	extern void SavePackets(String^ filename, CPackets^ p);
+	extern CPackets^ LoadPackets(String^ filename);
 }
 
