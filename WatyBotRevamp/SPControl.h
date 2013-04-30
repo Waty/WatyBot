@@ -7,6 +7,7 @@ namespace SpawnControl
 	public ref class SPControlLocation sealed
 	{
 	public:
+		[XmlAttribute]
 		property System::String^ Name;
 		property int MapId;
 		property int X;

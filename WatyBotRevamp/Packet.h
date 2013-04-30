@@ -39,10 +39,9 @@ namespace Packets
 	public:
 		CPackets();
 
-		//[XmlIgnore]
-		[XmlArrayItem(CPacketData::typeid)]
+		[XmlArrayItem("PacketData", CPacketData::typeid)]
+		[XmlArrayAttribute("PacketsArray")]
 		property ArrayList^ Items;
-
 		property bool IsSpamming
 		{
 			bool get(){return timer->Enabled;}
@@ -50,7 +49,7 @@ namespace Packets
 		[XmlIgnore]
 		property CPacketData^ SelectedPacket;
 
-
+		//Public Methods
 		void Add(String^ name, String^ data);
 		void Delete(int index);
 		void Edit(int i, String^ name, String^ data);
@@ -59,8 +58,6 @@ namespace Packets
 		bool Send();
 		void StartSpamming(int times, int delay);
 		void StopSpamming();
-
-
 		
 	private:
 		bool isGoodPacket(String^ strPacket, String^&strError);
