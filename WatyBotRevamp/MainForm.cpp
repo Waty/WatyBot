@@ -602,9 +602,9 @@ void MainForm::cbSPControl_CheckedChanged(System::Object^  sender, System::Event
 void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	String^ name = SPControlNameTextBox->Text;
-	int mapid = Convert::ToInt32(SPControlMapIDTextBox->Text);
-	int x = Convert::ToInt32(SPControlXTextBox->Text);
-	int y = Convert::ToInt32(SPControlYTextBox->Text);
+	int mapid = (int) nudSPCMapId->Value;
+	int x = (int) nudSPCX->Value;
+	int y = (int) nudSPCY->Value;
 	if(name == "" || !mapid || !x || !y)
 	{
 		ShowWarning("You forgot to fill in a textbox...");
@@ -638,17 +638,17 @@ void MainForm::GetSPControlCoordsButton_Click(System::Object^  sender, System::E
 		SendKey(VK_DOWN);
 		Sleep(10);
 	}
-	this->SPControlXTextBox->Text = Convert::ToString(CMS->CharX);
-	this->SPControlYTextBox->Text = Convert::ToString(CMS->CharY);
-	this->SPControlMapIDTextBox->Text = Convert::ToString(CMS->MapID);
+	this->nudSPCMapId->Value = CMS->CharX;
+	this->nudSPCX->Value = CMS->CharY;
+	this->nudSPCY->Value = CMS->MapID;
 }
 void MainForm::RefreshSPControlListView()
 {
 	SPControlListView->Items->Clear();
 	this->SPControlNameTextBox->Clear();
-	this->SPControlMapIDTextBox->Clear();
-	this->SPControlXTextBox->Clear();
-	this->SPControlYTextBox->Clear();
+	this->nudSPCMapId->ResetText();
+	this->nudSPCX->ResetText();
+	this->nudSPCY->ResetText();
 	if(CSPControl->Locations == nullptr) return;
 	for each(SPControlLocation^ SP in CSPControl->Locations)
 	{
@@ -669,39 +669,39 @@ void MainForm::SaveSettings()
 	ptree pt;
 
 	//Auto Bot Tab
-	pt.add("AutoAttackDelay", Convert::ToInt32(this->nudAttackDelay->Value));
-	pt.add("SAWSIL", Convert::ToInt32(this->nudSAWSIL->Value));
+	pt.add("AutoAttackDelay", (int) this->nudAttackDelay->Value);
+	pt.add("SAWSIL", (int) this->nudSAWSIL->Value);
 	pt.add("AutoAttackKey", this->AttackComboBox->SelectedIndex);
 
-	pt.add("LootDelay", Convert::ToInt32(this->nudLootDelay->Value));
-	pt.add("SLWIB", Convert::ToInt32(this->nudSLWIB->Value));
+	pt.add("LootDelay", (int) this->nudLootDelay->Value);
+	pt.add("SLWIB", (int) this->nudSLWIB->Value);
 	pt.add("LootKey", this->LootComboBox->SelectedIndex);
 
-	pt.add("AutoHPValue", Convert::ToInt32(this->nudHPValue->Value));
+	pt.add("AutoHPValue", (int) this->nudHPValue->Value);
 	pt.add("AutoHPKey", this->HPComboBox->SelectedIndex);
 
-	pt.add("AutoMPValue", Convert::ToInt32(this->nudMPValue->Value));
+	pt.add("AutoMPValue", (int) this->nudMPValue->Value);
 	pt.add("AutoMPKey", this->MPComboBox->SelectedIndex);
 
-	pt.add("AutoSkill1Value", Convert::ToInt32(this->nudSkill1Value->Value));
+	pt.add("AutoSkill1Value", (int) this->nudSkill1Value->Value);
 	pt.add("AutoSkill1Key", this->AutoSkill1ComboBox->SelectedIndex);
 
-	pt.add("AutoSkill2Value", Convert::ToInt32(this->nudSkill2Value->Value));
+	pt.add("AutoSkill2Value", (int) this->nudSkill2Value->Value);
 	pt.add("AutoSkill2Key", this->AutoSkill2ComboBox->SelectedIndex);
 
-	pt.add("AutoSkill3Value", Convert::ToInt32(this->nudSkill3Value->Value));
+	pt.add("AutoSkill3Value", (int) this->nudSkill3Value->Value);
 	pt.add("AutoSkill3Key", this->AutoSkill3ComboBox->SelectedIndex);
 
-	pt.add("AutoSkill4Value", Convert::ToInt32(this->nudSkill4Value->Value));
+	pt.add("AutoSkill4Value", (int) this->nudSkill4Value->Value);
 	pt.add("AutoSkill4Key", this->AutoSkill4ComboBox->SelectedIndex);
 
-	pt.add("AutoCCPeople", Convert::ToInt32(nudCCPeople->Value));
+	pt.add("AutoCCPeople", (int) nudCCPeople->Value);
 	pt.add("CC_CS_People", this->PeopleComboBox->SelectedIndex);
 
-	pt.add("AutoCCTimed", Convert::ToInt32(nudCCTimed->Value));
+	pt.add("AutoCCTimed", (int) nudCCTimed->Value);
 	pt.add("CC_CS_Timed", this->TimedComboBox->SelectedIndex);
 
-	pt.add("AutoCCAttacks", Convert::ToInt32(nudCCAttacks->Value));
+	pt.add("AutoCCAttacks", (int) nudCCAttacks->Value);
 	pt.add("CC_CS_Attacks", this->AttacksComboBox->SelectedIndex);
 
 	//Hot Keys
@@ -717,11 +717,11 @@ void MainForm::SaveSettings()
 	pt.add("PacketSpamDelay", (int) nudSpamDelay->Value);
 
 	//Info Tab
-	pt.add("LoadSettingsDelay", Convert::ToInt32(this->nudLoadDelay->Value));
-	pt.add("PvPCCDelay", Convert::ToInt32(this->nudPvPCCDelay->Value));
+	pt.add("LoadSettingsDelay", (int) this->nudLoadDelay->Value);
+	pt.add("PvPCCDelay", (int) this->nudPvPCCDelay->Value);
 
 	//Hacks Tab
-	pt.add("PvPDelay", Convert::ToInt32(this->nudPVPDelay->Value));
+	pt.add("PvPDelay", (int) this->nudPVPDelay->Value);
 	pt.add("PvPSkill", this->ddbPVPSkills->SelectedIndex);
 
 	pt.add("PinTyper", this->cbPinTyper->Checked);
@@ -739,39 +739,39 @@ void MainForm::LoadSettings()
 	try
 	{
 		//Auto Bot Tab
-		this->nudAttackDelay->Text = pt.get<int>("AutoAttackDelay", 50).ToString();
-		this->nudSAWSIL->Text = pt.get<int>("SAWSIL", 1).ToString();
+		this->nudAttackDelay->Value = pt.get<int>("AutoAttackDelay", 50);
+		this->nudSAWSIL->Value = pt.get<int>("SAWSIL", 1);
 		this->AttackComboBox->SelectedIndex = pt.get<int>("AutoAttackKey");
 		
-		this->nudLootDelay->Text = pt.get<int>("LootDelay", 50).ToString();
-		this->nudSLWIB->Text = pt.get<int>("SLWIB", 1).ToString();
+		this->nudLootDelay->Value = pt.get<int>("LootDelay", 50);
+		this->nudSLWIB->Value = pt.get<int>("SLWIB", 1);
 		this->LootComboBox->SelectedIndex = pt.get<int>("LootKey");
 
-		this->nudHPValue->Text = pt.get<int>("AutoHPValue", 9000).ToString();
+		this->nudHPValue->Value = pt.get<int>("AutoHPValue", 9000);
 		this->HPComboBox->SelectedIndex = pt.get<int>("AutoHPKey");
 
-		this->nudMPValue->Text = pt.get<int>("AutoMPValue", 100).ToString();
+		this->nudMPValue->Value = pt.get<int>("AutoMPValue", 100);
 		this->MPComboBox->SelectedIndex = pt.get<int>("AutoMPKey");
 
 		this->AutoSkill1ComboBox->SelectedIndex = pt.get<int>("AutoSkill1Key");
-		this->nudSkill1Value->Text = pt.get<int>("AutoSkill1Value", 0).ToString();
+		this->nudSkill1Value->Value = pt.get<int>("AutoSkill1Value", 0);
 
 		this->AutoSkill2ComboBox->SelectedIndex = pt.get<int>("AutoSkill2Key");
-		this->nudSkill2Value->Text = pt.get<int>("AutoSkill2Value", 0).ToString();
+		this->nudSkill2Value->Value = pt.get<int>("AutoSkill2Value", 0);
 
 		this->AutoSkill3ComboBox->SelectedIndex = pt.get<int>("AutoSkill3Key");
-		this->nudSkill3Value->Text = pt.get<int>("AutoSkill3Value", 0).ToString();
+		this->nudSkill3Value->Value = pt.get<int>("AutoSkill3Value", 0);
 
 		this->AutoSkill4ComboBox->SelectedIndex = pt.get<int>("AutoSkill4Key");
-		this->nudSkill4Value->Text = pt.get<int>("AutoSkill4Value", 0).ToString();
+		this->nudSkill4Value->Value = pt.get<int>("AutoSkill4Value", 0);
 
-		this->nudCCPeople->Text = pt.get<int>("AutoCCPeople", 0).ToString();
+		this->nudCCPeople->Value = pt.get<int>("AutoCCPeople", 0);
 		this->PeopleComboBox->SelectedIndex = pt.get<int>("CC_CS_People");
 
-		this->nudCCTimed->Text = pt.get<int>("AutoCCTimed", 0).ToString();
+		this->nudCCTimed->Value = pt.get<int>("AutoCCTimed", 0);
 		this->TimedComboBox->SelectedIndex = pt.get<int>("CC_CS_Timed");
 
-		this->nudCCAttacks->Text = pt.get<int>("AutoCCAttacks", 0).ToString();
+		this->nudCCAttacks->Value = pt.get<int>("AutoCCAttacks", 0);
 		this->AttacksComboBox->SelectedIndex = pt.get<int>("CC_CS_Attacks");
 
 		//Hot Keys
@@ -782,16 +782,16 @@ void MainForm::LoadSettings()
 		this->ddbHotKeySendPacket->SelectedIndex = pt.get<int>("SendPacketHotKey");
 
 		//Info Tab
-		this->nudLoadDelay->Text = pt.get<int>("LoadSettingsDelay", 1000).ToString();
-		this->nudPvPCCDelay->Text = pt.get<int>("PvPCCDelay", 2000).ToString();
+		this->nudLoadDelay->Value = pt.get<int>("LoadSettingsDelay", 1000);
+		this->nudPvPCCDelay->Value = pt.get<int>("PvPCCDelay", 2000);
 
 		//PacketSender Tab
 		this->PacketSelectBox->SelectedIndex =  pt.get<int>("PacketSenderIndex");
-		this->nudSpamAmount->Text = pt.get<int>("PacketSpamTimes").ToString();
-		this->nudSpamDelay->Text = pt.get<int>("PacketSpamDelay").ToString();
+		this->nudSpamAmount->Value = pt.get<int>("PacketSpamTimes");
+		this->nudSpamDelay->Value = pt.get<int>("PacketSpamDelay");
 
 		//Hacks Tab
-		this->nudPVPDelay->Text = pt.get<int>("PvPDelay").ToString();
+		this->nudPVPDelay->Value = pt.get<int>("PvPDelay");
 		this->ddbPVPSkills->SelectedIndex = pt.get<int>("PvPSkill");
 
 		Sleep(Convert::ToInt32(nudLoadDelay->Value));

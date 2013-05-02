@@ -212,9 +212,9 @@ private: System::Windows::Forms::Label^  SPControlMapIDLabel;
 private: System::Windows::Forms::Label^  SPControlXLabel;
 private: System::Windows::Forms::Label^  SPControlYLabel;
 private: System::Windows::Forms::GroupBox^  SPControlGroupBox;
-private: System::Windows::Forms::TextBox^  SPControlYTextBox;
-private: System::Windows::Forms::TextBox^  SPControlXTextBox;
-private: System::Windows::Forms::TextBox^  SPControlMapIDTextBox;
+
+
+
 private: System::Windows::Forms::TextBox^  SPControlNameTextBox;
 private: System::Windows::Forms::Button^  SPControlAddButton;
 private: System::Windows::Forms::ContextMenuStrip^  SPControlContextMenu;
@@ -353,6 +353,11 @@ private: System::Windows::Forms::CheckBox^  cbIceGuard;
 
 private: System::Windows::Forms::NumericUpDown^  nudSpamDelay;
 private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
+private: System::Windows::Forms::NumericUpDown^  nudSPCY;
+
+private: System::Windows::Forms::NumericUpDown^  nudSPCX;
+
+private: System::Windows::Forms::NumericUpDown^  nudSPCMapId;
 
 
 
@@ -509,15 +514,15 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->bStopSpamming = (gcnew System::Windows::Forms::Button());
 			this->SPControlTabPage = (gcnew System::Windows::Forms::TabPage());
 			this->SPControlGroupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->nudSPCY = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudSPCX = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudSPCMapId = (gcnew System::Windows::Forms::NumericUpDown());
 			this->GetSPControlCoordsButton = (gcnew System::Windows::Forms::Button());
 			this->SPControlAddButton = (gcnew System::Windows::Forms::Button());
 			this->SPControlMapIDLabel = (gcnew System::Windows::Forms::Label());
 			this->cbSPControl = (gcnew System::Windows::Forms::CheckBox());
-			this->SPControlYTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->SPControlNameLabel = (gcnew System::Windows::Forms::Label());
-			this->SPControlXTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->SPControlYLabel = (gcnew System::Windows::Forms::Label());
-			this->SPControlMapIDTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->SPControlXLabel = (gcnew System::Windows::Forms::Label());
 			this->SPControlNameTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->SPControlListView = (gcnew System::Windows::Forms::ListView());
@@ -595,6 +600,9 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamAmount))->BeginInit();
 			this->SPControlTabPage->SuspendLayout();
 			this->SPControlGroupBox->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCY))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCX))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCMapId))->BeginInit();
 			this->SPControlContextMenu->SuspendLayout();
 			this->InfoTab->SuspendLayout();
 			this->gbHotKeys->SuspendLayout();
@@ -1997,15 +2005,15 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			// 
 			// SPControlGroupBox
 			// 
+			this->SPControlGroupBox->Controls->Add(this->nudSPCY);
+			this->SPControlGroupBox->Controls->Add(this->nudSPCX);
+			this->SPControlGroupBox->Controls->Add(this->nudSPCMapId);
 			this->SPControlGroupBox->Controls->Add(this->GetSPControlCoordsButton);
 			this->SPControlGroupBox->Controls->Add(this->SPControlAddButton);
 			this->SPControlGroupBox->Controls->Add(this->SPControlMapIDLabel);
 			this->SPControlGroupBox->Controls->Add(this->cbSPControl);
-			this->SPControlGroupBox->Controls->Add(this->SPControlYTextBox);
 			this->SPControlGroupBox->Controls->Add(this->SPControlNameLabel);
-			this->SPControlGroupBox->Controls->Add(this->SPControlXTextBox);
 			this->SPControlGroupBox->Controls->Add(this->SPControlYLabel);
-			this->SPControlGroupBox->Controls->Add(this->SPControlMapIDTextBox);
 			this->SPControlGroupBox->Controls->Add(this->SPControlXLabel);
 			this->SPControlGroupBox->Controls->Add(this->SPControlNameTextBox);
 			this->SPControlGroupBox->Location = System::Drawing::Point(7, 279);
@@ -2015,11 +2023,32 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->SPControlGroupBox->TabStop = false;
 			this->SPControlGroupBox->Text = L"Add New Location";
 			// 
+			// nudSPCY
+			// 
+			this->nudSPCY->Location = System::Drawing::Point(269, 33);
+			this->nudSPCY->Name = L"nudSPCY";
+			this->nudSPCY->Size = System::Drawing::Size(36, 20);
+			this->nudSPCY->TabIndex = 41;
+			// 
+			// nudSPCX
+			// 
+			this->nudSPCX->Location = System::Drawing::Point(230, 33);
+			this->nudSPCX->Name = L"nudSPCX";
+			this->nudSPCX->Size = System::Drawing::Size(36, 20);
+			this->nudSPCX->TabIndex = 40;
+			// 
+			// nudSPCMapId
+			// 
+			this->nudSPCMapId->Location = System::Drawing::Point(150, 33);
+			this->nudSPCMapId->Name = L"nudSPCMapId";
+			this->nudSPCMapId->Size = System::Drawing::Size(77, 20);
+			this->nudSPCMapId->TabIndex = 39;
+			// 
 			// GetSPControlCoordsButton
 			// 
 			this->GetSPControlCoordsButton->Location = System::Drawing::Point(149, 59);
 			this->GetSPControlCoordsButton->Name = L"GetSPControlCoordsButton";
-			this->GetSPControlCoordsButton->Size = System::Drawing::Size(80, 23);
+			this->GetSPControlCoordsButton->Size = System::Drawing::Size(78, 23);
 			this->GetSPControlCoordsButton->TabIndex = 38;
 			this->GetSPControlCoordsButton->Text = L"Get Current";
 			this->GetSPControlCoordsButton->UseVisualStyleBackColor = true;
@@ -2055,13 +2084,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->cbSPControl->UseVisualStyleBackColor = true;
 			this->cbSPControl->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbSPControl_CheckedChanged);
 			// 
-			// SPControlYTextBox
-			// 
-			this->SPControlYTextBox->Location = System::Drawing::Point(271, 33);
-			this->SPControlYTextBox->Name = L"SPControlYTextBox";
-			this->SPControlYTextBox->Size = System::Drawing::Size(30, 20);
-			this->SPControlYTextBox->TabIndex = 36;
-			// 
 			// SPControlNameLabel
 			// 
 			this->SPControlNameLabel->Location = System::Drawing::Point(6, 16);
@@ -2071,13 +2093,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->SPControlNameLabel->Text = L"Name:";
 			this->SPControlNameLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
-			// SPControlXTextBox
-			// 
-			this->SPControlXTextBox->Location = System::Drawing::Point(235, 33);
-			this->SPControlXTextBox->Name = L"SPControlXTextBox";
-			this->SPControlXTextBox->Size = System::Drawing::Size(30, 20);
-			this->SPControlXTextBox->TabIndex = 35;
-			// 
 			// SPControlYLabel
 			// 
 			this->SPControlYLabel->Location = System::Drawing::Point(271, 16);
@@ -2086,13 +2101,6 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->SPControlYLabel->TabIndex = 30;
 			this->SPControlYLabel->Text = L"Y";
 			this->SPControlYLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			// 
-			// SPControlMapIDTextBox
-			// 
-			this->SPControlMapIDTextBox->Location = System::Drawing::Point(149, 33);
-			this->SPControlMapIDTextBox->Name = L"SPControlMapIDTextBox";
-			this->SPControlMapIDTextBox->Size = System::Drawing::Size(80, 20);
-			this->SPControlMapIDTextBox->TabIndex = 34;
 			// 
 			// SPControlXLabel
 			// 
@@ -2540,6 +2548,9 @@ private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 			this->SPControlTabPage->ResumeLayout(false);
 			this->SPControlGroupBox->ResumeLayout(false);
 			this->SPControlGroupBox->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCY))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCX))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCMapId))->EndInit();
 			this->SPControlContextMenu->ResumeLayout(false);
 			this->InfoTab->ResumeLayout(false);
 			this->gbHotKeys->ResumeLayout(false);
