@@ -36,16 +36,15 @@ SPControl^ SpawnControl::LoadSPControl(System::String^ filename)
 
 void SpawnControl::SaveSPControl(System::String^ filename, SPControl^ sp)
 {
-	TextWriter^ writer;
+	TextWriter^ writer = gcnew StreamWriter( filename );
 	try
 	{
 		if(!File::Exists(filename)) return;
 		XmlSerializer^ serializer = gcnew XmlSerializer( SPControl::typeid );
-		writer = gcnew StreamWriter( filename );
 		serializer->Serialize(writer, sp);
+		writer->Close();
 	}
 	catch(System::Exception^){}
-	finally{writer->Close();}
 }
 
 SPControl::SPControl()

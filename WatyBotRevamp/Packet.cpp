@@ -44,16 +44,15 @@ CPackets^ Packets::LoadPackets(String^ filename)
 
 void Packets::SavePackets(String^ filename, CPackets^ cpackets)
 {
-	TextWriter^ writer;
+	TextWriter^ writer = gcnew StreamWriter(filename);
 	try
 	{
 		if(!File::Exists(filename)) return;
 		XmlSerializer^ serializer = gcnew XmlSerializer( CPackets::typeid );
-		writer = gcnew StreamWriter( filename );
 		serializer->Serialize(writer, cpackets);
+		writer->Close();
 	}
 	catch(System::Exception^){}
-	finally{writer->Close();}
 }
 
 CPacketData::CPacketData(String^ Name, String^ Data)
