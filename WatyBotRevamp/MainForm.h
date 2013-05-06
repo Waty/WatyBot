@@ -4,6 +4,7 @@
 #include "SPControl.h"
 #include "Packet.h"
 #include "ChangeChannel.h"
+#include "SettingsManager.h"
 
 namespace WatyBotRevamp {
 
@@ -2567,8 +2568,9 @@ private: System::Windows::Forms::NumericUpDown^  nudSPCMapId;
 private: System::Void RefreshComboBoxes();
 private: System::Void RefreshSPControlListView();
 private: System::Void RedrawStatBars();
-private: System::Void SaveSettings();
-private: System::Void LoadSettings();
+private: System::Void SaveSettings(Settings::SettingsManager^ m);
+private: Settings::SettingsManager^ LoadSettings();
+private: Settings::SettingsManager^ NewManager();
 private: System::Void AutoPot();
 private: System::Void AutoCC();
 private: System::Void HotKeys();

@@ -3,8 +3,6 @@
 #include <Windows.h>
 #include <fstream>
 #include <msclr/marshal_cppstd.h>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/ini_parser.hpp>
 #include "MainForm.h"
 #include "Memory.h"
 #include "Defines.h"
@@ -16,6 +14,8 @@
 #include "MacroManager/FunctionalMacro.h"
 #include "MacroManager/BotMacro.h"
 #include "MacroManager/SkillMacro.h"
+#include "SettingsManager.h"
+using namespace Settings;
 using namespace WatyBotRevamp;
 using namespace msclr::interop;
 using namespace System::IO;
@@ -24,7 +24,7 @@ using namespace Packets;
 using namespace SpawnControl;
 
 #define WatyBotWorkingDirectory "WatyBot\\"
-#define SettingsFileName (WatyBotWorkingDirectory + "settings.ini")
+#define SettingsFileName (WatyBotWorkingDirectory + "settings.xml")
 #define PacketFileName (WatyBotWorkingDirectory + "packets.xml")
 #define SPControlFileName (WatyBotWorkingDirectory + "spcontrol.xml")
 
@@ -42,6 +42,7 @@ gcroot<CMapleStory^> CMS;
 gcroot<ChangeChannel::CChangeChannel^> CC;
 gcroot<SPControl^> CSPControl;
 gcroot<CPackets^> CPacket;
+gcroot<SettingsManager^> CSettings;
 
 //Find Window
 void getMSHWND()
@@ -396,16 +397,19 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	//Get the hwnd of maplestory
 	NewThread(getMSHWND);
 
+	if(!Directory::Exists("WatyBot"))	Directory::CreateDirectory("WatyBot");
+
+	//Loading of all the settings and innitializing th classes
 	CC = gcnew ChangeChannel::CChangeChannel;
-	CSPControl = LoadSPControl(SPControlFileName);
-	CPacket = LoadPackets(PacketFileName);;
 	CMS = gcnew CMapleStory;
+	CSPControl = LoadSPControl(SPControlFileName);
+	CPacket = LoadPackets(PacketFileName);
+	CSettings = LoadSettings();
 
 	//Start the MacroManager
 	InitializeMacros();
 
-	if(!Directory::Exists("WatyBot"))	Directory::CreateDirectory("WatyBot");
-	if(File::Exists(SettingsFileName))	LoadSettings();
+	
 	RefreshComboBoxes();
 	RefreshSPControlListView();
 
@@ -494,7 +498,7 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 	macroMan.Stop();
 	SaveSPControl(SPControlFileName, CSPControl);
 	SavePackets(PacketFileName, CPacket);
-	SaveSettings();
+	SaveSettings(CSettings);
 
 	switch(MessageBox::Show("Close MapleStory too?", "Terminate Maple?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
 	{
@@ -661,147 +665,104 @@ void MainForm::RefreshSPControlListView()
 }
 
 //Loading/Saving AutoBot settings
-void MainForm::SaveSettings()
+void MainForm::SaveSettings(SettingsManager^ m)
 {
-	File::Delete(SettingsFileName);
-	ofstream file(marshal_as<string>(SettingsFileName));
-	using boost::property_tree::ptree;
-	ptree pt;
-
-	//Auto Bot Tab
-	pt.add("AutoAttackDelay", (int) this->nudAttackDelay->Value);
-	pt.add("SAWSIL", (int) this->nudSAWSIL->Value);
-	pt.add("AutoAttackKey", this->AttackComboBox->SelectedIndex);
-
-	pt.add("LootDelay", (int) this->nudLootDelay->Value);
-	pt.add("SLWIB", (int) this->nudSLWIB->Value);
-	pt.add("LootKey", this->LootComboBox->SelectedIndex);
-
-	pt.add("AutoHPValue", (int) this->nudHPValue->Value);
-	pt.add("AutoHPKey", this->HPComboBox->SelectedIndex);
-
-	pt.add("AutoMPValue", (int) this->nudMPValue->Value);
-	pt.add("AutoMPKey", this->MPComboBox->SelectedIndex);
-
-	pt.add("AutoSkill1Value", (int) this->nudSkill1Value->Value);
-	pt.add("AutoSkill1Key", this->AutoSkill1ComboBox->SelectedIndex);
-
-	pt.add("AutoSkill2Value", (int) this->nudSkill2Value->Value);
-	pt.add("AutoSkill2Key", this->AutoSkill2ComboBox->SelectedIndex);
-
-	pt.add("AutoSkill3Value", (int) this->nudSkill3Value->Value);
-	pt.add("AutoSkill3Key", this->AutoSkill3ComboBox->SelectedIndex);
-
-	pt.add("AutoSkill4Value", (int) this->nudSkill4Value->Value);
-	pt.add("AutoSkill4Key", this->AutoSkill4ComboBox->SelectedIndex);
-
-	pt.add("AutoCCPeople", (int) nudCCPeople->Value);
-	pt.add("CC_CS_People", this->PeopleComboBox->SelectedIndex);
-
-	pt.add("AutoCCTimed", (int) nudCCTimed->Value);
-	pt.add("CC_CS_Timed", this->TimedComboBox->SelectedIndex);
-
-	pt.add("AutoCCAttacks", (int) nudCCAttacks->Value);
-	pt.add("CC_CS_Attacks", this->AttacksComboBox->SelectedIndex);
-
-	//Hot Keys
-	pt.add("AttackHotKey", this->ddbHotKeyAttack->SelectedIndex);
-	pt.add("LootHotKey", this->ddbHotKeyLoot->SelectedIndex);
-	pt.add("FMAHotKey", this->ddbHotKeyFMA->SelectedIndex);
-	pt.add("CCPeopleHotKey", this->ddbHotKeyCCPeople->SelectedIndex);
-	pt.add("SendPacketHotKey", this->ddbHotKeySendPacket->SelectedIndex);
-
-	//PacketSender Tab
-	pt.add("PacketSenderIndex", this->PacketSelectBox->SelectedIndex);
-	pt.add("PacketSpamTimes", (int) nudSpamAmount->Value);
-	pt.add("PacketSpamDelay", (int) nudSpamDelay->Value);
-
-	//Info Tab
-	pt.add("LoadSettingsDelay", (int) this->nudLoadDelay->Value);
-	pt.add("PvPCCDelay", (int) this->nudPvPCCDelay->Value);
-
-	//Hacks Tab
-	pt.add("PvPDelay", (int) this->nudPVPDelay->Value);
-	pt.add("PvPSkill", this->ddbPVPSkills->SelectedIndex);
-
-	pt.add("PinTyper", this->cbPinTyper->Checked);
-	pt.add("LogoSkipper", this->cbLogoSkipper->Checked);
-
-	write_ini(file, pt);
-}
-void MainForm::LoadSettings()
-{
-	ifstream file(marshal_as<string>(SettingsFileName));
-	using boost::property_tree::ptree;
-	ptree pt;
-
-	read_ini(file,pt);
+	TextWriter^ writer = gcnew StreamWriter(SettingsFileName);
 	try
 	{
-		//Auto Bot Tab
-		this->nudAttackDelay->Value = pt.get<int>("AutoAttackDelay", 50);
-		this->nudSAWSIL->Value = pt.get<int>("SAWSIL", 1);
-		this->AttackComboBox->SelectedIndex = pt.get<int>("AutoAttackKey");
-		
-		this->nudLootDelay->Value = pt.get<int>("LootDelay", 50);
-		this->nudSLWIB->Value = pt.get<int>("SLWIB", 1);
-		this->LootComboBox->SelectedIndex = pt.get<int>("LootKey");
+		XmlSerializer^ serializer = gcnew XmlSerializer(SettingsManager::typeid);
+		serializer->Serialize(writer, m);
+	}
+	catch(System::Exception^ ex)
+	{
+		ShowError(ex->ToString());
+	}
+	writer->Close();
+}
+SettingsManager^ MainForm::LoadSettings()
+{
+	if(!File::Exists(SettingsFileName))
+		return NewManager();
 
-		this->nudHPValue->Value = pt.get<int>("AutoHPValue", 9000);
-		this->HPComboBox->SelectedIndex = pt.get<int>("AutoHPKey");
-
-		this->nudMPValue->Value = pt.get<int>("AutoMPValue", 100);
-		this->MPComboBox->SelectedIndex = pt.get<int>("AutoMPKey");
-
-		this->AutoSkill1ComboBox->SelectedIndex = pt.get<int>("AutoSkill1Key");
-		this->nudSkill1Value->Value = pt.get<int>("AutoSkill1Value", 0);
-
-		this->AutoSkill2ComboBox->SelectedIndex = pt.get<int>("AutoSkill2Key");
-		this->nudSkill2Value->Value = pt.get<int>("AutoSkill2Value", 0);
-
-		this->AutoSkill3ComboBox->SelectedIndex = pt.get<int>("AutoSkill3Key");
-		this->nudSkill3Value->Value = pt.get<int>("AutoSkill3Value", 0);
-
-		this->AutoSkill4ComboBox->SelectedIndex = pt.get<int>("AutoSkill4Key");
-		this->nudSkill4Value->Value = pt.get<int>("AutoSkill4Value", 0);
-
-		this->nudCCPeople->Value = pt.get<int>("AutoCCPeople", 0);
-		this->PeopleComboBox->SelectedIndex = pt.get<int>("CC_CS_People");
-
-		this->nudCCTimed->Value = pt.get<int>("AutoCCTimed", 0);
-		this->TimedComboBox->SelectedIndex = pt.get<int>("CC_CS_Timed");
-
-		this->nudCCAttacks->Value = pt.get<int>("AutoCCAttacks", 0);
-		this->AttacksComboBox->SelectedIndex = pt.get<int>("CC_CS_Attacks");
-
-		//Hot Keys
-		this->ddbHotKeyAttack->SelectedIndex = pt.get<int>("AttackHotKey");
-		this->ddbHotKeyLoot->SelectedIndex = pt.get<int>("LootHotKey");
-		this->ddbHotKeyFMA->SelectedIndex = pt.get<int>("FMAHotKey");
-		this->ddbHotKeyCCPeople->SelectedIndex = pt.get<int>("CCPeopleHotKey");
-		this->ddbHotKeySendPacket->SelectedIndex = pt.get<int>("SendPacketHotKey");
-
+	TextReader^ reader;
+	try
+	{
+		reader = gcnew StreamReader(SettingsFileName);
+		XmlSerializer^ serializer = gcnew XmlSerializer(SettingsManager::typeid);
+		auto settings = safe_cast<SettingsManager^>(serializer->Deserialize(reader));
+		reader->Close();
+		return settings;
+	}
+	catch(System::Exception^)
+	{
+		reader->Close();
+		File::Delete(SettingsFileName);
+		return NewManager();
+	}
+}
+SettingsManager^ MainForm::NewManager()
+{
+		SettingsManager^ m = gcnew SettingsManager;
+		//AutoAttack
+		m->Add(gcnew NumericUpDownSetting(nudAttackDelay));
+		m->Add(gcnew NumericUpDownSetting(nudSAWSIL));
+		m->Add(gcnew ComboBoxSetting(AttackComboBox));
+		//AutoLoot
+		m->Add(gcnew NumericUpDownSetting(nudLootDelay));
+		m->Add(gcnew NumericUpDownSetting(nudSLWIB));
+		m->Add(gcnew ComboBoxSetting(LootComboBox));
+		//AutoHP
+		m->Add(gcnew NumericUpDownSetting(nudHPValue));
+		m->Add(gcnew ComboBoxSetting(HPComboBox));
+		//AutoMP
+		m->Add(gcnew NumericUpDownSetting(nudMPValue));
+		m->Add(gcnew ComboBoxSetting(MPComboBox));
+		//AutoSkill 1
+		m->Add(gcnew NumericUpDownSetting(nudSkill1Value));
+		m->Add(gcnew ComboBoxSetting(AutoSkill1ComboBox));
+		//AutoSkill 2
+		m->Add(gcnew NumericUpDownSetting(nudSkill2Value));
+		m->Add(gcnew ComboBoxSetting(AutoSkill2ComboBox));
+		//AutoSkill 3
+		m->Add(gcnew NumericUpDownSetting(nudSkill3Value));
+		m->Add(gcnew ComboBoxSetting(AutoSkill3ComboBox));
+		//AutoSkill 4
+		m->Add(gcnew NumericUpDownSetting(nudSkill4Value));
+		m->Add(gcnew ComboBoxSetting(AutoSkill4ComboBox));
+		//CC People
+		m->Add(gcnew NumericUpDownSetting(nudCCPeople));
+		m->Add(gcnew ComboBoxSetting(PeopleComboBox));
+		//CC Timed
+		m->Add(gcnew NumericUpDownSetting(nudCCTimed));
+		m->Add(gcnew ComboBoxSetting(TimedComboBox));
+		//CC Attacks
+		m->Add(gcnew NumericUpDownSetting(nudCCAttacks));
+		m->Add(gcnew ComboBoxSetting(AttacksComboBox));
+		//HotKeys
+		m->Add(gcnew ComboBoxSetting(ddbHotKeyAttack));
+		m->Add(gcnew ComboBoxSetting(ddbHotKeyLoot));
+		m->Add(gcnew ComboBoxSetting(ddbHotKeyFMA));
+		m->Add(gcnew ComboBoxSetting(ddbHotKeyCCPeople));
+		m->Add(gcnew ComboBoxSetting(ddbHotKeySendPacket));
 		//Info Tab
-		this->nudLoadDelay->Value = pt.get<int>("LoadSettingsDelay", 1000);
-		this->nudPvPCCDelay->Value = pt.get<int>("PvPCCDelay", 2000);
-
-		//PacketSender Tab
-		this->PacketSelectBox->SelectedIndex =  pt.get<int>("PacketSenderIndex");
-		this->nudSpamAmount->Value = pt.get<int>("PacketSpamTimes");
-		this->nudSpamDelay->Value = pt.get<int>("PacketSpamDelay");
-
+		m->Add(gcnew NumericUpDownSetting(nudLoadDelay));
+		m->Add(gcnew NumericUpDownSetting(nudPvPCCDelay));
+		//PacketSender
+		m->Add(gcnew ComboBoxSetting(PacketSelectBox));
+		m->Add(gcnew NumericUpDownSetting(nudSpamAmount));
+		m->Add(gcnew NumericUpDownSetting(nudSpamDelay));
 		//Hacks Tab
-		this->nudPVPDelay->Value = pt.get<int>("PvPDelay");
-		this->ddbPVPSkills->SelectedIndex = pt.get<int>("PvPSkill");
-
-		Sleep(Convert::ToInt32(nudLoadDelay->Value));
-		this->cbPinTyper->Checked = pt.get<bool>("PinTyper", false);
-		this->cbLogoSkipper->Checked = pt.get<bool>("LogoSkipper", false);
-	}catch(...){};
+		m->Add(gcnew NumericUpDownSetting(nudPVPDelay));
+		m->Add(gcnew ComboBoxSetting(ddbPVPSkills));
+		m->Add(gcnew NumericUpDownSetting(nudIceGuard));
+		
+		m->Add(gcnew CheckBoxSetting(cbPinTyper));
+		m->Add(gcnew CheckBoxSetting(cbLogoSkipper));
+		return m;
 }
 void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	MainForm::SaveSettings();
+	MainForm::SaveSettings(CSettings);
 	SaveSPControl(SPControlFileName, CSPControl);
 	SavePackets(PacketFileName, CPacket);
 }

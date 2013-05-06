@@ -8,16 +8,21 @@ SPControl^ SpawnControl::LoadSPControl(System::String^ filename)
 {
 	if(!File::Exists(filename))
 		return gcnew SPControl;
-
+	
 	TextReader^ reader = gcnew StreamReader(filename);
 	try
 	{
-		XmlSerializer^ serializer = gcnew XmlSerializer(SPControl::typeid);
-		return safe_cast<SPControl^>(serializer->Deserialize(reader));
+		auto serializer = gcnew XmlSerializer(SPControl::typeid);
+		auto sp = safe_cast<SPControl^>(serializer->Deserialize(reader));
+		reader->Close();
+		return sp;
 	}
 	catch(System::Exception^)
 	{
-		switch(MessageBox::Show("WatyBot Failed in loading your config for SPControl :( /n this can be because you just upgraded to a new version of WatyBot, or because the file got corrupted /n Do you want to delete the file to fix the problem?", "Error in loading SPControl", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
+		switch(MessageBox::Show("WatyBot Failed in loading your config for SPControl :( /n" + 
+			"This can be because you just upgraded to a new version of WatyBot, or because the file got corrupted /n" +
+			"Do you want to delete the file to fix the problem?",
+			"Error in loading SPControl", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
 		{
 		case ::DialogResult::Yes:
 			File::Delete(filename);
@@ -31,20 +36,23 @@ SPControl^ SpawnControl::LoadSPControl(System::String^ filename)
 		}
 
 	}
-	finally{reader->Close();}
+	return gcnew SPControl;
 }
 
 void SpawnControl::SaveSPControl(System::String^ filename, SPControl^ sp)
 {
+	if(!File::Exists(filename)) return;
+
 	TextWriter^ writer = gcnew StreamWriter( filename );
 	try
 	{
-		if(!File::Exists(filename)) return;
 		XmlSerializer^ serializer = gcnew XmlSerializer( SPControl::typeid );
 		serializer->Serialize(writer, sp);
-		writer->Close();
 	}
-	catch(System::Exception^){}
+	catch(System::Exception^)
+	{
+	}
+	writer->Close();
 }
 
 SPControl::SPControl()
