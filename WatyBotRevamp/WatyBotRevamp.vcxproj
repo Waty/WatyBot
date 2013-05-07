@@ -18,10 +18,6 @@
     <ProjectGuid>{E5812690-3792-4563-90DD-CABC4B18A6DB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>WatyBotRevamp</RootNamespace>
-    <SccProjectName>SAK</SccProjectName>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
