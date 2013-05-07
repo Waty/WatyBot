@@ -1,4 +1,6 @@
 @echo off
-xcopy /y "E:\Games\Europe MapleStory\WatyBot.dll" "E:\Games\Europe MapleStory\Dlls\WatyBot.dll"
-xcopy /y "E:\Games\Europe MapleStory\WatyBotInjector.exe" "E:\Games\Europe MapleStory\Dlls\WatyBotInjector.exe"
-xcopy /y "E:\Games\Europe MapleStory\WatyBotUpdater.dll" "E:\Games\Europe MapleStory\Dlls\WatyBotUpdater.dll"
+cd /d d:
+cd "D:\Programs\Europe MapleStory\"
+copy WatyBot.dll Dlls\ /Y
+copy WatyBotInjector.exe Dlls\ /Y
+copy WatyBotManager.exe Dlls\ /Y
