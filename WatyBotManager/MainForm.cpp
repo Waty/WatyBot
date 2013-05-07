@@ -1,13 +1,8 @@
 #include "MainForm.h"
 #include "Tab.h"
 using namespace WatyBotManager;
-
-string dllloc;
-string msloc;
-
-typedef vector<gcroot<Tab^>> vTabs;
-vTabs Tabs;
-
+using namespace Xml::Serialization;
+#define ConfigFile Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData) + "\\WatyBotManager.xml"
 BOOL IsElevated( ) {
 	BOOL fRet = FALSE;
 	HANDLE hToken = NULL;
@@ -24,7 +19,8 @@ BOOL IsElevated( ) {
 	return fRet;
 }
 
-[STAThread]
+gcroot<GeneralSettings^> Settings;
+
 void Main()
 {
 	Application::EnableVisualStyles();
@@ -33,19 +29,33 @@ void Main()
 	else MessageBox::Show("Run as administrator!");
 	Application::Exit();
 }
-
-void StartThread(void)
+void StartThread()
 {
 	Threading::Thread^ tMain = gcnew Threading::Thread(gcnew Threading::ThreadStart(Main));
 	tMain->SetApartmentState(Threading::ApartmentState::STA);
 	tMain->Start();
 }
+void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
+{
+	Tabs = gcnew ArrayList;
+
+	if(!File::Exists(ConfigFile)) return;
+	
+	TextReader^ reader = gcnew StreamReader(ConfigFile);
+	XmlSerializer^ s = gcnew XmlSerializer(GeneralSettings::typeid);
+	try
+	{
+		Settings = safe_cast<GeneralSettings^>(s->Deserialize(reader));
+	}
+	catch(Exception^){}
+	reader->Close();
+}
 
 void MainForm::menuToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	if(!File::Exists(marshal_as<String^>(msloc)))
+	if(!File::Exists(Settings->MSFileName))
 		ShowInfo("You forgot to set the MapleStory Location, you can find the option under the menu 'Settings'.");
-	else if(!File::Exists(marshal_as<String^>(dllloc)))
+	else if(!File::Exists(Settings->WatyBotFileName))
 		ShowInfo("You forgot to set the WatyBot Location, you can find the option under the menu 'Settings'.");
 	else
 	{
@@ -79,30 +89,34 @@ void MainForm::menuToolStripMenuItem_Click(System::Object^  sender, System::Even
 
 		//That's how easy it now is to add a new tab :)
 		Tab^ tab = gcnew Tab(tabPage, pMS, pWatyBot);
-		Tabs.push_back(tab);
+		Tabs->Add(tab);
 	}
 }
-
 void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 {
-	for(gcroot<Tab^> tab : Tabs)
-	{
-		tab->Stop();
-	}
-}
+	//Stop all running tabs
+	for each(Tab^ tab in Tabs) tab->Stop();
 
+	//Save the settings
+	TextWriter^ writer = gcnew StreamWriter(ConfigFile);
+	try
+	{
+		XmlSerializer^ serializer = gcnew XmlSerializer(GeneralSettings::typeid);
+		serializer->Serialize(writer, Settings);
+	}
+	catch(System::Exception^){}
+	writer->Close();
+}
 void MainForm::mapleStoryLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	dlgSelectMS->ShowDialog();
-	msloc = marshal_as<string>(dlgSelectMS->FileName);
+	Settings->MSFileName = dlgSelectMS->FileName;
 }
-
 void MainForm::watyBotLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	dlgSelectWatyBot->ShowDialog();
-	dllloc = marshal_as<string>(dlgSelectWatyBot->FileName);
+	Settings->WatyBotFileName = dlgSelectWatyBot->FileName;
 }
-int iTabIndex;
 void MainForm::tabControl1_MouseClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 	if(e->Button == ::MouseButtons::Right)
@@ -113,13 +127,13 @@ void MainForm::tabControl1_MouseClick(System::Object^  sender, System::Windows::
 			if(r.Contains(e->Location))
 			{
 				contextMenuStrip1->Show(tabControl1, e->X, e->Y);
-				iTabIndex = i;
+				Settings->SelectedTabIndex = i;
 			}
 		}
 	}
 }
 void MainForm::removeTabToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	Tabs.at(iTabIndex)->Stop();
-	tabControl1->TabPages->RemoveAt(iTabIndex);
+	safe_cast<Tab^>(Tabs[Settings->SelectedTabIndex])->Stop();
+	tabControl1->TabPages->RemoveAt(Settings->SelectedTabIndex);
 }

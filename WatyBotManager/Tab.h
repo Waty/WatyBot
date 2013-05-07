@@ -4,10 +4,7 @@
 
 using namespace WatyBotManager;
 
-extern string dllloc;
-extern string msloc;
-
-public ref class Tab
+public ref class Tab : MainForm
 {
 public:
 	Tab(TabPage^ , Panel^, Panel^);

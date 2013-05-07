@@ -1,8 +1,7 @@
 #pragma once
 #include <Windows.h>
-#include <vector>
-#include <vcclr.h>
 #include <msclr\marshal_cppstd.h>
+#include "GeneralSettings.h"
 
 using namespace std;
 using namespace msclr::interop;
@@ -178,6 +177,7 @@ namespace WatyBotManager {
 			this->ShowIcon = false;
 			this->Text = L"WatyBotManager";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
+			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->contextMenuStrip1->ResumeLayout(false);
@@ -186,11 +186,14 @@ namespace WatyBotManager {
 
 		}
 #pragma endregion
-private: System::Void MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
-private: System::Void menuToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-private: System::Void mapleStoryLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-private: System::Void watyBotLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-private: System::Void tabControl1_MouseClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-private: System::Void removeTabToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+		public: ArrayList^ Tabs;
+		private:
+			System::Void MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
+			System::Void menuToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+			System::Void mapleStoryLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+			System::Void watyBotLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+			System::Void tabControl1_MouseClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+			System::Void removeTabToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+			System::Void MainForm_Load(System::Object^  sender, System::EventArgs^  e);
 };
 }

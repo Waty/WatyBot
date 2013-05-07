@@ -21,6 +21,9 @@
     <ClInclude Include="Tab.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GeneralSettings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainForm.cpp">
