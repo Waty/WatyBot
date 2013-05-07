@@ -6,6 +6,12 @@ using namespace WatyBotManager;
 extern gcroot<GeneralSettings^> Settings;
 Tab::Tab(TabPage^ tabPage, Panel^ pMS, Panel^ pWatyBot)
 {
+	//Start the maintenance timer
+	timer = gcnew Timer;
+	timer->Tick += gcnew System::EventHandler(this, &Tab::timer_tick);
+	timer->Interval = 60000;
+	timer->Enabled = true;
+
 	this->tabPage = tabPage;
 	this->pMS = pMS;
 	this->pWatyBot = pWatyBot;
@@ -132,4 +138,9 @@ void Tab::Stop()
 	catch(Exception^ /*ex*/)
 	{
 	}
+}
+
+void Tab::timer_tick(System::Object^  sender, System::EventArgs^  e)
+{
+	//TODO: Add code decreasing MS working size + checks to see if MS is still running
 }

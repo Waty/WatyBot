@@ -4,7 +4,7 @@
 
 using namespace WatyBotManager;
 
-public ref class Tab : MainForm
+public ref class Tab
 {
 public:
 	Tab(TabPage^ , Panel^, Panel^);
@@ -21,4 +21,7 @@ private:
 	TabPage^ tabPage;
 	Panel^ pMS;
 	Panel^ pWatyBot;
+	
+	Timer^ timer;
+	void timer_tick(System::Object^  sender, System::EventArgs^  e);
 };
