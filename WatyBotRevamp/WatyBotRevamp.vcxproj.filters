@@ -34,7 +34,7 @@
     <Filter Include="Classes\CMapleStory">
       <UniqueIdentifier>{f466243f-d519-45eb-8fc5-930a68bcd3d1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\SettingsManager">
+    <Filter Include="Classes\Settings">
       <UniqueIdentifier>{73e9a498-1009-4f53-a6f3-0eba6532c7ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -62,9 +62,6 @@
     </ClCompile>
     <ClCompile Include="MapleStory.cpp">
       <Filter>Classes\CMapleStory</Filter>
-    </ClCompile>
-    <ClCompile Include="SettingsManager.cpp">
-      <Filter>Classes\SettingsManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -122,8 +119,8 @@
     <ClInclude Include="Pointers.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="SettingsManager.h">
-      <Filter>Classes\SettingsManager</Filter>
+    <ClInclude Include="Settings.h">
+      <Filter>Classes\Settings</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -158,7 +158,6 @@
     <ClCompile Include="MapleStory.cpp" />
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="Packet.cpp" />
-    <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="SPControl.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -188,7 +187,7 @@
     <ClInclude Include="Memory.h" />
     <ClInclude Include="Packet.h" />
     <ClInclude Include="Pointers.h" />
-    <ClInclude Include="SettingsManager.h" />
+    <ClInclude Include="Settings.h" />
     <ClInclude Include="SPControl.h" />
   </ItemGroup>
   <ItemGroup>
