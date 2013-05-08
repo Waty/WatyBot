@@ -524,7 +524,7 @@ void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^
 }
 void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	//delete packet from ArrayList
+	//delete packet from List
 	switch(MessageBox::Show("Are you sure you want to delete this packet?", "Please Confirm", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
 	{
 	case ::DialogResult::Yes:
