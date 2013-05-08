@@ -2,7 +2,7 @@
 #include "Tab.h"
 using namespace WatyBotManager;
 using namespace Xml::Serialization;
-#define ConfigFile Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData) + "\\WatyBotManager.xml"
+#define ConfigFile Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData) + "\\Waty\\WatyBotManager.xml"
 BOOL IsElevated( ) {
 	BOOL fRet = FALSE;
 	HANDLE hToken = NULL;
