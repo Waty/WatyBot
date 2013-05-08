@@ -14,7 +14,7 @@
 #include "MacroManager/FunctionalMacro.h"
 #include "MacroManager/BotMacro.h"
 #include "MacroManager/SkillMacro.h"
-#include "SettingsManager.h"
+#include "Settings.h"
 using namespace Settings;
 using namespace WatyBotRevamp;
 using namespace msclr::interop;
@@ -23,10 +23,8 @@ using namespace std;
 using namespace Packets;
 using namespace SpawnControl;
 
-#define WatyBotWorkingDirectory "WatyBot\\"
-#define SettingsFileName (WatyBotWorkingDirectory + "settings.xml")
-#define PacketFileName (WatyBotWorkingDirectory + "packets.xml")
-#define SPControlFileName (WatyBotWorkingDirectory + "spcontrol.xml")
+#define WatyBotWorkingDirectory Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData) + "\\Waty\\"
+#define SettingsFileName (WatyBotWorkingDirectory + "WatyBotSettings.xml")
 
 //Macro's
 Macro::BotMacro* AttackMacro;
@@ -42,7 +40,6 @@ gcroot<CMapleStory^> CMS;
 gcroot<ChangeChannel::CChangeChannel^> CC;
 gcroot<SPControl^> CSPControl;
 gcroot<CPackets^> CPacket;
-gcroot<SettingsManager^> CSettings;
 
 //Find Window
 void getMSHWND()
@@ -284,7 +281,7 @@ void AutoSkill(int KeyCodeIndex)
 	else
 	{
 		//Send Packet
-		CPacket->Send(safe_cast<CPacketData^>(CPacket->Items[KeyCodeIndex - KeyCodesSize]));
+		CPacket->Send(CPacket->Packets[KeyCodeIndex - KeyCodesSize]);
 	}
 }
 void TimedCC()
@@ -397,14 +394,14 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	//Get the hwnd of maplestory
 	NewThread(getMSHWND);
 
-	if(!Directory::Exists("WatyBot"))	Directory::CreateDirectory("WatyBot");
+	if(!Directory::Exists(WatyBotWorkingDirectory))	Directory::CreateDirectory(WatyBotWorkingDirectory);
 
 	//Loading of all the settings and innitializing th classes
 	CC = gcnew ChangeChannel::CChangeChannel;
 	CMS = gcnew CMapleStory;
-	CSPControl = LoadSPControl(SPControlFileName);
-	CPacket = LoadPackets(PacketFileName);
-	CSettings = LoadSettings();
+	CSPControl = gcnew SPControl;
+	CPacket = gcnew CPackets;
+	LoadSettings();
 
 	//Start the MacroManager
 	InitializeMacros();
@@ -496,9 +493,9 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 {
 	macroMan.ClearMacros();
 	macroMan.Stop();
-	SaveSPControl(SPControlFileName, CSPControl);
-	SavePackets(PacketFileName, CPacket);
-	SaveSettings(CSettings);
+	CSPControl->Save();
+	CPacket->Save();
+	SaveSettings();
 
 	switch(MessageBox::Show("Close MapleStory too?", "Terminate Maple?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
 	{
@@ -521,7 +518,7 @@ void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs
 void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	CPacket->Add(this->AddPacketNameTextBox->Text, this->AddPacketPacketTextBox->Text);
-	SavePackets(PacketFileName, CPacket);
+	CPacket->Save();
 	RefreshComboBoxes();
 	ShowInfo("Packet was added!");
 }
@@ -533,7 +530,7 @@ void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventAr
 	case ::DialogResult::Yes:
 		CPacket->Delete(DeletePacketComboBox->SelectedIndex);
 		ShowInfo("Packet was deleted succesfully!");
-		SavePackets(PacketFileName, CPacket);
+		CPacket->Save();
 		RefreshComboBoxes();
 		break;
 	}	
@@ -542,7 +539,7 @@ void MainForm::SelectPacketForEditingComboBox_SelectedIndexChanged(System::Objec
 {
 	if(SelectPacketForEditingComboBox->SelectedIndex >= 0)
 	{
-		CPacketData^ p = safe_cast<CPacketData^>(CPacket->Items[SelectPacketForEditingComboBox->SelectedIndex]);
+		CPacketData^ p = CPacket->Packets[SelectPacketForEditingComboBox->SelectedIndex];
 		this->EditPacketNameTextBox->Text = p->Name;
 		this->EditPacketPacketTextBox->Text = p->Data;
 	}
@@ -550,7 +547,7 @@ void MainForm::SelectPacketForEditingComboBox_SelectedIndexChanged(System::Objec
 void MainForm::SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	CPacket->Edit(SelectPacketForEditingComboBox->SelectedIndex, EditPacketNameTextBox->Text, EditPacketPacketTextBox->Text);
-	SavePackets(PacketFileName, CPacket);
+	CPacket->Save();
 	RefreshComboBoxes();
 }
 void MainForm::SpamsPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
@@ -563,7 +560,7 @@ void MainForm::bStopSpamming_Click(System::Object^  sender, System::EventArgs^  
 }
 void MainForm::PacketSelectBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	CPacket->SelectedPacket = safe_cast<CPacketData^>(CPacket->Items[PacketSelectBox->SelectedIndex]);
+	CPacket->SelectedPacket = CPacket->Packets[PacketSelectBox->SelectedIndex];
 }
 void MainForm::RefreshComboBoxes()
 {	
@@ -585,7 +582,7 @@ void MainForm::RefreshComboBoxes()
 	this->AutoSkill4ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 
 	//refresh comboboxes
-	for each(CPacketData^ p in	CPacket->Items) 
+	for each(CPacketData^ p in CPacket->Packets) 
 	{
 		String^ PacketName = p->Name;
 		this->PacketSelectBox->Items->Add(PacketName);
@@ -616,7 +613,7 @@ void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventAr
 	}
 
 	CSPControl->AddLocation(name, mapid, x, y);
-	SaveSPControl(SPControlFileName, CSPControl);
+	CSPControl->Save();
 	RefreshSPControlListView();
 }
 void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventArgs^  e)
@@ -629,7 +626,7 @@ void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventA
 		{
 		case ::DialogResult::Yes:
 			CSPControl->DeleteLocation(SPControlListView->Items->IndexOf(L));
-			SaveSPControl(SPControlFileName, CSPControl);
+			CSPControl->Save();
 			RefreshSPControlListView();
 			break;
 		}
@@ -665,13 +662,14 @@ void MainForm::RefreshSPControlListView()
 }
 
 //Loading/Saving AutoBot settings
-void MainForm::SaveSettings(SettingsManager^ m)
+Void MainForm::SaveSettings()
 {
+	ReloadSettings();
 	TextWriter^ writer = gcnew StreamWriter(SettingsFileName);
 	try
 	{
-		XmlSerializer^ serializer = gcnew XmlSerializer(SettingsManager::typeid);
-		serializer->Serialize(writer, m);
+		XmlSerializer^ serializer = gcnew XmlSerializer(List<SettingsEntry^>::typeid);
+		serializer->Serialize(writer, Settings);
 	}
 	catch(System::Exception^ ex)
 	{
@@ -679,92 +677,95 @@ void MainForm::SaveSettings(SettingsManager^ m)
 	}
 	writer->Close();
 }
-SettingsManager^ MainForm::LoadSettings()
+Void MainForm::LoadSettings()
 {
 	if(!File::Exists(SettingsFileName))
-		return NewManager();
+	{
+		ReloadSettings();
+		return;
+	}
 
 	TextReader^ reader;
 	try
 	{
 		reader = gcnew StreamReader(SettingsFileName);
-		XmlSerializer^ serializer = gcnew XmlSerializer(SettingsManager::typeid);
-		auto settings = safe_cast<SettingsManager^>(serializer->Deserialize(reader));
+		XmlSerializer^ serializer = gcnew XmlSerializer(List<SettingsEntry^>::typeid);
+		Settings = safe_cast<List<SettingsEntry^>^>(serializer->Deserialize(reader));
 		reader->Close();
-		return settings;
+		return;
 	}
 	catch(System::Exception^)
 	{
 		reader->Close();
-		File::Delete(SettingsFileName);
-		return NewManager();
+		ReloadSettings();
+		return;
 	}
 }
-SettingsManager^ MainForm::NewManager()
+Void MainForm::ReloadSettings()
 {
-		SettingsManager^ m = gcnew SettingsManager;
+		List<SettingsEntry^>^ m = gcnew List<SettingsEntry^>;
 		//AutoAttack
-		m->Add(gcnew NumericUpDownSetting(nudAttackDelay));
-		m->Add(gcnew NumericUpDownSetting(nudSAWSIL));
-		m->Add(gcnew ComboBoxSetting(AttackComboBox));
+		m->Add(gcnew SettingsEntry(nudAttackDelay));
+		m->Add(gcnew SettingsEntry(nudSAWSIL));
+		m->Add(gcnew SettingsEntry(AttackComboBox));
 		//AutoLoot
-		m->Add(gcnew NumericUpDownSetting(nudLootDelay));
-		m->Add(gcnew NumericUpDownSetting(nudSLWIB));
-		m->Add(gcnew ComboBoxSetting(LootComboBox));
+		m->Add(gcnew SettingsEntry(nudLootDelay));
+		m->Add(gcnew SettingsEntry(nudSLWIB));
+		m->Add(gcnew SettingsEntry(LootComboBox));
 		//AutoHP
-		m->Add(gcnew NumericUpDownSetting(nudHPValue));
-		m->Add(gcnew ComboBoxSetting(HPComboBox));
+		m->Add(gcnew SettingsEntry(nudHPValue));
+		m->Add(gcnew SettingsEntry(HPComboBox));
 		//AutoMP
-		m->Add(gcnew NumericUpDownSetting(nudMPValue));
-		m->Add(gcnew ComboBoxSetting(MPComboBox));
+		m->Add(gcnew SettingsEntry(nudMPValue));
+		m->Add(gcnew SettingsEntry(MPComboBox));
 		//AutoSkill 1
-		m->Add(gcnew NumericUpDownSetting(nudSkill1Value));
-		m->Add(gcnew ComboBoxSetting(AutoSkill1ComboBox));
+		m->Add(gcnew SettingsEntry(nudSkill1Value));
+		m->Add(gcnew SettingsEntry(AutoSkill1ComboBox));
 		//AutoSkill 2
-		m->Add(gcnew NumericUpDownSetting(nudSkill2Value));
-		m->Add(gcnew ComboBoxSetting(AutoSkill2ComboBox));
+		m->Add(gcnew SettingsEntry(nudSkill2Value));
+		m->Add(gcnew SettingsEntry(AutoSkill2ComboBox));
 		//AutoSkill 3
-		m->Add(gcnew NumericUpDownSetting(nudSkill3Value));
-		m->Add(gcnew ComboBoxSetting(AutoSkill3ComboBox));
+		m->Add(gcnew SettingsEntry(nudSkill3Value));
+		m->Add(gcnew SettingsEntry(AutoSkill3ComboBox));
 		//AutoSkill 4
-		m->Add(gcnew NumericUpDownSetting(nudSkill4Value));
-		m->Add(gcnew ComboBoxSetting(AutoSkill4ComboBox));
+		m->Add(gcnew SettingsEntry(nudSkill4Value));
+		m->Add(gcnew SettingsEntry(AutoSkill4ComboBox));
 		//CC People
-		m->Add(gcnew NumericUpDownSetting(nudCCPeople));
-		m->Add(gcnew ComboBoxSetting(PeopleComboBox));
+		m->Add(gcnew SettingsEntry(nudCCPeople));
+		m->Add(gcnew SettingsEntry(PeopleComboBox));
 		//CC Timed
-		m->Add(gcnew NumericUpDownSetting(nudCCTimed));
-		m->Add(gcnew ComboBoxSetting(TimedComboBox));
+		m->Add(gcnew SettingsEntry(nudCCTimed));
+		m->Add(gcnew SettingsEntry(TimedComboBox));
 		//CC Attacks
-		m->Add(gcnew NumericUpDownSetting(nudCCAttacks));
-		m->Add(gcnew ComboBoxSetting(AttacksComboBox));
+		m->Add(gcnew SettingsEntry(nudCCAttacks));
+		m->Add(gcnew SettingsEntry(AttacksComboBox));
 		//HotKeys
-		m->Add(gcnew ComboBoxSetting(ddbHotKeyAttack));
-		m->Add(gcnew ComboBoxSetting(ddbHotKeyLoot));
-		m->Add(gcnew ComboBoxSetting(ddbHotKeyFMA));
-		m->Add(gcnew ComboBoxSetting(ddbHotKeyCCPeople));
-		m->Add(gcnew ComboBoxSetting(ddbHotKeySendPacket));
+		m->Add(gcnew SettingsEntry(ddbHotKeyAttack));
+		m->Add(gcnew SettingsEntry(ddbHotKeyLoot));
+		m->Add(gcnew SettingsEntry(ddbHotKeyFMA));
+		m->Add(gcnew SettingsEntry(ddbHotKeyCCPeople));
+		m->Add(gcnew SettingsEntry(ddbHotKeySendPacket));
 		//Info Tab
-		m->Add(gcnew NumericUpDownSetting(nudLoadDelay));
-		m->Add(gcnew NumericUpDownSetting(nudPvPCCDelay));
+		m->Add(gcnew SettingsEntry(nudLoadDelay));
+		m->Add(gcnew SettingsEntry(nudPvPCCDelay));
 		//PacketSender
-		m->Add(gcnew ComboBoxSetting(PacketSelectBox));
-		m->Add(gcnew NumericUpDownSetting(nudSpamAmount));
-		m->Add(gcnew NumericUpDownSetting(nudSpamDelay));
+		m->Add(gcnew SettingsEntry(PacketSelectBox));
+		m->Add(gcnew SettingsEntry(nudSpamAmount));
+		m->Add(gcnew SettingsEntry(nudSpamDelay));
 		//Hacks Tab
-		m->Add(gcnew NumericUpDownSetting(nudPVPDelay));
-		m->Add(gcnew ComboBoxSetting(ddbPVPSkills));
-		m->Add(gcnew NumericUpDownSetting(nudIceGuard));
+		m->Add(gcnew SettingsEntry(nudPVPDelay));
+		m->Add(gcnew SettingsEntry(ddbPVPSkills));
+		m->Add(gcnew SettingsEntry(nudIceGuard));
 		
-		m->Add(gcnew CheckBoxSetting(cbPinTyper));
-		m->Add(gcnew CheckBoxSetting(cbLogoSkipper));
-		return m;
+		m->Add(gcnew SettingsEntry(cbPinTyper));
+		m->Add(gcnew SettingsEntry(cbLogoSkipper));
+		Settings = m;
 }
 void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	MainForm::SaveSettings(CSettings);
-	SaveSPControl(SPControlFileName, CSPControl);
-	SavePackets(PacketFileName, CPacket);
+	SaveSettings();
+	CSPControl->Save();
+	CPacket->Save();
 }
 
 //Hot Keys
