@@ -12,47 +12,16 @@ DWORD dwMSSendMethod = SendAddy;// + 5;
 DWORD dwMSSendObject = *(PDWORD)(SendClassAddy+2);
 DWORD dwMSSendRetVal = SendAddy - 13;
 
-CPackets^ Packets::LoadPackets(String^ filename)
+void CPackets::Save()
 {
-	if(!File::Exists(filename))
-		return gcnew CPackets;
-
-	TextReader^ reader = gcnew StreamReader(filename);
+	TextWriter^ writer = gcnew StreamWriter(PacketFileName);
 	try
 	{
-		XmlSerializer^ serializer = gcnew XmlSerializer(CPackets::typeid);
-		return safe_cast<CPackets^>(serializer->Deserialize(reader));
-	}
-	catch(System::Exception^)
-	{
-		switch(MessageBox::Show("WatyBot Failed in loading your config for SPControl :( /n this can be because you just upgraded to a new version of WatyBot, or because the file got corrupted /n Do you want to delete the file to fix the problem?", "Error in loading SPControl", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
-		{
-		case ::DialogResult::Yes:
-			File::Delete(filename);
-			return gcnew CPackets;
-			break;
-
-		case ::DialogResult::No:
-			TerminateProcess(GetCurrentProcess(), 0);
-			ExitProcess(0);
-			break;
-		}
-
-	}
-	finally{reader->Close();}
-}
-
-void Packets::SavePackets(String^ filename, CPackets^ cpackets)
-{
-	TextWriter^ writer = gcnew StreamWriter(filename);
-	try
-	{
-		if(!File::Exists(filename)) return;
-		XmlSerializer^ serializer = gcnew XmlSerializer( CPackets::typeid );
-		serializer->Serialize(writer, cpackets);
-		writer->Close();
+		XmlSerializer^ serializer = gcnew XmlSerializer(List<CPacketData^>::typeid);
+		serializer->Serialize(writer, Packets);
 	}
 	catch(System::Exception^){}
+	writer->Close();
 }
 
 CPacketData::CPacketData(String^ Name, String^ Data)
@@ -61,33 +30,43 @@ CPacketData::CPacketData(String^ Name, String^ Data)
 	this->Data = Data;
 }
 
-CPacketData::CPacketData()
-{
-
-}
-
 CPackets::CPackets()
 {
 	timer = gcnew Windows::Forms::Timer;
-	this->Items = gcnew ArrayList; 
+	
+	if(File::Exists(PacketFileName))
+	{
+		TextReader^ reader = gcnew StreamReader(PacketFileName);
+		try
+		{
+			auto serializer = gcnew XmlSerializer(List<CPacketData^>::typeid);
+			Packets = safe_cast<List<CPacketData^>^>(serializer->Deserialize(reader));
+			reader->Close();
+			return;
+		}
+		catch(System::Exception^)
+		{
+			reader->Close();
+			File::Delete(PacketFileName);
+		}
+	}
+	Packets = gcnew List<CPacketData^>;
 }
 
 void CPackets::Add(String^ name, String^ data)
 {
-	this->Items->Add(gcnew CPacketData(name, data));
+	this->Packets->Add(gcnew CPacketData(name, data));
 }
 
 void CPackets::Delete(int i)
 {
-	this->Items->RemoveAt(i);
+	this->Packets->RemoveAt(i);
 }
 
 void CPackets::Edit(int i, String^ name, String^ data)
 {
-	CPacketData^ p = safe_cast<CPacketData^>(this->Items[i]);
-	p->Name = name;
-	p->Data = data;
-	this->Items[i] = p;
+	Packets[i]->Name = name;
+	Packets[i]->Data = data;
 }
 
 void __declspec(naked) InjectPacket(COutPacket* pPacket)
