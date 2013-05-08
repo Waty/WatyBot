@@ -1861,6 +1861,8 @@ private:
 			// nudSPCY
 			// 
 			this->nudSPCY->Location = System::Drawing::Point(269, 33);
+			this->nudSPCY->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
+			this->nudSPCY->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, System::Int32::MinValue});
 			this->nudSPCY->Name = L"nudSPCY";
 			this->nudSPCY->Size = System::Drawing::Size(36, 20);
 			this->nudSPCY->TabIndex = 41;
@@ -1868,6 +1870,8 @@ private:
 			// nudSPCX
 			// 
 			this->nudSPCX->Location = System::Drawing::Point(230, 33);
+			this->nudSPCX->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
+			this->nudSPCX->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, System::Int32::MinValue});
 			this->nudSPCX->Name = L"nudSPCX";
 			this->nudSPCX->Size = System::Drawing::Size(36, 20);
 			this->nudSPCX->TabIndex = 40;
@@ -1875,6 +1879,8 @@ private:
 			// nudSPCMapId
 			// 
 			this->nudSPCMapId->Location = System::Drawing::Point(150, 33);
+			this->nudSPCMapId->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
+			this->nudSPCMapId->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, System::Int32::MinValue});
 			this->nudSPCMapId->Name = L"nudSPCMapId";
 			this->nudSPCMapId->Size = System::Drawing::Size(77, 20);
 			this->nudSPCMapId->TabIndex = 39;
