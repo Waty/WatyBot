@@ -11,7 +11,7 @@ SPControl^ SPControl::Load()
 		TextReader^ reader = gcnew StreamReader(SPControlFileName);
 		try
 		{
-			auto serializer = gcnew XmlSerializer(List<SPControlLocation^>::typeid);
+			auto serializer = gcnew XmlSerializer(SPControl::typeid);
 			SPControl^ s = safe_cast<SPControl^>(serializer->Deserialize(reader));
 			reader->Close();
 			return s;
@@ -19,7 +19,6 @@ SPControl^ SPControl::Load()
 		catch(System::Exception^)
 		{
 			reader->Close();
-			File::Delete(SPControlFileName);
 		}
 	}
 	return gcnew SPControl;
@@ -30,7 +29,7 @@ void SPControl::Save()
 	TextWriter^ writer = gcnew StreamWriter(SPControlFileName);
 	try
 	{
-		XmlSerializer^ serializer = gcnew XmlSerializer(List<SPControlLocation^>::typeid);
+		XmlSerializer^ serializer = gcnew XmlSerializer(SPControl::typeid);
 		serializer->Serialize(writer, this);
 	}
 	catch(System::Exception^){}
