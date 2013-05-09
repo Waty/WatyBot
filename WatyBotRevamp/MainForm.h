@@ -1288,9 +1288,9 @@ private:
 			this->ddbPVPSkills->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbPVPSkills->DropDownWidth = 215;
 			this->ddbPVPSkills->FormattingEnabled = true;
-			this->ddbPVPSkills->Items->AddRange(gcnew cli::array< System::Object^ >(14) {L"Ice Attack (600% dmg, 10 mobs)", L"Ice Smash (1200% dmg, 10 mobs)", 
+			this->ddbPVPSkills->Items->AddRange(gcnew cli::array< System::Object^  >(14) {L"Ice Attack (600% dmg, 10 mobs)", L"Ice Smash (1200% dmg, 10 mobs)", 
 				L"Ice Snow Tempest (500% x 4 dmg, 10 mobs)", L"Ice chop (900% dmg, 10 mob count)", L"Kaiser: 3rd Dragon Slash", L"Bandit 1st Job: DoubleStab", 
-				L"Bandit 2nd Job: SavageBlow", L"Bandit 3rd Job: Midnight Carneval", L"Bandit 4th Job: Assasinate", L"Warrior 1st Job: Power Strike",
+				L"Bandit 2nd Job: SavageBlow", L"Bandit 3rd Job: Midnight Carneval", L"Bandit 4th Job: Assasinate", L"Warrior 1st Job: Power Strike", 
 				L"Paladin 4th Job: Blast", L"Spearman 3rd Job: Sacrifice", L"Ice/Lightning 2nd Job: Cold Beam", L"Ice/Lightning 3rd Job: Thunder Spear"});
 			this->ddbPVPSkills->Location = System::Drawing::Point(159, 136);
 			this->ddbPVPSkills->Name = L"ddbPVPSkills";
@@ -1861,7 +1861,7 @@ private:
 			this->nudSPCY->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, System::Int32::MinValue});
 			this->nudSPCY->Name = L"nudSPCY";
 			this->nudSPCY->Size = System::Drawing::Size(36, 20);
-			this->nudSPCY->TabIndex = 41;
+			this->nudSPCY->TabIndex = 43;
 			// 
 			// nudSPCX
 			// 
@@ -1870,7 +1870,7 @@ private:
 			this->nudSPCX->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, System::Int32::MinValue});
 			this->nudSPCX->Name = L"nudSPCX";
 			this->nudSPCX->Size = System::Drawing::Size(36, 20);
-			this->nudSPCX->TabIndex = 40;
+			this->nudSPCX->TabIndex = 42;
 			// 
 			// nudSPCMapId
 			// 
@@ -1879,7 +1879,7 @@ private:
 			this->nudSPCMapId->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, System::Int32::MinValue});
 			this->nudSPCMapId->Name = L"nudSPCMapId";
 			this->nudSPCMapId->Size = System::Drawing::Size(77, 20);
-			this->nudSPCMapId->TabIndex = 39;
+			this->nudSPCMapId->TabIndex = 41;
 			// 
 			// GetSPControlCoordsButton
 			// 
@@ -1887,6 +1887,7 @@ private:
 			this->GetSPControlCoordsButton->Name = L"GetSPControlCoordsButton";
 			this->GetSPControlCoordsButton->Size = System::Drawing::Size(78, 23);
 			this->GetSPControlCoordsButton->TabIndex = 38;
+			this->GetSPControlCoordsButton->TabStop = false;
 			this->GetSPControlCoordsButton->Text = L"Get Current";
 			this->GetSPControlCoordsButton->UseVisualStyleBackColor = true;
 			this->GetSPControlCoordsButton->Click += gcnew System::EventHandler(this, &MainForm::GetSPControlCoordsButton_Click);
@@ -1897,6 +1898,7 @@ private:
 			this->SPControlAddButton->Name = L"SPControlAddButton";
 			this->SPControlAddButton->Size = System::Drawing::Size(134, 23);
 			this->SPControlAddButton->TabIndex = 37;
+			this->SPControlAddButton->TabStop = false;
 			this->SPControlAddButton->Text = L"Add Location";
 			this->SPControlAddButton->UseVisualStyleBackColor = true;
 			this->SPControlAddButton->Click += gcnew System::EventHandler(this, &MainForm::SPControlAddButton_Click);
@@ -1916,6 +1918,7 @@ private:
 			this->cbSPControl->Name = L"cbSPControl";
 			this->cbSPControl->Size = System::Drawing::Size(66, 17);
 			this->cbSPControl->TabIndex = 27;
+			this->cbSPControl->TabStop = false;
 			this->cbSPControl->Text = L"Enable";
 			this->cbSPControl->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			this->cbSPControl->UseVisualStyleBackColor = true;
@@ -1953,7 +1956,7 @@ private:
 			this->SPControlNameTextBox->Location = System::Drawing::Point(9, 33);
 			this->SPControlNameTextBox->Name = L"SPControlNameTextBox";
 			this->SPControlNameTextBox->Size = System::Drawing::Size(134, 20);
-			this->SPControlNameTextBox->TabIndex = 33;
+			this->SPControlNameTextBox->TabIndex = 40;
 			// 
 			// SPControlListView
 			// 
@@ -1969,6 +1972,7 @@ private:
 			this->SPControlListView->Name = L"SPControlListView";
 			this->SPControlListView->Size = System::Drawing::Size(310, 261);
 			this->SPControlListView->TabIndex = 28;
+			this->SPControlListView->TabStop = false;
 			this->SPControlListView->UseCompatibleStateImageBehavior = false;
 			this->SPControlListView->View = System::Windows::Forms::View::Details;
 			// 
