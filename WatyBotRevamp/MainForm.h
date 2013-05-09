@@ -193,15 +193,11 @@ private: System::Windows::Forms::Label^  lCharacterpID;
 private: System::Windows::Forms::CheckBox^  cbHideDamage;
 private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 private: System::Windows::Forms::ToolTip^  InfoToolTip;
-private: System::Windows::Forms::NumericUpDown^  nudLoadDelay;
-private: System::Windows::Forms::Label^  lLoadDelay;
 private: System::Windows::Forms::Label^  lKBCoords;
 private: System::Windows::Forms::Label^  lKnockBack;
 private: System::Windows::Forms::CheckBox^  cbPVP;
 private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
 private: System::Windows::Forms::NumericUpDown^  nudPVPDelay;
-private: System::Windows::Forms::NumericUpDown^  nudPvPCCDelay;
-private: System::Windows::Forms::Label^  lPvPCCDelay;
 private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 private: System::Windows::Forms::CheckBox^  cbMouseFly;
@@ -370,10 +366,6 @@ private:
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
 			this->bSaveSettings = (gcnew System::Windows::Forms::Button());
 			this->gbHotKeys = (gcnew System::Windows::Forms::GroupBox());
-			this->nudPvPCCDelay = (gcnew System::Windows::Forms::NumericUpDown());
-			this->lPvPCCDelay = (gcnew System::Windows::Forms::Label());
-			this->nudLoadDelay = (gcnew System::Windows::Forms::NumericUpDown());
-			this->lLoadDelay = (gcnew System::Windows::Forms::Label());
 			this->ddbHotKeySendPacket = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeySendPacket = (gcnew System::Windows::Forms::CheckBox());
 			this->ddbHotKeyCCPeople = (gcnew System::Windows::Forms::ComboBox());
@@ -441,8 +433,6 @@ private:
 			this->SPControlContextMenu->SuspendLayout();
 			this->InfoTab->SuspendLayout();
 			this->gbHotKeys->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPvPCCDelay))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->BeginInit();
 			this->gbPointers->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -766,6 +756,7 @@ private:
 			this->AutoSkill4ComboBox->Name = L"AutoSkill4ComboBox";
 			this->AutoSkill4ComboBox->Size = System::Drawing::Size(115, 21);
 			this->AutoSkill4ComboBox->TabIndex = 24;
+			this->AutoSkill4ComboBox->DropDown += gcnew System::EventHandler(this, &MainForm::AutoSkill4ComboBox_DropDown);
 			// 
 			// AutoSkill4CheckBox
 			// 
@@ -812,6 +803,7 @@ private:
 			this->AutoSkill3ComboBox->Name = L"AutoSkill3ComboBox";
 			this->AutoSkill3ComboBox->Size = System::Drawing::Size(115, 21);
 			this->AutoSkill3ComboBox->TabIndex = 21;
+			this->AutoSkill3ComboBox->DropDown += gcnew System::EventHandler(this, &MainForm::AutoSkill3ComboBox_DropDown);
 			// 
 			// AutoSkill2CheckBox
 			// 
@@ -836,6 +828,7 @@ private:
 			this->AutoSkill2ComboBox->Name = L"AutoSkill2ComboBox";
 			this->AutoSkill2ComboBox->Size = System::Drawing::Size(115, 21);
 			this->AutoSkill2ComboBox->TabIndex = 18;
+			this->AutoSkill2ComboBox->DropDown += gcnew System::EventHandler(this, &MainForm::AutoSkill2ComboBox_DropDown);
 			// 
 			// AttackCheckBox
 			// 
@@ -882,6 +875,7 @@ private:
 			this->AutoSkill1ComboBox->Name = L"AutoSkill1ComboBox";
 			this->AutoSkill1ComboBox->Size = System::Drawing::Size(115, 21);
 			this->AutoSkill1ComboBox->TabIndex = 15;
+			this->AutoSkill1ComboBox->DropDown += gcnew System::EventHandler(this, &MainForm::AutoSkill1ComboBox_DropDown);
 			// 
 			// HPComboBox
 			// 
@@ -2034,10 +2028,6 @@ private:
 			// 
 			// gbHotKeys
 			// 
-			this->gbHotKeys->Controls->Add(this->nudPvPCCDelay);
-			this->gbHotKeys->Controls->Add(this->lPvPCCDelay);
-			this->gbHotKeys->Controls->Add(this->nudLoadDelay);
-			this->gbHotKeys->Controls->Add(this->lLoadDelay);
 			this->gbHotKeys->Controls->Add(this->ddbHotKeySendPacket);
 			this->gbHotKeys->Controls->Add(this->cbHotKeySendPacket);
 			this->gbHotKeys->Controls->Add(this->ddbHotKeyCCPeople);
@@ -2054,40 +2044,6 @@ private:
 			this->gbHotKeys->TabIndex = 26;
 			this->gbHotKeys->TabStop = false;
 			this->gbHotKeys->Text = L"Hot Keys";
-			// 
-			// nudPvPCCDelay
-			// 
-			this->nudPvPCCDelay->Location = System::Drawing::Point(131, 285);
-			this->nudPvPCCDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
-			this->nudPvPCCDelay->Name = L"nudPvPCCDelay";
-			this->nudPvPCCDelay->Size = System::Drawing::Size(58, 20);
-			this->nudPvPCCDelay->TabIndex = 32;
-			// 
-			// lPvPCCDelay
-			// 
-			this->lPvPCCDelay->AutoSize = true;
-			this->lPvPCCDelay->Location = System::Drawing::Point(6, 292);
-			this->lPvPCCDelay->Name = L"lPvPCCDelay";
-			this->lPvPCCDelay->Size = System::Drawing::Size(74, 13);
-			this->lPvPCCDelay->TabIndex = 31;
-			this->lPvPCCDelay->Text = L"PvP CC Delay";
-			// 
-			// nudLoadDelay
-			// 
-			this->nudLoadDelay->Location = System::Drawing::Point(131, 311);
-			this->nudLoadDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
-			this->nudLoadDelay->Name = L"nudLoadDelay";
-			this->nudLoadDelay->Size = System::Drawing::Size(58, 20);
-			this->nudLoadDelay->TabIndex = 30;
-			// 
-			// lLoadDelay
-			// 
-			this->lLoadDelay->AutoSize = true;
-			this->lLoadDelay->Location = System::Drawing::Point(3, 318);
-			this->lLoadDelay->Name = L"lLoadDelay";
-			this->lLoadDelay->Size = System::Drawing::Size(130, 13);
-			this->lLoadDelay->TabIndex = 29;
-			this->lLoadDelay->Text = L"Delay of loading Settings: ";
 			// 
 			// ddbHotKeySendPacket
 			// 
@@ -2396,12 +2352,9 @@ private:
 			this->InfoTab->ResumeLayout(false);
 			this->gbHotKeys->ResumeLayout(false);
 			this->gbHotKeys->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPvPCCDelay))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLoadDelay))->EndInit();
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
 			this->ResumeLayout(false);
-
 		}
 #pragma endregion
 #pragma region custom voids
@@ -2483,6 +2436,10 @@ private: System::Void ddbPVPSkills_SelectedIndexChanged(System::Object^  sender,
 private: System::Void cbMouseFly_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbIceGuard_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void PacketSelectBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void AutoSkill1ComboBox_DropDown(System::Object^  sender, System::EventArgs^  e);
+private: System::Void AutoSkill2ComboBox_DropDown(System::Object^  sender, System::EventArgs^  e);
+private: System::Void AutoSkill3ComboBox_DropDown(System::Object^  sender, System::EventArgs^  e);
+private: System::Void AutoSkill4ComboBox_DropDown(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion
