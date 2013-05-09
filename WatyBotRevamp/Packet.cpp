@@ -56,6 +56,7 @@ CPackets::CPackets()
 void CPackets::Add(String^ name, String^ data)
 {
 	this->Packets->Add(gcnew CPacketData(name, data));
+	this->Save();
 }
 
 void CPackets::Delete(int i)
@@ -65,8 +66,9 @@ void CPackets::Delete(int i)
 
 void CPackets::Edit(int i, String^ name, String^ data)
 {
-	Packets[i]->Name = name;
-	Packets[i]->Data = data;
+	this->Packets[i]->Name = name;
+	this->Packets[i]->Data = data;
+	this->Save();
 }
 
 void __declspec(naked) InjectPacket(COutPacket* pPacket)

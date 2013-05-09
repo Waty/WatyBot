@@ -47,7 +47,6 @@ namespace Packets
 		{
 			bool get(){return timer->Enabled;}
 		}
-		[XmlIgnore]
 		property CPacketData^ SelectedPacket;
 
 		//Public Methods
