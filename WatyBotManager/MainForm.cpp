@@ -39,16 +39,19 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 {
 	Tabs = gcnew ArrayList;
 
-	if(!File::Exists(ConfigFile)) return;
-	
-	TextReader^ reader = gcnew StreamReader(ConfigFile);
-	XmlSerializer^ s = gcnew XmlSerializer(GeneralSettings::typeid);
-	try
+	if(File::Exists(ConfigFile))
 	{
-		Settings = safe_cast<GeneralSettings^>(s->Deserialize(reader));
+		TextReader^ reader = gcnew StreamReader(ConfigFile);
+		XmlSerializer^ s = gcnew XmlSerializer(GeneralSettings::typeid);
+		try
+		{
+			Settings = safe_cast<GeneralSettings^>(s->Deserialize(reader));
+			return;
+		}
+		catch(Exception^){}
+		reader->Close();
 	}
-	catch(Exception^){}
-	reader->Close();
+	Settings = gcnew GeneralSettings;
 }
 
 void MainForm::menuToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
