@@ -1873,7 +1873,7 @@ private:
 			// nudSPCMapId
 			// 
 			this->nudSPCMapId->Location = System::Drawing::Point(150, 33);
-			this->nudSPCMapId->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
+			this->nudSPCMapId->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1410065408, 2, 0, 0});
 			this->nudSPCMapId->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, System::Int32::MinValue});
 			this->nudSPCMapId->Name = L"nudSPCMapId";
 			this->nudSPCMapId->Size = System::Drawing::Size(77, 20);
@@ -2355,6 +2355,7 @@ private:
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
 			this->ResumeLayout(false);
+
 		}
 #pragma endregion
 #pragma region custom voids
