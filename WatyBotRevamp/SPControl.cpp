@@ -4,7 +4,7 @@ using namespace SpawnControl;
 using namespace System::IO;
 using namespace System::Windows::Forms;
 
-SPControl::SPControl()
+SPControl^ SPControl::Load()
 {
 	if(File::Exists(SPControlFileName))
 	{
@@ -12,9 +12,9 @@ SPControl::SPControl()
 		try
 		{
 			auto serializer = gcnew XmlSerializer(List<SPControlLocation^>::typeid);
-			Locations = safe_cast<List<SPControlLocation^>^>(serializer->Deserialize(reader));
+			SPControl^ s = safe_cast<SPControl^>(serializer->Deserialize(reader));
 			reader->Close();
-			return;
+			return s;
 		}
 		catch(System::Exception^)
 		{
@@ -22,7 +22,7 @@ SPControl::SPControl()
 			File::Delete(SPControlFileName);
 		}
 	}
-	Locations = gcnew List<SPControlLocation^>;
+	return gcnew SPControl;
 }
 
 void SPControl::Save()
@@ -31,31 +31,27 @@ void SPControl::Save()
 	try
 	{
 		XmlSerializer^ serializer = gcnew XmlSerializer(List<SPControlLocation^>::typeid);
-		serializer->Serialize(writer, Locations);
+		serializer->Serialize(writer, this);
 	}
 	catch(System::Exception^){}
 	writer->Close();
 }
 
-void SPControl::AddLocation(System::String^ name, int ID, int x, int y)
+void SPControl::EditLocation(int index, String^ name, int mapid, int x, int y)
 {
-	SPControlLocation^ SP = gcnew SPControlLocation;
-	SP->Name = name;
-	SP->MapId = ID;
-	SP->X = x;
-	SP->Y = y;
-	Locations->Add(SP);
+	this[index]->Name = name;
+	this[index]->MapId = mapid;
+	this[index]->X = x;
+	this[index]->Y = y;
 }
 
-void SPControl::EditLocation(int index, System::String^ name, int mapid, int x, int y)
+void SPControl::AddLocation(String^ Name, int MapId, int X, int Y)
 {
-	Locations[index]->Name = name;
-	Locations[index]->MapId = mapid;
-	Locations[index]->X = x;
-	Locations[index]->Y = y;
-}
-
-void SPControl::DeleteLocation(int i)
-{
-	Locations->RemoveAt(i);
+	SPControlLocation^ l = gcnew SPControlLocation;
+	l->Name = Name;
+	l->MapId = MapId;
+	l->X = X;
+	l->Y = Y;
+	this->Add(l);
+	this->Save();
 }
