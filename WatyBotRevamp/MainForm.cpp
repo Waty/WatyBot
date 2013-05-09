@@ -1,7 +1,6 @@
 #pragma once
 #pragma warning(disable : 4793 4244)
 #include <Windows.h>
-#include <fstream>
 #include <msclr/marshal_cppstd.h>
 #include "MainForm.h"
 #include "Memory.h"

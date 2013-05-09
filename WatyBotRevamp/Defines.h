@@ -13,12 +13,6 @@
 #define ShowError(Message)		MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
 #define ShowWarning(Message)	MessageBox::Show(Message, "Warning", MessageBoxButtons::OK, MessageBoxIcon::Warning)
 
-int iCCPeople;
-int iCCAttacks;
-int iHPValue, iHPKey;
-LPARAM HPlParam, MPlParam;
-int iMPValue, iMPKey;
-
 bool UsingPot;
 bool UsingAutoSkill;
 
