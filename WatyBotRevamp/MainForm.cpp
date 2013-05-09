@@ -394,19 +394,20 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	//Get the hwnd of maplestory
 	NewThread(getMSHWND);
 
+	//Create the Waty directory in %appdata%
 	if(!Directory::Exists(WatyBotWorkingDirectory))	Directory::CreateDirectory(WatyBotWorkingDirectory);
 
 	//Loading of all the settings and innitializing th classes
 	CC = gcnew ChangeChannel::CChangeChannel;
 	CMS = gcnew CMapleStory;
-	CSPControl = gcnew SPControl;
+	SPControl^s = gcnew SPControl;
+	CSPControl = s->Load();
 	CPacket = gcnew CPackets;
 	LoadSettings();
 
 	//Start the MacroManager
 	InitializeMacros();
 
-	
 	RefreshComboBoxes();
 	RefreshSPControlListView();
 
@@ -518,7 +519,6 @@ void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs
 void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	CPacket->Add(this->AddPacketNameTextBox->Text, this->AddPacketPacketTextBox->Text);
-	CPacket->Save();
 	RefreshComboBoxes();
 	ShowInfo("Packet was added!");
 }
@@ -570,16 +570,6 @@ void MainForm::RefreshComboBoxes()
 	this->PacketSelectBox->Items->Clear();
 	this->SelectPacketForEditingComboBox->Items->Clear();
 	this->DeletePacketComboBox->Items->Clear();
-	this->AutoSkill1ComboBox->Items->Clear();
-	this->AutoSkill2ComboBox->Items->Clear();
-	this->AutoSkill3ComboBox->Items->Clear();
-	this->AutoSkill4ComboBox->Items->Clear();
-
-	//Add Keys to the autoskillcomboboxes
-	this->AutoSkill1ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-	this->AutoSkill2ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-	this->AutoSkill3ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-	this->AutoSkill4ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 
 	//refresh comboboxes
 	for each(CPacketData^ p in CPacket->Packets) 
@@ -588,11 +578,31 @@ void MainForm::RefreshComboBoxes()
 		this->PacketSelectBox->Items->Add(PacketName);
 		this->SelectPacketForEditingComboBox->Items->Add(PacketName);
 		this->DeletePacketComboBox->Items->Add(PacketName);
-		this->AutoSkill1ComboBox->Items->Add(PacketName);
-		this->AutoSkill2ComboBox->Items->Add(PacketName);
-		this->AutoSkill3ComboBox->Items->Add(PacketName);
-		this->AutoSkill4ComboBox->Items->Add(PacketName);
 	}	
+}
+void MainForm::AutoSkill1ComboBox_DropDown(System::Object^  sender, System::EventArgs^  e)
+{
+	this->AutoSkill1ComboBox->Items->Clear();
+	this->AutoSkill1ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+	for each(CPacketData^ p in CPacket->Packets) this->AutoSkill1ComboBox->Items->Add(p->Name);
+}
+void MainForm::AutoSkill2ComboBox_DropDown(System::Object^  sender, System::EventArgs^  e)
+{
+	this->AutoSkill2ComboBox->Items->Clear();
+	this->AutoSkill2ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+	for each(CPacketData^ p in CPacket->Packets) this->AutoSkill2ComboBox->Items->Add(p->Name);
+}
+void MainForm::AutoSkill3ComboBox_DropDown(System::Object^  sender, System::EventArgs^  e)
+{
+	this->AutoSkill3ComboBox->Items->Clear();
+	this->AutoSkill3ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+	for each(CPacketData^ p in CPacket->Packets) this->AutoSkill3ComboBox->Items->Add(p->Name);
+}
+void MainForm::AutoSkill4ComboBox_DropDown(System::Object^  sender, System::EventArgs^  e)
+{
+	this->AutoSkill3ComboBox->Items->Clear();
+	this->AutoSkill3ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+	for each(CPacketData^ p in CPacket->Packets) this->AutoSkill3ComboBox->Items->Add(p->Name);
 }
 
 //controls on SPControl Tab
@@ -613,7 +623,6 @@ void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventAr
 	}
 
 	CSPControl->AddLocation(name, mapid, x, y);
-	CSPControl->Save();
 	RefreshSPControlListView();
 }
 void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventArgs^  e)
@@ -625,7 +634,7 @@ void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventA
 		switch(MessageBox::Show("Are you sure you want to delete this location?", "Please Confirm", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
 		{
 		case ::DialogResult::Yes:
-			CSPControl->DeleteLocation(SPControlListView->Items->IndexOf(L));
+			CSPControl->RemoveAt(SPControlListView->Items->IndexOf(L));
 			CSPControl->Save();
 			RefreshSPControlListView();
 			break;
@@ -650,13 +659,14 @@ void MainForm::RefreshSPControlListView()
 	this->nudSPCMapId->ResetText();
 	this->nudSPCX->ResetText();
 	this->nudSPCY->ResetText();
-	if(CSPControl->Locations == nullptr) return;
-	for each(SPControlLocation^ SP in CSPControl->Locations)
+	auto e = CSPControl->GetEnumerator();
+	while(e.MoveNext())
 	{
+		SPControlLocation^ SP = e.Current;
 		ListViewItem^ item = gcnew ListViewItem(SP->Name);
-		item->SubItems->Add(Convert::ToString(SP->MapId));
-		item->SubItems->Add(Convert::ToString(SP->X));
-		item->SubItems->Add(Convert::ToString(SP->Y));
+		item->SubItems->Add(SP->MapId.ToString());
+		item->SubItems->Add(SP->X.ToString());
+		item->SubItems->Add(SP->Y.ToString());
 		SPControlListView->Items->Add(item);
 	}
 }
@@ -692,6 +702,59 @@ Void MainForm::LoadSettings()
 		XmlSerializer^ serializer = gcnew XmlSerializer(List<SettingsEntry^>::typeid);
 		Settings = safe_cast<List<SettingsEntry^>^>(serializer->Deserialize(reader));
 		reader->Close();
+		
+		//AutoAttack
+		nudAttackDelay->Value = (Decimal)			Settings[0]->Value;
+		nudSAWSIL->Value = (Decimal)				Settings[1]->Value;
+		AttackComboBox->SelectedIndex = (int)		Settings[2]->Value;
+		//AutoLoot
+		nudLootDelay->Value = (Decimal)				Settings[3]->Value;
+		nudSLWIB->Value = (Decimal)					Settings[4]->Value;
+		LootComboBox->SelectedIndex = (int)			Settings[5]->Value;
+		//AutoHP
+		nudHPValue->Value = (Decimal)				Settings[6]->Value;
+		HPComboBox->SelectedIndex = (int)			Settings[7]->Value;
+		//AutoMP
+		nudMPValue->Value = (Decimal)				Settings[8]->Value;
+		MPComboBox->SelectedIndex = (int)			Settings[9]->Value;
+		//AutoSkill 1
+		nudSkill1Value->Value = (Decimal)			Settings[10]->Value;
+		AutoSkill1ComboBox->SelectedIndex = (int)	Settings[11]->Value;
+		//AutoSkill 2
+		nudSkill2Value->Value = (Decimal)			Settings[12]->Value;
+		AutoSkill2ComboBox->SelectedIndex = (int)	Settings[13]->Value;
+		//AutoSkill 3
+		nudSkill3Value->Value = (Decimal)			Settings[14]->Value;
+		AutoSkill3ComboBox->SelectedIndex = (int)	Settings[15]->Value;
+		//AutoSkill 4
+		nudSkill4Value->Value = (Decimal)			Settings[16]->Value;
+		AutoSkill4ComboBox->SelectedIndex = (int)	Settings[17]->Value;
+		//CC People
+		nudCCPeople->Value = (Decimal)				Settings[18]->Value;
+		PeopleComboBox->SelectedIndex = (int)		Settings[19]->Value;
+		//CC Timed
+		nudCCTimed->Value = (Decimal)				Settings[20]->Value;
+		TimedComboBox->SelectedIndex = (int)		Settings[21]->Value;
+		//CC Attacks
+		nudCCAttacks->Value = (Decimal)				Settings[22]->Value;
+		AttacksComboBox->SelectedIndex = (int)		Settings[23]->Value;
+		//HotKeys
+		ddbHotKeyAttack->SelectedIndex = (int)		Settings[24]->Value;
+		ddbHotKeyLoot->SelectedIndex = (int)		Settings[25]->Value;
+		ddbHotKeyFMA->SelectedIndex = (int)			Settings[26]->Value;
+		ddbHotKeyCCPeople->SelectedIndex = (int)	Settings[27]->Value;
+		ddbHotKeySendPacket->SelectedIndex = (int)	Settings[28]->Value;
+		//PacketSender
+		PacketSelectBox->SelectedIndex = (int)		Settings[29]->Value;
+		nudSpamAmount->Value = (Decimal)			Settings[30]->Value;
+		nudSpamDelay->Value = (Decimal)				Settings[31]->Value;
+		//Hacks Tab
+		nudPVPDelay->Value = (Decimal)				Settings[32]->Value;
+		ddbPVPSkills->SelectedIndex = (int)			Settings[33]->Value;
+		nudIceGuard->Value = (Decimal)				Settings[34]->Value;
+		
+		cbPinTyper->Checked = (bool)				Settings[35]->Value;
+		cbLogoSkipper->Checked = (bool)				Settings[36]->Value;
 		return;
 	}
 	catch(System::Exception^)
@@ -745,9 +808,6 @@ Void MainForm::ReloadSettings()
 		m->Add(gcnew SettingsEntry(ddbHotKeyFMA));
 		m->Add(gcnew SettingsEntry(ddbHotKeyCCPeople));
 		m->Add(gcnew SettingsEntry(ddbHotKeySendPacket));
-		//Info Tab
-		m->Add(gcnew SettingsEntry(nudLoadDelay));
-		m->Add(gcnew SettingsEntry(nudPvPCCDelay));
 		//PacketSender
 		m->Add(gcnew SettingsEntry(PacketSelectBox));
 		m->Add(gcnew SettingsEntry(nudSpamAmount));
