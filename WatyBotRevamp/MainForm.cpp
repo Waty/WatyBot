@@ -397,8 +397,7 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	//Loading of all the settings and innitializing th classes
 	CC = gcnew ChangeChannel::CChangeChannel;
 	CMS = gcnew CMapleStory;
-	SPControl^s = gcnew SPControl;
-	CSPControl = s->Load();
+	CSPControl = gcnew SPControl;
 	CPacket = gcnew CPackets;
 	LoadSettings();
 
@@ -624,14 +623,14 @@ void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventAr
 }
 void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	this->SPControlListView->SelectedItems;
+	SPControlListView->SelectedItems;
 	ListViewItem^ L = this->SPControlListView->SelectedItems[0];
 	if(SPControlListView->SelectedItems->Count > 0)
 	{
 		switch(MessageBox::Show("Are you sure you want to delete this location?", "Please Confirm", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
 		{
 		case ::DialogResult::Yes:
-			CSPControl->RemoveAt(SPControlListView->Items->IndexOf(L));
+			CSPControl->Locations->RemoveAt(SPControlListView->Items->IndexOf(L));
 			CSPControl->Save();
 			RefreshSPControlListView();
 			break;
@@ -656,10 +655,8 @@ void MainForm::RefreshSPControlListView()
 	this->nudSPCMapId->ResetText();
 	this->nudSPCX->ResetText();
 	this->nudSPCY->ResetText();
-	auto e = CSPControl->GetEnumerator();
-	while(e.MoveNext())
+	for each(SPControlLocation^ SP in CSPControl->Locations)
 	{
-		SPControlLocation^ SP = e.Current;
 		ListViewItem^ item = gcnew ListViewItem(SP->Name);
 		item->SubItems->Add(SP->MapId.ToString());
 		item->SubItems->Add(SP->X.ToString());

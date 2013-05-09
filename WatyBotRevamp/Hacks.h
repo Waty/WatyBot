@@ -152,10 +152,8 @@ namespace Hacks
 	BOOL WINAPI GetCoords()
 	{
 		int iMapID = CMS->MapID;
-		auto enumerator = CSPControl->GetEnumerator();
-		while(enumerator.MoveNext())
+		for each(SpawnControl::SPControlLocation^ location in CSPControl->Locations)
 		{
-			SpawnControl::SPControlLocation^ location = enumerator.Current;
 			if(iMapID == location->MapId)
 			{
 				spawn_x = location->X;

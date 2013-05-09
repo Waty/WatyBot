@@ -10,19 +10,25 @@ namespace SpawnControl
 	public ref class SPControlLocation sealed
 	{
 	public:
-		[XmlAttribute]
+		SPControlLocation();
+		SPControlLocation(String^ name, int MapId, int X, int Y);
+
+		//[XmlAttribute]
 		property String^ Name;
 		property int MapId;
 		property int X;
 		property int Y;
 	};
 
-	public ref class SPControl : List<SPControlLocation^>
+	public ref class SPControl
 	{
 	public:
-		SPControl^ Load();
+		SPControl();
+		void Load();
 		void Save();
 		void EditLocation(int index, System::String^ name, int mapid, int x, int y);
 		void AddLocation(String^ Name, int MapId, int X, int Y);
+
+		property List<SPControlLocation^>^ Locations;
 	};
 }
