@@ -84,7 +84,16 @@ CMemory::~CMemory(void)
 //Public Method
 bool CMemory::Enable(bool enable)
 {
-	if(!MSCRCPatched()) return false;
+	using namespace System::Windows::Forms;
+	using namespace System::Drawing;
+	if(!MSCRCPatched())
+	{
+		NotifyIcon^ i = gcnew NotifyIcon;
+		i->Icon = SystemIcons::Error;
+		i->Visible = true;
+		i->ShowBalloonTip(1000, L"WatyBot", L"Error in enabling the hack: No MSCRC bypass installed", ToolTipIcon::Error);
+		return false;
+	}
 	enable ? this->WriteMem() : this->RestoreMem();
 	this->Enabled = enable;
 	return true;
