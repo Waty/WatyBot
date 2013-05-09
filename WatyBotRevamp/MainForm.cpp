@@ -645,9 +645,9 @@ void MainForm::GetSPControlCoordsButton_Click(System::Object^  sender, System::E
 		SendKey(VK_DOWN);
 		Sleep(10);
 	}
-	this->nudSPCMapId->Value = CMS->CharX;
-	this->nudSPCX->Value = CMS->CharY;
-	this->nudSPCY->Value = CMS->MapID;
+	this->nudSPCMapId->Value = CMS->MapID;
+	this->nudSPCX->Value = CMS->CharX;
+	this->nudSPCY->Value = CMS->CharY;
 }
 void MainForm::RefreshSPControlListView()
 {
