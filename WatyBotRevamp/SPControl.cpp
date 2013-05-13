@@ -23,27 +23,21 @@ SPControlLocation::SPControlLocation(String^ name, int MapId, int X, int Y)
 
 SPControl::SPControl()
 {
-	Load();
-}
-
-void SPControl::Load()
-{
-	if(File::Exists(SPControlFileName))
+	if(!File::Exists(SPControlFileName))
 	{
-		TextReader^ reader = gcnew StreamReader(SPControlFileName);
-		try
-		{
-			auto serializer = gcnew XmlSerializer(List<SPControlLocation^>::typeid);
-			Locations = safe_cast<List<SPControlLocation^>^>(serializer->Deserialize(reader));
-			reader->Close();
-			return;
-		}
-		catch(System::Exception^)
-		{
-			reader->Close();
-		}
+		auto stream = File::Create(SPControlFileName);
+		stream->Close();
 	}
-	Locations = gcnew List<SPControlLocation^>;
+	
+	TextReader^ reader = gcnew StreamReader(SPControlFileName);
+	s = gcnew XmlSerializer(List<SPControlLocation^>::typeid);
+	try
+	{
+		Locations = safe_cast<List<SPControlLocation^>^>(s->Deserialize(reader));
+	}
+	catch(System::Exception^){}	
+	reader->Close();
+	if(Locations == nullptr) Locations = gcnew List<SPControlLocation^>;
 }
 
 void SPControl::Save()
@@ -51,8 +45,7 @@ void SPControl::Save()
 	TextWriter^ writer = gcnew StreamWriter(SPControlFileName);
 	try
 	{
-		XmlSerializer^ serializer = gcnew XmlSerializer(List<SPControlLocation^>::typeid);
-		serializer->Serialize(writer, Locations);
+		s->Serialize(writer, Locations);
 	}
 	catch(System::Exception^){}
 	writer->Close();

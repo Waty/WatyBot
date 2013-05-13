@@ -24,11 +24,11 @@ namespace SpawnControl
 	{
 	public:
 		SPControl();
-		void Load();
 		void Save();
 		void EditLocation(int index, System::String^ name, int mapid, int x, int y);
 		void AddLocation(String^ Name, int MapId, int X, int Y);
 
 		property List<SPControlLocation^>^ Locations;
+		property XmlSerializer^ s;
 	};
 }
