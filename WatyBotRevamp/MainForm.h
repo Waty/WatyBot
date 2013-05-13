@@ -54,12 +54,18 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::PictureBox^  MPForeground;
 	private: System::Windows::Forms::PictureBox^  HPForeground;
 	private: System::Windows::Forms::PictureBox^  EXPBackground;
-	private: System::Windows::Forms::CheckBox^  HPCheckBox;
-	private: System::Windows::Forms::ComboBox^  HPComboBox;
-	private: System::Windows::Forms::ComboBox^  MPComboBox;
-	private: System::Windows::Forms::CheckBox^  MPCheckBox;
-	private: System::Windows::Forms::ComboBox^  AttackComboBox;
-	private: System::Windows::Forms::CheckBox^  AttackCheckBox;
+	private: System::Windows::Forms::CheckBox^  cbAutoHP;
+	private: System::Windows::Forms::ComboBox^  ddbAutoHPKey;
+	private: System::Windows::Forms::ComboBox^  ddbAutoMPKey;
+
+
+
+	private: System::Windows::Forms::CheckBox^  cbAutoMP;
+
+	private: System::Windows::Forms::ComboBox^  ddbAutoAttackKey;
+
+	private: System::Windows::Forms::CheckBox^  cbAutoAttack;
+
 	private: System::Windows::Forms::Label^  lAttackMS;
 	private: System::Windows::Forms::TabPage^  InfoTab;
 	private: System::Windows::Forms::Label^  AttackCountLabel;
@@ -68,49 +74,84 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::Label^  PeopleCountLabel;
 	private: System::Windows::Forms::Label^  MobCountLabel;
 	private: System::Windows::Forms::GroupBox^  gbPointers;
-	private: System::Windows::Forms::CheckBox^  LootCheckBox;
-	private: System::Windows::Forms::ComboBox^  LootComboBox;
-	private: System::Windows::Forms::CheckBox^  AutoSkill1CheckBox;
-	private: System::Windows::Forms::ComboBox^  AutoSkill1ComboBox;
+	private: System::Windows::Forms::CheckBox^  cbAutoLoot;
+
+	private: System::Windows::Forms::ComboBox^  ddbAutoLootKey;
+	private: System::Windows::Forms::CheckBox^  cbAutoSkill1;
+	private: System::Windows::Forms::ComboBox^  ddbAutoSkill1Key;
+
+
+
 	private: System::Windows::Forms::GroupBox^  AutoBotGroupBox;
-private: System::Windows::Forms::CheckBox^  AutoSkill4CheckBox;
-private: System::Windows::Forms::ComboBox^  AutoSkill4ComboBox;
-private: System::Windows::Forms::CheckBox^  AutoSkill3CheckBox;
-private: System::Windows::Forms::ComboBox^  AutoSkill3ComboBox;
-private: System::Windows::Forms::CheckBox^  AutoSkill2CheckBox;
-private: System::Windows::Forms::ComboBox^  AutoSkill2ComboBox;
+	private: System::Windows::Forms::CheckBox^  cbAutoSkill4;
+	private: System::Windows::Forms::ComboBox^  ddbAutoSkill4Key;
+
+
+	private: System::Windows::Forms::CheckBox^  cbAutoSkill3;
+	private: System::Windows::Forms::ComboBox^  ddbAutoSkill3Key;
+
+
+	private: System::Windows::Forms::CheckBox^  cbAutoSkill2;
+	private: System::Windows::Forms::ComboBox^  ddbAutoSkill2Key;
+
+
 private: System::Windows::Forms::Label^  TubiPointerLabel;
 private: System::Windows::Forms::Label^  BreathLabel;
-private: System::Windows::Forms::CheckBox^  CCPeopleCheckBox;
+	private: System::Windows::Forms::CheckBox^  cbCCPeople;
+
 private: System::Windows::Forms::TabPage^  PacketSenderTab;
 private: System::Windows::Forms::Button^  SendPacketButton;
-private: System::Windows::Forms::ComboBox^  PacketSelectBox;
-private: System::Windows::Forms::GroupBox^  AddPacketsGroupBox;
-private: System::Windows::Forms::GroupBox^  SendPacketGroupBox;
-private: System::Windows::Forms::Button^  AddPacketButton;
-private: System::Windows::Forms::TextBox^  AddPacketPacketTextBox;
-private: System::Windows::Forms::TextBox^  AddPacketNameTextBox;
+	private: System::Windows::Forms::ComboBox^  ddbSelectedPacket;
+	private: System::Windows::Forms::GroupBox^  gbAddPacket;
+
+
+
+	private: System::Windows::Forms::GroupBox^  gbSendPackets;
+
+	private: System::Windows::Forms::Button^  bAddPacket;
+	private: System::Windows::Forms::TextBox^  tbAddPacketData;
+
+
+	private: System::Windows::Forms::TextBox^  tbAddPacketName;
+
+
+
 private: System::Windows::Forms::Label^  AddPacketPacketLabel;
 private: System::Windows::Forms::Label^  AddPacketNameLabel;
-private: System::Windows::Forms::Label^  SpamPacketTimesLabel;
+	private: System::Windows::Forms::Label^  lSpamPacketTimes;
+
 private: System::Windows::Forms::Label^  SpamPacketsDelayLabel;
 private: System::Windows::Forms::Button^  bStartSpamming;
-private: System::Windows::Forms::GroupBox^  DeletePacketsGroupBox;
-private: System::Windows::Forms::ComboBox^  DeletePacketComboBox;
-private: System::Windows::Forms::Button^  DeletePacketButton;
-private: System::Windows::Forms::GroupBox^  EditPacketGroupBox;
-private: System::Windows::Forms::Button^  SavePacketEditButton;
-private: System::Windows::Forms::TextBox^  EditPacketPacketTextBox;
-private: System::Windows::Forms::TextBox^  EditPacketNameTextBox;
-private: System::Windows::Forms::ComboBox^  SelectPacketForEditingComboBox;
+	private: System::Windows::Forms::GroupBox^  gbDeletePacket;
+
+	private: System::Windows::Forms::ComboBox^  ddbDeletePacket;
+	private: System::Windows::Forms::Button^  bDeletePacket;
+private: System::Windows::Forms::GroupBox^  gbEditPacket;
+
+
+
+
+private: System::Windows::Forms::Button^  bSaveChanges;
+private: System::Windows::Forms::TextBox^  tbEditPacketData;
+
+private: System::Windows::Forms::TextBox^  tbEditPacketName;
+
+
+
+
+private: System::Windows::Forms::ComboBox^  ddbEditPacket;
+
 private: System::Windows::Forms::TabPage^  SPControlTabPage;
 private: System::Windows::Forms::CheckBox^  cbSPControl;
-private: System::Windows::Forms::CheckBox^  CCAttacksCheckBox;
-private: System::Windows::Forms::CheckBox^  CCTimedCheckBox;
+private: System::Windows::Forms::CheckBox^  cbCCAttacks;
+
+private: System::Windows::Forms::CheckBox^  cbCCTimed;
+
 private: System::Windows::Forms::Label^  CCTimedLabel;
 private: System::Windows::Forms::Label^  CCPeopleLabel;
 private: System::Windows::Forms::Label^  CCAttacksLabel;
-private: System::Windows::Forms::ListView^  SPControlListView;
+private: System::Windows::Forms::ListView^  lvSPControl;
+
 private: System::Windows::Forms::ColumnHeader^  HeaderMapName;
 private: System::Windows::Forms::ColumnHeader^  HeaderMapID;
 private: System::Windows::Forms::ColumnHeader^  HeaderX;
@@ -119,12 +160,21 @@ private: System::Windows::Forms::Label^  SPControlNameLabel;
 private: System::Windows::Forms::Label^  SPControlMapIDLabel;
 private: System::Windows::Forms::Label^  SPControlXLabel;
 private: System::Windows::Forms::Label^  SPControlYLabel;
-private: System::Windows::Forms::GroupBox^  SPControlGroupBox;
-private: System::Windows::Forms::TextBox^  SPControlNameTextBox;
-private: System::Windows::Forms::Button^  SPControlAddButton;
+private: System::Windows::Forms::GroupBox^  gbNewSPCLocation;
+
+
+
+private: System::Windows::Forms::TextBox^  tbSPCName;
+private: System::Windows::Forms::Button^  bAddSPCLocation;
+
+
+
+
 private: System::Windows::Forms::ContextMenuStrip^  SPControlContextMenu;
 private: System::Windows::Forms::ToolStripMenuItem^  deleteSPControlToolStripMenuItem;
-private: System::Windows::Forms::Button^  GetSPControlCoordsButton;
+private: System::Windows::Forms::Button^  bSPCGetCurrent;
+
+
 private: System::Windows::Forms::GroupBox^  MobHacks;
 private: System::Windows::Forms::CheckBox^  cbPerfectLoot;
 private: System::Windows::Forms::CheckBox^  cbFusionAttack;
@@ -157,9 +207,12 @@ private: System::Windows::Forms::Label^  lLootMS;
 private: System::Windows::Forms::CheckBox^  cbCPUHack;
 private: System::Windows::Forms::Label^  lSLWIB;
 private: System::Windows::Forms::Label^  lSAWSIL;
-private: System::Windows::Forms::ComboBox^  TimedComboBox;
-private: System::Windows::Forms::ComboBox^  AttacksComboBox;
-private: System::Windows::Forms::ComboBox^  PeopleComboBox;
+private: System::Windows::Forms::ComboBox^  ddbTimedType;
+private: System::Windows::Forms::ComboBox^  ddbAttacksType;
+
+
+private: System::Windows::Forms::ComboBox^  ddbPeopleType;
+
 private: System::Windows::Forms::GroupBox^  gbHotKeys;
 private: System::Windows::Forms::CheckBox^  cbHotKeyAttack;
 private: System::Windows::Forms::ComboBox^  ddbHotKeyAttack;
@@ -168,17 +221,25 @@ private: System::Windows::Forms::CheckBox^  cbHotKeyLoot;
 private: System::Windows::Forms::Label^  lMapID;
 private: System::Windows::Forms::NumericUpDown^  nudSLWIB;
 private: System::Windows::Forms::NumericUpDown^  nudSAWSIL;
-private: System::Windows::Forms::NumericUpDown^  nudLootDelay;
-private: System::Windows::Forms::NumericUpDown^  nudAttackDelay;
-private: System::Windows::Forms::NumericUpDown^  nudMPValue;
-private: System::Windows::Forms::NumericUpDown^  nudHPValue;
+private: System::Windows::Forms::NumericUpDown^  nudAutoLoot;
+
+private: System::Windows::Forms::NumericUpDown^  nudAutoAttack;
+private: System::Windows::Forms::NumericUpDown^  nudAutoMP;
+
+
+private: System::Windows::Forms::NumericUpDown^  nudAutoHP;
+
 private: System::Windows::Forms::NumericUpDown^  nudCCAttacks;
 private: System::Windows::Forms::NumericUpDown^  nudCCTimed;
 private: System::Windows::Forms::NumericUpDown^  nudCCPeople;
-private: System::Windows::Forms::NumericUpDown^  nudSkill4Value;
-private: System::Windows::Forms::NumericUpDown^  nudSkill3Value;
-private: System::Windows::Forms::NumericUpDown^  nudSkill2Value;
-private: System::Windows::Forms::NumericUpDown^  nudSkill1Value;
+private: System::Windows::Forms::NumericUpDown^  nudAutoSkill4;
+
+private: System::Windows::Forms::NumericUpDown^  nudAutoSkill3;
+
+private: System::Windows::Forms::NumericUpDown^  nudAutoSkill2;
+
+private: System::Windows::Forms::NumericUpDown^  nudAutoSkill1;
+
 private: System::Windows::Forms::CheckBox^  cbNFA;
 private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 private: System::Windows::Forms::Button^  bSaveSettings;
@@ -196,8 +257,10 @@ private: System::Windows::Forms::ToolTip^  InfoToolTip;
 private: System::Windows::Forms::Label^  lKBCoords;
 private: System::Windows::Forms::Label^  lKnockBack;
 private: System::Windows::Forms::CheckBox^  cbPVP;
-private: System::Windows::Forms::ComboBox^  ddbPVPSkills;
-private: System::Windows::Forms::NumericUpDown^  nudPVPDelay;
+private: System::Windows::Forms::ComboBox^  ddbSkillInjection;
+
+private: System::Windows::Forms::NumericUpDown^  nudSkillInjection;
+
 private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
 private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
 private: System::Windows::Forms::CheckBox^  cbMouseFly;
@@ -229,45 +292,45 @@ private:
 			this->nudCCAttacks = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudCCTimed = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudCCPeople = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudSkill4Value = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudSkill3Value = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudSkill2Value = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudSkill1Value = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudMPValue = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudHPValue = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudLootDelay = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudAttackDelay = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudAutoSkill4 = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudAutoSkill3 = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudAutoSkill2 = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudAutoSkill1 = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudAutoMP = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudAutoHP = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudAutoLoot = (gcnew System::Windows::Forms::NumericUpDown());
+			this->nudAutoAttack = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudSLWIB = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudSAWSIL = (gcnew System::Windows::Forms::NumericUpDown());
-			this->TimedComboBox = (gcnew System::Windows::Forms::ComboBox());
-			this->AttacksComboBox = (gcnew System::Windows::Forms::ComboBox());
-			this->PeopleComboBox = (gcnew System::Windows::Forms::ComboBox());
+			this->ddbTimedType = (gcnew System::Windows::Forms::ComboBox());
+			this->ddbAttacksType = (gcnew System::Windows::Forms::ComboBox());
+			this->ddbPeopleType = (gcnew System::Windows::Forms::ComboBox());
 			this->lSLWIB = (gcnew System::Windows::Forms::Label());
 			this->lSAWSIL = (gcnew System::Windows::Forms::Label());
 			this->lLootMS = (gcnew System::Windows::Forms::Label());
 			this->CCAttacksLabel = (gcnew System::Windows::Forms::Label());
 			this->CCTimedLabel = (gcnew System::Windows::Forms::Label());
 			this->CCPeopleLabel = (gcnew System::Windows::Forms::Label());
-			this->CCAttacksCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->CCTimedCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->AutoSkill4ComboBox = (gcnew System::Windows::Forms::ComboBox());
-			this->AutoSkill4CheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->CCPeopleCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->AutoSkill3CheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->AutoSkill3ComboBox = (gcnew System::Windows::Forms::ComboBox());
-			this->AutoSkill2CheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->AutoSkill2ComboBox = (gcnew System::Windows::Forms::ComboBox());
-			this->AttackCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->AutoSkill1CheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->HPCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->AutoSkill1ComboBox = (gcnew System::Windows::Forms::ComboBox());
-			this->HPComboBox = (gcnew System::Windows::Forms::ComboBox());
-			this->MPCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->LootComboBox = (gcnew System::Windows::Forms::ComboBox());
-			this->LootCheckBox = (gcnew System::Windows::Forms::CheckBox());
-			this->MPComboBox = (gcnew System::Windows::Forms::ComboBox());
+			this->cbCCAttacks = (gcnew System::Windows::Forms::CheckBox());
+			this->cbCCTimed = (gcnew System::Windows::Forms::CheckBox());
+			this->ddbAutoSkill4Key = (gcnew System::Windows::Forms::ComboBox());
+			this->cbAutoSkill4 = (gcnew System::Windows::Forms::CheckBox());
+			this->cbCCPeople = (gcnew System::Windows::Forms::CheckBox());
+			this->cbAutoSkill3 = (gcnew System::Windows::Forms::CheckBox());
+			this->ddbAutoSkill3Key = (gcnew System::Windows::Forms::ComboBox());
+			this->cbAutoSkill2 = (gcnew System::Windows::Forms::CheckBox());
+			this->ddbAutoSkill2Key = (gcnew System::Windows::Forms::ComboBox());
+			this->cbAutoAttack = (gcnew System::Windows::Forms::CheckBox());
+			this->cbAutoSkill1 = (gcnew System::Windows::Forms::CheckBox());
+			this->cbAutoHP = (gcnew System::Windows::Forms::CheckBox());
+			this->ddbAutoSkill1Key = (gcnew System::Windows::Forms::ComboBox());
+			this->ddbAutoHPKey = (gcnew System::Windows::Forms::ComboBox());
+			this->cbAutoMP = (gcnew System::Windows::Forms::CheckBox());
+			this->ddbAutoLootKey = (gcnew System::Windows::Forms::ComboBox());
+			this->cbAutoLoot = (gcnew System::Windows::Forms::CheckBox());
+			this->ddbAutoMPKey = (gcnew System::Windows::Forms::ComboBox());
 			this->lAttackMS = (gcnew System::Windows::Forms::Label());
-			this->AttackComboBox = (gcnew System::Windows::Forms::ComboBox());
+			this->ddbAutoAttackKey = (gcnew System::Windows::Forms::ComboBox());
 			this->EXPLabel = (gcnew System::Windows::Forms::Label());
 			this->MPLabel = (gcnew System::Windows::Forms::Label());
 			this->HPLabel = (gcnew System::Windows::Forms::Label());
@@ -294,8 +357,8 @@ private:
 			this->gbCharHacks = (gcnew System::Windows::Forms::GroupBox());
 			this->nudIceGuard = (gcnew System::Windows::Forms::NumericUpDown());
 			this->cbIceGuard = (gcnew System::Windows::Forms::CheckBox());
-			this->nudPVPDelay = (gcnew System::Windows::Forms::NumericUpDown());
-			this->ddbPVPSkills = (gcnew System::Windows::Forms::ComboBox());
+			this->nudSkillInjection = (gcnew System::Windows::Forms::NumericUpDown());
+			this->ddbSkillInjection = (gcnew System::Windows::Forms::ComboBox());
 			this->cbPVP = (gcnew System::Windows::Forms::CheckBox());
 			this->cbMercedesCombo = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNDMining = (gcnew System::Windows::Forms::CheckBox());
@@ -320,43 +383,43 @@ private:
 			this->cbWalkRight = (gcnew System::Windows::Forms::CheckBox());
 			this->cbVacRight = (gcnew System::Windows::Forms::CheckBox());
 			this->PacketSenderTab = (gcnew System::Windows::Forms::TabPage());
-			this->EditPacketGroupBox = (gcnew System::Windows::Forms::GroupBox());
-			this->SavePacketEditButton = (gcnew System::Windows::Forms::Button());
-			this->EditPacketPacketTextBox = (gcnew System::Windows::Forms::TextBox());
-			this->EditPacketNameTextBox = (gcnew System::Windows::Forms::TextBox());
-			this->SelectPacketForEditingComboBox = (gcnew System::Windows::Forms::ComboBox());
-			this->DeletePacketsGroupBox = (gcnew System::Windows::Forms::GroupBox());
-			this->DeletePacketComboBox = (gcnew System::Windows::Forms::ComboBox());
-			this->DeletePacketButton = (gcnew System::Windows::Forms::Button());
-			this->AddPacketsGroupBox = (gcnew System::Windows::Forms::GroupBox());
-			this->AddPacketButton = (gcnew System::Windows::Forms::Button());
-			this->AddPacketPacketTextBox = (gcnew System::Windows::Forms::TextBox());
-			this->AddPacketNameTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->gbEditPacket = (gcnew System::Windows::Forms::GroupBox());
+			this->bSaveChanges = (gcnew System::Windows::Forms::Button());
+			this->tbEditPacketData = (gcnew System::Windows::Forms::TextBox());
+			this->tbEditPacketName = (gcnew System::Windows::Forms::TextBox());
+			this->ddbEditPacket = (gcnew System::Windows::Forms::ComboBox());
+			this->gbDeletePacket = (gcnew System::Windows::Forms::GroupBox());
+			this->ddbDeletePacket = (gcnew System::Windows::Forms::ComboBox());
+			this->bDeletePacket = (gcnew System::Windows::Forms::Button());
+			this->gbAddPacket = (gcnew System::Windows::Forms::GroupBox());
+			this->bAddPacket = (gcnew System::Windows::Forms::Button());
+			this->tbAddPacketData = (gcnew System::Windows::Forms::TextBox());
+			this->tbAddPacketName = (gcnew System::Windows::Forms::TextBox());
 			this->AddPacketPacketLabel = (gcnew System::Windows::Forms::Label());
 			this->AddPacketNameLabel = (gcnew System::Windows::Forms::Label());
-			this->SendPacketGroupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->gbSendPackets = (gcnew System::Windows::Forms::GroupBox());
 			this->nudSpamDelay = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudSpamAmount = (gcnew System::Windows::Forms::NumericUpDown());
 			this->bStartSpamming = (gcnew System::Windows::Forms::Button());
 			this->SpamPacketsDelayLabel = (gcnew System::Windows::Forms::Label());
-			this->SpamPacketTimesLabel = (gcnew System::Windows::Forms::Label());
-			this->PacketSelectBox = (gcnew System::Windows::Forms::ComboBox());
+			this->lSpamPacketTimes = (gcnew System::Windows::Forms::Label());
+			this->ddbSelectedPacket = (gcnew System::Windows::Forms::ComboBox());
 			this->SendPacketButton = (gcnew System::Windows::Forms::Button());
 			this->bStopSpamming = (gcnew System::Windows::Forms::Button());
 			this->SPControlTabPage = (gcnew System::Windows::Forms::TabPage());
-			this->SPControlGroupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->gbNewSPCLocation = (gcnew System::Windows::Forms::GroupBox());
 			this->nudSPCY = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudSPCX = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudSPCMapId = (gcnew System::Windows::Forms::NumericUpDown());
-			this->GetSPControlCoordsButton = (gcnew System::Windows::Forms::Button());
-			this->SPControlAddButton = (gcnew System::Windows::Forms::Button());
+			this->bSPCGetCurrent = (gcnew System::Windows::Forms::Button());
+			this->bAddSPCLocation = (gcnew System::Windows::Forms::Button());
 			this->SPControlMapIDLabel = (gcnew System::Windows::Forms::Label());
 			this->cbSPControl = (gcnew System::Windows::Forms::CheckBox());
 			this->SPControlNameLabel = (gcnew System::Windows::Forms::Label());
 			this->SPControlYLabel = (gcnew System::Windows::Forms::Label());
 			this->SPControlXLabel = (gcnew System::Windows::Forms::Label());
-			this->SPControlNameTextBox = (gcnew System::Windows::Forms::TextBox());
-			this->SPControlListView = (gcnew System::Windows::Forms::ListView());
+			this->tbSPCName = (gcnew System::Windows::Forms::TextBox());
+			this->lvSPControl = (gcnew System::Windows::Forms::ListView());
 			this->HeaderMapName = (gcnew System::Windows::Forms::ColumnHeader());
 			this->HeaderMapID = (gcnew System::Windows::Forms::ColumnHeader());
 			this->HeaderX = (gcnew System::Windows::Forms::ColumnHeader());
@@ -396,14 +459,14 @@ private:
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCAttacks))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCTimed))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCPeople))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill4Value))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill3Value))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill2Value))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill1Value))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudMPValue))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudHPValue))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLootDelay))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAttackDelay))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill4))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill3))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoMP))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoHP))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoLoot))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoAttack))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSLWIB))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSAWSIL))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->EXPForeground))->BeginInit();
@@ -416,17 +479,17 @@ private:
 			this->gbMiscHacks->SuspendLayout();
 			this->gbCharHacks->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudIceGuard))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPVPDelay))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkillInjection))->BeginInit();
 			this->MobHacks->SuspendLayout();
 			this->PacketSenderTab->SuspendLayout();
-			this->EditPacketGroupBox->SuspendLayout();
-			this->DeletePacketsGroupBox->SuspendLayout();
-			this->AddPacketsGroupBox->SuspendLayout();
-			this->SendPacketGroupBox->SuspendLayout();
+			this->gbEditPacket->SuspendLayout();
+			this->gbDeletePacket->SuspendLayout();
+			this->gbAddPacket->SuspendLayout();
+			this->gbSendPackets->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamDelay))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamAmount))->BeginInit();
 			this->SPControlTabPage->SuspendLayout();
-			this->SPControlGroupBox->SuspendLayout();
+			this->gbNewSPCLocation->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCY))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCX))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCMapId))->BeginInit();
@@ -475,45 +538,45 @@ private:
 			this->AutoBotGroupBox->Controls->Add(this->nudCCAttacks);
 			this->AutoBotGroupBox->Controls->Add(this->nudCCTimed);
 			this->AutoBotGroupBox->Controls->Add(this->nudCCPeople);
-			this->AutoBotGroupBox->Controls->Add(this->nudSkill4Value);
-			this->AutoBotGroupBox->Controls->Add(this->nudSkill3Value);
-			this->AutoBotGroupBox->Controls->Add(this->nudSkill2Value);
-			this->AutoBotGroupBox->Controls->Add(this->nudSkill1Value);
-			this->AutoBotGroupBox->Controls->Add(this->nudMPValue);
-			this->AutoBotGroupBox->Controls->Add(this->nudHPValue);
-			this->AutoBotGroupBox->Controls->Add(this->nudLootDelay);
-			this->AutoBotGroupBox->Controls->Add(this->nudAttackDelay);
+			this->AutoBotGroupBox->Controls->Add(this->nudAutoSkill4);
+			this->AutoBotGroupBox->Controls->Add(this->nudAutoSkill3);
+			this->AutoBotGroupBox->Controls->Add(this->nudAutoSkill2);
+			this->AutoBotGroupBox->Controls->Add(this->nudAutoSkill1);
+			this->AutoBotGroupBox->Controls->Add(this->nudAutoMP);
+			this->AutoBotGroupBox->Controls->Add(this->nudAutoHP);
+			this->AutoBotGroupBox->Controls->Add(this->nudAutoLoot);
+			this->AutoBotGroupBox->Controls->Add(this->nudAutoAttack);
 			this->AutoBotGroupBox->Controls->Add(this->nudSLWIB);
 			this->AutoBotGroupBox->Controls->Add(this->nudSAWSIL);
-			this->AutoBotGroupBox->Controls->Add(this->TimedComboBox);
-			this->AutoBotGroupBox->Controls->Add(this->AttacksComboBox);
-			this->AutoBotGroupBox->Controls->Add(this->PeopleComboBox);
+			this->AutoBotGroupBox->Controls->Add(this->ddbTimedType);
+			this->AutoBotGroupBox->Controls->Add(this->ddbAttacksType);
+			this->AutoBotGroupBox->Controls->Add(this->ddbPeopleType);
 			this->AutoBotGroupBox->Controls->Add(this->lSLWIB);
 			this->AutoBotGroupBox->Controls->Add(this->lSAWSIL);
 			this->AutoBotGroupBox->Controls->Add(this->lLootMS);
 			this->AutoBotGroupBox->Controls->Add(this->CCAttacksLabel);
 			this->AutoBotGroupBox->Controls->Add(this->CCTimedLabel);
 			this->AutoBotGroupBox->Controls->Add(this->CCPeopleLabel);
-			this->AutoBotGroupBox->Controls->Add(this->CCAttacksCheckBox);
-			this->AutoBotGroupBox->Controls->Add(this->CCTimedCheckBox);
-			this->AutoBotGroupBox->Controls->Add(this->AutoSkill4ComboBox);
-			this->AutoBotGroupBox->Controls->Add(this->AutoSkill4CheckBox);
-			this->AutoBotGroupBox->Controls->Add(this->CCPeopleCheckBox);
-			this->AutoBotGroupBox->Controls->Add(this->AutoSkill3CheckBox);
-			this->AutoBotGroupBox->Controls->Add(this->AutoSkill3ComboBox);
-			this->AutoBotGroupBox->Controls->Add(this->AutoSkill2CheckBox);
-			this->AutoBotGroupBox->Controls->Add(this->AutoSkill2ComboBox);
-			this->AutoBotGroupBox->Controls->Add(this->AttackCheckBox);
-			this->AutoBotGroupBox->Controls->Add(this->AutoSkill1CheckBox);
-			this->AutoBotGroupBox->Controls->Add(this->HPCheckBox);
-			this->AutoBotGroupBox->Controls->Add(this->AutoSkill1ComboBox);
-			this->AutoBotGroupBox->Controls->Add(this->HPComboBox);
-			this->AutoBotGroupBox->Controls->Add(this->MPCheckBox);
-			this->AutoBotGroupBox->Controls->Add(this->LootComboBox);
-			this->AutoBotGroupBox->Controls->Add(this->LootCheckBox);
-			this->AutoBotGroupBox->Controls->Add(this->MPComboBox);
+			this->AutoBotGroupBox->Controls->Add(this->cbCCAttacks);
+			this->AutoBotGroupBox->Controls->Add(this->cbCCTimed);
+			this->AutoBotGroupBox->Controls->Add(this->ddbAutoSkill4Key);
+			this->AutoBotGroupBox->Controls->Add(this->cbAutoSkill4);
+			this->AutoBotGroupBox->Controls->Add(this->cbCCPeople);
+			this->AutoBotGroupBox->Controls->Add(this->cbAutoSkill3);
+			this->AutoBotGroupBox->Controls->Add(this->ddbAutoSkill3Key);
+			this->AutoBotGroupBox->Controls->Add(this->cbAutoSkill2);
+			this->AutoBotGroupBox->Controls->Add(this->ddbAutoSkill2Key);
+			this->AutoBotGroupBox->Controls->Add(this->cbAutoAttack);
+			this->AutoBotGroupBox->Controls->Add(this->cbAutoSkill1);
+			this->AutoBotGroupBox->Controls->Add(this->cbAutoHP);
+			this->AutoBotGroupBox->Controls->Add(this->ddbAutoSkill1Key);
+			this->AutoBotGroupBox->Controls->Add(this->ddbAutoHPKey);
+			this->AutoBotGroupBox->Controls->Add(this->cbAutoMP);
+			this->AutoBotGroupBox->Controls->Add(this->ddbAutoLootKey);
+			this->AutoBotGroupBox->Controls->Add(this->cbAutoLoot);
+			this->AutoBotGroupBox->Controls->Add(this->ddbAutoMPKey);
 			this->AutoBotGroupBox->Controls->Add(this->lAttackMS);
-			this->AutoBotGroupBox->Controls->Add(this->AttackComboBox);
+			this->AutoBotGroupBox->Controls->Add(this->ddbAutoAttackKey);
 			this->AutoBotGroupBox->Location = System::Drawing::Point(0, 70);
 			this->AutoBotGroupBox->Name = L"AutoBotGroupBox";
 			this->AutoBotGroupBox->Size = System::Drawing::Size(325, 305);
@@ -544,79 +607,79 @@ private:
 			this->nudCCPeople->Size = System::Drawing::Size(107, 20);
 			this->nudCCPeople->TabIndex = 78;
 			// 
-			// nudSkill4Value
+			// nudAutoSkill4
 			// 
-			this->nudSkill4Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
-			this->nudSkill4Value->Location = System::Drawing::Point(91, 196);
-			this->nudSkill4Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000, 0, 0, 0});
-			this->nudSkill4Value->Name = L"nudSkill4Value";
-			this->nudSkill4Value->Size = System::Drawing::Size(107, 20);
-			this->nudSkill4Value->TabIndex = 77;
+			this->nudAutoSkill4->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudAutoSkill4->Location = System::Drawing::Point(91, 196);
+			this->nudAutoSkill4->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000, 0, 0, 0});
+			this->nudAutoSkill4->Name = L"nudAutoSkill4";
+			this->nudAutoSkill4->Size = System::Drawing::Size(107, 20);
+			this->nudAutoSkill4->TabIndex = 77;
 			// 
-			// nudSkill3Value
+			// nudAutoSkill3
 			// 
-			this->nudSkill3Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
-			this->nudSkill3Value->Location = System::Drawing::Point(91, 171);
-			this->nudSkill3Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000, 0, 0, 0});
-			this->nudSkill3Value->Name = L"nudSkill3Value";
-			this->nudSkill3Value->Size = System::Drawing::Size(107, 20);
-			this->nudSkill3Value->TabIndex = 76;
+			this->nudAutoSkill3->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudAutoSkill3->Location = System::Drawing::Point(91, 171);
+			this->nudAutoSkill3->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000, 0, 0, 0});
+			this->nudAutoSkill3->Name = L"nudAutoSkill3";
+			this->nudAutoSkill3->Size = System::Drawing::Size(107, 20);
+			this->nudAutoSkill3->TabIndex = 76;
 			// 
-			// nudSkill2Value
+			// nudAutoSkill2
 			// 
-			this->nudSkill2Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
-			this->nudSkill2Value->Location = System::Drawing::Point(91, 144);
-			this->nudSkill2Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000, 0, 0, 0});
-			this->nudSkill2Value->Name = L"nudSkill2Value";
-			this->nudSkill2Value->Size = System::Drawing::Size(107, 20);
-			this->nudSkill2Value->TabIndex = 75;
+			this->nudAutoSkill2->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudAutoSkill2->Location = System::Drawing::Point(91, 144);
+			this->nudAutoSkill2->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000, 0, 0, 0});
+			this->nudAutoSkill2->Name = L"nudAutoSkill2";
+			this->nudAutoSkill2->Size = System::Drawing::Size(107, 20);
+			this->nudAutoSkill2->TabIndex = 75;
 			// 
-			// nudSkill1Value
+			// nudAutoSkill1
 			// 
-			this->nudSkill1Value->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
-			this->nudSkill1Value->Location = System::Drawing::Point(91, 119);
-			this->nudSkill1Value->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000, 0, 0, 0});
-			this->nudSkill1Value->Name = L"nudSkill1Value";
-			this->nudSkill1Value->Size = System::Drawing::Size(107, 20);
-			this->nudSkill1Value->TabIndex = 74;
+			this->nudAutoSkill1->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudAutoSkill1->Location = System::Drawing::Point(91, 119);
+			this->nudAutoSkill1->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000, 0, 0, 0});
+			this->nudAutoSkill1->Name = L"nudAutoSkill1";
+			this->nudAutoSkill1->Size = System::Drawing::Size(107, 20);
+			this->nudAutoSkill1->TabIndex = 74;
 			// 
-			// nudMPValue
+			// nudAutoMP
 			// 
-			this->nudMPValue->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
-			this->nudMPValue->Location = System::Drawing::Point(91, 94);
-			this->nudMPValue->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
-			this->nudMPValue->Name = L"nudMPValue";
-			this->nudMPValue->Size = System::Drawing::Size(107, 20);
-			this->nudMPValue->TabIndex = 73;
+			this->nudAutoMP->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudAutoMP->Location = System::Drawing::Point(91, 94);
+			this->nudAutoMP->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
+			this->nudAutoMP->Name = L"nudAutoMP";
+			this->nudAutoMP->Size = System::Drawing::Size(107, 20);
+			this->nudAutoMP->TabIndex = 73;
 			// 
-			// nudHPValue
+			// nudAutoHP
 			// 
-			this->nudHPValue->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
-			this->nudHPValue->Location = System::Drawing::Point(91, 69);
-			this->nudHPValue->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
-			this->nudHPValue->Name = L"nudHPValue";
-			this->nudHPValue->Size = System::Drawing::Size(107, 20);
-			this->nudHPValue->TabIndex = 72;
+			this->nudAutoHP->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudAutoHP->Location = System::Drawing::Point(91, 69);
+			this->nudAutoHP->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
+			this->nudAutoHP->Name = L"nudAutoHP";
+			this->nudAutoHP->Size = System::Drawing::Size(107, 20);
+			this->nudAutoHP->TabIndex = 72;
 			// 
-			// nudLootDelay
+			// nudAutoLoot
 			// 
-			this->nudLootDelay->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
-			this->nudLootDelay->Location = System::Drawing::Point(91, 43);
-			this->nudLootDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1500, 0, 0, 0});
-			this->nudLootDelay->Name = L"nudLootDelay";
-			this->nudLootDelay->Size = System::Drawing::Size(44, 20);
-			this->nudLootDelay->TabIndex = 71;
-			this->nudLootDelay->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
+			this->nudAutoLoot->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
+			this->nudAutoLoot->Location = System::Drawing::Point(91, 43);
+			this->nudAutoLoot->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1500, 0, 0, 0});
+			this->nudAutoLoot->Name = L"nudAutoLoot";
+			this->nudAutoLoot->Size = System::Drawing::Size(44, 20);
+			this->nudAutoLoot->TabIndex = 71;
+			this->nudAutoLoot->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
 			// 
-			// nudAttackDelay
+			// nudAutoAttack
 			// 
-			this->nudAttackDelay->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
-			this->nudAttackDelay->Location = System::Drawing::Point(91, 15);
-			this->nudAttackDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1500, 0, 0, 0});
-			this->nudAttackDelay->Name = L"nudAttackDelay";
-			this->nudAttackDelay->Size = System::Drawing::Size(44, 20);
-			this->nudAttackDelay->TabIndex = 70;
-			this->nudAttackDelay->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
+			this->nudAutoAttack->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
+			this->nudAutoAttack->Location = System::Drawing::Point(91, 15);
+			this->nudAutoAttack->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1500, 0, 0, 0});
+			this->nudAutoAttack->Name = L"nudAutoAttack";
+			this->nudAutoAttack->Size = System::Drawing::Size(44, 20);
+			this->nudAutoAttack->TabIndex = 70;
+			this->nudAutoAttack->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
 			// 
 			// nudSLWIB
 			// 
@@ -625,7 +688,6 @@ private:
 			this->nudSLWIB->Name = L"nudSLWIB";
 			this->nudSLWIB->Size = System::Drawing::Size(35, 20);
 			this->nudSLWIB->TabIndex = 69;
-			this->nudSLWIB->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
 			// 
 			// nudSAWSIL
 			// 
@@ -636,35 +698,35 @@ private:
 			this->nudSAWSIL->TabIndex = 68;
 			this->nudSAWSIL->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
 			// 
-			// TimedComboBox
+			// ddbTimedType
 			// 
-			this->TimedComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->TimedComboBox->FormattingEnabled = true;
-			this->TimedComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(3) {L"CC", L"CS", L"DC"});
-			this->TimedComboBox->Location = System::Drawing::Point(47, 251);
-			this->TimedComboBox->Name = L"TimedComboBox";
-			this->TimedComboBox->Size = System::Drawing::Size(38, 21);
-			this->TimedComboBox->TabIndex = 67;
+			this->ddbTimedType->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbTimedType->FormattingEnabled = true;
+			this->ddbTimedType->Items->AddRange(gcnew cli::array< System::Object^  >(3) {L"CC", L"CS", L"DC"});
+			this->ddbTimedType->Location = System::Drawing::Point(47, 251);
+			this->ddbTimedType->Name = L"ddbTimedType";
+			this->ddbTimedType->Size = System::Drawing::Size(38, 21);
+			this->ddbTimedType->TabIndex = 67;
 			// 
-			// AttacksComboBox
+			// ddbAttacksType
 			// 
-			this->AttacksComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->AttacksComboBox->FormattingEnabled = true;
-			this->AttacksComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(3) {L"CC", L"CS", L"DC"});
-			this->AttacksComboBox->Location = System::Drawing::Point(47, 278);
-			this->AttacksComboBox->Name = L"AttacksComboBox";
-			this->AttacksComboBox->Size = System::Drawing::Size(38, 21);
-			this->AttacksComboBox->TabIndex = 66;
+			this->ddbAttacksType->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbAttacksType->FormattingEnabled = true;
+			this->ddbAttacksType->Items->AddRange(gcnew cli::array< System::Object^  >(3) {L"CC", L"CS", L"DC"});
+			this->ddbAttacksType->Location = System::Drawing::Point(47, 278);
+			this->ddbAttacksType->Name = L"ddbAttacksType";
+			this->ddbAttacksType->Size = System::Drawing::Size(38, 21);
+			this->ddbAttacksType->TabIndex = 66;
 			// 
-			// PeopleComboBox
+			// ddbPeopleType
 			// 
-			this->PeopleComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->PeopleComboBox->FormattingEnabled = true;
-			this->PeopleComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(3) {L"CC", L"CS", L"DC"});
-			this->PeopleComboBox->Location = System::Drawing::Point(47, 225);
-			this->PeopleComboBox->Name = L"PeopleComboBox";
-			this->PeopleComboBox->Size = System::Drawing::Size(38, 21);
-			this->PeopleComboBox->TabIndex = 65;
+			this->ddbPeopleType->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbPeopleType->FormattingEnabled = true;
+			this->ddbPeopleType->Items->AddRange(gcnew cli::array< System::Object^  >(3) {L"CC", L"CS", L"DC"});
+			this->ddbPeopleType->Location = System::Drawing::Point(47, 225);
+			this->ddbPeopleType->Name = L"ddbPeopleType";
+			this->ddbPeopleType->Size = System::Drawing::Size(38, 21);
+			this->ddbPeopleType->TabIndex = 65;
 			// 
 			// lSLWIB
 			// 
@@ -722,221 +784,221 @@ private:
 			this->CCPeopleLabel->TabIndex = 54;
 			this->CCPeopleLabel->Text = L"People";
 			// 
-			// CCAttacksCheckBox
+			// cbCCAttacks
 			// 
-			this->CCAttacksCheckBox->AutoSize = true;
-			this->CCAttacksCheckBox->Location = System::Drawing::Point(6, 280);
-			this->CCAttacksCheckBox->Name = L"CCAttacksCheckBox";
-			this->CCAttacksCheckBox->Size = System::Drawing::Size(48, 17);
-			this->CCAttacksCheckBox->TabIndex = 29;
-			this->CCAttacksCheckBox->Text = L"Auto";
-			this->CCAttacksCheckBox->UseVisualStyleBackColor = true;
-			this->CCAttacksCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCAttacksCheckBox_CheckedChanged);
+			this->cbCCAttacks->AutoSize = true;
+			this->cbCCAttacks->Location = System::Drawing::Point(6, 280);
+			this->cbCCAttacks->Name = L"cbCCAttacks";
+			this->cbCCAttacks->Size = System::Drawing::Size(48, 17);
+			this->cbCCAttacks->TabIndex = 29;
+			this->cbCCAttacks->Text = L"Auto";
+			this->cbCCAttacks->UseVisualStyleBackColor = true;
+			this->cbCCAttacks->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCAttacksCheckBox_CheckedChanged);
 			// 
-			// CCTimedCheckBox
+			// cbCCTimed
 			// 
-			this->CCTimedCheckBox->AutoSize = true;
-			this->CCTimedCheckBox->Location = System::Drawing::Point(6, 253);
-			this->CCTimedCheckBox->Name = L"CCTimedCheckBox";
-			this->CCTimedCheckBox->Size = System::Drawing::Size(48, 17);
-			this->CCTimedCheckBox->TabIndex = 27;
-			this->CCTimedCheckBox->Text = L"Auto";
-			this->CCTimedCheckBox->UseVisualStyleBackColor = true;
-			this->CCTimedCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCTimeCheckBox_CheckedChanged);
+			this->cbCCTimed->AutoSize = true;
+			this->cbCCTimed->Location = System::Drawing::Point(6, 253);
+			this->cbCCTimed->Name = L"cbCCTimed";
+			this->cbCCTimed->Size = System::Drawing::Size(48, 17);
+			this->cbCCTimed->TabIndex = 27;
+			this->cbCCTimed->Text = L"Auto";
+			this->cbCCTimed->UseVisualStyleBackColor = true;
+			this->cbCCTimed->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCTimeCheckBox_CheckedChanged);
 			// 
-			// AutoSkill4ComboBox
+			// ddbAutoSkill4Key
 			// 
-			this->AutoSkill4ComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->AutoSkill4ComboBox->FormattingEnabled = true;
-			this->AutoSkill4ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->ddbAutoSkill4Key->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbAutoSkill4Key->FormattingEnabled = true;
+			this->ddbAutoSkill4Key->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->AutoSkill4ComboBox->Location = System::Drawing::Point(202, 197);
-			this->AutoSkill4ComboBox->Name = L"AutoSkill4ComboBox";
-			this->AutoSkill4ComboBox->Size = System::Drawing::Size(115, 21);
-			this->AutoSkill4ComboBox->TabIndex = 24;
-			this->AutoSkill4ComboBox->DropDown += gcnew System::EventHandler(this, &MainForm::AutoSkill4ComboBox_DropDown);
+			this->ddbAutoSkill4Key->Location = System::Drawing::Point(202, 197);
+			this->ddbAutoSkill4Key->Name = L"ddbAutoSkill4Key";
+			this->ddbAutoSkill4Key->Size = System::Drawing::Size(115, 21);
+			this->ddbAutoSkill4Key->TabIndex = 24;
+			this->ddbAutoSkill4Key->DropDown += gcnew System::EventHandler(this, &MainForm::AutoSkill4ComboBox_DropDown);
 			// 
-			// AutoSkill4CheckBox
+			// cbAutoSkill4
 			// 
-			this->AutoSkill4CheckBox->AutoSize = true;
-			this->AutoSkill4CheckBox->Location = System::Drawing::Point(6, 199);
-			this->AutoSkill4CheckBox->Name = L"AutoSkill4CheckBox";
-			this->AutoSkill4CheckBox->Size = System::Drawing::Size(79, 17);
-			this->AutoSkill4CheckBox->TabIndex = 22;
-			this->AutoSkill4CheckBox->Text = L"Auto Skill 4";
-			this->AutoSkill4CheckBox->UseVisualStyleBackColor = true;
-			this->AutoSkill4CheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill4CheckBox_CheckedChanged);
+			this->cbAutoSkill4->AutoSize = true;
+			this->cbAutoSkill4->Location = System::Drawing::Point(6, 199);
+			this->cbAutoSkill4->Name = L"cbAutoSkill4";
+			this->cbAutoSkill4->Size = System::Drawing::Size(79, 17);
+			this->cbAutoSkill4->TabIndex = 22;
+			this->cbAutoSkill4->Text = L"Auto Skill 4";
+			this->cbAutoSkill4->UseVisualStyleBackColor = true;
+			this->cbAutoSkill4->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill4CheckBox_CheckedChanged);
 			// 
-			// CCPeopleCheckBox
+			// cbCCPeople
 			// 
-			this->CCPeopleCheckBox->AutoSize = true;
-			this->CCPeopleCheckBox->Location = System::Drawing::Point(6, 226);
-			this->CCPeopleCheckBox->Name = L"CCPeopleCheckBox";
-			this->CCPeopleCheckBox->Size = System::Drawing::Size(48, 17);
-			this->CCPeopleCheckBox->TabIndex = 25;
-			this->CCPeopleCheckBox->Text = L"Auto";
-			this->CCPeopleCheckBox->UseVisualStyleBackColor = true;
-			this->CCPeopleCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCPeopleCheckBox_CheckedChanged);
+			this->cbCCPeople->AutoSize = true;
+			this->cbCCPeople->Location = System::Drawing::Point(6, 226);
+			this->cbCCPeople->Name = L"cbCCPeople";
+			this->cbCCPeople->Size = System::Drawing::Size(48, 17);
+			this->cbCCPeople->TabIndex = 25;
+			this->cbCCPeople->Text = L"Auto";
+			this->cbCCPeople->UseVisualStyleBackColor = true;
+			this->cbCCPeople->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCPeopleCheckBox_CheckedChanged);
 			// 
-			// AutoSkill3CheckBox
+			// cbAutoSkill3
 			// 
-			this->AutoSkill3CheckBox->AutoSize = true;
-			this->AutoSkill3CheckBox->Location = System::Drawing::Point(6, 173);
-			this->AutoSkill3CheckBox->Name = L"AutoSkill3CheckBox";
-			this->AutoSkill3CheckBox->Size = System::Drawing::Size(79, 17);
-			this->AutoSkill3CheckBox->TabIndex = 19;
-			this->AutoSkill3CheckBox->Text = L"Auto Skill 3";
-			this->AutoSkill3CheckBox->UseVisualStyleBackColor = true;
-			this->AutoSkill3CheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill3CheckBox_CheckedChanged);
+			this->cbAutoSkill3->AutoSize = true;
+			this->cbAutoSkill3->Location = System::Drawing::Point(6, 173);
+			this->cbAutoSkill3->Name = L"cbAutoSkill3";
+			this->cbAutoSkill3->Size = System::Drawing::Size(79, 17);
+			this->cbAutoSkill3->TabIndex = 19;
+			this->cbAutoSkill3->Text = L"Auto Skill 3";
+			this->cbAutoSkill3->UseVisualStyleBackColor = true;
+			this->cbAutoSkill3->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill3CheckBox_CheckedChanged);
 			// 
-			// AutoSkill3ComboBox
+			// ddbAutoSkill3Key
 			// 
-			this->AutoSkill3ComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->AutoSkill3ComboBox->FormattingEnabled = true;
-			this->AutoSkill3ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->ddbAutoSkill3Key->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbAutoSkill3Key->FormattingEnabled = true;
+			this->ddbAutoSkill3Key->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->AutoSkill3ComboBox->Location = System::Drawing::Point(202, 171);
-			this->AutoSkill3ComboBox->Name = L"AutoSkill3ComboBox";
-			this->AutoSkill3ComboBox->Size = System::Drawing::Size(115, 21);
-			this->AutoSkill3ComboBox->TabIndex = 21;
-			this->AutoSkill3ComboBox->DropDown += gcnew System::EventHandler(this, &MainForm::AutoSkill3ComboBox_DropDown);
+			this->ddbAutoSkill3Key->Location = System::Drawing::Point(202, 171);
+			this->ddbAutoSkill3Key->Name = L"ddbAutoSkill3Key";
+			this->ddbAutoSkill3Key->Size = System::Drawing::Size(115, 21);
+			this->ddbAutoSkill3Key->TabIndex = 21;
+			this->ddbAutoSkill3Key->DropDown += gcnew System::EventHandler(this, &MainForm::AutoSkill3ComboBox_DropDown);
 			// 
-			// AutoSkill2CheckBox
+			// cbAutoSkill2
 			// 
-			this->AutoSkill2CheckBox->AutoSize = true;
-			this->AutoSkill2CheckBox->Location = System::Drawing::Point(6, 147);
-			this->AutoSkill2CheckBox->Name = L"AutoSkill2CheckBox";
-			this->AutoSkill2CheckBox->Size = System::Drawing::Size(79, 17);
-			this->AutoSkill2CheckBox->TabIndex = 16;
-			this->AutoSkill2CheckBox->Text = L"Auto Skill 2";
-			this->AutoSkill2CheckBox->UseVisualStyleBackColor = true;
-			this->AutoSkill2CheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill2CheckBox_CheckedChanged);
+			this->cbAutoSkill2->AutoSize = true;
+			this->cbAutoSkill2->Location = System::Drawing::Point(6, 147);
+			this->cbAutoSkill2->Name = L"cbAutoSkill2";
+			this->cbAutoSkill2->Size = System::Drawing::Size(79, 17);
+			this->cbAutoSkill2->TabIndex = 16;
+			this->cbAutoSkill2->Text = L"Auto Skill 2";
+			this->cbAutoSkill2->UseVisualStyleBackColor = true;
+			this->cbAutoSkill2->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill2CheckBox_CheckedChanged);
 			// 
-			// AutoSkill2ComboBox
+			// ddbAutoSkill2Key
 			// 
-			this->AutoSkill2ComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->AutoSkill2ComboBox->FormattingEnabled = true;
-			this->AutoSkill2ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->ddbAutoSkill2Key->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbAutoSkill2Key->FormattingEnabled = true;
+			this->ddbAutoSkill2Key->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->AutoSkill2ComboBox->Location = System::Drawing::Point(202, 145);
-			this->AutoSkill2ComboBox->Name = L"AutoSkill2ComboBox";
-			this->AutoSkill2ComboBox->Size = System::Drawing::Size(115, 21);
-			this->AutoSkill2ComboBox->TabIndex = 18;
-			this->AutoSkill2ComboBox->DropDown += gcnew System::EventHandler(this, &MainForm::AutoSkill2ComboBox_DropDown);
+			this->ddbAutoSkill2Key->Location = System::Drawing::Point(202, 145);
+			this->ddbAutoSkill2Key->Name = L"ddbAutoSkill2Key";
+			this->ddbAutoSkill2Key->Size = System::Drawing::Size(115, 21);
+			this->ddbAutoSkill2Key->TabIndex = 18;
+			this->ddbAutoSkill2Key->DropDown += gcnew System::EventHandler(this, &MainForm::AutoSkill2ComboBox_DropDown);
 			// 
-			// AttackCheckBox
+			// cbAutoAttack
 			// 
-			this->AttackCheckBox->AutoSize = true;
-			this->AttackCheckBox->Location = System::Drawing::Point(6, 18);
-			this->AttackCheckBox->Name = L"AttackCheckBox";
-			this->AttackCheckBox->Size = System::Drawing::Size(82, 17);
-			this->AttackCheckBox->TabIndex = 1;
-			this->AttackCheckBox->Text = L"Auto Attack";
-			this->AttackCheckBox->UseVisualStyleBackColor = true;
-			this->AttackCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AttackCheckBox_CheckedChanged);
+			this->cbAutoAttack->AutoSize = true;
+			this->cbAutoAttack->Location = System::Drawing::Point(6, 18);
+			this->cbAutoAttack->Name = L"cbAutoAttack";
+			this->cbAutoAttack->Size = System::Drawing::Size(82, 17);
+			this->cbAutoAttack->TabIndex = 1;
+			this->cbAutoAttack->Text = L"Auto Attack";
+			this->cbAutoAttack->UseVisualStyleBackColor = true;
+			this->cbAutoAttack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AttackCheckBox_CheckedChanged);
 			// 
-			// AutoSkill1CheckBox
+			// cbAutoSkill1
 			// 
-			this->AutoSkill1CheckBox->AutoSize = true;
-			this->AutoSkill1CheckBox->Location = System::Drawing::Point(6, 121);
-			this->AutoSkill1CheckBox->Name = L"AutoSkill1CheckBox";
-			this->AutoSkill1CheckBox->Size = System::Drawing::Size(79, 17);
-			this->AutoSkill1CheckBox->TabIndex = 13;
-			this->AutoSkill1CheckBox->Text = L"Auto Skill 1";
-			this->AutoSkill1CheckBox->UseVisualStyleBackColor = true;
-			this->AutoSkill1CheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill1CheckBox_CheckedChanged);
+			this->cbAutoSkill1->AutoSize = true;
+			this->cbAutoSkill1->Location = System::Drawing::Point(6, 121);
+			this->cbAutoSkill1->Name = L"cbAutoSkill1";
+			this->cbAutoSkill1->Size = System::Drawing::Size(79, 17);
+			this->cbAutoSkill1->TabIndex = 13;
+			this->cbAutoSkill1->Text = L"Auto Skill 1";
+			this->cbAutoSkill1->UseVisualStyleBackColor = true;
+			this->cbAutoSkill1->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill1CheckBox_CheckedChanged);
 			// 
-			// HPCheckBox
+			// cbAutoHP
 			// 
-			this->HPCheckBox->AutoSize = true;
-			this->HPCheckBox->Location = System::Drawing::Point(6, 72);
-			this->HPCheckBox->Name = L"HPCheckBox";
-			this->HPCheckBox->Size = System::Drawing::Size(66, 17);
-			this->HPCheckBox->TabIndex = 7;
-			this->HPCheckBox->Text = L"Auto HP";
-			this->HPCheckBox->UseVisualStyleBackColor = true;
-			this->HPCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::HPCheckBox_CheckedChanged);
+			this->cbAutoHP->AutoSize = true;
+			this->cbAutoHP->Location = System::Drawing::Point(6, 72);
+			this->cbAutoHP->Name = L"cbAutoHP";
+			this->cbAutoHP->Size = System::Drawing::Size(66, 17);
+			this->cbAutoHP->TabIndex = 7;
+			this->cbAutoHP->Text = L"Auto HP";
+			this->cbAutoHP->UseVisualStyleBackColor = true;
+			this->cbAutoHP->CheckedChanged += gcnew System::EventHandler(this, &MainForm::HPCheckBox_CheckedChanged);
 			// 
-			// AutoSkill1ComboBox
+			// ddbAutoSkill1Key
 			// 
-			this->AutoSkill1ComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->AutoSkill1ComboBox->FormattingEnabled = true;
-			this->AutoSkill1ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->ddbAutoSkill1Key->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbAutoSkill1Key->FormattingEnabled = true;
+			this->ddbAutoSkill1Key->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->AutoSkill1ComboBox->Location = System::Drawing::Point(202, 119);
-			this->AutoSkill1ComboBox->Name = L"AutoSkill1ComboBox";
-			this->AutoSkill1ComboBox->Size = System::Drawing::Size(115, 21);
-			this->AutoSkill1ComboBox->TabIndex = 15;
-			this->AutoSkill1ComboBox->DropDown += gcnew System::EventHandler(this, &MainForm::AutoSkill1ComboBox_DropDown);
+			this->ddbAutoSkill1Key->Location = System::Drawing::Point(202, 119);
+			this->ddbAutoSkill1Key->Name = L"ddbAutoSkill1Key";
+			this->ddbAutoSkill1Key->Size = System::Drawing::Size(115, 21);
+			this->ddbAutoSkill1Key->TabIndex = 15;
+			this->ddbAutoSkill1Key->DropDown += gcnew System::EventHandler(this, &MainForm::AutoSkill1ComboBox_DropDown);
 			// 
-			// HPComboBox
+			// ddbAutoHPKey
 			// 
-			this->HPComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->HPComboBox->FormattingEnabled = true;
-			this->HPComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->ddbAutoHPKey->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbAutoHPKey->FormattingEnabled = true;
+			this->ddbAutoHPKey->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->HPComboBox->Location = System::Drawing::Point(202, 69);
-			this->HPComboBox->Name = L"HPComboBox";
-			this->HPComboBox->Size = System::Drawing::Size(115, 21);
-			this->HPComboBox->TabIndex = 9;
+			this->ddbAutoHPKey->Location = System::Drawing::Point(202, 69);
+			this->ddbAutoHPKey->Name = L"ddbAutoHPKey";
+			this->ddbAutoHPKey->Size = System::Drawing::Size(115, 21);
+			this->ddbAutoHPKey->TabIndex = 9;
 			// 
-			// MPCheckBox
+			// cbAutoMP
 			// 
-			this->MPCheckBox->AutoSize = true;
-			this->MPCheckBox->Location = System::Drawing::Point(6, 98);
-			this->MPCheckBox->Name = L"MPCheckBox";
-			this->MPCheckBox->Size = System::Drawing::Size(67, 17);
-			this->MPCheckBox->TabIndex = 10;
-			this->MPCheckBox->Text = L"Auto MP";
-			this->MPCheckBox->UseVisualStyleBackColor = true;
-			this->MPCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::MPCheckBox_CheckedChanged);
+			this->cbAutoMP->AutoSize = true;
+			this->cbAutoMP->Location = System::Drawing::Point(6, 98);
+			this->cbAutoMP->Name = L"cbAutoMP";
+			this->cbAutoMP->Size = System::Drawing::Size(67, 17);
+			this->cbAutoMP->TabIndex = 10;
+			this->cbAutoMP->Text = L"Auto MP";
+			this->cbAutoMP->UseVisualStyleBackColor = true;
+			this->cbAutoMP->CheckedChanged += gcnew System::EventHandler(this, &MainForm::MPCheckBox_CheckedChanged);
 			// 
-			// LootComboBox
+			// ddbAutoLootKey
 			// 
-			this->LootComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->LootComboBox->FormattingEnabled = true;
-			this->LootComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->ddbAutoLootKey->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbAutoLootKey->FormattingEnabled = true;
+			this->ddbAutoLootKey->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->LootComboBox->Location = System::Drawing::Point(241, 42);
-			this->LootComboBox->Name = L"LootComboBox";
-			this->LootComboBox->Size = System::Drawing::Size(76, 21);
-			this->LootComboBox->TabIndex = 6;
+			this->ddbAutoLootKey->Location = System::Drawing::Point(241, 42);
+			this->ddbAutoLootKey->Name = L"ddbAutoLootKey";
+			this->ddbAutoLootKey->Size = System::Drawing::Size(76, 21);
+			this->ddbAutoLootKey->TabIndex = 6;
 			// 
-			// LootCheckBox
+			// cbAutoLoot
 			// 
-			this->LootCheckBox->AutoSize = true;
-			this->LootCheckBox->Location = System::Drawing::Point(6, 45);
-			this->LootCheckBox->Name = L"LootCheckBox";
-			this->LootCheckBox->Size = System::Drawing::Size(72, 17);
-			this->LootCheckBox->TabIndex = 4;
-			this->LootCheckBox->Text = L"Auto Loot";
-			this->LootCheckBox->UseVisualStyleBackColor = true;
-			this->LootCheckBox->CheckedChanged += gcnew System::EventHandler(this, &MainForm::LootCheckBox_CheckedChanged);
+			this->cbAutoLoot->AutoSize = true;
+			this->cbAutoLoot->Location = System::Drawing::Point(6, 45);
+			this->cbAutoLoot->Name = L"cbAutoLoot";
+			this->cbAutoLoot->Size = System::Drawing::Size(72, 17);
+			this->cbAutoLoot->TabIndex = 4;
+			this->cbAutoLoot->Text = L"Auto Loot";
+			this->cbAutoLoot->UseVisualStyleBackColor = true;
+			this->cbAutoLoot->CheckedChanged += gcnew System::EventHandler(this, &MainForm::LootCheckBox_CheckedChanged);
 			// 
-			// MPComboBox
+			// ddbAutoMPKey
 			// 
-			this->MPComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->MPComboBox->FormattingEnabled = true;
-			this->MPComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->ddbAutoMPKey->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbAutoMPKey->FormattingEnabled = true;
+			this->ddbAutoMPKey->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->MPComboBox->Location = System::Drawing::Point(202, 94);
-			this->MPComboBox->Name = L"MPComboBox";
-			this->MPComboBox->Size = System::Drawing::Size(115, 21);
-			this->MPComboBox->TabIndex = 12;
+			this->ddbAutoMPKey->Location = System::Drawing::Point(202, 94);
+			this->ddbAutoMPKey->Name = L"ddbAutoMPKey";
+			this->ddbAutoMPKey->Size = System::Drawing::Size(115, 21);
+			this->ddbAutoMPKey->TabIndex = 12;
 			// 
 			// lAttackMS
 			// 
@@ -947,18 +1009,18 @@ private:
 			this->lAttackMS->TabIndex = 28;
 			this->lAttackMS->Text = L"ms";
 			// 
-			// AttackComboBox
+			// ddbAutoAttackKey
 			// 
-			this->AttackComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->AttackComboBox->FormattingEnabled = true;
-			this->AttackComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+			this->ddbAutoAttackKey->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbAutoAttackKey->FormattingEnabled = true;
+			this->ddbAutoAttackKey->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->AttackComboBox->Location = System::Drawing::Point(241, 14);
-			this->AttackComboBox->Name = L"AttackComboBox";
-			this->AttackComboBox->Size = System::Drawing::Size(76, 21);
-			this->AttackComboBox->TabIndex = 3;
+			this->ddbAutoAttackKey->Location = System::Drawing::Point(241, 14);
+			this->ddbAutoAttackKey->Name = L"ddbAutoAttackKey";
+			this->ddbAutoAttackKey->Size = System::Drawing::Size(76, 21);
+			this->ddbAutoAttackKey->TabIndex = 3;
 			// 
 			// EXPLabel
 			// 
@@ -1229,8 +1291,8 @@ private:
 			// 
 			this->gbCharHacks->Controls->Add(this->nudIceGuard);
 			this->gbCharHacks->Controls->Add(this->cbIceGuard);
-			this->gbCharHacks->Controls->Add(this->nudPVPDelay);
-			this->gbCharHacks->Controls->Add(this->ddbPVPSkills);
+			this->gbCharHacks->Controls->Add(this->nudSkillInjection);
+			this->gbCharHacks->Controls->Add(this->ddbSkillInjection);
 			this->gbCharHacks->Controls->Add(this->cbPVP);
 			this->gbCharHacks->Controls->Add(this->cbMercedesCombo);
 			this->gbCharHacks->Controls->Add(this->cbNDMining);
@@ -1273,40 +1335,40 @@ private:
 			this->cbIceGuard->UseVisualStyleBackColor = true;
 			this->cbIceGuard->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbIceGuard_CheckedChanged);
 			// 
-			// nudPVPDelay
+			// nudSkillInjection
 			// 
-			this->nudPVPDelay->Location = System::Drawing::Point(111, 136);
-			this->nudPVPDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
-			this->nudPVPDelay->Name = L"nudPVPDelay";
-			this->nudPVPDelay->Size = System::Drawing::Size(42, 20);
-			this->nudPVPDelay->TabIndex = 17;
-			this->InfoToolTip->SetToolTip(this->nudPVPDelay, L"Delay for PvP Skill Injection, 10 is high, 0 is low");
-			this->nudPVPDelay->ValueChanged += gcnew System::EventHandler(this, &MainForm::nudPVPDelay_ValueChanged);
+			this->nudSkillInjection->Location = System::Drawing::Point(95, 136);
+			this->nudSkillInjection->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
+			this->nudSkillInjection->Name = L"nudSkillInjection";
+			this->nudSkillInjection->Size = System::Drawing::Size(58, 20);
+			this->nudSkillInjection->TabIndex = 17;
+			this->InfoToolTip->SetToolTip(this->nudSkillInjection, L"Delay for Skill Injection, 200 is high, 0 is low");
+			this->nudSkillInjection->ValueChanged += gcnew System::EventHandler(this, &MainForm::nudPVPDelay_ValueChanged);
 			// 
-			// ddbPVPSkills
+			// ddbSkillInjection
 			// 
-			this->ddbPVPSkills->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->ddbPVPSkills->DropDownWidth = 215;
-			this->ddbPVPSkills->FormattingEnabled = true;
-			this->ddbPVPSkills->Items->AddRange(gcnew cli::array< System::Object^  >(14) {L"Ice Attack (600% dmg, 10 mobs)", L"Ice Smash (1200% dmg, 10 mobs)", 
+			this->ddbSkillInjection->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbSkillInjection->DropDownWidth = 215;
+			this->ddbSkillInjection->FormattingEnabled = true;
+			this->ddbSkillInjection->Items->AddRange(gcnew cli::array< System::Object^  >(14) {L"Ice Attack (600% dmg, 10 mobs)", L"Ice Smash (1200% dmg, 10 mobs)", 
 				L"Ice Snow Tempest (500% x 4 dmg, 10 mobs)", L"Ice chop (900% dmg, 10 mob count)", L"Kaiser: 3rd Dragon Slash", L"Bandit 1st Job: DoubleStab", 
 				L"Bandit 2nd Job: SavageBlow", L"Bandit 3rd Job: Midnight Carneval", L"Bandit 4th Job: Assasinate", L"Warrior 1st Job: Power Strike", 
 				L"Paladin 4th Job: Blast", L"Spearman 3rd Job: Sacrifice", L"Ice/Lightning 2nd Job: Cold Beam", L"Ice/Lightning 3rd Job: Thunder Spear"});
-			this->ddbPVPSkills->Location = System::Drawing::Point(159, 136);
-			this->ddbPVPSkills->Name = L"ddbPVPSkills";
-			this->ddbPVPSkills->Size = System::Drawing::Size(145, 21);
-			this->ddbPVPSkills->TabIndex = 16;
-			this->InfoToolTip->SetToolTip(this->ddbPVPSkills, L"Select here the skill you want to use with PvP Skill Injection");
-			this->ddbPVPSkills->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::ddbPVPSkills_SelectedIndexChanged);
+			this->ddbSkillInjection->Location = System::Drawing::Point(159, 136);
+			this->ddbSkillInjection->Name = L"ddbSkillInjection";
+			this->ddbSkillInjection->Size = System::Drawing::Size(145, 21);
+			this->ddbSkillInjection->TabIndex = 16;
+			this->InfoToolTip->SetToolTip(this->ddbSkillInjection, L"Select here the skill you want to use with PvP Skill Injection");
+			this->ddbSkillInjection->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::ddbPVPSkills_SelectedIndexChanged);
 			// 
 			// cbPVP
 			// 
 			this->cbPVP->AutoSize = true;
 			this->cbPVP->Location = System::Drawing::Point(6, 137);
 			this->cbPVP->Name = L"cbPVP";
-			this->cbPVP->Size = System::Drawing::Size(111, 17);
+			this->cbPVP->Size = System::Drawing::Size(88, 17);
 			this->cbPVP->TabIndex = 15;
-			this->cbPVP->Text = L"PvP Skill Injection";
+			this->cbPVP->Text = L"Skill Injection";
 			this->InfoToolTip->SetToolTip(this->cbPVP, L"Spams a powerfull attack");
 			this->cbPVP->UseVisualStyleBackColor = true;
 			this->cbPVP->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbPVP_CheckedChanged);
@@ -1585,10 +1647,10 @@ private:
 			// 
 			// PacketSenderTab
 			// 
-			this->PacketSenderTab->Controls->Add(this->EditPacketGroupBox);
-			this->PacketSenderTab->Controls->Add(this->DeletePacketsGroupBox);
-			this->PacketSenderTab->Controls->Add(this->AddPacketsGroupBox);
-			this->PacketSenderTab->Controls->Add(this->SendPacketGroupBox);
+			this->PacketSenderTab->Controls->Add(this->gbEditPacket);
+			this->PacketSenderTab->Controls->Add(this->gbDeletePacket);
+			this->PacketSenderTab->Controls->Add(this->gbAddPacket);
+			this->PacketSenderTab->Controls->Add(this->gbSendPackets);
 			this->PacketSenderTab->Location = System::Drawing::Point(4, 22);
 			this->PacketSenderTab->Name = L"PacketSenderTab";
 			this->PacketSenderTab->Padding = System::Windows::Forms::Padding(3);
@@ -1597,121 +1659,121 @@ private:
 			this->PacketSenderTab->Text = L"Packets";
 			this->PacketSenderTab->UseVisualStyleBackColor = true;
 			// 
-			// EditPacketGroupBox
+			// gbEditPacket
 			// 
-			this->EditPacketGroupBox->Controls->Add(this->SavePacketEditButton);
-			this->EditPacketGroupBox->Controls->Add(this->EditPacketPacketTextBox);
-			this->EditPacketGroupBox->Controls->Add(this->EditPacketNameTextBox);
-			this->EditPacketGroupBox->Controls->Add(this->SelectPacketForEditingComboBox);
-			this->EditPacketGroupBox->Location = System::Drawing::Point(6, 191);
-			this->EditPacketGroupBox->Name = L"EditPacketGroupBox";
-			this->EditPacketGroupBox->Size = System::Drawing::Size(314, 76);
-			this->EditPacketGroupBox->TabIndex = 6;
-			this->EditPacketGroupBox->TabStop = false;
-			this->EditPacketGroupBox->Text = L"Edit Packet";
+			this->gbEditPacket->Controls->Add(this->bSaveChanges);
+			this->gbEditPacket->Controls->Add(this->tbEditPacketData);
+			this->gbEditPacket->Controls->Add(this->tbEditPacketName);
+			this->gbEditPacket->Controls->Add(this->ddbEditPacket);
+			this->gbEditPacket->Location = System::Drawing::Point(6, 191);
+			this->gbEditPacket->Name = L"gbEditPacket";
+			this->gbEditPacket->Size = System::Drawing::Size(314, 76);
+			this->gbEditPacket->TabIndex = 6;
+			this->gbEditPacket->TabStop = false;
+			this->gbEditPacket->Text = L"Edit Packet";
 			// 
-			// SavePacketEditButton
+			// bSaveChanges
 			// 
-			this->SavePacketEditButton->Location = System::Drawing::Point(209, 19);
-			this->SavePacketEditButton->Name = L"SavePacketEditButton";
-			this->SavePacketEditButton->Size = System::Drawing::Size(99, 21);
-			this->SavePacketEditButton->TabIndex = 10;
-			this->SavePacketEditButton->Text = L"Edit Packet";
-			this->SavePacketEditButton->UseVisualStyleBackColor = true;
-			this->SavePacketEditButton->Click += gcnew System::EventHandler(this, &MainForm::SavePacketEditButton_Click);
+			this->bSaveChanges->Location = System::Drawing::Point(209, 19);
+			this->bSaveChanges->Name = L"bSaveChanges";
+			this->bSaveChanges->Size = System::Drawing::Size(99, 21);
+			this->bSaveChanges->TabIndex = 10;
+			this->bSaveChanges->Text = L"Save Changes";
+			this->bSaveChanges->UseVisualStyleBackColor = true;
+			this->bSaveChanges->Click += gcnew System::EventHandler(this, &MainForm::SavePacketEditButton_Click);
 			// 
-			// EditPacketPacketTextBox
+			// tbEditPacketData
 			// 
-			this->EditPacketPacketTextBox->Location = System::Drawing::Point(112, 46);
-			this->EditPacketPacketTextBox->Name = L"EditPacketPacketTextBox";
-			this->EditPacketPacketTextBox->Size = System::Drawing::Size(196, 20);
-			this->EditPacketPacketTextBox->TabIndex = 5;
+			this->tbEditPacketData->Location = System::Drawing::Point(112, 46);
+			this->tbEditPacketData->Name = L"tbEditPacketData";
+			this->tbEditPacketData->Size = System::Drawing::Size(196, 20);
+			this->tbEditPacketData->TabIndex = 5;
 			// 
-			// EditPacketNameTextBox
+			// tbEditPacketName
 			// 
-			this->EditPacketNameTextBox->Location = System::Drawing::Point(6, 46);
-			this->EditPacketNameTextBox->Name = L"EditPacketNameTextBox";
-			this->EditPacketNameTextBox->Size = System::Drawing::Size(100, 20);
-			this->EditPacketNameTextBox->TabIndex = 5;
+			this->tbEditPacketName->Location = System::Drawing::Point(6, 46);
+			this->tbEditPacketName->Name = L"tbEditPacketName";
+			this->tbEditPacketName->Size = System::Drawing::Size(100, 20);
+			this->tbEditPacketName->TabIndex = 5;
 			// 
-			// SelectPacketForEditingComboBox
+			// ddbEditPacket
 			// 
-			this->SelectPacketForEditingComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->SelectPacketForEditingComboBox->FormattingEnabled = true;
-			this->SelectPacketForEditingComboBox->Location = System::Drawing::Point(6, 19);
-			this->SelectPacketForEditingComboBox->Name = L"SelectPacketForEditingComboBox";
-			this->SelectPacketForEditingComboBox->Size = System::Drawing::Size(197, 21);
-			this->SelectPacketForEditingComboBox->TabIndex = 10;
-			this->SelectPacketForEditingComboBox->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::SelectPacketForEditingComboBox_SelectedIndexChanged);
+			this->ddbEditPacket->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbEditPacket->FormattingEnabled = true;
+			this->ddbEditPacket->Location = System::Drawing::Point(6, 19);
+			this->ddbEditPacket->Name = L"ddbEditPacket";
+			this->ddbEditPacket->Size = System::Drawing::Size(197, 21);
+			this->ddbEditPacket->TabIndex = 10;
+			this->ddbEditPacket->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::SelectPacketForEditingComboBox_SelectedIndexChanged);
 			// 
-			// DeletePacketsGroupBox
+			// gbDeletePacket
 			// 
-			this->DeletePacketsGroupBox->Controls->Add(this->DeletePacketComboBox);
-			this->DeletePacketsGroupBox->Controls->Add(this->DeletePacketButton);
-			this->DeletePacketsGroupBox->Location = System::Drawing::Point(6, 273);
-			this->DeletePacketsGroupBox->Name = L"DeletePacketsGroupBox";
-			this->DeletePacketsGroupBox->Size = System::Drawing::Size(314, 51);
-			this->DeletePacketsGroupBox->TabIndex = 5;
-			this->DeletePacketsGroupBox->TabStop = false;
-			this->DeletePacketsGroupBox->Text = L"Delete Packets";
+			this->gbDeletePacket->Controls->Add(this->ddbDeletePacket);
+			this->gbDeletePacket->Controls->Add(this->bDeletePacket);
+			this->gbDeletePacket->Location = System::Drawing::Point(6, 273);
+			this->gbDeletePacket->Name = L"gbDeletePacket";
+			this->gbDeletePacket->Size = System::Drawing::Size(314, 51);
+			this->gbDeletePacket->TabIndex = 5;
+			this->gbDeletePacket->TabStop = false;
+			this->gbDeletePacket->Text = L"Delete Packets";
 			// 
-			// DeletePacketComboBox
+			// ddbDeletePacket
 			// 
-			this->DeletePacketComboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->DeletePacketComboBox->FormattingEnabled = true;
-			this->DeletePacketComboBox->Location = System::Drawing::Point(6, 19);
-			this->DeletePacketComboBox->Name = L"DeletePacketComboBox";
-			this->DeletePacketComboBox->Size = System::Drawing::Size(197, 21);
-			this->DeletePacketComboBox->TabIndex = 4;
+			this->ddbDeletePacket->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbDeletePacket->FormattingEnabled = true;
+			this->ddbDeletePacket->Location = System::Drawing::Point(6, 19);
+			this->ddbDeletePacket->Name = L"ddbDeletePacket";
+			this->ddbDeletePacket->Size = System::Drawing::Size(197, 21);
+			this->ddbDeletePacket->TabIndex = 4;
 			// 
-			// DeletePacketButton
+			// bDeletePacket
 			// 
-			this->DeletePacketButton->Location = System::Drawing::Point(209, 19);
-			this->DeletePacketButton->Name = L"DeletePacketButton";
-			this->DeletePacketButton->Size = System::Drawing::Size(99, 21);
-			this->DeletePacketButton->TabIndex = 3;
-			this->DeletePacketButton->Text = L"Delete Packet";
-			this->DeletePacketButton->UseVisualStyleBackColor = true;
-			this->DeletePacketButton->Click += gcnew System::EventHandler(this, &MainForm::DeletePacketButton_Click);
+			this->bDeletePacket->Location = System::Drawing::Point(209, 19);
+			this->bDeletePacket->Name = L"bDeletePacket";
+			this->bDeletePacket->Size = System::Drawing::Size(99, 21);
+			this->bDeletePacket->TabIndex = 3;
+			this->bDeletePacket->Text = L"Delete Packet";
+			this->bDeletePacket->UseVisualStyleBackColor = true;
+			this->bDeletePacket->Click += gcnew System::EventHandler(this, &MainForm::DeletePacketButton_Click);
 			// 
-			// AddPacketsGroupBox
+			// gbAddPacket
 			// 
-			this->AddPacketsGroupBox->Controls->Add(this->AddPacketButton);
-			this->AddPacketsGroupBox->Controls->Add(this->AddPacketPacketTextBox);
-			this->AddPacketsGroupBox->Controls->Add(this->AddPacketNameTextBox);
-			this->AddPacketsGroupBox->Controls->Add(this->AddPacketPacketLabel);
-			this->AddPacketsGroupBox->Controls->Add(this->AddPacketNameLabel);
-			this->AddPacketsGroupBox->Location = System::Drawing::Point(6, 91);
-			this->AddPacketsGroupBox->Name = L"AddPacketsGroupBox";
-			this->AddPacketsGroupBox->Size = System::Drawing::Size(314, 94);
-			this->AddPacketsGroupBox->TabIndex = 4;
-			this->AddPacketsGroupBox->TabStop = false;
-			this->AddPacketsGroupBox->Text = L"Add Packets";
+			this->gbAddPacket->Controls->Add(this->bAddPacket);
+			this->gbAddPacket->Controls->Add(this->tbAddPacketData);
+			this->gbAddPacket->Controls->Add(this->tbAddPacketName);
+			this->gbAddPacket->Controls->Add(this->AddPacketPacketLabel);
+			this->gbAddPacket->Controls->Add(this->AddPacketNameLabel);
+			this->gbAddPacket->Location = System::Drawing::Point(6, 91);
+			this->gbAddPacket->Name = L"gbAddPacket";
+			this->gbAddPacket->Size = System::Drawing::Size(314, 94);
+			this->gbAddPacket->TabIndex = 4;
+			this->gbAddPacket->TabStop = false;
+			this->gbAddPacket->Text = L"Add Packets";
 			// 
-			// AddPacketButton
+			// bAddPacket
 			// 
-			this->AddPacketButton->DialogResult = System::Windows::Forms::DialogResult::Cancel;
-			this->AddPacketButton->Location = System::Drawing::Point(6, 59);
-			this->AddPacketButton->Name = L"AddPacketButton";
-			this->AddPacketButton->Size = System::Drawing::Size(302, 23);
-			this->AddPacketButton->TabIndex = 4;
-			this->AddPacketButton->Text = L"Add Packet";
-			this->AddPacketButton->UseVisualStyleBackColor = true;
-			this->AddPacketButton->Click += gcnew System::EventHandler(this, &MainForm::AddPacketButton_Click);
+			this->bAddPacket->DialogResult = System::Windows::Forms::DialogResult::Cancel;
+			this->bAddPacket->Location = System::Drawing::Point(6, 59);
+			this->bAddPacket->Name = L"bAddPacket";
+			this->bAddPacket->Size = System::Drawing::Size(302, 23);
+			this->bAddPacket->TabIndex = 4;
+			this->bAddPacket->Text = L"Add Packet";
+			this->bAddPacket->UseVisualStyleBackColor = true;
+			this->bAddPacket->Click += gcnew System::EventHandler(this, &MainForm::AddPacketButton_Click);
 			// 
-			// AddPacketPacketTextBox
+			// tbAddPacketData
 			// 
-			this->AddPacketPacketTextBox->Location = System::Drawing::Point(112, 32);
-			this->AddPacketPacketTextBox->Name = L"AddPacketPacketTextBox";
-			this->AddPacketPacketTextBox->Size = System::Drawing::Size(196, 20);
-			this->AddPacketPacketTextBox->TabIndex = 3;
+			this->tbAddPacketData->Location = System::Drawing::Point(112, 32);
+			this->tbAddPacketData->Name = L"tbAddPacketData";
+			this->tbAddPacketData->Size = System::Drawing::Size(196, 20);
+			this->tbAddPacketData->TabIndex = 3;
 			// 
-			// AddPacketNameTextBox
+			// tbAddPacketName
 			// 
-			this->AddPacketNameTextBox->Location = System::Drawing::Point(6, 32);
-			this->AddPacketNameTextBox->Name = L"AddPacketNameTextBox";
-			this->AddPacketNameTextBox->Size = System::Drawing::Size(100, 20);
-			this->AddPacketNameTextBox->TabIndex = 2;
+			this->tbAddPacketName->Location = System::Drawing::Point(6, 32);
+			this->tbAddPacketName->Name = L"tbAddPacketName";
+			this->tbAddPacketName->Size = System::Drawing::Size(100, 20);
+			this->tbAddPacketName->TabIndex = 2;
 			// 
 			// AddPacketPacketLabel
 			// 
@@ -1731,22 +1793,22 @@ private:
 			this->AddPacketNameLabel->TabIndex = 0;
 			this->AddPacketNameLabel->Text = L"Name:";
 			// 
-			// SendPacketGroupBox
+			// gbSendPackets
 			// 
-			this->SendPacketGroupBox->Controls->Add(this->nudSpamDelay);
-			this->SendPacketGroupBox->Controls->Add(this->nudSpamAmount);
-			this->SendPacketGroupBox->Controls->Add(this->bStartSpamming);
-			this->SendPacketGroupBox->Controls->Add(this->SpamPacketsDelayLabel);
-			this->SendPacketGroupBox->Controls->Add(this->SpamPacketTimesLabel);
-			this->SendPacketGroupBox->Controls->Add(this->PacketSelectBox);
-			this->SendPacketGroupBox->Controls->Add(this->SendPacketButton);
-			this->SendPacketGroupBox->Controls->Add(this->bStopSpamming);
-			this->SendPacketGroupBox->Location = System::Drawing::Point(6, 6);
-			this->SendPacketGroupBox->Name = L"SendPacketGroupBox";
-			this->SendPacketGroupBox->Size = System::Drawing::Size(314, 79);
-			this->SendPacketGroupBox->TabIndex = 3;
-			this->SendPacketGroupBox->TabStop = false;
-			this->SendPacketGroupBox->Text = L"Packet Sender";
+			this->gbSendPackets->Controls->Add(this->nudSpamDelay);
+			this->gbSendPackets->Controls->Add(this->nudSpamAmount);
+			this->gbSendPackets->Controls->Add(this->bStartSpamming);
+			this->gbSendPackets->Controls->Add(this->SpamPacketsDelayLabel);
+			this->gbSendPackets->Controls->Add(this->lSpamPacketTimes);
+			this->gbSendPackets->Controls->Add(this->ddbSelectedPacket);
+			this->gbSendPackets->Controls->Add(this->SendPacketButton);
+			this->gbSendPackets->Controls->Add(this->bStopSpamming);
+			this->gbSendPackets->Location = System::Drawing::Point(6, 6);
+			this->gbSendPackets->Name = L"gbSendPackets";
+			this->gbSendPackets->Size = System::Drawing::Size(314, 79);
+			this->gbSendPackets->TabIndex = 3;
+			this->gbSendPackets->TabStop = false;
+			this->gbSendPackets->Text = L"Packet Sender";
 			// 
 			// nudSpamDelay
 			// 
@@ -1783,24 +1845,24 @@ private:
 			this->SpamPacketsDelayLabel->TabIndex = 7;
 			this->SpamPacketsDelayLabel->Text = L"ms delay";
 			// 
-			// SpamPacketTimesLabel
+			// lSpamPacketTimes
 			// 
-			this->SpamPacketTimesLabel->AutoSize = true;
-			this->SpamPacketTimesLabel->Location = System::Drawing::Point(158, 52);
-			this->SpamPacketTimesLabel->Name = L"SpamPacketTimesLabel";
-			this->SpamPacketTimesLabel->Size = System::Drawing::Size(60, 13);
-			this->SpamPacketTimesLabel->TabIndex = 5;
-			this->SpamPacketTimesLabel->Text = L"Times, with";
+			this->lSpamPacketTimes->AutoSize = true;
+			this->lSpamPacketTimes->Location = System::Drawing::Point(158, 52);
+			this->lSpamPacketTimes->Name = L"lSpamPacketTimes";
+			this->lSpamPacketTimes->Size = System::Drawing::Size(60, 13);
+			this->lSpamPacketTimes->TabIndex = 5;
+			this->lSpamPacketTimes->Text = L"Times, with";
 			// 
-			// PacketSelectBox
+			// ddbSelectedPacket
 			// 
-			this->PacketSelectBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->PacketSelectBox->FormattingEnabled = true;
-			this->PacketSelectBox->Location = System::Drawing::Point(6, 19);
-			this->PacketSelectBox->Name = L"PacketSelectBox";
-			this->PacketSelectBox->Size = System::Drawing::Size(197, 21);
-			this->PacketSelectBox->TabIndex = 2;
-			this->PacketSelectBox->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::PacketSelectBox_SelectedIndexChanged);
+			this->ddbSelectedPacket->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbSelectedPacket->FormattingEnabled = true;
+			this->ddbSelectedPacket->Location = System::Drawing::Point(6, 19);
+			this->ddbSelectedPacket->Name = L"ddbSelectedPacket";
+			this->ddbSelectedPacket->Size = System::Drawing::Size(197, 21);
+			this->ddbSelectedPacket->TabIndex = 2;
+			this->ddbSelectedPacket->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::PacketSelectBox_SelectedIndexChanged);
 			// 
 			// SendPacketButton
 			// 
@@ -1825,8 +1887,8 @@ private:
 			// 
 			// SPControlTabPage
 			// 
-			this->SPControlTabPage->Controls->Add(this->SPControlGroupBox);
-			this->SPControlTabPage->Controls->Add(this->SPControlListView);
+			this->SPControlTabPage->Controls->Add(this->gbNewSPCLocation);
+			this->SPControlTabPage->Controls->Add(this->lvSPControl);
 			this->SPControlTabPage->Location = System::Drawing::Point(4, 22);
 			this->SPControlTabPage->Name = L"SPControlTabPage";
 			this->SPControlTabPage->Size = System::Drawing::Size(326, 457);
@@ -1834,25 +1896,25 @@ private:
 			this->SPControlTabPage->Text = L"SPControl";
 			this->SPControlTabPage->UseVisualStyleBackColor = true;
 			// 
-			// SPControlGroupBox
+			// gbNewSPCLocation
 			// 
-			this->SPControlGroupBox->Controls->Add(this->nudSPCY);
-			this->SPControlGroupBox->Controls->Add(this->nudSPCX);
-			this->SPControlGroupBox->Controls->Add(this->nudSPCMapId);
-			this->SPControlGroupBox->Controls->Add(this->GetSPControlCoordsButton);
-			this->SPControlGroupBox->Controls->Add(this->SPControlAddButton);
-			this->SPControlGroupBox->Controls->Add(this->SPControlMapIDLabel);
-			this->SPControlGroupBox->Controls->Add(this->cbSPControl);
-			this->SPControlGroupBox->Controls->Add(this->SPControlNameLabel);
-			this->SPControlGroupBox->Controls->Add(this->SPControlYLabel);
-			this->SPControlGroupBox->Controls->Add(this->SPControlXLabel);
-			this->SPControlGroupBox->Controls->Add(this->SPControlNameTextBox);
-			this->SPControlGroupBox->Location = System::Drawing::Point(7, 279);
-			this->SPControlGroupBox->Name = L"SPControlGroupBox";
-			this->SPControlGroupBox->Size = System::Drawing::Size(310, 93);
-			this->SPControlGroupBox->TabIndex = 37;
-			this->SPControlGroupBox->TabStop = false;
-			this->SPControlGroupBox->Text = L"Add New Location";
+			this->gbNewSPCLocation->Controls->Add(this->nudSPCY);
+			this->gbNewSPCLocation->Controls->Add(this->nudSPCX);
+			this->gbNewSPCLocation->Controls->Add(this->nudSPCMapId);
+			this->gbNewSPCLocation->Controls->Add(this->bSPCGetCurrent);
+			this->gbNewSPCLocation->Controls->Add(this->bAddSPCLocation);
+			this->gbNewSPCLocation->Controls->Add(this->SPControlMapIDLabel);
+			this->gbNewSPCLocation->Controls->Add(this->cbSPControl);
+			this->gbNewSPCLocation->Controls->Add(this->SPControlNameLabel);
+			this->gbNewSPCLocation->Controls->Add(this->SPControlYLabel);
+			this->gbNewSPCLocation->Controls->Add(this->SPControlXLabel);
+			this->gbNewSPCLocation->Controls->Add(this->tbSPCName);
+			this->gbNewSPCLocation->Location = System::Drawing::Point(7, 279);
+			this->gbNewSPCLocation->Name = L"gbNewSPCLocation";
+			this->gbNewSPCLocation->Size = System::Drawing::Size(310, 93);
+			this->gbNewSPCLocation->TabIndex = 37;
+			this->gbNewSPCLocation->TabStop = false;
+			this->gbNewSPCLocation->Text = L"Add New Location";
 			// 
 			// nudSPCY
 			// 
@@ -1881,27 +1943,27 @@ private:
 			this->nudSPCMapId->Size = System::Drawing::Size(77, 20);
 			this->nudSPCMapId->TabIndex = 41;
 			// 
-			// GetSPControlCoordsButton
+			// bSPCGetCurrent
 			// 
-			this->GetSPControlCoordsButton->Location = System::Drawing::Point(149, 59);
-			this->GetSPControlCoordsButton->Name = L"GetSPControlCoordsButton";
-			this->GetSPControlCoordsButton->Size = System::Drawing::Size(78, 23);
-			this->GetSPControlCoordsButton->TabIndex = 38;
-			this->GetSPControlCoordsButton->TabStop = false;
-			this->GetSPControlCoordsButton->Text = L"Get Current";
-			this->GetSPControlCoordsButton->UseVisualStyleBackColor = true;
-			this->GetSPControlCoordsButton->Click += gcnew System::EventHandler(this, &MainForm::GetSPControlCoordsButton_Click);
+			this->bSPCGetCurrent->Location = System::Drawing::Point(149, 59);
+			this->bSPCGetCurrent->Name = L"bSPCGetCurrent";
+			this->bSPCGetCurrent->Size = System::Drawing::Size(78, 23);
+			this->bSPCGetCurrent->TabIndex = 38;
+			this->bSPCGetCurrent->TabStop = false;
+			this->bSPCGetCurrent->Text = L"Get Current";
+			this->bSPCGetCurrent->UseVisualStyleBackColor = true;
+			this->bSPCGetCurrent->Click += gcnew System::EventHandler(this, &MainForm::GetSPControlCoordsButton_Click);
 			// 
-			// SPControlAddButton
+			// bAddSPCLocation
 			// 
-			this->SPControlAddButton->Location = System::Drawing::Point(9, 59);
-			this->SPControlAddButton->Name = L"SPControlAddButton";
-			this->SPControlAddButton->Size = System::Drawing::Size(134, 23);
-			this->SPControlAddButton->TabIndex = 37;
-			this->SPControlAddButton->TabStop = false;
-			this->SPControlAddButton->Text = L"Add Location";
-			this->SPControlAddButton->UseVisualStyleBackColor = true;
-			this->SPControlAddButton->Click += gcnew System::EventHandler(this, &MainForm::SPControlAddButton_Click);
+			this->bAddSPCLocation->Location = System::Drawing::Point(9, 59);
+			this->bAddSPCLocation->Name = L"bAddSPCLocation";
+			this->bAddSPCLocation->Size = System::Drawing::Size(134, 23);
+			this->bAddSPCLocation->TabIndex = 37;
+			this->bAddSPCLocation->TabStop = false;
+			this->bAddSPCLocation->Text = L"Add Location";
+			this->bAddSPCLocation->UseVisualStyleBackColor = true;
+			this->bAddSPCLocation->Click += gcnew System::EventHandler(this, &MainForm::SPControlAddButton_Click);
 			// 
 			// SPControlMapIDLabel
 			// 
@@ -1951,30 +2013,30 @@ private:
 			this->SPControlXLabel->Text = L"X";
 			this->SPControlXLabel->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
-			// SPControlNameTextBox
+			// tbSPCName
 			// 
-			this->SPControlNameTextBox->Location = System::Drawing::Point(9, 33);
-			this->SPControlNameTextBox->Name = L"SPControlNameTextBox";
-			this->SPControlNameTextBox->Size = System::Drawing::Size(134, 20);
-			this->SPControlNameTextBox->TabIndex = 40;
+			this->tbSPCName->Location = System::Drawing::Point(9, 33);
+			this->tbSPCName->Name = L"tbSPCName";
+			this->tbSPCName->Size = System::Drawing::Size(134, 20);
+			this->tbSPCName->TabIndex = 40;
 			// 
-			// SPControlListView
+			// lvSPControl
 			// 
-			this->SPControlListView->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->SPControlListView->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(4) {this->HeaderMapName, 
+			this->lvSPControl->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->lvSPControl->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(4) {this->HeaderMapName, 
 				this->HeaderMapID, this->HeaderX, this->HeaderY});
-			this->SPControlListView->ContextMenuStrip = this->SPControlContextMenu;
-			this->SPControlListView->FullRowSelect = true;
-			this->SPControlListView->GridLines = true;
-			this->SPControlListView->HeaderStyle = System::Windows::Forms::ColumnHeaderStyle::Nonclickable;
-			this->SPControlListView->Location = System::Drawing::Point(7, 12);
-			this->SPControlListView->MultiSelect = false;
-			this->SPControlListView->Name = L"SPControlListView";
-			this->SPControlListView->Size = System::Drawing::Size(310, 261);
-			this->SPControlListView->TabIndex = 28;
-			this->SPControlListView->TabStop = false;
-			this->SPControlListView->UseCompatibleStateImageBehavior = false;
-			this->SPControlListView->View = System::Windows::Forms::View::Details;
+			this->lvSPControl->ContextMenuStrip = this->SPControlContextMenu;
+			this->lvSPControl->FullRowSelect = true;
+			this->lvSPControl->GridLines = true;
+			this->lvSPControl->HeaderStyle = System::Windows::Forms::ColumnHeaderStyle::Nonclickable;
+			this->lvSPControl->Location = System::Drawing::Point(7, 12);
+			this->lvSPControl->MultiSelect = false;
+			this->lvSPControl->Name = L"lvSPControl";
+			this->lvSPControl->Size = System::Drawing::Size(310, 261);
+			this->lvSPControl->TabIndex = 28;
+			this->lvSPControl->TabStop = false;
+			this->lvSPControl->UseCompatibleStateImageBehavior = false;
+			this->lvSPControl->View = System::Windows::Forms::View::Details;
 			// 
 			// HeaderMapName
 			// 
@@ -2024,7 +2086,7 @@ private:
 			// 
 			// bSaveSettings
 			// 
-			this->bSaveSettings->Location = System::Drawing::Point(6, 344);
+			this->bSaveSettings->Location = System::Drawing::Point(6, 178);
 			this->bSaveSettings->Name = L"bSaveSettings";
 			this->bSaveSettings->Size = System::Drawing::Size(314, 28);
 			this->bSaveSettings->TabIndex = 27;
@@ -2046,7 +2108,7 @@ private:
 			this->gbHotKeys->Controls->Add(this->cbHotKeyAttack);
 			this->gbHotKeys->Location = System::Drawing::Point(6, 7);
 			this->gbHotKeys->Name = L"gbHotKeys";
-			this->gbHotKeys->Size = System::Drawing::Size(189, 331);
+			this->gbHotKeys->Size = System::Drawing::Size(189, 165);
 			this->gbHotKeys->TabIndex = 26;
 			this->gbHotKeys->TabStop = false;
 			this->gbHotKeys->Text = L"Hot Keys";
@@ -2059,7 +2121,7 @@ private:
 				L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", 
 				L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", 
 				L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->ddbHotKeySendPacket->Location = System::Drawing::Point(100, 129);
+			this->ddbHotKeySendPacket->Location = System::Drawing::Point(100, 123);
 			this->ddbHotKeySendPacket->Name = L"ddbHotKeySendPacket";
 			this->ddbHotKeySendPacket->Size = System::Drawing::Size(80, 21);
 			this->ddbHotKeySendPacket->TabIndex = 18;
@@ -2067,7 +2129,7 @@ private:
 			// cbHotKeySendPacket
 			// 
 			this->cbHotKeySendPacket->AutoSize = true;
-			this->cbHotKeySendPacket->Location = System::Drawing::Point(6, 131);
+			this->cbHotKeySendPacket->Location = System::Drawing::Point(6, 125);
 			this->cbHotKeySendPacket->Name = L"cbHotKeySendPacket";
 			this->cbHotKeySendPacket->Size = System::Drawing::Size(88, 17);
 			this->cbHotKeySendPacket->TabIndex = 17;
@@ -2082,7 +2144,7 @@ private:
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->ddbHotKeyCCPeople->Location = System::Drawing::Point(100, 102);
+			this->ddbHotKeyCCPeople->Location = System::Drawing::Point(100, 96);
 			this->ddbHotKeyCCPeople->Name = L"ddbHotKeyCCPeople";
 			this->ddbHotKeyCCPeople->Size = System::Drawing::Size(80, 21);
 			this->ddbHotKeyCCPeople->TabIndex = 16;
@@ -2090,7 +2152,7 @@ private:
 			// cbHotKeyCCPeople
 			// 
 			this->cbHotKeyCCPeople->AutoSize = true;
-			this->cbHotKeyCCPeople->Location = System::Drawing::Point(6, 104);
+			this->cbHotKeyCCPeople->Location = System::Drawing::Point(6, 98);
 			this->cbHotKeyCCPeople->Name = L"cbHotKeyCCPeople";
 			this->cbHotKeyCCPeople->Size = System::Drawing::Size(76, 17);
 			this->cbHotKeyCCPeople->TabIndex = 15;
@@ -2105,7 +2167,7 @@ private:
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->ddbHotKeyFMA->Location = System::Drawing::Point(100, 75);
+			this->ddbHotKeyFMA->Location = System::Drawing::Point(100, 69);
 			this->ddbHotKeyFMA->Name = L"ddbHotKeyFMA";
 			this->ddbHotKeyFMA->Size = System::Drawing::Size(80, 21);
 			this->ddbHotKeyFMA->TabIndex = 14;
@@ -2113,7 +2175,7 @@ private:
 			// cbHotKeyFMA
 			// 
 			this->cbHotKeyFMA->AutoSize = true;
-			this->cbHotKeyFMA->Location = System::Drawing::Point(6, 77);
+			this->cbHotKeyFMA->Location = System::Drawing::Point(6, 71);
 			this->cbHotKeyFMA->Name = L"cbHotKeyFMA";
 			this->cbHotKeyFMA->Size = System::Drawing::Size(48, 17);
 			this->cbHotKeyFMA->TabIndex = 13;
@@ -2128,7 +2190,7 @@ private:
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->ddbHotKeyLoot->Location = System::Drawing::Point(100, 48);
+			this->ddbHotKeyLoot->Location = System::Drawing::Point(100, 42);
 			this->ddbHotKeyLoot->Name = L"ddbHotKeyLoot";
 			this->ddbHotKeyLoot->Size = System::Drawing::Size(80, 21);
 			this->ddbHotKeyLoot->TabIndex = 12;
@@ -2136,7 +2198,7 @@ private:
 			// cbHotKeyLoot
 			// 
 			this->cbHotKeyLoot->AutoSize = true;
-			this->cbHotKeyLoot->Location = System::Drawing::Point(6, 50);
+			this->cbHotKeyLoot->Location = System::Drawing::Point(6, 44);
 			this->cbHotKeyLoot->Name = L"cbHotKeyLoot";
 			this->cbHotKeyLoot->Size = System::Drawing::Size(69, 17);
 			this->cbHotKeyLoot->TabIndex = 11;
@@ -2151,7 +2213,7 @@ private:
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->ddbHotKeyAttack->Location = System::Drawing::Point(100, 21);
+			this->ddbHotKeyAttack->Location = System::Drawing::Point(100, 15);
 			this->ddbHotKeyAttack->Name = L"ddbHotKeyAttack";
 			this->ddbHotKeyAttack->Size = System::Drawing::Size(80, 21);
 			this->ddbHotKeyAttack->TabIndex = 10;
@@ -2159,7 +2221,7 @@ private:
 			// cbHotKeyAttack
 			// 
 			this->cbHotKeyAttack->AutoSize = true;
-			this->cbHotKeyAttack->Location = System::Drawing::Point(6, 23);
+			this->cbHotKeyAttack->Location = System::Drawing::Point(6, 17);
 			this->cbHotKeyAttack->Name = L"cbHotKeyAttack";
 			this->cbHotKeyAttack->Size = System::Drawing::Size(79, 17);
 			this->cbHotKeyAttack->TabIndex = 0;
@@ -2181,7 +2243,7 @@ private:
 			this->gbPointers->Controls->Add(this->CharPosLabel);
 			this->gbPointers->Location = System::Drawing::Point(195, 7);
 			this->gbPointers->Name = L"gbPointers";
-			this->gbPointers->Size = System::Drawing::Size(125, 331);
+			this->gbPointers->Size = System::Drawing::Size(125, 165);
 			this->gbPointers->TabIndex = 25;
 			this->gbPointers->TabStop = false;
 			this->gbPointers->Text = L"Pointers";
@@ -2313,14 +2375,14 @@ private:
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCAttacks))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCTimed))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCPeople))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill4Value))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill3Value))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill2Value))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkill1Value))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudMPValue))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudHPValue))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudLootDelay))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAttackDelay))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill4))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill3))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoMP))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoHP))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoLoot))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoAttack))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSLWIB))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSAWSIL))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->EXPForeground))->EndInit();
@@ -2335,22 +2397,22 @@ private:
 			this->gbCharHacks->ResumeLayout(false);
 			this->gbCharHacks->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudIceGuard))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPVPDelay))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkillInjection))->EndInit();
 			this->MobHacks->ResumeLayout(false);
 			this->MobHacks->PerformLayout();
 			this->PacketSenderTab->ResumeLayout(false);
-			this->EditPacketGroupBox->ResumeLayout(false);
-			this->EditPacketGroupBox->PerformLayout();
-			this->DeletePacketsGroupBox->ResumeLayout(false);
-			this->AddPacketsGroupBox->ResumeLayout(false);
-			this->AddPacketsGroupBox->PerformLayout();
-			this->SendPacketGroupBox->ResumeLayout(false);
-			this->SendPacketGroupBox->PerformLayout();
+			this->gbEditPacket->ResumeLayout(false);
+			this->gbEditPacket->PerformLayout();
+			this->gbDeletePacket->ResumeLayout(false);
+			this->gbAddPacket->ResumeLayout(false);
+			this->gbAddPacket->PerformLayout();
+			this->gbSendPackets->ResumeLayout(false);
+			this->gbSendPackets->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamDelay))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamAmount))->EndInit();
 			this->SPControlTabPage->ResumeLayout(false);
-			this->SPControlGroupBox->ResumeLayout(false);
-			this->SPControlGroupBox->PerformLayout();
+			this->gbNewSPCLocation->ResumeLayout(false);
+			this->gbNewSPCLocation->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCY))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCX))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCMapId))->EndInit();

@@ -29,4 +29,10 @@ namespace AutoBotVars
 	int iSlwib;
 }
 
-static int TabHeight[] = {431, 461, 381, 431, 431};
+static int TabHeight[] = {431, 461, 215, 431, 431};
+
+enum SettingsIndex{
+	AutoAttackDelay, SAWSIL, AutoAttackKey, AutoLootDelay, SLWIB, AutoLootKey, AutoHPValue, AutoHPKey, AutoMPValue, AutoMPKey, AutoSkill1, AutoSkill1Key, AutoSkill2, AutoSkill2Key,
+	AutoSkill3, AutoSkill3Key, AutoSkill4, AutoSkill4Key, CCPeople, CCPeopleType, CCTimed, CCTimedType, CCAttacks, CCAttacksType, HotKeyAttack, HotKeyLoot, HotKeyFMA,
+	HotKeyCCPeople, HotKeySendPacket, SelectedPacket, PacketSpamAmount, PacketSpamDelay, SkillInjectionDelay, SkillInjectionIndex, IceGuard, PinTyper, LogoSkipper, SettingCount
+} eSettings;

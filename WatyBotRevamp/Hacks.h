@@ -5,7 +5,7 @@
 extern BOOL WINAPI canPvP();
 extern gcroot<ChangeChannel::CChangeChannel^> CC;
 extern gcroot<CMapleStory^> CMS;
-extern gcroot<SpawnControl::SPControl^> CSPControl;
+extern gcroot<SpawnControl::CSPControl^> SPControl;
 
 namespace Hacks
 {
@@ -152,7 +152,7 @@ namespace Hacks
 	BOOL WINAPI GetCoords()
 	{
 		int iMapID = CMS->MapID;
-		for each(SpawnControl::SPControlLocation^ location in CSPControl->Locations)
+		for each(SpawnControl::CSPControlLocation^ location in SPControl->Locations)
 		{
 			if(iMapID == location->MapId)
 			{

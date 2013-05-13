@@ -5,7 +5,7 @@ using namespace SpawnControl;
 using namespace System::IO;
 using namespace System::Windows::Forms;
 
-SPControlLocation::SPControlLocation()
+CSPControlLocation::CSPControlLocation()
 {
 	Name = "Error";
 	MapId = -1;
@@ -13,7 +13,7 @@ SPControlLocation::SPControlLocation()
 	Y = -1;
 }
 
-SPControlLocation::SPControlLocation(String^ name, int MapId, int X, int Y)
+CSPControlLocation::CSPControlLocation(String^ name, int MapId, int X, int Y)
 {
 	this->Name = name;
 	this->MapId = MapId;
@@ -21,7 +21,7 @@ SPControlLocation::SPControlLocation(String^ name, int MapId, int X, int Y)
 	this->Y = Y;
 }
 
-SPControl::SPControl()
+CSPControl::CSPControl()
 {
 	if(!File::Exists(SPControlFileName))
 	{
@@ -30,17 +30,17 @@ SPControl::SPControl()
 	}
 	
 	TextReader^ reader = gcnew StreamReader(SPControlFileName);
-	s = gcnew XmlSerializer(List<SPControlLocation^>::typeid);
+	s = gcnew XmlSerializer(List<CSPControlLocation^>::typeid);
 	try
 	{
-		Locations = safe_cast<List<SPControlLocation^>^>(s->Deserialize(reader));
+		Locations = safe_cast<List<CSPControlLocation^>^>(s->Deserialize(reader));
 	}
 	catch(System::Exception^){}	
 	reader->Close();
-	if(Locations == nullptr) Locations = gcnew List<SPControlLocation^>;
+	if(Locations == nullptr) Locations = gcnew List<CSPControlLocation^>;
 }
 
-void SPControl::Save()
+void CSPControl::Save()
 {
 	TextWriter^ writer = gcnew StreamWriter(SPControlFileName);
 	try
@@ -51,7 +51,7 @@ void SPControl::Save()
 	writer->Close();
 }
 
-void SPControl::EditLocation(int index, String^ name, int mapid, int x, int y)
+void CSPControl::EditLocation(int index, String^ name, int mapid, int x, int y)
 {
 	Locations[index]->Name = name;
 	Locations[index]->MapId = mapid;
@@ -59,9 +59,9 @@ void SPControl::EditLocation(int index, String^ name, int mapid, int x, int y)
 	Locations[index]->Y = y;
 }
 
-void SPControl::AddLocation(String^ Name, int MapId, int X, int Y)
+void CSPControl::AddLocation(String^ Name, int MapId, int X, int Y)
 {
-	SPControlLocation^ l = gcnew SPControlLocation;
+	CSPControlLocation^ l = gcnew CSPControlLocation;
 	l->Name = Name;
 	l->MapId = MapId;
 	l->X = X;

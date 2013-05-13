@@ -7,11 +7,11 @@ namespace SpawnControl
 	using namespace System::Collections::Generic;
 	using namespace System::Xml::Serialization;
 
-	public ref class SPControlLocation sealed
+	public ref class CSPControlLocation sealed
 	{
 	public:
-		SPControlLocation();
-		SPControlLocation(String^ name, int MapId, int X, int Y);
+		CSPControlLocation();
+		CSPControlLocation(String^ name, int MapId, int X, int Y);
 
 		//[XmlAttribute]
 		property String^ Name;
@@ -20,15 +20,15 @@ namespace SpawnControl
 		property int Y;
 	};
 
-	public ref class SPControl
+	public ref class CSPControl
 	{
 	public:
-		SPControl();
+		CSPControl();
 		void Save();
 		void EditLocation(int index, System::String^ name, int mapid, int x, int y);
 		void AddLocation(String^ Name, int MapId, int X, int Y);
 
-		property List<SPControlLocation^>^ Locations;
+		property List<CSPControlLocation^>^ Locations;
 		property XmlSerializer^ s;
 	};
 }

@@ -37,8 +37,8 @@ StopWatch<milliseconds> PvPStopWatch;
 
 gcroot<CMapleStory^> CMS;
 gcroot<ChangeChannel::CChangeChannel^> CC;
-gcroot<SPControl^> CSPControl;
 gcroot<CPackets^> CPacket;
+gcroot<CSPControl^> SPControl;
 
 //Find Window
 void getMSHWND()
@@ -187,7 +187,7 @@ void MainForm::cbMouseFly_CheckedChanged(System::Object^  sender, System::EventA
 }
 void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	if(ddbPVPSkills->SelectedIndex < 0)
+	if(ddbSkillInjection->SelectedIndex < 0)
 	{
 		if(cbPVP->Checked)
 		{
@@ -198,8 +198,8 @@ void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^ 
 	else
 	{
 		//set variables
-		Hacks::iPVPSkillID = PVPSkills[ddbPVPSkills->SelectedIndex];
-		PvPStopWatch.SetDelay(milliseconds((int) nudPVPDelay->Value));
+		Hacks::iPVPSkillID = PVPSkills[ddbSkillInjection->SelectedIndex];
+		PvPStopWatch.SetDelay(milliseconds((int) nudSkillInjection->Value));
 
 		cbNFA->Checked = false;
 		cbPVP->Checked = Hacks::cmPVP1.Enable(cbPVP->Checked);
@@ -208,11 +208,11 @@ void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^ 
 }
 void MainForm::nudPVPDelay_ValueChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	PvPStopWatch.SetDelay(milliseconds((int) nudPVPDelay->Value));
+	PvPStopWatch.SetDelay(milliseconds((int) nudSkillInjection->Value));
 }
 void MainForm::ddbPVPSkills_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::iPVPSkillID = ddbPVPSkills->SelectedIndex;
+	Hacks::iPVPSkillID = ddbSkillInjection->SelectedIndex;
 }
 void MainForm::cbNoCCBlueBoxes_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -222,17 +222,17 @@ void MainForm::cbNoCCBlueBoxes_CheckedChanged(System::Object^  sender, System::E
 //AutoHP/MP/CC Checkboxes
 void MainForm::HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	nudHPValue->Enabled = !HPCheckBox->Checked;
-	HPComboBox->Enabled = !HPCheckBox->Checked;
+	nudAutoHP->Enabled = !cbAutoHP->Checked;
+	ddbAutoHPKey->Enabled = !cbAutoHP->Checked;
 }
 void MainForm::MPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	nudMPValue->Enabled = !MPCheckBox->Checked;
-	MPComboBox->Enabled = !MPCheckBox->Checked;
+	nudAutoMP->Enabled = !cbAutoMP->Checked;
+	ddbAutoMPKey->Enabled = !cbAutoMP->Checked;
 }
 void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	nudCCPeople->Enabled = !CCPeopleCheckBox->Checked;
+	nudCCPeople->Enabled = !cbCCPeople->Checked;
 }
 
 //Macro's
@@ -308,74 +308,74 @@ void InitializeMacros()
 
 void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	this->nudAttackDelay->Enabled = !AttackCheckBox->Checked;
-	this->nudSAWSIL->Enabled = !AttackCheckBox->Checked;
-	this->AttackComboBox->Enabled = !AttackCheckBox->Checked;
+	this->nudAutoAttack->Enabled = !cbAutoAttack->Checked;
+	this->nudSAWSIL->Enabled = !cbAutoAttack->Checked;
+	this->ddbAutoAttackKey->Enabled = !cbAutoAttack->Checked;
 
 	AutoBotVars::iSawsil = (int) nudSAWSIL->Value;
-	AttackMacro->SetValue(KeyCodes[AttackComboBox->SelectedIndex]);
-	AttackMacro->SetDelay((unsigned int) nudAttackDelay->Value);
-	AttackMacro->Toggle(AttackCheckBox->Checked);
+	AttackMacro->SetValue(KeyCodes[ddbAutoAttackKey->SelectedIndex]);
+	AttackMacro->SetDelay((unsigned int) nudAutoAttack->Value);
+	AttackMacro->Toggle(cbAutoAttack->Checked);
 }
 void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	this->LootComboBox->Enabled = !this->LootCheckBox->Checked;
-	this->nudLootDelay->Enabled = !this->LootCheckBox->Checked;
-	this->nudSLWIB->Enabled = !this->LootCheckBox->Checked;
+	this->nudAutoLoot->Enabled = !this->cbAutoLoot->Checked;
+	this->ddbAutoLootKey->Enabled = !this->cbAutoLoot->Checked;
+	this->nudSLWIB->Enabled = !this->cbAutoLoot->Checked;
 		
 	AutoBotVars::iSlwib = (int) nudSLWIB->Value;
-	LootMacro->SetValue(KeyCodes[LootComboBox->SelectedIndex]);
-	LootMacro->SetDelay((unsigned int) nudLootDelay->Value);
-	LootMacro->Toggle(this->LootCheckBox->Checked);
+	LootMacro->SetValue(KeyCodes[ddbAutoLootKey->SelectedIndex]);
+	LootMacro->SetDelay((unsigned int) nudAutoLoot->Value);
+	LootMacro->Toggle(cbAutoLoot->Checked);
 }
 void MainForm::AutoSkill1CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	this->AutoSkill1ComboBox->Enabled = !this->AutoSkill1CheckBox->Checked;
-	this->nudSkill1Value->Enabled = !this->AutoSkill1CheckBox->Checked;
-	Skill1Macro->SetDelay((unsigned int) nudSkill1Value->Value * 1000);
-	Skill1Macro->SetKeyIndex(AutoSkill1ComboBox->SelectedIndex);
-	Skill1Macro->Toggle(AutoSkill1CheckBox->Checked);
-	if(this->AutoSkill1CheckBox->Checked) AutoSkill(AutoSkill1ComboBox->SelectedIndex);
+	this->ddbAutoSkill1Key->Enabled = !this->cbAutoSkill1->Checked;
+	this->nudAutoSkill1->Enabled = !this->cbAutoSkill1->Checked;
+	Skill1Macro->SetDelay((unsigned int) nudAutoSkill1->Value * 1000);
+	Skill1Macro->SetKeyIndex(ddbAutoSkill1Key->SelectedIndex);
+	Skill1Macro->Toggle(cbAutoSkill1->Checked);
+	if(this->cbAutoSkill1->Checked) AutoSkill(ddbAutoSkill1Key->SelectedIndex);
 }
 void MainForm::AutoSkill2CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	this->AutoSkill2ComboBox->Enabled = !this->AutoSkill2CheckBox->Checked;
-	this->nudSkill2Value->Enabled = !this->AutoSkill2CheckBox->Checked;
-	Skill2Macro->SetDelay((unsigned int) nudSkill2Value->Value * 1000);
-	Skill2Macro->SetKeyIndex(AutoSkill2ComboBox->SelectedIndex);
-	Skill2Macro->Toggle(AutoSkill2CheckBox->Checked);
-	if(this->AutoSkill2CheckBox->Checked) AutoSkill(AutoSkill2ComboBox->SelectedIndex);
+	this->ddbAutoSkill2Key->Enabled = !this->cbAutoSkill2->Checked;
+	this->nudAutoSkill2->Enabled = !this->cbAutoSkill2->Checked;
+	Skill2Macro->SetDelay((unsigned int) nudAutoSkill2->Value * 1000);
+	Skill2Macro->SetKeyIndex(ddbAutoSkill2Key->SelectedIndex);
+	Skill2Macro->Toggle(cbAutoSkill2->Checked);
+	if(this->cbAutoSkill2->Checked) AutoSkill(ddbAutoSkill2Key->SelectedIndex);
 }
 void MainForm::AutoSkill3CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	this->AutoSkill3ComboBox->Enabled = !this->AutoSkill3CheckBox->Checked;
-	this->nudSkill3Value->Enabled = !this->AutoSkill3CheckBox->Checked;
-	Skill3Macro->SetDelay((unsigned int) nudSkill3Value->Value * 1000);
-	Skill3Macro->SetKeyIndex(AutoSkill3ComboBox->SelectedIndex);
-	Skill3Macro->Toggle(AutoSkill3CheckBox->Checked);
-	if(this->AutoSkill3CheckBox->Checked) AutoSkill(AutoSkill3ComboBox->SelectedIndex);
+	this->ddbAutoSkill3Key->Enabled = !this->cbAutoSkill3->Checked;
+	this->nudAutoSkill3->Enabled = !this->cbAutoSkill3->Checked;
+	Skill3Macro->SetDelay((unsigned int) nudAutoSkill3->Value * 1000);
+	Skill3Macro->SetKeyIndex(ddbAutoSkill3Key->SelectedIndex);
+	Skill3Macro->Toggle(cbAutoSkill3->Checked);
+	if(this->cbAutoSkill3->Checked) AutoSkill(ddbAutoSkill3Key->SelectedIndex);
 }
 void MainForm::AutoSkill4CheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	this->AutoSkill4ComboBox->Enabled = !this->AutoSkill4CheckBox->Checked;
-	this->nudSkill4Value->Enabled = !this->AutoSkill4CheckBox->Checked;
-	Skill4Macro->SetDelay((unsigned int) nudSkill4Value->Value * 1000);
-	Skill4Macro->SetKeyIndex(AutoSkill4ComboBox->SelectedIndex);
-	Skill4Macro->Toggle(AutoSkill4CheckBox->Checked);
-	if(this->AutoSkill4CheckBox->Checked) AutoSkill(AutoSkill4ComboBox->SelectedIndex);
+	this->ddbAutoSkill4Key->Enabled = !this->cbAutoSkill4->Checked;
+	this->nudAutoSkill4->Enabled = !this->cbAutoSkill4->Checked;
+	Skill4Macro->SetDelay((unsigned int) nudAutoSkill4->Value * 1000);
+	Skill4Macro->SetKeyIndex(ddbAutoSkill4Key->SelectedIndex);
+	Skill4Macro->Toggle(cbAutoSkill4->Checked);
+	if(this->cbAutoSkill4->Checked) AutoSkill(ddbAutoSkill4Key->SelectedIndex);
 }
 void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	this->TimedComboBox->Enabled = !this->CCTimedCheckBox->Checked;
-	this->nudCCTimed->Enabled = !this->CCTimedCheckBox->Checked;
+	this->ddbTimedType->Enabled = !this->cbCCTimed->Checked;
+	this->nudCCTimed->Enabled = !this->cbCCTimed->Checked;
 
 	CCMacro->SetDelay((unsigned int) nudCCTimed->Value * 1000);
-	CCMacro->SetValue(this->TimedComboBox->SelectedIndex);
-	CCMacro->Toggle(CCTimedCheckBox->Checked);
+	CCMacro->SetValue(this->ddbTimedType->SelectedIndex);
+	CCMacro->Toggle(cbCCTimed->Checked);
 }
 void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	nudCCAttacks->Enabled = !CCAttacksCheckBox->Checked;
+	nudCCAttacks->Enabled = !cbCCAttacks->Checked;
 }
 
 //General Trainer events
@@ -397,7 +397,7 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	//Loading of all the settings and innitializing th classes
 	CC = gcnew ChangeChannel::CChangeChannel;
 	CMS = gcnew CMapleStory;
-	CSPControl = gcnew SPControl;
+	SPControl = gcnew CSPControl;
 	CPacket = gcnew CPackets;
 	LoadSettings();
 
@@ -437,30 +437,30 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 }
 void MainForm::AutoPot()
 {
-	if(HPCheckBox->Checked)
+	if(cbAutoHP->Checked)
 	{
-		if(CMS->CharHP <= (int) nudHPValue->Value)
+		if(CMS->CharHP <= (int) nudAutoHP->Value)
 		{
-			int HPKey = KeyCodes[HPComboBox->SelectedIndex];
+			int HPKey = KeyCodes[ddbAutoHPKey->SelectedIndex];
 			PostMessage(CMS->MSHWND, WM_KEYDOWN, HPKey, (MapVirtualKey(HPKey, 0) << 16) + 1);
 		}
 	}
-	if(MPCheckBox->Checked)
+	if(cbAutoMP->Checked)
 	{
-		if(CMS->CharMP <= (int) nudMPValue->Value)
+		if(CMS->CharMP <= (int) nudAutoMP->Value)
 		{
-			int MPKey = KeyCodes[HPComboBox->SelectedIndex];
+			int MPKey = KeyCodes[ddbAutoMPKey->SelectedIndex];
 			PostMessage(CMS->MSHWND, WM_KEYDOWN, MPKey, (MapVirtualKey(MPKey, 0) << 16) + 1);
 		}
 	}
 }
 void MainForm::AutoCC()
 {
-	if(CCPeopleCheckBox->Checked && (CMS->PeopleCount >= (int) nudCCPeople->Value))
-		CC->CCSwitch(ChangeChannel::CChangeChannel::CCType(PeopleComboBox->SelectedIndex));
+	if(cbCCPeople->Checked && (CMS->PeopleCount >= (int) nudCCPeople->Value))
+		CC->CCSwitch(ChangeChannel::CChangeChannel::CCType(ddbPeopleType->SelectedIndex));
 	
-	if(CCAttacksCheckBox->Checked && (CMS->AttackCount >= (int) nudCCAttacks->Value))
-		CC->CCSwitch(ChangeChannel::CChangeChannel::CCType(AttacksComboBox->SelectedIndex));
+	if(cbCCAttacks->Checked && (CMS->AttackCount >= (int) nudCCAttacks->Value))
+		CC->CCSwitch(ChangeChannel::CChangeChannel::CCType(ddbAttacksType->SelectedIndex));
 }
 void MainForm::RedrawStatBars()
 {
@@ -490,7 +490,7 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 {
 	macroMan.ClearMacros();
 	macroMan.Stop();
-	CSPControl->Save();
+	SPControl->Save();
 	CPacket->Save();
 	SaveSettings();
 
@@ -514,7 +514,7 @@ void MainForm::SendPacketButton_Click(System::Object^  sender, System::EventArgs
 }
 void MainForm::AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	CPacket->Add(this->AddPacketNameTextBox->Text, this->AddPacketPacketTextBox->Text);
+	CPacket->Add(tbAddPacketName->Text, tbAddPacketData->Text);
 	RefreshComboBoxes();
 	ShowInfo("Packet was added!");
 }
@@ -524,31 +524,32 @@ void MainForm::DeletePacketButton_Click(System::Object^  sender, System::EventAr
 	switch(MessageBox::Show("Are you sure you want to delete this packet?", "Please Confirm", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
 	{
 	case ::DialogResult::Yes:
-		CPacket->Delete(DeletePacketComboBox->SelectedIndex);
-		ShowInfo("Packet was deleted succesfully!");
+		CPacket->Delete(ddbDeletePacket->SelectedIndex);
 		CPacket->Save();
 		RefreshComboBoxes();
+		ShowInfo("Packet was deleted succesfully!");
 		break;
 	}	
 }
 void MainForm::SelectPacketForEditingComboBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	if(SelectPacketForEditingComboBox->SelectedIndex >= 0)
+	if(ddbEditPacket->SelectedIndex >= 0)
 	{
-		CPacketData^ p = CPacket->Packets[SelectPacketForEditingComboBox->SelectedIndex];
-		this->EditPacketNameTextBox->Text = p->Name;
-		this->EditPacketPacketTextBox->Text = p->Data;
+		CPacketData^ p = CPacket->Packets[ddbEditPacket->SelectedIndex];
+		this->tbEditPacketName->Text = p->Name;
+		this->tbEditPacketData->Text = p->Data;
 	}
 }
 void MainForm::SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	CPacket->Edit(SelectPacketForEditingComboBox->SelectedIndex, EditPacketNameTextBox->Text, EditPacketPacketTextBox->Text);
+	CPacket->Edit(ddbEditPacket->SelectedIndex, tbEditPacketName->Text, tbEditPacketData->Text);
 	CPacket->Save();
 	RefreshComboBoxes();
 }
 void MainForm::SpamsPacketButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	if(nudSpamDelay->Value != 0 && nudSpamAmount->Value != 0) CPacket->StartSpamming((int) nudSpamAmount->Value, (int) nudSpamDelay->Value);	
+	if(nudSpamDelay->Value != 0 && nudSpamAmount->Value != 0)
+		CPacket->StartSpamming((int) nudSpamAmount->Value, (int) nudSpamDelay->Value);	
 }
 void MainForm::bStopSpamming_Click(System::Object^  sender, System::EventArgs^  e)
 {
@@ -556,49 +557,49 @@ void MainForm::bStopSpamming_Click(System::Object^  sender, System::EventArgs^  
 }
 void MainForm::PacketSelectBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	CPacket->SelectedPacket = CPacket->Packets[PacketSelectBox->SelectedIndex];
+	CPacket->SelectedPacket = CPacket->Packets[ddbSelectedPacket->SelectedIndex];
 }
 void MainForm::RefreshComboBoxes()
 {	
 	//clear old packets
-	this->AddPacketNameTextBox->Text = String::Empty;
-	this->AddPacketPacketTextBox->Text = String::Empty;
-	this->PacketSelectBox->Items->Clear();
-	this->SelectPacketForEditingComboBox->Items->Clear();
-	this->DeletePacketComboBox->Items->Clear();
+	this->tbAddPacketName->Text = String::Empty;
+	this->tbAddPacketData->Text = String::Empty;
+	this->ddbSelectedPacket->Items->Clear();
+	this->ddbEditPacket->Items->Clear();
+	this->ddbDeletePacket->Items->Clear();
 
 	//refresh comboboxes
 	for each(CPacketData^ p in CPacket->Packets) 
 	{
 		String^ PacketName = p->Name;
-		this->PacketSelectBox->Items->Add(PacketName);
-		this->SelectPacketForEditingComboBox->Items->Add(PacketName);
-		this->DeletePacketComboBox->Items->Add(PacketName);
+		this->ddbSelectedPacket->Items->Add(PacketName);
+		this->ddbEditPacket->Items->Add(PacketName);
+		this->ddbDeletePacket->Items->Add(PacketName);
 	}	
 }
 void MainForm::AutoSkill1ComboBox_DropDown(System::Object^  sender, System::EventArgs^  e)
 {
-	this->AutoSkill1ComboBox->Items->Clear();
-	this->AutoSkill1ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-	for each(CPacketData^ p in CPacket->Packets) this->AutoSkill1ComboBox->Items->Add(p->Name);
+	this->ddbAutoSkill1Key->Items->Clear();
+	this->ddbAutoSkill1Key->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+	for each(CPacketData^ p in CPacket->Packets) this->ddbAutoSkill1Key->Items->Add(p->Name);
 }
 void MainForm::AutoSkill2ComboBox_DropDown(System::Object^  sender, System::EventArgs^  e)
 {
-	this->AutoSkill2ComboBox->Items->Clear();
-	this->AutoSkill2ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-	for each(CPacketData^ p in CPacket->Packets) this->AutoSkill2ComboBox->Items->Add(p->Name);
+	this->ddbAutoSkill2Key->Items->Clear();
+	this->ddbAutoSkill2Key->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+	for each(CPacketData^ p in CPacket->Packets) this->ddbAutoSkill2Key->Items->Add(p->Name);
 }
 void MainForm::AutoSkill3ComboBox_DropDown(System::Object^  sender, System::EventArgs^  e)
 {
-	this->AutoSkill3ComboBox->Items->Clear();
-	this->AutoSkill3ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-	for each(CPacketData^ p in CPacket->Packets) this->AutoSkill3ComboBox->Items->Add(p->Name);
+	this->ddbAutoSkill3Key->Items->Clear();
+	this->ddbAutoSkill3Key->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+	for each(CPacketData^ p in CPacket->Packets) this->ddbAutoSkill3Key->Items->Add(p->Name);
 }
 void MainForm::AutoSkill4ComboBox_DropDown(System::Object^  sender, System::EventArgs^  e)
 {
-	this->AutoSkill3ComboBox->Items->Clear();
-	this->AutoSkill3ComboBox->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-	for each(CPacketData^ p in CPacket->Packets) this->AutoSkill3ComboBox->Items->Add(p->Name);
+	this->ddbAutoSkill4Key->Items->Clear();
+	this->ddbAutoSkill4Key->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+	for each(CPacketData^ p in CPacket->Packets) this->ddbAutoSkill4Key->Items->Add(p->Name);
 }
 
 //controls on SPControl Tab
@@ -608,30 +609,24 @@ void MainForm::cbSPControl_CheckedChanged(System::Object^  sender, System::Event
 }
 void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	String^ name = SPControlNameTextBox->Text;
+	String^ name = tbSPCName->Text;
 	int mapid = (int) nudSPCMapId->Value;
 	int x = (int) nudSPCX->Value;
 	int y = (int) nudSPCY->Value;
-	if(name == "" || !mapid || !x || !y)
-	{
-		ShowWarning("You forgot to fill in a textbox...");
-		return;
-	}
 
-	CSPControl->AddLocation(name, mapid, x, y);
+	SPControl->AddLocation(name, mapid, x, y);
 	RefreshSPControlListView();
 }
 void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	SPControlListView->SelectedItems;
-	ListViewItem^ L = this->SPControlListView->SelectedItems[0];
-	if(SPControlListView->SelectedItems->Count > 0)
+	ListViewItem^ L = lvSPControl->SelectedItems[0];
+	if(lvSPControl->SelectedItems->Count > 0)
 	{
 		switch(MessageBox::Show("Are you sure you want to delete this location?", "Please Confirm", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
 		{
 		case ::DialogResult::Yes:
-			CSPControl->Locations->RemoveAt(SPControlListView->Items->IndexOf(L));
-			CSPControl->Save();
+			SPControl->Locations->RemoveAt(lvSPControl->Items->IndexOf(L));
+			SPControl->Save();
 			RefreshSPControlListView();
 			break;
 		}
@@ -650,18 +645,18 @@ void MainForm::GetSPControlCoordsButton_Click(System::Object^  sender, System::E
 }
 void MainForm::RefreshSPControlListView()
 {
-	SPControlListView->Items->Clear();
-	this->SPControlNameTextBox->Clear();
+	lvSPControl->Items->Clear();
+	this->tbSPCName->Clear();
 	this->nudSPCMapId->ResetText();
 	this->nudSPCX->ResetText();
 	this->nudSPCY->ResetText();
-	for each(SPControlLocation^ SP in CSPControl->Locations)
+	for each(CSPControlLocation^ SP in SPControl->Locations)
 	{
 		ListViewItem^ item = gcnew ListViewItem(SP->Name);
 		item->SubItems->Add(SP->MapId.ToString());
 		item->SubItems->Add(SP->X.ToString());
 		item->SubItems->Add(SP->Y.ToString());
-		SPControlListView->Items->Add(item);
+		lvSPControl->Items->Add(item);
 	}
 }
 
@@ -700,98 +695,100 @@ Void MainForm::LoadSettings()
 	if(Settings == nullptr) Settings = gcnew List<SettingsEntry^>;
 	else if(Settings->Count >= 36)
 	{
+		try{
 		//AutoAttack
-		nudAttackDelay->Value = (Decimal)			Settings[0]->Value;
-		nudSAWSIL->Value = (Decimal)				Settings[1]->Value;
-		AttackComboBox->SelectedIndex = (int)		Settings[2]->Value;
+		nudAutoAttack->Value = (Decimal)			Settings[AutoAttackDelay]->Value;
+		nudSAWSIL->Value = (Decimal)				Settings[SAWSIL]->Value;
+		ddbAutoAttackKey->SelectedIndex = (int)		Settings[AutoAttackKey]->Value;
 		//AutoLoot
-		nudLootDelay->Value = (Decimal)				Settings[3]->Value;
-		nudSLWIB->Value = (Decimal)					Settings[4]->Value;
-		LootComboBox->SelectedIndex = (int)			Settings[5]->Value;
+		nudAutoLoot->Value = (Decimal)				Settings[AutoLootDelay]->Value;
+		nudSLWIB->Value = (Decimal)					Settings[SLWIB]->Value;
+		ddbAutoLootKey->SelectedIndex = (int)		Settings[AutoLootKey]->Value;
 		//AutoHP
-		nudHPValue->Value = (Decimal)				Settings[6]->Value;
-		HPComboBox->SelectedIndex = (int)			Settings[7]->Value;
+		nudAutoHP->Value = (Decimal)				Settings[AutoHPValue]->Value;
+		ddbAutoHPKey->SelectedIndex = (int)			Settings[AutoHPKey]->Value;
 		//AutoMP
-		nudMPValue->Value = (Decimal)				Settings[8]->Value;
-		MPComboBox->SelectedIndex = (int)			Settings[9]->Value;
+		nudAutoMP->Value = (Decimal)				Settings[AutoMPValue]->Value;
+		ddbAutoMPKey->SelectedIndex = (int)			Settings[AutoMPKey]->Value;
 		//AutoSkill 1
-		nudSkill1Value->Value = (Decimal)			Settings[10]->Value;
-		AutoSkill1ComboBox->SelectedIndex = (int)	Settings[11]->Value;
+		nudAutoSkill1->Value = (Decimal)			Settings[AutoSkill1]->Value;
+		ddbAutoSkill1Key->SelectedIndex = (int)		Settings[AutoSkill1Key]->Value;
 		//AutoSkill 2
-		nudSkill2Value->Value = (Decimal)			Settings[12]->Value;
-		AutoSkill2ComboBox->SelectedIndex = (int)	Settings[13]->Value;
+		nudAutoSkill2->Value = (Decimal)			Settings[AutoSkill2]->Value;
+		ddbAutoSkill2Key->SelectedIndex = (int)		Settings[AutoSkill2Key]->Value;
 		//AutoSkill 3
-		nudSkill3Value->Value = (Decimal)			Settings[14]->Value;
-		AutoSkill3ComboBox->SelectedIndex = (int)	Settings[15]->Value;
+		nudAutoSkill3->Value = (Decimal)			Settings[AutoSkill3]->Value;
+		ddbAutoSkill3Key->SelectedIndex = (int)		Settings[AutoSkill3Key]->Value;
 		//AutoSkill 4
-		nudSkill4Value->Value = (Decimal)			Settings[16]->Value;
-		AutoSkill4ComboBox->SelectedIndex = (int)	Settings[17]->Value;
+		nudAutoSkill4->Value = (Decimal)			Settings[AutoSkill4]->Value;
+		ddbAutoSkill4Key->SelectedIndex = (int)		Settings[AutoSkill4Key]->Value;
 		//CC People
-		nudCCPeople->Value = (Decimal)				Settings[18]->Value;
-		PeopleComboBox->SelectedIndex = (int)		Settings[19]->Value;
+		nudCCPeople->Value = (Decimal)				Settings[CCPeople]->Value;
+		ddbPeopleType->SelectedIndex = (int)		Settings[CCPeopleType]->Value;
 		//CC Timed
-		nudCCTimed->Value = (Decimal)				Settings[20]->Value;
-		TimedComboBox->SelectedIndex = (int)		Settings[21]->Value;
+		nudCCTimed->Value = (Decimal)				Settings[CCTimed]->Value;
+		ddbTimedType->SelectedIndex = (int)			Settings[CCTimedType]->Value;
 		//CC Attacks
-		nudCCAttacks->Value = (Decimal)				Settings[22]->Value;
-		AttacksComboBox->SelectedIndex = (int)		Settings[23]->Value;
+		nudCCAttacks->Value = (Decimal)				Settings[CCAttacks]->Value;
+		ddbAttacksType->SelectedIndex = (int)		Settings[CCAttacksType]->Value;
 		//HotKeys
-		ddbHotKeyAttack->SelectedIndex = (int)		Settings[24]->Value;
-		ddbHotKeyLoot->SelectedIndex = (int)		Settings[25]->Value;
-		ddbHotKeyFMA->SelectedIndex = (int)			Settings[26]->Value;
-		ddbHotKeyCCPeople->SelectedIndex = (int)	Settings[27]->Value;
-		ddbHotKeySendPacket->SelectedIndex = (int)	Settings[28]->Value;
+		ddbHotKeyAttack->SelectedIndex = (int)		Settings[HotKeyAttack]->Value;
+		ddbHotKeyLoot->SelectedIndex = (int)		Settings[HotKeyLoot]->Value;
+		ddbHotKeyFMA->SelectedIndex = (int)			Settings[HotKeyFMA]->Value;
+		ddbHotKeyCCPeople->SelectedIndex = (int)	Settings[HotKeyCCPeople]->Value;
+		ddbHotKeySendPacket->SelectedIndex = (int)	Settings[HotKeySendPacket]->Value;
 		//PacketSender
-		PacketSelectBox->SelectedIndex = (int)		Settings[29]->Value;
-		nudSpamAmount->Value = (Decimal)			Settings[30]->Value;
-		nudSpamDelay->Value = (Decimal)				Settings[31]->Value;
+		ddbSelectedPacket->SelectedIndex = (int)	Settings[SelectedPacket]->Value;
+		nudSpamAmount->Value = (Decimal)			Settings[PacketSpamAmount]->Value;
+		nudSpamDelay->Value = (Decimal)				Settings[PacketSpamDelay]->Value;
 		//Hacks Tab
-		nudPVPDelay->Value = (Decimal)				Settings[32]->Value;
-		ddbPVPSkills->SelectedIndex = (int)			Settings[33]->Value;
-		nudIceGuard->Value = (Decimal)				Settings[34]->Value;
+		nudSkillInjection->Value = (Decimal)		Settings[SkillInjectionDelay]->Value;
+		ddbSkillInjection->SelectedIndex = (int)	Settings[SkillInjectionIndex]->Value;
+		nudIceGuard->Value = (Decimal)				Settings[IceGuard]->Value;
 
-		cbPinTyper->Checked = (bool)				Settings[35]->Value;
-		cbLogoSkipper->Checked = (bool)				Settings[36]->Value;
+		cbPinTyper->Checked = (bool)				Settings[PinTyper]->Value;
+		cbLogoSkipper->Checked = (bool)				Settings[LogoSkipper]->Value;
+		}catch(...){}
 	}
 }
 Void MainForm::ReloadSettings()
 {
-		List<SettingsEntry^>^ m = gcnew List<SettingsEntry^>;
+		List<SettingsEntry^>^ m = gcnew List<SettingsEntry^>(SettingCount);
 		//AutoAttack
-		m->Add(gcnew SettingsEntry(nudAttackDelay));
+		m->Add(gcnew SettingsEntry(nudAutoAttack));
 		m->Add(gcnew SettingsEntry(nudSAWSIL));
-		m->Add(gcnew SettingsEntry(AttackComboBox));
+		m->Add(gcnew SettingsEntry(ddbAutoAttackKey));
 		//AutoLoot
-		m->Add(gcnew SettingsEntry(nudLootDelay));
+		m->Add(gcnew SettingsEntry(nudAutoLoot));
 		m->Add(gcnew SettingsEntry(nudSLWIB));
-		m->Add(gcnew SettingsEntry(LootComboBox));
+		m->Add(gcnew SettingsEntry(ddbAutoLootKey));
 		//AutoHP
-		m->Add(gcnew SettingsEntry(nudHPValue));
-		m->Add(gcnew SettingsEntry(HPComboBox));
+		m->Add(gcnew SettingsEntry(nudAutoHP));
+		m->Add(gcnew SettingsEntry(ddbAutoHPKey));
 		//AutoMP
-		m->Add(gcnew SettingsEntry(nudMPValue));
-		m->Add(gcnew SettingsEntry(MPComboBox));
+		m->Add(gcnew SettingsEntry(nudAutoMP));
+		m->Add(gcnew SettingsEntry(ddbAutoMPKey));
 		//AutoSkill 1
-		m->Add(gcnew SettingsEntry(nudSkill1Value));
-		m->Add(gcnew SettingsEntry(AutoSkill1ComboBox));
+		m->Add(gcnew SettingsEntry(nudAutoSkill1));
+		m->Add(gcnew SettingsEntry(ddbAutoSkill1Key));
 		//AutoSkill 2
-		m->Add(gcnew SettingsEntry(nudSkill2Value));
-		m->Add(gcnew SettingsEntry(AutoSkill2ComboBox));
+		m->Add(gcnew SettingsEntry(nudAutoSkill2));
+		m->Add(gcnew SettingsEntry(ddbAutoSkill2Key));
 		//AutoSkill 3
-		m->Add(gcnew SettingsEntry(nudSkill3Value));
-		m->Add(gcnew SettingsEntry(AutoSkill3ComboBox));
+		m->Add(gcnew SettingsEntry(nudAutoSkill3));
+		m->Add(gcnew SettingsEntry(ddbAutoSkill3Key));
 		//AutoSkill 4
-		m->Add(gcnew SettingsEntry(nudSkill4Value));
-		m->Add(gcnew SettingsEntry(AutoSkill4ComboBox));
+		m->Add(gcnew SettingsEntry(nudAutoSkill4));
+		m->Add(gcnew SettingsEntry(ddbAutoSkill4Key));
 		//CC People
 		m->Add(gcnew SettingsEntry(nudCCPeople));
-		m->Add(gcnew SettingsEntry(PeopleComboBox));
+		m->Add(gcnew SettingsEntry(ddbPeopleType));
 		//CC Timed
 		m->Add(gcnew SettingsEntry(nudCCTimed));
-		m->Add(gcnew SettingsEntry(TimedComboBox));
+		m->Add(gcnew SettingsEntry(ddbTimedType));
 		//CC Attacks
 		m->Add(gcnew SettingsEntry(nudCCAttacks));
-		m->Add(gcnew SettingsEntry(AttacksComboBox));
+		m->Add(gcnew SettingsEntry(ddbAttacksType));
 		//HotKeys
 		m->Add(gcnew SettingsEntry(ddbHotKeyAttack));
 		m->Add(gcnew SettingsEntry(ddbHotKeyLoot));
@@ -799,12 +796,12 @@ Void MainForm::ReloadSettings()
 		m->Add(gcnew SettingsEntry(ddbHotKeyCCPeople));
 		m->Add(gcnew SettingsEntry(ddbHotKeySendPacket));
 		//PacketSender
-		m->Add(gcnew SettingsEntry(PacketSelectBox));
+		m->Add(gcnew SettingsEntry(ddbSelectedPacket));
 		m->Add(gcnew SettingsEntry(nudSpamAmount));
 		m->Add(gcnew SettingsEntry(nudSpamDelay));
 		//Hacks Tab
-		m->Add(gcnew SettingsEntry(nudPVPDelay));
-		m->Add(gcnew SettingsEntry(ddbPVPSkills));
+		m->Add(gcnew SettingsEntry(nudSkillInjection));
+		m->Add(gcnew SettingsEntry(ddbSkillInjection));
 		m->Add(gcnew SettingsEntry(nudIceGuard));
 		
 		m->Add(gcnew SettingsEntry(cbPinTyper));
@@ -814,7 +811,7 @@ Void MainForm::ReloadSettings()
 Void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	SaveSettings();
-	CSPControl->Save();
+	SPControl->Save();
 	CPacket->Save();
 }
 
@@ -825,7 +822,7 @@ void MainForm::HotKeys()
 	{
 		if(GetAsyncKeyState(KeyCodes[ddbHotKeyAttack->SelectedIndex]))
 		{
-			this->AttackCheckBox->Checked = !this->AttackCheckBox->Checked;
+			this->cbAutoAttack->Checked = !this->cbAutoAttack->Checked;
 			Sleep(250);
 		}
 	}
@@ -833,7 +830,7 @@ void MainForm::HotKeys()
 	{
 		if(GetAsyncKeyState(KeyCodes[ddbHotKeyLoot->SelectedIndex]))
 		{
-			this->LootCheckBox->Checked = !this->LootCheckBox->Checked;
+			this->cbAutoLoot->Checked = !this->cbAutoLoot->Checked;
 			Sleep(250);
 		}
 	}
@@ -849,7 +846,7 @@ void MainForm::HotKeys()
 	{
 		if(GetAsyncKeyState(KeyCodes[ddbHotKeyCCPeople->SelectedIndex]))
 		{
-			this->CCPeopleCheckBox->Checked = !this->CCPeopleCheckBox->Checked;
+			this->cbCCPeople->Checked = !this->cbCCPeople->Checked;
 			Sleep(250);
 		}
 	}
