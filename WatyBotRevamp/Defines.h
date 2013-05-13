@@ -29,7 +29,7 @@ namespace AutoBotVars
 	int iSlwib;
 }
 
-static int TabHeight[] = {431, 461, 215, 431, 431};
+static int TabHeight[] = {431, 461, 386, 431, 266};
 
 enum SettingsIndex{
 	AutoAttackDelay, SAWSIL, AutoAttackKey, AutoLootDelay, SLWIB, AutoLootKey, AutoHPValue, AutoHPKey, AutoMPValue, AutoMPKey, AutoSkill1, AutoSkill1Key, AutoSkill2, AutoSkill2Key,
