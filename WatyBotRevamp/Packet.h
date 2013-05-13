@@ -8,7 +8,6 @@ using namespace System::Xml::Serialization;
 #define	LeaveCashShop "3E 00"
 #define ChangeCharacter "2C 01 01 00 **"
 
-
 namespace Packets
 {
 #define PacketFileName (Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData) + "\\Waty\\WatyBotPackets.xml")
@@ -61,6 +60,7 @@ namespace Packets
 		void Save();
 
 	private:
+		property XmlSerializer^ s;
 		bool isGoodPacket(String^ strPacket, String^&strError);
 		Windows::Forms::Timer^ timer;
 		void timer_tick(System::Object^  sender, System::EventArgs^  e);

@@ -12,18 +12,6 @@ DWORD dwMSSendMethod = SendAddy;// + 5;
 DWORD dwMSSendObject = *(PDWORD)(SendClassAddy+2);
 DWORD dwMSSendRetVal = SendAddy - 13;
 
-void CPackets::Save()
-{
-	TextWriter^ writer = gcnew StreamWriter(PacketFileName);
-	try
-	{
-		XmlSerializer^ serializer = gcnew XmlSerializer(List<CPacketData^>::typeid);
-		serializer->Serialize(writer, Packets);
-	}
-	catch(System::Exception^){}
-	writer->Close();
-}
-
 CPacketData::CPacketData(String^ Name, String^ Data)
 {
 	this->Name = Name;
@@ -33,24 +21,33 @@ CPacketData::CPacketData(String^ Name, String^ Data)
 CPackets::CPackets()
 {
 	timer = gcnew Windows::Forms::Timer;
-	
-	if(File::Exists(PacketFileName))
+
+	if(!File::Exists(PacketFileName))
 	{
-		TextReader^ reader = gcnew StreamReader(PacketFileName);
-		try
-		{
-			auto serializer = gcnew XmlSerializer(List<CPacketData^>::typeid);
-			Packets = safe_cast<List<CPacketData^>^>(serializer->Deserialize(reader));
-			reader->Close();
-			return;
-		}
-		catch(System::Exception^)
-		{
-			reader->Close();
-			File::Delete(PacketFileName);
-		}
+		auto stream = File::Create(PacketFileName);
+		stream->Close();
 	}
-	Packets = gcnew List<CPacketData^>;
+	
+	TextReader^ reader = gcnew StreamReader(PacketFileName);
+	s = gcnew XmlSerializer(List<CPacketData^>::typeid);
+	try
+	{
+		Packets = safe_cast<List<CPacketData^>^>(s->Deserialize(reader));
+	}
+	catch(System::Exception^){}	
+	reader->Close();
+	if(Packets == nullptr) Packets = gcnew List<CPacketData^>;
+}
+
+void CPackets::Save()
+{
+	TextWriter^ writer = gcnew StreamWriter(PacketFileName);
+	try
+	{
+		s->Serialize(writer, Packets);
+	}
+	catch(System::Exception^){}
+	writer->Close();
 }
 
 void CPackets::Add(String^ name, String^ data)
