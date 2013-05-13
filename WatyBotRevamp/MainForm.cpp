@@ -685,18 +685,21 @@ Void MainForm::LoadSettings()
 {
 	if(!File::Exists(SettingsFileName))
 	{
-		ReloadSettings();
-		return;
+		auto stream = File::Create(SettingsFileName);
+		stream->Close();
 	}
 
-	TextReader^ reader;
+	TextReader^ reader = gcnew StreamReader(SettingsFileName);
+	s = gcnew XmlSerializer(List<SettingsEntry^>::typeid);
 	try
 	{
-		reader = gcnew StreamReader(SettingsFileName);
-		XmlSerializer^ serializer = gcnew XmlSerializer(List<SettingsEntry^>::typeid);
-		Settings = safe_cast<List<SettingsEntry^>^>(serializer->Deserialize(reader));
-		reader->Close();
-		
+		Settings = safe_cast<List<SettingsEntry^>^>(s->Deserialize(reader));
+	}
+	catch(System::Exception^){}	
+	reader->Close();
+	if(Settings == nullptr) Settings = gcnew List<SettingsEntry^>;
+	else if(Settings->Count >= 36)
+	{
 		//AutoAttack
 		nudAttackDelay->Value = (Decimal)			Settings[0]->Value;
 		nudSAWSIL->Value = (Decimal)				Settings[1]->Value;
@@ -746,16 +749,9 @@ Void MainForm::LoadSettings()
 		nudPVPDelay->Value = (Decimal)				Settings[32]->Value;
 		ddbPVPSkills->SelectedIndex = (int)			Settings[33]->Value;
 		nudIceGuard->Value = (Decimal)				Settings[34]->Value;
-		
+
 		cbPinTyper->Checked = (bool)				Settings[35]->Value;
 		cbLogoSkipper->Checked = (bool)				Settings[36]->Value;
-		return;
-	}
-	catch(System::Exception^)
-	{
-		reader->Close();
-		ReloadSettings();
-		return;
 	}
 }
 Void MainForm::ReloadSettings()
@@ -815,7 +811,7 @@ Void MainForm::ReloadSettings()
 		m->Add(gcnew SettingsEntry(cbLogoSkipper));
 		Settings = m;
 }
-void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e)
+Void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	SaveSettings();
 	CSPControl->Save();

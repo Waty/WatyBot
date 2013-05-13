@@ -2366,6 +2366,7 @@ private:
 #pragma endregion
 #pragma region custom voids
 private: List<Settings::SettingsEntry^>^ Settings;
+private: property XmlSerializer^ s;
 private: System::Void LoadSettings();
 private: System::Void SaveSettings();
 private: System::Void ReloadSettings();
