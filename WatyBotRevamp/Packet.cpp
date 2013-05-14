@@ -1,12 +1,10 @@
 #include "Packet.h"
 #include "Pointers.h" // where i store stuff like SendAddy and SendClassAddy
-
 using namespace Packets;
 using namespace System::IO;
 using namespace System::Windows::Forms;
-
-#define ShowInfo(Message)		MessageBox::Show(Message, "Information", MessageBoxButtons::OK, MessageBoxIcon::Information)
-#define ShowError(Message)		MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
+#define PacketFileName (Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData) + "\\Waty\\WatyBotPackets.xml")
+#define ShowError(Message) MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
 
 DWORD dwMSSendMethod = SendAddy;// + 5;
 DWORD dwMSSendObject = *(PDWORD)(SendClassAddy+2);
@@ -169,7 +167,7 @@ bool CPackets::Send(CPacketData^ packet)
 	String^ strError = String::Empty;
 	bool succes = Send(packet->Data, strError);
 	if(!succes)
-		ShowError(strError);	
+		ShowError(strError);
 	return succes;
 }
 

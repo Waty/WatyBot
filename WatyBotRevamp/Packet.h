@@ -10,7 +10,6 @@ using namespace System::Xml::Serialization;
 
 namespace Packets
 {
-#define PacketFileName (Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData) + "\\Waty\\WatyBotPackets.xml")
 
 	struct COutPacket
 	{

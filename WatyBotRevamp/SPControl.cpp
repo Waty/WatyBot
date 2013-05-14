@@ -7,6 +7,7 @@
 using namespace SpawnControl;
 using namespace System::IO;
 using namespace System::Windows::Forms;
+#define SPControlFileName (System::Environment::GetFolderPath(System::Environment::SpecialFolder::ApplicationData) + "\\Waty\\WatyBotSPControl.xml")
 
 CSPControlLocation::CSPControlLocation()
 {

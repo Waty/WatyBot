@@ -2,7 +2,6 @@
 
 namespace SpawnControl
 {
-#define SPControlFileName (System::Environment::GetFolderPath(System::Environment::SpecialFolder::ApplicationData) + "\\Waty\\WatyBotSPControl.xml")
 	using namespace System;
 	using namespace System::Collections::Generic;
 	using namespace System::Xml::Serialization;
