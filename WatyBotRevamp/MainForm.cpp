@@ -733,6 +733,7 @@ Void MainForm::LoadSettings()
 		ddbSkillInjection->SelectedIndex = (int)	Settings[SkillInjectionIndex]->Value;
 		nudIceGuard->Value = (Decimal)				Settings[IceGuard]->Value;
 
+		Sleep(2500);
 		cbPinTyper->Checked = (bool)				Settings[PinTyper]->Value;
 		cbLogoSkipper->Checked = (bool)				Settings[LogoSkipper]->Value;
 		}catch(...){}
