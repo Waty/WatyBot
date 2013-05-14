@@ -397,4 +397,3 @@ namespace Hacks
 	EndCodeCave
 	CMemory cmExitCS(ExitCSAddy, CaveExitCS, 2, true);
 }
-

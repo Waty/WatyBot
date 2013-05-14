@@ -54,4 +54,3 @@ private:
 	void WriteMem();
 	void RestoreMem();
 };
-

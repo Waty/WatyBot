@@ -72,5 +72,4 @@ namespace Macro
 		unsigned int m_uCoolDown;
 		StopWatch<milliseconds> m_stopWatch;
 	};
-
 }
