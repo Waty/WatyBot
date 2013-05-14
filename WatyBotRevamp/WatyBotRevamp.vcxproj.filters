@@ -45,9 +45,6 @@
     <ClCompile Include="MainDll.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MacroManager\MacroManager.cpp">
-      <Filter>Classes\MacroManager</Filter>
-    </ClCompile>
     <ClCompile Include="Packet.cpp">
       <Filter>Classes\Packets</Filter>
     </ClCompile>
@@ -62,6 +59,9 @@
     </ClCompile>
     <ClCompile Include="MapleStory.cpp">
       <Filter>Classes\CMapleStory</Filter>
+    </ClCompile>
+    <ClCompile Include="MacroManager.cpp">
+      <Filter>Classes\MacroManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -79,27 +79,6 @@
     </ClInclude>
     <ClInclude Include="HackAddys.h">
       <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MacroManager\BotMacro.h">
-      <Filter>Classes\MacroManager</Filter>
-    </ClInclude>
-    <ClInclude Include="MacroManager\FunctionalMacro.h">
-      <Filter>Classes\MacroManager</Filter>
-    </ClInclude>
-    <ClInclude Include="MacroManager\Lock.h">
-      <Filter>Classes\MacroManager</Filter>
-    </ClInclude>
-    <ClInclude Include="MacroManager\MacroManager.h">
-      <Filter>Classes\MacroManager</Filter>
-    </ClInclude>
-    <ClInclude Include="MacroManager\noncopyable.h">
-      <Filter>Classes\MacroManager</Filter>
-    </ClInclude>
-    <ClInclude Include="MacroManager\SkillMacro.h">
-      <Filter>Classes\MacroManager</Filter>
-    </ClInclude>
-    <ClInclude Include="MacroManager\StopWatch.h">
-      <Filter>Classes\MacroManager</Filter>
     </ClInclude>
     <ClInclude Include="Packet.h">
       <Filter>Classes\Packets</Filter>
@@ -121,6 +100,27 @@
     </ClInclude>
     <ClInclude Include="Settings.h">
       <Filter>Classes\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="BotMacro.h">
+      <Filter>Classes\MacroManager</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionalMacro.h">
+      <Filter>Classes\MacroManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Lock.h">
+      <Filter>Classes\MacroManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroManager.h">
+      <Filter>Classes\MacroManager</Filter>
+    </ClInclude>
+    <ClInclude Include="noncopyable.h">
+      <Filter>Classes\MacroManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillMacro.h">
+      <Filter>Classes\MacroManager</Filter>
+    </ClInclude>
+    <ClInclude Include="StopWatch.h">
+      <Filter>Classes\MacroManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

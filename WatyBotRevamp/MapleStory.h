@@ -144,6 +144,8 @@ public:
 	}
 
 	bool WritePointer(unsigned long ulBase, int iOffset, int iValue);
+	void SendKey(int Key);
+	void SpamKey(int Key);
 
 private:
 	unsigned long ReadPointer(unsigned long ulBase, int iOffset);

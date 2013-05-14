@@ -10,9 +10,9 @@
 #include "SPControl.h"
 #include "Hacks.h"
 #include "MapleStory.h"
-#include "MacroManager/FunctionalMacro.h"
-#include "MacroManager/BotMacro.h"
-#include "MacroManager/SkillMacro.h"
+#include "FunctionalMacro.h"
+#include "BotMacro.h"
+#include "SkillMacro.h"
 #include "Settings.h"
 using namespace Settings;
 using namespace WatyBotRevamp;
@@ -21,6 +21,7 @@ using namespace System::IO;
 using namespace std;
 using namespace Packets;
 using namespace SpawnControl;
+using namespace ChangeChannel;
 
 #define WatyBotWorkingDirectory Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData) + "\\Waty\\"
 #define SettingsFileName (WatyBotWorkingDirectory + "WatyBotSettings.xml")
@@ -36,7 +37,7 @@ Macro::SkillMacro* Skill4Macro;
 StopWatch<milliseconds> PvPStopWatch;
 
 gcroot<CMapleStory^> CMS;
-gcroot<ChangeChannel::CChangeChannel^> CC;
+gcroot<CChangeChannel^> CC;
 gcroot<CPackets^> CPacket;
 gcroot<CSPControl^> SPControl;
 
@@ -232,11 +233,6 @@ void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::
 //Macro's
 Macro::MacroManager macroMan;
 enum MacroIndex{eAttack, eLoot, eCC, eAutoSkill1, eAutoSkill2, eAutoSkill3, eAutoSkill4};
-void SpamKey(int KeyCode)
-{
-	PostMessage(CMS->MSHWND, WM_KEYDOWN, KeyCode, (MapVirtualKey(KeyCode, 0) << 16) + 1);
-	PostMessage(CMS->MSHWND, WM_KEYUP, KeyCode, (MapVirtualKey(KeyCode, 0) << 16) + 1);
-}
 bool canAttack()
 {
 	if(CC->Busy) return false;
@@ -265,7 +261,7 @@ void AutoSkill(int KeyCodeIndex)
 		while(CC->Busy || UsingAutoSkill) Sleep(500);
 		UsingAutoSkill = true;
 		Sleep(500);
-		SendKey(KeyCodes[KeyCodeIndex]);
+		CMS->SendKey(KeyCodes[KeyCodeIndex]);
 		Sleep(500);
 		UsingAutoSkill = false;		
 	}
@@ -277,7 +273,7 @@ void AutoSkill(int KeyCodeIndex)
 }
 void TimedCC()
 {
-	CC->CCSwitch(ChangeChannel::CChangeChannel::CCType(CCMacro->GetValue()));
+	CC->CCSwitch(CCType(CCMacro->GetValue()));
 }
 void InitializeMacros()
 {
@@ -386,7 +382,7 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	if(!Directory::Exists(WatyBotWorkingDirectory))	Directory::CreateDirectory(WatyBotWorkingDirectory);
 
 	//Loading of all the settings and innitializing th classes
-	CC = gcnew ChangeChannel::CChangeChannel;
+	CC = gcnew CChangeChannel;
 	CMS = gcnew CMapleStory;
 	SPControl = gcnew CSPControl;
 	CPacket = gcnew CPackets;
@@ -448,10 +444,10 @@ void MainForm::AutoPot()
 void MainForm::AutoCC()
 {
 	if(cbCCPeople->Checked && (CMS->PeopleCount >= (int) nudCCPeople->Value))
-		CC->CCSwitch(ChangeChannel::CChangeChannel::CCType(ddbPeopleType->SelectedIndex));
+		CC->CCSwitch(CCType(ddbPeopleType->SelectedIndex));
 	
 	if(cbCCAttacks->Checked && (CMS->AttackCount >= (int) nudCCAttacks->Value))
-		CC->CCSwitch(ChangeChannel::CChangeChannel::CCType(ddbAttacksType->SelectedIndex));
+		CC->CCSwitch(CCType(ddbAttacksType->SelectedIndex));
 }
 void MainForm::RedrawStatBars()
 {
@@ -627,7 +623,7 @@ void MainForm::GetSPControlCoordsButton_Click(System::Object^  sender, System::E
 {
 	for(int i = 0; i < 10; i++)
 	{
-		SendKey(VK_DOWN);
+		CMS->SpamKey(VK_DOWN);
 		Sleep(10);
 	}
 	this->nudSPCMapId->Value = CMS->MapId;

@@ -1,9 +1,10 @@
 #include "HackAddys.h"
 #include "ChangeChannel.h"
 #include "MapleStory.h"
+using namespace ChangeChannel;
 
 extern BOOL WINAPI canPvP();
-extern gcroot<ChangeChannel::CChangeChannel^> CC;
+extern gcroot<CChangeChannel^> CC;
 extern gcroot<CMapleStory^> CMS;
 extern gcroot<SpawnControl::CSPControl^> SPControl;
 
@@ -392,7 +393,6 @@ namespace Hacks
 		popad
 
 		jmp dwExitCSRet
-
 	}
 	EndCodeCave
 	CMemory cmExitCS(ExitCSAddy, CaveExitCS, 2, true);

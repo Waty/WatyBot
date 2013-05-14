@@ -69,3 +69,14 @@ HWND CMapleStory::FindProcessWindow()
 	}
 	return false;
 }
+
+void CMapleStory::SendKey(int Key)
+{
+	PostMessage(MSHWND, WM_KEYDOWN, Key, (MapVirtualKey(Key, 0) << 16) + 1);
+}
+
+void CMapleStory::SpamKey(int Key)
+{
+	PostMessage(MSHWND, WM_KEYDOWN, Key, (MapVirtualKey(Key, 0) << 16) + 1);
+	PostMessage(MSHWND, WM_KEYUP, Key, (MapVirtualKey(Key, 0) << 16) + 1);
+}

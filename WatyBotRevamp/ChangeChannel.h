@@ -2,6 +2,7 @@
 #include "HackAddys.h"
 namespace ChangeChannel
 {
+	enum class CCType{CC, CS, DC};
 	public ref class CChangeChannel sealed
 	{
 	public:
@@ -10,8 +11,6 @@ namespace ChangeChannel
 		{
 			bool get() {return bw->IsBusy;}
 		}
-
-		enum class CCType{CC, CS, DC};
 		void CCSwitch(CCType type);
 
 	private:
