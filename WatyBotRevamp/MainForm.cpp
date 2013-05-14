@@ -40,12 +40,6 @@ gcroot<ChangeChannel::CChangeChannel^> CC;
 gcroot<CPackets^> CPacket;
 gcroot<CSPControl^> SPControl;
 
-//Find Window
-void getMSHWND()
-{
-	while(!CMS->FindProcessWindow());
-}
-
 //Hack CheckBoxes
 void MainForm::cbFusionAttack_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -388,9 +382,6 @@ void Main(void)
 }
 void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 {
-	//Get the hwnd of maplestory
-	NewThread(getMSHWND);
-
 	//Create the Waty directory in %appdata%
 	if(!Directory::Exists(WatyBotWorkingDirectory))	Directory::CreateDirectory(WatyBotWorkingDirectory);
 
@@ -420,8 +411,8 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	this->AttackCountLabel->Text =	"Attacks: "		+ CMS->AttackCount;
 	this->TubiPointerLabel->Text =	"Tubi: "		+ CMS->Tubi;
 	this->BreathLabel->Text =		"Breath: "		+ CMS->Breath;
-	this->lMapID->Text =			"MapID: "		+ CMS->MapID;
-	this->lCharacterpID->Text =		"Char pID: "	+ CMS->CharpID;
+	this->lMapID->Text =			"MapID: "		+ CMS->MapId;
+	this->lCharacterpID->Text =		"Char pID: "	+ CMS->CharpId;
 	this->lKnockBack->Text =		"KnockBack: "	+ CMS->KnockBack;
 	this->lKBCoords->Text =			"KB: (" + CMS->KnockBackX + "," + CMS->KnockBackY + ")";
 	
@@ -639,7 +630,7 @@ void MainForm::GetSPControlCoordsButton_Click(System::Object^  sender, System::E
 		SendKey(VK_DOWN);
 		Sleep(10);
 	}
-	this->nudSPCMapId->Value = CMS->MapID;
+	this->nudSPCMapId->Value = CMS->MapId;
 	this->nudSPCX->Value = CMS->CharX;
 	this->nudSPCY->Value = CMS->CharY;
 }

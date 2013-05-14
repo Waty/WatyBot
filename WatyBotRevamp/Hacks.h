@@ -151,7 +151,7 @@ namespace Hacks
 	int spawn_x, spawn_y;
 	BOOL WINAPI GetCoords()
 	{
-		int iMapID = CMS->MapID;
+		int iMapID = CMS->MapId;
 		for each(SpawnControl::CSPControlLocation^ location in SPControl->Locations)
 		{
 			if(iMapID == location->MapId)

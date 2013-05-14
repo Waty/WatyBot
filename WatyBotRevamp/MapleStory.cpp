@@ -1,9 +1,9 @@
 #include "MapleStory.h"
-#include "Pointers.h"
 
 
 CMapleStory::CMapleStory(void)
 {
+
 }
 
 CMapleStory::~CMapleStory(void)
@@ -39,128 +39,33 @@ bool CMapleStory::WritePointer(unsigned long ulBase, int iOffset, int iValue)
 	}
 }
 
-bool CMapleStory::FindProcessWindow()
+HWND CMapleStory::FindProcessWindow()
 {
-   TCHAR szBuffer[200];
-   DWORD dwTemp;
+	static HWND MShWnd = NULL;
+	if(MShWnd != NULL) return MShWnd;
 
-   for (HWND hWnd = GetTopWindow(NULL); hWnd != NULL; hWnd = GetNextWindow(hWnd, GW_HWNDNEXT))
-   {
-      GetWindowThreadProcessId(hWnd, &dwTemp);
-
-      if (dwTemp != GetCurrentProcessId())
-      {
-         continue;
-      }
-
-      if (!GetClassName(hWnd, szBuffer, sizeof(szBuffer) / sizeof(TCHAR)))
-      {
-         continue;
-      }
-
-      if (!wcscmp(szBuffer, L"MapleStoryClass"))
-      {
-		  MSHWND = hWnd;
-         return true;
-      }
-   }
-
-   return false;
-}
-
-int CMapleStory::getMobCount()
-{
-	return (int) ReadPointer(MobBasePtr, MobCountOffset);
-}
-
-int CMapleStory::getItemCount()
-{
-	return (int) ReadPointer(ItemBasePtr, ItemCountOffset);
-}
-
-int CMapleStory::getPeopleCount()
-{
-	return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);
-}
-
-int CMapleStory::getCharX()
-{
-	return (int) ReadPointer(CharBasePtr,XOffset);
-}
-
-int CMapleStory::getCharY()
-{
-	return (int) ReadPointer(CharBasePtr,XOffset + 4);
-}
-
-int CMapleStory::getCharHP()
-{
-	WritePointer(SettingsBasePtr, HPAlertOffset, 20);
-	return (int) ReadPointer(StatsBasePtr, HPOffset);
-}
-
-int CMapleStory::getCharMP()
-{
-	WritePointer(SettingsBasePtr, MPAlertOffset, 20);
-	return (int) ReadPointer(StatsBasePtr, MPOffset);
-}
-
-double CMapleStory::getCharEXP()
-{
-	return ReadDoublePointer(StatsBasePtr, EXPOffset);
-}
-
-int CMapleStory::getMapID()
-{
-	return (int) ReadPointer(InfoBasePtr, MapIDOffset);
-}
-
-int CMapleStory::getAttackCount()
-{
-	return (int) ReadPointer(CharBasePtr, AttackCountOffset);
-}
-
-int CMapleStory::getTubiValue()
-{
-	return (int) ReadPointer(ServerBasePtr, TubiOffset);
-}
-
-int CMapleStory::getBreathValue()
-{
-	return (int) ReadPointer(CharBasePtr, BreathOffset);
-}
-
-int CMapleStory::getChannel()
-{
-	return (int) ReadPointer(ServerBasePtr, ChannelOffset);
-}
-
-int CMapleStory::getCharpID()
-{
-	if(*(int*)WallBasePtr)	return (int) ReadPointer(CharBasePtr, pIDOffset);
-	else return 0;
-}
-
-int CMapleStory::getKnockBack()
-{
-	if(*(int*)WallBasePtr)	return (int) ReadPointer(getCharpID(), KBOffset);
-	else return 0;
-}
-
-int CMapleStory::getKnockBackX()
-{
-	if(*(int*)WallBasePtr)	return (int) ReadPointer(getCharpID(), KBXOffset);
-	else return 0;
-}
-
-int CMapleStory::getKnockBackY()
-{
-	if(*(int*)WallBasePtr)	return (int) ReadPointer(getCharpID(), KBYOffset);
-	else return 0;
-}	
-
-bool CMapleStory::isInGame()
-{
-	if(getMapID() > 0)	return true;
+	TCHAR szBuffer[200];
+	DWORD dwTemp;
+	
+	for (HWND hWnd = GetTopWindow(NULL); hWnd != NULL; hWnd = GetNextWindow(hWnd, GW_HWNDNEXT))
+	{
+		GetWindowThreadProcessId(hWnd, &dwTemp);
+		
+		if (dwTemp != GetCurrentProcessId())
+		{
+			continue;
+		}
+		
+		if (!GetClassName(hWnd, szBuffer, sizeof(szBuffer) / sizeof(TCHAR)))
+		{
+			continue;
+		}
+		
+		if (!wcscmp(szBuffer, L"MapleStoryClass"))
+		{
+			MShWnd = hWnd;
+			return hWnd;
+		}
+	}
 	return false;
 }

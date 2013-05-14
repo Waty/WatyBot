@@ -1,108 +1,155 @@
 #pragma once
 #include <Windows.h>
+#include "Pointers.h"
 ref class CMapleStory
 {
 public:
 	CMapleStory(void);
-	bool FindProcessWindow();
-	~CMapleStory(void);
 
 	property int MobCount
 	{
-		int get() {return getMobCount();}
+		int get()
+		{
+			return (int) ReadPointer(MobBasePtr, MobCountOffset);
+		}
 	}
 	property int ItemCount
 	{
-		int get() {return getItemCount();}
+		int get()
+		{
+			return (int) ReadPointer(ItemBasePtr, ItemCountOffset);
+		}
 	}
 	property int PeopleCount
 	{
-		int get() {return getPeopleCount();}
+		int get()
+		{
+			return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);
+		}
 	}
 	property int CharX
 	{
-		int get() {return getCharX();}
+		int get()
+		{
+			return (int) ReadPointer(CharBasePtr,XOffset);
+		}
 	}
 	property int CharY
 	{
-		int get() {return getCharY();}
+		int get()
+		{
+			return (int) ReadPointer(CharBasePtr,XOffset + 4);
+		}
 	}
 	property int CharHP
 	{
-		int get() {return getCharHP();}
+		int get()
+		{
+			WritePointer(SettingsBasePtr, HPAlertOffset, 20);
+			return (int) ReadPointer(StatsBasePtr, HPOffset);
+		}
 	}
 	property int CharMP
 	{
-		int get() {return getCharMP();}
+		int get()
+		{
+			WritePointer(SettingsBasePtr, MPAlertOffset, 20);
+			return (int) ReadPointer(StatsBasePtr, MPOffset);
+		}
 	}
 	property double CharEXP
 	{
-		double get() {return getCharEXP();}
+		double get()
+		{
+			return ReadDoublePointer(StatsBasePtr, EXPOffset);
+		}
 	}
-	property int MapID
+	property int MapId
 	{
-		int get() {return getMapID();}
+		int get()
+		{
+			return (int) ReadPointer(InfoBasePtr, MapIDOffset);
+		}
 	}
 	property int AttackCount
 	{
-		int get() {return getAttackCount();}
+		int get()
+		{
+			return (int) ReadPointer(CharBasePtr, AttackCountOffset);
+		}
 	}
 	property int Tubi
 	{
-		int get() {return getTubiValue();}
+		int get()
+		{
+			return (int) ReadPointer(ServerBasePtr, TubiOffset);
+		}
 	}
 	property int Breath
 	{
-		int get() {return getBreathValue();}
+		int get()
+		{
+			return (int) ReadPointer(CharBasePtr, BreathOffset);
+		}
 	}
 	property int Channel
 	{
-		int get() {return getChannel();}
+		int get()
+		{
+			return (int) ReadPointer(ServerBasePtr, ChannelOffset);
+		}
 	}
-	property int CharpID
+	property int CharpId
 	{
-		int get() {return getCharpID();}
+		int get()
+		{
+			return (int) ReadPointer(CharBasePtr, pIDOffset);
+		}
 	}
 	property int KnockBack
 	{
-		int get() {return getKnockBack();}
+		int get()
+		{
+			return (int) ReadPointer(CharpId, KBOffset);
+		}
 	}
 	property int KnockBackX
 	{
-		int get() {return getKnockBackX();}
+		int get()
+		{
+			return (int) ReadPointer(CharpId, KBXOffset);
+		}
 	}
 	property int KnockBackY
 	{
-		int get() {return getKnockBackY();}
+		int get()
+		{
+			return (int) ReadPointer(CharpId, KBYOffset);
+		}
 	}
 	property bool InGame
 	{
-		bool get() {return isInGame();}
+		bool get()
+		{
+			return MapId > 0;
+		}
+
 	}
-	property HWND MSHWND;
+	property HWND MSHWND
+	{
+		HWND get()
+		{
+			return FindProcessWindow();
+		}
+	}
+
 	bool WritePointer(unsigned long ulBase, int iOffset, int iValue);
 
 private:
-	int getMobCount();
-	int getItemCount();
-	int getPeopleCount();
-	int getCharX();
-	int getCharY();
-	int getCharHP();
-	int getCharMP();
-	double getCharEXP();
-	int getMapID();
-	int getAttackCount();
-	int getTubiValue();
-	int getBreathValue();
-	int getChannel();
-	int getCharpID();
-	int getKnockBack();
-	int getKnockBackX();
-	int getKnockBackY();
-	bool isInGame();
-
 	unsigned long ReadPointer(unsigned long ulBase, int iOffset);
 	double ReadDoublePointer(DWORD ulBase, INT iOffset);
+	HWND FindProcessWindow();
+
+	~CMapleStory(void);
 };
 
