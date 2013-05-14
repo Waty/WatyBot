@@ -30,5 +30,7 @@ namespace SpawnControl
 
 		property List<CSPControlLocation^>^ Locations;
 		property XmlSerializer^ s;
+
+		bool Enable(bool status);
 	};
 }

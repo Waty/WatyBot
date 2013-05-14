@@ -1,6 +1,9 @@
 #include <Windows.h>
 #include "SPControl.h"
 #include "HackAddys.h"
+#include "MapleStory.h"
+#include <vcclr.h>
+#include "Memory.h"
 using namespace SpawnControl;
 using namespace System::IO;
 using namespace System::Windows::Forms;
@@ -68,4 +71,50 @@ void CSPControl::AddLocation(String^ Name, int MapId, int X, int Y)
 	l->Y = Y;
 	Locations->Add(l);
 	this->Save();
+}
+
+DWORD dwSPControlRet = SPControlAddy + 6;
+int spawn_x, spawn_y;
+BOOL WINAPI GetCoords()
+{
+	gcroot<CMapleStory^> MS = gcnew CMapleStory;
+	extern gcroot<SpawnControl::CSPControl^> SPControl;
+	int iMapID = MS->MapId;
+	for each(SpawnControl::CSPControlLocation^ location in SPControl->Locations)
+	{
+		if(iMapID == location->MapId)
+		{
+			spawn_x = location->X;
+			spawn_y = location->Y;
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+void __declspec(naked) SPControlCave()
+{
+	_asm
+	{
+		push eax
+		call GetCoords
+		cmp eax,FALSE
+		pop eax
+		je SpawnNormal //if eax == false, jump to SpawnNormal
+ 
+		//Spawn on controlled location
+		mov ebx,[spawn_x]
+		mov ebp,[spawn_y]
+		jmp [dwSPControlRet]
+ 
+		SpawnNormal:
+		mov ebx,[eax+0x0C]
+		mov ebp,[eax+0x10]
+		jmp [dwSPControlRet]
+	}
+}
+CMemory cmSPControl(SPControlAddy, SPControlCave, 1, true);
+
+bool CSPControl::Enable(bool status)
+{
+	return cmSPControl.Enable(status);
 }

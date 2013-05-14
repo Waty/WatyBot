@@ -381,7 +381,7 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	//Create the Waty directory in %appdata%
 	if(!Directory::Exists(WatyBotWorkingDirectory))	Directory::CreateDirectory(WatyBotWorkingDirectory);
 
-	//Loading of all the settings and innitializing th classes
+	//Load all the settings and innitialize all the classes
 	CC = gcnew CChangeChannel;
 	CMS = gcnew CMapleStory;
 	SPControl = gcnew CSPControl;
@@ -592,7 +592,7 @@ void MainForm::AutoSkill4ComboBox_DropDown(System::Object^  sender, System::Even
 //controls on SPControl Tab
 void MainForm::cbSPControl_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::cmSPControl.Enable(cbSPControl->Checked);
+	SPControl->Enable(cbSPControl->Checked);
 }
 void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e)
 {

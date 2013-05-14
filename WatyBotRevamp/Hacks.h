@@ -147,44 +147,6 @@ namespace Hacks
 	BYTE bSit[] = {0x75};
 	CMemory cmSitHack(SitHackAddy, bSit, 1);
  
-	/////Spawn Control
-	DWORD dwSPControlRet = SPControlAddy + 6;
-	int spawn_x, spawn_y;
-	BOOL WINAPI GetCoords()
-	{
-		int iMapID = CMS->MapId;
-		for each(SpawnControl::CSPControlLocation^ location in SPControl->Locations)
-		{
-			if(iMapID == location->MapId)
-			{
-				spawn_x = location->X;
-				spawn_y = location->Y;
-				return TRUE;
-			}
-		}
-		return FALSE;
-	}
-	CodeCave(SPControl)
-	{
-		push eax
-		call GetCoords
-		cmp eax,FALSE
-		pop eax
-		je SpawnNormal //if eax == false, jump to SpawnNormal
- 
-		//Spawn on controlled location
-		mov ebx,[spawn_x]
-		mov ebp,[spawn_y]
-		jmp [dwSPControlRet]
- 
-		SpawnNormal:
-		mov ebx,[eax+0x0C]
-		mov ebp,[eax+0x10]
-		jmp [dwSPControlRet]
-	}
-	EndCodeCave
-	CMemory cmSPControl(SPControlAddy, CaveSPControl, 1, true);
- 
 	/////50 Seconds Godmode
 	BYTE b50SecGM1[] = {0x7E};
 	BYTE b50SecGM2[] = {0xD4, 0x36};

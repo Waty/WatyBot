@@ -102,7 +102,7 @@ bool CMemory::Enable(bool enable)
 //Private Methods
 int CMemory::jmp(unsigned long ulSource, void* ulDestination) 
 {
-		return (int)(((int)ulDestination - (int) ulSource) - 5);
+	return (int)(((int)ulDestination - (int) ulSource) - 5);
 }
 void CMemory::JumpCall(void* destination, SIZE_T ulNops)
 {

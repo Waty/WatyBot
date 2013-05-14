@@ -4,7 +4,6 @@
 #include "HackAddys.h"
 #include <string>
 #define NewThread(Function) CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)&Function, NULL, NULL, NULL)
-#define jmp(frm, to) (int)(((int)to - (int)frm) - 5);
 #define CodeCave(name) void __declspec(naked) Cave##name(){_asm
 #define EndCodeCave }
 
