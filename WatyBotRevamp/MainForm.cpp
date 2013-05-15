@@ -199,6 +199,8 @@ void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^ 
 		cbNFA->Checked = false;
 		cbPVP->Checked = Hacks::cmPVP1.Enable(cbPVP->Checked);
 		cbPVP->Checked = Hacks::cmPVP2.Enable(cbPVP->Checked);
+		cbNoCCBlueBoxes->Checked = cbPVP->Checked;
+		cbNoCCBlueBoxes->Enabled = !cbPVP->Checked;
 	}
 }
 void MainForm::nudPVPDelay_ValueChanged(System::Object^  sender, System::EventArgs^  e)
