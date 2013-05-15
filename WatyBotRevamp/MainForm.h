@@ -1253,10 +1253,10 @@ private:
 			// 
 			// nudIceGuard
 			// 
-			this->nudIceGuard->Location = System::Drawing::Point(85, 31);
+			this->nudIceGuard->Location = System::Drawing::Point(95, 31);
 			this->nudIceGuard->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000000, 0, 0, 0});
 			this->nudIceGuard->Name = L"nudIceGuard";
-			this->nudIceGuard->Size = System::Drawing::Size(52, 20);
+			this->nudIceGuard->Size = System::Drawing::Size(59, 20);
 			this->nudIceGuard->TabIndex = 20;
 			this->InfoToolTip->SetToolTip(this->nudIceGuard, L"Another godmode, use with caution, a to high amount could AB");
 			// 
@@ -2360,6 +2360,7 @@ private:
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
 			this->ResumeLayout(false);
+
 		}
 #pragma endregion
 #pragma region custom voids
