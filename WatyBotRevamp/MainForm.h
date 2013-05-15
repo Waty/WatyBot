@@ -60,7 +60,7 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::CheckBox^  cbAutoMP;
 	private: System::Windows::Forms::ComboBox^  ddbAutoAttackKey;
 	private: System::Windows::Forms::CheckBox^  cbAutoAttack;
-	private: System::Windows::Forms::Label^  lAttackMS;
+
 	private: System::Windows::Forms::TabPage^  InfoTab;
 	private: System::Windows::Forms::Label^  AttackCountLabel;
 	private: System::Windows::Forms::Label^  ItemCountLabel;
@@ -153,7 +153,7 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::Button^  bStopSpamming;
 	private: System::Windows::Forms::CheckBox^  cbScareMobs;
 	private: System::Windows::Forms::CheckBox^  cbFLACC;
-	private: System::Windows::Forms::Label^  lLootMS;
+
 	private: System::Windows::Forms::CheckBox^  cbCPUHack;
 	private: System::Windows::Forms::Label^  lSLWIB;
 	private: System::Windows::Forms::Label^  lSAWSIL;
@@ -244,7 +244,6 @@ private:
 			this->ddbPeopleType = (gcnew System::Windows::Forms::ComboBox());
 			this->lSLWIB = (gcnew System::Windows::Forms::Label());
 			this->lSAWSIL = (gcnew System::Windows::Forms::Label());
-			this->lLootMS = (gcnew System::Windows::Forms::Label());
 			this->CCAttacksLabel = (gcnew System::Windows::Forms::Label());
 			this->CCTimedLabel = (gcnew System::Windows::Forms::Label());
 			this->CCPeopleLabel = (gcnew System::Windows::Forms::Label());
@@ -266,7 +265,6 @@ private:
 			this->ddbAutoLootKey = (gcnew System::Windows::Forms::ComboBox());
 			this->cbAutoLoot = (gcnew System::Windows::Forms::CheckBox());
 			this->ddbAutoMPKey = (gcnew System::Windows::Forms::ComboBox());
-			this->lAttackMS = (gcnew System::Windows::Forms::Label());
 			this->ddbAutoAttackKey = (gcnew System::Windows::Forms::ComboBox());
 			this->EXPLabel = (gcnew System::Windows::Forms::Label());
 			this->MPLabel = (gcnew System::Windows::Forms::Label());
@@ -490,7 +488,6 @@ private:
 			this->AutoBotGroupBox->Controls->Add(this->ddbPeopleType);
 			this->AutoBotGroupBox->Controls->Add(this->lSLWIB);
 			this->AutoBotGroupBox->Controls->Add(this->lSAWSIL);
-			this->AutoBotGroupBox->Controls->Add(this->lLootMS);
 			this->AutoBotGroupBox->Controls->Add(this->CCAttacksLabel);
 			this->AutoBotGroupBox->Controls->Add(this->CCTimedLabel);
 			this->AutoBotGroupBox->Controls->Add(this->CCPeopleLabel);
@@ -512,7 +509,6 @@ private:
 			this->AutoBotGroupBox->Controls->Add(this->ddbAutoLootKey);
 			this->AutoBotGroupBox->Controls->Add(this->cbAutoLoot);
 			this->AutoBotGroupBox->Controls->Add(this->ddbAutoMPKey);
-			this->AutoBotGroupBox->Controls->Add(this->lAttackMS);
 			this->AutoBotGroupBox->Controls->Add(this->ddbAutoAttackKey);
 			this->AutoBotGroupBox->Location = System::Drawing::Point(0, 70);
 			this->AutoBotGroupBox->Name = L"AutoBotGroupBox";
@@ -552,6 +548,7 @@ private:
 			this->nudAutoSkill4->Name = L"nudAutoSkill4";
 			this->nudAutoSkill4->Size = System::Drawing::Size(107, 20);
 			this->nudAutoSkill4->TabIndex = 77;
+			this->InfoToolTip->SetToolTip(this->nudAutoSkill4, L"Sends a key after the delay so your buffs will stay");
 			// 
 			// nudAutoSkill3
 			// 
@@ -561,6 +558,7 @@ private:
 			this->nudAutoSkill3->Name = L"nudAutoSkill3";
 			this->nudAutoSkill3->Size = System::Drawing::Size(107, 20);
 			this->nudAutoSkill3->TabIndex = 76;
+			this->InfoToolTip->SetToolTip(this->nudAutoSkill3, L"Sends a key after the delay so your buffs will stay");
 			// 
 			// nudAutoSkill2
 			// 
@@ -570,6 +568,7 @@ private:
 			this->nudAutoSkill2->Name = L"nudAutoSkill2";
 			this->nudAutoSkill2->Size = System::Drawing::Size(107, 20);
 			this->nudAutoSkill2->TabIndex = 75;
+			this->InfoToolTip->SetToolTip(this->nudAutoSkill2, L"Sends a key after the delay so your buffs will stay");
 			// 
 			// nudAutoSkill1
 			// 
@@ -579,6 +578,7 @@ private:
 			this->nudAutoSkill1->Name = L"nudAutoSkill1";
 			this->nudAutoSkill1->Size = System::Drawing::Size(107, 20);
 			this->nudAutoSkill1->TabIndex = 74;
+			this->InfoToolTip->SetToolTip(this->nudAutoSkill1, L"Sends a key after the delay so your buffs will stay");
 			// 
 			// nudAutoMP
 			// 
@@ -588,6 +588,7 @@ private:
 			this->nudAutoMP->Name = L"nudAutoMP";
 			this->nudAutoMP->Size = System::Drawing::Size(107, 20);
 			this->nudAutoMP->TabIndex = 73;
+			this->InfoToolTip->SetToolTip(this->nudAutoMP, L"Keeps an eye on your MP, if it gets too low, it will send a key to use a potion");
 			// 
 			// nudAutoHP
 			// 
@@ -597,6 +598,7 @@ private:
 			this->nudAutoHP->Name = L"nudAutoHP";
 			this->nudAutoHP->Size = System::Drawing::Size(107, 20);
 			this->nudAutoHP->TabIndex = 72;
+			this->InfoToolTip->SetToolTip(this->nudAutoHP, L"Keeps an eye on your HP, if it gets too low, it will send a key to use a potion");
 			// 
 			// nudAutoLoot
 			// 
@@ -606,6 +608,7 @@ private:
 			this->nudAutoLoot->Name = L"nudAutoLoot";
 			this->nudAutoLoot->Size = System::Drawing::Size(44, 20);
 			this->nudAutoLoot->TabIndex = 71;
+			this->InfoToolTip->SetToolTip(this->nudAutoLoot, L"The delay in milliseconds between pressing keys in MapleStory");
 			this->nudAutoLoot->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
 			// 
 			// nudAutoAttack
@@ -616,6 +619,7 @@ private:
 			this->nudAutoAttack->Name = L"nudAutoAttack";
 			this->nudAutoAttack->Size = System::Drawing::Size(44, 20);
 			this->nudAutoAttack->TabIndex = 70;
+			this->InfoToolTip->SetToolTip(this->nudAutoAttack, L"The delay in milliseconds between pressing keys in MapleStory");
 			this->nudAutoAttack->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
 			// 
 			// nudSLWIB
@@ -625,6 +629,8 @@ private:
 			this->nudSLWIB->Name = L"nudSLWIB";
 			this->nudSLWIB->Size = System::Drawing::Size(35, 20);
 			this->nudSLWIB->TabIndex = 69;
+			this->InfoToolTip->SetToolTip(this->nudSLWIB, L"SLWIB: Stop Looting When Items Below, the number is for the number of items that " 
+				L"need to be dropped before the Looting starts");
 			// 
 			// nudSAWSIL
 			// 
@@ -633,6 +639,8 @@ private:
 			this->nudSAWSIL->Name = L"nudSAWSIL";
 			this->nudSAWSIL->Size = System::Drawing::Size(35, 20);
 			this->nudSAWSIL->TabIndex = 68;
+			this->InfoToolTip->SetToolTip(this->nudSAWSIL, L"SAWSIL: Stop Attacking When Spawn Is Low, the number is for the amount of mobs th" 
+				L"at need to be in the map for AutoAttack to attack");
 			this->nudSAWSIL->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
 			// 
 			// ddbTimedType
@@ -644,6 +652,8 @@ private:
 			this->ddbTimedType->Name = L"ddbTimedType";
 			this->ddbTimedType->Size = System::Drawing::Size(38, 21);
 			this->ddbTimedType->TabIndex = 67;
+			this->InfoToolTip->SetToolTip(this->ddbTimedType, L"Set here the method you want to use. CC is ChangeChannel, CS is enter/leave cashs" 
+				L"hop, DC is relog to character select screen");
 			// 
 			// ddbAttacksType
 			// 
@@ -654,6 +664,8 @@ private:
 			this->ddbAttacksType->Name = L"ddbAttacksType";
 			this->ddbAttacksType->Size = System::Drawing::Size(38, 21);
 			this->ddbAttacksType->TabIndex = 66;
+			this->InfoToolTip->SetToolTip(this->ddbAttacksType, L"Set here the method you want to use. CC is ChangeChannel, CS is enter/leave cashs" 
+				L"hop, DC is relog to character select screen");
 			// 
 			// ddbPeopleType
 			// 
@@ -664,35 +676,32 @@ private:
 			this->ddbPeopleType->Name = L"ddbPeopleType";
 			this->ddbPeopleType->Size = System::Drawing::Size(38, 21);
 			this->ddbPeopleType->TabIndex = 65;
+			this->InfoToolTip->SetToolTip(this->ddbPeopleType, L"Set here the method you want to use. CC is ChangeChannel, CS is enter/leave cashs" 
+				L"hop, DC is relog to character select screen");
 			// 
 			// lSLWIB
 			// 
 			this->lSLWIB->AutoSize = true;
 			this->lSLWIB->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7));
-			this->lSLWIB->Location = System::Drawing::Point(159, 46);
+			this->lSLWIB->Location = System::Drawing::Point(150, 45);
 			this->lSLWIB->Name = L"lSLWIB";
 			this->lSLWIB->Size = System::Drawing::Size(39, 13);
 			this->lSLWIB->TabIndex = 64;
 			this->lSLWIB->Text = L"SLWIB";
+			this->InfoToolTip->SetToolTip(this->lSLWIB, L"SLWIB: Stop Looting When Items Below, the number is for the number of items that " 
+				L"need to be dropped before the Looting starts");
 			// 
 			// lSAWSIL
 			// 
 			this->lSAWSIL->AutoSize = true;
 			this->lSAWSIL->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7));
-			this->lSAWSIL->Location = System::Drawing::Point(159, 18);
+			this->lSAWSIL->Location = System::Drawing::Point(150, 17);
 			this->lSAWSIL->Name = L"lSAWSIL";
 			this->lSAWSIL->Size = System::Drawing::Size(46, 13);
 			this->lSAWSIL->TabIndex = 63;
 			this->lSAWSIL->Text = L"SAWSIL";
-			// 
-			// lLootMS
-			// 
-			this->lLootMS->AutoSize = true;
-			this->lLootMS->Location = System::Drawing::Point(135, 45);
-			this->lLootMS->Name = L"lLootMS";
-			this->lLootMS->Size = System::Drawing::Size(20, 13);
-			this->lLootMS->TabIndex = 58;
-			this->lLootMS->Text = L"ms";
+			this->InfoToolTip->SetToolTip(this->lSAWSIL, L"SAWSIL: Stop Attacking When Spawn Is Low, the number is for the amount of mobs th" 
+				L"at need to be in the map for AutoAttack to attack");
 			// 
 			// CCAttacksLabel
 			// 
@@ -755,6 +764,7 @@ private:
 			this->ddbAutoSkill4Key->Name = L"ddbAutoSkill4Key";
 			this->ddbAutoSkill4Key->Size = System::Drawing::Size(115, 21);
 			this->ddbAutoSkill4Key->TabIndex = 24;
+			this->InfoToolTip->SetToolTip(this->ddbAutoSkill4Key, L"Key AutoSkill will send");
 			this->ddbAutoSkill4Key->DropDown += gcnew System::EventHandler(this, &MainForm::AutoSkill4ComboBox_DropDown);
 			// 
 			// cbAutoSkill4
@@ -765,6 +775,7 @@ private:
 			this->cbAutoSkill4->Size = System::Drawing::Size(79, 17);
 			this->cbAutoSkill4->TabIndex = 22;
 			this->cbAutoSkill4->Text = L"Auto Skill 4";
+			this->InfoToolTip->SetToolTip(this->cbAutoSkill4, L"Sends a key after the delay so your buffs will stay");
 			this->cbAutoSkill4->UseVisualStyleBackColor = true;
 			this->cbAutoSkill4->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill4CheckBox_CheckedChanged);
 			// 
@@ -787,6 +798,7 @@ private:
 			this->cbAutoSkill3->Size = System::Drawing::Size(79, 17);
 			this->cbAutoSkill3->TabIndex = 19;
 			this->cbAutoSkill3->Text = L"Auto Skill 3";
+			this->InfoToolTip->SetToolTip(this->cbAutoSkill3, L"Sends a key after the delay so your buffs will stay");
 			this->cbAutoSkill3->UseVisualStyleBackColor = true;
 			this->cbAutoSkill3->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill3CheckBox_CheckedChanged);
 			// 
@@ -802,6 +814,7 @@ private:
 			this->ddbAutoSkill3Key->Name = L"ddbAutoSkill3Key";
 			this->ddbAutoSkill3Key->Size = System::Drawing::Size(115, 21);
 			this->ddbAutoSkill3Key->TabIndex = 21;
+			this->InfoToolTip->SetToolTip(this->ddbAutoSkill3Key, L"Key AutoSkill will send");
 			this->ddbAutoSkill3Key->DropDown += gcnew System::EventHandler(this, &MainForm::AutoSkill3ComboBox_DropDown);
 			// 
 			// cbAutoSkill2
@@ -812,6 +825,7 @@ private:
 			this->cbAutoSkill2->Size = System::Drawing::Size(79, 17);
 			this->cbAutoSkill2->TabIndex = 16;
 			this->cbAutoSkill2->Text = L"Auto Skill 2";
+			this->InfoToolTip->SetToolTip(this->cbAutoSkill2, L"Sends a key after the delay so your buffs will stay");
 			this->cbAutoSkill2->UseVisualStyleBackColor = true;
 			this->cbAutoSkill2->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill2CheckBox_CheckedChanged);
 			// 
@@ -827,6 +841,7 @@ private:
 			this->ddbAutoSkill2Key->Name = L"ddbAutoSkill2Key";
 			this->ddbAutoSkill2Key->Size = System::Drawing::Size(115, 21);
 			this->ddbAutoSkill2Key->TabIndex = 18;
+			this->InfoToolTip->SetToolTip(this->ddbAutoSkill2Key, L"Key AutoSkill will send");
 			this->ddbAutoSkill2Key->DropDown += gcnew System::EventHandler(this, &MainForm::AutoSkill2ComboBox_DropDown);
 			// 
 			// cbAutoAttack
@@ -837,6 +852,7 @@ private:
 			this->cbAutoAttack->Size = System::Drawing::Size(82, 17);
 			this->cbAutoAttack->TabIndex = 1;
 			this->cbAutoAttack->Text = L"Auto Attack";
+			this->InfoToolTip->SetToolTip(this->cbAutoAttack, L"Lets you character spam his skill just like you would smash your keyboard");
 			this->cbAutoAttack->UseVisualStyleBackColor = true;
 			this->cbAutoAttack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AttackCheckBox_CheckedChanged);
 			// 
@@ -848,6 +864,7 @@ private:
 			this->cbAutoSkill1->Size = System::Drawing::Size(79, 17);
 			this->cbAutoSkill1->TabIndex = 13;
 			this->cbAutoSkill1->Text = L"Auto Skill 1";
+			this->InfoToolTip->SetToolTip(this->cbAutoSkill1, L"Sends a key after the delay so your buffs will stay");
 			this->cbAutoSkill1->UseVisualStyleBackColor = true;
 			this->cbAutoSkill1->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoSkill1CheckBox_CheckedChanged);
 			// 
@@ -859,6 +876,7 @@ private:
 			this->cbAutoHP->Size = System::Drawing::Size(66, 17);
 			this->cbAutoHP->TabIndex = 7;
 			this->cbAutoHP->Text = L"Auto HP";
+			this->InfoToolTip->SetToolTip(this->cbAutoHP, L"Keeps an eye on your HP, if it gets too low, it will send a key to use a potion");
 			this->cbAutoHP->UseVisualStyleBackColor = true;
 			this->cbAutoHP->CheckedChanged += gcnew System::EventHandler(this, &MainForm::HPCheckBox_CheckedChanged);
 			// 
@@ -874,6 +892,7 @@ private:
 			this->ddbAutoSkill1Key->Name = L"ddbAutoSkill1Key";
 			this->ddbAutoSkill1Key->Size = System::Drawing::Size(115, 21);
 			this->ddbAutoSkill1Key->TabIndex = 15;
+			this->InfoToolTip->SetToolTip(this->ddbAutoSkill1Key, L"Key AutoSkill will send");
 			this->ddbAutoSkill1Key->DropDown += gcnew System::EventHandler(this, &MainForm::AutoSkill1ComboBox_DropDown);
 			// 
 			// ddbAutoHPKey
@@ -888,6 +907,7 @@ private:
 			this->ddbAutoHPKey->Name = L"ddbAutoHPKey";
 			this->ddbAutoHPKey->Size = System::Drawing::Size(115, 21);
 			this->ddbAutoHPKey->TabIndex = 9;
+			this->InfoToolTip->SetToolTip(this->ddbAutoHPKey, L"Key for HP potions");
 			// 
 			// cbAutoMP
 			// 
@@ -897,6 +917,7 @@ private:
 			this->cbAutoMP->Size = System::Drawing::Size(67, 17);
 			this->cbAutoMP->TabIndex = 10;
 			this->cbAutoMP->Text = L"Auto MP";
+			this->InfoToolTip->SetToolTip(this->cbAutoMP, L"Keeps an eye on your MP, if it gets too low, it will send a key to use a potion");
 			this->cbAutoMP->UseVisualStyleBackColor = true;
 			this->cbAutoMP->CheckedChanged += gcnew System::EventHandler(this, &MainForm::MPCheckBox_CheckedChanged);
 			// 
@@ -912,6 +933,7 @@ private:
 			this->ddbAutoLootKey->Name = L"ddbAutoLootKey";
 			this->ddbAutoLootKey->Size = System::Drawing::Size(76, 21);
 			this->ddbAutoLootKey->TabIndex = 6;
+			this->InfoToolTip->SetToolTip(this->ddbAutoLootKey, L"The key WatyBot will press for looting");
 			// 
 			// cbAutoLoot
 			// 
@@ -921,6 +943,7 @@ private:
 			this->cbAutoLoot->Size = System::Drawing::Size(72, 17);
 			this->cbAutoLoot->TabIndex = 4;
 			this->cbAutoLoot->Text = L"Auto Loot";
+			this->InfoToolTip->SetToolTip(this->cbAutoLoot, L"Very fast looting, faster then normally");
 			this->cbAutoLoot->UseVisualStyleBackColor = true;
 			this->cbAutoLoot->CheckedChanged += gcnew System::EventHandler(this, &MainForm::LootCheckBox_CheckedChanged);
 			// 
@@ -936,15 +959,7 @@ private:
 			this->ddbAutoMPKey->Name = L"ddbAutoMPKey";
 			this->ddbAutoMPKey->Size = System::Drawing::Size(115, 21);
 			this->ddbAutoMPKey->TabIndex = 12;
-			// 
-			// lAttackMS
-			// 
-			this->lAttackMS->AutoSize = true;
-			this->lAttackMS->Location = System::Drawing::Point(135, 16);
-			this->lAttackMS->Name = L"lAttackMS";
-			this->lAttackMS->Size = System::Drawing::Size(20, 13);
-			this->lAttackMS->TabIndex = 28;
-			this->lAttackMS->Text = L"ms";
+			this->InfoToolTip->SetToolTip(this->ddbAutoMPKey, L"Key for MP potions");
 			// 
 			// ddbAutoAttackKey
 			// 
@@ -958,6 +973,7 @@ private:
 			this->ddbAutoAttackKey->Name = L"ddbAutoAttackKey";
 			this->ddbAutoAttackKey->Size = System::Drawing::Size(76, 21);
 			this->ddbAutoAttackKey->TabIndex = 3;
+			this->InfoToolTip->SetToolTip(this->ddbAutoAttackKey, L"The key WatyBot will press for attacking");
 			// 
 			// EXPLabel
 			// 
