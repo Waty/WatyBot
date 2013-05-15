@@ -57,15 +57,9 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::CheckBox^  cbAutoHP;
 	private: System::Windows::Forms::ComboBox^  ddbAutoHPKey;
 	private: System::Windows::Forms::ComboBox^  ddbAutoMPKey;
-
-
-
 	private: System::Windows::Forms::CheckBox^  cbAutoMP;
-
 	private: System::Windows::Forms::ComboBox^  ddbAutoAttackKey;
-
 	private: System::Windows::Forms::CheckBox^  cbAutoAttack;
-
 	private: System::Windows::Forms::Label^  lAttackMS;
 	private: System::Windows::Forms::TabPage^  InfoTab;
 	private: System::Windows::Forms::Label^  AttackCountLabel;
@@ -75,203 +69,146 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::Label^  MobCountLabel;
 	private: System::Windows::Forms::GroupBox^  gbPointers;
 	private: System::Windows::Forms::CheckBox^  cbAutoLoot;
-
 	private: System::Windows::Forms::ComboBox^  ddbAutoLootKey;
 	private: System::Windows::Forms::CheckBox^  cbAutoSkill1;
 	private: System::Windows::Forms::ComboBox^  ddbAutoSkill1Key;
-
-
-
 	private: System::Windows::Forms::GroupBox^  AutoBotGroupBox;
 	private: System::Windows::Forms::CheckBox^  cbAutoSkill4;
 	private: System::Windows::Forms::ComboBox^  ddbAutoSkill4Key;
-
-
 	private: System::Windows::Forms::CheckBox^  cbAutoSkill3;
 	private: System::Windows::Forms::ComboBox^  ddbAutoSkill3Key;
-
-
 	private: System::Windows::Forms::CheckBox^  cbAutoSkill2;
 	private: System::Windows::Forms::ComboBox^  ddbAutoSkill2Key;
-
-
-private: System::Windows::Forms::Label^  TubiPointerLabel;
-private: System::Windows::Forms::Label^  BreathLabel;
+	private: System::Windows::Forms::Label^  TubiPointerLabel;
+	private: System::Windows::Forms::Label^  BreathLabel;
 	private: System::Windows::Forms::CheckBox^  cbCCPeople;
-
-private: System::Windows::Forms::TabPage^  PacketSenderTab;
-private: System::Windows::Forms::Button^  SendPacketButton;
+	private: System::Windows::Forms::TabPage^  PacketSenderTab;
+	private: System::Windows::Forms::Button^  SendPacketButton;
 	private: System::Windows::Forms::ComboBox^  ddbSelectedPacket;
 	private: System::Windows::Forms::GroupBox^  gbAddPacket;
-
-
-
 	private: System::Windows::Forms::GroupBox^  gbSendPackets;
-
 	private: System::Windows::Forms::Button^  bAddPacket;
 	private: System::Windows::Forms::TextBox^  tbAddPacketData;
-
-
 	private: System::Windows::Forms::TextBox^  tbAddPacketName;
-
-
-
-private: System::Windows::Forms::Label^  AddPacketPacketLabel;
-private: System::Windows::Forms::Label^  AddPacketNameLabel;
+	private: System::Windows::Forms::Label^  AddPacketPacketLabel;
+	private: System::Windows::Forms::Label^  AddPacketNameLabel;
 	private: System::Windows::Forms::Label^  lSpamPacketTimes;
-
-private: System::Windows::Forms::Label^  SpamPacketsDelayLabel;
-private: System::Windows::Forms::Button^  bStartSpamming;
+	private: System::Windows::Forms::Label^  SpamPacketsDelayLabel;
+	private: System::Windows::Forms::Button^  bStartSpamming;
 	private: System::Windows::Forms::GroupBox^  gbDeletePacket;
-
 	private: System::Windows::Forms::ComboBox^  ddbDeletePacket;
 	private: System::Windows::Forms::Button^  bDeletePacket;
-private: System::Windows::Forms::GroupBox^  gbEditPacket;
-
-
-
-
-private: System::Windows::Forms::Button^  bSaveChanges;
-private: System::Windows::Forms::TextBox^  tbEditPacketData;
-
-private: System::Windows::Forms::TextBox^  tbEditPacketName;
-
-
-
-
-private: System::Windows::Forms::ComboBox^  ddbEditPacket;
-
-private: System::Windows::Forms::TabPage^  SPControlTabPage;
-private: System::Windows::Forms::CheckBox^  cbSPControl;
-private: System::Windows::Forms::CheckBox^  cbCCAttacks;
-
-private: System::Windows::Forms::CheckBox^  cbCCTimed;
-
-private: System::Windows::Forms::Label^  CCTimedLabel;
-private: System::Windows::Forms::Label^  CCPeopleLabel;
-private: System::Windows::Forms::Label^  CCAttacksLabel;
-private: System::Windows::Forms::ListView^  lvSPControl;
-
-private: System::Windows::Forms::ColumnHeader^  HeaderMapName;
-private: System::Windows::Forms::ColumnHeader^  HeaderMapID;
-private: System::Windows::Forms::ColumnHeader^  HeaderX;
-private: System::Windows::Forms::ColumnHeader^  HeaderY;
-private: System::Windows::Forms::Label^  SPControlNameLabel;
-private: System::Windows::Forms::Label^  SPControlMapIDLabel;
-private: System::Windows::Forms::Label^  SPControlXLabel;
-private: System::Windows::Forms::Label^  SPControlYLabel;
-private: System::Windows::Forms::GroupBox^  gbNewSPCLocation;
-
-
-
-private: System::Windows::Forms::TextBox^  tbSPCName;
-private: System::Windows::Forms::Button^  bAddSPCLocation;
-
-
-
-
-private: System::Windows::Forms::ContextMenuStrip^  SPControlContextMenu;
-private: System::Windows::Forms::ToolStripMenuItem^  deleteSPControlToolStripMenuItem;
-private: System::Windows::Forms::Button^  bSPCGetCurrent;
-
-
-private: System::Windows::Forms::GroupBox^  MobHacks;
-private: System::Windows::Forms::CheckBox^  cbPerfectLoot;
-private: System::Windows::Forms::CheckBox^  cbFusionAttack;
-private: System::Windows::Forms::GroupBox^  gbMiscHacks;
-private: System::Windows::Forms::CheckBox^  cbJDA;
-private: System::Windows::Forms::CheckBox^  cbNoBG;
-private: System::Windows::Forms::GroupBox^  gbCharHacks;
-private: System::Windows::Forms::CheckBox^  cbVacRight;
-private: System::Windows::Forms::CheckBox^  cbJumpRight;
-private: System::Windows::Forms::CheckBox^  cbWalkRight;
-private: System::Windows::Forms::CheckBox^  cbPinTyper;
-private: System::Windows::Forms::CheckBox^  cbNoKB;
-private: System::Windows::Forms::CheckBox^  cbMobDisarm;
-private: System::Windows::Forms::CheckBox^  cbDojangGodmode;
-private: System::Windows::Forms::CheckBox^  cbUnlimitedMorph;
-private: System::Windows::Forms::CheckBox^  cbFasterMobs;
-private: System::Windows::Forms::CheckBox^  cbNDAllAttacks;
-private: System::Windows::Forms::CheckBox^  cbNoMobs;
-private: System::Windows::Forms::CheckBox^  cbUA;
-private: System::Windows::Forms::CheckBox^  cbSitHack;
-private: System::Windows::Forms::CheckBox^  cb50SecGM;
-private: System::Windows::Forms::CheckBox^  cbLogoSkipper;
-private: System::Windows::Forms::CheckBox^  cbViewSwears;
-private: System::Windows::Forms::CheckBox^  cbItemVac;
-private: System::Windows::Forms::CheckBox^  cbFMA;
-private: System::Windows::Forms::Button^  bStopSpamming;
-private: System::Windows::Forms::CheckBox^  cbScareMobs;
-private: System::Windows::Forms::CheckBox^  cbFLACC;
-private: System::Windows::Forms::Label^  lLootMS;
-private: System::Windows::Forms::CheckBox^  cbCPUHack;
-private: System::Windows::Forms::Label^  lSLWIB;
-private: System::Windows::Forms::Label^  lSAWSIL;
-private: System::Windows::Forms::ComboBox^  ddbTimedType;
-private: System::Windows::Forms::ComboBox^  ddbAttacksType;
-
-
-private: System::Windows::Forms::ComboBox^  ddbPeopleType;
-
-private: System::Windows::Forms::GroupBox^  gbHotKeys;
-private: System::Windows::Forms::CheckBox^  cbHotKeyAttack;
-private: System::Windows::Forms::ComboBox^  ddbHotKeyAttack;
-private: System::Windows::Forms::ComboBox^  ddbHotKeyLoot;
-private: System::Windows::Forms::CheckBox^  cbHotKeyLoot;
-private: System::Windows::Forms::Label^  lMapID;
-private: System::Windows::Forms::NumericUpDown^  nudSLWIB;
-private: System::Windows::Forms::NumericUpDown^  nudSAWSIL;
-private: System::Windows::Forms::NumericUpDown^  nudAutoLoot;
-
-private: System::Windows::Forms::NumericUpDown^  nudAutoAttack;
-private: System::Windows::Forms::NumericUpDown^  nudAutoMP;
-
-
-private: System::Windows::Forms::NumericUpDown^  nudAutoHP;
-
-private: System::Windows::Forms::NumericUpDown^  nudCCAttacks;
-private: System::Windows::Forms::NumericUpDown^  nudCCTimed;
-private: System::Windows::Forms::NumericUpDown^  nudCCPeople;
-private: System::Windows::Forms::NumericUpDown^  nudAutoSkill4;
-
-private: System::Windows::Forms::NumericUpDown^  nudAutoSkill3;
-
-private: System::Windows::Forms::NumericUpDown^  nudAutoSkill2;
-
-private: System::Windows::Forms::NumericUpDown^  nudAutoSkill1;
-
-private: System::Windows::Forms::CheckBox^  cbNFA;
-private: System::Windows::Forms::CheckBox^  cbAutoAggro;
-private: System::Windows::Forms::Button^  bSaveSettings;
-private: System::Windows::Forms::ComboBox^  ddbHotKeyFMA;
-private: System::Windows::Forms::CheckBox^  cbHotKeyFMA;
-private: System::Windows::Forms::ComboBox^  ddbHotKeyCCPeople;
-private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
-private: System::Windows::Forms::CheckBox^  cbNDMining;
-private: System::Windows::Forms::ComboBox^  ddbHotKeySendPacket;
-private: System::Windows::Forms::CheckBox^  cbHotKeySendPacket;
-private: System::Windows::Forms::Label^  lCharacterpID;
-private: System::Windows::Forms::CheckBox^  cbHideDamage;
-private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
-private: System::Windows::Forms::ToolTip^  InfoToolTip;
-private: System::Windows::Forms::Label^  lKBCoords;
-private: System::Windows::Forms::Label^  lKnockBack;
-private: System::Windows::Forms::CheckBox^  cbPVP;
-private: System::Windows::Forms::ComboBox^  ddbSkillInjection;
-
-private: System::Windows::Forms::NumericUpDown^  nudSkillInjection;
-
-private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
-private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
-private: System::Windows::Forms::CheckBox^  cbMouseFly;
-private: System::Windows::Forms::NumericUpDown^  nudIceGuard;
-private: System::Windows::Forms::CheckBox^  cbIceGuard;
-private: System::Windows::Forms::NumericUpDown^  nudSpamDelay;
-private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
-private: System::Windows::Forms::NumericUpDown^  nudSPCY;
-private: System::Windows::Forms::NumericUpDown^  nudSPCX;
-private: System::Windows::Forms::NumericUpDown^  nudSPCMapId;
-private: System::ComponentModel::IContainer^  components;
+	private: System::Windows::Forms::GroupBox^  gbEditPacket;
+	private: System::Windows::Forms::Button^  bSaveChanges;
+	private: System::Windows::Forms::TextBox^  tbEditPacketData;
+	private: System::Windows::Forms::TextBox^  tbEditPacketName;
+	private: System::Windows::Forms::ComboBox^  ddbEditPacket;
+	private: System::Windows::Forms::TabPage^  SPControlTabPage;
+	private: System::Windows::Forms::CheckBox^  cbSPControl;
+	private: System::Windows::Forms::CheckBox^  cbCCAttacks;
+	private: System::Windows::Forms::CheckBox^  cbCCTimed;
+	private: System::Windows::Forms::Label^  CCTimedLabel;
+	private: System::Windows::Forms::Label^  CCPeopleLabel;
+	private: System::Windows::Forms::Label^  CCAttacksLabel;
+	private: System::Windows::Forms::ListView^  lvSPControl;
+	private: System::Windows::Forms::ColumnHeader^  HeaderMapName;
+	private: System::Windows::Forms::ColumnHeader^  HeaderMapID;
+	private: System::Windows::Forms::ColumnHeader^  HeaderX;
+	private: System::Windows::Forms::ColumnHeader^  HeaderY;
+	private: System::Windows::Forms::Label^  SPControlNameLabel;
+	private: System::Windows::Forms::Label^  SPControlMapIDLabel;
+	private: System::Windows::Forms::Label^  SPControlXLabel;
+	private: System::Windows::Forms::Label^  SPControlYLabel;
+	private: System::Windows::Forms::GroupBox^  gbNewSPCLocation;
+	private: System::Windows::Forms::TextBox^  tbSPCName;
+	private: System::Windows::Forms::Button^  bAddSPCLocation;
+	private: System::Windows::Forms::ContextMenuStrip^  SPControlContextMenu;
+	private: System::Windows::Forms::ToolStripMenuItem^  deleteSPControlToolStripMenuItem;
+	private: System::Windows::Forms::Button^  bSPCGetCurrent;
+	private: System::Windows::Forms::GroupBox^  MobHacks;
+	private: System::Windows::Forms::CheckBox^  cbPerfectLoot;
+	private: System::Windows::Forms::CheckBox^  cbFusionAttack;
+	private: System::Windows::Forms::GroupBox^  gbMiscHacks;
+	private: System::Windows::Forms::CheckBox^  cbJDA;
+	private: System::Windows::Forms::CheckBox^  cbNoBG;
+	private: System::Windows::Forms::GroupBox^  gbCharHacks;
+	private: System::Windows::Forms::CheckBox^  cbVacRight;
+	private: System::Windows::Forms::CheckBox^  cbJumpRight;
+	private: System::Windows::Forms::CheckBox^  cbWalkRight;
+	private: System::Windows::Forms::CheckBox^  cbPinTyper;
+	private: System::Windows::Forms::CheckBox^  cbNoKB;
+	private: System::Windows::Forms::CheckBox^  cbMobDisarm;
+	private: System::Windows::Forms::CheckBox^  cbDojangGodmode;
+	private: System::Windows::Forms::CheckBox^  cbUnlimitedMorph;
+	private: System::Windows::Forms::CheckBox^  cbFasterMobs;
+	private: System::Windows::Forms::CheckBox^  cbNDAllAttacks;
+	private: System::Windows::Forms::CheckBox^  cbNoMobs;
+	private: System::Windows::Forms::CheckBox^  cbUA;
+	private: System::Windows::Forms::CheckBox^  cbSitHack;
+	private: System::Windows::Forms::CheckBox^  cb50SecGM;
+	private: System::Windows::Forms::CheckBox^  cbLogoSkipper;
+	private: System::Windows::Forms::CheckBox^  cbViewSwears;
+	private: System::Windows::Forms::CheckBox^  cbItemVac;
+	private: System::Windows::Forms::CheckBox^  cbFMA;
+	private: System::Windows::Forms::Button^  bStopSpamming;
+	private: System::Windows::Forms::CheckBox^  cbScareMobs;
+	private: System::Windows::Forms::CheckBox^  cbFLACC;
+	private: System::Windows::Forms::Label^  lLootMS;
+	private: System::Windows::Forms::CheckBox^  cbCPUHack;
+	private: System::Windows::Forms::Label^  lSLWIB;
+	private: System::Windows::Forms::Label^  lSAWSIL;
+	private: System::Windows::Forms::ComboBox^  ddbTimedType;
+	private: System::Windows::Forms::ComboBox^  ddbAttacksType;
+	private: System::Windows::Forms::ComboBox^  ddbPeopleType;
+	private: System::Windows::Forms::GroupBox^  gbHotKeys;
+	private: System::Windows::Forms::CheckBox^  cbHotKeyAttack;
+	private: System::Windows::Forms::ComboBox^  ddbHotKeyAttack;
+	private: System::Windows::Forms::ComboBox^  ddbHotKeyLoot;
+	private: System::Windows::Forms::CheckBox^  cbHotKeyLoot;
+	private: System::Windows::Forms::Label^  lMapID;
+	private: System::Windows::Forms::NumericUpDown^  nudSLWIB;
+	private: System::Windows::Forms::NumericUpDown^  nudSAWSIL;
+	private: System::Windows::Forms::NumericUpDown^  nudAutoLoot;
+	private: System::Windows::Forms::NumericUpDown^  nudAutoAttack;
+	private: System::Windows::Forms::NumericUpDown^  nudAutoMP;
+	private: System::Windows::Forms::NumericUpDown^  nudAutoHP;
+	private: System::Windows::Forms::NumericUpDown^  nudCCAttacks;
+	private: System::Windows::Forms::NumericUpDown^  nudCCTimed;
+	private: System::Windows::Forms::NumericUpDown^  nudCCPeople;
+	private: System::Windows::Forms::NumericUpDown^  nudAutoSkill4;
+	private: System::Windows::Forms::NumericUpDown^  nudAutoSkill3;
+	private: System::Windows::Forms::NumericUpDown^  nudAutoSkill2;
+	private: System::Windows::Forms::NumericUpDown^  nudAutoSkill1;
+	private: System::Windows::Forms::CheckBox^  cbNFA;
+	private: System::Windows::Forms::CheckBox^  cbAutoAggro;
+	private: System::Windows::Forms::Button^  bSaveSettings;
+	private: System::Windows::Forms::ComboBox^  ddbHotKeyFMA;
+	private: System::Windows::Forms::CheckBox^  cbHotKeyFMA;
+	private: System::Windows::Forms::ComboBox^  ddbHotKeyCCPeople;
+	private: System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
+	private: System::Windows::Forms::CheckBox^  cbNDMining;
+	private: System::Windows::Forms::ComboBox^  ddbHotKeySendPacket;
+	private: System::Windows::Forms::CheckBox^  cbHotKeySendPacket;
+	private: System::Windows::Forms::Label^  lCharacterpID;
+	private: System::Windows::Forms::CheckBox^  cbHideDamage;
+	private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
+	private: System::Windows::Forms::ToolTip^  InfoToolTip;
+	private: System::Windows::Forms::Label^  lKBCoords;
+	private: System::Windows::Forms::Label^  lKnockBack;
+	private: System::Windows::Forms::CheckBox^  cbPVP;
+	private: System::Windows::Forms::ComboBox^  ddbSkillInjection;
+	private: System::Windows::Forms::NumericUpDown^  nudSkillInjection;
+	private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
+	private: System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
+	private: System::Windows::Forms::CheckBox^  cbMouseFly;
+	private: System::Windows::Forms::NumericUpDown^  nudIceGuard;
+	private: System::Windows::Forms::CheckBox^  cbIceGuard;
+	private: System::Windows::Forms::NumericUpDown^  nudSpamDelay;
+	private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
+	private: System::Windows::Forms::NumericUpDown^  nudSPCY;
+	private: System::Windows::Forms::NumericUpDown^  nudSPCX;
+	private: System::Windows::Forms::NumericUpDown^  nudSPCMapId;
+	private: System::ComponentModel::IContainer^  components;
 private:
 		/// <summary>
 		/// Required designer variable.
@@ -2423,7 +2360,6 @@ private:
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
 			this->ResumeLayout(false);
-
 		}
 #pragma endregion
 #pragma region custom voids
@@ -2435,7 +2371,6 @@ private: System::Void ReloadSettings();
 private: System::Void RefreshComboBoxes();
 private: System::Void RefreshSPControlListView();
 private: System::Void RedrawStatBars();
-private: System::Void AutoPot();
 private: System::Void AutoCC();
 private: System::Void HotKeys();
 #pragma endregion
