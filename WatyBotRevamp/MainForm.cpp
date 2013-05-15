@@ -246,6 +246,21 @@ bool canLoot()
 	if(!CMS->WritePointer(ServerBasePtr, TubiOffset, 0)) return false;
 	return true;
 }
+BOOL WINAPI GetCoords()
+{
+	int iMapID = CMS->MapId;
+	for each(SpawnControl::CSPControlLocation^ location in SPControl->Locations)
+	{
+		if(iMapID == location->MapId)
+		{
+			extern int spawn_x, spawn_y;
+			spawn_x = location->X;
+			spawn_y = location->Y;
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
 BOOL WINAPI canPvP()
 {
 	if(CC->Busy || UsingPot || UsingAutoSkill || !PvPStopWatch.IsOver()) return FALSE;

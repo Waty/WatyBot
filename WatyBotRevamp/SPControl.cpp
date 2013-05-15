@@ -75,23 +75,8 @@ void CSPControl::AddLocation(String^ Name, int MapId, int X, int Y)
 }
 
 DWORD dwSPControlRet = SPControlAddy + 6;
+extern BOOL WINAPI GetCoords();
 int spawn_x, spawn_y;
-BOOL WINAPI GetCoords()
-{
-	gcroot<CMapleStory^> MS = gcnew CMapleStory;
-	extern gcroot<SpawnControl::CSPControl^> SPControl;
-	int iMapID = MS->MapId;
-	for each(SpawnControl::CSPControlLocation^ location in SPControl->Locations)
-	{
-		if(iMapID == location->MapId)
-		{
-			spawn_x = location->X;
-			spawn_y = location->Y;
-			return TRUE;
-		}
-	}
-	return FALSE;
-}
 void __declspec(naked) SPControlCave()
 {
 	_asm
