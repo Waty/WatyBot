@@ -427,7 +427,10 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	this->lKnockBack->Text =		"KnockBack: "	+ CMS->KnockBack;
 	this->lKBCoords->Text =			"KB: (" + CMS->KnockBackX + "," + CMS->KnockBackY + ")";
 	
-	MainForm::AutoPot();
+	//AutoHP/MP happens here
+	if(cbAutoHP->Checked && CMS->CharHP <= nudAutoHP->Value) CMS->SpamKey(KeyCodes[ddbAutoHPKey->SelectedIndex]);
+	if(cbAutoMP->Checked && CMS->CharMP <= nudAutoMP->Value) CMS->SpamKey(KeyCodes[ddbAutoMPKey->SelectedIndex]);
+
 	MainForm::AutoCC();
 	MainForm::RedrawStatBars();
 	MainForm::HotKeys();
@@ -436,17 +439,6 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	if(AttackMacro != nullptr){
 	bStopSpamming->Visible = CPacket->IsSpamming;
 	bStartSpamming->Visible = !CPacket->IsSpamming;}
-}
-void MainForm::AutoPot()
-{
-	if(cbAutoHP->Checked)
-	{
-		if(CMS->CharHP <= nudAutoHP->Value) CMS->SpamKey(KeyCodes[ddbAutoHPKey->SelectedIndex]);
-	}
-	if(cbAutoMP->Checked)
-	{
-		if(CMS->CharMP <= nudAutoMP->Value) CMS->SpamKey(KeyCodes[ddbAutoMPKey->SelectedIndex]);
-	}
 }
 void MainForm::AutoCC()
 {
