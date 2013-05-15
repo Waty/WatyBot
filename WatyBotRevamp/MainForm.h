@@ -2302,7 +2302,7 @@ private:
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot - V3.0 - CCPLZ! - EMS 89.2";
+			this->Text = L"WatyBot 3.0.1 - CCPLZ! - EMS 89.2";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
