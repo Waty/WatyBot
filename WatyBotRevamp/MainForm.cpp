@@ -441,19 +441,11 @@ void MainForm::AutoPot()
 {
 	if(cbAutoHP->Checked)
 	{
-		if(CMS->CharHP <= (int) nudAutoHP->Value)
-		{
-			int HPKey = KeyCodes[ddbAutoHPKey->SelectedIndex];
-			PostMessage(CMS->MSHWND, WM_KEYDOWN, HPKey, (MapVirtualKey(HPKey, 0) << 16) + 1);
-		}
+		if(CMS->CharHP <= nudAutoHP->Value) CMS->SpamKey(KeyCodes[ddbAutoHPKey->SelectedIndex]);
 	}
 	if(cbAutoMP->Checked)
 	{
-		if(CMS->CharMP <= (int) nudAutoMP->Value)
-		{
-			int MPKey = KeyCodes[ddbAutoMPKey->SelectedIndex];
-			PostMessage(CMS->MSHWND, WM_KEYDOWN, MPKey, (MapVirtualKey(MPKey, 0) << 16) + 1);
-		}
+		if(CMS->CharMP <= nudAutoMP->Value) CMS->SpamKey(KeyCodes[ddbAutoMPKey->SelectedIndex]);
 	}
 }
 void MainForm::AutoCC()
