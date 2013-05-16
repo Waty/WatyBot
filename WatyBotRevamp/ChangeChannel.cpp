@@ -3,12 +3,10 @@
 #include "Packet.h"
 #include <Windows.h>
 #include "Memory.h"
-#include <vcclr.h>
+#include "Defines.h"
 
 using namespace ChangeChannel;
 using namespace System;
-extern gcroot<Packets::CPackets^> CPacket;
-extern gcroot<CMapleStory^> CMS;
 
 typedef void (__stdcall* PFN_CField_SendTransferChannelRequest)(unsigned char nChannel);
 auto CField_SendTransferChannelRequest = reinterpret_cast<PFN_CField_SendTransferChannelRequest>(CCAddy);

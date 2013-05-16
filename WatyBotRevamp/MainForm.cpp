@@ -1,45 +1,19 @@
 #pragma once
 #pragma warning(disable : 4793 4244)
 #include <Windows.h>
-#include <msclr/marshal_cppstd.h>
 #include "MainForm.h"
 #include "Memory.h"
-#include "Defines.h"
 #include "Pointers.h"
 #include "Packet.h"
 #include "SPControl.h"
 #include "Hacks.h"
 #include "MapleStory.h"
-#include "FunctionalMacro.h"
-#include "BotMacro.h"
-#include "SkillMacro.h"
 #include "Settings.h"
+#include "Defines.h"
+
 using namespace Settings;
 using namespace WatyBotRevamp;
-using namespace msclr::interop;
 using namespace System::IO;
-using namespace std;
-using namespace Packets;
-using namespace SpawnControl;
-using namespace ChangeChannel;
-
-#define WatyBotWorkingDirectory Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData) + "\\Waty\\"
-#define SettingsFileName (WatyBotWorkingDirectory + "WatyBotSettings.xml")
-
-//Macro's
-Macro::BotMacro* AttackMacro;
-Macro::BotMacro* LootMacro;
-Macro::FunctionalMacro* CCMacro;
-Macro::SkillMacro* Skill1Macro;
-Macro::SkillMacro* Skill2Macro;
-Macro::SkillMacro* Skill3Macro;
-Macro::SkillMacro* Skill4Macro;
-StopWatch<milliseconds> SkillInjectionStopWatch;
-
-gcroot<CMapleStory^> CMS;
-gcroot<CChangeChannel^> CC;
-gcroot<CPackets^> CPacket;
-gcroot<CSPControl^> SPControl;
 
 //Hack CheckBoxes
 void MainForm::cbFusionAttack_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -209,7 +183,7 @@ void MainForm::nudSkillInjectionDelay_ValueChanged(System::Object^  sender, Syst
 }
 void MainForm::ddbSkillInjectionSkills_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::iSkillInjectionSkillID = ddbSkillInjection->SelectedIndex;
+	Hacks::iSkillInjectionSkillID = SkillInjectionSkills[ddbSkillInjection->SelectedIndex];
 }
 void MainForm::cbNoCCBlueBoxes_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -233,18 +207,16 @@ void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::
 }
 
 //Macro's
-Macro::MacroManager macroMan;
-enum MacroIndex{eAttack, eLoot, eCC, eAutoSkill1, eAutoSkill2, eAutoSkill3, eAutoSkill4};
 bool canAttack()
 {
 	if(CC->Busy) return false;
-	if(CMS->MobCount >= AutoBotVars::iSawsil && CMS->InGame) return true;
+	if(CMS->MobCount >= CMS->SAWSIL && CMS->InGame) return true;
 	return false;
 }
 bool canLoot()
 {
 	if(!CMS->InGame) return false;
-	if(CMS->ItemCount < AutoBotVars::iSlwib) return false;
+	if(CMS->ItemCount < CMS->SLWIB) return false;
 	if(!CMS->WritePointer(ServerBasePtr, TubiOffset, 0)) return false;
 	return true;
 }
@@ -263,24 +235,17 @@ BOOL WINAPI GetCoords()
 	}
 	return FALSE;
 }
-BOOL WINAPI canSkillInjection()
-{
-	if(CC->Busy || UsingPot || UsingAutoSkill || !SkillInjectionStopWatch.IsOver()) return FALSE;
-	
-	SkillInjectionStopWatch.Start();
-	return TRUE;
-}
 void AutoSkill(int KeyCodeIndex)
 {
 	if(KeyCodeIndex < KeyCodesSize)
 	{
 		//Send Key
-		while(CC->Busy || UsingAutoSkill) Sleep(500);
-		UsingAutoSkill = true;
+		while(CC->Busy || CMS->UsingAutoSkill) Sleep(500);
+		CMS->UsingAutoSkill = true;
 		Sleep(500);
 		CMS->SendKey(KeyCodes[KeyCodeIndex]);
 		Sleep(500);
-		UsingAutoSkill = false;		
+		CMS->UsingAutoSkill = false;		
 	}
 	else
 	{
@@ -319,7 +284,7 @@ void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::Ev
 	this->nudSAWSIL->Enabled = !cbAutoAttack->Checked;
 	this->ddbAutoAttackKey->Enabled = !cbAutoAttack->Checked;
 
-	AutoBotVars::iSawsil = (int) nudSAWSIL->Value;
+	CMS->SAWSIL = (int) nudSAWSIL->Value;
 	AttackMacro->SetValue(KeyCodes[ddbAutoAttackKey->SelectedIndex]);
 	AttackMacro->SetDelay((unsigned int) nudAutoAttack->Value);
 	AttackMacro->Toggle(cbAutoAttack->Checked);
@@ -330,7 +295,7 @@ void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::Even
 	this->ddbAutoLootKey->Enabled = !this->cbAutoLoot->Checked;
 	this->nudSLWIB->Enabled = !this->cbAutoLoot->Checked;
 		
-	AutoBotVars::iSlwib = (int) nudSLWIB->Value;
+	CMS->SLWIB = (int) nudSLWIB->Value;
 	LootMacro->SetValue(KeyCodes[ddbAutoLootKey->SelectedIndex]);
 	LootMacro->SetDelay((unsigned int) nudAutoLoot->Value);
 	LootMacro->Toggle(cbAutoLoot->Checked);
@@ -452,19 +417,14 @@ void MainForm::AutoCC()
 }
 void MainForm::RedrawStatBars()
 {
-	if(CMS->CharHP >= MaxHP || CMS->CharHP < 0)	MaxHP = CMS->CharHP;
-	if(CMS->CharMP >= MaxMP || CMS->CharMP < 0)	MaxMP = CMS->CharMP;
-	
-	this->HPLabel->Text = "HP: " + CMS->CharHP + "/" + MaxHP;
-	this->MPLabel->Text = "MP: " + CMS->CharMP + "/" + MaxMP;
+	this->HPLabel->Text = "HP: " + CMS->CharHP + "/" + CMS->MaxHP;
+	this->MPLabel->Text = "MP: " + CMS->CharMP + "/" + CMS->MaxMP;
 	this->EXPLabel->Text = "EXP: " + CMS->CharEXP.ToString("f2") +"%";
-	
 
-	int lengtOfBars  = 223;
-
-	double HPBarLength = ((double) CMS->CharHP / (double) MaxHP) * lengtOfBars;
+	static int lengtOfBars = 223;
+	double HPBarLength = ((double) CMS->CharHP / (double) CMS->MaxHP) * lengtOfBars;
 	this->HPForeground->Width = HPBarLength;
-	double MPBarLength = ((double) CMS->CharMP / (double) MaxMP) * lengtOfBars;
+	double MPBarLength = ((double) CMS->CharMP / (double) CMS->MaxMP) * lengtOfBars;
 	this->MPForeground->Width = MPBarLength;
 	double EXPBarLength = (CMS->CharEXP / 100) * lengtOfBars;
 	this->EXPForeground->Width = EXPBarLength;

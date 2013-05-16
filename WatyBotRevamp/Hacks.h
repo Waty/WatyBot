@@ -1,12 +1,7 @@
 #include "HackAddys.h"
 #include "ChangeChannel.h"
 #include "MapleStory.h"
-using namespace ChangeChannel;
-
-extern BOOL WINAPI canSkillInjection();
-extern gcroot<CChangeChannel^> CC;
-extern gcroot<CMapleStory^> CMS;
-extern gcroot<SpawnControl::CSPControl^> SPControl;
+#include "Defines.h"
 
 namespace Hacks
 {
@@ -276,6 +271,12 @@ namespace Hacks
 	/////SkillInjection Set Skill ID
 	DWORD dwSkillInjectionRet = SkillInjectionInjectAddy + 6;
 	int iSkillInjectionSkillID;
+	BOOL WINAPI canSkillInjection()
+	{
+		if(CC->Busy || CMS->UsingPots || CMS->UsingAutoSkill || !SkillInjectionStopWatch.IsOver()) return FALSE;	
+		SkillInjectionStopWatch.Start();
+		return TRUE;
+	}
 	CodeCave(SkillInjection)
 	{
 		push eax
