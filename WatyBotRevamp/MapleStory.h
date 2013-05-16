@@ -46,17 +46,23 @@ public:
 		int get()
 		{
 			WritePointer(SettingsBasePtr, HPAlertOffset, 20);
-			return (int) ReadPointer(StatsBasePtr, HPOffset);
+			int HP = ReadPointer(StatsBasePtr, HPOffset);
+			if(HP > MaxHP) MaxHP = HP;
+			return HP;
 		}
 	}
+	property int MaxHP;
 	property int CharMP
 	{
 		int get()
 		{
 			WritePointer(SettingsBasePtr, MPAlertOffset, 20);
-			return (int) ReadPointer(StatsBasePtr, MPOffset);
+			int MP = ReadPointer(StatsBasePtr, MPOffset);
+			if(MP > MaxMP) MaxMP = MP;
+			return MP;
 		}
 	}
+	property int MaxMP;
 	property double CharEXP
 	{
 		double get()
@@ -142,6 +148,10 @@ public:
 			return FindProcessWindow();
 		}
 	}
+	property bool UsingPots;
+	property bool UsingAutoSkill;
+	property int SAWSIL;
+	property int SLWIB;
 
 	bool WritePointer(unsigned long ulBase, int iOffset, int iValue);
 	void SendKey(int Key);
