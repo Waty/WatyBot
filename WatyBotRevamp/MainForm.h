@@ -195,7 +195,8 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::ToolTip^  InfoToolTip;
 	private: System::Windows::Forms::Label^  lKBCoords;
 	private: System::Windows::Forms::Label^  lKnockBack;
-	private: System::Windows::Forms::CheckBox^  cbPVP;
+private: System::Windows::Forms::CheckBox^  cbSkillInjection;
+
 	private: System::Windows::Forms::ComboBox^  ddbSkillInjection;
 	private: System::Windows::Forms::NumericUpDown^  nudSkillInjection;
 	private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
@@ -294,7 +295,7 @@ private:
 			this->cbIceGuard = (gcnew System::Windows::Forms::CheckBox());
 			this->nudSkillInjection = (gcnew System::Windows::Forms::NumericUpDown());
 			this->ddbSkillInjection = (gcnew System::Windows::Forms::ComboBox());
-			this->cbPVP = (gcnew System::Windows::Forms::CheckBox());
+			this->cbSkillInjection = (gcnew System::Windows::Forms::CheckBox());
 			this->cbMercedesCombo = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNDMining = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNFA = (gcnew System::Windows::Forms::CheckBox());
@@ -1246,7 +1247,7 @@ private:
 			this->gbCharHacks->Controls->Add(this->cbIceGuard);
 			this->gbCharHacks->Controls->Add(this->nudSkillInjection);
 			this->gbCharHacks->Controls->Add(this->ddbSkillInjection);
-			this->gbCharHacks->Controls->Add(this->cbPVP);
+			this->gbCharHacks->Controls->Add(this->cbSkillInjection);
 			this->gbCharHacks->Controls->Add(this->cbMercedesCombo);
 			this->gbCharHacks->Controls->Add(this->cbNDMining);
 			this->gbCharHacks->Controls->Add(this->cbNFA);
@@ -1296,7 +1297,7 @@ private:
 			this->nudSkillInjection->Size = System::Drawing::Size(58, 20);
 			this->nudSkillInjection->TabIndex = 17;
 			this->InfoToolTip->SetToolTip(this->nudSkillInjection, L"Delay for Skill Injection, 200 is high, 0 is low");
-			this->nudSkillInjection->ValueChanged += gcnew System::EventHandler(this, &MainForm::nudPVPDelay_ValueChanged);
+			this->nudSkillInjection->ValueChanged += gcnew System::EventHandler(this, &MainForm::nudSkillInjectionDelay_ValueChanged);
 			// 
 			// ddbSkillInjection
 			// 
@@ -1311,20 +1312,20 @@ private:
 			this->ddbSkillInjection->Name = L"ddbSkillInjection";
 			this->ddbSkillInjection->Size = System::Drawing::Size(145, 21);
 			this->ddbSkillInjection->TabIndex = 16;
-			this->InfoToolTip->SetToolTip(this->ddbSkillInjection, L"Select here the skill you want to use with PvP Skill Injection");
-			this->ddbSkillInjection->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::ddbPVPSkills_SelectedIndexChanged);
+			this->InfoToolTip->SetToolTip(this->ddbSkillInjection, L"Select here the skill you want to use with Skill Injection");
+			this->ddbSkillInjection->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::ddbSkillInjectionSkills_SelectedIndexChanged);
 			// 
-			// cbPVP
+			// cbSkillInjection
 			// 
-			this->cbPVP->AutoSize = true;
-			this->cbPVP->Location = System::Drawing::Point(6, 137);
-			this->cbPVP->Name = L"cbPVP";
-			this->cbPVP->Size = System::Drawing::Size(88, 17);
-			this->cbPVP->TabIndex = 15;
-			this->cbPVP->Text = L"Skill Injection";
-			this->InfoToolTip->SetToolTip(this->cbPVP, L"Spams a powerfull attack");
-			this->cbPVP->UseVisualStyleBackColor = true;
-			this->cbPVP->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbPVP_CheckedChanged);
+			this->cbSkillInjection->AutoSize = true;
+			this->cbSkillInjection->Location = System::Drawing::Point(6, 137);
+			this->cbSkillInjection->Name = L"cbSkillInjection";
+			this->cbSkillInjection->Size = System::Drawing::Size(88, 17);
+			this->cbSkillInjection->TabIndex = 15;
+			this->cbSkillInjection->Text = L"Skill Injection";
+			this->InfoToolTip->SetToolTip(this->cbSkillInjection, L"Spams a powerfull attack");
+			this->cbSkillInjection->UseVisualStyleBackColor = true;
+			this->cbSkillInjection->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbSkillInjection_CheckedChanged);
 			// 
 			// cbMercedesCombo
 			// 
@@ -2450,11 +2451,11 @@ private: System::Void bSaveSettings_Click(System::Object^  sender, System::Event
 private: System::Void cbNDMining_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbHideDamage_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbMercedesCombo_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void cbSkillInjection_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNoFadeStages_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbNoCCBlueBoxes_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void nudPVPDelay_ValueChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void ddbPVPSkills_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void nudSkillInjectionDelay_ValueChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void ddbSkillInjectionSkills_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbMouseFly_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void cbIceGuard_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void PacketSelectBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);

@@ -34,7 +34,7 @@ Macro::SkillMacro* Skill1Macro;
 Macro::SkillMacro* Skill2Macro;
 Macro::SkillMacro* Skill3Macro;
 Macro::SkillMacro* Skill4Macro;
-StopWatch<milliseconds> PvPStopWatch;
+StopWatch<milliseconds> SkillInjectionStopWatch;
 
 gcroot<CMapleStory^> CMS;
 gcroot<CChangeChannel^> CC;
@@ -180,36 +180,36 @@ void MainForm::cbMouseFly_CheckedChanged(System::Object^  sender, System::EventA
 {
 	cbMouseFly->Checked = Hacks::cmMouseFly.Enable(cbMouseFly->Checked);
 }
-void MainForm::cbPVP_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::cbSkillInjection_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	if(ddbSkillInjection->SelectedIndex < 0)
 	{
-		if(cbPVP->Checked)
+		if(cbSkillInjection->Checked)
 		{
 			ShowError("Please Select a Skill");
-			cbPVP->Checked = false;
+			cbSkillInjection->Checked = false;
 		}
 	}
 	else
 	{
 		//set variables
-		Hacks::iPVPSkillID = PVPSkills[ddbSkillInjection->SelectedIndex];
-		PvPStopWatch.SetDelay(milliseconds((int) nudSkillInjection->Value));
+		Hacks::iSkillInjectionSkillID = SkillInjectionSkills[ddbSkillInjection->SelectedIndex];
+		SkillInjectionStopWatch.SetDelay(milliseconds((int) nudSkillInjection->Value));
 
 		cbNFA->Checked = false;
-		cbPVP->Checked = Hacks::cmPVP1.Enable(cbPVP->Checked);
-		cbPVP->Checked = Hacks::cmPVP2.Enable(cbPVP->Checked);
-		cbNoCCBlueBoxes->Checked = cbPVP->Checked;
-		cbNoCCBlueBoxes->Enabled = !cbPVP->Checked;
+		cbSkillInjection->Checked = Hacks::cmSkillInjectionChecks.Enable(cbSkillInjection->Checked);
+		cbSkillInjection->Checked = Hacks::cmSkillInjectionCave.Enable(cbSkillInjection->Checked);
+		cbNoCCBlueBoxes->Checked = cbSkillInjection->Checked;
+		cbNoCCBlueBoxes->Enabled = !cbSkillInjection->Checked;
 	}
 }
-void MainForm::nudPVPDelay_ValueChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::nudSkillInjectionDelay_ValueChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	PvPStopWatch.SetDelay(milliseconds((int) nudSkillInjection->Value));
+	SkillInjectionStopWatch.SetDelay(milliseconds((int) nudSkillInjection->Value));
 }
-void MainForm::ddbPVPSkills_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::ddbSkillInjectionSkills_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::iPVPSkillID = ddbSkillInjection->SelectedIndex;
+	Hacks::iSkillInjectionSkillID = ddbSkillInjection->SelectedIndex;
 }
 void MainForm::cbNoCCBlueBoxes_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -263,11 +263,11 @@ BOOL WINAPI GetCoords()
 	}
 	return FALSE;
 }
-BOOL WINAPI canPvP()
+BOOL WINAPI canSkillInjection()
 {
-	if(CC->Busy || UsingPot || UsingAutoSkill || !PvPStopWatch.IsOver()) return FALSE;
+	if(CC->Busy || UsingPot || UsingAutoSkill || !SkillInjectionStopWatch.IsOver()) return FALSE;
 	
-	PvPStopWatch.Start();
+	SkillInjectionStopWatch.Start();
 	return TRUE;
 }
 void AutoSkill(int KeyCodeIndex)

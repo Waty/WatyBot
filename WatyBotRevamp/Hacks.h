@@ -3,7 +3,7 @@
 #include "MapleStory.h"
 using namespace ChangeChannel;
 
-extern BOOL WINAPI canPvP();
+extern BOOL WINAPI canSkillInjection();
 extern gcroot<CChangeChannel^> CC;
 extern gcroot<CMapleStory^> CMS;
 extern gcroot<SpawnControl::CSPControl^> SPControl;
@@ -268,33 +268,33 @@ namespace Hacks
 	BYTE bMercedesCombo[] = {0xEB};
 	CMemory cmMercedesCombo(MercedesComboAddy, bMercedesCombo, 1);
  
-	/////PvP Disable Checks
-	BYTE bPVP1[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
-	BYTE bPVP3[] = {0xEB, 0x0E};
-	CMemory cmPVP1(PvPChecksAddy1, bPVP1, 6, PvPChecksAddy2, bPVP1, 6, PvPChecksAddy3, bPVP3, 2);
+	/////SkillInjection Disable Checks
+	BYTE bSkillInjection1[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
+	BYTE bSkillInjection3[] = {0xEB, 0x0E};
+	CMemory cmSkillInjectionChecks(SkillInjectionChecksAddy1, bSkillInjection1, 6, SkillInjectionChecksAddy2, bSkillInjection1, 6, SkillInjectionChecksAddy3, bSkillInjection3, 2);
  
-	/////PvP Set Skill ID
-	DWORD dwPVPRet = PvPInjectAddy + 6;
-	int iPVPSkillID;
-	CodeCave(PVP)
+	/////SkillInjection Set Skill ID
+	DWORD dwSkillInjectionRet = SkillInjectionInjectAddy + 6;
+	int iSkillInjectionSkillID;
+	CodeCave(SkillInjection)
 	{
 		push eax
-		call canPvP
+		call canSkillInjection
 		cmp eax, TRUE
 		pop eax
-		//If it returns TRUE, jump to InjectPvP
-		je InjectPvP
+		//If it returns TRUE, jump to InjectSkillInjection
+		je InjectSkill
 
 		//Else
 		mov edx,[esi+0x00006DAC]
-		jmp dword ptr [dwPVPRet]
+		jmp dword ptr [dwSkillInjectionRet]
  
-		InjectPvP:
-		mov edx,[iPVPSkillID]
-		jmp dword ptr [dwPVPRet]
+		InjectSkill:
+		mov edx,[iSkillInjectionSkillID]
+		jmp dword ptr [dwSkillInjectionRet]
 	}
 	EndCodeCave
-	CMemory cmPVP2(PvPInjectAddy, CavePVP, 1, true);
+	CMemory cmSkillInjectionCave(SkillInjectionInjectAddy, CaveSkillInjection, 1, true);
 	
 	/////No Fadestarge
 	BYTE bNoFadeStages[] = {0xc2, 0x04, 0x00};

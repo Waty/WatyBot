@@ -50,10 +50,10 @@
 #define HideDamageAddy3 0x702285
 #define HideDamageAddy4 0x6E4F00
 #define MercedesComboAddy 0xBB245B
-#define PvPChecksAddy1 0xBBFDE4
-#define PvPChecksAddy2 0xBBFE0B
-#define PvPChecksAddy3 0xBBFEAC
-#define PvPInjectAddy 0xBBFE11
+#define SkillInjectionChecksAddy1 0xBBFDE4
+#define SkillInjectionChecksAddy2 0xBBFE0B
+#define SkillInjectionChecksAddy3 0xBBFEAC
+#define SkillInjectionInjectAddy 0xBBFE11
 #define CCAddy 0x568800
 #define Fadeaddy1 0x826e70
 #define Fadeaddy2 0x827320
