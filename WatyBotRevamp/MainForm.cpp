@@ -223,7 +223,7 @@ bool canLoot()
 BOOL WINAPI GetCoords()
 {
 	int iMapID = CMS->MapId;
-	for each(SpawnControl::CSPControlLocation^ location in SPControl->Locations)
+	for each(CSPControlLocation^ location in SPControl->Locations)
 	{
 		if(iMapID == location->MapId)
 		{

@@ -1,5 +1,6 @@
 #pragma once
 #ifndef _DEFINES_H
+#define _DEFINES_H
 #include <Windows.h>
 #include "SPControl.h"
 #include "Pointers.h"
