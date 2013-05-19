@@ -637,51 +637,51 @@ Void MainForm::LoadSettings()
 }
 Void MainForm::ReloadSettings()
 {
-	List<SettingsEntry^>^ m = gcnew List<SettingsEntry^>(SettingCount);
+	List<SettingsEntry^>^ s = gcnew List<SettingsEntry^>(SettingCount);
 		//AutoAttack
-		m->Add(gcnew SettingsEntry(nudAutoAttack));
-		m->Add(gcnew SettingsEntry(nudSAWSIL));
-		m->Add(gcnew SettingsEntry(ddbAutoAttackKey));
+		s->Add(gcnew SettingsEntry(nudAutoAttack));
+		s->Add(gcnew SettingsEntry(nudSAWSIL));
+		s->Add(gcnew SettingsEntry(ddbAutoAttackKey));
 		//AutoLoot
-		m->Add(gcnew SettingsEntry(nudAutoLoot));
-		m->Add(gcnew SettingsEntry(nudSLWIB));
-		m->Add(gcnew SettingsEntry(ddbAutoLootKey));
+		s->Add(gcnew SettingsEntry(nudAutoLoot));
+		s->Add(gcnew SettingsEntry(nudSLWIB));
+		s->Add(gcnew SettingsEntry(ddbAutoLootKey));
 		//AutoHP
-		m->Add(gcnew SettingsEntry(nudAutoHP));
-		m->Add(gcnew SettingsEntry(ddbAutoHPKey));
+		s->Add(gcnew SettingsEntry(nudAutoHP));
+		s->Add(gcnew SettingsEntry(ddbAutoHPKey));
 		//AutoMP
-		m->Add(gcnew SettingsEntry(nudAutoMP));
-		m->Add(gcnew SettingsEntry(ddbAutoMPKey));
+		s->Add(gcnew SettingsEntry(nudAutoMP));
+		s->Add(gcnew SettingsEntry(ddbAutoMPKey));
 		//PetFeeder
-		m->Add(gcnew SettingsEntry(nudPetFeeder));
-		m->Add(gcnew SettingsEntry(ddbPetFeeder));
+		s->Add(gcnew SettingsEntry(nudPetFeeder));
+		s->Add(gcnew SettingsEntry(ddbPetFeeder));
 		//CC People
-		m->Add(gcnew SettingsEntry(nudCCPeople));
-		m->Add(gcnew SettingsEntry(ddbPeopleType));
+		s->Add(gcnew SettingsEntry(nudCCPeople));
+		s->Add(gcnew SettingsEntry(ddbPeopleType));
 		//CC Timed
-		m->Add(gcnew SettingsEntry(nudCCTimed));
-		m->Add(gcnew SettingsEntry(ddbTimedType));
+		s->Add(gcnew SettingsEntry(nudCCTimed));
+		s->Add(gcnew SettingsEntry(ddbTimedType));
 		//CC Attacks
-		m->Add(gcnew SettingsEntry(nudCCAttacks));
-		m->Add(gcnew SettingsEntry(ddbAttacksType));
+		s->Add(gcnew SettingsEntry(nudCCAttacks));
+		s->Add(gcnew SettingsEntry(ddbAttacksType));
 		//HotKeys
-		m->Add(gcnew SettingsEntry(ddbHotKeyAttack));
-		m->Add(gcnew SettingsEntry(ddbHotKeyLoot));
-		m->Add(gcnew SettingsEntry(ddbHotKeyFMA));
-		m->Add(gcnew SettingsEntry(ddbHotKeyCCPeople));
-		m->Add(gcnew SettingsEntry(ddbHotKeySendPacket));
+		s->Add(gcnew SettingsEntry(ddbHotKeyAttack));
+		s->Add(gcnew SettingsEntry(ddbHotKeyLoot));
+		s->Add(gcnew SettingsEntry(ddbHotKeyFMA));
+		s->Add(gcnew SettingsEntry(ddbHotKeyCCPeople));
+		s->Add(gcnew SettingsEntry(ddbHotKeySendPacket));
 		//PacketSender
-		m->Add(gcnew SettingsEntry(ddbSelectedPacket));
-		m->Add(gcnew SettingsEntry(nudSpamAmount));
-		m->Add(gcnew SettingsEntry(nudSpamDelay));
+		s->Add(gcnew SettingsEntry(ddbSelectedPacket));
+		s->Add(gcnew SettingsEntry(nudSpamAmount));
+		s->Add(gcnew SettingsEntry(nudSpamDelay));
 		//Hacks Tab
-		m->Add(gcnew SettingsEntry(nudSkillInjection));
-		m->Add(gcnew SettingsEntry(ddbSkillInjection));
-		m->Add(gcnew SettingsEntry(nudIceGuard));
+		s->Add(gcnew SettingsEntry(nudSkillInjection));
+		s->Add(gcnew SettingsEntry(ddbSkillInjection));
+		s->Add(gcnew SettingsEntry(nudIceGuard));
 		
-		m->Add(gcnew SettingsEntry(cbPinTyper));
-		m->Add(gcnew SettingsEntry(cbLogoSkipper));
-		Settings = m;
+		s->Add(gcnew SettingsEntry(cbPinTyper));
+		s->Add(gcnew SettingsEntry(cbLogoSkipper));
+		Settings = s;
 }
 Void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e)
 {
