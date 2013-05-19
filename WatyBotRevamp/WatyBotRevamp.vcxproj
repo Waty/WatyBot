@@ -129,7 +129,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AutoSkill.cpp" />
     <ClCompile Include="ChangeChannel.cpp" />
+    <ClCompile Include="Defines.cpp" />
     <ClCompile Include="MacroManager.cpp" />
     <ClCompile Include="MainDll.cpp" />
     <ClCompile Include="MainForm.cpp">
@@ -168,6 +170,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AutoSkill.h" />
     <ClInclude Include="BotMacro.h" />
     <ClInclude Include="ChangeChannel.h" />
     <ClInclude Include="Defines.h" />
@@ -186,7 +189,6 @@
     <ClInclude Include="Packet.h" />
     <ClInclude Include="Pointers.h" />
     <ClInclude Include="Settings.h" />
-    <ClInclude Include="SkillMacro.h" />
     <ClInclude Include="SPControl.h" />
     <ClInclude Include="StopWatch.h" />
   </ItemGroup>

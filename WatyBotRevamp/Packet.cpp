@@ -1,10 +1,5 @@
 #include "Packet.h"
-#include "Pointers.h" // where i store stuff like SendAddy and SendClassAddy
-using namespace Packets;
-using namespace System::IO;
-using namespace System::Windows::Forms;
-#define PacketFileName (Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData) + "\\Waty\\WatyBotPackets.xml")
-#define ShowError(Message) MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
+#include "Defines.h"
 
 DWORD dwMSSendMethod = SendAddy;// + 5;
 DWORD dwMSSendObject = *(PDWORD)(SendClassAddy+2);

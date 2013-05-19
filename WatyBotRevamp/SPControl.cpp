@@ -1,13 +1,4 @@
-#include <Windows.h>
-#include "SPControl.h"
-#include "HackAddys.h"
-#include "MapleStory.h"
-#include <vcclr.h>
-#include "Memory.h"
-using namespace SpawnControl;
-using namespace System::IO;
-using namespace System::Windows::Forms;
-#define SPControlFileName (System::Environment::GetFolderPath(System::Environment::SpecialFolder::ApplicationData) + "\\Waty\\WatyBotSPControl.xml")
+#include "Defines.h"
 
 CSPControlLocation::CSPControlLocation()
 {

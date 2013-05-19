@@ -1,10 +1,7 @@
 #pragma region ...
 #pragma once
 #include <Windows.h>
-#include "SPControl.h"
-#include "Packet.h"
-#include "ChangeChannel.h"
-#include "Settings.h"
+#include "Defines.h"
 
 namespace WatyBotRevamp {
 
@@ -250,6 +247,9 @@ private:
 			this->hName = (gcnew System::Windows::Forms::ColumnHeader());
 			this->hInterval = (gcnew System::Windows::Forms::ColumnHeader());
 			this->hKey = (gcnew System::Windows::Forms::ColumnHeader());
+			this->AutoSkillContextMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
+			this->castToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->deleteToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->nudCCAttacks = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudCCTimed = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudCCPeople = (gcnew System::Windows::Forms::NumericUpDown());
@@ -403,13 +403,11 @@ private:
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->InfoToolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
-			this->AutoSkillContextMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
-			this->castToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->deleteToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill))->BeginInit();
+			this->AutoSkillContextMenu->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCAttacks))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCTimed))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCPeople))->BeginInit();
@@ -448,7 +446,6 @@ private:
 			this->InfoTab->SuspendLayout();
 			this->gbHotKeys->SuspendLayout();
 			this->gbPointers->SuspendLayout();
-			this->AutoSkillContextMenu->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -572,7 +569,6 @@ private:
 			// lvAutoSkill
 			// 
 			this->lvAutoSkill->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->lvAutoSkill->CheckBoxes = true;
 			this->lvAutoSkill->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(3) {this->hName, this->hInterval, 
 				this->hKey});
 			this->lvAutoSkill->ContextMenuStrip = this->AutoSkillContextMenu;
@@ -597,6 +593,27 @@ private:
 			// 
 			this->hKey->Text = L"Key";
 			this->hKey->Width = 75;
+			// 
+			// AutoSkillContextMenu
+			// 
+			this->AutoSkillContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->castToolStripMenuItem, 
+				this->deleteToolStripMenuItem});
+			this->AutoSkillContextMenu->Name = L"AutoSkillContextMenu";
+			this->AutoSkillContextMenu->Size = System::Drawing::Size(108, 48);
+			// 
+			// castToolStripMenuItem
+			// 
+			this->castToolStripMenuItem->Name = L"castToolStripMenuItem";
+			this->castToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->castToolStripMenuItem->Text = L"Cast";
+			this->castToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::castToolStripMenuItem_Click);
+			// 
+			// deleteToolStripMenuItem
+			// 
+			this->deleteToolStripMenuItem->Name = L"deleteToolStripMenuItem";
+			this->deleteToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->deleteToolStripMenuItem->Text = L"Delete";
+			this->deleteToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::deleteToolStripMenuItem_Click);
 			// 
 			// nudCCAttacks
 			// 
@@ -2273,27 +2290,6 @@ private:
 			this->StatsTimer->Enabled = true;
 			this->StatsTimer->Tick += gcnew System::EventHandler(this, &MainForm::StatsTimer_Tick);
 			// 
-			// AutoSkillContextMenu
-			// 
-			this->AutoSkillContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->castToolStripMenuItem, 
-				this->deleteToolStripMenuItem});
-			this->AutoSkillContextMenu->Name = L"AutoSkillContextMenu";
-			this->AutoSkillContextMenu->Size = System::Drawing::Size(153, 70);
-			// 
-			// castToolStripMenuItem
-			// 
-			this->castToolStripMenuItem->Name = L"castToolStripMenuItem";
-			this->castToolStripMenuItem->Size = System::Drawing::Size(152, 22);
-			this->castToolStripMenuItem->Text = L"Cast";
-			this->castToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::castToolStripMenuItem_Click);
-			// 
-			// deleteToolStripMenuItem
-			// 
-			this->deleteToolStripMenuItem->Name = L"deleteToolStripMenuItem";
-			this->deleteToolStripMenuItem->Size = System::Drawing::Size(152, 22);
-			this->deleteToolStripMenuItem->Text = L"Delete";
-			this->deleteToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::deleteToolStripMenuItem_Click);
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2315,6 +2311,7 @@ private:
 			this->AutoBotGroupBox->ResumeLayout(false);
 			this->AutoBotGroupBox->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill))->EndInit();
+			this->AutoSkillContextMenu->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCAttacks))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCTimed))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCPeople))->EndInit();
@@ -2362,13 +2359,13 @@ private:
 			this->gbHotKeys->PerformLayout();
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
-			this->AutoSkillContextMenu->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
 #pragma region custom voids
-private: List<Settings::SettingsEntry^>^ Settings;
+private: List<SettingsEntry^>^ Settings;
+private: List<CAutoSkill^>^ AutoSkills;
 private: property XmlSerializer^ s;
 private: System::Void LoadSettings();
 private: System::Void SaveSettings();

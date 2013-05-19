@@ -1,15 +1,7 @@
 #pragma once
-#pragma warning(disable : 4793 4244)
-#include <Windows.h>
 #include "MainForm.h"
-#include "Memory.h"
-#include "Pointers.h"
-#include "Packet.h"
-#include "SPControl.h"
-#include "Hacks.h"
-#include "MapleStory.h"
-#include "Settings.h"
 #include "Defines.h"
+#include "Hacks.h"
 
 using namespace Settings;
 using namespace WatyBotRevamp;
@@ -235,28 +227,11 @@ BOOL WINAPI GetCoords()
 	}
 	return FALSE;
 }
-void AutoSkill(int KeyCodeIndex)
-{
-	if(KeyCodeIndex < KeyCodesSize)
-	{
-		//Send Key
-		while(CC->Busy || CMS->UsingAutoSkill) Sleep(500);
-		CMS->UsingAutoSkill = true;
-		Sleep(500);
-		CMS->SendKey(KeyCodes[KeyCodeIndex]);
-		Sleep(500);
-		CMS->UsingAutoSkill = false;		
-	}
-	else
-	{
-		//Send Packet
-		CPacket->Send(CPacket->Packets[KeyCodeIndex - KeyCodesSize]);
-	}
-}
 void TimedCC()
 {
 	CC->CCSwitch(CCType(CCMacro->GetValue()));
 }
+enum MacroIndex{eAttack, eLoot, eCC, eAutoSkill1, eAutoSkill2, eAutoSkill3, eAutoSkill4};
 void InitializeMacros()
 {
 	//Start the MacroManager
@@ -264,18 +239,12 @@ void InitializeMacros()
 	AttackMacro = new Macro::BotMacro(canAttack);
 	LootMacro = new Macro::BotMacro(canLoot);
 	CCMacro = new Macro::FunctionalMacro(TimedCC);
-	Skill1Macro = new Macro::SkillMacro();
-	Skill2Macro = new Macro::SkillMacro();
-	Skill3Macro = new Macro::SkillMacro();
-	Skill4Macro = new Macro::SkillMacro();
+	PetFeederMacro = new Macro::FunctionalMacro(TimedCC);
 
 	macroMan.AddMacro(MacroIndex::eAttack, AttackMacro);
 	macroMan.AddMacro(MacroIndex::eLoot, LootMacro);
 	macroMan.AddMacro(MacroIndex::eCC, CCMacro);
-	macroMan.AddMacro(MacroIndex::eAutoSkill1, Skill1Macro);
-	macroMan.AddMacro(MacroIndex::eAutoSkill2, Skill2Macro);
-	macroMan.AddMacro(MacroIndex::eAutoSkill3, Skill3Macro);
-	macroMan.AddMacro(MacroIndex::eAutoSkill4, Skill4Macro);
+	macroMan.AddMacro(MacroIndex::eAutoSkill1, PetFeederMacro);
 }
 
 void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -333,6 +302,7 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	SPControl = gcnew CSPControl;
 	CPacket = gcnew CPackets;
 	LoadSettings();
+	AutoSkills = gcnew List<CAutoSkill^>;
 
 	//Start the MacroManager
 	InitializeMacros();
@@ -427,20 +397,22 @@ Void MainForm::bAutoSkill_Click(System::Object^  sender, System::EventArgs^  e)
 	item->SubItems->Add(nudAutoSkill->Value.ToString());
 	item->SubItems->Add(ddbAutoSkill->SelectedItem->ToString());
 	lvAutoSkill->Items->Add(item);
-	Macro::SkillMacro* m = new Macro::SkillMacro();
-	m->SetDelay((unsigned int) nudAutoSkill->Value);
-	m->SetKeyIndex(ddbAutoSkill->SelectedIndex);
-
-	//And then something like this:
-	AutoSkillManager.AddMacro(lvAutoSkill->Items->IndexOf(item), m);
+	AutoSkills->Add(gcnew CAutoSkill((int) nudAutoSkill->Value, ddbAutoSkill->SelectedIndex));
 }
 Void MainForm::castToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	
+	if(lvSPControl->SelectedItems->Count < 0) return;
+	ListViewItem^ i = lvAutoSkill->SelectedItems[0];
+	AutoSkills[lvAutoSkill->Items->IndexOf(i)]->Cast();
 }
 Void MainForm::deleteToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
-
+	if(lvSPControl->SelectedItems->Count < 0) return;
+	ListViewItem^ i = lvAutoSkill->SelectedItems[0];
+	int index = lvAutoSkill->Items->IndexOf(i);
+	delete AutoSkills[index];
+	AutoSkills->RemoveAt(index);
+	lvAutoSkill->Items->RemoveAt(index);
 }
 
 //Controls on the PacketSender tab
@@ -573,6 +545,11 @@ void MainForm::RefreshSPControlListView()
 }
 
 //Loading/Saving AutoBot settings
+enum SettingsIndex{
+	AutoAttackDelay, SAWSIL, AutoAttackKey, AutoLootDelay, SLWIB, AutoLootKey, AutoHPValue, AutoHPKey, AutoMPValue, AutoMPKey,
+	CCPeople, CCPeopleType, CCTimed, CCTimedType, CCAttacks, CCAttacksType, HotKeyAttack, HotKeyLoot, HotKeyFMA,
+	HotKeyCCPeople, HotKeySendPacket, SelectedPacket, PacketSpamAmount, PacketSpamDelay, SkillInjectionDelay, SkillInjectionIndex, IceGuard, PinTyper, LogoSkipper, SettingCount
+};
 Void MainForm::SaveSettings()
 {
 	ReloadSettings();
@@ -597,14 +574,14 @@ Void MainForm::LoadSettings()
 	}
 
 	TextReader^ reader = gcnew StreamReader(SettingsFileName);
-	s = gcnew XmlSerializer(List<SettingsEntry^>::typeid);
+	s = gcnew XmlSerializer(SettingsList::typeid);
 	try
 	{
-		Settings = safe_cast<List<SettingsEntry^>^>(s->Deserialize(reader));
+		Settings = safe_cast<SettingsList^>(s->Deserialize(reader));
 	}
 	catch(System::Exception^){}	
 	reader->Close();
-	if(Settings == nullptr) Settings = gcnew List<SettingsEntry^>;
+	if(Settings == nullptr) Settings = gcnew SettingsList;
 	else if(Settings->Count >= 36)
 	{
 		try{
@@ -654,7 +631,7 @@ Void MainForm::LoadSettings()
 }
 Void MainForm::ReloadSettings()
 {
-		List<SettingsEntry^>^ m = gcnew List<SettingsEntry^>(SettingCount);
+	SettingsList^ m = gcnew SettingsList(SettingCount);
 		//AutoAttack
 		m->Add(gcnew SettingsEntry(nudAutoAttack));
 		m->Add(gcnew SettingsEntry(nudSAWSIL));

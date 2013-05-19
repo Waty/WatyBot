@@ -2,6 +2,7 @@
 #include "MacroManager.h"
 #include "MapleStory.h"
 #include <vcclr.h>
+extern gcroot<CMapleStory^> CMS;
 
 namespace Macro
 {
@@ -35,6 +36,5 @@ namespace Macro
 		}
 	private:
 		std::function<bool()> m_fCondition;
-		gcroot<CMapleStory^> CMS;
 	};
 }

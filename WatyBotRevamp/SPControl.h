@@ -1,5 +1,4 @@
 #pragma once
-
 namespace SpawnControl
 {
 	using namespace System;

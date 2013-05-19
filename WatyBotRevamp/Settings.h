@@ -1,5 +1,4 @@
 #pragma once
-#include <Windows.h>
 using namespace System;
 using namespace System::Collections;
 using namespace System::Windows::Forms;

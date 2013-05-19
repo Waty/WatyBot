@@ -37,6 +37,9 @@
     <Filter Include="Classes\Settings">
       <UniqueIdentifier>{73e9a498-1009-4f53-a6f3-0eba6532c7ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\CAutoSkill">
+      <UniqueIdentifier>{717c3d74-0f51-4145-b5e1-e89cda80b9fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainForm.cpp">
@@ -62,6 +65,12 @@
     </ClCompile>
     <ClCompile Include="MacroManager.cpp">
       <Filter>Classes\MacroManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Defines.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoSkill.cpp">
+      <Filter>Classes\CAutoSkill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,11 +125,11 @@
     <ClInclude Include="noncopyable.h">
       <Filter>Classes\MacroManager</Filter>
     </ClInclude>
-    <ClInclude Include="SkillMacro.h">
-      <Filter>Classes\MacroManager</Filter>
-    </ClInclude>
     <ClInclude Include="StopWatch.h">
       <Filter>Classes\MacroManager</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoSkill.h">
+      <Filter>Classes\CAutoSkill</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

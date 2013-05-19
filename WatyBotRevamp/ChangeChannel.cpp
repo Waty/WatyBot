@@ -1,10 +1,5 @@
 #include "ChangeChannel.h"
-#include "Packet.h"
-#include "MapleStory.h"
-#include "Packet.h"
-#include <Windows.h>
-#include "Memory.h"
-#include <vcclr.h>
+#include "Defines.h"
 
 using namespace ChangeChannel;
 using namespace System;
@@ -27,17 +22,17 @@ void CChangeChannel::CCSwitch(CCType type)
 	switch(type)
 	{
 	case CCType::CC:
-		bw->DoWork += gcnew ComponentModel::DoWorkEventHandler(this, &CChangeChannel::CC);
+		bw->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &CChangeChannel::CC);
 		bw->RunWorkerAsync();
 		break;
 
 	case CCType::CS:
-		bw->DoWork += gcnew ComponentModel::DoWorkEventHandler(this, &CChangeChannel::CS);
+		bw->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &CChangeChannel::CS);
 		bw->RunWorkerAsync();
 		break;
 
 	case CCType::DC:
-		bw->DoWork += gcnew ComponentModel::DoWorkEventHandler(this, &CChangeChannel::DC);
+		bw->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &CChangeChannel::DC);
 		bw->RunWorkerAsync();
 		break;
 	}
