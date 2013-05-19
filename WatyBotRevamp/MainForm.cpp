@@ -390,7 +390,6 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 }
 
 //Autoskill
-Macro::MacroManager AutoSkillManager;
 Void MainForm::bAutoSkill_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	ListViewItem^ item = gcnew ListViewItem(tbAutoSkill->Text);
@@ -546,9 +545,9 @@ void MainForm::RefreshSPControlListView()
 
 //Loading/Saving AutoBot settings
 enum SettingsIndex{
-	AutoAttackDelay, SAWSIL, AutoAttackKey, AutoLootDelay, SLWIB, AutoLootKey, AutoHPValue, AutoHPKey, AutoMPValue, AutoMPKey,
-	CCPeople, CCPeopleType, CCTimed, CCTimedType, CCAttacks, CCAttacksType, HotKeyAttack, HotKeyLoot, HotKeyFMA,
-	HotKeyCCPeople, HotKeySendPacket, SelectedPacket, PacketSpamAmount, PacketSpamDelay, SkillInjectionDelay, SkillInjectionIndex, IceGuard, PinTyper, LogoSkipper, SettingCount
+	AutoAttackDelay, SAWSIL, AutoAttackKey, AutoLootDelay, SLWIB, AutoLootKey, AutoHPValue, AutoHPKey, AutoMPValue, AutoMPKey, PetFeederValue, PetFeederKey,
+	CCPeople, CCPeopleType, CCTimed, CCTimedType, CCAttacks, CCAttacksType, HotKeyAttack, HotKeyLoot, HotKeyFMA, HotKeyCCPeople, HotKeySendPacket,
+	SelectedPacket, PacketSpamAmount, PacketSpamDelay, SkillInjectionDelay, SkillInjectionIndex, IceGuard, PinTyper, LogoSkipper, SettingCount
 };
 Void MainForm::SaveSettings()
 {
@@ -574,16 +573,20 @@ Void MainForm::LoadSettings()
 	}
 
 	TextReader^ reader = gcnew StreamReader(SettingsFileName);
-	s = gcnew XmlSerializer(SettingsList::typeid);
+	s = gcnew XmlSerializer(List<SettingsEntry^>::typeid);
 	try
 	{
-		Settings = safe_cast<SettingsList^>(s->Deserialize(reader));
+		Settings = safe_cast<List<SettingsEntry^>^>(s->Deserialize(reader));
 	}
-	catch(System::Exception^){}	
-	reader->Close();
-	if(Settings == nullptr) Settings = gcnew SettingsList;
-	else if(Settings->Count >= 36)
+	catch(System::Exception^ ex)
 	{
+		ShowError(ex->ToString());
+	}	
+	reader->Close();
+	if(Settings == nullptr) Settings = gcnew List<SettingsEntry^>;
+	else
+	{
+		if(Settings->Count == SettingCount) ShowError("The Loaded settings file is invalid!\n" + "WatyBot Will try to load it anyways :)");
 		try{
 		//AutoAttack
 		nudAutoAttack->Value = (Decimal)			Settings[AutoAttackDelay]->Value;
@@ -599,6 +602,9 @@ Void MainForm::LoadSettings()
 		//AutoMP
 		nudAutoMP->Value = (Decimal)				Settings[AutoMPValue]->Value;
 		ddbAutoMPKey->SelectedIndex = (int)			Settings[AutoMPKey]->Value;
+		//PetFeeder
+		nudPetFeeder->Value = (Decimal)				Settings[PetFeederValue]->Value;
+		ddbPetFeeder->SelectedIndex = (int)			Settings[PetFeederKey]->Value;
 		//CC People
 		nudCCPeople->Value = (Decimal)				Settings[CCPeople]->Value;
 		ddbPeopleType->SelectedIndex = (int)		Settings[CCPeopleType]->Value;
@@ -631,7 +637,7 @@ Void MainForm::LoadSettings()
 }
 Void MainForm::ReloadSettings()
 {
-	SettingsList^ m = gcnew SettingsList(SettingCount);
+	List<SettingsEntry^>^ m = gcnew List<SettingsEntry^>(SettingCount);
 		//AutoAttack
 		m->Add(gcnew SettingsEntry(nudAutoAttack));
 		m->Add(gcnew SettingsEntry(nudSAWSIL));
@@ -646,6 +652,9 @@ Void MainForm::ReloadSettings()
 		//AutoMP
 		m->Add(gcnew SettingsEntry(nudAutoMP));
 		m->Add(gcnew SettingsEntry(ddbAutoMPKey));
+		//PetFeeder
+		m->Add(gcnew SettingsEntry(nudPetFeeder));
+		m->Add(gcnew SettingsEntry(ddbPetFeeder));
 		//CC People
 		m->Add(gcnew SettingsEntry(nudCCPeople));
 		m->Add(gcnew SettingsEntry(ddbPeopleType));

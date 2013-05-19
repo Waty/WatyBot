@@ -35,8 +35,6 @@ using namespace System::IO;
 #define CodeCave(name) void __declspec(naked) Cave##name(){_asm
 #define EndCodeCave }
 
-typedef List<SettingsEntry^> SettingsList;
-
 //Macro's
 extern Macro::MacroManager macroMan;
 extern enum MacroIndex;
