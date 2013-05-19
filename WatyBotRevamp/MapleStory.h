@@ -133,6 +133,14 @@ public:
 			return (int) ReadPointer(CharpId, KBYOffset);
 		}
 	}
+	property int PetPercentage
+	{
+		int get()
+		{
+			unsigned long Pet = ReadPointer(CharBasePtr, PetOffset);
+			return ReadPointer(Pet+Pet1Offset, PetFullness);
+		}
+	}
 	property bool InGame
 	{
 		bool get()

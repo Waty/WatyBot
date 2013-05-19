@@ -231,7 +231,7 @@ void TimedCC()
 {
 	CC->CCSwitch(CCType(CCMacro->GetValue()));
 }
-enum MacroIndex{eAttack, eLoot, eCC, eAutoSkill1, eAutoSkill2, eAutoSkill3, eAutoSkill4};
+enum MacroIndex{eAttack, eLoot, eCC};
 void InitializeMacros()
 {
 	//Start the MacroManager
@@ -239,12 +239,10 @@ void InitializeMacros()
 	AttackMacro = new Macro::BotMacro(canAttack);
 	LootMacro = new Macro::BotMacro(canLoot);
 	CCMacro = new Macro::FunctionalMacro(TimedCC);
-	PetFeederMacro = new Macro::FunctionalMacro(TimedCC);
 
 	macroMan.AddMacro(MacroIndex::eAttack, AttackMacro);
 	macroMan.AddMacro(MacroIndex::eLoot, LootMacro);
 	macroMan.AddMacro(MacroIndex::eCC, CCMacro);
-	macroMan.AddMacro(MacroIndex::eAutoSkill1, PetFeederMacro);
 }
 
 void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -326,28 +324,31 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	this->lMapID->Text =			"MapID: "		+ CMS->MapId;
 	this->lCharacterpID->Text =		"Char pID: "	+ CMS->CharpId;
 	this->lKnockBack->Text =		"KnockBack: "	+ CMS->KnockBack;
-	this->lKBCoords->Text =			"KB: (" + CMS->KnockBackX + "," + CMS->KnockBackY + ")";
+	this->lKBCoords->Text =			"KB: ("			+ CMS->KnockBackX + "," + CMS->KnockBackY + ")";
+	this->lPetFullness->Text =		"PetFullness: "	+ CMS->PetPercentage;
 	
-	//AutoHP/MP happens here
-	if(cbAutoHP->Checked && CMS->CharHP <= nudAutoHP->Value) CMS->SpamKey(KeyCodes[ddbAutoHPKey->SelectedIndex]);
-	if(cbAutoMP->Checked && CMS->CharMP <= nudAutoMP->Value) CMS->SpamKey(KeyCodes[ddbAutoMPKey->SelectedIndex]);
+	if(CMS->InGame)
+	{
+		//AutoHP/MP happens here
+		if(cbAutoHP->Checked && CMS->CharHP <= nudAutoHP->Value) CMS->SpamKey(KeyCodes[ddbAutoHPKey->SelectedIndex]);
+		if(cbAutoMP->Checked && CMS->CharMP <= nudAutoMP->Value) CMS->SpamKey(KeyCodes[ddbAutoMPKey->SelectedIndex]);
 
-	MainForm::AutoCC();
-	MainForm::RedrawStatBars();
-	MainForm::HotKeys();
+		//AutoCC happens here
+		if(cbCCPeople->Checked && (CMS->PeopleCount >= (int) nudCCPeople->Value)) CC->CCSwitch(CCType(ddbPeopleType->SelectedIndex));	
+		if(cbCCAttacks->Checked && (CMS->AttackCount >= (int) nudCCAttacks->Value)) CC->CCSwitch(CCType(ddbAttacksType->SelectedIndex));
+
+		//PetFeeder happens here
+		if(cbPetFeeder->Checked && (CMS->PetPercentage <= nudPetFeeder->Value)) CMS->SendKey(KeyCodes[ddbPetFeeder->SelectedIndex]);
+		MainForm::RedrawStatBars();
+		MainForm::HotKeys();
+	}
 
 	//Set the correct state of the PacketSpammer Buttons
-	if(AttackMacro != nullptr){
-	bStopSpamming->Visible = CPacket->IsSpamming;
-	bStartSpamming->Visible = !CPacket->IsSpamming;}
-}
-void MainForm::AutoCC()
-{
-	if(cbCCPeople->Checked && (CMS->PeopleCount >= (int) nudCCPeople->Value))
-		CC->CCSwitch(CCType(ddbPeopleType->SelectedIndex));
-	
-	if(cbCCAttacks->Checked && (CMS->AttackCount >= (int) nudCCAttacks->Value))
-		CC->CCSwitch(CCType(ddbAttacksType->SelectedIndex));
+	if(AttackMacro != nullptr)
+	{
+		bStopSpamming->Visible = CPacket->IsSpamming;
+		bStartSpamming->Visible = !CPacket->IsSpamming;
+	}
 }
 void MainForm::RedrawStatBars()
 {
@@ -586,7 +587,7 @@ Void MainForm::LoadSettings()
 	if(Settings == nullptr) Settings = gcnew List<SettingsEntry^>;
 	else
 	{
-		if(Settings->Count == SettingCount) ShowError("The Loaded settings file is invalid!\n" + "WatyBot Will try to load it anyways :)");
+		if(Settings->Count != SettingCount) ShowError("The Loaded settings file is invalid!\n" + "WatyBot Will try to load it anyways :)\n" + "Found: " + Settings->Count + " Should be: " + (int) SettingCount);
 		try{
 		//AutoAttack
 		nudAutoAttack->Value = (Decimal)			Settings[AutoAttackDelay]->Value;
@@ -638,50 +639,50 @@ Void MainForm::LoadSettings()
 Void MainForm::ReloadSettings()
 {
 	List<SettingsEntry^>^ s = gcnew List<SettingsEntry^>(SettingCount);
-		//AutoAttack
-		s->Add(gcnew SettingsEntry(nudAutoAttack));
-		s->Add(gcnew SettingsEntry(nudSAWSIL));
-		s->Add(gcnew SettingsEntry(ddbAutoAttackKey));
-		//AutoLoot
-		s->Add(gcnew SettingsEntry(nudAutoLoot));
-		s->Add(gcnew SettingsEntry(nudSLWIB));
-		s->Add(gcnew SettingsEntry(ddbAutoLootKey));
-		//AutoHP
-		s->Add(gcnew SettingsEntry(nudAutoHP));
-		s->Add(gcnew SettingsEntry(ddbAutoHPKey));
-		//AutoMP
-		s->Add(gcnew SettingsEntry(nudAutoMP));
-		s->Add(gcnew SettingsEntry(ddbAutoMPKey));
-		//PetFeeder
-		s->Add(gcnew SettingsEntry(nudPetFeeder));
-		s->Add(gcnew SettingsEntry(ddbPetFeeder));
-		//CC People
-		s->Add(gcnew SettingsEntry(nudCCPeople));
-		s->Add(gcnew SettingsEntry(ddbPeopleType));
-		//CC Timed
-		s->Add(gcnew SettingsEntry(nudCCTimed));
-		s->Add(gcnew SettingsEntry(ddbTimedType));
-		//CC Attacks
-		s->Add(gcnew SettingsEntry(nudCCAttacks));
-		s->Add(gcnew SettingsEntry(ddbAttacksType));
-		//HotKeys
-		s->Add(gcnew SettingsEntry(ddbHotKeyAttack));
-		s->Add(gcnew SettingsEntry(ddbHotKeyLoot));
-		s->Add(gcnew SettingsEntry(ddbHotKeyFMA));
-		s->Add(gcnew SettingsEntry(ddbHotKeyCCPeople));
-		s->Add(gcnew SettingsEntry(ddbHotKeySendPacket));
-		//PacketSender
-		s->Add(gcnew SettingsEntry(ddbSelectedPacket));
-		s->Add(gcnew SettingsEntry(nudSpamAmount));
-		s->Add(gcnew SettingsEntry(nudSpamDelay));
-		//Hacks Tab
-		s->Add(gcnew SettingsEntry(nudSkillInjection));
-		s->Add(gcnew SettingsEntry(ddbSkillInjection));
-		s->Add(gcnew SettingsEntry(nudIceGuard));
-		
-		s->Add(gcnew SettingsEntry(cbPinTyper));
-		s->Add(gcnew SettingsEntry(cbLogoSkipper));
-		Settings = s;
+	//AutoAttack
+	s->Add(gcnew SettingsEntry(nudAutoAttack));
+	s->Add(gcnew SettingsEntry(nudSAWSIL));
+	s->Add(gcnew SettingsEntry(ddbAutoAttackKey));
+	//AutoLoot
+	s->Add(gcnew SettingsEntry(nudAutoLoot));
+	s->Add(gcnew SettingsEntry(nudSLWIB));
+	s->Add(gcnew SettingsEntry(ddbAutoLootKey));
+	//AutoHP
+	s->Add(gcnew SettingsEntry(nudAutoHP));
+	s->Add(gcnew SettingsEntry(ddbAutoHPKey));
+	//AutoMP
+	s->Add(gcnew SettingsEntry(nudAutoMP));
+	s->Add(gcnew SettingsEntry(ddbAutoMPKey));
+	//PetFeeder
+	s->Add(gcnew SettingsEntry(nudPetFeeder));
+	s->Add(gcnew SettingsEntry(ddbPetFeeder));
+	//CC People
+	s->Add(gcnew SettingsEntry(nudCCPeople));
+	s->Add(gcnew SettingsEntry(ddbPeopleType));
+	//CC Timed
+	s->Add(gcnew SettingsEntry(nudCCTimed));
+	s->Add(gcnew SettingsEntry(ddbTimedType));
+	//CC Attacks
+	s->Add(gcnew SettingsEntry(nudCCAttacks));
+	s->Add(gcnew SettingsEntry(ddbAttacksType));
+	//HotKeys
+	s->Add(gcnew SettingsEntry(ddbHotKeyAttack));
+	s->Add(gcnew SettingsEntry(ddbHotKeyLoot));
+	s->Add(gcnew SettingsEntry(ddbHotKeyFMA));
+	s->Add(gcnew SettingsEntry(ddbHotKeyCCPeople));
+	s->Add(gcnew SettingsEntry(ddbHotKeySendPacket));
+	//PacketSender
+	s->Add(gcnew SettingsEntry(ddbSelectedPacket));
+	s->Add(gcnew SettingsEntry(nudSpamAmount));
+	s->Add(gcnew SettingsEntry(nudSpamDelay));
+	//Hacks Tab
+	s->Add(gcnew SettingsEntry(nudSkillInjection));
+	s->Add(gcnew SettingsEntry(ddbSkillInjection));
+	s->Add(gcnew SettingsEntry(nudIceGuard));
+
+	s->Add(gcnew SettingsEntry(cbPinTyper));
+	s->Add(gcnew SettingsEntry(cbLogoSkipper));
+	Settings = s;
 }
 Void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e)
 {

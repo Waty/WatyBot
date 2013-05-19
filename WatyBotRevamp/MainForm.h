@@ -57,7 +57,6 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::CheckBox^  cbAutoMP;
 	private: System::Windows::Forms::ComboBox^  ddbAutoAttackKey;
 	private: System::Windows::Forms::CheckBox^  cbAutoAttack;
-
 	private: System::Windows::Forms::TabPage^  InfoTab;
 	private: System::Windows::Forms::Label^  AttackCountLabel;
 	private: System::Windows::Forms::Label^  ItemCountLabel;
@@ -69,15 +68,7 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::ComboBox^  ddbAutoLootKey;
 	private: System::Windows::Forms::CheckBox^  cbPetFeeder;
 	private: System::Windows::Forms::ComboBox^  ddbPetFeeder;
-
-
 	private: System::Windows::Forms::GroupBox^  AutoBotGroupBox;
-
-
-
-
-
-
 	private: System::Windows::Forms::Label^  TubiPointerLabel;
 	private: System::Windows::Forms::Label^  BreathLabel;
 	private: System::Windows::Forms::CheckBox^  cbCCPeople;
@@ -152,7 +143,6 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::Button^  bStopSpamming;
 	private: System::Windows::Forms::CheckBox^  cbScareMobs;
 	private: System::Windows::Forms::CheckBox^  cbFLACC;
-
 	private: System::Windows::Forms::CheckBox^  cbCPUHack;
 	private: System::Windows::Forms::Label^  lSLWIB;
 	private: System::Windows::Forms::Label^  lSAWSIL;
@@ -174,11 +164,7 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::NumericUpDown^  nudCCAttacks;
 	private: System::Windows::Forms::NumericUpDown^  nudCCTimed;
 	private: System::Windows::Forms::NumericUpDown^  nudCCPeople;
-private: System::Windows::Forms::NumericUpDown^  nudPetFeeder;
-
-
-
-
+	private: System::Windows::Forms::NumericUpDown^  nudPetFeeder;
 	private: System::Windows::Forms::CheckBox^  cbNFA;
 	private: System::Windows::Forms::CheckBox^  cbAutoAggro;
 	private: System::Windows::Forms::Button^  bSaveSettings;
@@ -195,8 +181,7 @@ private: System::Windows::Forms::NumericUpDown^  nudPetFeeder;
 	private: System::Windows::Forms::ToolTip^  InfoToolTip;
 	private: System::Windows::Forms::Label^  lKBCoords;
 	private: System::Windows::Forms::Label^  lKnockBack;
-private: System::Windows::Forms::CheckBox^  cbSkillInjection;
-
+	private: System::Windows::Forms::CheckBox^  cbSkillInjection;
 	private: System::Windows::Forms::ComboBox^  ddbSkillInjection;
 	private: System::Windows::Forms::NumericUpDown^  nudSkillInjection;
 	private: System::Windows::Forms::CheckBox^  cbNoFadeStages;
@@ -209,8 +194,20 @@ private: System::Windows::Forms::CheckBox^  cbSkillInjection;
 	private: System::Windows::Forms::NumericUpDown^  nudSPCY;
 	private: System::Windows::Forms::NumericUpDown^  nudSPCX;
 	private: System::Windows::Forms::NumericUpDown^  nudSPCMapId;
-private: System::Windows::Forms::ComboBox^  ddbAutoSkill;
 
+
+
+
+
+
+
+
+	private: System::Windows::Forms::ContextMenuStrip^  AutoSkillContextMenu;
+	private: System::Windows::Forms::ToolStripMenuItem^  castToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  deleteToolStripMenuItem;
+	private: System::Windows::Forms::Label^  lPetFullness;
+private: System::Windows::Forms::GroupBox^  gbAutoSkill;
+private: System::Windows::Forms::ComboBox^  ddbAutoSkill;
 private: System::Windows::Forms::NumericUpDown^  nudAutoSkill;
 private: System::Windows::Forms::TextBox^  tbAutoSkill;
 private: System::Windows::Forms::Button^  bAutoSkill;
@@ -218,9 +215,6 @@ private: System::Windows::Forms::ListView^  lvAutoSkill;
 private: System::Windows::Forms::ColumnHeader^  hName;
 private: System::Windows::Forms::ColumnHeader^  hInterval;
 private: System::Windows::Forms::ColumnHeader^  hKey;
-private: System::Windows::Forms::ContextMenuStrip^  AutoSkillContextMenu;
-private: System::Windows::Forms::ToolStripMenuItem^  castToolStripMenuItem;
-private: System::Windows::Forms::ToolStripMenuItem^  deleteToolStripMenuItem;
 	private: System::ComponentModel::IContainer^  components;
 private:
 		/// <summary>
@@ -239,14 +233,6 @@ private:
 			this->MainTabControl = (gcnew System::Windows::Forms::TabControl());
 			this->AutoBotTab = (gcnew System::Windows::Forms::TabPage());
 			this->AutoBotGroupBox = (gcnew System::Windows::Forms::GroupBox());
-			this->ddbAutoSkill = (gcnew System::Windows::Forms::ComboBox());
-			this->nudAutoSkill = (gcnew System::Windows::Forms::NumericUpDown());
-			this->tbAutoSkill = (gcnew System::Windows::Forms::TextBox());
-			this->bAutoSkill = (gcnew System::Windows::Forms::Button());
-			this->lvAutoSkill = (gcnew System::Windows::Forms::ListView());
-			this->hName = (gcnew System::Windows::Forms::ColumnHeader());
-			this->hInterval = (gcnew System::Windows::Forms::ColumnHeader());
-			this->hKey = (gcnew System::Windows::Forms::ColumnHeader());
 			this->AutoSkillContextMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->castToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->deleteToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -379,6 +365,7 @@ private:
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
 			this->bSaveSettings = (gcnew System::Windows::Forms::Button());
 			this->gbHotKeys = (gcnew System::Windows::Forms::GroupBox());
+			this->lPetFullness = (gcnew System::Windows::Forms::Label());
 			this->ddbHotKeySendPacket = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeySendPacket = (gcnew System::Windows::Forms::CheckBox());
 			this->ddbHotKeyCCPeople = (gcnew System::Windows::Forms::ComboBox());
@@ -403,10 +390,18 @@ private:
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->InfoToolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
+			this->gbAutoSkill = (gcnew System::Windows::Forms::GroupBox());
+			this->ddbAutoSkill = (gcnew System::Windows::Forms::ComboBox());
+			this->nudAutoSkill = (gcnew System::Windows::Forms::NumericUpDown());
+			this->tbAutoSkill = (gcnew System::Windows::Forms::TextBox());
+			this->bAutoSkill = (gcnew System::Windows::Forms::Button());
+			this->lvAutoSkill = (gcnew System::Windows::Forms::ListView());
+			this->hName = (gcnew System::Windows::Forms::ColumnHeader());
+			this->hInterval = (gcnew System::Windows::Forms::ColumnHeader());
+			this->hKey = (gcnew System::Windows::Forms::ColumnHeader());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill))->BeginInit();
 			this->AutoSkillContextMenu->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCAttacks))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCTimed))->BeginInit();
@@ -446,6 +441,8 @@ private:
 			this->InfoTab->SuspendLayout();
 			this->gbHotKeys->SuspendLayout();
 			this->gbPointers->SuspendLayout();
+			this->gbAutoSkill->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -458,12 +455,13 @@ private:
 			this->MainTabControl->Location = System::Drawing::Point(1, 1);
 			this->MainTabControl->Name = L"MainTabControl";
 			this->MainTabControl->SelectedIndex = 0;
-			this->MainTabControl->Size = System::Drawing::Size(334, 483);
+			this->MainTabControl->Size = System::Drawing::Size(334, 568);
 			this->MainTabControl->TabIndex = 0;
 			this->MainTabControl->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::MainTabControl_SelectedIndexChanged);
 			// 
 			// AutoBotTab
 			// 
+			this->AutoBotTab->Controls->Add(this->gbAutoSkill);
 			this->AutoBotTab->Controls->Add(this->AutoBotGroupBox);
 			this->AutoBotTab->Controls->Add(this->EXPLabel);
 			this->AutoBotTab->Controls->Add(this->MPLabel);
@@ -477,18 +475,13 @@ private:
 			this->AutoBotTab->Location = System::Drawing::Point(4, 22);
 			this->AutoBotTab->Name = L"AutoBotTab";
 			this->AutoBotTab->Padding = System::Windows::Forms::Padding(3);
-			this->AutoBotTab->Size = System::Drawing::Size(326, 457);
+			this->AutoBotTab->Size = System::Drawing::Size(326, 542);
 			this->AutoBotTab->TabIndex = 0;
 			this->AutoBotTab->Text = L"AutoBot";
 			this->AutoBotTab->UseVisualStyleBackColor = true;
 			// 
 			// AutoBotGroupBox
 			// 
-			this->AutoBotGroupBox->Controls->Add(this->ddbAutoSkill);
-			this->AutoBotGroupBox->Controls->Add(this->nudAutoSkill);
-			this->AutoBotGroupBox->Controls->Add(this->tbAutoSkill);
-			this->AutoBotGroupBox->Controls->Add(this->bAutoSkill);
-			this->AutoBotGroupBox->Controls->Add(this->lvAutoSkill);
 			this->AutoBotGroupBox->Controls->Add(this->nudCCAttacks);
 			this->AutoBotGroupBox->Controls->Add(this->nudCCTimed);
 			this->AutoBotGroupBox->Controls->Add(this->nudCCPeople);
@@ -522,77 +515,10 @@ private:
 			this->AutoBotGroupBox->Controls->Add(this->ddbAutoAttackKey);
 			this->AutoBotGroupBox->Location = System::Drawing::Point(0, 70);
 			this->AutoBotGroupBox->Name = L"AutoBotGroupBox";
-			this->AutoBotGroupBox->Size = System::Drawing::Size(325, 387);
+			this->AutoBotGroupBox->Size = System::Drawing::Size(325, 224);
 			this->AutoBotGroupBox->TabIndex = 36;
 			this->AutoBotGroupBox->TabStop = false;
 			this->AutoBotGroupBox->Text = L"Autobot";
-			// 
-			// ddbAutoSkill
-			// 
-			this->ddbAutoSkill->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->ddbAutoSkill->FormattingEnabled = true;
-			this->ddbAutoSkill->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
-				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
-				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->ddbAutoSkill->Location = System::Drawing::Point(241, 361);
-			this->ddbAutoSkill->Name = L"ddbAutoSkill";
-			this->ddbAutoSkill->Size = System::Drawing::Size(76, 21);
-			this->ddbAutoSkill->TabIndex = 85;
-			// 
-			// nudAutoSkill
-			// 
-			this->nudAutoSkill->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
-			this->nudAutoSkill->Location = System::Drawing::Point(162, 361);
-			this->nudAutoSkill->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
-			this->nudAutoSkill->Name = L"nudAutoSkill";
-			this->nudAutoSkill->Size = System::Drawing::Size(75, 20);
-			this->nudAutoSkill->TabIndex = 84;
-			// 
-			// tbAutoSkill
-			// 
-			this->tbAutoSkill->Location = System::Drawing::Point(48, 362);
-			this->tbAutoSkill->Name = L"tbAutoSkill";
-			this->tbAutoSkill->Size = System::Drawing::Size(108, 20);
-			this->tbAutoSkill->TabIndex = 83;
-			// 
-			// bAutoSkill
-			// 
-			this->bAutoSkill->Location = System::Drawing::Point(6, 361);
-			this->bAutoSkill->Name = L"bAutoSkill";
-			this->bAutoSkill->Size = System::Drawing::Size(35, 23);
-			this->bAutoSkill->TabIndex = 82;
-			this->bAutoSkill->Text = L"Add";
-			this->bAutoSkill->UseVisualStyleBackColor = true;
-			this->bAutoSkill->Click += gcnew System::EventHandler(this, &MainForm::bAutoSkill_Click);
-			// 
-			// lvAutoSkill
-			// 
-			this->lvAutoSkill->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->lvAutoSkill->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(3) {this->hName, this->hInterval, 
-				this->hKey});
-			this->lvAutoSkill->ContextMenuStrip = this->AutoSkillContextMenu;
-			this->lvAutoSkill->Location = System::Drawing::Point(7, 224);
-			this->lvAutoSkill->Name = L"lvAutoSkill";
-			this->lvAutoSkill->Size = System::Drawing::Size(310, 131);
-			this->lvAutoSkill->TabIndex = 81;
-			this->lvAutoSkill->UseCompatibleStateImageBehavior = false;
-			this->lvAutoSkill->View = System::Windows::Forms::View::Details;
-			// 
-			// hName
-			// 
-			this->hName->Text = L"Name";
-			this->hName->Width = 160;
-			// 
-			// hInterval
-			// 
-			this->hInterval->Text = L"Interval";
-			this->hInterval->Width = 75;
-			// 
-			// hKey
-			// 
-			this->hKey->Text = L"Key";
-			this->hKey->Width = 75;
 			// 
 			// AutoSkillContextMenu
 			// 
@@ -646,7 +572,7 @@ private:
 			this->nudPetFeeder->Name = L"nudPetFeeder";
 			this->nudPetFeeder->Size = System::Drawing::Size(107, 20);
 			this->nudPetFeeder->TabIndex = 74;
-			this->InfoToolTip->SetToolTip(this->nudPetFeeder, L"Sends a key after the delay so your buffs will stay");
+			this->InfoToolTip->SetToolTip(this->nudPetFeeder, L"The amount of fullness that your pet shouldn\'t get under");
 			// 
 			// nudAutoMP
 			// 
@@ -851,7 +777,7 @@ private:
 			this->cbPetFeeder->Size = System::Drawing::Size(75, 17);
 			this->cbPetFeeder->TabIndex = 13;
 			this->cbPetFeeder->Text = L"PetFeeder";
-			this->InfoToolTip->SetToolTip(this->cbPetFeeder, L"Sends a key after the delay so your pet will survive");
+			this->InfoToolTip->SetToolTip(this->cbPetFeeder, L"Feeds your pet to keep him alive while you are botting ;)");
 			this->cbPetFeeder->UseVisualStyleBackColor = true;
 			// 
 			// cbAutoHP
@@ -2034,6 +1960,7 @@ private:
 			// 
 			// gbHotKeys
 			// 
+			this->gbHotKeys->Controls->Add(this->lPetFullness);
 			this->gbHotKeys->Controls->Add(this->ddbHotKeySendPacket);
 			this->gbHotKeys->Controls->Add(this->cbHotKeySendPacket);
 			this->gbHotKeys->Controls->Add(this->ddbHotKeyCCPeople);
@@ -2050,6 +1977,15 @@ private:
 			this->gbHotKeys->TabIndex = 26;
 			this->gbHotKeys->TabStop = false;
 			this->gbHotKeys->Text = L"Hot Keys";
+			// 
+			// lPetFullness
+			// 
+			this->lPetFullness->AutoSize = true;
+			this->lPetFullness->Location = System::Drawing::Point(6, 146);
+			this->lPetFullness->Name = L"lPetFullness";
+			this->lPetFullness->Size = System::Drawing::Size(67, 13);
+			this->lPetFullness->TabIndex = 19;
+			this->lPetFullness->Text = L"PetFullness: ";
 			// 
 			// ddbHotKeySendPacket
 			// 
@@ -2290,12 +2226,94 @@ private:
 			this->StatsTimer->Enabled = true;
 			this->StatsTimer->Tick += gcnew System::EventHandler(this, &MainForm::StatsTimer_Tick);
 			// 
+			// gbAutoSkill
+			// 
+			this->gbAutoSkill->Controls->Add(this->ddbAutoSkill);
+			this->gbAutoSkill->Controls->Add(this->nudAutoSkill);
+			this->gbAutoSkill->Controls->Add(this->tbAutoSkill);
+			this->gbAutoSkill->Controls->Add(this->bAutoSkill);
+			this->gbAutoSkill->Controls->Add(this->lvAutoSkill);
+			this->gbAutoSkill->Location = System::Drawing::Point(0, 301);
+			this->gbAutoSkill->Name = L"gbAutoSkill";
+			this->gbAutoSkill->Size = System::Drawing::Size(326, 185);
+			this->gbAutoSkill->TabIndex = 37;
+			this->gbAutoSkill->TabStop = false;
+			this->gbAutoSkill->Text = L"AutoSkill";
+			// 
+			// ddbAutoSkill
+			// 
+			this->ddbAutoSkill->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbAutoSkill->FormattingEnabled = true;
+			this->ddbAutoSkill->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+			this->ddbAutoSkill->Location = System::Drawing::Point(242, 156);
+			this->ddbAutoSkill->Name = L"ddbAutoSkill";
+			this->ddbAutoSkill->Size = System::Drawing::Size(76, 21);
+			this->ddbAutoSkill->TabIndex = 90;
+			// 
+			// nudAutoSkill
+			// 
+			this->nudAutoSkill->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudAutoSkill->Location = System::Drawing::Point(163, 156);
+			this->nudAutoSkill->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
+			this->nudAutoSkill->Name = L"nudAutoSkill";
+			this->nudAutoSkill->Size = System::Drawing::Size(75, 20);
+			this->nudAutoSkill->TabIndex = 89;
+			// 
+			// tbAutoSkill
+			// 
+			this->tbAutoSkill->Location = System::Drawing::Point(49, 157);
+			this->tbAutoSkill->Name = L"tbAutoSkill";
+			this->tbAutoSkill->Size = System::Drawing::Size(108, 20);
+			this->tbAutoSkill->TabIndex = 88;
+			// 
+			// bAutoSkill
+			// 
+			this->bAutoSkill->Location = System::Drawing::Point(7, 156);
+			this->bAutoSkill->Name = L"bAutoSkill";
+			this->bAutoSkill->Size = System::Drawing::Size(35, 23);
+			this->bAutoSkill->TabIndex = 87;
+			this->bAutoSkill->Text = L"Add";
+			this->bAutoSkill->UseVisualStyleBackColor = true;
+			// 
+			// lvAutoSkill
+			// 
+			this->lvAutoSkill->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->lvAutoSkill->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(3) {this->hName, this->hInterval, 
+				this->hKey});
+			this->lvAutoSkill->ContextMenuStrip = this->AutoSkillContextMenu;
+			this->lvAutoSkill->FullRowSelect = true;
+			this->lvAutoSkill->Location = System::Drawing::Point(8, 19);
+			this->lvAutoSkill->MultiSelect = false;
+			this->lvAutoSkill->Name = L"lvAutoSkill";
+			this->lvAutoSkill->Size = System::Drawing::Size(310, 131);
+			this->lvAutoSkill->TabIndex = 86;
+			this->lvAutoSkill->UseCompatibleStateImageBehavior = false;
+			this->lvAutoSkill->View = System::Windows::Forms::View::Details;
+			// 
+			// hName
+			// 
+			this->hName->Text = L"Name";
+			this->hName->Width = 160;
+			// 
+			// hInterval
+			// 
+			this->hInterval->Text = L"Interval";
+			this->hInterval->Width = 75;
+			// 
+			// hKey
+			// 
+			this->hKey->Text = L"Key";
+			this->hKey->Width = 75;
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Control;
-			this->ClientSize = System::Drawing::Size(334, 485);
+			this->ClientSize = System::Drawing::Size(334, 622);
 			this->Controls->Add(this->MainTabControl);
 			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
@@ -2310,7 +2328,6 @@ private:
 			this->AutoBotTab->ResumeLayout(false);
 			this->AutoBotGroupBox->ResumeLayout(false);
 			this->AutoBotGroupBox->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill))->EndInit();
 			this->AutoSkillContextMenu->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCAttacks))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCTimed))->EndInit();
@@ -2359,6 +2376,9 @@ private:
 			this->gbHotKeys->PerformLayout();
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
+			this->gbAutoSkill->ResumeLayout(false);
+			this->gbAutoSkill->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -2373,7 +2393,6 @@ private: System::Void ReloadSettings();
 private: System::Void RefreshComboBoxes();
 private: System::Void RefreshSPControlListView();
 private: System::Void RedrawStatBars();
-private: System::Void AutoCC();
 private: System::Void HotKeys();
 #pragma endregion
 #pragma region CheckBoxes

@@ -42,7 +42,6 @@ extern enum MacroIndex;
 extern Macro::BotMacro* AttackMacro;
 extern Macro::BotMacro* LootMacro;
 extern Macro::FunctionalMacro* CCMacro;
-extern Macro::FunctionalMacro* PetFeederMacro;
 extern StopWatch<milliseconds> SkillInjectionStopWatch;
 
 extern gcroot<CMapleStory^> CMS;
