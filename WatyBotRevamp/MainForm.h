@@ -232,10 +232,19 @@ private:
 			this->components = (gcnew System::ComponentModel::Container());
 			this->MainTabControl = (gcnew System::Windows::Forms::TabControl());
 			this->AutoBotTab = (gcnew System::Windows::Forms::TabPage());
-			this->AutoBotGroupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->gbAutoSkill = (gcnew System::Windows::Forms::GroupBox());
+			this->ddbAutoSkill = (gcnew System::Windows::Forms::ComboBox());
+			this->nudAutoSkill = (gcnew System::Windows::Forms::NumericUpDown());
+			this->tbAutoSkill = (gcnew System::Windows::Forms::TextBox());
+			this->bAutoSkill = (gcnew System::Windows::Forms::Button());
+			this->lvAutoSkill = (gcnew System::Windows::Forms::ListView());
+			this->hName = (gcnew System::Windows::Forms::ColumnHeader());
+			this->hInterval = (gcnew System::Windows::Forms::ColumnHeader());
+			this->hKey = (gcnew System::Windows::Forms::ColumnHeader());
 			this->AutoSkillContextMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->castToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->deleteToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->AutoBotGroupBox = (gcnew System::Windows::Forms::GroupBox());
 			this->nudCCAttacks = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudCCTimed = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudCCPeople = (gcnew System::Windows::Forms::NumericUpDown());
@@ -390,19 +399,12 @@ private:
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->InfoToolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
-			this->gbAutoSkill = (gcnew System::Windows::Forms::GroupBox());
-			this->ddbAutoSkill = (gcnew System::Windows::Forms::ComboBox());
-			this->nudAutoSkill = (gcnew System::Windows::Forms::NumericUpDown());
-			this->tbAutoSkill = (gcnew System::Windows::Forms::TextBox());
-			this->bAutoSkill = (gcnew System::Windows::Forms::Button());
-			this->lvAutoSkill = (gcnew System::Windows::Forms::ListView());
-			this->hName = (gcnew System::Windows::Forms::ColumnHeader());
-			this->hInterval = (gcnew System::Windows::Forms::ColumnHeader());
-			this->hKey = (gcnew System::Windows::Forms::ColumnHeader());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
-			this->AutoBotGroupBox->SuspendLayout();
+			this->gbAutoSkill->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill))->BeginInit();
 			this->AutoSkillContextMenu->SuspendLayout();
+			this->AutoBotGroupBox->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCAttacks))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCTimed))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCPeople))->BeginInit();
@@ -441,8 +443,6 @@ private:
 			this->InfoTab->SuspendLayout();
 			this->gbHotKeys->SuspendLayout();
 			this->gbPointers->SuspendLayout();
-			this->gbAutoSkill->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -479,6 +479,110 @@ private:
 			this->AutoBotTab->TabIndex = 0;
 			this->AutoBotTab->Text = L"AutoBot";
 			this->AutoBotTab->UseVisualStyleBackColor = true;
+			// 
+			// gbAutoSkill
+			// 
+			this->gbAutoSkill->Controls->Add(this->ddbAutoSkill);
+			this->gbAutoSkill->Controls->Add(this->nudAutoSkill);
+			this->gbAutoSkill->Controls->Add(this->tbAutoSkill);
+			this->gbAutoSkill->Controls->Add(this->bAutoSkill);
+			this->gbAutoSkill->Controls->Add(this->lvAutoSkill);
+			this->gbAutoSkill->Location = System::Drawing::Point(0, 300);
+			this->gbAutoSkill->Name = L"gbAutoSkill";
+			this->gbAutoSkill->Size = System::Drawing::Size(325, 185);
+			this->gbAutoSkill->TabIndex = 37;
+			this->gbAutoSkill->TabStop = false;
+			this->gbAutoSkill->Text = L"AutoSkill";
+			// 
+			// ddbAutoSkill
+			// 
+			this->ddbAutoSkill->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbAutoSkill->FormattingEnabled = true;
+			this->ddbAutoSkill->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+			this->ddbAutoSkill->Location = System::Drawing::Point(242, 156);
+			this->ddbAutoSkill->Name = L"ddbAutoSkill";
+			this->ddbAutoSkill->Size = System::Drawing::Size(76, 21);
+			this->ddbAutoSkill->TabIndex = 90;
+			// 
+			// nudAutoSkill
+			// 
+			this->nudAutoSkill->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudAutoSkill->Location = System::Drawing::Point(163, 156);
+			this->nudAutoSkill->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
+			this->nudAutoSkill->Name = L"nudAutoSkill";
+			this->nudAutoSkill->Size = System::Drawing::Size(75, 20);
+			this->nudAutoSkill->TabIndex = 89;
+			// 
+			// tbAutoSkill
+			// 
+			this->tbAutoSkill->Location = System::Drawing::Point(49, 157);
+			this->tbAutoSkill->Name = L"tbAutoSkill";
+			this->tbAutoSkill->Size = System::Drawing::Size(108, 20);
+			this->tbAutoSkill->TabIndex = 88;
+			// 
+			// bAutoSkill
+			// 
+			this->bAutoSkill->Location = System::Drawing::Point(7, 156);
+			this->bAutoSkill->Name = L"bAutoSkill";
+			this->bAutoSkill->Size = System::Drawing::Size(35, 23);
+			this->bAutoSkill->TabIndex = 87;
+			this->bAutoSkill->Text = L"Add";
+			this->bAutoSkill->UseVisualStyleBackColor = true;
+			this->bAutoSkill->Click += gcnew System::EventHandler(this, &MainForm::bAutoSkill_Click);
+			// 
+			// lvAutoSkill
+			// 
+			this->lvAutoSkill->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->lvAutoSkill->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(3) {this->hName, this->hInterval, 
+				this->hKey});
+			this->lvAutoSkill->ContextMenuStrip = this->AutoSkillContextMenu;
+			this->lvAutoSkill->FullRowSelect = true;
+			this->lvAutoSkill->Location = System::Drawing::Point(7, 19);
+			this->lvAutoSkill->MultiSelect = false;
+			this->lvAutoSkill->Name = L"lvAutoSkill";
+			this->lvAutoSkill->Size = System::Drawing::Size(310, 131);
+			this->lvAutoSkill->TabIndex = 86;
+			this->lvAutoSkill->UseCompatibleStateImageBehavior = false;
+			this->lvAutoSkill->View = System::Windows::Forms::View::Details;
+			// 
+			// hName
+			// 
+			this->hName->Text = L"Name";
+			this->hName->Width = 160;
+			// 
+			// hInterval
+			// 
+			this->hInterval->Text = L"Interval";
+			this->hInterval->Width = 75;
+			// 
+			// hKey
+			// 
+			this->hKey->Text = L"Key";
+			this->hKey->Width = 75;
+			// 
+			// AutoSkillContextMenu
+			// 
+			this->AutoSkillContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->castToolStripMenuItem, 
+				this->deleteToolStripMenuItem});
+			this->AutoSkillContextMenu->Name = L"AutoSkillContextMenu";
+			this->AutoSkillContextMenu->Size = System::Drawing::Size(108, 48);
+			// 
+			// castToolStripMenuItem
+			// 
+			this->castToolStripMenuItem->Name = L"castToolStripMenuItem";
+			this->castToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->castToolStripMenuItem->Text = L"Cast";
+			this->castToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::castToolStripMenuItem_Click);
+			// 
+			// deleteToolStripMenuItem
+			// 
+			this->deleteToolStripMenuItem->Name = L"deleteToolStripMenuItem";
+			this->deleteToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->deleteToolStripMenuItem->Text = L"Delete";
+			this->deleteToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::deleteToolStripMenuItem_Click);
 			// 
 			// AutoBotGroupBox
 			// 
@@ -519,27 +623,6 @@ private:
 			this->AutoBotGroupBox->TabIndex = 36;
 			this->AutoBotGroupBox->TabStop = false;
 			this->AutoBotGroupBox->Text = L"Autobot";
-			// 
-			// AutoSkillContextMenu
-			// 
-			this->AutoSkillContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->castToolStripMenuItem, 
-				this->deleteToolStripMenuItem});
-			this->AutoSkillContextMenu->Name = L"AutoSkillContextMenu";
-			this->AutoSkillContextMenu->Size = System::Drawing::Size(108, 48);
-			// 
-			// castToolStripMenuItem
-			// 
-			this->castToolStripMenuItem->Name = L"castToolStripMenuItem";
-			this->castToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->castToolStripMenuItem->Text = L"Cast";
-			this->castToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::castToolStripMenuItem_Click);
-			// 
-			// deleteToolStripMenuItem
-			// 
-			this->deleteToolStripMenuItem->Name = L"deleteToolStripMenuItem";
-			this->deleteToolStripMenuItem->Size = System::Drawing::Size(107, 22);
-			this->deleteToolStripMenuItem->Text = L"Delete";
-			this->deleteToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::deleteToolStripMenuItem_Click);
 			// 
 			// nudCCAttacks
 			// 
@@ -980,7 +1063,7 @@ private:
 			this->HacksTab->Location = System::Drawing::Point(4, 22);
 			this->HacksTab->Name = L"HacksTab";
 			this->HacksTab->Padding = System::Windows::Forms::Padding(3);
-			this->HacksTab->Size = System::Drawing::Size(326, 457);
+			this->HacksTab->Size = System::Drawing::Size(326, 542);
 			this->HacksTab->TabIndex = 1;
 			this->HacksTab->Text = L"Hacks";
 			this->HacksTab->UseVisualStyleBackColor = true;
@@ -1518,7 +1601,7 @@ private:
 			this->PacketSenderTab->Location = System::Drawing::Point(4, 22);
 			this->PacketSenderTab->Name = L"PacketSenderTab";
 			this->PacketSenderTab->Padding = System::Windows::Forms::Padding(3);
-			this->PacketSenderTab->Size = System::Drawing::Size(326, 457);
+			this->PacketSenderTab->Size = System::Drawing::Size(326, 542);
 			this->PacketSenderTab->TabIndex = 2;
 			this->PacketSenderTab->Text = L"Packets";
 			this->PacketSenderTab->UseVisualStyleBackColor = true;
@@ -1755,7 +1838,7 @@ private:
 			this->SPControlTabPage->Controls->Add(this->lvSPControl);
 			this->SPControlTabPage->Location = System::Drawing::Point(4, 22);
 			this->SPControlTabPage->Name = L"SPControlTabPage";
-			this->SPControlTabPage->Size = System::Drawing::Size(326, 457);
+			this->SPControlTabPage->Size = System::Drawing::Size(326, 542);
 			this->SPControlTabPage->TabIndex = 3;
 			this->SPControlTabPage->Text = L"SPControl";
 			this->SPControlTabPage->UseVisualStyleBackColor = true;
@@ -1943,7 +2026,7 @@ private:
 			this->InfoTab->Location = System::Drawing::Point(4, 22);
 			this->InfoTab->Name = L"InfoTab";
 			this->InfoTab->Padding = System::Windows::Forms::Padding(3);
-			this->InfoTab->Size = System::Drawing::Size(326, 457);
+			this->InfoTab->Size = System::Drawing::Size(326, 542);
 			this->InfoTab->TabIndex = 4;
 			this->InfoTab->Text = L"Info";
 			this->InfoTab->UseVisualStyleBackColor = true;
@@ -2226,88 +2309,6 @@ private:
 			this->StatsTimer->Enabled = true;
 			this->StatsTimer->Tick += gcnew System::EventHandler(this, &MainForm::StatsTimer_Tick);
 			// 
-			// gbAutoSkill
-			// 
-			this->gbAutoSkill->Controls->Add(this->ddbAutoSkill);
-			this->gbAutoSkill->Controls->Add(this->nudAutoSkill);
-			this->gbAutoSkill->Controls->Add(this->tbAutoSkill);
-			this->gbAutoSkill->Controls->Add(this->bAutoSkill);
-			this->gbAutoSkill->Controls->Add(this->lvAutoSkill);
-			this->gbAutoSkill->Location = System::Drawing::Point(0, 301);
-			this->gbAutoSkill->Name = L"gbAutoSkill";
-			this->gbAutoSkill->Size = System::Drawing::Size(326, 185);
-			this->gbAutoSkill->TabIndex = 37;
-			this->gbAutoSkill->TabStop = false;
-			this->gbAutoSkill->Text = L"AutoSkill";
-			// 
-			// ddbAutoSkill
-			// 
-			this->ddbAutoSkill->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->ddbAutoSkill->FormattingEnabled = true;
-			this->ddbAutoSkill->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
-				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
-				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->ddbAutoSkill->Location = System::Drawing::Point(242, 156);
-			this->ddbAutoSkill->Name = L"ddbAutoSkill";
-			this->ddbAutoSkill->Size = System::Drawing::Size(76, 21);
-			this->ddbAutoSkill->TabIndex = 90;
-			// 
-			// nudAutoSkill
-			// 
-			this->nudAutoSkill->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
-			this->nudAutoSkill->Location = System::Drawing::Point(163, 156);
-			this->nudAutoSkill->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
-			this->nudAutoSkill->Name = L"nudAutoSkill";
-			this->nudAutoSkill->Size = System::Drawing::Size(75, 20);
-			this->nudAutoSkill->TabIndex = 89;
-			// 
-			// tbAutoSkill
-			// 
-			this->tbAutoSkill->Location = System::Drawing::Point(49, 157);
-			this->tbAutoSkill->Name = L"tbAutoSkill";
-			this->tbAutoSkill->Size = System::Drawing::Size(108, 20);
-			this->tbAutoSkill->TabIndex = 88;
-			// 
-			// bAutoSkill
-			// 
-			this->bAutoSkill->Location = System::Drawing::Point(7, 156);
-			this->bAutoSkill->Name = L"bAutoSkill";
-			this->bAutoSkill->Size = System::Drawing::Size(35, 23);
-			this->bAutoSkill->TabIndex = 87;
-			this->bAutoSkill->Text = L"Add";
-			this->bAutoSkill->UseVisualStyleBackColor = true;
-			// 
-			// lvAutoSkill
-			// 
-			this->lvAutoSkill->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->lvAutoSkill->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(3) {this->hName, this->hInterval, 
-				this->hKey});
-			this->lvAutoSkill->ContextMenuStrip = this->AutoSkillContextMenu;
-			this->lvAutoSkill->FullRowSelect = true;
-			this->lvAutoSkill->Location = System::Drawing::Point(8, 19);
-			this->lvAutoSkill->MultiSelect = false;
-			this->lvAutoSkill->Name = L"lvAutoSkill";
-			this->lvAutoSkill->Size = System::Drawing::Size(310, 131);
-			this->lvAutoSkill->TabIndex = 86;
-			this->lvAutoSkill->UseCompatibleStateImageBehavior = false;
-			this->lvAutoSkill->View = System::Windows::Forms::View::Details;
-			// 
-			// hName
-			// 
-			this->hName->Text = L"Name";
-			this->hName->Width = 160;
-			// 
-			// hInterval
-			// 
-			this->hInterval->Text = L"Interval";
-			this->hInterval->Width = 75;
-			// 
-			// hKey
-			// 
-			this->hKey->Text = L"Key";
-			this->hKey->Width = 75;
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2326,9 +2327,12 @@ private:
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
 			this->AutoBotTab->ResumeLayout(false);
+			this->gbAutoSkill->ResumeLayout(false);
+			this->gbAutoSkill->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill))->EndInit();
+			this->AutoSkillContextMenu->ResumeLayout(false);
 			this->AutoBotGroupBox->ResumeLayout(false);
 			this->AutoBotGroupBox->PerformLayout();
-			this->AutoSkillContextMenu->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCAttacks))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCTimed))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCPeople))->EndInit();
@@ -2376,9 +2380,6 @@ private:
 			this->gbHotKeys->PerformLayout();
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
-			this->gbAutoSkill->ResumeLayout(false);
-			this->gbAutoSkill->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill))->EndInit();
 			this->ResumeLayout(false);
 
 		}

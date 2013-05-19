@@ -393,11 +393,16 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 //Autoskill
 Void MainForm::bAutoSkill_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	ListViewItem^ item = gcnew ListViewItem(tbAutoSkill->Text);
-	item->SubItems->Add(nudAutoSkill->Value.ToString());
-	item->SubItems->Add(ddbAutoSkill->SelectedItem->ToString());
-	lvAutoSkill->Items->Add(item);
-	AutoSkills->Add(gcnew CAutoSkill((int) nudAutoSkill->Value, ddbAutoSkill->SelectedIndex));
+	if(nudAutoSkill->Value == 0) ShowError("The interval can't be 0!");
+	else if(ddbAutoSkill->SelectedIndex == -1) ShowError("You must select a key!");
+	else
+	{
+		ListViewItem^ item = gcnew ListViewItem(tbAutoSkill->Text);
+		item->SubItems->Add(nudAutoSkill->Value.ToString());
+		item->SubItems->Add(ddbAutoSkill->SelectedItem->ToString());
+		lvAutoSkill->Items->Add(item);
+		AutoSkills->Add(gcnew CAutoSkill((int) nudAutoSkill->Value, ddbAutoSkill->SelectedIndex));
+	}
 }
 Void MainForm::castToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
