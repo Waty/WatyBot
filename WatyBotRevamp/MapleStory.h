@@ -153,7 +153,6 @@ public:
 			return *(BYTE*)MSCRCAddy == 233;
 		}
 	}
-
 	property bool InGame
 	{
 		bool get()

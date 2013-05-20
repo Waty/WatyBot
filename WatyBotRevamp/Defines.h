@@ -31,6 +31,7 @@ using namespace System::IO;
 #define ShowInfo(Message)		MessageBox::Show(Message, "Information", MessageBoxButtons::OK, MessageBoxIcon::Information)
 #define ShowError(Message)		MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
 #define ShowWarning(Message)	MessageBox::Show(Message, "Warning", MessageBoxButtons::OK, MessageBoxIcon::Warning)
+#define ShowNotifyIcon(Message)	notifyIcon->ShowBalloonTip(1000, "WatyBot Error:", Message, ToolTipIcon::Error);
 
 #define CodeCave(name) void __declspec(naked) Cave##name(){_asm
 #define EndCodeCave }

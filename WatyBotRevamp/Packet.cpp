@@ -27,7 +27,10 @@ CPackets::CPackets()
 	{
 		Packets = safe_cast<List<CPacketData^>^>(s->Deserialize(reader));
 	}
-	catch(System::Exception^){}	
+	catch(Exception^ ex)
+	{
+		ShowNotifyIcon(ex->Message);
+	}	
 	reader->Close();
 	if(Packets == nullptr) Packets = gcnew List<CPacketData^>;
 }
@@ -39,7 +42,10 @@ void CPackets::Save()
 	{
 		s->Serialize(writer, Packets);
 	}
-	catch(System::Exception^){}
+	catch(Exception^ ex)
+	{
+		ShowNotifyIcon(ex->Message);
+	}
 	writer->Close();
 }
 
@@ -152,7 +158,10 @@ bool CPackets::Send(String^ packet, String^&strError)
 	{
 		SendPacketf(lpBytes, dwLength);
 	} 
-	catch ( Exception^ ){} 
+	catch(Exception^ ex)
+	{
+		ShowNotifyIcon(ex->Message);
+	} 
 	finally {delete [] lpBytes;}
     return true;
 }

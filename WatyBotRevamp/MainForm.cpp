@@ -522,7 +522,7 @@ void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventA
 	ListViewItem^ L = lvSPControl->SelectedItems[0];
 	if(lvSPControl->SelectedItems->Count > 0)
 	{
-		switch(MessageBox::Show("Are you sure you want to delete this location?", "Please Confirm", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
+		switch(MessageBox::Show("Are you sure you want to delete this location?", "Confirm deletion", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
 		{
 		case ::DialogResult::Yes:
 			SPControl->Locations->RemoveAt(lvSPControl->Items->IndexOf(L));
@@ -577,7 +577,7 @@ Void MainForm::SaveSettings()
 	}
 	catch(System::Exception^ ex)
 	{
-		ShowError(ex->ToString());
+		ShowNotifyIcon(ex->Message);
 	}
 	writer->Close();
 }
@@ -597,64 +597,70 @@ Void MainForm::LoadSettings()
 	}
 	catch(System::Exception^ ex)
 	{
-		ShowError(ex->ToString());
+		ShowNotifyIcon(ex->Message);
 	}	
 	reader->Close();
 	if(Settings == nullptr) Settings = gcnew List<SettingsEntry^>;
 	else
 	{
-		if(Settings->Count != SettingCount) ShowError("The Loaded settings file is invalid!\n" + "WatyBot Will try to load it anyways :)\n" + "Found: " + Settings->Count + " Should be: " + (int) SettingCount);
-		try{
-		//AutoAttack
-		nudAutoAttack->Value = (Decimal)			Settings[AutoAttackDelay]->Value;
-		nudSAWSIL->Value = (Decimal)				Settings[SAWSIL]->Value;
-		ddbAutoAttackKey->SelectedIndex = (int)		Settings[AutoAttackKey]->Value;
-		//AutoLoot
-		nudAutoLoot->Value = (Decimal)				Settings[AutoLootDelay]->Value;
-		nudSLWIB->Value = (Decimal)					Settings[SLWIB]->Value;
-		ddbAutoLootKey->SelectedIndex = (int)		Settings[AutoLootKey]->Value;
-		//AutoHP
-		nudAutoHP->Value = (Decimal)				Settings[AutoHPValue]->Value;
-		ddbAutoHPKey->SelectedIndex = (int)			Settings[AutoHPKey]->Value;
-		//AutoMP
-		nudAutoMP->Value = (Decimal)				Settings[AutoMPValue]->Value;
-		ddbAutoMPKey->SelectedIndex = (int)			Settings[AutoMPKey]->Value;
-		//PetFeeder
-		nudPetFeeder->Value = (Decimal)				Settings[PetFeederValue]->Value;
-		ddbPetFeeder->SelectedIndex = (int)			Settings[PetFeederKey]->Value;
-		//CC People
-		nudCCPeople->Value = (Decimal)				Settings[CCPeople]->Value;
-		ddbPeopleType->SelectedIndex = (int)		Settings[CCPeopleType]->Value;
-		//CC Timed
-		nudCCTimed->Value = (Decimal)				Settings[CCTimed]->Value;
-		ddbTimedType->SelectedIndex = (int)			Settings[CCTimedType]->Value;
-		//CC Attacks
-		nudCCAttacks->Value = (Decimal)				Settings[CCAttacks]->Value;
-		ddbAttacksType->SelectedIndex = (int)		Settings[CCAttacksType]->Value;
-		//HotKeys
-		ddbHotKeyAttack->SelectedIndex = (int)		Settings[HotKeyAttack]->Value;
-		ddbHotKeyLoot->SelectedIndex = (int)		Settings[HotKeyLoot]->Value;
-		ddbHotKeyFMA->SelectedIndex = (int)			Settings[HotKeyFMA]->Value;
-		ddbHotKeyCCPeople->SelectedIndex = (int)	Settings[HotKeyCCPeople]->Value;
-		ddbHotKeySendPacket->SelectedIndex = (int)	Settings[HotKeySendPacket]->Value;
-		//PacketSender
-		ddbSelectedPacket->SelectedIndex = (int)	Settings[SelectedPacket]->Value;
-		nudSpamAmount->Value = (Decimal)			Settings[PacketSpamAmount]->Value;
-		nudSpamDelay->Value = (Decimal)				Settings[PacketSpamDelay]->Value;
-		//Hacks Tab
-		nudSkillInjection->Value = (Decimal)		Settings[SkillInjectionDelay]->Value;
-		ddbSkillInjection->SelectedIndex = (int)	Settings[SkillInjectionIndex]->Value;
-		nudIceGuard->Value = (Decimal)				Settings[IceGuard]->Value;
-
-		int i = 0;
-		while(i<50 && !CMS->GotMSCRC)
+		if(Settings->Count != SettingCount) ShowNotifyIcon("The Loaded settings file is invalid!\n" + "WatyBot Will try to load it anyways :)\n" + "Found: " + Settings->Count + " Should be: " + (int) SettingCount);
+		try
 		{
-			Sleep(100);
-			i++;
+			//AutoAttack
+			nudAutoAttack->Value = (Decimal)			Settings[AutoAttackDelay]->Value;
+			nudSAWSIL->Value = (Decimal)				Settings[SAWSIL]->Value;
+			ddbAutoAttackKey->SelectedIndex = (int)		Settings[AutoAttackKey]->Value;
+			//AutoLoot
+			nudAutoLoot->Value = (Decimal)				Settings[AutoLootDelay]->Value;
+			nudSLWIB->Value = (Decimal)					Settings[SLWIB]->Value;
+			ddbAutoLootKey->SelectedIndex = (int)		Settings[AutoLootKey]->Value;
+			//AutoHP
+			nudAutoHP->Value = (Decimal)				Settings[AutoHPValue]->Value;
+			ddbAutoHPKey->SelectedIndex = (int)			Settings[AutoHPKey]->Value;
+			//AutoMP
+			nudAutoMP->Value = (Decimal)				Settings[AutoMPValue]->Value;
+			ddbAutoMPKey->SelectedIndex = (int)			Settings[AutoMPKey]->Value;
+			//PetFeeder
+			nudPetFeeder->Value = (Decimal)				Settings[PetFeederValue]->Value;
+			ddbPetFeeder->SelectedIndex = (int)			Settings[PetFeederKey]->Value;
+			//CC People
+			nudCCPeople->Value = (Decimal)				Settings[CCPeople]->Value;
+			ddbPeopleType->SelectedIndex = (int)		Settings[CCPeopleType]->Value;
+			//CC Timed
+			nudCCTimed->Value = (Decimal)				Settings[CCTimed]->Value;
+			ddbTimedType->SelectedIndex = (int)			Settings[CCTimedType]->Value;
+			//CC Attacks
+			nudCCAttacks->Value = (Decimal)				Settings[CCAttacks]->Value;
+			ddbAttacksType->SelectedIndex = (int)		Settings[CCAttacksType]->Value;
+			//HotKeys
+			ddbHotKeyAttack->SelectedIndex = (int)		Settings[HotKeyAttack]->Value;
+			ddbHotKeyLoot->SelectedIndex = (int)		Settings[HotKeyLoot]->Value;
+			ddbHotKeyFMA->SelectedIndex = (int)			Settings[HotKeyFMA]->Value;
+			ddbHotKeyCCPeople->SelectedIndex = (int)	Settings[HotKeyCCPeople]->Value;
+			ddbHotKeySendPacket->SelectedIndex = (int)	Settings[HotKeySendPacket]->Value;
+			//PacketSender
+			ddbSelectedPacket->SelectedIndex = (int)	Settings[SelectedPacket]->Value;
+			nudSpamAmount->Value = (Decimal)			Settings[PacketSpamAmount]->Value;
+			nudSpamDelay->Value = (Decimal)				Settings[PacketSpamDelay]->Value;
+			//Hacks Tab
+			nudSkillInjection->Value = (Decimal)		Settings[SkillInjectionDelay]->Value;
+			ddbSkillInjection->SelectedIndex = (int)	Settings[SkillInjectionIndex]->Value;
+			nudIceGuard->Value = (Decimal)				Settings[IceGuard]->Value;
+
+			//try's 5 seconds long if your CRC is ready for the hacks
+			int i = 0;
+			while(i<50 && !CMS->GotMSCRC)
+			{
+				Sleep(100);
+				i++;
+			}
+			cbPinTyper->Checked = (bool)				Settings[PinTyper]->Value;
+			cbLogoSkipper->Checked = (bool)				Settings[LogoSkipper]->Value;
 		}
-		cbPinTyper->Checked = (bool)				Settings[PinTyper]->Value;
-		cbLogoSkipper->Checked = (bool)				Settings[LogoSkipper]->Value;
-		}catch(...){}
+		catch(Exception^ ex)
+		{
+			ShowNotifyIcon(ex->Message);
+		}
 	}
 }
 Void MainForm::ReloadSettings()

@@ -30,7 +30,10 @@ CSPControl::CSPControl()
 	{
 		Locations = safe_cast<List<CSPControlLocation^>^>(s->Deserialize(reader));
 	}
-	catch(System::Exception^){}	
+	catch(Exception^ ex)
+	{
+		ShowNotifyIcon(ex->Message);
+	}	
 	reader->Close();
 	if(Locations == nullptr) Locations = gcnew List<CSPControlLocation^>;
 }
@@ -42,7 +45,10 @@ void CSPControl::Save()
 	{
 		s->Serialize(writer, Locations);
 	}
-	catch(System::Exception^){}
+	catch(Exception^ ex)
+	{
+		ShowNotifyIcon(ex->Message);
+	}
 	writer->Close();
 }
 
