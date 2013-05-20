@@ -562,9 +562,9 @@ void MainForm::SPControlAddButton_Click(System::Object^  sender, System::EventAr
 }
 void MainForm::SPControlDeleteItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	ListViewItem^ L = lvSPControl->SelectedItems[0];
 	if(lvSPControl->SelectedItems->Count > 0)
 	{
+		ListViewItem^ L = lvSPControl->SelectedItems[0];
 		switch(MessageBox::Show("Are you sure you want to delete this location?", "Confirm deletion", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
 		{
 		case ::DialogResult::Yes:
