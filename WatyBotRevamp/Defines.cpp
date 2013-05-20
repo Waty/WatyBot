@@ -11,6 +11,7 @@ gcroot<CMapleStory^> CMS;
 gcroot<CChangeChannel^> CC;
 gcroot<CPackets^> CPacket;
 gcroot<CSPControl^> SPControl;
+gcroot<NotifyIcon^> notifyIcon;
 
 int SkillInjectionSkills[] = {97, 99, 100, 103, 61001005, 4001334, 4201005, 4211011, 4221001, 1001004, 1221009, 1311005, 2201004, 2211003};
 int TabHeight[] = {541, 461, 386, 431, 266};

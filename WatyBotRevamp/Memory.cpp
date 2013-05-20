@@ -1,9 +1,5 @@
 #include "Memory.h"
-
-bool MSCRCPatched()
-{
-	return *(BYTE*)MSCRCAddy == 233;
-}
+#include "Defines.h"
 
 //Constructors
 CMemory::CMemory(unsigned long ulAddy, unsigned char *bytes, int size) //one addy
@@ -81,22 +77,20 @@ CMemory::~CMemory(void)
 	this->RestoreMem();
 }
 
-//Public Method
+//Public Methods
 bool CMemory::Enable(bool enable)
 {
-	using namespace System::Windows::Forms;
-	using namespace System::Drawing;
-	if(!MSCRCPatched())
+	if(!CMS->GotMSCRC)
 	{
-		NotifyIcon^ i = gcnew NotifyIcon;
-		i->Icon = SystemIcons::Error;
-		i->Visible = true;
-		i->ShowBalloonTip(1000, L"WatyBot", L"Error in enabling the hack: No MSCRC bypass installed", ToolTipIcon::Error);
+		notifyIcon->ShowBalloonTip(1000, L"WatyBot", L"Error in enabling the hack: No MSCRC bypass installed", ToolTipIcon::Error);
 		return false;
 	}
-	enable ? this->WriteMem() : this->RestoreMem();
-	this->Enabled = enable;
-	return enable ? true : false;
+	else
+	{
+		enable ? this->WriteMem() : this->RestoreMem();
+		this->Enabled = enable;
+		return enable ? true : false;
+	}
 }
 
 //Private Methods

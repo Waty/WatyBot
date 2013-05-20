@@ -90,6 +90,11 @@ public:
 		{
 			return (int) ReadPointer(ServerBasePtr, TubiOffset);
 		}
+		void set(int i)
+		{
+			WritePointer(ServerBasePtr, TubiOffset, i);
+		}
+
 	}
 	property int Breath
 	{
@@ -141,6 +146,14 @@ public:
 			return ReadPointer(Pet+Pet1Offset, PetFullness);
 		}
 	}
+	property bool GotMSCRC
+	{
+		bool get()
+		{
+			return *(BYTE*)MSCRCAddy == 233;
+		}
+	}
+
 	property bool InGame
 	{
 		bool get()
@@ -161,13 +174,13 @@ public:
 	property int SAWSIL;
 	property int SLWIB;
 
-	bool WritePointer(unsigned long ulBase, int iOffset, int iValue);
 	void SendKey(int Key);
 	void SpamKey(int Key);
 
 private:
 	unsigned long ReadPointer(unsigned long ulBase, int iOffset);
 	double ReadDoublePointer(DWORD ulBase, INT iOffset);
+	bool WritePointer(unsigned long ulBase, int iOffset, int iValue);
 	HWND FindProcessWindow();
 
 	~CMapleStory(void);

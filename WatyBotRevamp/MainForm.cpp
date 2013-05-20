@@ -5,7 +5,6 @@
 
 using namespace Settings;
 using namespace WatyBotRevamp;
-using namespace System::IO;
 
 //Hack CheckBoxes
 void MainForm::cbFusionAttack_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
@@ -209,7 +208,7 @@ bool canLoot()
 {
 	if(!CMS->InGame) return false;
 	if(CMS->ItemCount < CMS->SLWIB) return false;
-	if(!CMS->WritePointer(ServerBasePtr, TubiOffset, 0)) return false;
+	CMS->Tubi = 0;
 	return true;
 }
 BOOL WINAPI GetCoords()
@@ -301,6 +300,11 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	CPacket = gcnew CPackets;
 	LoadSettings();
 	AutoSkills = gcnew List<CAutoSkill^>;
+	
+	//Initialize the NotifyIcon
+	notifyIcon = gcnew NotifyIcon;
+	notifyIcon->Icon = SystemIcons::Error;
+	notifyIcon->Visible = true;
 
 	//Start the MacroManager
 	InitializeMacros();
@@ -380,6 +384,7 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 	switch(MessageBox::Show("Close MapleStory too?", "Terminate Maple?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
 	{
 		case ::DialogResult::Yes:
+			notifyIcon->Visible = false;
 			TerminateProcess(GetCurrentProcess(), 0);
 			ExitProcess(0);
 			break;
@@ -641,7 +646,12 @@ Void MainForm::LoadSettings()
 		ddbSkillInjection->SelectedIndex = (int)	Settings[SkillInjectionIndex]->Value;
 		nudIceGuard->Value = (Decimal)				Settings[IceGuard]->Value;
 
-		Sleep(2500);
+		int i = 0;
+		while(i<50 && !CMS->GotMSCRC)
+		{
+			Sleep(100);
+			i++;
+		}
 		cbPinTyper->Checked = (bool)				Settings[PinTyper]->Value;
 		cbLogoSkipper->Checked = (bool)				Settings[LogoSkipper]->Value;
 		}catch(...){}

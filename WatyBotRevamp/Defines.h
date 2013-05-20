@@ -48,6 +48,7 @@ extern gcroot<CMapleStory^> CMS;
 extern gcroot<CChangeChannel^> CC;
 extern gcroot<CPackets^> CPacket;
 extern gcroot<CSPControl^> SPControl;
+extern gcroot<NotifyIcon^> notifyIcon;
 
 extern int SkillInjectionSkills[];
 extern int TabHeight[];

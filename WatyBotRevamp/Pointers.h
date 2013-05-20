@@ -58,3 +58,5 @@
 #define KBOffset 0x124
 #define KBXOffset (KBOffset + 0x0C)
 #define KBYOffset (KBOffset + 0x10)
+
+#define MSCRCAddy 0x00D0B264
