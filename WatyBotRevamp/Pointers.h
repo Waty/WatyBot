@@ -8,7 +8,7 @@
 #define ComboOffset 0x7CD0
 #define PetOffset 0x5050
 #define Pet1Offset 0x4
-#define PetFullness 0xB4
+#define PetFull 0xB4
  
 #define InfoBasePtr 0x011E33A8
 #define MapIDOffset 0xC9C

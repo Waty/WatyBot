@@ -155,12 +155,12 @@ public:
 		}
 		void set(int){}
 	}
-	property int PetPercentage
+	property int PetFullness
 	{
 		int get()
 		{
 			unsigned long Pet = ReadPointer(CharBasePtr, PetOffset);
-			return ReadPointer(Pet+Pet1Offset, PetFullness);
+			return ReadPointer(Pet+Pet1Offset, PetFull);
 		}
 		void set(int){}
 	}

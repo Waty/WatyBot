@@ -326,7 +326,7 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	this->lMapID->Text =			"MapID: "		+ CMS->MapId;
 	this->lCharacterpID->Text =		"Char pID: "	+ CMS->CharpId;
 	this->lKnockBack->Text =		"KnockBack: "	+ CMS->KnockBack;
-	this->lPetFullness->Text =		"PetFullness: "	+ CMS->PetPercentage;
+	this->lPetFullness->Text =		"PetFullness: "	+ CMS->PetFullness;
 	
 	if(CMS->InGame)
 	{
@@ -339,7 +339,7 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 		if(cbCCAttacks->Checked && (CMS->AttackCount >= (int) nudCCAttacks->Value)) CC->CCSwitch(CCType(ddbAttacksType->SelectedIndex));
 
 		//PetFeeder happens here
-		if(cbPetFeeder->Checked && (CMS->PetPercentage <= nudPetFeeder->Value)) CMS->SendKey(KeyCodes[ddbPetFeeder->SelectedIndex]);
+		if(cbPetFeeder->Checked && (CMS->PetFullness <= nudPetFeeder->Value)) CMS->SendKey(KeyCodes[ddbPetFeeder->SelectedIndex]);
 		MainForm::RedrawStatBars();
 		MainForm::HotKeys();
 	}
