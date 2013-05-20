@@ -43,9 +43,5 @@ Void CAutoSkill::CastBackground(System::Object^ sender, System::ComponentModel::
 		Sleep(500);
 		CMS->UsingAutoSkill = false;		
 	}
-	else
-	{
-		//Send Packet
-		CPacket->Send(CPacket->Packets[keyIndex - KeyCodesSize]);
-	}
+	else CPacket->Send(CPacket->Packets[keyIndex - KeyCodesSize]);
 }

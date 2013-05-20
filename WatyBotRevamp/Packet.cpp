@@ -161,8 +161,7 @@ bool CPackets::Send(CPacketData^ packet)
 {
 	String^ strError = String::Empty;
 	bool succes = Send(packet->Data, strError);
-	if(!succes)
-		ShowError(strError);
+	if(!succes) ShowError(strError);
 	return succes;
 }
 

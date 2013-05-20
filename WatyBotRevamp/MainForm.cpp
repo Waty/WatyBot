@@ -404,6 +404,12 @@ Void MainForm::bAutoSkill_Click(System::Object^  sender, System::EventArgs^  e)
 		AutoSkills->Add(gcnew CAutoSkill((int) nudAutoSkill->Value, ddbAutoSkill->SelectedIndex));
 	}
 }
+Void MainForm::ddbAutoSkill_DropDown(System::Object^  sender, System::EventArgs^  e)
+{
+	ddbAutoSkill->Items->Clear();
+	ddbAutoSkill->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+	for each(CPacketData^ p in CPacket->Packets) ddbAutoSkill->Items->Add(p->Name);
+}
 Void MainForm::castToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	if(lvSPControl->SelectedItems->Count < 0) return;

@@ -194,27 +194,19 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::NumericUpDown^  nudSPCY;
 	private: System::Windows::Forms::NumericUpDown^  nudSPCX;
 	private: System::Windows::Forms::NumericUpDown^  nudSPCMapId;
-
-
-
-
-
-
-
-
 	private: System::Windows::Forms::ContextMenuStrip^  AutoSkillContextMenu;
 	private: System::Windows::Forms::ToolStripMenuItem^  castToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  deleteToolStripMenuItem;
 	private: System::Windows::Forms::Label^  lPetFullness;
-private: System::Windows::Forms::GroupBox^  gbAutoSkill;
-private: System::Windows::Forms::ComboBox^  ddbAutoSkill;
-private: System::Windows::Forms::NumericUpDown^  nudAutoSkill;
-private: System::Windows::Forms::TextBox^  tbAutoSkill;
-private: System::Windows::Forms::Button^  bAutoSkill;
-private: System::Windows::Forms::ListView^  lvAutoSkill;
-private: System::Windows::Forms::ColumnHeader^  hName;
-private: System::Windows::Forms::ColumnHeader^  hInterval;
-private: System::Windows::Forms::ColumnHeader^  hKey;
+	private: System::Windows::Forms::GroupBox^  gbAutoSkill;
+	private: System::Windows::Forms::ComboBox^  ddbAutoSkill;
+	private: System::Windows::Forms::NumericUpDown^  nudAutoSkill;
+	private: System::Windows::Forms::TextBox^  tbAutoSkill;
+	private: System::Windows::Forms::Button^  bAutoSkill;
+	private: System::Windows::Forms::ListView^  lvAutoSkill;
+	private: System::Windows::Forms::ColumnHeader^  hName;
+	private: System::Windows::Forms::ColumnHeader^  hInterval;
+	private: System::Windows::Forms::ColumnHeader^  hKey;
 	private: System::ComponentModel::IContainer^  components;
 private:
 		/// <summary>
@@ -506,6 +498,7 @@ private:
 			this->ddbAutoSkill->Name = L"ddbAutoSkill";
 			this->ddbAutoSkill->Size = System::Drawing::Size(76, 21);
 			this->ddbAutoSkill->TabIndex = 90;
+			this->ddbAutoSkill->DropDown += gcnew System::EventHandler(this, &MainForm::ddbAutoSkill_DropDown);
 			// 
 			// nudAutoSkill
 			// 
@@ -2462,6 +2455,7 @@ private: System::Void PacketSelectBox_SelectedIndexChanged(System::Object^  send
 private: System::Void bAutoSkill_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void castToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void deleteToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+private: System::Void ddbAutoSkill_DropDown(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion
