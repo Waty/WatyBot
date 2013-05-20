@@ -1,15 +1,25 @@
 #include "AutoSkill.h"
 #include "Defines.h"
 
-CAutoSkill::CAutoSkill(int interval, int key)
+CAutoSkill::CAutoSkill()
+{
+	bw = gcnew System::ComponentModel::BackgroundWorker;
+	bw->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &CAutoSkill::CastBackground);
+	timer = gcnew System::Windows::Forms::Timer;
+	timer->Tick += gcnew System::EventHandler(this, &CAutoSkill::AutoSkill_Tick);
+	timer->Enabled = true;
+}
+
+CAutoSkill::CAutoSkill(String^ name, int interval, int key)
 {
 	bw = gcnew System::ComponentModel::BackgroundWorker;
 	bw->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &CAutoSkill::CastBackground);
 	keyIndex = key;
 	timer = gcnew System::Windows::Forms::Timer;
-	timer->Interval = interval * 1000;
+	Interval = interval;
 	timer->Tick += gcnew System::EventHandler(this, &CAutoSkill::AutoSkill_Tick);
 	timer->Enabled = true;
+	Name = name;
 	Cast();
 }
 

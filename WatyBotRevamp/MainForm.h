@@ -2381,6 +2381,9 @@ private:
 private: List<SettingsEntry^>^ Settings;
 private: List<CAutoSkill^>^ AutoSkills;
 private: property XmlSerializer^ s;
+private: XmlSerializer^ AutoSkillSerializer;
+private: List<CAutoSkill^>^ LoadAutoSkill();
+private: void MainForm::SaveAutoSkill();
 private: System::Void LoadSettings();
 private: System::Void SaveSettings();
 private: System::Void ReloadSettings();

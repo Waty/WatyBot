@@ -27,6 +27,7 @@ using namespace System::IO;
 #define SPControlFileName (WatyBotWorkingDirectory + "WatyBotSPControl.xml")
 #define SettingsFileName (WatyBotWorkingDirectory + "WatyBotSettings.xml")
 #define PacketFileName (WatyBotWorkingDirectory + "WatyBotPackets.xml")
+#define AutoSkillFileName (WatyBotWorkingDirectory + "WatyBotAutoSkill.xml")
 
 #define ShowInfo(Message)		MessageBox::Show(Message, "Information", MessageBoxButtons::OK, MessageBoxIcon::Information)
 #define ShowError(Message)		MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)

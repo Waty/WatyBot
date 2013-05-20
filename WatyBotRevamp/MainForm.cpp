@@ -291,18 +291,18 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	//Create the Waty directory in %appdata%
 	if(!Directory::Exists(WatyBotWorkingDirectory))	Directory::CreateDirectory(WatyBotWorkingDirectory);
 
+	//Initialize the NotifyIcon
+	notifyIcon = gcnew NotifyIcon;
+	notifyIcon->Icon = SystemIcons::Error;
+	notifyIcon->Visible = true;
+
 	//Load all the settings and innitialize all the classes
 	CC = gcnew CChangeChannel;
 	CMS = gcnew CMapleStory;
 	SPControl = gcnew CSPControl;
 	CPacket = gcnew CPackets;
 	LoadSettings();
-	AutoSkills = gcnew List<CAutoSkill^>;
-	
-	//Initialize the NotifyIcon
-	notifyIcon = gcnew NotifyIcon;
-	notifyIcon->Icon = SystemIcons::Error;
-	notifyIcon->Visible = true;
+	AutoSkills = LoadAutoSkill();
 
 	//Start the MacroManager
 	InitializeMacros();
@@ -375,8 +375,6 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 {
 	macroMan.ClearMacros();
 	macroMan.Stop();
-	SPControl->Save();
-	CPacket->Save();
 	SaveSettings();
 
 	switch(MessageBox::Show("Close MapleStory too?", "Terminate Maple?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
@@ -404,8 +402,9 @@ Void MainForm::bAutoSkill_Click(System::Object^  sender, System::EventArgs^  e)
 		item->SubItems->Add(nudAutoSkill->Value.ToString());
 		item->SubItems->Add(ddbAutoSkill->SelectedItem->ToString());
 		lvAutoSkill->Items->Add(item);
-		AutoSkills->Add(gcnew CAutoSkill((int) nudAutoSkill->Value, ddbAutoSkill->SelectedIndex));
+		AutoSkills->Add(gcnew CAutoSkill(tbAutoSkill->Text, (int) nudAutoSkill->Value, ddbAutoSkill->SelectedIndex));
 	}
+	SaveAutoSkill();
 }
 Void MainForm::ddbAutoSkill_DropDown(System::Object^  sender, System::EventArgs^  e)
 {
@@ -427,6 +426,53 @@ Void MainForm::deleteToolStripMenuItem_Click(System::Object^  sender, System::Ev
 	delete AutoSkills[index];
 	AutoSkills->RemoveAt(index);
 	lvAutoSkill->Items->RemoveAt(index);
+	SaveAutoSkill();
+}
+List<CAutoSkill^>^ MainForm::LoadAutoSkill()
+{
+	if(!File::Exists(AutoSkillFileName))
+	{
+		auto stream = File::Create(AutoSkillFileName);
+		stream->Close();
+	}
+	
+	TextReader^ reader = gcnew StreamReader(AutoSkillFileName);
+	AutoSkillSerializer = gcnew XmlSerializer(List<CAutoSkill^>::typeid);
+	List<CAutoSkill^>^ AutoSkill;
+	try
+	{
+		AutoSkill = safe_cast<List<CAutoSkill^>^>(AutoSkillSerializer->Deserialize(reader));
+	}
+	catch(Exception^ ex)
+	{
+		ShowNotifyIcon(ex->Message);
+	}	
+	reader->Close();
+	if(AutoSkill == nullptr) AutoSkill = gcnew List<CAutoSkill^>;
+	ddbAutoSkill->Items->Clear();
+	ddbAutoSkill->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+	for each(CPacketData^ p in CPacket->Packets) ddbAutoSkill->Items->Add(p->Name);
+	for each(CAutoSkill^ as in AutoSkill)
+	{
+		ListViewItem^ item = gcnew ListViewItem(as->Name);
+		item->SubItems->Add(as->Interval.ToString());
+		item->SubItems->Add(ddbAutoSkill->Items[as->keyIndex]->ToString());
+		lvAutoSkill->Items->Add(item);
+	}
+	return AutoSkill;
+}
+void MainForm::SaveAutoSkill()
+{
+	TextWriter^ writer = gcnew StreamWriter(AutoSkillFileName);
+	try
+	{
+		AutoSkillSerializer->Serialize(writer, AutoSkills);
+	}
+	catch(Exception^ ex)
+	{
+		ShowNotifyIcon(ex->Message);
+	}
+	writer->Close();
 }
 
 //Controls on the PacketSender tab
@@ -714,6 +760,7 @@ Void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  
 	SaveSettings();
 	SPControl->Save();
 	CPacket->Save();
+	SaveAutoSkill();
 }
 
 //Hot Keys
