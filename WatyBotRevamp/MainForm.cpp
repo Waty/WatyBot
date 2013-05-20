@@ -372,13 +372,12 @@ void MainForm::MainTabControl_SelectedIndexChanged(System::Object^  sender, Syst
 }
 void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 {
-	macroMan.ClearMacros();
-	macroMan.Stop();
 	SaveSettings();
-
 	switch(MessageBox::Show("Close MapleStory too?", "Terminate Maple?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
 	{
 		case ::DialogResult::Yes:
+			macroMan.ClearMacros();
+			macroMan.Stop();
 			notifyIcon->Visible = false;
 			TerminateProcess(GetCurrentProcess(), 0);
 			ExitProcess(0);
