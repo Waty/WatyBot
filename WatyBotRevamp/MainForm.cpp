@@ -326,7 +326,6 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	this->lMapID->Text =			"MapID: "		+ CMS->MapId;
 	this->lCharacterpID->Text =		"Char pID: "	+ CMS->CharpId;
 	this->lKnockBack->Text =		"KnockBack: "	+ CMS->KnockBack;
-	this->lKBCoords->Text =			"KB: ("			+ CMS->KnockBackX + "," + CMS->KnockBackY + ")";
 	this->lPetFullness->Text =		"PetFullness: "	+ CMS->PetPercentage;
 	
 	if(CMS->InGame)
@@ -608,7 +607,7 @@ void MainForm::RefreshSPControlListView()
 enum SettingsIndex{
 	AutoAttackDelay, SAWSIL, AutoAttackKey, AutoLootDelay, SLWIB, AutoLootKey, AutoHPValue, AutoHPKey, AutoMPValue, AutoMPKey, PetFeederValue, PetFeederKey,
 	CCPeople, CCPeopleType, CCTimed, CCTimedType, CCAttacks, CCAttacksType, HotKeyAttack, HotKeyLoot, HotKeyFMA, HotKeyCCPeople, HotKeySendPacket,
-	SelectedPacket, PacketSpamAmount, PacketSpamDelay, SkillInjectionDelay, SkillInjectionIndex, IceGuard, PinTyper, LogoSkipper, SettingCount
+	SelectedPacket, PacketSpamAmount, PacketSpamDelay, SkillInjectionDelay, SkillInjectionIndex, IceGuard, SaveCMS, PinTyper, LogoSkipper, SettingCount
 };
 Void MainForm::SaveSettings()
 {
@@ -690,6 +689,8 @@ Void MainForm::LoadSettings()
 			nudSkillInjection->Value = (Decimal)		Settings[SkillInjectionDelay]->Value;
 			ddbSkillInjection->SelectedIndex = (int)	Settings[SkillInjectionIndex]->Value;
 			nudIceGuard->Value = (Decimal)				Settings[IceGuard]->Value;
+			//SaveCMS
+			nudSaveCMS->Value = (Decimal)				Settings[SettingsIndex::SaveCMS]->Value;
 
 			//try's 5 seconds long if your CRC is ready for the hacks
 			int i = 0;
@@ -750,6 +751,8 @@ Void MainForm::ReloadSettings()
 	s->Add(gcnew SettingsEntry(nudSkillInjection));
 	s->Add(gcnew SettingsEntry(ddbSkillInjection));
 	s->Add(gcnew SettingsEntry(nudIceGuard));
+	//SaveCMS
+	s->Add(gcnew SettingsEntry(nudSaveCMS));
 
 	s->Add(gcnew SettingsEntry(cbPinTyper));
 	s->Add(gcnew SettingsEntry(cbLogoSkipper));
@@ -761,6 +764,14 @@ Void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  
 	SPControl->Save();
 	CPacket->Save();
 	SaveAutoSkill();
+}
+Void MainForm::nudSaveCMS_ValueChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	SaveCMS->Interval = (int) nudSaveCMS->Value * 1000;
+}
+Void MainForm::SaveCMS_Tick(System::Object^  sender, System::EventArgs^  e)
+{
+	CMS->Save();
 }
 
 //Hot Keys

@@ -179,7 +179,6 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::CheckBox^  cbHideDamage;
 	private: System::Windows::Forms::CheckBox^  cbMercedesCombo;
 	private: System::Windows::Forms::ToolTip^  InfoToolTip;
-	private: System::Windows::Forms::Label^  lKBCoords;
 	private: System::Windows::Forms::Label^  lKnockBack;
 	private: System::Windows::Forms::CheckBox^  cbSkillInjection;
 	private: System::Windows::Forms::ComboBox^  ddbSkillInjection;
@@ -207,6 +206,9 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::ColumnHeader^  hName;
 	private: System::Windows::Forms::ColumnHeader^  hInterval;
 	private: System::Windows::Forms::ColumnHeader^  hKey;
+	private: System::Windows::Forms::NumericUpDown^  nudSaveCMS;
+	private: System::Windows::Forms::Label^  lSaveCMS;
+	private: System::Windows::Forms::Timer^  SaveCMS;
 	private: System::ComponentModel::IContainer^  components;
 private:
 		/// <summary>
@@ -366,7 +368,8 @@ private:
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
 			this->bSaveSettings = (gcnew System::Windows::Forms::Button());
 			this->gbHotKeys = (gcnew System::Windows::Forms::GroupBox());
-			this->lPetFullness = (gcnew System::Windows::Forms::Label());
+			this->nudSaveCMS = (gcnew System::Windows::Forms::NumericUpDown());
+			this->lSaveCMS = (gcnew System::Windows::Forms::Label());
 			this->ddbHotKeySendPacket = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeySendPacket = (gcnew System::Windows::Forms::CheckBox());
 			this->ddbHotKeyCCPeople = (gcnew System::Windows::Forms::ComboBox());
@@ -378,7 +381,7 @@ private:
 			this->ddbHotKeyAttack = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeyAttack = (gcnew System::Windows::Forms::CheckBox());
 			this->gbPointers = (gcnew System::Windows::Forms::GroupBox());
-			this->lKBCoords = (gcnew System::Windows::Forms::Label());
+			this->lPetFullness = (gcnew System::Windows::Forms::Label());
 			this->lKnockBack = (gcnew System::Windows::Forms::Label());
 			this->lCharacterpID = (gcnew System::Windows::Forms::Label());
 			this->lMapID = (gcnew System::Windows::Forms::Label());
@@ -391,6 +394,7 @@ private:
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->InfoToolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
+			this->SaveCMS = (gcnew System::Windows::Forms::Timer(this->components));
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->gbAutoSkill->SuspendLayout();
@@ -434,6 +438,7 @@ private:
 			this->SPControlContextMenu->SuspendLayout();
 			this->InfoTab->SuspendLayout();
 			this->gbHotKeys->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSaveCMS))->BeginInit();
 			this->gbPointers->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -2036,7 +2041,8 @@ private:
 			// 
 			// gbHotKeys
 			// 
-			this->gbHotKeys->Controls->Add(this->lPetFullness);
+			this->gbHotKeys->Controls->Add(this->nudSaveCMS);
+			this->gbHotKeys->Controls->Add(this->lSaveCMS);
 			this->gbHotKeys->Controls->Add(this->ddbHotKeySendPacket);
 			this->gbHotKeys->Controls->Add(this->cbHotKeySendPacket);
 			this->gbHotKeys->Controls->Add(this->ddbHotKeyCCPeople);
@@ -2054,14 +2060,24 @@ private:
 			this->gbHotKeys->TabStop = false;
 			this->gbHotKeys->Text = L"Hot Keys";
 			// 
-			// lPetFullness
+			// nudSaveCMS
 			// 
-			this->lPetFullness->AutoSize = true;
-			this->lPetFullness->Location = System::Drawing::Point(6, 146);
-			this->lPetFullness->Name = L"lPetFullness";
-			this->lPetFullness->Size = System::Drawing::Size(67, 13);
-			this->lPetFullness->TabIndex = 19;
-			this->lPetFullness->Text = L"PetFullness: ";
+			this->nudSaveCMS->Location = System::Drawing::Point(45, 142);
+			this->nudSaveCMS->Name = L"nudSaveCMS";
+			this->nudSaveCMS->Size = System::Drawing::Size(49, 20);
+			this->nudSaveCMS->TabIndex = 20;
+			this->InfoToolTip->SetToolTip(this->nudSaveCMS, L"In seconds");
+			this->nudSaveCMS->ValueChanged += gcnew System::EventHandler(this, &MainForm::nudSaveCMS_ValueChanged);
+			// 
+			// lSaveCMS
+			// 
+			this->lSaveCMS->AutoSize = true;
+			this->lSaveCMS->Location = System::Drawing::Point(6, 146);
+			this->lSaveCMS->Name = L"lSaveCMS";
+			this->lSaveCMS->Size = System::Drawing::Size(37, 13);
+			this->lSaveCMS->TabIndex = 19;
+			this->lSaveCMS->Text = L"Delay:";
+			this->InfoToolTip->SetToolTip(this->lSaveCMS, L"Developers only, if you aren\'t a developer, you wont have any use for this!");
 			// 
 			// ddbHotKeySendPacket
 			// 
@@ -2180,7 +2196,7 @@ private:
 			// 
 			// gbPointers
 			// 
-			this->gbPointers->Controls->Add(this->lKBCoords);
+			this->gbPointers->Controls->Add(this->lPetFullness);
 			this->gbPointers->Controls->Add(this->lKnockBack);
 			this->gbPointers->Controls->Add(this->lCharacterpID);
 			this->gbPointers->Controls->Add(this->lMapID);
@@ -2198,14 +2214,14 @@ private:
 			this->gbPointers->TabStop = false;
 			this->gbPointers->Text = L"Pointers";
 			// 
-			// lKBCoords
+			// lPetFullness
 			// 
-			this->lKBCoords->AutoSize = true;
-			this->lKBCoords->Location = System::Drawing::Point(6, 146);
-			this->lKBCoords->Name = L"lKBCoords";
-			this->lKBCoords->Size = System::Drawing::Size(105, 13);
-			this->lKBCoords->TabIndex = 30;
-			this->lKBCoords->Text = L"KBCoords: (123,123)";
+			this->lPetFullness->AutoSize = true;
+			this->lPetFullness->Location = System::Drawing::Point(6, 146);
+			this->lPetFullness->Name = L"lPetFullness";
+			this->lPetFullness->Size = System::Drawing::Size(67, 13);
+			this->lPetFullness->TabIndex = 19;
+			this->lPetFullness->Text = L"PetFullness: ";
 			// 
 			// lKnockBack
 			// 
@@ -2302,6 +2318,12 @@ private:
 			this->StatsTimer->Enabled = true;
 			this->StatsTimer->Tick += gcnew System::EventHandler(this, &MainForm::StatsTimer_Tick);
 			// 
+			// SaveCMS
+			// 
+			this->SaveCMS->Enabled = true;
+			this->SaveCMS->Interval = 10000;
+			this->SaveCMS->Tick += gcnew System::EventHandler(this, &MainForm::SaveCMS_Tick);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2371,6 +2393,7 @@ private:
 			this->InfoTab->ResumeLayout(false);
 			this->gbHotKeys->ResumeLayout(false);
 			this->gbHotKeys->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSaveCMS))->EndInit();
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
 			this->ResumeLayout(false);
@@ -2459,6 +2482,8 @@ private: System::Void bAutoSkill_Click(System::Object^  sender, System::EventArg
 private: System::Void castToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void deleteToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void ddbAutoSkill_DropDown(System::Object^  sender, System::EventArgs^  e);
+private: System::Void nudSaveCMS_ValueChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void SaveCMS_Tick(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion

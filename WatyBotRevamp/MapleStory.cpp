@@ -1,9 +1,9 @@
 #include "MapleStory.h"
-
+#include "Defines.h"
 
 CMapleStory::CMapleStory(void)
 {
-
+	s = gcnew XmlSerializer(CMapleStory::typeid);
 }
 
 CMapleStory::~CMapleStory(void)
@@ -79,4 +79,18 @@ void CMapleStory::SpamKey(int Key)
 {
 	PostMessage(MSHWND, WM_KEYDOWN, Key, (MapVirtualKey(Key, 0) << 16) + 1);
 	PostMessage(MSHWND, WM_KEYUP, Key, (MapVirtualKey(Key, 0) << 16) + 1);
+}
+
+void CMapleStory::Save()
+{
+	TextWriter^ writer = gcnew StreamWriter(CMapleStoryFileName);
+	try
+	{
+		s->Serialize(writer, this);
+	}
+	catch(Exception^ ex)
+	{
+		ShowNotifyIcon(ex->Message);
+	}
+	writer->Close();
 }
