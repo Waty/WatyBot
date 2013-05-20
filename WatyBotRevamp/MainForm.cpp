@@ -200,14 +200,12 @@ void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::
 //Macro's
 bool canAttack()
 {
-	if(CC->Busy) return false;
-	if(CMS->MobCount >= CMS->SAWSIL && CMS->InGame) return true;
-	return false;
+	if(!CMS->InGame || CC->Busy || CMS->MobCount < CMS->SAWSIL || CMS->UsingAutoSkill) return false;
+	return true;
 }
 bool canLoot()
 {
-	if(!CMS->InGame) return false;
-	if(CMS->ItemCount < CMS->SLWIB) return false;
+	if(!CMS->InGame || CMS->ItemCount < CMS->SLWIB || CMS->UsingAutoSkill) return false;
 	CMS->Tubi = 0;
 	return true;
 }
