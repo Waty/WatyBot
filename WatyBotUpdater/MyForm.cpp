@@ -51,6 +51,7 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 		lvAddys->Items->Clear();
 		String^ error = " 0xError";
 
+		lvAddys->BeginUpdate();
 		for each(Address^ address in Addresses)
 		{
 			char* aob = (char*) marshal_as<string>(address->AOB).c_str();
@@ -74,6 +75,7 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 			sw->WriteLine("#define " + address->Name + (succes ? strresult : error));
 		}
 		if(sw) delete (IDisposable^)(sw);
+		lvAddys->EndUpdate();
 		ShowInfo("Finished Updating!");
 	}
 }
