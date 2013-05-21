@@ -16,8 +16,7 @@ HWND hProcesswnd = NULL;
 
 bool inject(std::string fileName, DWORD pID)
 {
-	if(!pID)
-		return false;
+	if(!pID) return false;
 
 	HANDLE Proc; 
 	LPVOID RemoteString, LoadLibAddy; 
@@ -98,6 +97,8 @@ int main()
 	
 	cout << "Waiting for MS..." << endl;
 	WaitForInputIdle((HANDLE) procMS->Handle.ToPointer(), INFINITE);
+	Sleep(1000);
+
 	if(procMS->CloseMainWindow()) cout << "Closed the Play screen..." << endl;
 	else
 	{
@@ -114,7 +115,9 @@ int main()
 		system("pause");
 		return false;
 	}
-	Sleep(2500);
+
+	if(File::Exists(Directory::GetCurrentDirectory() + "\\WatyBotUpdater.dll")) inject(marshal_as<string>(Directory::GetCurrentDirectory() + "\\WatyBotUpdater.dll"), procMS->Id);
+
 	return true;
 }
 
