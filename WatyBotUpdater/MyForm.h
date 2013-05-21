@@ -46,7 +46,7 @@ namespace WatyBotUpdater
 	private: System::Windows::Forms::SaveFileDialog^  OutputFileDialog;
 	private: System::ComponentModel::IContainer^  components;
 	private: System::Xml::Serialization::XmlSerializer^ s;
-	private: System::Windows::Forms::Button^  button1;
+
 	private: List<Address^>^ Addresses;
 	private:
 		/// <summary>
@@ -69,15 +69,14 @@ namespace WatyBotUpdater
 			this->bOutput = (gcnew System::Windows::Forms::Button());
 			this->InputFileDialog = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->OutputFileDialog = (gcnew System::Windows::Forms::SaveFileDialog());
-			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// bUpdate
 			// 
 			this->bUpdate->DialogResult = System::Windows::Forms::DialogResult::Cancel;
-			this->bUpdate->Location = System::Drawing::Point(2, 271);
+			this->bUpdate->Location = System::Drawing::Point(2, 270);
 			this->bUpdate->Name = L"bUpdate";
-			this->bUpdate->Size = System::Drawing::Size(183, 23);
+			this->bUpdate->Size = System::Drawing::Size(234, 23);
 			this->bUpdate->TabIndex = 0;
 			this->bUpdate->Text = L"Update";
 			this->bUpdate->UseVisualStyleBackColor = true;
@@ -93,7 +92,7 @@ namespace WatyBotUpdater
 			this->lvAddys->Location = System::Drawing::Point(2, 27);
 			this->lvAddys->MultiSelect = false;
 			this->lvAddys->Name = L"lvAddys";
-			this->lvAddys->Size = System::Drawing::Size(234, 240);
+			this->lvAddys->Size = System::Drawing::Size(234, 241);
 			this->lvAddys->TabIndex = 1;
 			this->lvAddys->UseCompatibleStateImageBehavior = false;
 			this->lvAddys->View = System::Windows::Forms::View::Details;
@@ -151,7 +150,6 @@ namespace WatyBotUpdater
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(238, 295);
-			this->Controls->Add(this->button1);
 			this->Controls->Add(this->bOutput);
 			this->Controls->Add(this->bInput);
 			this->Controls->Add(this->lvAddys);
