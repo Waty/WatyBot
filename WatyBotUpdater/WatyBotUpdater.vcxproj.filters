@@ -32,6 +32,9 @@
     <ClInclude Include="PatternFind.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Address.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MyForm.resx">

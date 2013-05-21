@@ -1,5 +1,5 @@
 #include <Windows.h>
-
+#pragma unmanaged
 extern void InitializeTrainer(HINSTANCE hInstance);
 
 BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD fwdreason, LPVOID /*lpvReserved*/)

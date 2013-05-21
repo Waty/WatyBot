@@ -1,15 +1,14 @@
 #include "MyForm.h"
 #include "PatternFind.h"
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/ini_parser.hpp>
-#include <fstream>
+#include <msclr/marshal_cppstd.h>
 using namespace WatyBotUpdater;
+using namespace System::Xml::Serialization;
+using namespace msclr::interop;
 using namespace System::IO;
 using namespace std;
-using boost::property_tree::ptree;
 
-#define directory "WatyBotUpdater"
-#define settings "WatyBotUpdater\\settings.ini"
+#define directory Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData) + "\\Waty\\"
+#define filename (directory + "AOBs.xml")
 
 #define ShowInfo(Message)		MessageBox::Show(Message, "Information", MessageBoxButtons::OK, MessageBoxIcon::Information)
 #define ShowError(Message)		MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
@@ -17,36 +16,26 @@ using boost::property_tree::ptree;
 PFSEARCH pf;
 void *lpvMapleBase = NULL;
 DWORD dwMapleSize = 0;
-string inputfile = "WatyBotUpdater\\AOBs.ini";
-string outputfile = "WatyBotUpdater\\Addys.h";
 
 void CreateGUI(void)
 {
-        Application::EnableVisualStyles();
-        Application::SetCompatibleTextRenderingDefault(false);
-        Application::Run(gcnew MyForm);
-        Application::Exit();
+	Application::EnableVisualStyles();
+	Application::SetCompatibleTextRenderingDefault(false);
+	Application::Run(gcnew MyForm);
+	Application::Exit();
 }
-
 void InitializeTrainer(HINSTANCE hInstance)
 {
     DisableThreadLibraryCalls(hInstance);
     GetModuleSize(GetModuleHandle(NULL), &lpvMapleBase, &dwMapleSize); // Obtain Maple base address & size
 	
 	if(!Directory::Exists(directory))	Directory::CreateDirectory(directory);
-	if(!File::Exists(settings))			File::Create(settings);
-	else
+	if(!File::Exists(filename))
 	{
-		ifstream file(settings);
-		ptree pt;
-		read_ini(file, pt);
-		if(!pt.empty())
-		{
-			inputfile = pt.get<string>("inputfile");
-			outputfile = pt.get<string>("outputfile");
-		}
+		auto stream = File::Create(filename);
+		stream->Close();
 	}
-	
+
 	Threading::Thread^ tMain = gcnew Threading::Thread(gcnew Threading::ThreadStart(CreateGUI));
 	tMain->SetApartmentState(Threading::ApartmentState::STA);
 	tMain->Start();
@@ -55,29 +44,24 @@ void InitializeTrainer(HINSTANCE hInstance)
 void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	lpvMapleBase = reinterpret_cast<LPVOID>(0x00400000);
-	if(!File::Exists(marshal_as<String^>(inputfile))) ShowError("You didn't select an inputfile");
+	if(Addresses->Count <= 0) ShowError("You didn't select an inputfile");
 	else
 	{
-		ifstream file(inputfile);
-		ptree pt;
-		read_ini(file, pt);
-		StreamWriter^ sw = File::CreateText(marshal_as<String^>(outputfile));
-	
+		StreamWriter^ sw = File::CreateText(OutputFileDialog->FileName);	
 		lvAddys->Items->Clear();
-		for(ptree::value_type const& v : pt)
-		{		
-			char* aob = (char*) v.second.data().c_str();
-			String^ name = marshal_as<String^>(v.first);
+		String^ error = " 0xError";
+
+		for each(Address^ address in Addresses)
+		{
+			char* aob = (char*) marshal_as<string>(address->AOB).c_str();
 
 			FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
-			DWORD result = pf.dwResult;
 
-			String^ error = " 0xError";
-			String^ strresult = " 0x" + result.ToString("X");
-			bool succes = result != 0;
+			String^ strresult = " 0x" + pf.dwResult.ToString("X");
+			bool succes = pf.dwResult != 0;
 
 			//Add the result to the ListView
-			auto lvItem = gcnew ListViewItem(name);
+			auto lvItem = gcnew ListViewItem(address->Name);
 			lvItem->SubItems->Add(succes ? strresult : error);
 			if(!succes)
 			{
@@ -87,7 +71,7 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 			lvAddys->Items->Add(lvItem);
 
 			//Write the found addy to the header file
-			sw->WriteLine("#define " + name + (succes ? strresult : error));
+			sw->WriteLine("#define " + address->Name + (succes ? strresult : error));
 		}
 		if(sw) delete (IDisposable^)(sw);
 		ShowInfo("Finished Updating!");
@@ -96,34 +80,17 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 
 void MyForm::bInput_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	switch(InputFileDialog->ShowDialog())
-	{
-	case ::DialogResult::OK:
-		inputfile = marshal_as<string>(InputFileDialog->FileName);
-		break;
-	}
-}
-
-void MyForm::bOutput_Click(System::Object^  sender, System::EventArgs^  e)
-{
-	switch(OutputFileDialog->ShowDialog())
-	{
-	case ::DialogResult::OK:
-		outputfile = marshal_as<string>(OutputFileDialog->FileName);
-		break;
+	if(InputFileDialog->ShowDialog() == ::DialogResult::OK)
+	{		
+		TextReader^ reader = gcnew StreamReader(InputFileDialog->FileName);
+		try{Addresses = safe_cast<List<Address^>^>(s->Deserialize(reader));}
+		catch(Exception^ ex){ShowError(ex->ToString());}
+		reader->Close();
 	}
 }
 
 void MyForm::MyForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 {
-	//Save Settings
-	string settingsfile = settings;
-	ofstream file(settingsfile);
-	ptree pt;
-	pt.add("outputfile", outputfile);
-	pt.add("inputfile", inputfile);
-	write_ini(file, pt);
-
 	//Close MS
 	switch(MessageBox::Show("Do you want to close MS too?", "Close MapleStory?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
 	{

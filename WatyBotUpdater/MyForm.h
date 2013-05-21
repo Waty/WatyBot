@@ -1,12 +1,9 @@
 #pragma once
 #include <Windows.h>
-#include <msclr/marshal_cppstd.h>
-using namespace msclr::interop;
+#include "Address.h"
 
-extern std::string inputfile; 
-extern std::string outputfile; 
-
-namespace WatyBotUpdater {
+namespace WatyBotUpdater
+{
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -14,6 +11,7 @@ namespace WatyBotUpdater {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Collections::Generic;
 
 	/// <summary>
 	/// Summary for MyForm
@@ -24,9 +22,7 @@ namespace WatyBotUpdater {
 		MyForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+			s = gcnew XmlSerializer(List<Address^>::typeid);
 		}
 
 	protected:
@@ -48,12 +44,10 @@ namespace WatyBotUpdater {
 	private: System::Windows::Forms::Button^  bOutput;
 	private: System::Windows::Forms::OpenFileDialog^  InputFileDialog;
 	private: System::Windows::Forms::SaveFileDialog^  OutputFileDialog;
-
 	private: System::ComponentModel::IContainer^  components;
-	protected: 
-
-	protected: 
-
+	private: System::Xml::Serialization::XmlSerializer^ s;
+	private: System::Windows::Forms::Button^  button1;
+	private: List<Address^>^ Addresses;
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -75,6 +69,7 @@ namespace WatyBotUpdater {
 			this->bOutput = (gcnew System::Windows::Forms::Button());
 			this->InputFileDialog = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->OutputFileDialog = (gcnew System::Windows::Forms::SaveFileDialog());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// bUpdate
@@ -82,7 +77,7 @@ namespace WatyBotUpdater {
 			this->bUpdate->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 			this->bUpdate->Location = System::Drawing::Point(2, 271);
 			this->bUpdate->Name = L"bUpdate";
-			this->bUpdate->Size = System::Drawing::Size(234, 23);
+			this->bUpdate->Size = System::Drawing::Size(183, 23);
 			this->bUpdate->TabIndex = 0;
 			this->bUpdate->Text = L"Update";
 			this->bUpdate->UseVisualStyleBackColor = true;
@@ -131,16 +126,15 @@ namespace WatyBotUpdater {
 			this->bOutput->TabIndex = 3;
 			this->bOutput->Text = L"Output File";
 			this->bOutput->UseVisualStyleBackColor = true;
-			this->bOutput->Click += gcnew System::EventHandler(this, &MyForm::bOutput_Click);
 			// 
 			// InputFileDialog
 			// 
-			this->InputFileDialog->DefaultExt = L"ini";
+			this->InputFileDialog->DefaultExt = L"xml";
 			this->InputFileDialog->FileName = L"AOBs";
-			this->InputFileDialog->Filter = L"Ini files (*.ini)|*.ini";
+			this->InputFileDialog->Filter = L"Xml files (*.xml)|*.xml";
 			this->InputFileDialog->InitialDirectory = L"WatyBotUpdater";
 			this->InputFileDialog->RestoreDirectory = true;
-			this->InputFileDialog->Title = L"Open the ini file containing all the AOB\'s";
+			this->InputFileDialog->Title = L"Open the xml file containing all the AOB\'s";
 			// 
 			// OutputFileDialog
 			// 
@@ -157,6 +151,7 @@ namespace WatyBotUpdater {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(238, 295);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->bOutput);
 			this->Controls->Add(this->bInput);
 			this->Controls->Add(this->lvAddys);
@@ -174,6 +169,5 @@ namespace WatyBotUpdater {
 	private: System::Void bUpdate_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void MyForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
 	private: System::Void bInput_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void bOutput_Click(System::Object^  sender, System::EventArgs^  e);
 };
 }
