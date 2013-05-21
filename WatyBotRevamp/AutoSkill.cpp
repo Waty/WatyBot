@@ -7,20 +7,14 @@ CAutoSkill::CAutoSkill()
 	bw->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &CAutoSkill::CastBackground);
 	timer = gcnew System::Windows::Forms::Timer;
 	timer->Tick += gcnew System::EventHandler(this, &CAutoSkill::AutoSkill_Tick);
-	timer->Enabled = true;
 }
 
 CAutoSkill::CAutoSkill(String^ name, int interval, int key)
 {
-	bw = gcnew System::ComponentModel::BackgroundWorker;
-	bw->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &CAutoSkill::CastBackground);
-	keyIndex = key;
-	timer = gcnew System::Windows::Forms::Timer;
-	Interval = interval;
-	timer->Tick += gcnew System::EventHandler(this, &CAutoSkill::AutoSkill_Tick);
-	timer->Enabled = true;
 	Name = name;
-	Cast();
+	Interval = interval;
+	keyIndex = key;
+	CAutoSkill();
 }
 
 CAutoSkill::~CAutoSkill()

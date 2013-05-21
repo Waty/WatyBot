@@ -20,6 +20,19 @@ public:
 			timer->Interval = i * 1000;
 		}
 	}
+	[System::Xml::Serialization::XmlIgnoreAttribute]
+	property bool Enabled
+	{
+		void set(bool state)
+		{
+			if(state) Cast(); 
+			timer->Enabled = state;
+		}
+		bool get()
+		{
+			return timer->Enabled;
+		}
+	}
 
 private:
 	System::Windows::Forms::Timer^ timer;

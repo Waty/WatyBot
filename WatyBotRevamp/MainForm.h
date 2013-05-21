@@ -534,6 +534,7 @@ private:
 			// lvAutoSkill
 			// 
 			this->lvAutoSkill->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->lvAutoSkill->CheckBoxes = true;
 			this->lvAutoSkill->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(3) {this->hName, this->hInterval, 
 				this->hKey});
 			this->lvAutoSkill->ContextMenuStrip = this->AutoSkillContextMenu;
@@ -545,6 +546,7 @@ private:
 			this->lvAutoSkill->TabIndex = 86;
 			this->lvAutoSkill->UseCompatibleStateImageBehavior = false;
 			this->lvAutoSkill->View = System::Windows::Forms::View::Details;
+			this->lvAutoSkill->ItemCheck += gcnew System::Windows::Forms::ItemCheckEventHandler(this, &MainForm::lvAutoSkill_ItemCheck);
 			// 
 			// hName
 			// 
@@ -2484,6 +2486,7 @@ private: System::Void deleteToolStripMenuItem_Click(System::Object^  sender, Sys
 private: System::Void ddbAutoSkill_DropDown(System::Object^  sender, System::EventArgs^  e);
 private: System::Void nudSaveCMS_ValueChanged(System::Object^  sender, System::EventArgs^  e);
 private: System::Void SaveCMS_Tick(System::Object^  sender, System::EventArgs^  e);
+private: System::Void lvAutoSkill_ItemCheck(System::Object^  sender, System::Windows::Forms::ItemCheckEventArgs^  e);
 };
 }
 #pragma endregion

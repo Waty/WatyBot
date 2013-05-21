@@ -426,6 +426,14 @@ Void MainForm::deleteToolStripMenuItem_Click(System::Object^  sender, System::Ev
 	lvAutoSkill->Items->RemoveAt(index);
 	SaveAutoSkill();
 }
+Void MainForm::lvAutoSkill_ItemCheck(System::Object^  sender, System::Windows::Forms::ItemCheckEventArgs^  e)
+{
+	if(e->CurrentValue == CheckState::Checked)
+		AutoSkills[e->Index]->Enabled = false;
+	else if(e->CurrentValue == CheckState::Unchecked)
+		AutoSkills[e->Index]->Enabled = true;
+}
+
 List<CAutoSkill^>^ MainForm::LoadAutoSkill()
 {
 	if(!File::Exists(AutoSkillFileName))
@@ -449,7 +457,10 @@ List<CAutoSkill^>^ MainForm::LoadAutoSkill()
 	if(AutoSkill == nullptr) AutoSkill = gcnew List<CAutoSkill^>;
 	ddbAutoSkill->Items->Clear();
 	ddbAutoSkill->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+	ddbAutoSkill->BeginUpdate();
 	for each(CPacketData^ p in CPacket->Packets) ddbAutoSkill->Items->Add(p->Name);
+	ddbAutoSkill->EndUpdate();
+	lvAutoSkill->BeginUpdate();
 	for each(CAutoSkill^ as in AutoSkill)
 	{
 		ListViewItem^ item = gcnew ListViewItem(as->Name);
@@ -457,6 +468,7 @@ List<CAutoSkill^>^ MainForm::LoadAutoSkill()
 		item->SubItems->Add(ddbAutoSkill->Items[as->keyIndex]->ToString());
 		lvAutoSkill->Items->Add(item);
 	}
+	lvAutoSkill->EndUpdate();
 	return AutoSkill;
 }
 void MainForm::SaveAutoSkill()
@@ -592,6 +604,7 @@ void MainForm::RefreshSPControlListView()
 	this->nudSPCMapId->ResetText();
 	this->nudSPCX->ResetText();
 	this->nudSPCY->ResetText();
+	lvSPControl->BeginUpdate();
 	for each(CSPControlLocation^ SP in SPControl->Locations)
 	{
 		ListViewItem^ item = gcnew ListViewItem(SP->Name);
@@ -600,6 +613,7 @@ void MainForm::RefreshSPControlListView()
 		item->SubItems->Add(SP->Y.ToString());
 		lvSPControl->Items->Add(item);
 	}
+	lvSPControl->EndUpdate();
 }
 
 //Loading/Saving AutoBot settings
