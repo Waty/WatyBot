@@ -49,37 +49,35 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		StreamWriter^ sw = File::CreateText(OutputFileDialog->FileName);	
 		lvAddys->Items->Clear();
-		String^ error = " 0xError";
 
 		lvAddys->BeginUpdate();
 		for each(Address^ address in Addresses)
 		{
 			char* aob = (char*) marshal_as<string>(address->AOB).c_str();
-
 			FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
 
-			String^ strresult = " 0x" + pf.dwResult.ToString("X");
-			bool succes = pf.dwResult != 0;
+			String^ Name = address->Name;
+			String^ Addy = String::Empty;
+			if(pf.dwResult) Addy = " 0x" + pf.dwResult.ToString("X");
+			else Addy = "0xERROR";
+			String^ Comment = String::Empty;
+			if(address->Comment) Comment = " //" + address->Comment;
 
 			//Add the result to the ListView
-			auto lvItem = gcnew ListViewItem(address->Name);
-			lvItem->SubItems->Add(succes ? strresult : error);
-			if(!succes)
+			auto lvItem = gcnew ListViewItem(Name);
+			lvItem->SubItems->Add(Addy);
+			if(!pf.dwResult)
 			{
 				lvItem->UseItemStyleForSubItems = false;
 				lvItem->SubItems[1]->BackColor = Color::Red;
 			}
 			lvAddys->Items->Add(lvItem);
 
-			String^ Comment = String::Empty;;
-			if(address->Comment) Comment = " //" + address->Comment;
-
 			//Write the found addy to the header file
-			sw->WriteLine("#define " + address->Name + (succes ? strresult : error) + Comment);
+			sw->WriteLine("#define " + Name + Addy + Comment);
 		}
 		if(sw) delete (IDisposable^)(sw);
 		lvAddys->EndUpdate();
-		ShowInfo("Finished Updating!");
 	}
 }
 
