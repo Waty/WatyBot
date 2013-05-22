@@ -125,6 +125,7 @@ namespace WatyBotUpdater
 			this->bOutput->TabIndex = 3;
 			this->bOutput->Text = L"Output File";
 			this->bOutput->UseVisualStyleBackColor = true;
+			this->bOutput->Click += gcnew System::EventHandler(this, &MyForm::bOutput_Click);
 			// 
 			// InputFileDialog
 			// 
@@ -167,5 +168,6 @@ namespace WatyBotUpdater
 	private: System::Void bUpdate_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void MyForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
 	private: System::Void bInput_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void bOutput_Click(System::Object^  sender, System::EventArgs^  e);
 };
 }

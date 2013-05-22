@@ -71,8 +71,11 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 			}
 			lvAddys->Items->Add(lvItem);
 
+			String^ Comment = String::Empty;;
+			if(address->Comment) Comment = " //" + address->Comment;
+
 			//Write the found addy to the header file
-			sw->WriteLine("#define " + address->Name + (succes ? strresult : error));
+			sw->WriteLine("#define " + address->Name + (succes ? strresult : error) + Comment);
 		}
 		if(sw) delete (IDisposable^)(sw);
 		lvAddys->EndUpdate();
@@ -89,6 +92,11 @@ void MyForm::bInput_Click(System::Object^  sender, System::EventArgs^  e)
 		catch(Exception^ ex){ShowError(ex->ToString());}
 		reader->Close();
 	}
+}
+
+void MyForm::bOutput_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	OutputFileDialog->ShowDialog();
 }
 
 void MyForm::MyForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
