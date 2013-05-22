@@ -59,13 +59,14 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 			String^ Name = address->Name;
 			String^ Addy = String::Empty;
 			if(pf.dwResult) Addy = " 0x" + pf.dwResult.ToString("X");
-			else Addy = "0xERROR";
+			else Addy = " 0xERROR";
 			String^ Comment = String::Empty;
 			if(address->Comment) Comment = " //" + address->Comment;
 
 			//Add the result to the ListView
 			auto lvItem = gcnew ListViewItem(Name);
 			lvItem->SubItems->Add(Addy);
+			lvItem->ToolTipText = Comment;
 			if(!pf.dwResult)
 			{
 				lvItem->UseItemStyleForSubItems = false;
