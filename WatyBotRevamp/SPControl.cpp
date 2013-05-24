@@ -72,8 +72,21 @@ void CSPControl::AddLocation(String^ Name, int MapId, int X, int Y)
 }
 
 DWORD dwSPControlRet = SPControlAddy + 6;
-extern BOOL WINAPI GetCoords();
 int spawn_x, spawn_y;
+BOOL WINAPI GetCoords()
+{
+	int iMapID = CMS->MapId;
+	for each(CSPControlLocation^ location in SPControl->Locations)
+	{
+		if(iMapID == location->MapId)
+		{
+			spawn_x = location->X;
+			spawn_y = location->Y;
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
 void __declspec(naked) SPControlCave()
 {
 	_asm
@@ -85,19 +98,21 @@ void __declspec(naked) SPControlCave()
 		je SpawnNormal //if eax == false, jump to SpawnNormal
  
 		//Spawn on controlled location
-		mov ebx,[spawn_x]
-		mov ebp,[spawn_y]
+		mov edi,[spawn_x]
+		mov ebx,[spawn_y]
 		jmp [dwSPControlRet]
  
 		SpawnNormal:
-		mov ebx,[eax+0x0C]
-		mov ebp,[eax+0x10]
+		mov edi,[eax+0x0C]
+		mov ebx,[eax+0x10]
 		jmp [dwSPControlRet]
 	}
 }
+BYTE SPCCheck[] = {0xEB};
+CMemory cmSPCChecks(SPCChecksAddy, SPCCheck, 1);
 CMemory cmSPControl(SPControlAddy, SPControlCave, 1, true);
 
 bool CSPControl::Enable(bool status)
 {
-	return cmSPControl.Enable(status);
+	return (cmSPCChecks.Enable(status) && cmSPControl.Enable(status));
 }

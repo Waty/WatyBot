@@ -3,7 +3,7 @@
 
 DWORD dwMSSendMethod = SendAddy;// + 5;
 DWORD dwMSSendObject = *(PDWORD)(SendClassAddy+2);
-DWORD dwMSSendRetVal = SendAddy - 13;
+DWORD dwMSSendRetVal = 0x4A4C0C;
 
 CPacketData::CPacketData(String^ Name, String^ Data)
 {

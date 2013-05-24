@@ -51,7 +51,7 @@ namespace Hacks
 	{
 		call dwAggroCall
 		mov edx,dword ptr ds:[CharBasePtr]
-		mov edx,[edx+0x29D8]
+		mov edx,[edx+pIDOffset]
 		mov edx,[edx+0x0C]
 		mov [esi+0x2B0],edx
 		jmp dwAggroRet
@@ -108,7 +108,7 @@ namespace Hacks
 	CMemory cmJDA(JDAAddy1, bJDA1, 1, JDAAddy2, bJDA2, 1, JDAAddy3, bJDA3, 2);
  
 	/////Full Mob Disarm
-	BYTE bDisarm[] = {0xE9, 0x9B, 0x02, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90};
+	BYTE bDisarm[] = {0xE9, 0x24, 0x04, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90}; //jmp 00772493 + 4 nops
 	CMemory cmMobDisarm(MobDisarmAddy, bDisarm, sizeof(bDisarm));
  
 	/////No Mobs			77 ? 0F B6 80 ? ? ? 00 FF 24 85 ? ? ? 00 8B 54 24 ? 52 E8 ? ? ? FF C2 08 00 - 2nd result
@@ -262,7 +262,7 @@ namespace Hacks
  
 	/////SkillInjection Disable Checks
 	BYTE bSkillInjection1[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
-	BYTE bSkillInjection3[] = {0xEB, 0x0E};
+	BYTE bSkillInjection3[] = {0xEB, 0x12};
 	CMemory cmSkillInjectionChecks(SkillInjectionChecksAddy1, bSkillInjection1, 6, SkillInjectionChecksAddy2, bSkillInjection1, 6, SkillInjectionChecksAddy3, bSkillInjection3, 2);
  
 	/////SkillInjection Set Skill ID
@@ -320,7 +320,7 @@ namespace Hacks
 		//get mouselocation
 		mov ebx,[ebx+MouseLocOffset]
 		mov eax,[ebx+MouseXOffset]
-		mov ebx,[ebx+MouseYOffset]
+		mov ebx,[ebx+(MouseXOffset + 4)]
 
 		//encrypt and set teleoffsets
 		lea ecx,[esi+0x6e00]

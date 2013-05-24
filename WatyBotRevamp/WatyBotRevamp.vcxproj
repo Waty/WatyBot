@@ -170,11 +170,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Addys.h" />
     <ClInclude Include="AutoSkill.h" />
     <ClInclude Include="BotMacro.h" />
     <ClInclude Include="ChangeChannel.h" />
     <ClInclude Include="Defines.h" />
-    <ClInclude Include="E:\Games\Europe MapleStory\WatyBotUpdater\Addys.h" />
     <ClInclude Include="FunctionalMacro.h" />
     <ClInclude Include="HackAddys.h" />
     <ClInclude Include="Hacks.h" />
@@ -199,7 +199,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="E:\Games\Europe MapleStory\WatyBotUpdater\AOBs.ini" />
+    <Xml Include="..\..\..\..\AppData\Roaming\Waty\AOBs.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

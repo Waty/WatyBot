@@ -209,21 +209,6 @@ bool canLoot()
 	CMS->Tubi = 0;
 	return true;
 }
-BOOL WINAPI GetCoords()
-{
-	int iMapID = CMS->MapId;
-	for each(CSPControlLocation^ location in SPControl->Locations)
-	{
-		if(iMapID == location->MapId)
-		{
-			extern int spawn_x, spawn_y;
-			spawn_x = location->X;
-			spawn_y = location->Y;
-			return TRUE;
-		}
-	}
-	return FALSE;
-}
 void TimedCC()
 {
 	CC->CCSwitch(CCType(CCMacro->GetValue()));

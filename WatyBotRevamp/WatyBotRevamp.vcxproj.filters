@@ -83,9 +83,6 @@
     <ClInclude Include="Hacks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="E:\Games\Europe MapleStory\WatyBotUpdater\Addys.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
     <ClInclude Include="HackAddys.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
@@ -131,6 +128,9 @@
     <ClInclude Include="AutoSkill.h">
       <Filter>Classes\CAutoSkill</Filter>
     </ClInclude>
+    <ClInclude Include="Addys.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
@@ -138,8 +138,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="E:\Games\Europe MapleStory\WatyBotUpdater\AOBs.ini">
+    <Xml Include="..\..\..\..\AppData\Roaming\Waty\AOBs.xml">
       <Filter>Resource Files</Filter>
-    </None>
+    </Xml>
   </ItemGroup>
 </Project>

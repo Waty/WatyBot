@@ -11,10 +11,14 @@ CAutoSkill::CAutoSkill()
 
 CAutoSkill::CAutoSkill(String^ name, int interval, int key)
 {
+	bw = gcnew System::ComponentModel::BackgroundWorker;
+	bw->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &CAutoSkill::CastBackground);
+	timer = gcnew System::Windows::Forms::Timer;
+	timer->Tick += gcnew System::EventHandler(this, &CAutoSkill::AutoSkill_Tick);
+
 	Name = name;
 	Interval = interval;
 	keyIndex = key;
-	CAutoSkill();
 }
 
 CAutoSkill::~CAutoSkill()
