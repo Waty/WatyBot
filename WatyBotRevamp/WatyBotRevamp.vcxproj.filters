@@ -72,6 +72,9 @@
     <ClCompile Include="AutoSkill.cpp">
       <Filter>Classes\CAutoSkill</Filter>
     </ClCompile>
+    <ClCompile Include="Hooks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainForm.h">

@@ -10,21 +10,6 @@ using namespace System::Xml::Serialization;
 
 namespace Packets
 {
-
-	struct COutPacket
-	{
-		BOOL fLoopback;
-		union
-		{
-			LPBYTE lpbData;
-			LPVOID lpvData;
-			LPWORD lpwHeader;
-		};
-		DWORD dwcbData;
-		UINT uOffset;
-		BOOL fEncryptedByShanda;
-	};
-
 	public ref class CPacketData sealed
 	{
 	public:

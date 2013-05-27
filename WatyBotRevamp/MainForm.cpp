@@ -100,7 +100,6 @@ void MainForm::cbItemVac_CheckedChanged(System::Object^  sender, System::EventAr
 }
 void MainForm::cbFMA_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	cbNFA->Checked = cbFMA->Checked;
 	cbItemVac->Checked = cbFMA->Checked;
 	cbItemVac->Enabled = !cbFMA->Checked;
 	cbFMA->Checked = Hacks::cmFMA.Enable(cbFMA->Checked);
@@ -201,6 +200,7 @@ void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::
 bool canAttack()
 {
 	if(!CMS->InGame || CC->Busy || CMS->MobCount < CMS->SAWSIL || CMS->UsingAutoSkill) return false;
+	CMS->Breath = 5000;
 	return true;
 }
 bool canLoot()
@@ -211,7 +211,7 @@ bool canLoot()
 }
 void TimedCC()
 {
-	CC->CCSwitch(CCType(CCMacro->GetValue()));
+	CC->CCSwitch((CCType) CCMacro->GetValue());
 }
 enum MacroIndex{eAttack, eLoot, eCC};
 void InitializeMacros()
@@ -320,8 +320,8 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 		if(cbAutoMP->Checked && CMS->CharMP <= nudAutoMP->Value) CMS->SpamKey(KeyCodes[ddbAutoMPKey->SelectedIndex]);
 
 		//AutoCC happens here
-		if(cbCCPeople->Checked && (CMS->PeopleCount >= (int) nudCCPeople->Value)) CC->CCSwitch(CCType(ddbPeopleType->SelectedIndex));	
-		if(cbCCAttacks->Checked && (CMS->AttackCount >= (int) nudCCAttacks->Value)) CC->CCSwitch(CCType(ddbAttacksType->SelectedIndex));
+		if(cbCCPeople->Checked && (CMS->PeopleCount >= (int) nudCCPeople->Value)) CC->CCSwitch((CCType) ddbPeopleType->SelectedIndex);	
+		if(cbCCAttacks->Checked && (CMS->AttackCount >= (int) nudCCAttacks->Value)) CC->CCSwitch((CCType) ddbAttacksType->SelectedIndex);
 
 		//PetFeeder happens here
 		if(cbPetFeeder->Checked && (CMS->PetFullness <= nudPetFeeder->Value)) CMS->SendKey(KeyCodes[ddbPetFeeder->SelectedIndex]);
@@ -434,9 +434,8 @@ List<CAutoSkill^>^ MainForm::LoadAutoSkill()
 	{
 		AutoSkill = safe_cast<List<CAutoSkill^>^>(AutoSkillSerializer->Deserialize(reader));
 	}
-	catch(Exception^ ex)
+	catch(Exception^)
 	{
-		ShowNotifyIcon(ex->Message);
 	}	
 	reader->Close();
 	if(AutoSkill == nullptr) AutoSkill = gcnew List<CAutoSkill^>;
@@ -463,9 +462,8 @@ void MainForm::SaveAutoSkill()
 	{
 		AutoSkillSerializer->Serialize(writer, AutoSkills);
 	}
-	catch(Exception^ ex)
+	catch(Exception^)
 	{
-		ShowNotifyIcon(ex->Message);
 	}
 	writer->Close();
 }
@@ -616,9 +614,8 @@ Void MainForm::SaveSettings()
 		XmlSerializer^ serializer = gcnew XmlSerializer(List<SettingsEntry^>::typeid);
 		serializer->Serialize(writer, Settings);
 	}
-	catch(System::Exception^ ex)
+	catch(System::Exception^)
 	{
-		ShowNotifyIcon(ex->Message);
 	}
 	writer->Close();
 }
@@ -636,9 +633,8 @@ Void MainForm::LoadSettings()
 	{
 		Settings = safe_cast<List<SettingsEntry^>^>(s->Deserialize(reader));
 	}
-	catch(System::Exception^ ex)
+	catch(System::Exception^)
 	{
-		ShowNotifyIcon(ex->Message);
 	}	
 	reader->Close();
 	if(Settings == nullptr) Settings = gcnew List<SettingsEntry^>;
@@ -687,8 +683,6 @@ Void MainForm::LoadSettings()
 			nudSkillInjection->Value = (Decimal)		Settings[SkillInjectionDelay]->Value;
 			ddbSkillInjection->SelectedIndex = (int)	Settings[SkillInjectionIndex]->Value;
 			nudIceGuard->Value = (Decimal)				Settings[IceGuard]->Value;
-			//SaveCMS
-			nudSaveCMS->Value = (Decimal)				Settings[SettingsIndex::SaveCMS]->Value;
 
 			//try's 5 seconds long if your CRC is ready for the hacks
 			int i = 0;
@@ -700,9 +694,8 @@ Void MainForm::LoadSettings()
 			cbPinTyper->Checked = (bool)				Settings[PinTyper]->Value;
 			cbLogoSkipper->Checked = (bool)				Settings[LogoSkipper]->Value;
 		}
-		catch(Exception^ ex)
+		catch(Exception^)
 		{
-			ShowNotifyIcon(ex->Message);
 		}
 	}
 }
@@ -749,8 +742,6 @@ Void MainForm::ReloadSettings()
 	s->Add(gcnew SettingsEntry(nudSkillInjection));
 	s->Add(gcnew SettingsEntry(ddbSkillInjection));
 	s->Add(gcnew SettingsEntry(nudIceGuard));
-	//SaveCMS
-	s->Add(gcnew SettingsEntry(nudSaveCMS));
 
 	s->Add(gcnew SettingsEntry(cbPinTyper));
 	s->Add(gcnew SettingsEntry(cbLogoSkipper));
@@ -763,17 +754,9 @@ Void MainForm::bSaveSettings_Click(System::Object^  sender, System::EventArgs^  
 	CPacket->Save();
 	SaveAutoSkill();
 }
-Void MainForm::nudSaveCMS_ValueChanged(System::Object^  sender, System::EventArgs^  e)
-{
-	SaveCMS->Interval = (int) nudSaveCMS->Value * 1000;
-}
-Void MainForm::SaveCMS_Tick(System::Object^  sender, System::EventArgs^  e)
-{
-	CMS->Save();
-}
 
 //Hot Keys
-void MainForm::HotKeys()
+Void MainForm::HotKeys()
 {
 	if(this->cbHotKeyAttack->Checked)
 	{

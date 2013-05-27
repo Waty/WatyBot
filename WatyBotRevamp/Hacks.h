@@ -146,8 +146,8 @@ namespace Hacks
  
 	/////Logo Skipper
 	DWORD dwLogoSkipper = LogoSkipperAddy;
-	BYTE bLogoSkipper[] = {0xE0, 0xF0, 0x69};
-	CMemory cmLogoSkipper(dwLogoSkipper, bLogoSkipper, 3);
+	BYTE bLogoSkipper[] = {0x70, 0xD3};
+	CMemory cmLogoSkipper(dwLogoSkipper, bLogoSkipper, 2);
  
 	/////(semi) Item Vac
 	DWORD dwItemVacCall = ItemVacCall;
@@ -158,7 +158,6 @@ namespace Hacks
 		itemvac_x = CMS->CharX;
 		itemvac_y = CMS->CharY;
 	}
-	/*old Codecave
 	CodeCave(ItemVac)
 	{
 		call dwItemVacCall //Original Opcode
@@ -170,23 +169,6 @@ namespace Hacks
 		pop edi
 		mov esi,[itemvac_y]
 		mov [eax+04],esi //Y
-		pop esi
-		ret 0004
-	}
-	*/
-	CodeCave(ItemVac)
-	{
-		call dwItemVacCall //Original Opcode
-		call getItemVacCoords
-		mov ecx,eax
-		mov eax,[esp+0x0C]
-		push ecx
-		mov ecx, [itemvac_x]
-		mov [eax],ecx //X
-		mov ecx, [itemvac_y]
-		mov [eax+04],ecx //Y
-		pop ecx
-		pop edi
 		pop esi
 		ret 0004
 	}
@@ -293,7 +275,7 @@ namespace Hacks
 	}
 	EndCodeCave
 	CMemory cmSkillInjectionCave(SkillInjectionInjectAddy, CaveSkillInjection, 1, true);
-	
+
 	/////No Fadestarge
 	BYTE bNoFadeStages[] = {0xc2, 0x04, 0x00};
 	CMemory cmNoFadeStages(Fadeaddy1, bNoFadeStages, 3, Fadeaddy2, bNoFadeStages, 3);
@@ -323,13 +305,13 @@ namespace Hacks
 		mov ebx,[ebx+(MouseXOffset + 4)]
 
 		//encrypt and set teleoffsets
-		lea ecx,[esi+0x6e00]
+		lea ecx,[esi+0x7AF0]
 		push eax
 		call dwMouseFlyCall2
-		lea ecx, [esi+0x6df4]
+		lea ecx, [esi+0x7AE4]
 		push ebx
 		call dwMouseFlyCall2
-		lea ecx, [esi+0x6ddc]
+		lea ecx, [esi+0x7ACC]
 		push 00000001 //Probably dont need all the proceeding 0's but wthell
 		call dwMouseFlyCall2
 

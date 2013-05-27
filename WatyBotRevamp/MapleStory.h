@@ -1,7 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include "Pointers.h"
-using namespace System::Xml::Serialization;
+
 public ref class CMapleStory
 {
 public:
@@ -13,7 +13,7 @@ public:
 		{
 			return (int) ReadPointer(MobBasePtr, MobCountOffset);
 		}
-		void set(int){}
+		
 	}
 	property int ItemCount
 	{
@@ -21,7 +21,7 @@ public:
 		{
 			return (int) ReadPointer(ItemBasePtr, ItemCountOffset);
 		}
-		void set(int){}
+		
 	}
 	property int PeopleCount
 	{
@@ -29,7 +29,7 @@ public:
 		{
 			return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);
 		}
-		void set(int){}
+		
 	}
 	property int CharX
 	{
@@ -37,7 +37,7 @@ public:
 		{
 			return (int) ReadPointer(CharBasePtr,XOffset);
 		}
-		void set(int){}
+		
 	}
 	property int CharY
 	{
@@ -45,7 +45,6 @@ public:
 		{
 			return (int) ReadPointer(CharBasePtr,XOffset + 4);
 		}
-		void set(int){}
 	}
 	property int CharHP
 	{
@@ -56,7 +55,6 @@ public:
 			if(HP > MaxHP) MaxHP = HP;
 			return HP;
 		}
-		void set(int){}
 	}
 	property int MaxHP;
 	property int CharMP
@@ -68,7 +66,6 @@ public:
 			if(MP > MaxMP) MaxMP = MP;
 			return MP;
 		}
-		void set(int){}
 	}
 	property int MaxMP;
 	property double CharEXP
@@ -77,7 +74,6 @@ public:
 		{
 			return ReadDoublePointer(StatsBasePtr, EXPOffset);
 		}
-		void set(double){}
 	}
 	property int MapId
 	{
@@ -85,7 +81,6 @@ public:
 		{
 			return (int) ReadPointer(InfoBasePtr, MapIDOffset);
 		}
-		void set(int){}
 	}
 	property int AttackCount
 	{
@@ -93,7 +88,6 @@ public:
 		{
 			return (int) ReadPointer(CharBasePtr, AttackCountOffset);
 		}
-		void set(int){}
 	}
 	property int Tubi
 	{
@@ -105,7 +99,6 @@ public:
 		{
 			WritePointer(ServerBasePtr, TubiOffset, i);
 		}
-
 	}
 	property int Breath
 	{
@@ -113,7 +106,10 @@ public:
 		{
 			return (int) ReadPointer(CharBasePtr, BreathOffset);
 		}
-		void set(int){}
+		void set(int i)
+		{
+			WritePointer(CharBasePtr, BreathOffset, i);
+		}
 	}
 	property int Channel
 	{
@@ -121,7 +117,6 @@ public:
 		{
 			return (int) ReadPointer(ServerBasePtr, ChannelOffset);
 		}
-		void set(int){}
 	}
 	property int CharpId
 	{
@@ -129,7 +124,6 @@ public:
 		{
 			return (int) ReadPointer(CharBasePtr, pIDOffset);
 		}
-		void set(int){}
 	}
 	property int KnockBack
 	{
@@ -137,7 +131,6 @@ public:
 		{
 			return (int) ReadPointer(CharpId, KBOffset);
 		}
-		void set(int){}
 	}
 	property int KnockBackX
 	{
@@ -145,7 +138,6 @@ public:
 		{
 			return (int) ReadPointer(CharpId, KBXOffset);
 		}
-		void set(int){}
 	}
 	property int KnockBackY
 	{
@@ -153,7 +145,6 @@ public:
 		{
 			return (int) ReadPointer(CharpId, KBYOffset);
 		}
-		void set(int){}
 	}
 	property int PetFullness
 	{
@@ -162,7 +153,6 @@ public:
 			unsigned long Pet = ReadPointer(CharBasePtr, PetOffset);
 			return ReadPointer(Pet+Pet1Offset, PetFull);
 		}
-		void set(int){}
 	}
 	property bool GotMSCRC
 	{
@@ -170,7 +160,6 @@ public:
 		{
 			return *(BYTE*)MSCRCAddy == 233;
 		}
-		void set(bool){}
 	}
 	property bool InGame
 	{
@@ -178,7 +167,6 @@ public:
 		{
 			return MapId > 0;
 		}
-		void set(bool){}
 	}
 	property HWND MSHWND
 	{
@@ -194,10 +182,8 @@ public:
 
 	void SendKey(int Key);
 	void SpamKey(int Key);
-	void Save();
 
 private:
-	XmlSerializer^ s;
 	unsigned long ReadPointer(unsigned long ulBase, int iOffset);
 	double ReadDoublePointer(DWORD ulBase, INT iOffset);
 	bool WritePointer(unsigned long ulBase, int iOffset, int iValue);

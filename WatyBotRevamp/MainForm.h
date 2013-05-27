@@ -206,9 +206,9 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::ColumnHeader^  hName;
 	private: System::Windows::Forms::ColumnHeader^  hInterval;
 	private: System::Windows::Forms::ColumnHeader^  hKey;
-	private: System::Windows::Forms::NumericUpDown^  nudSaveCMS;
-	private: System::Windows::Forms::Label^  lSaveCMS;
-	private: System::Windows::Forms::Timer^  SaveCMS;
+
+
+
 	private: System::ComponentModel::IContainer^  components;
 private:
 		/// <summary>
@@ -368,8 +368,6 @@ private:
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
 			this->bSaveSettings = (gcnew System::Windows::Forms::Button());
 			this->gbHotKeys = (gcnew System::Windows::Forms::GroupBox());
-			this->nudSaveCMS = (gcnew System::Windows::Forms::NumericUpDown());
-			this->lSaveCMS = (gcnew System::Windows::Forms::Label());
 			this->ddbHotKeySendPacket = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeySendPacket = (gcnew System::Windows::Forms::CheckBox());
 			this->ddbHotKeyCCPeople = (gcnew System::Windows::Forms::ComboBox());
@@ -394,7 +392,6 @@ private:
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->InfoToolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
-			this->SaveCMS = (gcnew System::Windows::Forms::Timer(this->components));
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->gbAutoSkill->SuspendLayout();
@@ -438,7 +435,6 @@ private:
 			this->SPControlContextMenu->SuspendLayout();
 			this->InfoTab->SuspendLayout();
 			this->gbHotKeys->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSaveCMS))->BeginInit();
 			this->gbPointers->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -1092,6 +1088,7 @@ private:
 			// cbMouseFly
 			// 
 			this->cbMouseFly->AutoSize = true;
+			this->cbMouseFly->Enabled = false;
 			this->cbMouseFly->Location = System::Drawing::Point(159, 107);
 			this->cbMouseFly->Name = L"cbMouseFly";
 			this->cbMouseFly->Size = System::Drawing::Size(74, 17);
@@ -1104,6 +1101,7 @@ private:
 			// cbNoCCBlueBoxes
 			// 
 			this->cbNoCCBlueBoxes->AutoSize = true;
+			this->cbNoCCBlueBoxes->Enabled = false;
 			this->cbNoCCBlueBoxes->Location = System::Drawing::Point(7, 107);
 			this->cbNoCCBlueBoxes->Name = L"cbNoCCBlueBoxes";
 			this->cbNoCCBlueBoxes->Size = System::Drawing::Size(110, 17);
@@ -1117,6 +1115,7 @@ private:
 			// cbNoFadeStages
 			// 
 			this->cbNoFadeStages->AutoSize = true;
+			this->cbNoFadeStages->Enabled = false;
 			this->cbNoFadeStages->Location = System::Drawing::Point(159, 89);
 			this->cbNoFadeStages->Name = L"cbNoFadeStages";
 			this->cbNoFadeStages->Size = System::Drawing::Size(100, 17);
@@ -1129,6 +1128,7 @@ private:
 			// cbHideDamage
 			// 
 			this->cbHideDamage->AutoSize = true;
+			this->cbHideDamage->Enabled = false;
 			this->cbHideDamage->Location = System::Drawing::Point(7, 89);
 			this->cbHideDamage->Name = L"cbHideDamage";
 			this->cbHideDamage->Size = System::Drawing::Size(147, 17);
@@ -1263,6 +1263,7 @@ private:
 			// 
 			// nudIceGuard
 			// 
+			this->nudIceGuard->Enabled = false;
 			this->nudIceGuard->Location = System::Drawing::Point(95, 31);
 			this->nudIceGuard->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000000, 0, 0, 0});
 			this->nudIceGuard->Name = L"nudIceGuard";
@@ -1273,6 +1274,7 @@ private:
 			// cbIceGuard
 			// 
 			this->cbIceGuard->AutoSize = true;
+			this->cbIceGuard->Enabled = false;
 			this->cbIceGuard->Location = System::Drawing::Point(6, 32);
 			this->cbIceGuard->Name = L"cbIceGuard";
 			this->cbIceGuard->Size = System::Drawing::Size(73, 17);
@@ -1284,6 +1286,7 @@ private:
 			// 
 			// nudSkillInjection
 			// 
+			this->nudSkillInjection->Enabled = false;
 			this->nudSkillInjection->Location = System::Drawing::Point(95, 136);
 			this->nudSkillInjection->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
 			this->nudSkillInjection->Name = L"nudSkillInjection";
@@ -1296,6 +1299,7 @@ private:
 			// 
 			this->ddbSkillInjection->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbSkillInjection->DropDownWidth = 215;
+			this->ddbSkillInjection->Enabled = false;
 			this->ddbSkillInjection->FormattingEnabled = true;
 			this->ddbSkillInjection->Items->AddRange(gcnew cli::array< System::Object^  >(14) {L"Ice Attack (600% dmg, 10 mobs)", L"Ice Smash (1200% dmg, 10 mobs)", 
 				L"Ice Snow Tempest (500% x 4 dmg, 10 mobs)", L"Ice chop (900% dmg, 10 mob count)", L"Kaiser: 3rd Dragon Slash", L"Bandit 1st Job: DoubleStab", 
@@ -1311,6 +1315,7 @@ private:
 			// cbSkillInjection
 			// 
 			this->cbSkillInjection->AutoSize = true;
+			this->cbSkillInjection->Enabled = false;
 			this->cbSkillInjection->Location = System::Drawing::Point(6, 137);
 			this->cbSkillInjection->Name = L"cbSkillInjection";
 			this->cbSkillInjection->Size = System::Drawing::Size(88, 17);
@@ -1347,6 +1352,7 @@ private:
 			// cbNFA
 			// 
 			this->cbNFA->AutoSize = true;
+			this->cbNFA->Enabled = false;
 			this->cbNFA->Location = System::Drawing::Point(159, 102);
 			this->cbNFA->Name = L"cbNFA";
 			this->cbNFA->Size = System::Drawing::Size(99, 17);
@@ -1499,6 +1505,7 @@ private:
 			// cbAutoAggro
 			// 
 			this->cbAutoAggro->AutoSize = true;
+			this->cbAutoAggro->Enabled = false;
 			this->cbAutoAggro->Location = System::Drawing::Point(159, 19);
 			this->cbAutoAggro->Name = L"cbAutoAggro";
 			this->cbAutoAggro->Size = System::Drawing::Size(79, 17);
@@ -2043,8 +2050,6 @@ private:
 			// 
 			// gbHotKeys
 			// 
-			this->gbHotKeys->Controls->Add(this->nudSaveCMS);
-			this->gbHotKeys->Controls->Add(this->lSaveCMS);
 			this->gbHotKeys->Controls->Add(this->ddbHotKeySendPacket);
 			this->gbHotKeys->Controls->Add(this->cbHotKeySendPacket);
 			this->gbHotKeys->Controls->Add(this->ddbHotKeyCCPeople);
@@ -2061,25 +2066,6 @@ private:
 			this->gbHotKeys->TabIndex = 26;
 			this->gbHotKeys->TabStop = false;
 			this->gbHotKeys->Text = L"Hot Keys";
-			// 
-			// nudSaveCMS
-			// 
-			this->nudSaveCMS->Location = System::Drawing::Point(45, 142);
-			this->nudSaveCMS->Name = L"nudSaveCMS";
-			this->nudSaveCMS->Size = System::Drawing::Size(49, 20);
-			this->nudSaveCMS->TabIndex = 20;
-			this->InfoToolTip->SetToolTip(this->nudSaveCMS, L"In seconds");
-			this->nudSaveCMS->ValueChanged += gcnew System::EventHandler(this, &MainForm::nudSaveCMS_ValueChanged);
-			// 
-			// lSaveCMS
-			// 
-			this->lSaveCMS->AutoSize = true;
-			this->lSaveCMS->Location = System::Drawing::Point(6, 146);
-			this->lSaveCMS->Name = L"lSaveCMS";
-			this->lSaveCMS->Size = System::Drawing::Size(37, 13);
-			this->lSaveCMS->TabIndex = 19;
-			this->lSaveCMS->Text = L"Delay:";
-			this->InfoToolTip->SetToolTip(this->lSaveCMS, L"Developers only, if you aren\'t a developer, you wont have any use for this!");
 			// 
 			// ddbHotKeySendPacket
 			// 
@@ -2320,12 +2306,6 @@ private:
 			this->StatsTimer->Enabled = true;
 			this->StatsTimer->Tick += gcnew System::EventHandler(this, &MainForm::StatsTimer_Tick);
 			// 
-			// SaveCMS
-			// 
-			this->SaveCMS->Enabled = true;
-			this->SaveCMS->Interval = 10000;
-			this->SaveCMS->Tick += gcnew System::EventHandler(this, &MainForm::SaveCMS_Tick);
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2395,7 +2375,6 @@ private:
 			this->InfoTab->ResumeLayout(false);
 			this->gbHotKeys->ResumeLayout(false);
 			this->gbHotKeys->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSaveCMS))->EndInit();
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
 			this->ResumeLayout(false);
@@ -2484,8 +2463,6 @@ private: System::Void bAutoSkill_Click(System::Object^  sender, System::EventArg
 private: System::Void castToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void deleteToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void ddbAutoSkill_DropDown(System::Object^  sender, System::EventArgs^  e);
-private: System::Void nudSaveCMS_ValueChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void SaveCMS_Tick(System::Object^  sender, System::EventArgs^  e);
 private: System::Void lvAutoSkill_ItemCheck(System::Object^  sender, System::Windows::Forms::ItemCheckEventArgs^  e);
 };
 }

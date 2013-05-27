@@ -4,11 +4,7 @@
 using namespace ChangeChannel;
 using namespace System;
 
-extern gcroot<CMapleStory^> CMS;
-extern gcroot<Packets::CPackets^> CPacket;
-
-typedef void (__stdcall* PFN_CField_SendTransferChannelRequest)(unsigned char nChannel);
-auto CField_SendTransferChannelRequest = reinterpret_cast<PFN_CField_SendTransferChannelRequest>(CCAddy);
+void TryCC(int channel);
 
 CChangeChannel::CChangeChannel()
 {
@@ -72,7 +68,7 @@ void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkE
 		if(i > 10) GenerateRandomChannel();
 
 		//Send the CC request
-		CField_SendTransferChannelRequest(TargetChannel);
+		TryCC(TargetChannel);
 		Sleep(1000);
 		i++;
 	}

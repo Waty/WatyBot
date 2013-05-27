@@ -59,4 +59,5 @@ extern int KeyCodes[];
 #define KeyCodesSize 58
 
 extern enum SettingsIndex;
+
 #endif //_DEFINES_H

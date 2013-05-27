@@ -1,9 +1,7 @@
 #include "Packet.h"
 #include "Defines.h"
 
-DWORD dwMSSendMethod = SendAddy;// + 5;
-DWORD dwMSSendObject = *(PDWORD)(SendClassAddy+2);
-DWORD dwMSSendRetVal = 0x4A4C0C;
+void TrySendPacket(__in_bcount(nLength) LPBYTE lpBytes, __in DWORD dwLength);
 
 CPacketData::CPacketData(String^ Name, String^ Data)
 {
@@ -67,43 +65,6 @@ void CPackets::Edit(int i, String^ name, String^ data)
 	this->Save();
 }
 
-void __declspec(naked) InjectPacket(COutPacket* pPacket)
-{
-  __asm
-  {
-      //set class ptr
-      mov ecx,dwMSSendObject
-      mov ecx,[ecx]
- 
-      //push packet and fake return address
-      push [esp+4]
-      push dwMSSendRetVal
- 
-      //send packet
-      jmp [dwMSSendMethod]
-  }
-}
-
-// Send a MapleStory packet using byte data
-DWORD WINAPI SendPacketf ( __in_bcount(nLength) LPBYTE lpBytes, __in DWORD dwLength )
-{
-//21st Century / ZPE
-    COutPacket Packet;
- 
-    ZeroMemory(&Packet, sizeof(COutPacket));
- 
-    Packet.lpbData  = lpBytes;
-    Packet.dwcbData = dwLength;
- 
-    try {
-        InjectPacket(&Packet);
-        return TRUE;
- 
-    } catch (...) {
-        return FALSE;
-    }
-}
-
 bool CPackets::isGoodPacket(String^ strPacket, String^&strError)
 {
     if(strPacket == String::Empty)
@@ -144,7 +105,7 @@ bool CPackets::Send(String^ packet, String^&strError)
     for(int i = 0; i < strPacket->Length; i++)
 	{
         if(strPacket[i] == '*')	rawBytes += randObj->Next(16).ToString("X");
-        else	rawBytes += strPacket[i];
+        else rawBytes += strPacket[i];
     }
  
     ::DWORD dwOffset = 0;
@@ -156,7 +117,7 @@ bool CPackets::Send(String^ packet, String^&strError)
  
     try
 	{
-		SendPacketf(lpBytes, dwLength);
+		TrySendPacket(lpBytes, dwLength);
 	} 
 	catch(Exception^ ex)
 	{

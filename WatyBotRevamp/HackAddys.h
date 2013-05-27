@@ -18,7 +18,7 @@
 #define NDAllAttacksAddy 0xCF4F53
 #define JDAAddy1 0xCCECE7
 #define JDAAddy2 0xCCED24
-#define JDAAddy3 0xCD7464
+#define JDAAddy3 0xCCED42
 #define MobDisarmAddy 0x77206A
 #define NoMobsAddy 0x81605F
 #define AirLootAddy 0x55CF09
@@ -31,7 +31,7 @@
 #define SPCChecksAddy 0xCEDFF7
 #define Godmode50SecAddy1 0xD1763F
 #define Godmode50SecAddy2 0xD1765A
-											#define LogoSkipperAddy 0xf5e0b8 //01176BB0 logoskipper
+#define LogoSkipperAddy 0x01176BB0
 #define ItemVacAddy 0x7389C4
 #define ItemVacCall 0x74CF60
 #define ViewSwearsAddy 0x921CBB
@@ -42,26 +42,26 @@
 #define CPUAddy2 0x718E12
 #define CPUAddy3 0x71DA89
 #define UAAddy 0x4E8F6F
-											#define DFAAddy 0x007D4F52
+												#define DFAAddy 0x007D4F52
 #define NDMiningAddy1 0xCCBD52
 #define NDMiningAddy2 0xCCBE2B
 #define NDMiningAddy3 0xCDE287
-											#define HideDamageAddy1 0xB3AD43
+												#define HideDamageAddy1 0xB3AD43
 #define HideDamageAddy2 0x76BE5B
 #define HideDamageAddy3 0x76BE61
-											#define HideDamageAddy4 0x6E4F00
+												#define HideDamageAddy4 0x6E4F00
 #define MercedesComboAddy 0x5CB93A
 #define SkillInjectionChecksAddy1 0xD28CD4
 #define SkillInjectionChecksAddy2 0xD28D1F
 #define SkillInjectionChecksAddy3 0xD28DC0
 #define SkillInjectionInjectAddy 0xD28D25
 #define CCAddy 0x5ADDF0
-											#define ExitCSAddy 0x82A2B1
-											#define ExitCSCall 0x5F31D0
-											#define NoCCBoxesAddy1 0x5688D4
-											#define NoCCBoxesAddy2 0x56D780
-											#define Fadeaddy1 0x826e70
-											#define Fadeaddy2 0x827320
+												#define ExitCSAddy 0x82A2B1
+												#define ExitCSCall 0x5F31D0
+												#define NoCCBoxesAddy1 0x5688D4
+												#define NoCCBoxesAddy2 0x56D780
+												#define Fadeaddy1 0x826e70
+												#define Fadeaddy2 0x827320
 #define MouseFlyAddy 0xD12669
 #define MouseFlyCall1 0xD51E50
 #define MouseFlyCall2 0x74CF60
