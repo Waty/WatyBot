@@ -42,7 +42,7 @@
 #define CPUAddy2 0x718E12
 #define CPUAddy3 0x71DA89
 #define UAAddy 0x4E8F6F
-												#define DFAAddy 0x007D4F52
+#define DFAAddy 0x85E1B2
 #define NDMiningAddy1 0xCCBD52
 #define NDMiningAddy2 0xCCBE2B
 #define NDMiningAddy3 0xCDE287

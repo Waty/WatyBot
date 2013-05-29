@@ -2,18 +2,19 @@
 #ifndef _DEFINES_H
 #define _DEFINES_H
 #include <Windows.h>
+#include <vcclr.h>
 
 #include "SPControl.h"
+#include "MapleStory.h"
 #include "Packet.h"
 #include "ChangeChannel.h"
 #include "Settings.h"
 #include "AutoSkill.h"
 #include "Memory.h"
+#include "StopWatch.h"
 
 #include "Pointers.h"
 #include "HackAddys.h"
-#include "FunctionalMacro.h"
-#include "BotMacro.h"
 
 using namespace Packets;
 using namespace SpawnControl;
@@ -38,15 +39,7 @@ using namespace System::IO;
 #define CodeCave(name) void __declspec(naked) Cave##name(){_asm
 #define EndCodeCave }
 
-//Macro's
-extern Macro::MacroManager macroMan;
-extern enum MacroIndex;
-
-extern Macro::BotMacro* AttackMacro;
-extern Macro::BotMacro* LootMacro;
-extern Macro::FunctionalMacro* CCMacro;
 extern StopWatch<milliseconds> SkillInjectionStopWatch;
-
 extern gcroot<CMapleStory^> CMS;
 extern gcroot<CChangeChannel^> CC;
 extern gcroot<CPackets^> CPacket;

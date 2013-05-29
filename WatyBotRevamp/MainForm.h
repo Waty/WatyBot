@@ -206,9 +206,9 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::ColumnHeader^  hName;
 	private: System::Windows::Forms::ColumnHeader^  hInterval;
 	private: System::Windows::Forms::ColumnHeader^  hKey;
-
-
-
+	private: System::Windows::Forms::Timer^  tAutoAttack;
+	private: System::Windows::Forms::Timer^  tAutoLoot;
+	private: System::Windows::Forms::Timer^  tTimedCC;
 	private: System::ComponentModel::IContainer^  components;
 private:
 		/// <summary>
@@ -392,6 +392,9 @@ private:
 			this->CharPosLabel = (gcnew System::Windows::Forms::Label());
 			this->StatsTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->InfoToolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
+			this->tAutoAttack = (gcnew System::Windows::Forms::Timer(this->components));
+			this->tAutoLoot = (gcnew System::Windows::Forms::Timer(this->components));
+			this->tTimedCC = (gcnew System::Windows::Forms::Timer(this->components));
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->gbAutoSkill->SuspendLayout();
@@ -1352,7 +1355,6 @@ private:
 			// cbNFA
 			// 
 			this->cbNFA->AutoSize = true;
-			this->cbNFA->Enabled = false;
 			this->cbNFA->Location = System::Drawing::Point(159, 102);
 			this->cbNFA->Name = L"cbNFA";
 			this->cbNFA->Size = System::Drawing::Size(99, 17);
@@ -2306,6 +2308,18 @@ private:
 			this->StatsTimer->Enabled = true;
 			this->StatsTimer->Tick += gcnew System::EventHandler(this, &MainForm::StatsTimer_Tick);
 			// 
+			// tAutoAttack
+			// 
+			this->tAutoAttack->Tick += gcnew System::EventHandler(this, &MainForm::tAutoAttack_Tick);
+			// 
+			// tAutoLoot
+			// 
+			this->tAutoLoot->Tick += gcnew System::EventHandler(this, &MainForm::tAutoLoot_Tick);
+			// 
+			// tTimedCC
+			// 
+			this->tTimedCC->Tick += gcnew System::EventHandler(this, &MainForm::tTimedCC_Tick);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2319,7 +2333,7 @@ private:
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot 3.0.1 - CCPLZ! - EMS 89.2";
+			this->Text = L"WatyBot 3.1 - CCPLZ! - EMS 90.1";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
@@ -2464,6 +2478,9 @@ private: System::Void castToolStripMenuItem_Click(System::Object^  sender, Syste
 private: System::Void deleteToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void ddbAutoSkill_DropDown(System::Object^  sender, System::EventArgs^  e);
 private: System::Void lvAutoSkill_ItemCheck(System::Object^  sender, System::Windows::Forms::ItemCheckEventArgs^  e);
+private: System::Void tAutoAttack_Tick(System::Object^  sender, System::EventArgs^  e);
+private: System::Void tAutoLoot_Tick(System::Object^  sender, System::EventArgs^  e);
+private: System::Void tTimedCC_Tick(System::Object^  sender, System::EventArgs^  e);
 };
 }
 #pragma endregion

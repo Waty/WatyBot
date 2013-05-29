@@ -6,7 +6,7 @@ using namespace System::Xml::Serialization;
 
 #define EnterCashShop "40 00 ** ** ** 00 00"
 #define	LeaveCashShop "3E 00"
-#define ChangeCharacter "2C 01 01 00 **"
+#define ChangeCharacter "7F"//"2C 01 01 00 **"
 
 namespace Packets
 {

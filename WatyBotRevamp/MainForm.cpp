@@ -100,6 +100,7 @@ void MainForm::cbItemVac_CheckedChanged(System::Object^  sender, System::EventAr
 }
 void MainForm::cbFMA_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
+	cbNFA->Checked = cbFMA->Checked;
 	cbItemVac->Checked = cbFMA->Checked;
 	cbItemVac->Enabled = !cbFMA->Checked;
 	cbFMA->Checked = Hacks::cmFMA.Enable(cbFMA->Checked);
@@ -196,67 +197,50 @@ void MainForm::CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::
 	nudCCPeople->Enabled = !cbCCPeople->Checked;
 }
 
-//Macro's
-bool canAttack()
-{
-	if(!CMS->InGame || CC->Busy || CMS->MobCount < CMS->SAWSIL || CMS->UsingAutoSkill) return false;
-	CMS->Breath = 5000;
-	return true;
-}
-bool canLoot()
-{
-	if(!CMS->InGame || CMS->ItemCount < CMS->SLWIB || CMS->UsingAutoSkill) return false;
-	CMS->Tubi = 0;
-	return true;
-}
-void TimedCC()
-{
-	CC->CCSwitch((CCType) CCMacro->GetValue());
-}
-enum MacroIndex{eAttack, eLoot, eCC};
-void InitializeMacros()
-{
-	//Start the MacroManager
-	macroMan.Start();
-	AttackMacro = new Macro::BotMacro(canAttack);
-	LootMacro = new Macro::BotMacro(canLoot);
-	CCMacro = new Macro::FunctionalMacro(TimedCC);
-
-	macroMan.AddMacro(MacroIndex::eAttack, AttackMacro);
-	macroMan.AddMacro(MacroIndex::eLoot, LootMacro);
-	macroMan.AddMacro(MacroIndex::eCC, CCMacro);
-}
-
-void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+//AutoAttack/Loot/CC
+Void MainForm::AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->nudAutoAttack->Enabled = !cbAutoAttack->Checked;
 	this->nudSAWSIL->Enabled = !cbAutoAttack->Checked;
 	this->ddbAutoAttackKey->Enabled = !cbAutoAttack->Checked;
 
 	CMS->SAWSIL = (int) nudSAWSIL->Value;
-	AttackMacro->SetValue(KeyCodes[ddbAutoAttackKey->SelectedIndex]);
-	AttackMacro->SetDelay((unsigned int) nudAutoAttack->Value);
-	AttackMacro->Toggle(cbAutoAttack->Checked);
+	this->tAutoAttack->Interval = (int) nudAutoAttack->Value;
+	this->tAutoAttack->Enabled = cbAutoAttack->Checked;
 }
-void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+Void MainForm::tAutoAttack_Tick(System::Object^  sender, System::EventArgs^  e)
+{
+	if(!CMS->InGame || CC->Busy || CMS->MobCount < CMS->SAWSIL || CMS->UsingAutoSkill) return;
+	CMS->Breath = 5000;
+	CMS->SpamKey(KeyCodes[ddbAutoAttackKey->SelectedIndex]);
+}
+Void MainForm::LootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->nudAutoLoot->Enabled = !this->cbAutoLoot->Checked;
 	this->ddbAutoLootKey->Enabled = !this->cbAutoLoot->Checked;
 	this->nudSLWIB->Enabled = !this->cbAutoLoot->Checked;
 		
 	CMS->SLWIB = (int) nudSLWIB->Value;
-	LootMacro->SetValue(KeyCodes[ddbAutoLootKey->SelectedIndex]);
-	LootMacro->SetDelay((unsigned int) nudAutoLoot->Value);
-	LootMacro->Toggle(cbAutoLoot->Checked);
+	tAutoLoot->Interval = ((int) nudAutoLoot->Value);
+	tAutoLoot->Enabled = cbAutoLoot->Checked;
 }
-void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+Void MainForm::tAutoLoot_Tick(System::Object^  sender, System::EventArgs^  e)
+{
+	if(!CMS->InGame || CMS->ItemCount < CMS->SLWIB || CMS->UsingAutoSkill) return;
+	CMS->Tubi = 0;
+	CMS->SpamKey(KeyCodes[ddbAutoLootKey->SelectedIndex]);
+}
+Void MainForm::CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	this->ddbTimedType->Enabled = !this->cbCCTimed->Checked;
 	this->nudCCTimed->Enabled = !this->cbCCTimed->Checked;
 
-	CCMacro->SetDelay((unsigned int) nudCCTimed->Value * 1000);
-	CCMacro->SetValue(this->ddbTimedType->SelectedIndex);
-	CCMacro->Toggle(cbCCTimed->Checked);
+	tTimedCC->Interval = (int) nudCCTimed->Value * 1000;
+	tTimedCC->Enabled = cbCCTimed->Checked;
+}
+Void MainForm::tTimedCC_Tick(System::Object^  sender, System::EventArgs^  e)
+{
+	CC->CCSwitch((CCType) ddbTimedType->SelectedIndex);
 }
 void MainForm::CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -288,9 +272,6 @@ void MainForm::MainForm_Load(System::Object^  sender, System::EventArgs^  e)
 	CPacket = gcnew CPackets;
 	LoadSettings();
 	AutoSkills = LoadAutoSkill();
-
-	//Start the MacroManager
-	InitializeMacros();
 
 	RefreshComboBoxes();
 	RefreshSPControlListView();
@@ -330,11 +311,8 @@ void MainForm::StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	}
 
 	//Set the correct state of the PacketSpammer Buttons
-	if(AttackMacro != nullptr)
-	{
-		bStopSpamming->Visible = CPacket->IsSpamming;
-		bStartSpamming->Visible = !CPacket->IsSpamming;
-	}
+	bStopSpamming->Visible = CPacket->IsSpamming;
+	bStartSpamming->Visible = !CPacket->IsSpamming;
 }
 void MainForm::RedrawStatBars()
 {
@@ -360,8 +338,6 @@ void MainForm::MainForm_FormClosing(System::Object^  sender, System::Windows::Fo
 	switch(MessageBox::Show("Close MapleStory too?", "Terminate Maple?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
 	{
 		case ::DialogResult::Yes:
-			macroMan.ClearMacros();
-			macroMan.Stop();
 			notifyIcon->Visible = false;
 			SaveSettings();
 			TerminateProcess(GetCurrentProcess(), 0);
@@ -603,7 +579,7 @@ void MainForm::RefreshSPControlListView()
 enum SettingsIndex{
 	AutoAttackDelay, SAWSIL, AutoAttackKey, AutoLootDelay, SLWIB, AutoLootKey, AutoHPValue, AutoHPKey, AutoMPValue, AutoMPKey, PetFeederValue, PetFeederKey,
 	CCPeople, CCPeopleType, CCTimed, CCTimedType, CCAttacks, CCAttacksType, HotKeyAttack, HotKeyLoot, HotKeyFMA, HotKeyCCPeople, HotKeySendPacket,
-	SelectedPacket, PacketSpamAmount, PacketSpamDelay, SkillInjectionDelay, SkillInjectionIndex, IceGuard, SaveCMS, PinTyper, LogoSkipper, SettingCount
+	SelectedPacket, PacketSpamAmount, PacketSpamDelay, SkillInjectionDelay, SkillInjectionIndex, IceGuard, PinTyper, LogoSkipper, SettingCount
 };
 Void MainForm::SaveSettings()
 {

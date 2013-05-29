@@ -25,9 +25,6 @@
     <Filter Include="Classes\CMemory">
       <UniqueIdentifier>{88a9a07f-3871-4467-b9d2-ad4a3faf437e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\MacroManager">
-      <UniqueIdentifier>{d05cc2aa-ac27-459a-bbdf-0178b218800a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\ChangeChannel">
       <UniqueIdentifier>{696ca6ab-1668-4da5-9064-bce6adf12b59}</UniqueIdentifier>
     </Filter>
@@ -62,9 +59,6 @@
     </ClCompile>
     <ClCompile Include="MapleStory.cpp">
       <Filter>Classes\CMapleStory</Filter>
-    </ClCompile>
-    <ClCompile Include="MacroManager.cpp">
-      <Filter>Classes\MacroManager</Filter>
     </ClCompile>
     <ClCompile Include="Defines.cpp">
       <Filter>Source Files</Filter>
@@ -110,29 +104,17 @@
     <ClInclude Include="Settings.h">
       <Filter>Classes\Settings</Filter>
     </ClInclude>
-    <ClInclude Include="BotMacro.h">
-      <Filter>Classes\MacroManager</Filter>
-    </ClInclude>
-    <ClInclude Include="FunctionalMacro.h">
-      <Filter>Classes\MacroManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Lock.h">
-      <Filter>Classes\MacroManager</Filter>
-    </ClInclude>
-    <ClInclude Include="MacroManager.h">
-      <Filter>Classes\MacroManager</Filter>
-    </ClInclude>
-    <ClInclude Include="noncopyable.h">
-      <Filter>Classes\MacroManager</Filter>
-    </ClInclude>
-    <ClInclude Include="StopWatch.h">
-      <Filter>Classes\MacroManager</Filter>
-    </ClInclude>
     <ClInclude Include="AutoSkill.h">
       <Filter>Classes\CAutoSkill</Filter>
     </ClInclude>
     <ClInclude Include="Addys.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StopWatch.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="noncopyable.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

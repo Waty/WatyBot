@@ -1,10 +1,5 @@
 #include "Defines.h"
-Macro::MacroManager macroMan;
 
-Macro::BotMacro* AttackMacro;
-Macro::BotMacro* LootMacro;
-Macro::FunctionalMacro* CCMacro;
-Macro::FunctionalMacro* PetFeederMacro;
 StopWatch<milliseconds> SkillInjectionStopWatch;
 
 gcroot<CMapleStory^> CMS;

@@ -132,7 +132,6 @@
     <ClCompile Include="AutoSkill.cpp" />
     <ClCompile Include="ChangeChannel.cpp" />
     <ClCompile Include="Defines.cpp" />
-    <ClCompile Include="MacroManager.cpp" />
     <ClCompile Include="MainDll.cpp" />
     <ClCompile Include="MainForm.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
@@ -175,14 +174,10 @@
   <ItemGroup>
     <ClInclude Include="Addys.h" />
     <ClInclude Include="AutoSkill.h" />
-    <ClInclude Include="BotMacro.h" />
     <ClInclude Include="ChangeChannel.h" />
     <ClInclude Include="Defines.h" />
-    <ClInclude Include="FunctionalMacro.h" />
     <ClInclude Include="HackAddys.h" />
     <ClInclude Include="Hacks.h" />
-    <ClInclude Include="Lock.h" />
-    <ClInclude Include="MacroManager.h" />
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
