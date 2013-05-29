@@ -46,10 +46,10 @@
 #define NDMiningAddy1 0xCCBD52
 #define NDMiningAddy2 0xCCBE2B
 #define NDMiningAddy3 0xCDE287
-												#define HideDamageAddy1 0xB3AD43
+#define HideDamageAddy1 0xC96EF3
 #define HideDamageAddy2 0x76BE5B
 #define HideDamageAddy3 0x76BE61
-												#define HideDamageAddy4 0x6E4F00
+#define HideDamageAddy4 0x7499B0
 #define MercedesComboAddy 0x5CB93A
 #define SkillInjectionChecksAddy1 0xD28CD4
 #define SkillInjectionChecksAddy2 0xD28D1F
@@ -60,8 +60,8 @@
 												#define ExitCSCall 0x5F31D0
 												#define NoCCBoxesAddy1 0x5688D4
 												#define NoCCBoxesAddy2 0x56D780
-												#define Fadeaddy1 0x826e70
-												#define Fadeaddy2 0x827320
+#define Fadeaddy1 0x8B6230
+#define Fadeaddy2 0x8B66E0
 #define MouseFlyAddy 0xD12669
 #define MouseFlyCall1 0xD51E50
 #define MouseFlyCall2 0x74CF60

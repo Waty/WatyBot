@@ -1118,7 +1118,6 @@ private:
 			// cbNoFadeStages
 			// 
 			this->cbNoFadeStages->AutoSize = true;
-			this->cbNoFadeStages->Enabled = false;
 			this->cbNoFadeStages->Location = System::Drawing::Point(159, 89);
 			this->cbNoFadeStages->Name = L"cbNoFadeStages";
 			this->cbNoFadeStages->Size = System::Drawing::Size(100, 17);
@@ -1131,7 +1130,6 @@ private:
 			// cbHideDamage
 			// 
 			this->cbHideDamage->AutoSize = true;
-			this->cbHideDamage->Enabled = false;
 			this->cbHideDamage->Location = System::Drawing::Point(7, 89);
 			this->cbHideDamage->Name = L"cbHideDamage";
 			this->cbHideDamage->Size = System::Drawing::Size(147, 17);
