@@ -13,7 +13,6 @@ public:
 		{
 			return (int) ReadPointer(MobBasePtr, MobCountOffset);
 		}
-		
 	}
 	property int ItemCount
 	{
@@ -21,7 +20,6 @@ public:
 		{
 			return (int) ReadPointer(ItemBasePtr, ItemCountOffset);
 		}
-		
 	}
 	property int PeopleCount
 	{
@@ -29,7 +27,6 @@ public:
 		{
 			return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);
 		}
-		
 	}
 	property int CharX
 	{
@@ -37,7 +34,6 @@ public:
 		{
 			return (int) ReadPointer(CharBasePtr,XOffset);
 		}
-		
 	}
 	property int CharY
 	{
