@@ -1,4 +1,6 @@
 #include <Windows.h>
+#include <vcclr.h>
+#include "MapleStory.h"
 
 enum cType{asmtype, singleaddy, twoaddys, threeaddys, fouraddys}; 
 enum jumpType{jump, call};
@@ -20,6 +22,7 @@ public:
 	bool Enabled;
 
 private:
+	gcroot<CMapleStory^> CMS;
 	
 	unsigned long ulAddress;
 	unsigned char* bMem;

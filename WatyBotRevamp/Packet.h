@@ -13,11 +13,15 @@ namespace Packets
 	public ref class CPacketData sealed
 	{
 	public:
-		CPacketData(){}
-		CPacketData(String^ Name, String^ Data);
+		CPacketData()
+		{
+			Name = String::Empty;
+			Data = gcnew List<String^>;
+		}
+		CPacketData(String^ Name, List<String^>^ Data);
 
 		property String^ Name;
-		property String^ Data;
+		property List<String^>^ Data;
 	};
 
 	public ref class CPackets sealed
@@ -33,19 +37,20 @@ namespace Packets
 		property CPacketData^ SelectedPacket;
 
 		//Public Methods
-		void Add(String^ name, String^ data);
+		void Add(CPacketData^ Packet);
+		void Add(String^ name, List<String^>^ data);
 		void Delete(int index);
-		void Edit(int i, String^ name, String^ data);
+		void Edit(int i, String^ name, List<String^>^ data);
 		bool Send(String^ packet, String^&strError);
 		bool Send(CPacketData^ packet);
 		bool Send();
 		void StartSpamming(int times, int delay);
 		void StopSpamming();
 		void Save();
+		bool VerifyPacket(String^ strPacket, String^&strError);
 
 	private:
 		property XmlSerializer^ s;
-		bool isGoodPacket(String^ strPacket, String^&strError);
 		Windows::Forms::Timer^ timer;
 		void timer_tick(System::Object^  sender, System::EventArgs^  e);
 		property String^ m_spampacket;

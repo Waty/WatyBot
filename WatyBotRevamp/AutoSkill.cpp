@@ -25,6 +25,7 @@ CAutoSkill::~CAutoSkill()
 {
 	delete timer;
 	delete bw;
+	delete CMS;
 }
 
 Void CAutoSkill::AutoSkill_Tick(System::Object^  sender, System::EventArgs^  e)

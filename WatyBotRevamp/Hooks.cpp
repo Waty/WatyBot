@@ -61,7 +61,7 @@ void WINAPI _InjectPacket(COutPacket *pPacket)
 }
 
 // Send a MapleStory packet using byte data
-DWORD WINAPI SendPacketf (__in_bcount(nLength) LPBYTE lpBytes, __in DWORD dwLength)
+DWORD WINAPI TrySendPacket(__in_bcount(nLength) LPBYTE lpBytes, __in DWORD dwLength)
 {
 	COutPacket Packet;
 	ZeroMemory(&Packet, sizeof(COutPacket));
@@ -80,10 +80,6 @@ DWORD WINAPI SendPacketf (__in_bcount(nLength) LPBYTE lpBytes, __in DWORD dwLeng
 	}
 }
 
-void TrySendPacket(__in_bcount(nLength) LPBYTE lpBytes, __in DWORD dwLength)
-{
-	SendPacketf(lpBytes,dwLength);
-}
 void TryCC(int channel)
 {
 	FakeThreadID;

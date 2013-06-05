@@ -73,26 +73,6 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::Label^  BreathLabel;
 	private: System::Windows::Forms::CheckBox^  cbCCPeople;
 	private: System::Windows::Forms::TabPage^  PacketSenderTab;
-	private: System::Windows::Forms::Button^  SendPacketButton;
-	private: System::Windows::Forms::ComboBox^  ddbSelectedPacket;
-	private: System::Windows::Forms::GroupBox^  gbAddPacket;
-	private: System::Windows::Forms::GroupBox^  gbSendPackets;
-	private: System::Windows::Forms::Button^  bAddPacket;
-	private: System::Windows::Forms::TextBox^  tbAddPacketData;
-	private: System::Windows::Forms::TextBox^  tbAddPacketName;
-	private: System::Windows::Forms::Label^  AddPacketPacketLabel;
-	private: System::Windows::Forms::Label^  AddPacketNameLabel;
-	private: System::Windows::Forms::Label^  lSpamPacketTimes;
-	private: System::Windows::Forms::Label^  SpamPacketsDelayLabel;
-	private: System::Windows::Forms::Button^  bStartSpamming;
-	private: System::Windows::Forms::GroupBox^  gbDeletePacket;
-	private: System::Windows::Forms::ComboBox^  ddbDeletePacket;
-	private: System::Windows::Forms::Button^  bDeletePacket;
-	private: System::Windows::Forms::GroupBox^  gbEditPacket;
-	private: System::Windows::Forms::Button^  bSaveChanges;
-	private: System::Windows::Forms::TextBox^  tbEditPacketData;
-	private: System::Windows::Forms::TextBox^  tbEditPacketName;
-	private: System::Windows::Forms::ComboBox^  ddbEditPacket;
 	private: System::Windows::Forms::TabPage^  SPControlTabPage;
 	private: System::Windows::Forms::CheckBox^  cbSPControl;
 	private: System::Windows::Forms::CheckBox^  cbCCAttacks;
@@ -140,7 +120,6 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::CheckBox^  cbViewSwears;
 	private: System::Windows::Forms::CheckBox^  cbItemVac;
 	private: System::Windows::Forms::CheckBox^  cbFMA;
-	private: System::Windows::Forms::Button^  bStopSpamming;
 	private: System::Windows::Forms::CheckBox^  cbScareMobs;
 	private: System::Windows::Forms::CheckBox^  cbFLACC;
 	private: System::Windows::Forms::CheckBox^  cbCPUHack;
@@ -188,8 +167,6 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::CheckBox^  cbMouseFly;
 	private: System::Windows::Forms::NumericUpDown^  nudIceGuard;
 	private: System::Windows::Forms::CheckBox^  cbIceGuard;
-	private: System::Windows::Forms::NumericUpDown^  nudSpamDelay;
-	private: System::Windows::Forms::NumericUpDown^  nudSpamAmount;
 	private: System::Windows::Forms::NumericUpDown^  nudSPCY;
 	private: System::Windows::Forms::NumericUpDown^  nudSPCX;
 	private: System::Windows::Forms::NumericUpDown^  nudSPCMapId;
@@ -209,6 +186,17 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::Timer^  tAutoAttack;
 	private: System::Windows::Forms::Timer^  tAutoLoot;
 	private: System::Windows::Forms::Timer^  tTimedCC;
+	private: System::Windows::Forms::ListView^  lvPackets;
+	private: System::Windows::Forms::ColumnHeader^  hPacketName;
+	private: System::Windows::Forms::ColumnHeader^  hPacket;
+	private: System::Windows::Forms::TextBox^  tbPacketData;
+	private: System::Windows::Forms::TextBox^  tbPacketName;
+	private: System::Windows::Forms::Button^  bAddPacket;
+	private: System::Windows::Forms::ContextMenuStrip^  PacketContextMenu;
+	private: System::Windows::Forms::ToolStripMenuItem^  bSendPacket;
+	private: System::Windows::Forms::ToolStripMenuItem^  bDeletePacket;
+	private: System::Windows::Forms::Button^  bSaveChangedPacket;
+	private: System::Windows::Forms::Label^  label1;
 	private: System::ComponentModel::IContainer^  components;
 private:
 		/// <summary>
@@ -322,29 +310,17 @@ private:
 			this->cbWalkRight = (gcnew System::Windows::Forms::CheckBox());
 			this->cbVacRight = (gcnew System::Windows::Forms::CheckBox());
 			this->PacketSenderTab = (gcnew System::Windows::Forms::TabPage());
-			this->gbEditPacket = (gcnew System::Windows::Forms::GroupBox());
-			this->bSaveChanges = (gcnew System::Windows::Forms::Button());
-			this->tbEditPacketData = (gcnew System::Windows::Forms::TextBox());
-			this->tbEditPacketName = (gcnew System::Windows::Forms::TextBox());
-			this->ddbEditPacket = (gcnew System::Windows::Forms::ComboBox());
-			this->gbDeletePacket = (gcnew System::Windows::Forms::GroupBox());
-			this->ddbDeletePacket = (gcnew System::Windows::Forms::ComboBox());
-			this->bDeletePacket = (gcnew System::Windows::Forms::Button());
-			this->gbAddPacket = (gcnew System::Windows::Forms::GroupBox());
+			this->bSaveChangedPacket = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->bAddPacket = (gcnew System::Windows::Forms::Button());
-			this->tbAddPacketData = (gcnew System::Windows::Forms::TextBox());
-			this->tbAddPacketName = (gcnew System::Windows::Forms::TextBox());
-			this->AddPacketPacketLabel = (gcnew System::Windows::Forms::Label());
-			this->AddPacketNameLabel = (gcnew System::Windows::Forms::Label());
-			this->gbSendPackets = (gcnew System::Windows::Forms::GroupBox());
-			this->nudSpamDelay = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudSpamAmount = (gcnew System::Windows::Forms::NumericUpDown());
-			this->bStartSpamming = (gcnew System::Windows::Forms::Button());
-			this->SpamPacketsDelayLabel = (gcnew System::Windows::Forms::Label());
-			this->lSpamPacketTimes = (gcnew System::Windows::Forms::Label());
-			this->ddbSelectedPacket = (gcnew System::Windows::Forms::ComboBox());
-			this->SendPacketButton = (gcnew System::Windows::Forms::Button());
-			this->bStopSpamming = (gcnew System::Windows::Forms::Button());
+			this->tbPacketData = (gcnew System::Windows::Forms::TextBox());
+			this->tbPacketName = (gcnew System::Windows::Forms::TextBox());
+			this->lvPackets = (gcnew System::Windows::Forms::ListView());
+			this->hPacketName = (gcnew System::Windows::Forms::ColumnHeader());
+			this->hPacket = (gcnew System::Windows::Forms::ColumnHeader());
+			this->PacketContextMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
+			this->bSendPacket = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->bDeletePacket = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->SPControlTabPage = (gcnew System::Windows::Forms::TabPage());
 			this->gbNewSPCLocation = (gcnew System::Windows::Forms::GroupBox());
 			this->nudSPCY = (gcnew System::Windows::Forms::NumericUpDown());
@@ -424,12 +400,7 @@ private:
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkillInjection))->BeginInit();
 			this->MobHacks->SuspendLayout();
 			this->PacketSenderTab->SuspendLayout();
-			this->gbEditPacket->SuspendLayout();
-			this->gbDeletePacket->SuspendLayout();
-			this->gbAddPacket->SuspendLayout();
-			this->gbSendPackets->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamDelay))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamAmount))->BeginInit();
+			this->PacketContextMenu->SuspendLayout();
 			this->SPControlTabPage->SuspendLayout();
 			this->gbNewSPCLocation->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCY))->BeginInit();
@@ -815,7 +786,7 @@ private:
 			this->cbCCAttacks->TabIndex = 29;
 			this->cbCCAttacks->Text = L"Auto";
 			this->cbCCAttacks->UseVisualStyleBackColor = true;
-			this->cbCCAttacks->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCAttacksCheckBox_CheckedChanged);
+			this->cbCCAttacks->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbCCAttacks_CheckedChanged);
 			// 
 			// cbCCTimed
 			// 
@@ -826,7 +797,7 @@ private:
 			this->cbCCTimed->TabIndex = 27;
 			this->cbCCTimed->Text = L"Auto";
 			this->cbCCTimed->UseVisualStyleBackColor = true;
-			this->cbCCTimed->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCTimeCheckBox_CheckedChanged);
+			this->cbCCTimed->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbCCTimed_CheckedChanged);
 			// 
 			// cbCCPeople
 			// 
@@ -837,7 +808,7 @@ private:
 			this->cbCCPeople->TabIndex = 25;
 			this->cbCCPeople->Text = L"Auto";
 			this->cbCCPeople->UseVisualStyleBackColor = true;
-			this->cbCCPeople->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CCPeopleCheckBox_CheckedChanged);
+			this->cbCCPeople->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbCCPeople_CheckedChanged);
 			// 
 			// cbAutoAttack
 			// 
@@ -849,7 +820,7 @@ private:
 			this->cbAutoAttack->Text = L"Auto Attack";
 			this->InfoToolTip->SetToolTip(this->cbAutoAttack, L"Lets you character spam his skill just like you would smash your keyboard");
 			this->cbAutoAttack->UseVisualStyleBackColor = true;
-			this->cbAutoAttack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AttackCheckBox_CheckedChanged);
+			this->cbAutoAttack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbAutoAttack_CheckedChanged);
 			// 
 			// cbPetFeeder
 			// 
@@ -872,7 +843,7 @@ private:
 			this->cbAutoHP->Text = L"Auto HP";
 			this->InfoToolTip->SetToolTip(this->cbAutoHP, L"Keeps an eye on your HP, if it gets too low, it will send a key to use a potion");
 			this->cbAutoHP->UseVisualStyleBackColor = true;
-			this->cbAutoHP->CheckedChanged += gcnew System::EventHandler(this, &MainForm::HPCheckBox_CheckedChanged);
+			this->cbAutoHP->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbAutoHP_CheckedChanged);
 			// 
 			// ddbPetFeeder
 			// 
@@ -912,7 +883,7 @@ private:
 			this->cbAutoMP->Text = L"Auto MP";
 			this->InfoToolTip->SetToolTip(this->cbAutoMP, L"Keeps an eye on your MP, if it gets too low, it will send a key to use a potion");
 			this->cbAutoMP->UseVisualStyleBackColor = true;
-			this->cbAutoMP->CheckedChanged += gcnew System::EventHandler(this, &MainForm::MPCheckBox_CheckedChanged);
+			this->cbAutoMP->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbAutoMP_CheckedChanged);
 			// 
 			// ddbAutoLootKey
 			// 
@@ -938,7 +909,7 @@ private:
 			this->cbAutoLoot->Text = L"Auto Loot";
 			this->InfoToolTip->SetToolTip(this->cbAutoLoot, L"Very fast looting, faster then normally");
 			this->cbAutoLoot->UseVisualStyleBackColor = true;
-			this->cbAutoLoot->CheckedChanged += gcnew System::EventHandler(this, &MainForm::LootCheckBox_CheckedChanged);
+			this->cbAutoLoot->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbAutoLoot_CheckedChanged);
 			// 
 			// ddbAutoMPKey
 			// 
@@ -1264,7 +1235,6 @@ private:
 			// 
 			// nudIceGuard
 			// 
-			this->nudIceGuard->Enabled = false;
 			this->nudIceGuard->Location = System::Drawing::Point(95, 31);
 			this->nudIceGuard->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000000, 0, 0, 0});
 			this->nudIceGuard->Name = L"nudIceGuard";
@@ -1275,7 +1245,6 @@ private:
 			// cbIceGuard
 			// 
 			this->cbIceGuard->AutoSize = true;
-			this->cbIceGuard->Enabled = false;
 			this->cbIceGuard->Location = System::Drawing::Point(6, 32);
 			this->cbIceGuard->Name = L"cbIceGuard";
 			this->cbIceGuard->Size = System::Drawing::Size(73, 17);
@@ -1601,10 +1570,12 @@ private:
 			// 
 			// PacketSenderTab
 			// 
-			this->PacketSenderTab->Controls->Add(this->gbEditPacket);
-			this->PacketSenderTab->Controls->Add(this->gbDeletePacket);
-			this->PacketSenderTab->Controls->Add(this->gbAddPacket);
-			this->PacketSenderTab->Controls->Add(this->gbSendPackets);
+			this->PacketSenderTab->Controls->Add(this->bSaveChangedPacket);
+			this->PacketSenderTab->Controls->Add(this->label1);
+			this->PacketSenderTab->Controls->Add(this->bAddPacket);
+			this->PacketSenderTab->Controls->Add(this->tbPacketData);
+			this->PacketSenderTab->Controls->Add(this->tbPacketName);
+			this->PacketSenderTab->Controls->Add(this->lvPackets);
 			this->PacketSenderTab->Location = System::Drawing::Point(4, 22);
 			this->PacketSenderTab->Name = L"PacketSenderTab";
 			this->PacketSenderTab->Padding = System::Windows::Forms::Padding(3);
@@ -1613,231 +1584,98 @@ private:
 			this->PacketSenderTab->Text = L"Packets";
 			this->PacketSenderTab->UseVisualStyleBackColor = true;
 			// 
-			// gbEditPacket
+			// bSaveChangedPacket
 			// 
-			this->gbEditPacket->Controls->Add(this->bSaveChanges);
-			this->gbEditPacket->Controls->Add(this->tbEditPacketData);
-			this->gbEditPacket->Controls->Add(this->tbEditPacketName);
-			this->gbEditPacket->Controls->Add(this->ddbEditPacket);
-			this->gbEditPacket->Location = System::Drawing::Point(6, 191);
-			this->gbEditPacket->Name = L"gbEditPacket";
-			this->gbEditPacket->Size = System::Drawing::Size(314, 76);
-			this->gbEditPacket->TabIndex = 6;
-			this->gbEditPacket->TabStop = false;
-			this->gbEditPacket->Text = L"Edit Packet";
+			this->bSaveChangedPacket->Enabled = false;
+			this->bSaveChangedPacket->Location = System::Drawing::Point(6, 202);
+			this->bSaveChangedPacket->Name = L"bSaveChangedPacket";
+			this->bSaveChangedPacket->Size = System::Drawing::Size(115, 23);
+			this->bSaveChangedPacket->TabIndex = 5;
+			this->bSaveChangedPacket->Text = L"Save Changes";
+			this->bSaveChangedPacket->UseVisualStyleBackColor = true;
+			this->bSaveChangedPacket->Click += gcnew System::EventHandler(this, &MainForm::bSaveChangedPacket_Click);
 			// 
-			// bSaveChanges
+			// label1
 			// 
-			this->bSaveChanges->Location = System::Drawing::Point(209, 19);
-			this->bSaveChanges->Name = L"bSaveChanges";
-			this->bSaveChanges->Size = System::Drawing::Size(99, 21);
-			this->bSaveChanges->TabIndex = 10;
-			this->bSaveChanges->Text = L"Save Changes";
-			this->bSaveChanges->UseVisualStyleBackColor = true;
-			this->bSaveChanges->Click += gcnew System::EventHandler(this, &MainForm::SavePacketEditButton_Click);
-			// 
-			// tbEditPacketData
-			// 
-			this->tbEditPacketData->Location = System::Drawing::Point(112, 46);
-			this->tbEditPacketData->Name = L"tbEditPacketData";
-			this->tbEditPacketData->Size = System::Drawing::Size(196, 20);
-			this->tbEditPacketData->TabIndex = 5;
-			// 
-			// tbEditPacketName
-			// 
-			this->tbEditPacketName->Location = System::Drawing::Point(6, 46);
-			this->tbEditPacketName->Name = L"tbEditPacketName";
-			this->tbEditPacketName->Size = System::Drawing::Size(100, 20);
-			this->tbEditPacketName->TabIndex = 5;
-			// 
-			// ddbEditPacket
-			// 
-			this->ddbEditPacket->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->ddbEditPacket->FormattingEnabled = true;
-			this->ddbEditPacket->Location = System::Drawing::Point(6, 19);
-			this->ddbEditPacket->Name = L"ddbEditPacket";
-			this->ddbEditPacket->Size = System::Drawing::Size(197, 21);
-			this->ddbEditPacket->TabIndex = 10;
-			this->ddbEditPacket->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::SelectPacketForEditingComboBox_SelectedIndexChanged);
-			// 
-			// gbDeletePacket
-			// 
-			this->gbDeletePacket->Controls->Add(this->ddbDeletePacket);
-			this->gbDeletePacket->Controls->Add(this->bDeletePacket);
-			this->gbDeletePacket->Location = System::Drawing::Point(6, 273);
-			this->gbDeletePacket->Name = L"gbDeletePacket";
-			this->gbDeletePacket->Size = System::Drawing::Size(314, 51);
-			this->gbDeletePacket->TabIndex = 5;
-			this->gbDeletePacket->TabStop = false;
-			this->gbDeletePacket->Text = L"Delete Packets";
-			// 
-			// ddbDeletePacket
-			// 
-			this->ddbDeletePacket->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->ddbDeletePacket->FormattingEnabled = true;
-			this->ddbDeletePacket->Location = System::Drawing::Point(6, 19);
-			this->ddbDeletePacket->Name = L"ddbDeletePacket";
-			this->ddbDeletePacket->Size = System::Drawing::Size(197, 21);
-			this->ddbDeletePacket->TabIndex = 4;
-			// 
-			// bDeletePacket
-			// 
-			this->bDeletePacket->Location = System::Drawing::Point(209, 19);
-			this->bDeletePacket->Name = L"bDeletePacket";
-			this->bDeletePacket->Size = System::Drawing::Size(99, 21);
-			this->bDeletePacket->TabIndex = 3;
-			this->bDeletePacket->Text = L"Delete Packet";
-			this->bDeletePacket->UseVisualStyleBackColor = true;
-			this->bDeletePacket->Click += gcnew System::EventHandler(this, &MainForm::DeletePacketButton_Click);
-			// 
-			// gbAddPacket
-			// 
-			this->gbAddPacket->Controls->Add(this->bAddPacket);
-			this->gbAddPacket->Controls->Add(this->tbAddPacketData);
-			this->gbAddPacket->Controls->Add(this->tbAddPacketName);
-			this->gbAddPacket->Controls->Add(this->AddPacketPacketLabel);
-			this->gbAddPacket->Controls->Add(this->AddPacketNameLabel);
-			this->gbAddPacket->Location = System::Drawing::Point(6, 91);
-			this->gbAddPacket->Name = L"gbAddPacket";
-			this->gbAddPacket->Size = System::Drawing::Size(314, 94);
-			this->gbAddPacket->TabIndex = 4;
-			this->gbAddPacket->TabStop = false;
-			this->gbAddPacket->Text = L"Add Packets";
+			this->label1->Location = System::Drawing::Point(6, 177);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(115, 22);
+			this->label1->TabIndex = 4;
+			this->label1->Text = L"or";
+			this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// bAddPacket
 			// 
-			this->bAddPacket->DialogResult = System::Windows::Forms::DialogResult::Cancel;
-			this->bAddPacket->Location = System::Drawing::Point(6, 59);
+			this->bAddPacket->Location = System::Drawing::Point(6, 151);
 			this->bAddPacket->Name = L"bAddPacket";
-			this->bAddPacket->Size = System::Drawing::Size(302, 23);
-			this->bAddPacket->TabIndex = 4;
+			this->bAddPacket->Size = System::Drawing::Size(115, 23);
+			this->bAddPacket->TabIndex = 3;
 			this->bAddPacket->Text = L"Add Packet";
 			this->bAddPacket->UseVisualStyleBackColor = true;
-			this->bAddPacket->Click += gcnew System::EventHandler(this, &MainForm::AddPacketButton_Click);
+			this->bAddPacket->Click += gcnew System::EventHandler(this, &MainForm::bAddPacket_Click);
 			// 
-			// tbAddPacketData
+			// tbPacketData
 			// 
-			this->tbAddPacketData->Location = System::Drawing::Point(112, 32);
-			this->tbAddPacketData->Name = L"tbAddPacketData";
-			this->tbAddPacketData->Size = System::Drawing::Size(196, 20);
-			this->tbAddPacketData->TabIndex = 3;
+			this->tbPacketData->Location = System::Drawing::Point(128, 125);
+			this->tbPacketData->Multiline = true;
+			this->tbPacketData->Name = L"tbPacketData";
+			this->tbPacketData->Size = System::Drawing::Size(192, 100);
+			this->tbPacketData->TabIndex = 2;
 			// 
-			// tbAddPacketName
+			// tbPacketName
 			// 
-			this->tbAddPacketName->Location = System::Drawing::Point(6, 32);
-			this->tbAddPacketName->Name = L"tbAddPacketName";
-			this->tbAddPacketName->Size = System::Drawing::Size(100, 20);
-			this->tbAddPacketName->TabIndex = 2;
+			this->tbPacketName->Location = System::Drawing::Point(6, 125);
+			this->tbPacketName->Name = L"tbPacketName";
+			this->tbPacketName->Size = System::Drawing::Size(115, 20);
+			this->tbPacketName->TabIndex = 1;
 			// 
-			// AddPacketPacketLabel
+			// lvPackets
 			// 
-			this->AddPacketPacketLabel->AutoSize = true;
-			this->AddPacketPacketLabel->Location = System::Drawing::Point(110, 16);
-			this->AddPacketPacketLabel->Name = L"AddPacketPacketLabel";
-			this->AddPacketPacketLabel->Size = System::Drawing::Size(44, 13);
-			this->AddPacketPacketLabel->TabIndex = 1;
-			this->AddPacketPacketLabel->Text = L"Packet:";
+			this->lvPackets->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(2) {this->hPacketName, this->hPacket});
+			this->lvPackets->ContextMenuStrip = this->PacketContextMenu;
+			this->lvPackets->FullRowSelect = true;
+			this->lvPackets->GridLines = true;
+			this->lvPackets->HeaderStyle = System::Windows::Forms::ColumnHeaderStyle::Nonclickable;
+			this->lvPackets->Location = System::Drawing::Point(6, 7);
+			this->lvPackets->MultiSelect = false;
+			this->lvPackets->Name = L"lvPackets";
+			this->lvPackets->Size = System::Drawing::Size(314, 112);
+			this->lvPackets->TabIndex = 0;
+			this->lvPackets->UseCompatibleStateImageBehavior = false;
+			this->lvPackets->View = System::Windows::Forms::View::Details;
+			this->lvPackets->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::lvPackets_SelectedIndexChanged);
+			this->lvPackets->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainForm::lvPackets_KeyDown);
 			// 
-			// AddPacketNameLabel
+			// hPacketName
 			// 
-			this->AddPacketNameLabel->AutoSize = true;
-			this->AddPacketNameLabel->Location = System::Drawing::Point(6, 16);
-			this->AddPacketNameLabel->Name = L"AddPacketNameLabel";
-			this->AddPacketNameLabel->Size = System::Drawing::Size(38, 13);
-			this->AddPacketNameLabel->TabIndex = 0;
-			this->AddPacketNameLabel->Text = L"Name:";
+			this->hPacketName->Text = L"Name";
+			this->hPacketName->Width = 120;
 			// 
-			// gbSendPackets
+			// hPacket
 			// 
-			this->gbSendPackets->Controls->Add(this->nudSpamDelay);
-			this->gbSendPackets->Controls->Add(this->nudSpamAmount);
-			this->gbSendPackets->Controls->Add(this->bStartSpamming);
-			this->gbSendPackets->Controls->Add(this->SpamPacketsDelayLabel);
-			this->gbSendPackets->Controls->Add(this->lSpamPacketTimes);
-			this->gbSendPackets->Controls->Add(this->ddbSelectedPacket);
-			this->gbSendPackets->Controls->Add(this->SendPacketButton);
-			this->gbSendPackets->Controls->Add(this->bStopSpamming);
-			this->gbSendPackets->Location = System::Drawing::Point(6, 6);
-			this->gbSendPackets->Name = L"gbSendPackets";
-			this->gbSendPackets->Size = System::Drawing::Size(314, 79);
-			this->gbSendPackets->TabIndex = 3;
-			this->gbSendPackets->TabStop = false;
-			this->gbSendPackets->Text = L"Packet Sender";
+			this->hPacket->Text = L"Packet(s)";
+			this->hPacket->Width = 180;
 			// 
-			// nudSpamDelay
+			// PacketContextMenu
 			// 
-			this->nudSpamDelay->Location = System::Drawing::Point(219, 50);
-			this->nudSpamDelay->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {2000000000, 0, 0, 0});
-			this->nudSpamDelay->Name = L"nudSpamDelay";
-			this->nudSpamDelay->Size = System::Drawing::Size(41, 20);
-			this->nudSpamDelay->TabIndex = 10;
+			this->PacketContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->bSendPacket, 
+				this->bDeletePacket});
+			this->PacketContextMenu->Name = L"PacketContextMenu";
+			this->PacketContextMenu->Size = System::Drawing::Size(108, 48);
 			// 
-			// nudSpamAmount
+			// bSendPacket
 			// 
-			this->nudSpamAmount->Location = System::Drawing::Point(112, 48);
-			this->nudSpamAmount->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {2000000000, 0, 0, 0});
-			this->nudSpamAmount->Name = L"nudSpamAmount";
-			this->nudSpamAmount->Size = System::Drawing::Size(41, 20);
-			this->nudSpamAmount->TabIndex = 5;
+			this->bSendPacket->Name = L"bSendPacket";
+			this->bSendPacket->Size = System::Drawing::Size(107, 22);
+			this->bSendPacket->Text = L"Send";
+			this->bSendPacket->Click += gcnew System::EventHandler(this, &MainForm::bSendPacket_Click);
 			// 
-			// bStartSpamming
+			// bDeletePacket
 			// 
-			this->bStartSpamming->Location = System::Drawing::Point(6, 48);
-			this->bStartSpamming->Name = L"bStartSpamming";
-			this->bStartSpamming->Size = System::Drawing::Size(100, 20);
-			this->bStartSpamming->TabIndex = 8;
-			this->bStartSpamming->Text = L"Spam Packets";
-			this->bStartSpamming->UseVisualStyleBackColor = true;
-			this->bStartSpamming->Click += gcnew System::EventHandler(this, &MainForm::SpamsPacketButton_Click);
-			// 
-			// SpamPacketsDelayLabel
-			// 
-			this->SpamPacketsDelayLabel->AutoSize = true;
-			this->SpamPacketsDelayLabel->Location = System::Drawing::Point(260, 52);
-			this->SpamPacketsDelayLabel->Name = L"SpamPacketsDelayLabel";
-			this->SpamPacketsDelayLabel->Size = System::Drawing::Size(48, 13);
-			this->SpamPacketsDelayLabel->TabIndex = 7;
-			this->SpamPacketsDelayLabel->Text = L"ms delay";
-			// 
-			// lSpamPacketTimes
-			// 
-			this->lSpamPacketTimes->AutoSize = true;
-			this->lSpamPacketTimes->Location = System::Drawing::Point(158, 52);
-			this->lSpamPacketTimes->Name = L"lSpamPacketTimes";
-			this->lSpamPacketTimes->Size = System::Drawing::Size(60, 13);
-			this->lSpamPacketTimes->TabIndex = 5;
-			this->lSpamPacketTimes->Text = L"Times, with";
-			// 
-			// ddbSelectedPacket
-			// 
-			this->ddbSelectedPacket->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->ddbSelectedPacket->FormattingEnabled = true;
-			this->ddbSelectedPacket->Location = System::Drawing::Point(6, 19);
-			this->ddbSelectedPacket->Name = L"ddbSelectedPacket";
-			this->ddbSelectedPacket->Size = System::Drawing::Size(197, 21);
-			this->ddbSelectedPacket->TabIndex = 2;
-			this->ddbSelectedPacket->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::PacketSelectBox_SelectedIndexChanged);
-			// 
-			// SendPacketButton
-			// 
-			this->SendPacketButton->Location = System::Drawing::Point(209, 19);
-			this->SendPacketButton->Name = L"SendPacketButton";
-			this->SendPacketButton->Size = System::Drawing::Size(99, 21);
-			this->SendPacketButton->TabIndex = 0;
-			this->SendPacketButton->Text = L"Send Packet";
-			this->SendPacketButton->UseVisualStyleBackColor = true;
-			this->SendPacketButton->Click += gcnew System::EventHandler(this, &MainForm::SendPacketButton_Click);
-			// 
-			// bStopSpamming
-			// 
-			this->bStopSpamming->Location = System::Drawing::Point(6, 48);
-			this->bStopSpamming->Name = L"bStopSpamming";
-			this->bStopSpamming->Size = System::Drawing::Size(100, 20);
-			this->bStopSpamming->TabIndex = 9;
-			this->bStopSpamming->Text = L"Stop Spamming";
-			this->bStopSpamming->UseVisualStyleBackColor = true;
-			this->bStopSpamming->Visible = false;
-			this->bStopSpamming->Click += gcnew System::EventHandler(this, &MainForm::bStopSpamming_Click);
+			this->bDeletePacket->Name = L"bDeletePacket";
+			this->bDeletePacket->Size = System::Drawing::Size(107, 22);
+			this->bDeletePacket->Text = L"Delete";
+			this->bDeletePacket->Click += gcnew System::EventHandler(this, &MainForm::bDeletePacket_Click);
 			// 
 			// SPControlTabPage
 			// 
@@ -1917,7 +1755,7 @@ private:
 			this->bAddSPCLocation->TabStop = false;
 			this->bAddSPCLocation->Text = L"Add Location";
 			this->bAddSPCLocation->UseVisualStyleBackColor = true;
-			this->bAddSPCLocation->Click += gcnew System::EventHandler(this, &MainForm::SPControlAddButton_Click);
+			this->bAddSPCLocation->Click += gcnew System::EventHandler(this, &MainForm::bAddSPCLocation_Click);
 			// 
 			// SPControlMapIDLabel
 			// 
@@ -2368,15 +2206,8 @@ private:
 			this->MobHacks->ResumeLayout(false);
 			this->MobHacks->PerformLayout();
 			this->PacketSenderTab->ResumeLayout(false);
-			this->gbEditPacket->ResumeLayout(false);
-			this->gbEditPacket->PerformLayout();
-			this->gbDeletePacket->ResumeLayout(false);
-			this->gbAddPacket->ResumeLayout(false);
-			this->gbAddPacket->PerformLayout();
-			this->gbSendPackets->ResumeLayout(false);
-			this->gbSendPackets->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamDelay))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSpamAmount))->EndInit();
+			this->PacketSenderTab->PerformLayout();
+			this->PacketContextMenu->ResumeLayout(false);
 			this->SPControlTabPage->ResumeLayout(false);
 			this->gbNewSPCLocation->ResumeLayout(false);
 			this->gbNewSPCLocation->PerformLayout();
@@ -2393,92 +2224,101 @@ private:
 
 		}
 #pragma endregion
-#pragma region custom voids
-private: List<SettingsEntry^>^ Settings;
-private: List<CAutoSkill^>^ AutoSkills;
-private: property XmlSerializer^ s;
-private: XmlSerializer^ AutoSkillSerializer;
-private: List<CAutoSkill^>^ LoadAutoSkill();
-private: void MainForm::SaveAutoSkill();
-private: System::Void LoadSettings();
-private: System::Void SaveSettings();
-private: System::Void ReloadSettings();
-private: System::Void RefreshComboBoxes();
-private: System::Void RefreshSPControlListView();
-private: System::Void RedrawStatBars();
-private: System::Void HotKeys();
-#pragma endregion
-#pragma region CheckBoxes
-private: System::Void StatsTimer_Tick(System::Object^  sender, System::EventArgs^  e);
-private: System::Void HPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void MainForm_Load(System::Object^  sender, System::EventArgs^  e);
-private: System::Void MPCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void AttackCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void StatFixButton_Click(System::Object^  sender, System::EventArgs^  e){}
-private: System::Void LootCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void CCPeopleCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void CCTimeCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);	
-private: System::Void SendPacketButton_Click(System::Object^  sender, System::EventArgs^  e);
-private: System::Void MainTabControl_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
-private: System::Void AddPacketButton_Click(System::Object^  sender, System::EventArgs^  e);
-private: System::Void DeletePacketButton_Click(System::Object^  sender, System::EventArgs^  e);
-private: System::Void SpamsPacketButton_Click(System::Object^  sender, System::EventArgs^  e);
-private: System::Void SelectPacketForEditingComboBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void SavePacketEditButton_Click(System::Object^  sender, System::EventArgs^  e);
-private: System::Void CCAttacksCheckBox_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void SPControlAddButton_Click(System::Object^  sender, System::EventArgs^  e);
-private: System::Void SPControlDeleteItem_Click(System::Object^  sender, System::EventArgs^  e);
-private: System::Void GetSPControlCoordsButton_Click(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbFusionAttack_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbNoKB_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbPerfectLoot_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbVacRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbWalkRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbJumpRight_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbMobDisarm_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbNoBG_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbJDA_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbPinTyper_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbDojangGodmode_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbUnlimitedMorph_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbFasterMobs_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbNDAllAttacks_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbNoMobs_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbUA_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbSitHack_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbSPControl_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cb50SecGM_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbLogoSkipper_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbViewSwears_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbItemVac_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbFMA_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void bStopSpamming_Click(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbScareMobs_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbFLACC_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbCPUHack_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbNFA_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbAutoAggro_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void bSaveSettings_Click(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbNDMining_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbHideDamage_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbMercedesCombo_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbSkillInjection_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbNoFadeStages_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbNoCCBlueBoxes_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void nudSkillInjectionDelay_ValueChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void ddbSkillInjectionSkills_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbMouseFly_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void cbIceGuard_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void PacketSelectBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
-private: System::Void bAutoSkill_Click(System::Object^  sender, System::EventArgs^  e);
-private: System::Void castToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-private: System::Void deleteToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-private: System::Void ddbAutoSkill_DropDown(System::Object^  sender, System::EventArgs^  e);
-private: System::Void lvAutoSkill_ItemCheck(System::Object^  sender, System::Windows::Forms::ItemCheckEventArgs^  e);
-private: System::Void tAutoAttack_Tick(System::Object^  sender, System::EventArgs^  e);
-private: System::Void tAutoLoot_Tick(System::Object^  sender, System::EventArgs^  e);
-private: System::Void tTimedCC_Tick(System::Object^  sender, System::EventArgs^  e);
+
+//General private class members
+private:
+	CMapleStory^ CMS;
+	List<SettingsEntry^>^ Settings;
+	List<CAutoSkill^>^ AutoSkills;
+	property XmlSerializer^ s;
+	XmlSerializer^ AutoSkillSerializer;
+	List<CAutoSkill^>^ LoadAutoSkill();
+	Void MainForm::SaveAutoSkill();
+	Void LoadSettings();
+	Void SaveSettings();
+	Void ReloadSettings();
+	Void RefreshSPControlListView();
+	Void RedrawStatBars();
+	Void HotKeys();
+
+//General trainer events
+private: Void MainForm_Load(Object^  sender, EventArgs^  e);
+private: Void StatsTimer_Tick(Object^  sender, EventArgs^  e);
+private: Void MainTabControl_SelectedIndexChanged(Object^  sender, EventArgs^  e);
+private: Void MainForm_FormClosing(Object^  sender, Windows::Forms::FormClosingEventArgs^  e);
+private: Void bSaveSettings_Click(Object^  sender, EventArgs^  e);
+
+//AutoBot Events
+private: Void cbAutoAttack_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void tAutoAttack_Tick(Object^  sender, EventArgs^  e);
+private: Void cbAutoLoot_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void tAutoLoot_Tick(Object^  sender, EventArgs^  e);
+private: Void cbAutoHP_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbAutoMP_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbCCPeople_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbCCTimed_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void tTimedCC_Tick(Object^  sender, EventArgs^  e);
+private: Void cbCCAttacks_CheckedChanged(Object^  sender, EventArgs^  e);
+
+//AutoSkill
+private: Void bAutoSkill_Click(Object^  sender, EventArgs^  e);
+private: Void castToolStripMenuItem_Click(Object^  sender, EventArgs^  e);
+private: Void deleteToolStripMenuItem_Click(Object^  sender, EventArgs^  e);
+private: Void ddbAutoSkill_DropDown(Object^  sender, EventArgs^  e);
+private: Void lvAutoSkill_ItemCheck(Object^  sender, Windows::Forms::ItemCheckEventArgs^  e);
+
+//SPControl
+private: Void bAddSPCLocation_Click(Object^  sender, EventArgs^  e);
+private: Void SPControlDeleteItem_Click(Object^  sender, EventArgs^  e);
+private: Void GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e);
+
+//Hacks
+private: Void cbFusionAttack_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbNoKB_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbPerfectLoot_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbVacRight_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbWalkRight_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbJumpRight_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbMobDisarm_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbNoBG_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbJDA_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbPinTyper_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbDojangGodmode_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbUnlimitedMorph_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbFasterMobs_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbNDAllAttacks_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbNoMobs_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbUA_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbSitHack_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbSPControl_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cb50SecGM_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbLogoSkipper_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbViewSwears_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbItemVac_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbFMA_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbScareMobs_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbFLACC_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbCPUHack_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbNFA_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbAutoAggro_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbNDMining_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbHideDamage_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbMercedesCombo_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbSkillInjection_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbNoFadeStages_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbNoCCBlueBoxes_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void nudSkillInjectionDelay_ValueChanged(Object^  sender, EventArgs^  e);
+private: Void ddbSkillInjectionSkills_SelectedIndexChanged(Object^  sender, EventArgs^  e);
+private: Void cbMouseFly_CheckedChanged(Object^  sender, EventArgs^  e);
+private: Void cbIceGuard_CheckedChanged(Object^  sender, EventArgs^  e);
+
+private: //PacketSender events
+	Void InitializePacketSender();
+	Void lvPackets_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
+	Void bAddPacket_Click(System::Object^  sender, System::EventArgs^  e);
+	Void bSaveChangedPacket_Click(System::Object^  sender, System::EventArgs^  e);
+	Void bSendPacket_Click(System::Object^  sender, System::EventArgs^  e);
+	Void bDeletePacket_Click(System::Object^  sender, System::EventArgs^  e);
+	Void lvPackets_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
 };
 }
-#pragma endregion

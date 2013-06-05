@@ -1,9 +1,9 @@
 #include "Packet.h"
 #include "Defines.h"
 
-void TrySendPacket(__in_bcount(nLength) LPBYTE lpBytes, __in DWORD dwLength);
+DWORD WINAPI TrySendPacket(__in_bcount(nLength) LPBYTE lpBytes, __in DWORD dwLength);
 
-CPacketData::CPacketData(String^ Name, String^ Data)
+CPacketData::CPacketData(String^ Name, List<String^>^ Data)
 {
 	this->Name = Name;
 	this->Data = Data;
@@ -47,10 +47,14 @@ void CPackets::Save()
 	writer->Close();
 }
 
-void CPackets::Add(String^ name, String^ data)
+void CPackets::Add(String^ name, List<String^>^ data)
 {
-	this->Packets->Add(gcnew CPacketData(name, data));
-	this->Save();
+	Add(gcnew CPacketData(name, data));
+}
+void CPackets::Add(CPacketData^ Packet)
+{
+	Packets->Add(Packet);
+	Save();
 }
 
 void CPackets::Delete(int i)
@@ -58,15 +62,16 @@ void CPackets::Delete(int i)
 	this->Packets->RemoveAt(i);
 }
 
-void CPackets::Edit(int i, String^ name, String^ data)
+void CPackets::Edit(int i, String^ name, List<String^>^ data)
 {
 	this->Packets[i]->Name = name;
 	this->Packets[i]->Data = data;
 	this->Save();
 }
 
-bool CPackets::isGoodPacket(String^ strPacket, String^&strError)
+bool CPackets::VerifyPacket(String^ str, String^&strError)
 {
+	String^ strPacket = str->Replace(" ", "");
     if(strPacket == String::Empty)
 	{
         strError = "Packet is Empty";
@@ -85,21 +90,17 @@ bool CPackets::isGoodPacket(String^ strPacket, String^&strError)
         if (strPacket[i] >= 'A' && strPacket[i] <= 'F') continue;
         if (strPacket[i] == '*') continue;
  
-        strError = "Invalid character detected in packet" + strPacket[i];
+        strError = "Invalid character detected in packet: It contains a \"" + strPacket[i] + "\"";
    
         return false;
     }
     return true;
 }
 
-bool CPackets::Send(String^ packet, String^&strError)
-{	
-	String^strPacket = packet->Replace(" ", "");
-
-    if(!isGoodPacket(strPacket, strError))
-        return false;
-
-    Random^ randObj = gcnew Random();
+bool CPackets::Send(String^ str, String^&strError)
+{
+	String^ strPacket = str->Replace(" ", "");
+	Random^ randObj = gcnew Random();
     String^ rawBytes = String::Empty;
  
     for(int i = 0; i < strPacket->Length; i++)
@@ -115,23 +116,16 @@ bool CPackets::Send(String^ packet, String^&strError)
     for ( int i = 0; ( dwOffset < dwLength ) && ( ( i + 1 ) < rawBytes->Length ); dwOffset++, i += 2 )
         lpBytes[dwOffset] = Byte::Parse(rawBytes->Substring(i, 2), Globalization::NumberStyles::HexNumber, Globalization::CultureInfo::InvariantCulture);
  
-    try
-	{
-		TrySendPacket(lpBytes, dwLength);
-	} 
-	catch(Exception^ ex)
-	{
-		ShowNotifyIcon(ex->Message);
-	} 
-	finally {delete [] lpBytes;}
+	TrySendPacket(lpBytes, dwLength);
+	delete [] lpBytes;
     return true;
 }
 
 bool CPackets::Send(CPacketData^ packet)
 {
 	String^ strError = String::Empty;
-	bool succes = Send(packet->Data, strError);
-	if(!succes) ShowError(strError);
+	bool succes;
+	for each(String^ packet in packet->Data) if(!Send(packet, strError)) succes = false;
 	return succes;
 }
 
@@ -147,7 +141,6 @@ bool CPackets::Send()
 
 void CPackets::StartSpamming(int times, int delay)
 {
-	if(!Send()) return;
 	if(delay == 0)
 	{
 		for(int i = 0; i < times; i++) Send();
