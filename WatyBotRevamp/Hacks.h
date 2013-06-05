@@ -39,7 +39,7 @@ namespace Hacks
 
 		blockDMG:
 		add [iIceGuardCounter], 1
-		ret 0x0028
+		ret 0x002C
 	}
 	EndCodeCave
 	CMemory cmIceGuard(IceGuardAddy, CaveIceGuard, 2, true);
@@ -153,6 +153,7 @@ namespace Hacks
 	DWORD dwItemVacCall = ItemVacCall;
 	int itemvac_x = 0;
 	int itemvac_y = 0;
+	gcroot<CMapleStory^> CMS;
 	VOID WINAPI getItemVacCoords()
 	{
 		itemvac_x = CMS->CharX;
