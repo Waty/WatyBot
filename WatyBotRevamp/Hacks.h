@@ -224,7 +224,7 @@ namespace Hacks
  
 	/////Disable Final Attack Luna
 	BYTE bDFA[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
-	CMemory cmDFA(DFAAddy, bDFA, 7);
+	//CMemory cmDFA(DFAAddy, bDFA, 7);
  
 	/////ND Mining
 	BYTE bNDMining1[] = {0x90, 0x90};
@@ -233,11 +233,13 @@ namespace Hacks
 	CMemory cmNDMining(NDMiningAddy1, bNDMining1, 2, NDMiningAddy2, bNDMining2, 1, NDMiningAddy3, bNDMining3, 2);
  
 	/////Hide Damage
-	BYTE bHideDamage1[] = {0x90, 0xE9};
-	BYTE bHideDamage2[] = {0x90, 0x90};
-	BYTE bHideDamage3[] = {0x90, 0xE9};
-	BYTE bHideDamage4[] = {0xC2, 0x20, 0x00, 0xE9, 0x56, 0x8B, 0xB5, 0x6C};
-	CMemory cmHideDamage(HideDamageAddy1, bHideDamage1, 2, HideDamageAddy2, bHideDamage2, 2, HideDamageAddy3, bHideDamage3, 2, HideDamageAddy4, bHideDamage4, 8);
+	BYTE bHideDamage1[] = {0x00};
+	BYTE bHideDamage2[] = {0x90, 0xE9};
+	BYTE bHideDamage3[] = {0xEB};
+	BYTE bHideDamage4[] = {0xEB};
+	BYTE bHideDamage5[] = {0xEB};
+	CMemory cmHideDamage1(HideDamageAddy1, bHideDamage1, 1, HideDamageAddy2, bHideDamage2, 2, HideDamageAddy3, bHideDamage3, 1, HideDamageAddy4, bHideDamage4, 1);
+	CMemory cmHideDamage2(HideDamageAddy5, bHideDamage5, 1);
  
 	/////Mercedes Combos without comboing
 	BYTE bMercedesCombo[] = {0xEB};
@@ -246,7 +248,7 @@ namespace Hacks
 	/////SkillInjection Disable Checks
 	BYTE bSkillInjection1[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
 	BYTE bSkillInjection3[] = {0xEB, 0x12};
-	CMemory cmSkillInjectionChecks(SkillInjectionChecksAddy1, bSkillInjection1, 6, SkillInjectionChecksAddy2, bSkillInjection1, 6, SkillInjectionChecksAddy3, bSkillInjection3, 2);
+	//CMemory cmSkillInjectionChecks(SkillInjectionChecksAddy1, bSkillInjection1, 6, SkillInjectionChecksAddy2, bSkillInjection1, 6, SkillInjectionChecksAddy3, bSkillInjection3, 2);
  
 	/////SkillInjection Set Skill ID
 	DWORD dwSkillInjectionRet = SkillInjectionInjectAddy + 6;
@@ -279,13 +281,13 @@ namespace Hacks
 
 	/////No Fadestarge
 	BYTE bNoFadeStages[] = {0xc2, 0x04, 0x00};
-	CMemory cmNoFadeStages(Fadeaddy1, bNoFadeStages, 3, Fadeaddy2, bNoFadeStages, 3);
+//	CMemory cmNoFadeStages(Fadeaddy1, bNoFadeStages, 3, Fadeaddy2, bNoFadeStages, 3);
 
 	/////No CC BLue Boxes
 	BYTE bNoCCBoxes[] = {0x90, 0x90, 0x90, 0x90, 0x90};
 	CMemory cmNoCCBoxes(NoCCBoxesAddy1, bNoCCBoxes, 5, NoCCBoxesAddy2, bNoCCBoxes, 5);
 	
-	////SS Mouse Click Fly
+	////SS Mouse Fly
 	DWORD dwMouseFlyRet = MouseFlyAddy + 5;
 	DWORD dwMouseFlyCall1 = MouseFlyCall1;
 	DWORD dwMouseFlyCall2 = MouseFlyCall2;
@@ -295,10 +297,10 @@ namespace Hacks
 		call dwMouseFlyCall1
 		pushad
 		//looking for the mouse click
-		mov ebx, [MouseBasePtr]
-		mov ebx, [ebx]
-		cmp dword ptr[ebx+MouseAniOffset], 0x0C
-		jne FlyExit
+		//mov ebx, [MouseBasePtr]
+		//mov ebx, [ebx]
+		//cmp dword ptr[ebx+MouseAniOffset], 0x0C
+		//jne FlyExit
 
 		//get mouselocation
 		mov ebx,[ebx+MouseLocOffset]
@@ -316,7 +318,7 @@ namespace Hacks
 		push 00000001 //Probably dont need all the proceeding 0's but wthell
 		call dwMouseFlyCall2
 
-		FlyExit:
+		//FlyExit:
 		popad
 		jmp dwMouseFlyRet
 
@@ -327,7 +329,6 @@ namespace Hacks
 	////Auto ExitCS Script
 	DWORD dwExitCSRet = ExitCSAddy + 9;
 	DWORD dwExitCSCall = ExitCSCall;
-
 	CodeCave(ExitCS)
 	{
 		mov fs:[00000000],ecx

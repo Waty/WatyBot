@@ -88,7 +88,8 @@ void MainForm::cb50SecGM_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 void MainForm::cbLogoSkipper_CheckedChanged(Object^  sender, EventArgs^  e)
 {
-	cbLogoSkipper->Checked = Hacks::cmLogoSkipper.Enable(cbLogoSkipper->Checked);
+	cbLogoSkipper->Checked = false; //Hacks::cmLogoSkipper.Enable(cbLogoSkipper->Checked);
+	ShowNotifyIcon("Not updated yet :-(");
 }
 void MainForm::cbViewSwears_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -123,7 +124,8 @@ void MainForm::cbUA_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 void MainForm::cbNFA_CheckedChanged(Object^  sender, EventArgs^  e)
 {
-	cbNFA->Checked = Hacks::cmDFA.Enable(cbNFA->Checked);
+	ShowNotifyIcon("Not Updated Yet :-(");
+	//cbNFA->Checked = Hacks::cmDFA.Enable(cbNFA->Checked);
 }
 void MainForm::cbNDMining_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -131,7 +133,8 @@ void MainForm::cbNDMining_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 void MainForm::cbHideDamage_CheckedChanged(Object^  sender, EventArgs^  e)
 {
-	cbHideDamage->Checked = Hacks::cmHideDamage.Enable(cbHideDamage->Checked);
+	cbHideDamage->Checked = Hacks::cmHideDamage1.Enable(cbHideDamage->Checked);
+	cbHideDamage->Checked = Hacks::cmHideDamage1.Enable(cbHideDamage->Checked);
 }
 void MainForm::cbMercedesCombo_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -139,7 +142,8 @@ void MainForm::cbMercedesCombo_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 void MainForm::cbNoFadeStages_CheckedChanged(Object^  sender, EventArgs^  e)
 {
-	cbNoFadeStages->Checked = Hacks::cmNoFadeStages.Enable(cbNoFadeStages->Checked);
+	ShowNotifyIcon("Not Updated Yet :-(");
+	//cbNoFadeStages->Checked = Hacks::cmNoFadeStages.Enable(cbNoFadeStages->Checked);
 }
 void MainForm::cbMouseFly_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -147,7 +151,8 @@ void MainForm::cbMouseFly_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 void MainForm::cbSkillInjection_CheckedChanged(Object^  sender, EventArgs^  e)
 {
-	if(ddbSkillInjection->SelectedIndex < 0)
+	ShowNotifyIcon("Patched :-(");
+	/*if(ddbSkillInjection->SelectedIndex < 0)
 	{
 		if(cbSkillInjection->Checked)
 		{
@@ -166,7 +171,7 @@ void MainForm::cbSkillInjection_CheckedChanged(Object^  sender, EventArgs^  e)
 		cbSkillInjection->Checked = Hacks::cmSkillInjectionCave.Enable(cbSkillInjection->Checked);
 		cbNoCCBlueBoxes->Checked = cbSkillInjection->Checked;
 		cbNoCCBlueBoxes->Enabled = !cbSkillInjection->Checked;
-	}
+	}*/
 }
 void MainForm::nudSkillInjectionDelay_ValueChanged(Object^  sender, EventArgs^  e)
 {

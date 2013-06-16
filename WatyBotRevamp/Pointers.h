@@ -58,4 +58,4 @@
 #define KBYOffset (KBOffset + 0x14)
 //Outdated end
 
-#define MSCRCAddy 0x00EAE7C2
+#define MSCRCAddy 0x00EAE9E2

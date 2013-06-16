@@ -40,6 +40,8 @@ Void CAutoSkill::Cast()
 
 Void CAutoSkill::CastBackground(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
+		//ShowNotifyIcon("Test");
+
 	if(!CMS->InGame) return;
 
 	if(keyIndex < KeyCodesSize)
@@ -52,5 +54,6 @@ Void CAutoSkill::CastBackground(System::Object^ sender, System::ComponentModel::
 		Sleep(500);
 		CMS->UsingAutoSkill = false;		
 	}
+		
 	else CPacket->Send(CPacket->Packets[keyIndex - KeyCodesSize]);
 }

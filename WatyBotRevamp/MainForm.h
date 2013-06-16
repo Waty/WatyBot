@@ -1062,7 +1062,6 @@ private:
 			// cbMouseFly
 			// 
 			this->cbMouseFly->AutoSize = true;
-			this->cbMouseFly->Enabled = false;
 			this->cbMouseFly->Location = System::Drawing::Point(159, 107);
 			this->cbMouseFly->Name = L"cbMouseFly";
 			this->cbMouseFly->Size = System::Drawing::Size(74, 17);

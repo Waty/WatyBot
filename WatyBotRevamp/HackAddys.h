@@ -1,67 +1,68 @@
-#define DojangAddy 0xCBFB84 
-#define DojangCall 0xD93FE0
-#define IceGuardAddy 0xD15860
-#define IceGuardPush 0xF8FFDB
-#define AggroAddy 0xDA2956
-#define AggroCall 0xD99DD0
-#define PinTyperAddy1 0x6EB8A6
-#define PinTyperAddy2 0x6ECF87
-#define FusionAddy 0x774C04
-#define PerfectLootAddy1 0x4C2527
-#define PerfectLootAddy2 0x55BD15
-#define PerfectLootAddy3 0x445B79
-#define NoBGAddy1 0x718E12
-#define NoBGAddy2 0x71771B
-#define FasterMobsAddy 0x79C253
-#define UnlimitedMorphAddy1 0xD33267
-#define UnlimitedMorphAddy2 0xD33C18
-#define NDAllAttacksAddy 0xCF4F53
-#define JDAAddy1 0xCCECE7
-#define JDAAddy2 0xCCED24
-#define JDAAddy3 0xCCED42
-#define MobDisarmAddy 0x77206A
-#define NoMobsAddy 0x81605F
-#define AirLootAddy 0x55CF09
-#define VacRightAddy 0xD93DD0
-#define WalkRightAddy 0xD9F7BB
-#define JumpRightAddy 0xD9FCBF
-#define NoKBAddy 0x925A8B
-#define SitHackAddy 0xCC4C11
-#define SPControlAddy 0xCEDFEA
-#define SPCChecksAddy 0xCEDFF7
-#define Godmode50SecAddy1 0xD1763F
-#define Godmode50SecAddy2 0xD1765A
-#define LogoSkipperAddy 0x01176BB0
-#define ItemVacAddy 0x7389C4
-#define ItemVacCall 0x74CF60
-#define ViewSwearsAddy 0x921CBB
-#define FMAAddy 0x774BF4
-#define ScareMobsAddy 0x772B6F
-#define FLACC 0xD93F4A
-#define CPUAddy1 0x696EA1
-#define CPUAddy2 0x718E12
-#define CPUAddy3 0x71DA89
-#define UAAddy 0x4E8F6F
-#define DFAAddy 0x85E1B2
-#define NDMiningAddy1 0xCCBD52
-#define NDMiningAddy2 0xCCBE2B
-#define NDMiningAddy3 0xCDE287
-#define HideDamageAddy1 0xC96EF3
-#define HideDamageAddy2 0x76BE5B
-#define HideDamageAddy3 0x76BE61
-#define HideDamageAddy4 0x7499B0
-#define MercedesComboAddy 0x5CB93A
-#define SkillInjectionChecksAddy1 0xD28CD4
-#define SkillInjectionChecksAddy2 0xD28D1F
-#define SkillInjectionChecksAddy3 0xD28DC0
-#define SkillInjectionInjectAddy 0xD28D25
-#define CCAddy 0x5ADDF0
-												#define ExitCSAddy 0x82A2B1
-												#define ExitCSCall 0x5F31D0
-												#define NoCCBoxesAddy1 0x5688D4
-												#define NoCCBoxesAddy2 0x56D780
-#define Fadeaddy1 0x8B6230
-#define Fadeaddy2 0x8B66E0
-#define MouseFlyAddy 0xD12669
-#define MouseFlyCall1 0xD51E50
-#define MouseFlyCall2 0x74CF60
+#define DojangAddy 0xCBF094 //8B 01 8B 50 ? ff d2 8b 88 ? ? ? ? 51 - 6TH Result
+#define DojangCall 0x4430C0
+#define IceGuardAddy 0xD14DB0
+#define IceGuardPush 0xF9014B //The push 1 line below the Addy
+#define AggroAddy 0xDA2246
+#define AggroCall 0xD996D0
+#define PinTyperAddy1 0x6ECC06
+#define PinTyperAddy2 0x6EE2E7
+#define FusionAddy 0x7759B4
+#define PerfectLootAddy1 0x4C2787
+#define PerfectLootAddy2 0x55C675
+#define PerfectLootAddy3 0x4462C9
+#define NoBGAddy1 0x71A1E2
+#define NoBGAddy2 0x718AEB
+#define FasterMobsAddy 0x79CEB3
+#define UnlimitedMorphAddy1 0xD327C7
+#define UnlimitedMorphAddy2 0xD33178
+#define NDAllAttacksAddy 0xCF44A3
+#define JDAAddy1 0xCCE067
+#define JDAAddy2 0xCCE0A4
+#define JDAAddy3 0xCD67E4
+#define MobDisarmAddy 0x772D5A
+#define NoMobsAddy 0x816AAF
+#define AirLootAddy 0x55D809
+#define VacRightAddy 0xD933D0
+#define WalkRightAddy 0xD9F0AB
+#define JumpRightAddy 0xD9F5AF
+#define NoKBAddy 0x9259CB
+#define SitHackAddy 0xCC4051
+#define SPControlAddy 0xCED53A
+#define SPCChecksAddy 0xCED547
+#define Godmode50SecAddy1 0xD16B8F
+#define Godmode50SecAddy2 0xD16BAA
+#define LogoSkipperAddy 0x700460
+#define ItemVacAddy 0x739E44 //e8 ? ? ? ? 8b c8 8b 44 24 ? 89 38  -7th Result
+#define ItemVacCall 0x4216B0
+#define ViewSwearsAddy 0x921BFB
+#define FMAAddy 0x7759A4
+#define ScareMobsAddy 0x77385F
+#define FLACC 0xD9354A
+#define CPUAddy1 0x698421
+#define CPUAddy2 0x71A1E2
+#define CPUAddy3 0x71EE59
+#define UAAddy 0x4E99CF  //89 38 5F 89 48 04 5E C2 ? ? CC - 3rd result
+#define DFAAddy 0xERROR
+#define NDMiningAddy1 0xCCB112
+#define NDMiningAddy2 0xCCB1EB
+#define NDMiningAddy3 0xCDD607
+#define HideDamageAddy1 0x46A390
+#define HideDamageAddy2 0x75331B
+#define HideDamageAddy3 0x74AA1A
+#define HideDamageAddy4 0x74AA27
+#define HideDamageAddy5 0x74AA42
+#define MercedesComboAddy 0x5CC92A
+#define SkillInjectionChecksAddy1 0xD28234
+#define SkillInjectionChecksAddy2 0xD2827F
+#define SkillInjectionChecksAddy3 0xERROR
+#define SkillInjectionInjectAddy 0xD28285
+#define CCAddy 0x5AE8F0
+#define ExitCSAddy 0x93C5E9 //75 15 57 FF 15 ? ? ? ? 3B F3 74 0A 8B 16 8B 02 6A 01 8B CE FF d0 8b 4c 24 ? 64 89 0D 00 00 00 00 -4th Result MemoryView below: mov fs:[00000000],ecx
+#define ExitCSCall 0xFF1084 //See ExitCSAddy
+#define NoCCBoxesAddy1 0x5AE9C4
+#define NoCCBoxesAddy2 0x5B2DA6
+#define FadeAddy1 0xERROR //6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53 55 56 57 A1 ? ? ? ? 33 C4 50 8D 44 24 ? 64 A3 ? ? ? ? A1 ? ? ? ? - 4h result
+#define FadeAddy2 0xERROR //6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53 55 56 57 A1 ? ? ? ? 33 C4 50 8D 84 24 ? ? ? ? 64 A3 ? ? ? ? A1 ? ? ? ? 85 C0
+#define MouseFlyAddy 0xD11BB9
+#define MouseFlyCall1 0xD51390 //Opcode
+#define MouseFlyCall2 0x421180

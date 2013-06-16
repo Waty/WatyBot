@@ -197,7 +197,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="..\..\..\..\AppData\Roaming\Waty\AOBs.xml">
+    <Xml Include="..\WatyBotUpdater\AOBs.xml">
       <SubType>Designer</SubType>
     </Xml>
   </ItemGroup>

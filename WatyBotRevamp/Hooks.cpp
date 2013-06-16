@@ -1,6 +1,6 @@
 #include <Windows.h>
 #include "HackAddys.h"
-
+//all outdated from 90
 #define FakeThreadID __writefsdword(dwRealThreadIdOffset, DecryptData(pLastThreadId))
 
 struct SKILLENTRY
@@ -31,7 +31,7 @@ static const pfnSendPacket SendPacket = reinterpret_cast<pfnSendPacket>(0x004D70
 static const PVOID pReturnAddress = reinterpret_cast<const PVOID>(0x004A4C0C);
 
 //Fake the ThreadID
-static const pfnDecryptData DecryptData = reinterpret_cast<pfnDecryptData>(0x0040A5C0);
+static const pfnDecryptData DecryptData = reinterpret_cast<pfnDecryptData>(0x473640);
 static const PVOID pLastThreadId = reinterpret_cast<const PVOID>(0x0144C640);
 static const DWORD dwRealThreadIdOffset = 0x000006B8;
 
