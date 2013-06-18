@@ -26,3 +26,8 @@ extern void Main(void);
 	}
 	return TRUE;
 }
+
+BOOL WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCommandLine,int nCmdShow)
+{
+	Main();
+}
