@@ -72,7 +72,6 @@ HWND CMapleStory::FindProcessWindow()
 
 void CMapleStory::SendKey(int Key)
 {
-	ShowNotifyIcon("Sending Message");
 	PostMessage(MSHWND, WM_KEYDOWN, Key, (MapVirtualKey(Key, 0) << 16) + 1);
 }
 
