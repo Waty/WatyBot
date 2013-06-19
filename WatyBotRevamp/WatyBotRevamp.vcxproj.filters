@@ -107,9 +107,6 @@
     <ClInclude Include="AutoSkill.h">
       <Filter>Classes\CAutoSkill</Filter>
     </ClInclude>
-    <ClInclude Include="Addys.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
     <ClInclude Include="StopWatch.h">
       <Filter>Source Files</Filter>
     </ClInclude>

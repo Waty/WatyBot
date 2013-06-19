@@ -176,7 +176,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Addys.h" />
     <ClInclude Include="AutoSkill.h" />
     <ClInclude Include="ChangeChannel.h" />
     <ClInclude Include="Defines.h" />

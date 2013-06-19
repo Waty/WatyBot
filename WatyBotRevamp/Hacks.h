@@ -98,8 +98,9 @@ namespace Hacks
 	CMemory cmUnlimitedMorph(UnlimitedMorphAddy1, bMorph1, 2, UnlimitedMorphAddy2, bMorph2, 1);
  
 	/////ND - All Attacks
-	BYTE bNDAllAttacks[] = {0x74};
-	CMemory cmNDAllAttacks(NDAllAttacksAddy, bNDAllAttacks, 1);
+	BYTE bgND1[] = {0x74};
+	BYTE bgND2[] = {0x00};
+	CMemory cmNDAllAttacks(gNDAddy1, bgND1, 1, gNDAddy2, bgND2, 1);
  
 	/////Jump Down Anywhere
 	BYTE bJDA1[] = {0xEB};
