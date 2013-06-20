@@ -1,7 +1,9 @@
 #include <Windows.h>
+#include <tlhelp32.h>
+#include <stdexcept>
+#include <memory>
 #include "HackAddys.h"
 //all outdated from 90
-#define FakeThreadID __writefsdword(dwRealThreadIdOffset, DecryptData(pLastThreadId))
 
 struct SKILLENTRY
 {
@@ -32,8 +34,8 @@ static const PVOID pReturnAddress = reinterpret_cast<const PVOID>(0x004A4C0C);
 
 //Fake the ThreadID
 static const pfnDecryptData DecryptData = reinterpret_cast<pfnDecryptData>(0x473640);
-static const PVOID pLastThreadId = reinterpret_cast<const PVOID>(0x0144C640);
-static const DWORD dwRealThreadIdOffset = 0x000006B8;
+static const PVOID pLastThreadId = reinterpret_cast<const PVOID>(0x1483767);
+static const DWORD dwRealThreadIdOffset = 0x06B8;
 
 //NDFA/SkillInjection Hooks
 typedef void (__fastcall* CUserLocal__TryDoingFinalAttack_t)(void* lpvEcx, void* lpvEdx);//0F 84 ? ? 00 00 2B AE (start)
@@ -47,6 +49,27 @@ void* const CSkillInfo = reinterpret_cast<void* const>(0x011D7F68); //8B 3D ? ? 
 typedef void (__stdcall* CField__SendTransferChannelRequest_t)(unsigned char nChannel);
 auto CField_SendTransferChannelRequest = reinterpret_cast<CField__SendTransferChannelRequest_t>(CCAddy);
 
+DWORD GetMainThreadId()
+{
+	const std::shared_ptr<void> hThreadSnapshot(CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0), CloseHandle);
+	if (hThreadSnapshot.get() == INVALID_HANDLE_VALUE)
+        throw std::runtime_error("GetMainThreadId failed");
+    
+    THREADENTRY32 tEntry;
+    tEntry.dwSize = sizeof(THREADENTRY32);
+    DWORD result = 0;
+    DWORD currentPID = GetCurrentProcessId();
+    for (BOOL success = Thread32First(hThreadSnapshot.get(), &tEntry);
+        !result && success && GetLastError() != ERROR_NO_MORE_FILES;
+        success = Thread32Next(hThreadSnapshot.get(), &tEntry))
+    {
+        if (tEntry.th32OwnerProcessID == currentPID) {
+            result = tEntry.th32ThreadID;
+        }
+    }
+    return result;
+}
+#define FakeThreadID __writefsdword(dwRealThreadIdOffset, GetMainThreadId())
 void WINAPI _InjectPacket(COutPacket *pPacket)
 {
 	FakeThreadID;

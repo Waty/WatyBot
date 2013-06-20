@@ -51,7 +51,7 @@ namespace Hacks
 	{
 		call dwAggroCall
 		mov edx,dword ptr ds:[CharBasePtr]
-		mov edx,[edx+pIDOffset]
+		mov edx,[edx+CharpIDOffset]
 		mov edx,[edx+0x0C]
 		mov [esi+0x2B0],edx
 		jmp dwAggroRet
@@ -147,7 +147,7 @@ namespace Hacks
  
 	/////Logo Skipper
 	DWORD dwLogoSkipper = LogoSkipperAddy;
-	BYTE bLogoSkipper[] = {0x70, 0xD3};
+	BYTE bLogoSkipper[] = {0x50, 0xD2};
 	CMemory cmLogoSkipper(dwLogoSkipper, bLogoSkipper, 2);
  
 	/////(semi) Item Vac
@@ -225,7 +225,7 @@ namespace Hacks
  
 	/////Disable Final Attack Luna
 	BYTE bDFA[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
-	//CMemory cmDFA(DFAAddy, bDFA, 7);
+	CMemory cmDFA(DFAAddy, bDFA, 7);
  
 	/////ND Mining
 	BYTE bNDMining1[] = {0x90, 0x90};
@@ -246,6 +246,7 @@ namespace Hacks
 	BYTE bMercedesCombo[] = {0xEB};
 	CMemory cmMercedesCombo(MercedesComboAddy, bMercedesCombo, 1);
  
+	/* Patched ?
 	/////SkillInjection Disable Checks
 	BYTE bSkillInjection1[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
 	BYTE bSkillInjection3[] = {0xEB, 0x12};
@@ -279,10 +280,11 @@ namespace Hacks
 	}
 	EndCodeCave
 	CMemory cmSkillInjectionCave(SkillInjectionInjectAddy, CaveSkillInjection, 1, true);
+	*/
 
 	/////No Fadestarge
 	BYTE bNoFadeStages[] = {0xc2, 0x04, 0x00};
-//	CMemory cmNoFadeStages(Fadeaddy1, bNoFadeStages, 3, Fadeaddy2, bNoFadeStages, 3);
+	CMemory cmNoFadeStages(FadeAddy1, bNoFadeStages, 3, FadeAddy2, bNoFadeStages, 3);
 
 	/////No CC BLue Boxes
 	BYTE bNoCCBoxes[] = {0x90, 0x90, 0x90, 0x90, 0x90};

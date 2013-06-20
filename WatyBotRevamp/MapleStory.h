@@ -118,7 +118,7 @@ public:
 	{
 		int get()
 		{
-			return (int) ReadPointer(CharBasePtr, pIDOffset);
+			return (int) ReadPointer(CharBasePtr, CharpIDOffset);
 		}
 	}
 	property int KnockBack

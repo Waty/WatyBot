@@ -88,8 +88,7 @@ void MainForm::cb50SecGM_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 void MainForm::cbLogoSkipper_CheckedChanged(Object^  sender, EventArgs^  e)
 {
-	cbLogoSkipper->Checked = false; //Hacks::cmLogoSkipper.Enable(cbLogoSkipper->Checked);
-	ShowNotifyIcon("Not updated yet :-(");
+	cbLogoSkipper->Checked = Hacks::cmLogoSkipper.Enable(cbLogoSkipper->Checked);
 }
 void MainForm::cbViewSwears_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -124,8 +123,7 @@ void MainForm::cbUA_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 void MainForm::cbNFA_CheckedChanged(Object^  sender, EventArgs^  e)
 {
-	ShowNotifyIcon("Not Updated Yet :-(");
-	//cbNFA->Checked = Hacks::cmDFA.Enable(cbNFA->Checked);
+	cbNFA->Checked = Hacks::cmDFA.Enable(cbNFA->Checked);
 }
 void MainForm::cbNDMining_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -142,8 +140,7 @@ void MainForm::cbMercedesCombo_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 void MainForm::cbNoFadeStages_CheckedChanged(Object^  sender, EventArgs^  e)
 {
-	ShowNotifyIcon("Not Updated Yet :-(");
-	//cbNoFadeStages->Checked = Hacks::cmNoFadeStages.Enable(cbNoFadeStages->Checked);
+	cbNoFadeStages->Checked = Hacks::cmNoFadeStages.Enable(cbNoFadeStages->Checked);
 }
 void MainForm::cbMouseFly_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -151,8 +148,8 @@ void MainForm::cbMouseFly_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 void MainForm::cbSkillInjection_CheckedChanged(Object^  sender, EventArgs^  e)
 {
-	ShowNotifyIcon("Patched :-(");
-	/*if(ddbSkillInjection->SelectedIndex < 0)
+	/* Patched :(
+	if(ddbSkillInjection->SelectedIndex < 0)
 	{
 		if(cbSkillInjection->Checked)
 		{
@@ -171,7 +168,8 @@ void MainForm::cbSkillInjection_CheckedChanged(Object^  sender, EventArgs^  e)
 		cbSkillInjection->Checked = Hacks::cmSkillInjectionCave.Enable(cbSkillInjection->Checked);
 		cbNoCCBlueBoxes->Checked = cbSkillInjection->Checked;
 		cbNoCCBlueBoxes->Enabled = !cbSkillInjection->Checked;
-	}*/
+	}
+	*/
 }
 void MainForm::nudSkillInjectionDelay_ValueChanged(Object^  sender, EventArgs^  e)
 {
@@ -179,7 +177,8 @@ void MainForm::nudSkillInjectionDelay_ValueChanged(Object^  sender, EventArgs^  
 }
 void MainForm::ddbSkillInjectionSkills_SelectedIndexChanged(Object^  sender, EventArgs^  e)
 {
-	Hacks::iSkillInjectionSkillID = SkillInjectionSkills[ddbSkillInjection->SelectedIndex];
+	//Patched
+	//Hacks::iSkillInjectionSkillID = SkillInjectionSkills[ddbSkillInjection->SelectedIndex];
 }
 void MainForm::cbNoCCBlueBoxes_CheckedChanged(Object^  sender, EventArgs^  e)
 {
