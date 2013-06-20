@@ -346,7 +346,7 @@ namespace Hacks
 	
 	//PacketSender Fix
 	DWORD dwMainThreadID = 0;
-	DWORD CClientSocket__SendPacketRet = CClientSocket__SendPacket + 5;
+	DWORD SendPacketRet = SendPacketAddy + 5;
 	CodeCave(FixPacketSender)
 	{
 		cmp [dwMainThreadID],0
@@ -371,8 +371,8 @@ namespace Hacks
 		push ebp
 		mov ebp,esp
 		push 0xFF
-		jmp CClientSocket__SendPacketRet
+		jmp SendPacketRet
 	}
 	EndCodeCave
-	CMemory cmPacketSenderFix(CClientSocket__SendPacket, CaveFixPacketSender, 0, true);
+	CMemory cmPacketSenderFix(SendPacketAddy, CaveFixPacketSender, 0, true);
 }

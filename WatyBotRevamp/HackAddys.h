@@ -63,4 +63,4 @@
 #define MouseFlyAddy 0xD11B39
 #define MouseFlyCall1 0xD51480 //Opcode
 #define MouseFlyCall2 0x406E40
-#define CClientSocket__SendPacket 0x4D7070
+#define SendPacketAddy 0x4D7070
