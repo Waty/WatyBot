@@ -53,13 +53,16 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 		lvAddys->BeginUpdate();
 		for each(Address^ address in Addresses)
 		{
-			char* aob = (char*) marshal_as<string>(address->AOB).c_str();
-			FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
+			if(address->AOB != "ERROR")
+			{
+				char* aob = (char*) marshal_as<string>(address->AOB).c_str();
+				FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
+			}
 
 			String^ Name = address->Name;
-			String^ Addy = String::Empty;
+			String^ Addy = " 0xERROR";
 			if(pf.dwResult) Addy = " 0x" + pf.dwResult.ToString("X");
-			else Addy = " 0xERROR";
+
 			String^ Comment = String::Empty;
 			if(address->Comment) Comment = " //" + address->Comment;
 
@@ -70,7 +73,10 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 			if(!pf.dwResult)
 			{
 				lvItem->UseItemStyleForSubItems = false;
-				lvItem->SubItems[1]->BackColor = Color::Red;
+				if(address->Comment == String::Empty)
+					lvItem->SubItems[1]->BackColor = Color::Red;
+				else
+					lvItem->SubItems[1]->BackColor = Color::Orange;
 			}
 			lvAddys->Items->Add(lvItem);
 
