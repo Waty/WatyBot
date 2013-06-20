@@ -85,6 +85,7 @@ bool CMemory::Enable(bool enable)
 		notifyIcon->ShowBalloonTip(1000, L"WatyBot", L"Error in enabling the hack: No MSCRC bypass installed", ToolTipIcon::Error);
 		return false;
 	}
+	else if(Enabled == enable) return false;
 	else
 	{
 		enable ? this->WriteMem() : this->RestoreMem();
@@ -115,7 +116,6 @@ void CMemory::JumpCall(void* destination, SIZE_T ulNops)
 }
 void CMemory::WriteMem()
 {
-	if(Enabled) return;
 	if(this->Type == cType::asmtype)
 	{
 		//VirtualProtect start

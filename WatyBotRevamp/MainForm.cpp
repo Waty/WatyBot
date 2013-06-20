@@ -684,8 +684,12 @@ Void MainForm::LoadSettings()
 				Sleep(100);
 				i++;
 			}
-			cbPinTyper->Checked = (bool)				Settings[PinTyper]->Value;
-			cbLogoSkipper->Checked = (bool)				Settings[LogoSkipper]->Value;
+			if(CMS->GotMSCRC)
+			{
+				cbPinTyper->Checked = (bool)				Settings[PinTyper]->Value;
+				cbLogoSkipper->Checked = (bool)				Settings[LogoSkipper]->Value;
+				Hacks::cmPacketSenderFix.Enable(true);
+			}
 		}
 		catch(Exception^)
 		{

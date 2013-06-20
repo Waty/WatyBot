@@ -343,4 +343,36 @@ namespace Hacks
 	}
 	EndCodeCave
 	CMemory cmExitCS(ExitCSAddy, CaveExitCS, 2, true);
+	
+	//PacketSender Fix
+	DWORD dwMainThreadID = 0;
+	DWORD CClientSocket__SendPacketRet = CClientSocket__SendPacket + 5;
+	CodeCave(FixPacketSender)
+	{
+		cmp [dwMainThreadID],0
+		jnz alreadyKnowMainThreadID
+		push eax
+		mov eax,  fs:[0x18]
+		mov eax, [eax+0x6B8]
+		mov [dwMainThreadID], eax
+		pop eax
+
+		alreadyKnowMainThreadID:
+		push eax
+		mov eax,  fs:[0x18]
+		mov eax, [eax+0x6B8]
+		cmp [dwMainThreadID], eax
+		jz  Continue
+		mov eax, [dwMainThreadID]
+		mov fs:[0x6B8], eax
+		Continue: //Do the original shit
+		pop eax
+
+		push ebp
+		mov ebp,esp
+		push 0xFF
+		jmp CClientSocket__SendPacketRet
+	}
+	EndCodeCave
+	CMemory cmPacketSenderFix(CClientSocket__SendPacket, CaveFixPacketSender, 0, true);
 }
