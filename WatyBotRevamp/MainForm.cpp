@@ -133,7 +133,7 @@ void MainForm::cbNDMining_CheckedChanged(Object^  sender, EventArgs^  e)
 void MainForm::cbHideDamage_CheckedChanged(Object^  sender, EventArgs^  e)
 {
 	cbHideDamage->Checked = Hacks::cmHideDamage1.Enable(cbHideDamage->Checked);
-	cbHideDamage->Checked = Hacks::cmHideDamage1.Enable(cbHideDamage->Checked);
+	cbHideDamage->Checked = Hacks::cmHideDamage2.Enable(cbHideDamage->Checked);
 }
 void MainForm::cbMercedesCombo_CheckedChanged(Object^  sender, EventArgs^  e)
 {
