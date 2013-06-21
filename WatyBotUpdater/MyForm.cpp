@@ -43,25 +43,39 @@ void InitializeTrainer(HINSTANCE hInstance)
 
 void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 {
+	//Set the maple base for the scanner
 	lpvMapleBase = reinterpret_cast<LPVOID>(0x00400000);
+
+	//Deserialize the xml file
+	TextReader^ reader = gcnew StreamReader(InputFileDialog->FileName);
+	try 
+	{
+		Addresses = safe_cast<List<Address^>^>(s->Deserialize(reader));
+	}
+	catch(Exception^ ex)
+	{
+		ShowError(ex->ToString());
+	}
+	reader->Close();
+
+	//Check if the class isn't empty
 	if(Addresses->Count <= 0) ShowError("You didn't select an inputfile");
 	else
 	{
 		StreamWriter^ sw = File::CreateText(OutputFileDialog->FileName);	
 		lvAddys->Items->Clear();
 
+		int Succes = NULL;
 		lvAddys->BeginUpdate();
 		for each(Address^ address in Addresses)
 		{
-			if(address->AOB != "ERROR")
-			{
-				char* aob = (char*) marshal_as<string>(address->AOB).c_str();
-				FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
-			}
-
+			char* aob = (char*) marshal_as<string>(address->AOB).c_str();
+			FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
+		
 			String^ Name = address->Name;
 			String^ Addy = " 0xERROR";
 			if(pf.dwResult) Addy = " 0x" + pf.dwResult.ToString("X");
+			if(pf.dwResult) Succes++;
 
 			String^ Comment = String::Empty;
 			if(address->Comment) Comment = " //" + address->Comment;
@@ -73,10 +87,7 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 			if(!pf.dwResult)
 			{
 				lvItem->UseItemStyleForSubItems = false;
-				if(address->Comment == String::Empty)
-					lvItem->SubItems[1]->BackColor = Color::Red;
-				else
-					lvItem->SubItems[1]->BackColor = Color::Orange;
+				lvItem->SubItems[1]->BackColor = (address->Comment) ? Color::Orange : Color::Red;
 			}
 			lvAddys->Items->Add(lvItem);
 
@@ -85,18 +96,13 @@ void MyForm::bUpdate_Click(System::Object^  sender, System::EventArgs^  e)
 		}
 		if(sw) delete (IDisposable^)(sw);
 		lvAddys->EndUpdate();
+		ShowInfo(Succes.ToString() + " of the " + Addresses->Count + " where succesfull");
 	}
 }
 
 void MyForm::bInput_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	if(InputFileDialog->ShowDialog() == ::DialogResult::OK)
-	{		
-		TextReader^ reader = gcnew StreamReader(InputFileDialog->FileName);
-		try{Addresses = safe_cast<List<Address^>^>(s->Deserialize(reader));}
-		catch(Exception^ ex){ShowError(ex->ToString());}
-		reader->Close();
-	}
+	InputFileDialog->ShowDialog();
 }
 
 void MyForm::bOutput_Click(System::Object^  sender, System::EventArgs^  e)
