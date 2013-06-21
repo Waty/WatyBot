@@ -64,3 +64,4 @@
 #define MouseFlyCall1 0xD51480 //Opcode
 #define MouseFlyCall2 0x406E40
 #define SendPacketAddy 0x4D7070
+#define SendPacketHookAddy 0x426B70 //8B 44 24 04 8B 0D ? ? ? ? 50 E8 ? ? ? ? C3 2nd result, check if it ends with a call to SendPacketAddy

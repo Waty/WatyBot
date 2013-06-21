@@ -1,7 +1,4 @@
 #include <Windows.h>
-#include <tlhelp32.h>
-#include <stdexcept>
-#include <memory>
 #include "HackAddys.h"
 
 /* all outdated from 90
@@ -37,8 +34,8 @@ struct COutPacket
 };
 
 //PacketSender hooks
-typedef void (__cdecl *SendPacket)(COutPacket *oPacket);
-auto InjectPacket = reinterpret_cast<SendPacket>(0x426B70); //8B 44 24 04 8B 0D ? ? ? ? 50 E8 ? ? ? ? C3
+typedef void (__cdecl *SendPacketHook)(COutPacket *oPacket);
+auto InjectPacket = reinterpret_cast<SendPacketHook>(SendPacketHookAddy);
 
 // Send a MapleStory packet using byte data
 DWORD WINAPI TrySendPacket(__in_bcount(nLength) LPBYTE lpBytes, __in DWORD dwLength)

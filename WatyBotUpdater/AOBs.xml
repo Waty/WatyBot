@@ -224,7 +224,11 @@
     <Comment>lpfnCWvsContext::SendMigrateToShopRequest</Comment>
   </Address>
   <Address Name="SendPacketAddy">
-    <AOB>55 8B EC 6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53 56 57 A1 ? ? ? ? 33 C5 50 8D 45 ? 64 A3 ? ? ? ? 89 4D ? 6A ? E9 ? ? ? ? F6 C5 ? 00 C3</AOB>
+    <AOB>E9 ? ? ? ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53</AOB>
     <Comment>CClientSocket::SendPacket</Comment>
+  </Address>
+  <Address Name="SendPacketHookAddy">
+    <AOB>ERROR</AOB>
+    <Comment>8B 44 24 04 8B 0D ? ? ? ? 50 E8 ? ? ? ? C3 - 2nd result, check if it ends with a call to SendPacketAddy</Comment>
   </Address>
 </ArrayOfAddress>
