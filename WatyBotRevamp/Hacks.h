@@ -308,8 +308,9 @@ namespace Hacks
 		call dwMouseFlyCall1
 		pushad
 		//looking for the mouse click
-		//mov ebx, [MouseBasePtr]
-		//mov ebx, [ebx]
+		mov ebx, [MouseBasePtr]
+		mov ebx, [ebx]
+		//MouseClick fly, but mouseanioffset is wrong :(
 		//cmp dword ptr[ebx+MouseAniOffset], 0x0C
 		//jne FlyExit
 
