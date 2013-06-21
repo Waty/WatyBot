@@ -6,6 +6,9 @@
 #define AggroCall 0xD99870
 #define PinTyperAddy1 0x6EB556
 #define PinTyperAddy2 0x6ECC37
+#define PicTyperAddy1 0x8B2BC6
+#define PicTyperAddy2 0x8B21D5
+#define PicTyperAddy3 0x8B21EE
 #define FusionAddy 0x774114
 #define PerfectLootAddy1 0x4C2227
 #define PerfectLootAddy2 0x55B965

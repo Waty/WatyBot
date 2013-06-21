@@ -1074,7 +1074,6 @@ private:
 			// cbNoCCBlueBoxes
 			// 
 			this->cbNoCCBlueBoxes->AutoSize = true;
-			this->cbNoCCBlueBoxes->Enabled = false;
 			this->cbNoCCBlueBoxes->Location = System::Drawing::Point(7, 107);
 			this->cbNoCCBlueBoxes->Name = L"cbNoCCBlueBoxes";
 			this->cbNoCCBlueBoxes->Size = System::Drawing::Size(110, 17);
@@ -1174,9 +1173,9 @@ private:
 			this->cbPinTyper->AutoSize = true;
 			this->cbPinTyper->Location = System::Drawing::Point(7, 55);
 			this->cbPinTyper->Name = L"cbPinTyper";
-			this->cbPinTyper->Size = System::Drawing::Size(71, 17);
+			this->cbPinTyper->Size = System::Drawing::Size(91, 17);
 			this->cbPinTyper->TabIndex = 2;
-			this->cbPinTyper->Text = L"Pin Typer";
+			this->cbPinTyper->Text = L"Pin/Pic Typer";
 			this->InfoToolTip->SetToolTip(this->cbPinTyper, L"Lets you type your pin instead of clicking it");
 			this->cbPinTyper->UseVisualStyleBackColor = true;
 			this->cbPinTyper->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbPinTyper_CheckedChanged);
@@ -1853,12 +1852,12 @@ private:
 			// 
 			this->SPControlContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->deleteSPControlToolStripMenuItem});
 			this->SPControlContextMenu->Name = L"SPControlContextMenu";
-			this->SPControlContextMenu->Size = System::Drawing::Size(157, 26);
+			this->SPControlContextMenu->Size = System::Drawing::Size(155, 26);
 			// 
 			// deleteSPControlToolStripMenuItem
 			// 
 			this->deleteSPControlToolStripMenuItem->Name = L"deleteSPControlToolStripMenuItem";
-			this->deleteSPControlToolStripMenuItem->Size = System::Drawing::Size(156, 22);
+			this->deleteSPControlToolStripMenuItem->Size = System::Drawing::Size(154, 22);
 			this->deleteSPControlToolStripMenuItem->Text = L"Delete Location";
 			this->deleteSPControlToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::SPControlDeleteItem_Click);
 			// 

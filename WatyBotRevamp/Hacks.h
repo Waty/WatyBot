@@ -61,8 +61,16 @@ namespace Hacks
  
 	/////Pin Typer
 	BYTE bPinTyper[] = {0x0F, 0x84};
+
 	CMemory cmPinTyper(PinTyperAddy1, bPinTyper, 2, PinTyperAddy2, bPinTyper, 2);
- 
+
+	/////PIC Typer
+	BYTE bPicTyper1[] = {0x90, 0xE9};
+	BYTE bPicTyper2[] = {0x00};
+	BYTE bPictyper3[] = {0xE8, 0x4D, 0xB2, 0xC5, 0xFF};
+
+	CMemory cmPicTyper(PicTyperAddy1, bPicTyper1, 2, PicTyperAddy2, bPicTyper2, 1, PicTyperAddy3, bPictyper3, 5);
+
 	/////FusionAttack
 	DWORD dwFusionRet = FusionAddy + 8;
 	CodeCave(FusionAttack)
