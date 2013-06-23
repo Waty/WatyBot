@@ -197,6 +197,8 @@ namespace WatyBotRevamp {
 	private: System::Windows::Forms::ToolStripMenuItem^  bDeletePacket;
 	private: System::Windows::Forms::Button^  bSaveChangedPacket;
 	private: System::Windows::Forms::Label^  label1;
+	private: System::Windows::Forms::ComboBox^  ddbHotKeyMouseFly;
+	private: System::Windows::Forms::CheckBox^  cbHotKeyMouseFly;
 	private: System::ComponentModel::IContainer^  components;
 private:
 		/// <summary>
@@ -371,6 +373,8 @@ private:
 			this->tAutoAttack = (gcnew System::Windows::Forms::Timer(this->components));
 			this->tAutoLoot = (gcnew System::Windows::Forms::Timer(this->components));
 			this->tTimedCC = (gcnew System::Windows::Forms::Timer(this->components));
+			this->ddbHotKeyMouseFly = (gcnew System::Windows::Forms::ComboBox());
+			this->cbHotKeyMouseFly = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->gbAutoSkill->SuspendLayout();
@@ -1852,12 +1856,12 @@ private:
 			// 
 			this->SPControlContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->deleteSPControlToolStripMenuItem});
 			this->SPControlContextMenu->Name = L"SPControlContextMenu";
-			this->SPControlContextMenu->Size = System::Drawing::Size(155, 26);
+			this->SPControlContextMenu->Size = System::Drawing::Size(157, 26);
 			// 
 			// deleteSPControlToolStripMenuItem
 			// 
 			this->deleteSPControlToolStripMenuItem->Name = L"deleteSPControlToolStripMenuItem";
-			this->deleteSPControlToolStripMenuItem->Size = System::Drawing::Size(154, 22);
+			this->deleteSPControlToolStripMenuItem->Size = System::Drawing::Size(156, 22);
 			this->deleteSPControlToolStripMenuItem->Text = L"Delete Location";
 			this->deleteSPControlToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::SPControlDeleteItem_Click);
 			// 
@@ -1886,6 +1890,8 @@ private:
 			// 
 			// gbHotKeys
 			// 
+			this->gbHotKeys->Controls->Add(this->ddbHotKeyMouseFly);
+			this->gbHotKeys->Controls->Add(this->cbHotKeyMouseFly);
 			this->gbHotKeys->Controls->Add(this->ddbHotKeySendPacket);
 			this->gbHotKeys->Controls->Add(this->cbHotKeySendPacket);
 			this->gbHotKeys->Controls->Add(this->ddbHotKeyCCPeople);
@@ -1911,7 +1917,7 @@ private:
 				L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", 
 				L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", 
 				L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->ddbHotKeySendPacket->Location = System::Drawing::Point(100, 123);
+			this->ddbHotKeySendPacket->Location = System::Drawing::Point(100, 111);
 			this->ddbHotKeySendPacket->Name = L"ddbHotKeySendPacket";
 			this->ddbHotKeySendPacket->Size = System::Drawing::Size(80, 21);
 			this->ddbHotKeySendPacket->TabIndex = 18;
@@ -1919,7 +1925,7 @@ private:
 			// cbHotKeySendPacket
 			// 
 			this->cbHotKeySendPacket->AutoSize = true;
-			this->cbHotKeySendPacket->Location = System::Drawing::Point(6, 125);
+			this->cbHotKeySendPacket->Location = System::Drawing::Point(6, 113);
 			this->cbHotKeySendPacket->Name = L"cbHotKeySendPacket";
 			this->cbHotKeySendPacket->Size = System::Drawing::Size(88, 17);
 			this->cbHotKeySendPacket->TabIndex = 17;
@@ -1934,7 +1940,7 @@ private:
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->ddbHotKeyCCPeople->Location = System::Drawing::Point(100, 96);
+			this->ddbHotKeyCCPeople->Location = System::Drawing::Point(100, 87);
 			this->ddbHotKeyCCPeople->Name = L"ddbHotKeyCCPeople";
 			this->ddbHotKeyCCPeople->Size = System::Drawing::Size(80, 21);
 			this->ddbHotKeyCCPeople->TabIndex = 16;
@@ -1942,7 +1948,7 @@ private:
 			// cbHotKeyCCPeople
 			// 
 			this->cbHotKeyCCPeople->AutoSize = true;
-			this->cbHotKeyCCPeople->Location = System::Drawing::Point(6, 98);
+			this->cbHotKeyCCPeople->Location = System::Drawing::Point(6, 89);
 			this->cbHotKeyCCPeople->Name = L"cbHotKeyCCPeople";
 			this->cbHotKeyCCPeople->Size = System::Drawing::Size(76, 17);
 			this->cbHotKeyCCPeople->TabIndex = 15;
@@ -1957,7 +1963,7 @@ private:
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->ddbHotKeyFMA->Location = System::Drawing::Point(100, 69);
+			this->ddbHotKeyFMA->Location = System::Drawing::Point(100, 63);
 			this->ddbHotKeyFMA->Name = L"ddbHotKeyFMA";
 			this->ddbHotKeyFMA->Size = System::Drawing::Size(80, 21);
 			this->ddbHotKeyFMA->TabIndex = 14;
@@ -1965,7 +1971,7 @@ private:
 			// cbHotKeyFMA
 			// 
 			this->cbHotKeyFMA->AutoSize = true;
-			this->cbHotKeyFMA->Location = System::Drawing::Point(6, 71);
+			this->cbHotKeyFMA->Location = System::Drawing::Point(6, 65);
 			this->cbHotKeyFMA->Name = L"cbHotKeyFMA";
 			this->cbHotKeyFMA->Size = System::Drawing::Size(48, 17);
 			this->cbHotKeyFMA->TabIndex = 13;
@@ -1980,7 +1986,7 @@ private:
 				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
 				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
 				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->ddbHotKeyLoot->Location = System::Drawing::Point(100, 42);
+			this->ddbHotKeyLoot->Location = System::Drawing::Point(100, 39);
 			this->ddbHotKeyLoot->Name = L"ddbHotKeyLoot";
 			this->ddbHotKeyLoot->Size = System::Drawing::Size(80, 21);
 			this->ddbHotKeyLoot->TabIndex = 12;
@@ -1988,7 +1994,7 @@ private:
 			// cbHotKeyLoot
 			// 
 			this->cbHotKeyLoot->AutoSize = true;
-			this->cbHotKeyLoot->Location = System::Drawing::Point(6, 44);
+			this->cbHotKeyLoot->Location = System::Drawing::Point(6, 41);
 			this->cbHotKeyLoot->Name = L"cbHotKeyLoot";
 			this->cbHotKeyLoot->Size = System::Drawing::Size(69, 17);
 			this->cbHotKeyLoot->TabIndex = 11;
@@ -2153,6 +2159,29 @@ private:
 			// tTimedCC
 			// 
 			this->tTimedCC->Tick += gcnew System::EventHandler(this, &MainForm::tTimedCC_Tick);
+			// 
+			// ddbHotKeyMouseFly
+			// 
+			this->ddbHotKeyMouseFly->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbHotKeyMouseFly->FormattingEnabled = true;
+			this->ddbHotKeyMouseFly->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
+				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
+				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
+				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+			this->ddbHotKeyMouseFly->Location = System::Drawing::Point(100, 135);
+			this->ddbHotKeyMouseFly->Name = L"ddbHotKeyMouseFly";
+			this->ddbHotKeyMouseFly->Size = System::Drawing::Size(80, 21);
+			this->ddbHotKeyMouseFly->TabIndex = 20;
+			// 
+			// cbHotKeyMouseFly
+			// 
+			this->cbHotKeyMouseFly->AutoSize = true;
+			this->cbHotKeyMouseFly->Location = System::Drawing::Point(6, 137);
+			this->cbHotKeyMouseFly->Name = L"cbHotKeyMouseFly";
+			this->cbHotKeyMouseFly->Size = System::Drawing::Size(71, 17);
+			this->cbHotKeyMouseFly->TabIndex = 19;
+			this->cbHotKeyMouseFly->Text = L"MouseFly";
+			this->cbHotKeyMouseFly->UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 

@@ -796,4 +796,12 @@ Void MainForm::HotKeys()
 			Sleep(250);
 		}
 	}
+	if(this->cbHotKeyMouseFly->Checked)
+	{
+		if(GetAsyncKeyState(KeyCodes[ddbHotKeyMouseFly->SelectedIndex]))
+		{
+			this->cbHotKeyMouseFly->Checked = !this->cbHotKeyMouseFly->Checked;
+			Sleep(250);
+		}
+	}
 }
