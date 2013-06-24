@@ -70,13 +70,25 @@ HWND CMapleStory::FindProcessWindow()
 	return false;
 }
 
-void CMapleStory::SendKey(int Key)
+inline void CMapleStory::SendKey(int Key)
 {
 	PostMessage(MSHWND, WM_KEYDOWN, Key, (MapVirtualKey(Key, 0) << 16) + 1);
 }
 
-void CMapleStory::SpamKey(int Key)
+inline void CMapleStory::SpamKey(int Key)
 {
 	PostMessage(MSHWND, WM_KEYDOWN, Key, (MapVirtualKey(Key, 0) << 16) + 1);
 	PostMessage(MSHWND, WM_KEYUP, Key, (MapVirtualKey(Key, 0) << 16) + 1);
+}
+
+inline void CMapleStory::SendSwitch(int index)
+{
+	if(index < KeyCodesSize) SendKey(KeyCodes[index]);	
+	else CPacket->Send(CPacket->Packets[index - KeyCodesSize]);
+}
+
+inline void CMapleStory::SpamSwitch(int index)
+{
+	if(index < KeyCodesSize) SpamKey(KeyCodes[index]);	
+	else CPacket->Send(CPacket->Packets[index - KeyCodesSize]);
 }

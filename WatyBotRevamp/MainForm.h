@@ -22,9 +22,19 @@ namespace WatyBotRevamp {
 		MainForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+			KeyNames = gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"};
+			this->ddbAutoSkill->Items->AddRange(KeyNames);
+			this->ddbPetFeeder->Items->AddRange(KeyNames);
+			this->ddbAutoHPKey->Items->AddRange(KeyNames);
+			this->ddbAutoLootKey->Items->AddRange(KeyNames);
+			this->ddbAutoMPKey->Items->AddRange(KeyNames);
+			this->ddbAutoAttackKey->Items->AddRange(KeyNames);
+			this->ddbHotKeySendPacket->Items->AddRange(KeyNames);
+			this->ddbHotKeyCCPeople->Items->AddRange(KeyNames);
+			this->ddbHotKeyFMA->Items->AddRange(KeyNames);
+			this->ddbHotKeyLoot->Items->AddRange(KeyNames);
+			this->ddbHotKeyAttack->Items->AddRange(KeyNames);
+			this->ddbHotKeyMouseFly->Items->AddRange(KeyNames);
 		}
 
 	protected:
@@ -346,6 +356,8 @@ private:
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
 			this->bSaveSettings = (gcnew System::Windows::Forms::Button());
 			this->gbHotKeys = (gcnew System::Windows::Forms::GroupBox());
+			this->ddbHotKeyMouseFly = (gcnew System::Windows::Forms::ComboBox());
+			this->cbHotKeyMouseFly = (gcnew System::Windows::Forms::CheckBox());
 			this->ddbHotKeySendPacket = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeySendPacket = (gcnew System::Windows::Forms::CheckBox());
 			this->ddbHotKeyCCPeople = (gcnew System::Windows::Forms::ComboBox());
@@ -373,8 +385,6 @@ private:
 			this->tAutoAttack = (gcnew System::Windows::Forms::Timer(this->components));
 			this->tAutoLoot = (gcnew System::Windows::Forms::Timer(this->components));
 			this->tTimedCC = (gcnew System::Windows::Forms::Timer(this->components));
-			this->ddbHotKeyMouseFly = (gcnew System::Windows::Forms::ComboBox());
-			this->cbHotKeyMouseFly = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->gbAutoSkill->SuspendLayout();
@@ -469,10 +479,6 @@ private:
 			// 
 			this->ddbAutoSkill->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbAutoSkill->FormattingEnabled = true;
-			this->ddbAutoSkill->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
-				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
-				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->ddbAutoSkill->Location = System::Drawing::Point(242, 156);
 			this->ddbAutoSkill->Name = L"ddbAutoSkill";
 			this->ddbAutoSkill->Size = System::Drawing::Size(76, 21);
@@ -853,29 +859,23 @@ private:
 			// 
 			this->ddbPetFeeder->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbPetFeeder->FormattingEnabled = true;
-			this->ddbPetFeeder->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
-				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
-				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->ddbPetFeeder->Location = System::Drawing::Point(202, 119);
 			this->ddbPetFeeder->Name = L"ddbPetFeeder";
 			this->ddbPetFeeder->Size = System::Drawing::Size(115, 21);
 			this->ddbPetFeeder->TabIndex = 15;
 			this->InfoToolTip->SetToolTip(this->ddbPetFeeder, L"Key PetFeeder will send");
+			this->ddbPetFeeder->DropDown += gcnew System::EventHandler(this, &MainForm::ddbPetFeeder_DropDown);
 			// 
 			// ddbAutoHPKey
 			// 
 			this->ddbAutoHPKey->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbAutoHPKey->FormattingEnabled = true;
-			this->ddbAutoHPKey->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
-				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
-				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->ddbAutoHPKey->Location = System::Drawing::Point(202, 69);
 			this->ddbAutoHPKey->Name = L"ddbAutoHPKey";
 			this->ddbAutoHPKey->Size = System::Drawing::Size(115, 21);
 			this->ddbAutoHPKey->TabIndex = 9;
 			this->InfoToolTip->SetToolTip(this->ddbAutoHPKey, L"Key for HP potions");
+			this->ddbAutoHPKey->DropDown += gcnew System::EventHandler(this, &MainForm::ddbAutoHPKey_DropDown);
 			// 
 			// cbAutoMP
 			// 
@@ -893,15 +893,12 @@ private:
 			// 
 			this->ddbAutoLootKey->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbAutoLootKey->FormattingEnabled = true;
-			this->ddbAutoLootKey->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
-				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
-				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->ddbAutoLootKey->Location = System::Drawing::Point(241, 42);
 			this->ddbAutoLootKey->Name = L"ddbAutoLootKey";
 			this->ddbAutoLootKey->Size = System::Drawing::Size(76, 21);
 			this->ddbAutoLootKey->TabIndex = 6;
 			this->InfoToolTip->SetToolTip(this->ddbAutoLootKey, L"The key WatyBot will press for looting");
+			this->ddbAutoLootKey->DropDown += gcnew System::EventHandler(this, &MainForm::ddbAutoLootKey_DropDown);
 			// 
 			// cbAutoLoot
 			// 
@@ -919,29 +916,23 @@ private:
 			// 
 			this->ddbAutoMPKey->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbAutoMPKey->FormattingEnabled = true;
-			this->ddbAutoMPKey->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
-				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
-				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->ddbAutoMPKey->Location = System::Drawing::Point(202, 94);
 			this->ddbAutoMPKey->Name = L"ddbAutoMPKey";
 			this->ddbAutoMPKey->Size = System::Drawing::Size(115, 21);
 			this->ddbAutoMPKey->TabIndex = 12;
 			this->InfoToolTip->SetToolTip(this->ddbAutoMPKey, L"Key for MP potions");
+			this->ddbAutoMPKey->DropDown += gcnew System::EventHandler(this, &MainForm::ddbAutoMPKey_DropDown);
 			// 
 			// ddbAutoAttackKey
 			// 
 			this->ddbAutoAttackKey->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbAutoAttackKey->FormattingEnabled = true;
-			this->ddbAutoAttackKey->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
-				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
-				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->ddbAutoAttackKey->Location = System::Drawing::Point(241, 14);
 			this->ddbAutoAttackKey->Name = L"ddbAutoAttackKey";
 			this->ddbAutoAttackKey->Size = System::Drawing::Size(76, 21);
 			this->ddbAutoAttackKey->TabIndex = 3;
 			this->InfoToolTip->SetToolTip(this->ddbAutoAttackKey, L"The key WatyBot will press for attacking");
+			this->ddbAutoAttackKey->DropDown += gcnew System::EventHandler(this, &MainForm::ddbAutoAttackKey_DropDown);
 			// 
 			// EXPLabel
 			// 
@@ -1237,12 +1228,14 @@ private:
 			// 
 			// nudIceGuard
 			// 
+			this->nudIceGuard->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {100, 0, 0, 0});
 			this->nudIceGuard->Location = System::Drawing::Point(95, 31);
 			this->nudIceGuard->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000000, 0, 0, 0});
 			this->nudIceGuard->Name = L"nudIceGuard";
 			this->nudIceGuard->Size = System::Drawing::Size(59, 20);
 			this->nudIceGuard->TabIndex = 20;
 			this->InfoToolTip->SetToolTip(this->nudIceGuard, L"Another godmode, use with caution, a to high amount could AB");
+			this->nudIceGuard->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000, 0, 0, 0});
 			// 
 			// cbIceGuard
 			// 
@@ -1909,14 +1902,29 @@ private:
 			this->gbHotKeys->TabStop = false;
 			this->gbHotKeys->Text = L"Hot Keys";
 			// 
+			// ddbHotKeyMouseFly
+			// 
+			this->ddbHotKeyMouseFly->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbHotKeyMouseFly->FormattingEnabled = true;
+			this->ddbHotKeyMouseFly->Location = System::Drawing::Point(100, 135);
+			this->ddbHotKeyMouseFly->Name = L"ddbHotKeyMouseFly";
+			this->ddbHotKeyMouseFly->Size = System::Drawing::Size(80, 21);
+			this->ddbHotKeyMouseFly->TabIndex = 20;
+			// 
+			// cbHotKeyMouseFly
+			// 
+			this->cbHotKeyMouseFly->AutoSize = true;
+			this->cbHotKeyMouseFly->Location = System::Drawing::Point(6, 137);
+			this->cbHotKeyMouseFly->Name = L"cbHotKeyMouseFly";
+			this->cbHotKeyMouseFly->Size = System::Drawing::Size(71, 17);
+			this->cbHotKeyMouseFly->TabIndex = 19;
+			this->cbHotKeyMouseFly->Text = L"MouseFly";
+			this->cbHotKeyMouseFly->UseVisualStyleBackColor = true;
+			// 
 			// ddbHotKeySendPacket
 			// 
 			this->ddbHotKeySendPacket->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbHotKeySendPacket->FormattingEnabled = true;
-			this->ddbHotKeySendPacket->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", 
-				L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", 
-				L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", 
-				L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->ddbHotKeySendPacket->Location = System::Drawing::Point(100, 111);
 			this->ddbHotKeySendPacket->Name = L"ddbHotKeySendPacket";
 			this->ddbHotKeySendPacket->Size = System::Drawing::Size(80, 21);
@@ -1936,10 +1944,6 @@ private:
 			// 
 			this->ddbHotKeyCCPeople->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbHotKeyCCPeople->FormattingEnabled = true;
-			this->ddbHotKeyCCPeople->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
-				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
-				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->ddbHotKeyCCPeople->Location = System::Drawing::Point(100, 87);
 			this->ddbHotKeyCCPeople->Name = L"ddbHotKeyCCPeople";
 			this->ddbHotKeyCCPeople->Size = System::Drawing::Size(80, 21);
@@ -1959,10 +1963,6 @@ private:
 			// 
 			this->ddbHotKeyFMA->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbHotKeyFMA->FormattingEnabled = true;
-			this->ddbHotKeyFMA->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
-				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
-				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->ddbHotKeyFMA->Location = System::Drawing::Point(100, 63);
 			this->ddbHotKeyFMA->Name = L"ddbHotKeyFMA";
 			this->ddbHotKeyFMA->Size = System::Drawing::Size(80, 21);
@@ -1982,10 +1982,6 @@ private:
 			// 
 			this->ddbHotKeyLoot->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbHotKeyLoot->FormattingEnabled = true;
-			this->ddbHotKeyLoot->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
-				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
-				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->ddbHotKeyLoot->Location = System::Drawing::Point(100, 39);
 			this->ddbHotKeyLoot->Name = L"ddbHotKeyLoot";
 			this->ddbHotKeyLoot->Size = System::Drawing::Size(80, 21);
@@ -2005,10 +2001,6 @@ private:
 			// 
 			this->ddbHotKeyAttack->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbHotKeyAttack->FormattingEnabled = true;
-			this->ddbHotKeyAttack->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
-				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
-				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
 			this->ddbHotKeyAttack->Location = System::Drawing::Point(100, 15);
 			this->ddbHotKeyAttack->Name = L"ddbHotKeyAttack";
 			this->ddbHotKeyAttack->Size = System::Drawing::Size(80, 21);
@@ -2160,29 +2152,6 @@ private:
 			// 
 			this->tTimedCC->Tick += gcnew System::EventHandler(this, &MainForm::tTimedCC_Tick);
 			// 
-			// ddbHotKeyMouseFly
-			// 
-			this->ddbHotKeyMouseFly->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->ddbHotKeyMouseFly->FormattingEnabled = true;
-			this->ddbHotKeyMouseFly->Items->AddRange(gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", 
-				L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", 
-				L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", 
-				L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
-			this->ddbHotKeyMouseFly->Location = System::Drawing::Point(100, 135);
-			this->ddbHotKeyMouseFly->Name = L"ddbHotKeyMouseFly";
-			this->ddbHotKeyMouseFly->Size = System::Drawing::Size(80, 21);
-			this->ddbHotKeyMouseFly->TabIndex = 20;
-			// 
-			// cbHotKeyMouseFly
-			// 
-			this->cbHotKeyMouseFly->AutoSize = true;
-			this->cbHotKeyMouseFly->Location = System::Drawing::Point(6, 137);
-			this->cbHotKeyMouseFly->Name = L"cbHotKeyMouseFly";
-			this->cbHotKeyMouseFly->Size = System::Drawing::Size(71, 17);
-			this->cbHotKeyMouseFly->TabIndex = 19;
-			this->cbHotKeyMouseFly->Text = L"MouseFly";
-			this->cbHotKeyMouseFly->UseVisualStyleBackColor = true;
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2252,8 +2221,7 @@ private:
 		}
 #pragma endregion
 
-//General private class members
-private:
+private: //General private class members
 	CMapleStory^ CMS;
 	List<SettingsEntry^>^ Settings;
 	List<CAutoSkill^>^ AutoSkills;
@@ -2267,85 +2235,91 @@ private:
 	Void RefreshSPControlListView();
 	Void RedrawStatBars();
 	Void HotKeys();
+	cli::array<Object^>^ KeyNames;
 
-//General trainer events
-private: Void MainForm_Load(Object^  sender, EventArgs^  e);
-private: Void StatsTimer_Tick(Object^  sender, EventArgs^  e);
-private: Void MainTabControl_SelectedIndexChanged(Object^  sender, EventArgs^  e);
-private: Void MainForm_FormClosing(Object^  sender, Windows::Forms::FormClosingEventArgs^  e);
-private: Void bSaveSettings_Click(Object^  sender, EventArgs^  e);
+private: //General trainer events
+	Void MainForm_Load(Object^  sender, EventArgs^  e);
+	Void StatsTimer_Tick(Object^  sender, EventArgs^  e);
+	Void MainTabControl_SelectedIndexChanged(Object^  sender, EventArgs^  e);
+	Void MainForm_FormClosing(Object^  sender, Windows::Forms::FormClosingEventArgs^  e);
+	Void bSaveSettings_Click(Object^  sender, EventArgs^  e);
 
-//AutoBot Events
-private: Void cbAutoAttack_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void tAutoAttack_Tick(Object^  sender, EventArgs^  e);
-private: Void cbAutoLoot_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void tAutoLoot_Tick(Object^  sender, EventArgs^  e);
-private: Void cbAutoHP_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbAutoMP_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbCCPeople_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbCCTimed_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void tTimedCC_Tick(Object^  sender, EventArgs^  e);
-private: Void cbCCAttacks_CheckedChanged(Object^  sender, EventArgs^  e);
+private: //AutoBot Events
+	Void cbAutoAttack_CheckedChanged(Object^ sender, EventArgs^  e);
+	Void tAutoAttack_Tick(Object^ sender, EventArgs^ e);
+	Void ddbAutoAttackKey_DropDown(Object^ sender, EventArgs^ e);
+	Void cbAutoLoot_CheckedChanged(Object^ sender, EventArgs^ e);
+	Void tAutoLoot_Tick(Object^  sender, EventArgs^ e);
+	Void ddbAutoLootKey_DropDown(Object^  sender, EventArgs^ e);
+	Void cbAutoHP_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void ddbAutoHPKey_DropDown(Object^  sender, EventArgs^ e);
+	Void cbAutoMP_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void ddbAutoMPKey_DropDown(Object^  sender, EventArgs^ e);
+	Void ddbPetFeeder_DropDown(::Object^  sender, EventArgs^  e);
+	Void cbCCPeople_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbCCTimed_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void tTimedCC_Tick(Object^  sender, EventArgs^  e);
+	Void cbCCAttacks_CheckedChanged(Object^  sender, EventArgs^  e);
 
-//AutoSkill
-private: Void bAutoSkill_Click(Object^  sender, EventArgs^  e);
-private: Void castToolStripMenuItem_Click(Object^  sender, EventArgs^  e);
-private: Void deleteToolStripMenuItem_Click(Object^  sender, EventArgs^  e);
-private: Void ddbAutoSkill_DropDown(Object^  sender, EventArgs^  e);
-private: Void lvAutoSkill_ItemCheck(Object^  sender, Windows::Forms::ItemCheckEventArgs^  e);
+private: //AutoSkill
+	Void bAutoSkill_Click(Object^  sender, EventArgs^  e);
+	Void castToolStripMenuItem_Click(Object^  sender, EventArgs^  e);
+	Void deleteToolStripMenuItem_Click(Object^  sender, EventArgs^  e);
+	Void ddbAutoSkill_DropDown(Object^  sender, EventArgs^  e);
+	Void lvAutoSkill_ItemCheck(Object^  sender, Windows::Forms::ItemCheckEventArgs^  e);
 
-//SPControl
-private: Void bAddSPCLocation_Click(Object^  sender, EventArgs^  e);
-private: Void SPControlDeleteItem_Click(Object^  sender, EventArgs^  e);
-private: Void GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e);
+private: //SPControl
+	Void bAddSPCLocation_Click(Object^  sender, EventArgs^  e);
+	Void SPControlDeleteItem_Click(Object^  sender, EventArgs^  e);
+	Void GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e);
 
-//Hacks
-private: Void cbFusionAttack_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbNoKB_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbPerfectLoot_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbVacRight_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbWalkRight_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbJumpRight_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbMobDisarm_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbNoBG_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbJDA_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbPinTyper_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbDojangGodmode_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbUnlimitedMorph_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbFasterMobs_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbNDAllAttacks_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbNoMobs_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbUA_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbSitHack_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbSPControl_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cb50SecGM_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbLogoSkipper_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbViewSwears_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbItemVac_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbFMA_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbScareMobs_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbFLACC_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbCPUHack_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbNFA_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbAutoAggro_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbNDMining_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbHideDamage_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbMercedesCombo_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbSkillInjection_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbNoFadeStages_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbNoCCBlueBoxes_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void nudSkillInjectionDelay_ValueChanged(Object^  sender, EventArgs^  e);
-private: Void ddbSkillInjectionSkills_SelectedIndexChanged(Object^  sender, EventArgs^  e);
-private: Void cbMouseFly_CheckedChanged(Object^  sender, EventArgs^  e);
-private: Void cbIceGuard_CheckedChanged(Object^  sender, EventArgs^  e);
+private: //Hacks
+	Void cbFusionAttack_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbNoKB_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbPerfectLoot_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbVacRight_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbWalkRight_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbJumpRight_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbNoBG_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbMobDisarm_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbJDA_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbPinTyper_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbDojangGodmode_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbUnlimitedMorph_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbFasterMobs_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbNDAllAttacks_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbNoMobs_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbUA_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbSitHack_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbSPControl_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cb50SecGM_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbLogoSkipper_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbViewSwears_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbItemVac_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbFMA_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbScareMobs_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbFLACC_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbCPUHack_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbNFA_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbAutoAggro_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbNDMining_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbHideDamage_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbMercedesCombo_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbSkillInjection_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbNoFadeStages_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbNoCCBlueBoxes_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void nudSkillInjectionDelay_ValueChanged(Object^  sender, EventArgs^  e);
+	Void ddbSkillInjectionSkills_SelectedIndexChanged(Object^  sender, EventArgs^  e);
+	Void cbMouseFly_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbIceGuard_CheckedChanged(Object^  sender, EventArgs^  e);
 
 private: //PacketSender events
 	Void InitializePacketSender();
-	Void lvPackets_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
-	Void bAddPacket_Click(System::Object^  sender, System::EventArgs^  e);
-	Void bSaveChangedPacket_Click(System::Object^  sender, System::EventArgs^  e);
-	Void bSendPacket_Click(System::Object^  sender, System::EventArgs^  e);
-	Void bDeletePacket_Click(System::Object^  sender, System::EventArgs^  e);
-	Void lvPackets_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
+	Void lvPackets_SelectedIndexChanged(Object^ sender, EventArgs^ e);
+	Void bAddPacket_Click(Object^ sender, EventArgs^ e);
+	Void bSaveChangedPacket_Click(Object^ sender, EventArgs^ e);
+	Void bSendPacket_Click(Object^ sender, EventArgs^ e);
+	Void bDeletePacket_Click(Object^ sender, EventArgs^  e);
+	Void lvPackets_KeyDown(Object^ sender, KeyEventArgs^ e);
 };
 }

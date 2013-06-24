@@ -40,20 +40,13 @@ Void CAutoSkill::Cast()
 
 Void CAutoSkill::CastBackground(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
-		//ShowNotifyIcon("Test");
-
 	if(!CMS->InGame) return;
-
-	if(keyIndex < KeyCodesSize)
-	{
-		//Send Key
-		while(CC->Busy || CMS->UsingAutoSkill) Sleep(500);
-		CMS->UsingAutoSkill = true;
-		Sleep(500);
-		CMS->SendKey(KeyCodes[keyIndex]);
-		Sleep(500);
-		CMS->UsingAutoSkill = false;		
-	}
-		
-	else CPacket->Send(CPacket->Packets[keyIndex - KeyCodesSize]);
+	
+	//Send Key
+	while(CC->Busy || CMS->UsingAutoSkill) Sleep(500);
+	CMS->UsingAutoSkill = true;
+	Sleep(500);
+	CMS->SendSwitch(keyIndex);
+	Sleep(500);
+	CMS->UsingAutoSkill = false;
 }

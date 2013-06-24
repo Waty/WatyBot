@@ -176,6 +176,8 @@ public:
 	property int SAWSIL;
 	property int SLWIB;
 
+	void SendSwitch(int index);
+	void SpamSwitch(int index);
 	void SendKey(int Key);
 	void SpamKey(int Key);
 

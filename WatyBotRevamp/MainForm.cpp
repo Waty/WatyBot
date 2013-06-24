@@ -201,7 +201,13 @@ Void MainForm::tAutoAttack_Tick(Object^  sender, EventArgs^  e)
 {
 	if(!CMS->InGame || CC->Busy || CMS->MobCount < CMS->SAWSIL || CMS->UsingAutoSkill) return;
 	CMS->Breath = 5000;
-	CMS->SpamKey(KeyCodes[ddbAutoAttackKey->SelectedIndex]);
+	CMS->SpamSwitch(ddbAutoAttackKey->SelectedIndex);
+}
+Void MainForm::ddbAutoAttackKey_DropDown(System::Object^  sender, System::EventArgs^  e)	 
+{
+	ddbAutoAttackKey->Items->Clear();
+	ddbAutoAttackKey->Items->AddRange(KeyNames);
+	for each(CPacketData^ p in CPacket->Packets) ddbAutoAttackKey->Items->Add(p->Name);
 }
 Void MainForm::cbAutoLoot_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -217,17 +223,41 @@ Void MainForm::tAutoLoot_Tick(Object^  sender, EventArgs^  e)
 {
 	if(!CMS->InGame || CMS->ItemCount < CMS->SLWIB || CMS->UsingAutoSkill) return;
 	CMS->Tubi = 0;
-	CMS->SpamKey(KeyCodes[ddbAutoLootKey->SelectedIndex]);
+	CMS->SpamSwitch(ddbAutoLootKey->SelectedIndex);
+}
+Void MainForm::ddbAutoLootKey_DropDown(Object^  sender, EventArgs^ e)
+{
+	ddbAutoLootKey->Items->Clear();
+	ddbAutoLootKey->Items->AddRange(KeyNames);
+	for each(CPacketData^ p in CPacket->Packets) ddbAutoLootKey->Items->Add(p->Name);
 }
 Void MainForm::cbAutoHP_CheckedChanged(Object^  sender, EventArgs^  e)
 {
 	nudAutoHP->Enabled = !cbAutoHP->Checked;
 	ddbAutoHPKey->Enabled = !cbAutoHP->Checked;
 }
+Void MainForm::ddbAutoHPKey_DropDown(Object^  sender, EventArgs^ e)
+{
+	ddbAutoHPKey->Items->Clear();
+	ddbAutoHPKey->Items->AddRange(KeyNames);
+	for each(CPacketData^ p in CPacket->Packets) ddbAutoHPKey->Items->Add(p->Name);
+}
 Void MainForm::cbAutoMP_CheckedChanged(Object^  sender, EventArgs^  e)
 {
 	nudAutoMP->Enabled = !cbAutoMP->Checked;
 	ddbAutoMPKey->Enabled = !cbAutoMP->Checked;
+}
+Void MainForm::ddbAutoMPKey_DropDown(Object^  sender, EventArgs^ e)
+{
+	ddbAutoMPKey->Items->Clear();
+	ddbAutoMPKey->Items->AddRange(KeyNames);
+	for each(CPacketData^ p in CPacket->Packets) ddbAutoMPKey->Items->Add(p->Name);
+}
+Void MainForm::ddbPetFeeder_DropDown(::Object^  sender, EventArgs^  e)
+{
+	ddbPetFeeder->Items->Clear();
+	ddbPetFeeder->Items->AddRange(KeyNames);
+	for each(CPacketData^ p in CPacket->Packets) ddbPetFeeder->Items->Add(p->Name);
 }
 Void MainForm::cbCCPeople_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -299,15 +329,15 @@ void MainForm::StatsTimer_Tick(Object^  sender, EventArgs^  e)
 	if(CMS->InGame)
 	{
 		//AutoHP/MP happens here
-		if(cbAutoHP->Checked && CMS->CharHP <= nudAutoHP->Value) CMS->SpamKey(KeyCodes[ddbAutoHPKey->SelectedIndex]);
-		if(cbAutoMP->Checked && CMS->CharMP <= nudAutoMP->Value) CMS->SpamKey(KeyCodes[ddbAutoMPKey->SelectedIndex]);
+		if(cbAutoHP->Checked && CMS->CharHP <= nudAutoHP->Value) CMS->SpamSwitch(ddbAutoHPKey->SelectedIndex);
+		if(cbAutoMP->Checked && CMS->CharMP <= nudAutoMP->Value) CMS->SpamSwitch(ddbAutoMPKey->SelectedIndex);
 
 		//AutoCC happens here
 		if(cbCCPeople->Checked && (CMS->PeopleCount >= (int) nudCCPeople->Value)) CC->CCSwitch((CCType) ddbPeopleType->SelectedIndex);	
 		if(cbCCAttacks->Checked && (CMS->AttackCount >= (int) nudCCAttacks->Value)) CC->CCSwitch((CCType) ddbAttacksType->SelectedIndex);
 
 		//PetFeeder happens here
-		if(cbPetFeeder->Checked && (CMS->PetFullness <= nudPetFeeder->Value)) CMS->SendKey(KeyCodes[ddbPetFeeder->SelectedIndex]);
+		if(cbPetFeeder->Checked && (CMS->PetFullness <= nudPetFeeder->Value)) CMS->SendSwitch(ddbPetFeeder->SelectedIndex);
 		MainForm::RedrawStatBars();
 		MainForm::HotKeys();
 	}
@@ -366,7 +396,7 @@ Void MainForm::bAutoSkill_Click(Object^  sender, EventArgs^  e)
 Void MainForm::ddbAutoSkill_DropDown(Object^  sender, EventArgs^  e)
 {
 	ddbAutoSkill->Items->Clear();
-	ddbAutoSkill->Items->AddRange(gcnew cli::array< Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+	ddbAutoSkill->Items->AddRange(KeyNames);
 	for each(CPacketData^ p in CPacket->Packets) ddbAutoSkill->Items->Add(p->Name);
 }
 Void MainForm::castToolStripMenuItem_Click(Object^  sender, EventArgs^  e)
@@ -414,7 +444,7 @@ List<CAutoSkill^>^ MainForm::LoadAutoSkill()
 	reader->Close();
 	if(AutoSkill == nullptr) AutoSkill = gcnew List<CAutoSkill^>;
 	ddbAutoSkill->Items->Clear();
-	ddbAutoSkill->Items->AddRange(gcnew cli::array< Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"});
+	ddbAutoSkill->Items->AddRange(KeyNames);
 	ddbAutoSkill->BeginUpdate();
 	for each(CPacketData^ p in CPacket->Packets) ddbAutoSkill->Items->Add(p->Name);
 	ddbAutoSkill->EndUpdate();
