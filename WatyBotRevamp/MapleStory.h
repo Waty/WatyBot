@@ -2,6 +2,8 @@
 #include <Windows.h>
 #include "Pointers.h"
 
+static bool UsingAutoSkill;
+
 public ref class CMapleStory
 {
 public:
@@ -172,7 +174,6 @@ public:
 		}
 	}
 	property bool UsingPots;
-	property bool UsingAutoSkill;
 	property int SAWSIL;
 	property int SLWIB;
 

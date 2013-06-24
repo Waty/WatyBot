@@ -199,7 +199,7 @@ Void MainForm::cbAutoAttack_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 Void MainForm::tAutoAttack_Tick(Object^  sender, EventArgs^  e)
 {
-	if(!CMS->InGame || CC->Busy || CMS->MobCount < CMS->SAWSIL || CMS->UsingAutoSkill) return;
+	if(!CMS->InGame || CC->Busy || CMS->MobCount < CMS->SAWSIL || UsingAutoSkill) return;
 	CMS->Breath = 5000;
 	CMS->SpamSwitch(ddbAutoAttackKey->SelectedIndex);
 }
@@ -221,7 +221,7 @@ Void MainForm::cbAutoLoot_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 Void MainForm::tAutoLoot_Tick(Object^  sender, EventArgs^  e)
 {
-	if(!CMS->InGame || CMS->ItemCount < CMS->SLWIB || CMS->UsingAutoSkill) return;
+	if(!CMS->InGame || CMS->ItemCount < CMS->SLWIB || UsingAutoSkill) return;
 	CMS->Tubi = 0;
 	CMS->SpamSwitch(ddbAutoLootKey->SelectedIndex);
 }

@@ -41,12 +41,12 @@ Void CAutoSkill::Cast()
 Void CAutoSkill::CastBackground(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
 	if(!CMS->InGame) return;
-	
+
 	//Send Key
-	while(CC->Busy || CMS->UsingAutoSkill) Sleep(500);
-	CMS->UsingAutoSkill = true;
+	while(CC->Busy || UsingAutoSkill) Sleep(500);
+	UsingAutoSkill = true;
 	Sleep(500);
 	CMS->SendSwitch(keyIndex);
 	Sleep(500);
-	CMS->UsingAutoSkill = false;
+	UsingAutoSkill = false;
 }
