@@ -59,7 +59,8 @@ void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkE
 	GenerateRandomChannel();
 
 	//Sleep while breath > 0
-	while(CMS->Breath > 0) Sleep(100);
+	while(!BreatCounter.IsOver()) Sleep(100);
+	CMS->Breath = 0;
 	
 	int i = 0;
 	while(CMS->Channel != TargetChannel && CMS->Channel != -1)
@@ -77,8 +78,9 @@ void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkE
 void CChangeChannel::CS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
 	if(!CMS->InGame) e->Cancel;
-	while(CMS->Breath != 0) Sleep(100);
+	while(!BreatCounter.IsOver()) Sleep(100);
 	Sleep(500);
+	CMS->Breath = 0;
 	String^ strError = String::Empty;
 	CPacket->Send(EnterCashShop, strError);
 	Sleep(2500);

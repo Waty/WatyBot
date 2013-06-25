@@ -1,6 +1,7 @@
 #include "Defines.h"
 
 StopWatch<milliseconds> SkillInjectionStopWatch;
+StopWatch<milliseconds> BreatCounter;
 
 gcroot<CChangeChannel^> CC;
 gcroot<CPackets^> CPacket;
