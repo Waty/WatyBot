@@ -59,7 +59,7 @@ void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkE
 	GenerateRandomChannel();
 
 	//Sleep while breath > 0
-	while(!BreatCounter.IsOver()) Sleep(100);
+	while(!BreathCounter.IsOver()) Sleep(100);
 	CMS->Breath = 0;
 	
 	int i = 0;
@@ -78,7 +78,7 @@ void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkE
 void CChangeChannel::CS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
 	if(!CMS->InGame) e->Cancel;
-	while(!BreatCounter.IsOver()) Sleep(100);
+	while(!BreathCounter.IsOver()) Sleep(100);
 	Sleep(500);
 	CMS->Breath = 0;
 	String^ strError = String::Empty;

@@ -40,7 +40,7 @@ using namespace System::IO;
 #define EndCodeCave }
 
 extern StopWatch<milliseconds> SkillInjectionStopWatch;
-extern StopWatch<milliseconds> BreatCounter;
+extern StopWatch<milliseconds> BreathCounter;
 extern gcroot<CChangeChannel^> CC;
 extern gcroot<CPackets^> CPacket;
 extern gcroot<CSPControl^> SPControl;

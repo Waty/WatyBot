@@ -200,7 +200,7 @@ Void MainForm::cbAutoAttack_CheckedChanged(Object^  sender, EventArgs^  e)
 Void MainForm::tAutoAttack_Tick(Object^  sender, EventArgs^  e)
 {
 	if(!CMS->InGame || CC->Busy || CMS->MobCount < CMS->SAWSIL || UsingAutoSkill) return;
-	BreatCounter.SetDelay(milliseconds(5000));
+	BreathCounter.Start();
 	CMS->SpamSwitch(ddbAutoAttackKey->SelectedIndex);
 }
 Void MainForm::ddbAutoAttackKey_DropDown(System::Object^  sender, System::EventArgs^  e)	 
