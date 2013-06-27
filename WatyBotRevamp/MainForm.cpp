@@ -830,7 +830,7 @@ Void MainForm::HotKeys()
 	{
 		if(GetAsyncKeyState(KeyCodes[ddbHotKeyMouseFly->SelectedIndex]))
 		{
-			this->cbHotKeyMouseFly->Checked = !this->cbHotKeyMouseFly->Checked;
+			this->cbMouseFly->Checked = !this->cbMouseFly->Checked;
 			Sleep(250);
 		}
 	}
