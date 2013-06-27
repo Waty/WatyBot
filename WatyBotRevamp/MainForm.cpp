@@ -221,7 +221,7 @@ Void MainForm::cbAutoLoot_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 Void MainForm::tAutoLoot_Tick(Object^  sender, EventArgs^  e)
 {
-	if(!CMS->InGame || CMS->ItemCount < CMS->SLWIB || UsingAutoSkill) return;
+	if(!CMS->InGame || CMS->MobCount > CMS->SAWSIL || UsingAutoSkill) return;
 	CMS->Tubi = 0;
 	CMS->SpamSwitch(ddbAutoLootKey->SelectedIndex);
 }
