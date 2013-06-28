@@ -2,6 +2,7 @@
 #include "MainForm.h"
 #include "Defines.h"
 #include "Hacks.h"
+#include "EditSPControl.h"
 
 using namespace Settings;
 using namespace WatyBotRevamp;
@@ -564,7 +565,7 @@ Void MainForm::lvPackets_KeyDown(Object^  sender, Windows::Forms::KeyEventArgs^ 
 }
 
 //controls on SPControl Tab
-void MainForm::bAddSPCLocation_Click(Object^  sender, EventArgs^  e)
+Void MainForm::bAddSPCLocation_Click(Object^  sender, EventArgs^  e)
 {
 	String^ name = tbSPCName->Text;
 	int mapid = (int) nudSPCMapId->Value;
@@ -574,11 +575,11 @@ void MainForm::bAddSPCLocation_Click(Object^  sender, EventArgs^  e)
 	SPControl->AddLocation(name, mapid, x, y);
 	RefreshSPControlListView();
 }
-void MainForm::cbSPControl_CheckedChanged(Object^  sender, EventArgs^  e)
+Void MainForm::cbSPControl_CheckedChanged(Object^  sender, EventArgs^  e)
 {
 	SPControl->Enable(cbSPControl->Checked);
 }
-void MainForm::SPControlDeleteItem_Click(Object^  sender, EventArgs^  e)
+Void MainForm::SPControlDeleteItem_Click(Object^  sender, EventArgs^  e)
 {
 	{
 		ListViewItem^ L = lvSPControl->SelectedItems[0];
@@ -592,7 +593,21 @@ void MainForm::SPControlDeleteItem_Click(Object^  sender, EventArgs^  e)
 		}
 	}
 }
-void MainForm::GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e)
+Void MainForm::editLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	ListViewItem^ L = lvSPControl->SelectedItems[0];
+	int index = lvSPControl->Items->IndexOf(L);
+	auto SPCLoc = SPControl->Locations[index];
+	EditSPControl^ dlg = gcnew EditSPControl(SPCLoc);
+	switch(dlg->ShowDialog())
+	{
+	case ::DialogResult::OK:
+		SPCLoc = dlg->location;
+		RefreshSPControlListView();
+		SPControl->Save();
+	}
+}
+Void MainForm::GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e)
 {
 	for(int i = 0; i < 10; i++)
 	{
@@ -603,7 +618,7 @@ void MainForm::GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e)
 	this->nudSPCX->Value = CMS::CharX();
 	this->nudSPCY->Value = CMS::CharY();
 }
-void MainForm::RefreshSPControlListView()
+Void MainForm::RefreshSPControlListView()
 {
 	lvSPControl->Items->Clear();
 	this->tbSPCName->Clear();

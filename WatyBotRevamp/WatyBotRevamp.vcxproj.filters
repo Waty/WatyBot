@@ -69,6 +69,9 @@
     <ClCompile Include="Hooks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EditSPControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainForm.h">
@@ -112,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="noncopyable.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EditSPControl.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
