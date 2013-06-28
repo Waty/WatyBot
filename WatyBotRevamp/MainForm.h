@@ -134,7 +134,8 @@ namespace WatyBotRevamp {
 		System::Windows::Forms::CheckBox^  cbScareMobs;
 		System::Windows::Forms::CheckBox^  cbFLACC;
 		System::Windows::Forms::CheckBox^  cbCPUHack;
-		System::Windows::Forms::Label^  lSLWIB;
+private: System::Windows::Forms::Label^  lSLWSB;
+
 		System::Windows::Forms::Label^  lSAWSIL;
 		System::Windows::Forms::ComboBox^  ddbTimedType;
 		System::Windows::Forms::ComboBox^  ddbAttacksType;
@@ -253,7 +254,7 @@ namespace WatyBotRevamp {
 			this->ddbTimedType = (gcnew System::Windows::Forms::ComboBox());
 			this->ddbAttacksType = (gcnew System::Windows::Forms::ComboBox());
 			this->ddbPeopleType = (gcnew System::Windows::Forms::ComboBox());
-			this->lSLWIB = (gcnew System::Windows::Forms::Label());
+			this->lSLWSB = (gcnew System::Windows::Forms::Label());
 			this->lSAWSIL = (gcnew System::Windows::Forms::Label());
 			this->CCAttacksLabel = (gcnew System::Windows::Forms::Label());
 			this->CCTimedLabel = (gcnew System::Windows::Forms::Label());
@@ -580,7 +581,7 @@ namespace WatyBotRevamp {
 			this->AutoBotGroupBox->Controls->Add(this->ddbTimedType);
 			this->AutoBotGroupBox->Controls->Add(this->ddbAttacksType);
 			this->AutoBotGroupBox->Controls->Add(this->ddbPeopleType);
-			this->AutoBotGroupBox->Controls->Add(this->lSLWIB);
+			this->AutoBotGroupBox->Controls->Add(this->lSLWSB);
 			this->AutoBotGroupBox->Controls->Add(this->lSAWSIL);
 			this->AutoBotGroupBox->Controls->Add(this->CCAttacksLabel);
 			this->AutoBotGroupBox->Controls->Add(this->CCTimedLabel);
@@ -604,6 +605,7 @@ namespace WatyBotRevamp {
 			this->AutoBotGroupBox->TabIndex = 36;
 			this->AutoBotGroupBox->TabStop = false;
 			this->AutoBotGroupBox->Text = L"Autobot";
+			this->InfoToolTip->SetToolTip(this->AutoBotGroupBox, L"StopAttackingWhenSpawnIsLow");
 			// 
 			// nudCCAttacks
 			// 
@@ -737,17 +739,16 @@ namespace WatyBotRevamp {
 			this->InfoToolTip->SetToolTip(this->ddbPeopleType, L"Set here the method you want to use. CC is ChangeChannel, CS is enter/leave cashs" 
 				L"hop, DC is relog to character select screen");
 			// 
-			// lSLWIB
+			// lSLWSB
 			// 
-			this->lSLWIB->AutoSize = true;
-			this->lSLWIB->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7));
-			this->lSLWIB->Location = System::Drawing::Point(150, 45);
-			this->lSLWIB->Name = L"lSLWIB";
-			this->lSLWIB->Size = System::Drawing::Size(39, 13);
-			this->lSLWIB->TabIndex = 64;
-			this->lSLWIB->Text = L"SLWIB";
-			this->InfoToolTip->SetToolTip(this->lSLWIB, L"SLWIB: Stop Looting When Items Below, the number is for the number of items that " 
-				L"need to be dropped before the Looting starts");
+			this->lSLWSB->AutoSize = true;
+			this->lSLWSB->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7));
+			this->lSLWSB->Location = System::Drawing::Point(150, 45);
+			this->lSLWSB->Name = L"lSLWSB";
+			this->lSLWSB->Size = System::Drawing::Size(43, 13);
+			this->lSLWSB->TabIndex = 64;
+			this->lSLWSB->Text = L"SLWSB";
+			this->InfoToolTip->SetToolTip(this->lSLWSB, L"StartLootingWhenSpawnBelow");
 			// 
 			// lSAWSIL
 			// 
@@ -2218,6 +2219,7 @@ namespace WatyBotRevamp {
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
 			this->ResumeLayout(false);
+
 		}
 #pragma endregion
 

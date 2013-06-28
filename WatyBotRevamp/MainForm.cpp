@@ -215,13 +215,13 @@ Void MainForm::cbAutoLoot_CheckedChanged(Object^  sender, EventArgs^  e)
 	this->ddbAutoLootKey->Enabled = !this->cbAutoLoot->Checked;
 	this->nudSLWIB->Enabled = !this->cbAutoLoot->Checked;
 		
-	CMS::SLWIB = (int) nudSLWIB->Value;
+	CMS::SLWSB = (int) nudSLWIB->Value;
 	tAutoLoot->Interval = ((int) nudAutoLoot->Value);
 	tAutoLoot->Enabled = cbAutoLoot->Checked;
 }
 Void MainForm::tAutoLoot_Tick(Object^  sender, EventArgs^  e)
 {
-	if(!CMS::InGame() || CMS::MobCount() > CMS::SAWSIL || CMS::UsingAutoSkill) return;
+	if(!CMS::InGame() || CMS::MobCount() > CMS::SLWSB || CMS::UsingAutoSkill) return;
 	CMS::Tubi(0);
 	CMS::SpamSwitch(ddbAutoLootKey->SelectedIndex);
 }

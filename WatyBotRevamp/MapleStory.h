@@ -18,7 +18,7 @@ namespace CMS
 	static int MaxMP;
 	static bool UsingPots;
 	static int SAWSIL;
-	static int SLWIB;
+	static int SLWSB;
 
 	inline int MobCount()
 	{
