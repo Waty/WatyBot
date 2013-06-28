@@ -36,7 +36,6 @@ public:
 	}
 
 private:
-	CMapleStory^ CMS;
 	System::Windows::Forms::Timer^ timer;
 	void AutoSkill_Tick(System::Object^  sender, System::EventArgs^  e);
 

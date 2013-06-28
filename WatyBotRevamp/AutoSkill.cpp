@@ -25,7 +25,6 @@ CAutoSkill::~CAutoSkill()
 {
 	delete timer;
 	delete bw;
-	delete CMS;
 }
 
 Void CAutoSkill::AutoSkill_Tick(System::Object^  sender, System::EventArgs^  e)
@@ -40,13 +39,13 @@ Void CAutoSkill::Cast()
 
 Void CAutoSkill::CastBackground(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
-	if(!CMS->InGame) return;
+	if(!CMS::InGame()) return;
 
 	//Send Key
-	while(CC->Busy || UsingAutoSkill) Sleep(500);
-	UsingAutoSkill = true;
+	while(CC->Busy || CMS::UsingAutoSkill) Sleep(500);
+	CMS::UsingAutoSkill = true;
 	Sleep(500);
-	CMS->SendSwitch(keyIndex);
+	CMS::SendSwitch(keyIndex);
 	Sleep(500);
-	UsingAutoSkill = false;
+	CMS::UsingAutoSkill = false;
 }

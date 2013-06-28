@@ -15,7 +15,6 @@ namespace ChangeChannel
 		void CCSwitch(CCType type);
 
 	private:
-		CMapleStory^ CMS;
 		System::ComponentModel::BackgroundWorker^ bw;
 		void CC(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^  e);
 		void DC(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^  e);

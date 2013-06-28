@@ -21,9 +21,7 @@ public:
 	bool Enable(bool enable);
 	bool Enabled;
 
-private:
-	gcroot<CMapleStory^> CMS;
-	
+private:	
 	unsigned long ulAddress;
 	unsigned char* bMem;
 	unsigned char* oldMem;

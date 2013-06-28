@@ -2223,7 +2223,6 @@ namespace WatyBotRevamp {
 
 private:
 	//General private class members
-	CMapleStory^ CMS;
 	List<SettingsEntry^>^ Settings;
 	List<CAutoSkill^>^ AutoSkills;
 	property XmlSerializer^ s;

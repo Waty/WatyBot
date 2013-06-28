@@ -162,11 +162,10 @@ namespace Hacks
 	DWORD dwItemVacCall = ItemVacCall;
 	int itemvac_x = 0;
 	int itemvac_y = 0;
-	gcroot<CMapleStory^> CMS;
 	VOID WINAPI getItemVacCoords()
 	{
-		itemvac_x = CMS->CharX;
-		itemvac_y = CMS->CharY;
+		itemvac_x = CMS::CharX();
+		itemvac_y = CMS::CharY();
 	}
 	CodeCave(ItemVac)
 	{
@@ -209,7 +208,7 @@ namespace Hacks
 	DWORD dwUARet = UAAddy + 6;
 	BOOL WINAPI UA()
 	{
-		if(CMS->AttackCount > 90) return TRUE;
+		if(CMS::AttackCount() > 90) return TRUE;
 		return FALSE;
 	}
 	CodeCave(UA)
@@ -265,7 +264,7 @@ namespace Hacks
 	int iSkillInjectionSkillID;
 	BOOL WINAPI canSkillInjection()
 	{
-		if(CC->Busy || CMS->UsingPots || CMS->UsingAutoSkill || !SkillInjectionStopWatch.IsOver()) return FALSE;	
+		if(CC->Busy || CMS::UsingPots || CMS::UsingAutoSkill || !SkillInjectionStopWatch.IsOver()) return FALSE;	
 		SkillInjectionStopWatch.Start();
 		return TRUE;
 	}

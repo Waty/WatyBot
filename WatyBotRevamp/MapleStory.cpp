@@ -1,94 +1,90 @@
 #include "MapleStory.h"
 #include "Defines.h"
 
-CMapleStory::CMapleStory(void)
+namespace CMS
 {
-
-}
-
-CMapleStory::~CMapleStory(void)
-{
-}
-
-unsigned long CMapleStory::ReadPointer(unsigned long ulBase, int iOffset)
-{
-	if(*(int*)WallBasePtr)
+	DWORD ReadPointer(DWORD ulBase, int iOffset)
 	{
-		__try { return *(unsigned long*)(*(unsigned long*)ulBase + iOffset); }
-		__except (EXCEPTION_EXECUTE_HANDLER) { return -1; }
+		if(*(int*)WallBasePtr)
+		{
+			__try
+			{
+				return *(unsigned long*)(*(unsigned long*)ulBase + iOffset);
+			}
+			__except(EXCEPTION_EXECUTE_HANDLER) { return -1; }
+		}
+		else return -1;
 	}
-	else return -1;
-}
-
-double CMapleStory::ReadDoublePointer(DWORD ulBase, INT iOffset)
-{
-      __try { return (*(DOUBLE*)(*(DWORD*)ulBase + iOffset)); }
-      __except (EXCEPTION_EXECUTE_HANDLER) { return 0.0; }
-}
-
-bool CMapleStory::WritePointer(unsigned long ulBase, int iOffset, int iValue)
-{
-	__try
+	double ReadDoublePointer(DWORD ulBase, INT iOffset)
 	{
-		*(int*)(*(unsigned long*)ulBase + iOffset) = iValue;
-		return true;
+		if(*(int*)WallBasePtr)
+		{
+			__try
+			{
+				return (*(DOUBLE*)(*(DWORD*)ulBase + iOffset));
+			}
+			__except(EXCEPTION_EXECUTE_HANDLER) { return 0.0; }
+		}
+		return -1.0;
 	}
-	__except (EXCEPTION_EXECUTE_HANDLER)
+	bool WritePointer(unsigned long ulBase, int iOffset, int iValue)
 	{
+		if(*(int*)WallBasePtr)
+		{
+			__try
+			{
+				*(int*)(*(unsigned long*)ulBase + iOffset) = iValue;
+				return true;
+			}
+			__except (EXCEPTION_EXECUTE_HANDLER)
+			{
+				return false;
+			}
+		}
 		return false;
 	}
-}
-
-HWND CMapleStory::FindProcessWindow()
-{
-	static HWND MShWnd = NULL;
-	if(MShWnd != NULL) return MShWnd;
-
-	TCHAR szBuffer[200];
-	DWORD dwTemp;
-	
-	for (HWND hWnd = GetTopWindow(NULL); hWnd != NULL; hWnd = GetNextWindow(hWnd, GW_HWNDNEXT))
+	HWND FindProcessWindow()
 	{
-		GetWindowThreadProcessId(hWnd, &dwTemp);
-		
-		if (dwTemp != GetCurrentProcessId())
+		static HWND MShWnd = NULL;
+		if(MShWnd != NULL) return MShWnd;
+	
+		TCHAR szBuffer[200];
+		DWORD dwTemp;
+	
+		for (HWND hWnd = GetTopWindow(NULL); hWnd != NULL; hWnd = GetNextWindow(hWnd, GW_HWNDNEXT))
 		{
-			continue;
-		}
+			GetWindowThreadProcessId(hWnd, &dwTemp);
 		
-		if (!GetClassName(hWnd, szBuffer, sizeof(szBuffer) / sizeof(TCHAR)))
-		{
-			continue;
-		}
+			if (dwTemp != GetCurrentProcessId()) continue;
 		
-		if (!wcscmp(szBuffer, L"MapleStoryClass"))
-		{
-			MShWnd = hWnd;
-			return hWnd;
+		
+			if(!GetClassName(hWnd, szBuffer, sizeof(szBuffer) / sizeof(TCHAR))) continue;
+
+			if(!wcscmp(szBuffer, L"MapleStoryClass"))
+			{
+				MShWnd = hWnd;
+				return hWnd;
+			}
 		}
+		return false;
 	}
-	return false;
-}
-
-inline void CMapleStory::SendKey(int Key)
-{
-	PostMessage(MSHWND, WM_KEYDOWN, Key, (MapVirtualKey(Key, 0) << 16) + 1);
-}
-
-inline void CMapleStory::SpamKey(int Key)
-{
-	PostMessage(MSHWND, WM_KEYDOWN, Key, (MapVirtualKey(Key, 0) << 16) + 1);
-	PostMessage(MSHWND, WM_KEYUP, Key, (MapVirtualKey(Key, 0) << 16) + 1);
-}
-
-inline void CMapleStory::SendSwitch(int index)
-{
-	if(index < KeyCodesSize) SendKey(KeyCodes[index]);	
-	else CPacket->Send(CPacket->Packets[index - KeyCodesSize]);
-}
-
-inline void CMapleStory::SpamSwitch(int index)
-{
-	if(index < KeyCodesSize) SpamKey(KeyCodes[index]);	
-	else CPacket->Send(CPacket->Packets[index - KeyCodesSize]);
+	inline void SendKey(int Key)
+	{
+		PostMessage(MSHWND(), WM_KEYDOWN, Key, (MapVirtualKey(Key, 0) << 16) + 1);
+	}
+	inline void SpamKey(int Key)
+	{
+		PostMessage(MSHWND(), WM_KEYDOWN, Key, (MapVirtualKey(Key, 0) << 16) + 1);
+		PostMessage(MSHWND(), WM_KEYUP, Key, (MapVirtualKey(Key, 0) << 16) + 1);
+	}
+	void SendSwitch(int index)
+	{
+		if(index < KeyCodesSize) SendKey(KeyCodes[index]);	
+		else CPacket->Send(CPacket->Packets[index - KeyCodesSize]);
+	}
+	void SpamSwitch(int index)
+	{
+		if(index < KeyCodesSize) SpamKey(KeyCodes[index]);	
+		else CPacket->Send(CPacket->Packets[index - KeyCodesSize]);
+	}
 }
