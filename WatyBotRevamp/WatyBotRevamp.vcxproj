@@ -134,6 +134,22 @@
     <ClCompile Include="AutoSkill.cpp" />
     <ClCompile Include="ChangeChannel.cpp" />
     <ClCompile Include="Defines.cpp" />
+    <ClCompile Include="EditSPControl.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <MinimalRebuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</MinimalRebuild>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</BasicRuntimeChecks>
+      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Async</ExceptionHandling>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <MinimalRebuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</MinimalRebuild>
+      <BasicRuntimeChecks Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</BasicRuntimeChecks>
+      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Async</ExceptionHandling>
+    </ClCompile>
     <ClCompile Include="MainDll.cpp" />
     <ClCompile Include="MainForm.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
@@ -178,6 +194,9 @@
     <ClInclude Include="AutoSkill.h" />
     <ClInclude Include="ChangeChannel.h" />
     <ClInclude Include="Defines.h" />
+    <ClInclude Include="EditSPControl.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="HackAddys.h" />
     <ClInclude Include="Hacks.h" />
     <ClInclude Include="MainForm.h">
@@ -192,6 +211,9 @@
     <ClInclude Include="StopWatch.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="EditSPControl.resx">
+      <DependentUpon>EditSPControl.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>
       <SubType>Designer</SubType>

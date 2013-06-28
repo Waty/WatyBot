@@ -211,7 +211,8 @@ private: System::Windows::Forms::Label^  lSLWSB;
 		System::Windows::Forms::Label^  label1;
 		System::Windows::Forms::ComboBox^  ddbHotKeyMouseFly;
 		System::Windows::Forms::CheckBox^  cbHotKeyMouseFly;
-		System::ComponentModel::IContainer^  components;
+private: System::Windows::Forms::ToolStripMenuItem^  editLocationToolStripMenuItem;
+		 System::ComponentModel::IContainer^  components;
 
 		/// <summary>
 		/// Required designer variable.
@@ -354,6 +355,7 @@ private: System::Windows::Forms::Label^  lSLWSB;
 			this->HeaderX = (gcnew System::Windows::Forms::ColumnHeader());
 			this->HeaderY = (gcnew System::Windows::Forms::ColumnHeader());
 			this->SPControlContextMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
+			this->editLocationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->deleteSPControlToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->InfoTab = (gcnew System::Windows::Forms::TabPage());
 			this->bSaveSettings = (gcnew System::Windows::Forms::Button());
@@ -1849,9 +1851,17 @@ private: System::Windows::Forms::Label^  lSLWSB;
 			// 
 			// SPControlContextMenu
 			// 
-			this->SPControlContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->deleteSPControlToolStripMenuItem});
+			this->SPControlContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->editLocationToolStripMenuItem, 
+				this->deleteSPControlToolStripMenuItem});
 			this->SPControlContextMenu->Name = L"SPControlContextMenu";
-			this->SPControlContextMenu->Size = System::Drawing::Size(157, 26);
+			this->SPControlContextMenu->Size = System::Drawing::Size(157, 48);
+			// 
+			// editLocationToolStripMenuItem
+			// 
+			this->editLocationToolStripMenuItem->Name = L"editLocationToolStripMenuItem";
+			this->editLocationToolStripMenuItem->Size = System::Drawing::Size(156, 22);
+			this->editLocationToolStripMenuItem->Text = L"Edit Location";
+			this->editLocationToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::editLocationToolStripMenuItem_Click);
 			// 
 			// deleteSPControlToolStripMenuItem
 			// 
@@ -2274,6 +2284,7 @@ private:
 	Void bAddSPCLocation_Click(Object^  sender, EventArgs^  e);
 	Void SPControlDeleteItem_Click(Object^  sender, EventArgs^  e);
 	Void GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e);
+	Void editLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 
 	//Hacks
 	Void cbFusionAttack_CheckedChanged(Object^  sender, EventArgs^  e);
