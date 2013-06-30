@@ -68,3 +68,5 @@
 #define MouseFlyCall2 0x406E40
 #define SendPacketAddy 0x4D7070
 #define SendPacketHookAddy 0x426B70 //8B 44 24 04 8B 0D ? ? ? ? 50 E8 ? ? ? ? C3 2nd result, check if it ends with a call to SendPacketAddy
+#define Energysupplybase 0x129669C
+#define Energysupplyoffset 0x1D38
