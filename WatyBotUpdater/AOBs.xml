@@ -66,7 +66,7 @@
     <AOB>7D ? 8B 16 8B 52 ? 8D 44 24 ? 50</AOB>
   </Address>
   <Address Name="JDAAddy3">
-    <AOB>00 C6 84 24 CC 00 00 00 2A 3B F5</AOB>
+    <AOB>74 ? 8B CF C7 87 ? ? 00 00 01 00 00 00 e8 ? ? ? ? 6A 01 6A 01</AOB>
   </Address>
   <Address Name="MobDisarmAddy">
     <AOB>75 ? 8B CE E8 ? ? ? ? 8B CE E8 ? ? ? ? 8B CE E8 ? ? ? ?</AOB>
