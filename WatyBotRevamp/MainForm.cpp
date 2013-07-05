@@ -641,7 +641,8 @@ Void MainForm::RefreshSPControlListView()
 enum SettingsIndex{
 	AutoAttackDelay, SAWSIL, AutoAttackKey, AutoLootDelay, SLWIB, AutoLootKey, AutoHPValue, AutoHPKey, AutoMPValue, AutoMPKey, PetFeederValue, PetFeederKey,
 	CCPeople, CCPeopleType, CCTimed, CCTimedType, CCAttacks, CCAttacksType, HotKeyAttack, HotKeyLoot, HotKeyFMA, HotKeyCCPeople, HotKeySendPacket,
-	/*SelectedPacket, PacketSpamAmount, PacketSpamDelay, */SkillInjectionDelay, SkillInjectionIndex, IceGuard, PinTyper, LogoSkipper, SettingCount
+	/*SelectedPacket, PacketSpamAmount, PacketSpamDelay, */SkillInjectionDelay, SkillInjectionIndex, IceGuard, PinTyper, LogoSkipper,
+	HideDamage, NoCCBlueBoxes, NoBG, NoFadeStages, MobDisarm, UA, FMA, GND, Perfectloot, SPControlsave, SettingCount
 };
 Void MainForm::SaveSettings()
 {
@@ -733,6 +734,16 @@ Void MainForm::LoadSettings()
 			{
 				cbPinTyper->Checked = (bool)				Settings[PinTyper]->Value;
 				cbLogoSkipper->Checked = (bool)				Settings[LogoSkipper]->Value;
+				cbHideDamage->Checked = (bool)				Settings[HideDamage]->Value;
+				cbNoCCBlueBoxes->Checked = (bool)			Settings[NoCCBlueBoxes]->Value;
+				cbNoBG->Checked = (bool)					Settings[NoBG]->Value;
+				cbNoFadeStages->Checked = (bool)			Settings[NoFadeStages]->Value;
+				cbMobDisarm->Checked = (bool)				Settings[MobDisarm]->Value;
+				cbUA->Checked = (bool)						Settings[UA]->Value;
+				cbFMA->Checked = (bool)						Settings[FMA]->Value;
+				cbNDAllAttacks->Checked = (bool)			Settings[GND]->Value;
+				cbPerfectLoot->Checked = (bool)				Settings[Perfectloot]->Value;
+				cbSPControl->Checked = (bool)				Settings[SPControlsave]->Value;
 				Hacks::cmPacketSenderFix.Enable(true);
 			}
 		}
@@ -787,6 +798,16 @@ Void MainForm::ReloadSettings()
 
 	s->Add(gcnew SettingsEntry(cbPinTyper));
 	s->Add(gcnew SettingsEntry(cbLogoSkipper));
+	s->Add(gcnew SettingsEntry(cbHideDamage));
+	s->Add(gcnew SettingsEntry(cbNoCCBlueBoxes));
+	s->Add(gcnew SettingsEntry(cbNoBG));
+	s->Add(gcnew SettingsEntry(cbNoFadeStages));
+	s->Add(gcnew SettingsEntry(cbMobDisarm));
+	s->Add(gcnew SettingsEntry(cbUA));
+	s->Add(gcnew SettingsEntry(cbFMA));
+	s->Add(gcnew SettingsEntry(cbNDAllAttacks));
+	s->Add(gcnew SettingsEntry(cbPerfectLoot));
+	s->Add(gcnew SettingsEntry(cbSPControl));
 	Settings = s;
 }
 Void MainForm::bSaveSettings_Click(Object^  sender, EventArgs^  e)
