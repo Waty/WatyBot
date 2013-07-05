@@ -22,7 +22,7 @@
 #define gNDAddy2 0x89D928
 #define JDAAddy1 0xCCDFE7
 #define JDAAddy2 0xCCE024
-#define JDAAddy3 0xCD6764
+#define JDAAddy3 0xCCE042
 #define MobDisarmAddy 0x7715AA
 #define NoMobsAddy 0x81595F
 #define AirLootAddy 0x55CAF9
