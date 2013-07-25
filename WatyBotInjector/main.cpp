@@ -115,8 +115,9 @@ int main()
 		system("pause");
 		return false;
 	}
-
+	
 	if(File::Exists(Directory::GetCurrentDirectory() + "\\WatyBotUpdater.dll")) inject(marshal_as<string>(Directory::GetCurrentDirectory() + "\\WatyBotUpdater.dll"), procMS->Id);
+	if(File::Exists(Directory::GetCurrentDirectory() + "\\MSCRC.dll")) inject(marshal_as<string>(Directory::GetCurrentDirectory() + "\\MSCRC.dll"), procMS->Id);
 
 	return true;
 }
