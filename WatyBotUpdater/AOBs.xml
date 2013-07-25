@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfAddress xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Address Name="DojangAddy">
-    <Comment>8B 01 8B 50 ? ff d2 8b 88 ? ? ? ? 51 - 6TH Result</Comment>
+    <Comment>8B 01 8B 50 14 FF D2 8B 88 ? ? ? ? 51 05 ? ? ? ? 50 E8 ? ? ? ? 83 C4 08 F7 D8 1B C0 F7 D8 C3 - check call</Comment>
     <AOB>ERROR</AOB>
   </Address>
   <Address Name="DojangCall">
