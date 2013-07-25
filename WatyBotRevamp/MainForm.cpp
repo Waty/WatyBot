@@ -89,7 +89,7 @@ void MainForm::cb50SecGM_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 void MainForm::cbLogoSkipper_CheckedChanged(Object^  sender, EventArgs^  e)
 {
-	cbLogoSkipper->Checked = Hacks::cmLogoSkipper.Enable(cbLogoSkipper->Checked);
+	//cbLogoSkipper->Checked = Hacks::cmLogoSkipper.Enable(cbLogoSkipper->Checked);
 }
 void MainForm::cbViewSwears_CheckedChanged(Object^  sender, EventArgs^  e)
 {

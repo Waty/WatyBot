@@ -94,7 +94,7 @@ namespace Hacks
  
 	/////No Background + Clouds
 	BYTE bNoBG[] = {0x90, 0x90, 0x90, 0x90, 0x90};
-	CMemory cmNoBG(NoBGAddy1, bNoBG, 5, NoBGAddy2, bNoBG, 5);
+	CMemory cmNoBG(/*NoBGAddy1, bNoBG, 5, */NoBGAddy2, bNoBG, 5);
  
 	/////Faster Mobs
 	BYTE bFasterMobs[] = {0x90, 0x90};
@@ -108,7 +108,7 @@ namespace Hacks
 	/////ND - All Attacks
 	BYTE bgND1[] = {0x74};
 	BYTE bgND2[] = {0x00};
-	CMemory cmNDAllAttacks(gNDAddy1, bgND1, 1, gNDAddy2, bgND2, 1);
+	CMemory cmNDAllAttacks(gNDAddy1, bgND1, 1/*, gNDAddy2, bgND2, 1*/);
  
 	/////Jump Down Anywhere
 	BYTE bJDA1[] = {0xEB};
@@ -154,9 +154,8 @@ namespace Hacks
 	CMemory cm50SecGM(Godmode50SecAddy1, b50SecGM1, 1, Godmode50SecAddy2, b50SecGM2, 2);
  
 	/////Logo Skipper
-	DWORD dwLogoSkipper = LogoSkipperAddy;
 	BYTE bLogoSkipper[] = {0x50, 0xD2};
-	CMemory cmLogoSkipper(dwLogoSkipper, bLogoSkipper, 2);
+	CMemory cmLogoSkipper(/*LogoSkipperAddy, bLogoSkipper, 2*/);
  
 	/////(semi) Item Vac
 	DWORD dwItemVacCall = ItemVacCall;
@@ -202,7 +201,7 @@ namespace Hacks
  
 	/////CPU Hack
 	BYTE bCPU[] = {0x90, 0x90, 0x90, 0x90, 0x90};
-	CMemory cmCPUHack(CPUAddy1, bCPU, 5, CPUAddy2, bCPU, 5, CPUAddy3, bCPU, 5);
+	CMemory cmCPUHack(CPUAddy1, bCPU, 5/*, CPUAddy2, bCPU, 5, CPUAddy3, bCPU, 5*/);
  
 	/////Unlimited Attack
 	DWORD dwUARet = UAAddy + 6;
@@ -246,7 +245,7 @@ namespace Hacks
 	BYTE bHideDamage3[] = {0xEB};
 	BYTE bHideDamage4[] = {0xEB};
 	BYTE bHideDamage5[] = {0xEB};
-	CMemory cmHideDamage1(HideDamageAddy1, bHideDamage1, 1, HideDamageAddy2, bHideDamage2, 2, HideDamageAddy3, bHideDamage3, 1, HideDamageAddy4, bHideDamage4, 1);
+	CMemory cmHideDamage1(HideDamageAddy1, bHideDamage1, 1, HideDamageAddy2, bHideDamage2, 2/*, HideDamageAddy3, bHideDamage3, 1, HideDamageAddy4, bHideDamage4, 1*/);
 	CMemory cmHideDamage2(HideDamageAddy5, bHideDamage5, 1);
  
 	/////Mercedes Combos without comboing
@@ -293,9 +292,10 @@ namespace Hacks
 	BYTE bNoFadeStages[] = {0xc2, 0x04, 0x00};
 	CMemory cmNoFadeStages(FadeAddy1, bNoFadeStages, 3, FadeAddy2, bNoFadeStages, 3);
 
-	/////No CC BLue Boxes
+	///No CC BLue Boxes
+	//TODO: Fix this:
 	BYTE bNoCCBoxes[] = {0x90, 0x90, 0x90, 0x90, 0x90};
-	CMemory cmNoCCBoxes(NoCCBoxesAddy1, bNoCCBoxes, 5, NoCCBoxesAddy2, bNoCCBoxes, 5);
+	CMemory cmNoCCBoxes(NoCCBoxesAddy1, bNoCCBoxes, 5/*, NoCCBoxesAddy2, bNoCCBoxes, 5*/);
 	
 	////SS Mouse Fly
 	DWORD dwMouseFlyRet = MouseFlyAddy + 5;
