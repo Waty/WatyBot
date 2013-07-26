@@ -1,234 +1,336 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <ArrayOfAddress xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Address Name="DojangAddy">
+  <Address Type="Address" Name="DojangAddy">
     <Comment>8B 01 8B 50 14 FF D2 8B 88 ? ? ? ? 51 05 ? ? ? ? 50 E8 ? ? ? ? 83 C4 08 F7 D8 1B C0 F7 D8 C3 - check call</Comment>
-    <AOB>ERROR</AOB>
+    <AOB>N/A</AOB>
   </Address>
-  <Address Name="DojangCall">
+  <Address Type="Address" Name="DojangCall">
     <AOB>8B 44 24 ? 8B 50 ? 8B 08 8B C2 C1 C0 ?</AOB>
   </Address>
-  <Address Name="IceGuardAddy">
+  <Address Type="Address" Name="IceGuardAddy">
     <AOB>6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 81 EC ? ? ? ? 53 55 56 57 A1 ? ? ? ? 33 C4 50 8D 84 24 ? ? ? ? 64 A3 ? ? ? ? 8B E9 33 FF 89 7C 24 ? 39 BC 24 ? ? ? ? 74 ? 8D 8D ? ? ? ? E8 ? ? ? ? 85 C0</AOB>
   </Address>
-  <Address Name="IceGuardPush">
-    <AOB>ERROR</AOB>
+  <Address Type="Address" Name="IceGuardPush">
     <Comment>The push 1 line below the Addy</Comment>
+    <AOB>N/A</AOB>
   </Address>
-  <Address Name="AggroAddy">
+  <Address Type="Address" Name="AggroAddy">
     <AOB>E8 ? ? ? ? 8B F8 3B FB 75 ? 33 C0</AOB>
   </Address>
-  <Address Name="AggroCall">
+  <Address Type="Address" Name="AggroCall">
     <AOB>55 8B EC 83 E4 ? 83 EC ? 56 8B F1</AOB>
   </Address>
-  <Address Name="PinTyperAddy1">
+  <Address Type="Address" Name="PinTyperAddy1">
     <AOB>0F 85 ? ? ? ? 68 ? ? ? ? B9 ? ? ? ? E8 ? ? ? ? 89 44 24 ? C6 44 24 ? ? 85 C0 0F 84 ? ? ? ? 6A ? 8B C8</AOB>
   </Address>
-  <Address Name="PinTyperAddy2">
+  <Address Type="Address" Name="PinTyperAddy2">
     <AOB>0F 85 ? ? ? ? 68 ? ? ? ? B9 ? ? ? ? E8 ? ? ? ? 89 44 24 ? C7 44 24 ? ? ? ? ? 85 C0 0F 84 ? ? ? ? 6A ? 8B C8 E8 ? ? ? ? 85 C0 0F 84 ? ? ? ? 83 C0 ? 74 ? 8D 70 ? 89 74 24 ? 85 F6</AOB>
   </Address>
-  <Address Name="FusionAddy">
+  <Address Type="Address" Name="FusionAddy">
     <AOB>89 34 81 40 89 44 24 ? 8B 44 24 ? 85 C0</AOB>
   </Address>
-  <Address Name="PerfectLootAddy1">
+  <Address Type="Address" Name="PerfectLootAddy1">
     <AOB>89 86 ? ? ? ? E8 ? ? ? ? 89 ? ? ? ? ? 5E C2</AOB>
   </Address>
-  <Address Name="PerfectLootAddy2">
+  <Address Type="Address" Name="PerfectLootAddy2">
     <AOB>0D ? ? ? ? 83 C4 ? E9 ? ? ? ? DD 05 ? ? ? ? DC C9</AOB>
   </Address>
-  <Address Name="PerfectLootAddy3">
+  <Address Type="Address" Name="PerfectLootAddy3">
     <AOB>81 FE ? ? ? ? 0F 8D ? ? ? ? 85 ED 0F 84 ? ? ? ? 81 FE ? ? ? ? BF ? ? ? ? 7E ? B8 ? ? ? ? 2B C6</AOB>
   </Address>
-  <Address Name="NoBGAddy1">
+  <Address Type="Address" Name="NoBGAddy1">
     <AOB>E8 ? ? ? ? 8B 06 8B 48 ? 56 C6 45 ? ? FF D1 8B 75 ?</AOB>
   </Address>
-  <Address Name="NoBGAddy2">
+  <Address Type="Address" Name="NoBGAddy2">
     <AOB>E8 ? ? ? ? 8B 06 8B 48 ? 56 C7 44 24 ? ? ? ? ? FF D1 8B 4C 24 ? 64 89 0D ? ? ? ? 59</AOB>
   </Address>
-  <Address Name="FasterMobsAddy">
+  <Address Type="Address" Name="FasterMobsAddy">
     <AOB>75 ? 33 DB 8D 55 ? B9 ? ? ? ? E8 ? ? ? ? 89 85 ? ? ? ? 8B 45 ? 8B 08</AOB>
   </Address>
-  <Address Name="UnlimitedMorphAddy1">
+  <Address Type="Address" Name="UnlimitedMorphAddy1">
     <AOB>74 ? 81 FE ? ? ? ? 75 ? 8D ? 24 1C 68</AOB>
   </Address>
-  <Address Name="UnlimitedMorphAddy2">
+  <Address Type="Address" Name="UnlimitedMorphAddy2">
     <AOB>7D ? 8D ? ? ? 68 ? 24 00</AOB>
   </Address>
-  <Address Name="gNDAddy1">
+  <Address Type="Address" Name="gNDAddy1">
     <AOB>75 ? C7 85 ? ? ? ? ? ? ? ? EB ? C7 85 ? ? ? ? ? ? ? ? 8B 8D ? ? ? ? 89 4D ? 8B 4D ? E8 ? ? ? ? 50</AOB>
   </Address>
-  <Address Name="gNDAddy2">
+  <Address Type="Address" Name="gNDAddy2">
     <AOB>06 33 FF 89 7C 24 ? 81 7C 24 ? ? ? ? ? 75 ? 8B 5C 24 ? 8B CB</AOB>
   </Address>
-  <Address Name="JDAAddy1">
+  <Address Type="Address" Name="JDAAddy1">
     <AOB>74 ? 3B 5C 24 ? 75 ? 8B 4C 24 ? 6A ? 03 C1</AOB>
   </Address>
-  <Address Name="JDAAddy2">
+  <Address Type="Address" Name="JDAAddy2">
     <AOB>7D ? 8B 16 8B 52 ? 8D 44 24 ? 50</AOB>
   </Address>
-  <Address Name="JDAAddy3">
+  <Address Type="Address" Name="JDAAddy3">
     <AOB>74 ? 8B CF C7 87 ? ? ? ? ? ? ? ? E8 ? ? ? ? 6A ? 6A ? 8B CF 89 87 ? ? ? ? E8 ? ? ? ? 5D</AOB>
   </Address>
-  <Address Name="MobDisarmAddy">
+  <Address Type="Address" Name="MobDisarmAddy">
     <AOB>75 ? 8B CE E8 ? ? ? ? 8B CE E8 ? ? ? ? 8B CE E8 ? ? ? ?</AOB>
   </Address>
-  <Address Name="NoMobsAddy">
-    <AOB>77 42 0f b6 80 ? ? ? ? ff 24 85 ? ? ? ?</AOB>
+  <Address Type="Address" Name="NoMobsAddy">
+    <Comment>77 ? 0F B6 80 ? ? ? 00 FF 24 85 ? ? ? 00 8B 54 24 ? 52 E8 ? ? ? FF C2 08 00 - 2nd result</Comment>
   </Address>
-  <Address Name="AirLootAddy">
+  <Address Type="Address" Name="AirLootAddy">
     <AOB>75 ? 2B 56 ? 81 FA ? ? ? ? 7C ? 8B 46 ? 3D ? ? ? ? 74 ? 3D ? ? ? ? 74 ? 81 7E ? ? ? ? ? 75 ? 8B 4C 24 ? 83 C1 ? 89 4C 24 ? 8D 7E ? 8D 4F ? E8 ? ? ? ? 8B CF</AOB>
   </Address>
-  <Address Name="VacRightAddy">
+  <Address Type="Address" Name="VacRightAddy">
     <AOB>75 ? DC 11 DF E0 F6 C4 ? 75 ? D9 C9</AOB>
   </Address>
-  <Address Name="WalkRightAddy">
+  <Address Type="Address" Name="WalkRightAddy">
     <AOB>0F 8F ? ? ? ? 83 BE ? ? ? ? ? 0F 84 ? ? ? ? 8D 8E ? ? ? ? E8 ? ? ? ? 8B F8</AOB>
   </Address>
-  <Address Name="JumpRightAddy">
+  <Address Type="Address" Name="JumpRightAddy">
     <AOB>0F 84 ? ? ? ? 83 BE ? ? ? ? ? 0F 84 ? ? ? ? 8B 50 ? 8D 78 ? 8B 42 ? 8B CF</AOB>
   </Address>
-  <Address Name="NoKBAddy">
+  <Address Type="Address" Name="NoKBAddy">
     <AOB>01 00 00 00 D8 D1 DF E0 F6 C4 ? 7A ? DC 91 ? ? ? ? DF E0 F6 C4 ? 7A ? D9 C0</AOB>
   </Address>
-  <Address Name="SitHackAddy">
+  <Address Type="Address" Name="SitHackAddy">
     <AOB>74 ? 8B 44 24 ? 83 E0 ? 83 C8 ? EB ? 8B 7C 24 ? 8B 07</AOB>
   </Address>
-  <Address Name="SPControlAddy">
+  <Address Type="Address" Name="SPControlAddy">
     <AOB>8B 78 ? 8B 58 ? 8B 44 24 ? 39 50 ? 74 ? 8B 78 ? 8B 58 ? 89 50 ? E8 ? ? ? ? 8B E8</AOB>
   </Address>
-  <Address Name="SPCChecksAddy">
+  <Address Type="Address" Name="SPCChecksAddy">
     <AOB>74 ? 8B 78 ? 8B 58 ? 89 50 ? E8 ? ? ? ? 8B E8</AOB>
   </Address>
-  <Address Name="Godmode50SecAddy1">
+  <Address Type="Address" Name="Godmode50SecAddy1">
     <AOB>7F ? 8B 4C 24 ? E8 ? ? ? ? 33 C9 85 C0</AOB>
   </Address>
-  <Address Name="Godmode50SecAddy2">
+  <Address Type="Address" Name="Godmode50SecAddy2">
     <AOB>24 ? FF FF 51 8D 8D ? ? ? ? E8 ? ? ? ? 33 DB</AOB>
   </Address>
-  <Address Name="LogoSkipperAddy">
+  <Address Type="Address" Name="LogoSkipperAddy">
     <AOB>30 0E 6A 00 C0 0A ?</AOB>
   </Address>
-  <Address Name="ItemVacAddy">
+  <Address Type="Address" Name="ItemVacAddy">
     <Comment>e8 ? ? ? ? 8b c8 8b 44 24 ? 89 38  -7th Result</Comment>
-    <AOB>ERROR</AOB>
+    <AOB>N/A</AOB>
   </Address>
-  <Address Name="ItemVacCall">
+  <Address Type="Address" Name="ItemVacCall">
     <AOB>51 53 56 57 8B F9</AOB>
   </Address>
-  <Address Name="ViewSwearsAddy">
+  <Address Type="Address" Name="ViewSwearsAddy">
     <AOB>74 ? 80 3E ? 75 ? 0F B6 13 52</AOB>
   </Address>
-  <Address Name="FMAAddy">
+  <Address Type="Address" Name="FMAAddy">
     <AOB>75 ? 43 83 C5 ? EB ? 8B 44 24 ? 8B 4C 24 ? 89 34 81</AOB>
   </Address>
-  <Address Name="ScareMobsAddy">
+  <Address Type="Address" Name="ScareMobsAddy">
     <AOB>74 ? 8B CE E8 ? ? ? ? 85 C0 75 ? 8B CE E8 ? ? ? ? 8B B8 ? ? ? ? 85 FF</AOB>
   </Address>
-  <Address Name="FLACC">
+  <Address Type="Address" Name="FLACC">
     <AOB>8B 86 ? ? ? ? 50 89 96 ? ? ? ? 89 BE ? ? ? ? 8B 19</AOB>
   </Address>
-  <Address Name="CPUAddy1">
+  <Address Type="Address" Name="CPUAddy1">
     <AOB>E8 ? ? ? ? C6 45 ? ? 85 F6 74 ? 8B 06</AOB>
   </Address>
-  <Address Name="CPUAddy2">
+  <Address Type="Address" Name="CPUAddy2">
     <AOB>E8 ? ? ? ? 8B 06 8B 48 ? 56 C6 45 ? ? FF D1 8B 75 ?</AOB>
   </Address>
-  <Address Name="CPUAddy3">
+  <Address Type="Address" Name="CPUAddy3">
     <AOB>E8 ? ? ? ? 8B 0E 8B 51 ? 56 C6 45 ? ? FF D2 8B 45 ? 40 3B 45 ? 89 45 ? 0F 8C ? ? ? ? 8B 5D ? 8B 75 ? 8B 07</AOB>
   </Address>
-  <Address Name="UAAddy">
-    <AOB>ERROR</AOB>
+  <Address Type="Address" Name="UAAddy">
     <Comment>89 38 5F 89 48 04 5E C2 ? ? CC - 3rd result</Comment>
+    <AOB>N/A</AOB>
   </Address>
-  <Address Name="DFAAddy">
+  <Address Type="Address" Name="DFAAddy">
     <AOB>83 ? ? ? 0F 94 ? C3 CC CC CC CC CC CC 8B</AOB>
   </Address>
-  <Address Name="NDMiningAddy1">
+  <Address Type="Address" Name="NDMiningAddy1">
     <AOB>7C ? 83 BE ? ? ? ? ? 7F ? 6A ? 6A ? 8B CE</AOB>
   </Address>
-  <Address Name="NDMiningAddy2">
+  <Address Type="Address" Name="NDMiningAddy2">
     <AOB>C6 44 24 ? ? 85 C0 74 ? 83 C0 ? 50 E8 ? ? ? ? 83 C4 ? 8B 44 24 ? 85 C0 0F 94 C1</AOB>
   </Address>
-  <Address Name="NDMiningAddy3">
+  <Address Type="Address" Name="NDMiningAddy3">
     <AOB>75 ? 55 6A ? 6A ? 8B CB</AOB>
   </Address>
-  <Address Name="HideDamageAddy1">
+  <Address Type="Address" Name="HideDamageAddy1">
     <AOB>7C ? B8 ? ? ? ? E8 ? ? ? ? 8B C4 6A ?</AOB>
   </Address>
-  <Address Name="HideDamageAddy2">
+  <Address Type="Address" Name="HideDamageAddy2">
     <AOB>0F 84 ? ? ? ? 2D ? ? ? ? 75 ? 85 DB 74 ? 8B 13</AOB>
   </Address>
-  <Address Name="HideDamageAddy3">
+  <Address Type="Address" Name="HideDamageAddy3">
     <AOB>7E ? 8B 54 24 ? 52 6A ? 6A ? EB ? 75 ? 8B 0D ? ? ? ? 6A ? 56</AOB>
   </Address>
-  <Address Name="HideDamageAddy4">
+  <Address Type="Address" Name="HideDamageAddy4">
     <AOB>75 ? 8B 0D ? ? ? ? 6A ? 56 55</AOB>
   </Address>
-  <Address Name="HideDamageAddy5">
+  <Address Type="Address" Name="HideDamageAddy5">
     <AOB>7D ? 6A ? 6A ? 6A ? F7 D8</AOB>
   </Address>
-  <Address Name="MercedesComboAddy">
+  <Address Type="Address" Name="MercedesComboAddy">
     <AOB>74 ? 8B 55 ? 52 E8 ? ? ? ? 83 C4 ? 85 C0</AOB>
   </Address>
-      <!-- Outdated, patched?
-  <Address Name="SkillInjectionChecksAddy1">
-    <AOB>0F 84 ? ? ? ? 2B AE ? ? ? ? 0F 88 ? ? ? ? 8B 86 ? ? ? ? 50</AOB>
-  </Address>
-  <Address Name="SkillInjectionChecksAddy2">
-    <AOB>0F 85 ? ? ? ? 8B 96 ? ? ? ? 8B 44 24 ? 6A ? 6A ? 6A ? 8D 4C 24 ? 51</AOB>
-  </Address>
-  <Address Name="SkillInjectionChecksAddy3">
-    <AOB>77 ? 0F B6 88 ? ? ? ? FF 24 8D ? ? ? ? 8B 54 24 ? 6A ? 6A ? 6A ? 6A ? 6A ? 6A ? 6A ? 6A ? 6A ? 6A ? 57</AOB>
-  </Address>
-  <Address Name="SkillInjectionInjectAddy">
-    <AOB>8B 96 ? ? ? ? 8B 44 24 ? 6A ? 6A ? 6A ? 8D 4C 24 ? 51</AOB>
-  </Address>
-  -->
-  <Address Name="ExitCSAddy">
+  <Address Type="Address" Name="ExitCSAddy">
     <Comment>75 15 57 FF 15 ? ? ? ? 3B F3 74 0A 8B 16 8B 02 6A 01 8B CE FF d0 8b 4c 24 ? 64 89 0D 00 00 00 00 -4th Result MemoryView below: mov fs:[00000000],ecx</Comment>
-    <AOB>ERROR</AOB>
+    <AOB>N/A</AOB>
   </Address>
-  <Address Name="ExitCSCall">
-    <AOB>ERROR</AOB>
+  <Address Type="Address" Name="ExitCSCall">
     <Comment>See ExitCSAddy</Comment>
+    <AOB>N/A</AOB>
   </Address>
-  <Address Name="NoCCBoxesAddy1">
+  <Address Type="Address" Name="NoCCBoxesAddy1">
     <AOB>56 8B F1 8B 0D ? ? ? ? 41 B8 ? ? ? ? F7 E9</AOB>
   </Address>
-  <Address Name="NoCCBoxesAddy2">
-    <AOB>ERROR</AOB>
+  <Address Type="Address" Name="NoCCBoxesAddy2">
+    <AOB>N/A</AOB>
   </Address>
-  <Address Name="FadeAddy1">
-    <AOB>ERROR</AOB>
+  <Address Type="Address" Name="FadeAddy1">
     <Comment>6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53 55 56 57 A1 ? ? ? ? 33 C4 50 8D 44 24 ? 64 A3 ? ? ? ? A1 ? ? ? ? - 4h result</Comment>
+    <AOB>N/A</AOB>
   </Address>
-  <Address Name="FadeAddy2">
+  <Address Type="Address" Name="FadeAddy2">
     <AOB>6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53 55 56 57 A1 ? ? ? ? 33 C4 50 8D 84 24 ? ? ? ? 64 A3 ? ? ? ? A1 ? ? ? ? 85 C0</AOB>
   </Address>
-  <Address Name="MouseFlyAddy">
+  <Address Type="Address" Name="MouseFlyAddy">
     <AOB>E8 ? ? ? ? 8B D8 8D BE ? ? ? ? 8D 4F ? 89 5C 24 ? E8 ? ? ? ? 8B CF</AOB>
   </Address>
-  <Address Name="MouseFlyCall1">
+  <Address Type="Address" Name="MouseFlyCall1">
     <Comment>Opcode</Comment>
-    <AOB>ERROR</AOB>
+    <AOB>N/A</AOB>
   </Address>
-  <Address Name="MouseFlyCall2">
+  <Address Type="Address" Name="MouseFlyCall2">
     <AOB>56 8B F1 8B 0D ? ? ? ? 41 B8 ? ? ? ? F7 E9</AOB>
   </Address>
-  <!--Hooks-->
-  <Address Name="CCAddy">
-    <AOB>6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 56 57 A1 ? ? ? ? 33 C4 50 8D 44 24 ? 64 A3 ? ? ? ? 8B 0D ? ? ? ? 85 C9</AOB>
+  <Address Type="Address" Name="CCAddy">
     <Comment>CField::SendTransferChannelRequest</Comment>
+    <AOB>6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 56 57 A1 ? ? ? ? 33 C4 50 8D 44 24 ? 64 A3 ? ? ? ? 8B 0D ? ? ? ? 85 C9</AOB>
   </Address>
-  <Address Name="CSAddy">
-    <AOB>6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53 55 56 57 A1 ? ? ? ? 33 C4 50 8D 44 24 ? 64 A3 ? ? ? ? 8B D9 A1 ? ? ? ? 33 F6</AOB>
+  <Address Type="Address" Name="CSAddy">
     <Comment>lpfnCWvsContext::SendMigrateToShopRequest</Comment>
+    <AOB>6A ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53 55 56 57 A1 ? ? ? ? 33 C4 50 8D 44 24 ? 64 A3 ? ? ? ? 8B D9 A1 ? ? ? ? 33 F6</AOB>
   </Address>
-  <Address Name="SendPacketAddy">
-    <AOB>E9 ? ? ? ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53</AOB>
+  <Address Type="Address" Name="SendPacketAddy">
     <Comment>CClientSocket::SendPacket</Comment>
+    <AOB>E9 ? ? ? ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53</AOB>
   </Address>
-  <Address Name="SendPacketHookAddy">
-    <AOB>ERROR</AOB>
+  <Address Type="Address" Name="SendPacketHookAddy">
     <Comment>8B 44 24 04 8B 0D ? ? ? ? 50 E8 ? ? ? ? C3 - 2nd result, check if it ends with a call to SendPacketAddy</Comment>
+    <AOB>N/A</AOB>
+  </Address>
+  <Address Type="Pointer" Name="CharBasePtr">
+    <AOB>8B ? ? ? ? ? 85 C9 74 ? 83 B8 ? ? ? ? 00 74 ? 8B ? ? ? ? ? 85 C0 7E ? 8B</AOB>
+  </Address>
+  <Address Type="Offset" Name="AttackCountOffset">
+    <AOB>89 ? ? ? 00 00 C7 ? ? ? 00 00 ? 00 00 00 89 ? ? ? 00 00 89 ? ? ? 00 00 89 ? ? ? 00 00 C7 ? ? ? 00 00 ? 00 00 00 89 ? ? ? 00 00 8D</AOB>
+  </Address>
+  <Address Type="Offset" Name="AttackXOffset">
+    <AOB>81 C1 ? ? 00 00 e8 ? ? ? ? 85 c0 75 ? c7</AOB>
+  </Address>
+  <Address Type="Offset" Name="BuffCountOffset">
+    <AOB>89 9E ? ? 00 00 C7 86 ? ? 00 00 14 00 00 00</AOB>
+  </Address>
+  <Address Type="Offset" Name="BreathOffset">
+    <AOB>83 B8 ? ? ? ? 00 7E ? 6A 00 6A 00 6A 00 6A 00</AOB>
+  </Address>
+  <Address Type="Offset" Name="ItemIDOffset">
+    <AOB>89 99 ? ? 00 00 8b 40 ? 55</AOB>
+  </Address>
+  <Address Type="Offset" Name="XOffset">
+    <AOB>89 8E ? ? 00 00 8B ? ? 8B ? 89 ? ? ? 00 00 8B ? ? 8B ? FF</AOB>
+  </Address>
+  <Address Type="Offset" Name="ComboOffset">
+    <AOB>89 86 ? ? 00 00 e8 ? ? ? ? 8b ce 89 86 ? ? 00 00 E8 ? ? ? ? 5E</AOB>
+  </Address>
+  <Address Type="Offset" Name="PetOffset">
+    <AOB>8B 97 ? ? ? ? 83 7A ? ? 74 ? A1 ? ? ? ? 83 B8 ? ? ? ? ? 75 ? 8B 87 ? ? ? ? 83 E0 ? 83 F8 ? 74 ? 33 F6</AOB>
+  </Address>
+  <Address Type="Offset" Name="PetFullnessOffset">
+    <AOB>89 96 ? 00 00 00 8b 47 ? 50 83 c7</AOB>
+  </Address>
+  <Address Type="Pointer" Name="InfoBasePtr">
+    <AOB>8B 0D ? ? ? ? 53 E8 ? ? ? ? 8B 44 24 ? C7 44 24</AOB>
+  </Address>
+  <Address Type="Offset" Name="MapIDOffset">
+    <AOB>89 BE ? ? ? ? 89 BE ? ? ? ? 89 BE ? ? ? ? 6A ? 6A ? 57 6A ? 68 ? ? ? ? 8B CE C6 44 24 ? ? C7 86 ? ? ? ? ? ? ? ? E8 ? ? ? ? 8B C6</AOB>
+  </Address>
+  <Address Type="Offset" Name="CharXOffset">
+    <AOB>8B 8F ? ? 00 00 53 E8 ? ? FF FF 5B 5E 5F C2 ? ? CC CC</AOB>
+  </Address>
+  <Address Type="Pointer" Name="StatsBasePtr">
+    <AOB>8B 0D ? ? ? ? 6A ? 50 E8 ? ? ? ? 8B 44 24 ? C6 44 24 ? 00 3B C7</AOB>
+  </Address>
+  <Address Type="Offset" Name="HPOffset">
+    <AOB>89 8E ? ? 00 00 80 BE ? ? 00 00 00 75 52 8B</AOB>
+  </Address>
+  <Address Type="Offset" Name="EXPOffset">
+    <AOB>89 AF ? ? ? ? 8B 08 8B 51 ? 50 FF D2 89 AF ? ? ? ? 8B 87 ? ? ? ?</AOB>
+  </Address>
+  <Address Type="Pointer" Name="MouseBasePtr">
+    <AOB>8B 0D ? ? ? ? 74 12 83 B9 ? ? ? ? ? 74 09 6A ? 6A ? E8</AOB>
+  </Address>
+  <Address Type="Offset" Name="MouseLocOffset">
+    <AOB>8B B1 ? ? ? ? 85 F6 75 ? 68 ? ? ? ? E8 ? ? ? 00 8B 4C 24 ? 8B 06 8B 90 ? ? ? ? F7 D9</AOB>
+  </Address>
+  <Address Type="Offset" Name="MouseXOffset">
+    <AOB>8B 88 ? ? ? ? 6A FF 57 83 C5 FE 55</AOB>
+  </Address>
+  <Address Type="Offset" Name="MouseAniOffset">
+    <AOB>8B 87 ? ? ? ? 8B 4C 24 ? 3B C1</AOB>
+  </Address>
+  <Address Type="Pointer" Name="SettingsBasePtr">
+    <AOB>8B 0D ? ? ? ? E8 ? ? ? ? 3B C3 0F 85 ? ? ? ? 8D 44 24 ? 50</AOB>
+  </Address>
+  <Address Type="Offset" Name="HPAlertOffset">
+    <AOB>a1 ? ? ? ? 8b 48 ? 8d 0c 89</AOB>
+  </Address>
+  <Address Type="Offset" Name="MPAlertOffset">
+    <AOB>8b 15 ? ? ? ? 8b 4a ? 8d 0c 89</AOB>
+  </Address>
+  <Address Type="Pointer" Name="ServerBasePtr">
+    <AOB>8b 0d ? ? ? ? 8D 44 24 ? 50 E8 ? ? ? ? 8B 70 ? 8D 4C 24 ? E8 ? ? ? ? 8B 4B ? 51</AOB>
+  </Address>
+  <Address Type="Offset" Name="TubiOffset">
+    <AOB>83 bb ? ? 00 00 00 75 ? 8b 83 ? ? 00 00 8b 48</AOB>
+  </Address>
+  <Address Type="Offset" Name="WorldOffset">
+    <AOB>8b 88 ? ? 00 00 89 8e ? ? 00 00 8b 88</AOB>
+  </Address>
+  <Address Type="Offset" Name="ChannelOffset">
+    <AOB>89 83 ? ? 00 00 e8 ? ? ? ? 89 83</AOB>
+  </Address>
+  <Address Type="Pointer" Name="WallBasePtr">
+    <AOB>8B 0D ? ? ? ? E8 ? ? ? ? C6 84 24 ? ? ? ? ? 3B F5 74 ? 8B 0E</AOB>
+  </Address>
+  <Address Type="Pointer" Name="MobBasePtr">
+    <AOB>8b 0d ? ? ? ? 50 e8 ? ? ? ? 8b f8 85 ff 74 ? 8b 57 ? 8b 52</AOB>
+  </Address>
+  <Address Type="Offset" Name="MobCountOffset">
+    <AOB>8B 52 ? 83 C7 ? 8D 44 24 ? 50 8B CF FF D2 8B 00 89</AOB>
+  </Address>
+  <Address Type="Offset" Name="MobDeathOffset">
+    <AOB>89 83 ? ? ? ? 8B 56 ? 52 8D 46 ? 50 E8 ? ? ? ? 89 83</AOB>
+  </Address>
+  <Address Type="Pointer" Name="PeopleBasePtr">
+    <AOB>8b 0d ? ? ? ? e8 ? ? ? ? 89 44 24 ? 85 c0</AOB>
+  </Address>
+  <Address Type="Offset" Name="PeopleCountOffset">
+    <AOB>8B 76 ? 85 F6 7C ? 83 FE 03 7D ? 8B</AOB>
+  </Address>
+  <Address Type="Pointer" Name="ItemBasePtr">
+    <AOB>8b 0d ? ? ? ? 57 e8 ? ? ? ? 8b 16</AOB>
+  </Address>
+  <Address Type="Offset" Name="ItemCountOffset">
+    <AOB>8B 4C 24 ? 83 C1 F8 83 F9 50</AOB>
+  </Address>
+  <Address Type="Address" Name="SendAddy">
+    <AOB>55 8b ec 6a ? 68 ? ? ? ? 64 a1 00 00 00 00 50 83 ec ? 53 56 57 a1 ? ? ? ? 33 c5 50 8d 45 ? 64 a3 00 00 00 00 89 4d ?</AOB>
+  </Address>
+  <Address Type="Address" Name="SendClassAddy">
+    <AOB>8B 0D ? ? ? ? E8 ? ? ? ? 8D 4C 24 ? C7 44 24 ? ? ? ? ? E8 ? ? ? ? 8B 4C 24 ? 64 89 0D ? ? ? ? 59</AOB>
+  </Address>
+  <Address Type="Address" Name="ClientSocketAddy">
+    <AOB>8B 0D ? ? ? ? E8 ? ? ? ? 8D 4C 24 ? C7 44 24 ? ? ? ? ? E8 ? ? ? ? 8B 4C 24 ? 64 89 0D ? ? ? ? 59</AOB>
+  </Address>
+  <Address Type="Address" Name="MSCRCAddy">
+    <AOB>8a 11 80 c2 ? 8b 4d ? 8b 09</AOB>
   </Address>
 </ArrayOfAddress>
