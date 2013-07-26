@@ -183,5 +183,10 @@ Void MyForm::bAdd_Click(System::Object^  sender, System::EventArgs^  e)
 	address->AOB = tbAOB->Text;
 	address->Comment = tbComment->Text;
 	addressList->Add(address);
+
+	tbName->Clear();
+	ddbType->SelectedIndex = -1;
+	tbAOB->Clear();
+	tbComment->Clear();
 	WriteXmlData();
 }
