@@ -51,7 +51,7 @@ namespace Hacks
 	{
 		call dwAggroCall
 		mov edx,dword ptr ds:[CharBasePtr]
-		mov edx,[edx+CharpIDOffset]
+		mov edx,[edx+0x0C]
 		mov edx,[edx+0x0C]
 		mov [esi+0x2B0],edx
 		jmp dwAggroRet
@@ -61,15 +61,13 @@ namespace Hacks
  
 	/////Pin Typer
 	BYTE bPinTyper[] = {0x0F, 0x84};
-
 	CMemory cmPinTyper(PinTyperAddy1, bPinTyper, 2, PinTyperAddy2, bPinTyper, 2);
 
 	/////PIC Typer
 	BYTE bPicTyper1[] = {0x90, 0xE9};
 	BYTE bPicTyper2[] = {0x00};
 	BYTE bPictyper3[] = {0xE8, 0x4D, 0xB2, 0xC5, 0xFF};
-
-	CMemory cmPicTyper(PicTyperAddy1, bPicTyper1, 2, PicTyperAddy2, bPicTyper2, 1, PicTyperAddy3, bPictyper3, 5);
+	CMemory cmPicTyper(/*PicTyperAddy1, bPicTyper1, 2, PicTyperAddy2, bPicTyper2, 1, PicTyperAddy3, bPictyper3, 5*/);
 
 	/////FusionAttack
 	DWORD dwFusionRet = FusionAddy + 8;
@@ -120,7 +118,7 @@ namespace Hacks
 	BYTE bDisarm[] = {0xE9, 0x24, 0x04, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90}; //jmp 00772493 + 4 nops
 	CMemory cmMobDisarm(MobDisarmAddy, bDisarm, sizeof(bDisarm));
  
-	/////No Mobs			77 ? 0F B6 80 ? ? ? 00 FF 24 85 ? ? ? 00 8B 54 24 ? 52 E8 ? ? ? FF C2 08 00 - 2nd result
+	/////No Mobs
 	BYTE bNoMobs[] = {0xEB};
 	CMemory cmNoMobs(NoMobsAddy, bNoMobs, 1);
  

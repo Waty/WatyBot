@@ -98,9 +98,6 @@
     <ClInclude Include="MapleStory.h">
       <Filter>Classes\CMapleStory</Filter>
     </ClInclude>
-    <ClInclude Include="Pointers.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
     <ClInclude Include="Settings.h">
       <Filter>Classes\Settings</Filter>
     </ClInclude>

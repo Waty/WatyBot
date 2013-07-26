@@ -1,6 +1,6 @@
 #pragma once
 #include <Windows.h>
-#include "Pointers.h"
+#include "HackAddys.h"
 
 namespace CMS
 {
@@ -50,7 +50,7 @@ namespace CMS
 	inline int CharMP()
 	{
 		WritePointer(SettingsBasePtr, MPAlertOffset, 20);
-		int MP = ReadPointer(StatsBasePtr, MPOffset);
+		int MP = ReadPointer(StatsBasePtr, HPOffset + 4);
 		if(MP > MaxMP) MaxMP = MP;
 		return MP;
 	}
@@ -86,26 +86,10 @@ namespace CMS
 	{
 		return (int) ReadPointer(ServerBasePtr, ChannelOffset);
 	}
-	inline int CharpId()
-	{
-		return (int) ReadPointer(CharBasePtr, CharpIDOffset);
-	}
-	inline int KnockBack()
-	{
-		return (int) ReadPointer(CharpId(), KBOffset);
-	}
-	inline int KnockBackX()
-	{
-		return (int) ReadPointer(CharpId(), KBXOffset);
-	}
-	inline int KnockBackY()
-	{
-		return (int) ReadPointer(CharpId(), KBYOffset);
-	}
 	inline int PetFullness()
 	{
 		unsigned long Pet = ReadPointer(CharBasePtr, PetOffset);
-		return ReadPointer(Pet+Pet1Offset, PetFull);
+		return ReadPointer(Pet+0x4, PetFullnessOffset);
 	}
 	inline bool gotMSCRC()
 	{

@@ -47,7 +47,7 @@ void MainForm::cbJDA_CheckedChanged(Object^  sender, EventArgs^  e)
 void MainForm::cbPinTyper_CheckedChanged(Object^  sender, EventArgs^  e)
 {
 	cbPinTyper->Checked = Hacks::cmPinTyper.Enable(cbPinTyper->Checked);
-	cbPinTyper->Checked = Hacks::cmPicTyper.Enable(cbPinTyper->Checked);
+	//cbPinTyper->Checked = Hacks::cmPicTyper.Enable(cbPinTyper->Checked);
 }
 void MainForm::cbDojangGodmode_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -321,8 +321,6 @@ void MainForm::StatsTimer_Tick(Object^  sender, EventArgs^  e)
 	this->TubiPointerLabel->Text =	"Tubi: "		+ CMS::Tubi();
 	this->BreathLabel->Text =		"Breath: "		+ CMS::Breath();
 	this->lMapID->Text =			"MapID: "		+ CMS::MapId();
-	this->lCharacterpID->Text =		"Char pID: "	+ CMS::CharpId();
-	this->lKnockBack->Text =		"KnockBack: "	+ CMS::KnockBack();
 	this->lPetFullness->Text =		"PetFullness: "	+ CMS::PetFullness();
 	
 	if(CMS::InGame())

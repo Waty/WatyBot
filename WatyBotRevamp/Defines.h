@@ -13,7 +13,6 @@
 #include "Memory.h"
 #include "StopWatch.h"
 
-#include "Pointers.h"
 #include "HackAddys.h"
 
 using namespace Packets;
