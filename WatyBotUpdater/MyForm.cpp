@@ -190,3 +190,37 @@ Void MyForm::bAdd_Click(System::Object^  sender, System::EventArgs^  e)
 	tbComment->Clear();
 	WriteXmlData();
 }
+
+Void MyForm::copySearchResultToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	auto selectedItem = lvAddys->SelectedItems[0];
+	auto text = selectedItem->SubItems[1]->Text;
+	if(text != nullptr) Clipboard::SetText(text);
+}
+
+Void MyForm::copyAOBToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	auto selectedItem = lvAddys->SelectedItems[0];
+	auto text = selectedItem->SubItems[3]->Text;
+	if(text != nullptr) Clipboard::SetText(text);
+}
+
+Void MyForm::copyCommentToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	auto selectedItem = lvAddys->SelectedItems[0];
+	auto text = selectedItem->SubItems[4]->Text;
+	if(text != nullptr && !String::Empty) Clipboard::SetText(text);
+}
+
+Void MyForm::deleteEntryToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	auto selectedItem = lvAddys->SelectedItems[0];
+	if(MessageBox::Show("Are you sure you want to delete \"" + selectedItem->Text + "\" ?", "Confirm", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::No) return;
+	addressList->RemoveAt(lvAddys->SelectedIndices[0]);
+	WriteXmlData();
+}
+
+Void MyForm::openFileLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+{
+	System::Diagnostics::Process::Start("explorer.exe", "/select," + aobfile);
+}

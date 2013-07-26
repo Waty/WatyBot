@@ -69,6 +69,12 @@ namespace WatyBotUpdater
 		TextBox^  tbAOB;
 		TextBox^  tbComment;
 		Button^  bAdd;
+		Windows::Forms::ContextMenuStrip^  contextMenuStrip1;
+		Windows::Forms::ToolStripMenuItem^  copySearchResultToolStripMenuItem;
+		Windows::Forms::ToolStripMenuItem^  copyAOBToolStripMenuItem;
+		Windows::Forms::ToolStripMenuItem^  copyCommentToolStripMenuItem;
+		Windows::Forms::ToolStripMenuItem^  deleteEntryToolStripMenuItem;
+		Windows::Forms::ToolStripMenuItem^  openFileLocationToolStripMenuItem;
 
 		IContainer^  components;
 
@@ -79,12 +85,19 @@ namespace WatyBotUpdater
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			this->lvAddys = (gcnew System::Windows::Forms::ListView());
 			this->chName = (gcnew System::Windows::Forms::ColumnHeader());
 			this->chAddy = (gcnew System::Windows::Forms::ColumnHeader());
 			this->chType = (gcnew System::Windows::Forms::ColumnHeader());
 			this->chAOB = (gcnew System::Windows::Forms::ColumnHeader());
 			this->chComments = (gcnew System::Windows::Forms::ColumnHeader());
+			this->contextMenuStrip1 = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
+			this->copySearchResultToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->copyAOBToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->copyCommentToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->deleteEntryToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->openFileLocationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->InputFileDialog = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->AOBFileWatcher = (gcnew System::IO::FileSystemWatcher());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
@@ -97,6 +110,7 @@ namespace WatyBotUpdater
 			this->bAdd = (gcnew System::Windows::Forms::Button());
 			this->tbComment = (gcnew System::Windows::Forms::TextBox());
 			this->tbAOB = (gcnew System::Windows::Forms::TextBox());
+			this->contextMenuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->AOBFileWatcher))->BeginInit();
 			this->menuStrip1->SuspendLayout();
 			this->gbNewAOB->SuspendLayout();
@@ -107,6 +121,7 @@ namespace WatyBotUpdater
 			this->lvAddys->AllowColumnReorder = true;
 			this->lvAddys->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(5) {this->chName, this->chAddy, 
 				this->chType, this->chAOB, this->chComments});
+			this->lvAddys->ContextMenuStrip = this->contextMenuStrip1;
 			this->lvAddys->FullRowSelect = true;
 			this->lvAddys->GridLines = true;
 			this->lvAddys->HeaderStyle = System::Windows::Forms::ColumnHeaderStyle::Nonclickable;
@@ -142,6 +157,48 @@ namespace WatyBotUpdater
 			// 
 			this->chComments->Text = L"Comment";
 			this->chComments->Width = 500;
+			// 
+			// contextMenuStrip1
+			// 
+			this->contextMenuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {this->copySearchResultToolStripMenuItem, 
+				this->copyAOBToolStripMenuItem, this->copyCommentToolStripMenuItem, this->deleteEntryToolStripMenuItem, this->openFileLocationToolStripMenuItem});
+			this->contextMenuStrip1->Name = L"contextMenuStrip1";
+			this->contextMenuStrip1->Size = System::Drawing::Size(172, 114);
+			// 
+			// copySearchResultToolStripMenuItem
+			// 
+			this->copySearchResultToolStripMenuItem->Name = L"copySearchResultToolStripMenuItem";
+			this->copySearchResultToolStripMenuItem->Size = System::Drawing::Size(171, 22);
+			this->copySearchResultToolStripMenuItem->Text = L"Copy search result";
+			this->copySearchResultToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::copySearchResultToolStripMenuItem_Click);
+			// 
+			// copyAOBToolStripMenuItem
+			// 
+			this->copyAOBToolStripMenuItem->Name = L"copyAOBToolStripMenuItem";
+			this->copyAOBToolStripMenuItem->Size = System::Drawing::Size(171, 22);
+			this->copyAOBToolStripMenuItem->Text = L"Copy AOB";
+			this->copyAOBToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::copyAOBToolStripMenuItem_Click);
+			// 
+			// copyCommentToolStripMenuItem
+			// 
+			this->copyCommentToolStripMenuItem->Name = L"copyCommentToolStripMenuItem";
+			this->copyCommentToolStripMenuItem->Size = System::Drawing::Size(171, 22);
+			this->copyCommentToolStripMenuItem->Text = L"Copy Comment";
+			this->copyCommentToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::copyCommentToolStripMenuItem_Click);
+			// 
+			// deleteEntryToolStripMenuItem
+			// 
+			this->deleteEntryToolStripMenuItem->Name = L"deleteEntryToolStripMenuItem";
+			this->deleteEntryToolStripMenuItem->Size = System::Drawing::Size(171, 22);
+			this->deleteEntryToolStripMenuItem->Text = L"Delete entry";
+			this->deleteEntryToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::deleteEntryToolStripMenuItem_Click);
+			// 
+			// openFileLocationToolStripMenuItem
+			// 
+			this->openFileLocationToolStripMenuItem->Name = L"openFileLocationToolStripMenuItem";
+			this->openFileLocationToolStripMenuItem->Size = System::Drawing::Size(171, 22);
+			this->openFileLocationToolStripMenuItem->Text = L"Open file location";
+			this->openFileLocationToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::openFileLocationToolStripMenuItem_Click);
 			// 
 			// InputFileDialog
 			// 
@@ -259,6 +316,7 @@ namespace WatyBotUpdater
 			this->Text = L"WatyUpdater Bèta 2.0";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MyForm::MyForm_FormClosing);
 			this->SizeChanged += gcnew System::EventHandler(this, &MyForm::MyForm_SizeChanged);
+			this->contextMenuStrip1->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->AOBFileWatcher))->EndInit();
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
@@ -279,5 +337,11 @@ namespace WatyBotUpdater
 		Void MyForm_SizeChanged(System::Object^  sender, System::EventArgs^  e);
 		Void saveAOBItem_Click(System::Object^  sender, System::EventArgs^  e);
 		Void bAdd_Click(System::Object^  sender, System::EventArgs^  e);
+		
+		Void copySearchResultToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+		Void copyAOBToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+		Void copyCommentToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+		Void deleteEntryToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+		Void openFileLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 	};
 }
