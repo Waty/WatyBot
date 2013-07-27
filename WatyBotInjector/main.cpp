@@ -107,17 +107,14 @@ int main()
 		return false;
 	}
 	
-	cout << "Trying to inject WatyBot..." << endl;
-	if(inject(marshal_as<string>(Directory::GetCurrentDirectory() + "\\WatyBot.dll"), procMS->Id)) cout << "Injected WatyBot :)" << endl;
+	cout << "Trying to inject CCPlZ's birthday Hacks..." << endl;
+	if(inject(marshal_as<string>(Directory::GetCurrentDirectory() + "\\CCPLZ3Years.dll"), procMS->Id)) cout << "Injected CCPlZ's birthday Hacks :)" << endl;
 	else
 	{
-		cout << "Failed in injecting WatyBot :(" << endl;		
+		cout << "Failed in injecting CCPlZ's birthday Hacks :(" << endl;		
 		system("pause");
 		return false;
 	}
-	
-	if(File::Exists(Directory::GetCurrentDirectory() + "\\WatyBotUpdater.dll")) inject(marshal_as<string>(Directory::GetCurrentDirectory() + "\\WatyBotUpdater.dll"), procMS->Id);
-	if(File::Exists(Directory::GetCurrentDirectory() + "\\MSCRC.dll")) inject(marshal_as<string>(Directory::GetCurrentDirectory() + "\\MSCRC.dll"), procMS->Id);
 
 	return true;
 }
