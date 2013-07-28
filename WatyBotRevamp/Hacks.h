@@ -65,9 +65,9 @@ namespace Hacks
 
 	/////PIC Typer
 	BYTE bPicTyper1[] = {0x90, 0xE9};
-	BYTE bPicTyper2[] = {0x00};
-	BYTE bPictyper3[] = {0xE8, 0x4D, 0xB2, 0xC5, 0xFF};
-	CMemory cmPicTyper(/*PicTyperAddy1, bPicTyper1, 2, PicTyperAddy2, bPicTyper2, 1, PicTyperAddy3, bPictyper3, 5*/);
+	BYTE bPicTyper2[] = {0xC7, 0x45, 0x88, 0x00};
+	BYTE bPictyper3[] = {0xE8, 0x79, 0x00, 0xC8, 0xFF};
+	CMemory cmPicTyper(PicTyperAddy1, bPicTyper1, 2, PicTyperAddy2, bPicTyper2, 4, PicTyperAddy3, bPictyper3, 5);
 
 	/////FusionAttack
 	DWORD dwFusionRet = FusionAddy + 8;
@@ -92,7 +92,7 @@ namespace Hacks
  
 	/////No Background + Clouds
 	BYTE bNoBG[] = {0x90, 0x90, 0x90, 0x90, 0x90};
-	CMemory cmNoBG(/*NoBGAddy1, bNoBG, 5, */NoBGAddy2, bNoBG, 5);
+	CMemory cmNoBG(NoBGAddy1, bNoBG, 5, NoBGAddy2, bNoBG, 5);
  
 	/////Faster Mobs
 	BYTE bFasterMobs[] = {0x90, 0x90};
@@ -152,8 +152,8 @@ namespace Hacks
 	CMemory cm50SecGM(Godmode50SecAddy1, b50SecGM1, 1, Godmode50SecAddy2, b50SecGM2, 2);
  
 	/////Logo Skipper
-	BYTE bLogoSkipper[] = {0x50, 0xD2};
-	CMemory cmLogoSkipper(/*LogoSkipperAddy, bLogoSkipper, 2*/);
+	BYTE bLogoSkipper[] = {0xB0, 0x4A};
+	CMemory cmLogoSkipper(LogoSkipperAddy, bLogoSkipper, 2);
  
 	/////(semi) Item Vac
 	DWORD dwItemVacCall = ItemVacCall;
@@ -243,7 +243,7 @@ namespace Hacks
 	BYTE bHideDamage3[] = {0xEB};
 	BYTE bHideDamage4[] = {0xEB};
 	BYTE bHideDamage5[] = {0xEB};
-	CMemory cmHideDamage1(HideDamageAddy1, bHideDamage1, 1, HideDamageAddy2, bHideDamage2, 2/*, HideDamageAddy3, bHideDamage3, 1, HideDamageAddy4, bHideDamage4, 1*/);
+	CMemory cmHideDamage1(HideDamageAddy1, bHideDamage1, 1, HideDamageAddy2, bHideDamage2, 2, HideDamageAddy3, bHideDamage3, 1, HideDamageAddy4, bHideDamage4, 1);
 	CMemory cmHideDamage2(HideDamageAddy5, bHideDamage5, 1);
  
 	/////Mercedes Combos without comboing
@@ -293,7 +293,7 @@ namespace Hacks
 	///No CC BLue Boxes
 	//TODO: Fix this:
 	BYTE bNoCCBoxes[] = {0x90, 0x90, 0x90, 0x90, 0x90};
-	CMemory cmNoCCBoxes(NoCCBoxesAddy1, bNoCCBoxes, 5/*, NoCCBoxesAddy2, bNoCCBoxes, 5*/);
+	CMemory cmNoCCBoxes(NoCCBoxesAddy1, bNoCCBoxes, 5, NoCCBoxesAddy2, bNoCCBoxes, 5);
 	
 	////SS Mouse Fly
 	DWORD dwMouseFlyRet = MouseFlyAddy + 5;
@@ -307,9 +307,8 @@ namespace Hacks
 		//looking for the mouse click
 		mov ebx, [MouseBasePtr]
 		mov ebx, [ebx]
-		//MouseClick fly, but mouseanioffset is wrong :(
-		//cmp dword ptr[ebx+MouseAniOffset], 0x0C
-		//jne FlyExit
+		cmp dword ptr[ebx+MouseAniOffset], 0x0C
+		jne FlyExit
 
 		//get mouselocation
 		mov ebx,[ebx+MouseLocOffset]
@@ -317,20 +316,19 @@ namespace Hacks
 		mov ebx,[ebx+(MouseXOffset + 4)]
 
 		//encrypt and set teleoffsets
-		lea ecx,[esi+0x7AF0]
+		lea ecx,[esi+0x7B28]
 		push eax
 		call dwMouseFlyCall2
-		lea ecx, [esi+0x7AE4]
+		lea ecx, [esi+0x7B1C]
 		push ebx
 		call dwMouseFlyCall2
-		lea ecx, [esi+0x7ACC]
+		lea ecx, [esi+0x7B04]
 		push 00000001 //Probably dont need all the proceeding 0's but wthell
 		call dwMouseFlyCall2
 
-		//FlyExit:
+		FlyExit:
 		popad
 		jmp dwMouseFlyRet
-
 	}
 	EndCodeCave
 	CMemory cmMouseFly(MouseFlyAddy, CaveMouseFly, 0, true);

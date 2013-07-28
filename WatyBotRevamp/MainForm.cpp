@@ -47,7 +47,7 @@ void MainForm::cbJDA_CheckedChanged(Object^  sender, EventArgs^  e)
 void MainForm::cbPinTyper_CheckedChanged(Object^  sender, EventArgs^  e)
 {
 	cbPinTyper->Checked = Hacks::cmPinTyper.Enable(cbPinTyper->Checked);
-	//cbPinTyper->Checked = Hacks::cmPicTyper.Enable(cbPinTyper->Checked);
+	cbPinTyper->Checked = Hacks::cmPicTyper.Enable(cbPinTyper->Checked);
 }
 void MainForm::cbDojangGodmode_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -89,7 +89,7 @@ void MainForm::cb50SecGM_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 void MainForm::cbLogoSkipper_CheckedChanged(Object^  sender, EventArgs^  e)
 {
-	//cbLogoSkipper->Checked = Hacks::cmLogoSkipper.Enable(cbLogoSkipper->Checked);
+	cbLogoSkipper->Checked = Hacks::cmLogoSkipper.Enable(cbLogoSkipper->Checked);
 }
 void MainForm::cbViewSwears_CheckedChanged(Object^  sender, EventArgs^  e)
 {
