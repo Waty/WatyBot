@@ -11,10 +11,12 @@ int keys[] = {VK_F1, VK_F2, VK_F3, VK_F4, VK_F5, VK_F6, VK_F7, VK_F8, VK_F9, VK_
 
 BYTE bSit[] = {0x75};
 CMemory cmSitHack(0xC84331, bSit, 1);
+BOOL Humping = TRUE;
 
 DWORD dwMouseFlyRet = 0xCD1B39 + 5;
 DWORD dwMouseFlyCall1 = 0xD115D0;
 DWORD dwMouseFlyCall2 = 0x407920;
+BOOL ClickMouseFly = TRUE;
 
 CodeCave(MouseFly)
 {
@@ -23,10 +25,15 @@ CodeCave(MouseFly)
 	//looking for the mouse click
 	mov ebx, [0x1402540]
 	mov ebx, [ebx]
+
+	cmp ClickMouseFly,FALSE
+	je Fly
+
 	//MouseClick fly, but mouseanioffset is wrong :(
 	cmp dword ptr[ebx+0x9DC], 0x0C
 	jne FlyExit
 
+	Fly:
 	//get mouselocation
 	mov ebx,[ebx+0x978]
 	mov eax,[ebx+0x8C]
@@ -51,6 +58,18 @@ CodeCave(MouseFly)
 EndCodeCave
 CMemory cmMouseFly(0xCD1B39, CaveMouseFly, 0, true);
 
+
+Void MyForm::ddbMouseFly_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	ClickMouseFly = ddbMouseFly->SelectedIndex;
+}
+
+Void MyForm::ddbSitHack_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Humping = ddbSitHack->SelectedIndex;
+}
+
+
 void Main(void)
 {
 	Application::EnableVisualStyles();
@@ -68,7 +87,7 @@ Void MyForm::sithackTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 {
 	static int timer = 0;
 	timer++;
-	if(Enabled && timer >= 5)
+	if(Enabled && timer >= 5 && Humping)
 	{
 		timer = 0;
 		cmSitHack.Enable(!cmSitHack.Enabled);
