@@ -29,8 +29,8 @@ namespace Packets
 	public ref class CPackets sealed
 	{
 	public:
-		static property List<CPacketData^>^ Packets;
-		static property CPacketData^ SelectedPacket;
+		static List<CPacketData^>^ Packets = gcnew List<CPacketData^>;
+		static CPacketData^ SelectedPacket;
 
 		//Public Methods
 		static void Add(CPacketData^ Packet);

@@ -26,8 +26,8 @@ namespace SpawnControl
 		static void EditLocation(int index, System::String^ name, int mapid, int x, int y);
 		static void AddLocation(String^ Name, int MapId, int X, int Y);
 
-		static property List<CSPControlLocation^>^ Locations;
-		static property XmlSerializer^ serializer;
+		static List<CSPControlLocation^>^ Locations = gcnew List<CSPControlLocation^>;
+		static XmlSerializer^ serializer;
 
 		static bool Enable(bool status);
 	};
