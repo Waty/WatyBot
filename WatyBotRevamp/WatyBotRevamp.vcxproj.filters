@@ -116,9 +116,15 @@
     <ClInclude Include="EditSPControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PacketDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditSPControl.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>
