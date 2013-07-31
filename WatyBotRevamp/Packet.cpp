@@ -12,8 +12,6 @@ CPacketData::CPacketData(String^ Name, List<String^>^ Data, int Interval)
 
 void CPackets::WriteXmlData()
 {
-	if(serializer == nullptr) serializer = gcnew XmlSerializer(List<CPacketData^>::typeid);
-	
 	auto writer = File::Create(PacketFileName);
 	try
 	{
@@ -25,7 +23,6 @@ void CPackets::WriteXmlData()
 
 void CPackets::ReadXmlData()
 {
-	if(serializer == nullptr) serializer = gcnew XmlSerializer(List<CPacketData^>::typeid);
 	if(!File::Exists(PacketFileName))
 	{
 		WriteXmlData();

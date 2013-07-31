@@ -45,7 +45,6 @@ namespace Packets
 		static bool VerifyPacket(String^ strPacket, String^&strError);
 
 	private:
-		static property XmlSerializer^ serializer;
-		~CPackets(){}
+		static XmlSerializer^ serializer = gcnew XmlSerializer(List<CPacketData^>::typeid);
 	};
 }

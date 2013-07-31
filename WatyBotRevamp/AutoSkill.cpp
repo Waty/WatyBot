@@ -54,8 +54,6 @@ Void AutoSkillEntry::CastBackground(System::Object^ sender, System::ComponentMod
 
 Void AutoSkill::WriteXmlData()
 {
-	if(serializer == nullptr) serializer = gcnew XmlSerializer(List<AutoSkillEntry^>::typeid);
-	
 	auto writer = File::Create(AutoSkillFileName);
 	try
 	{
@@ -67,7 +65,6 @@ Void AutoSkill::WriteXmlData()
 
 Void AutoSkill::ReadXmlData()
 {
-	if(serializer == nullptr) serializer = gcnew XmlSerializer(List<AutoSkillEntry^>::typeid);
 	if(!File::Exists(AutoSkillFileName))
 	{
 		WriteXmlData();

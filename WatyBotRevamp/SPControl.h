@@ -27,8 +27,10 @@ namespace SpawnControl
 		static void AddLocation(String^ Name, int MapId, int X, int Y);
 
 		static List<CSPControlLocation^>^ Locations = gcnew List<CSPControlLocation^>;
-		static XmlSerializer^ serializer;
 
 		static bool Enable(bool status);
+
+	private:
+		static XmlSerializer^ serializer = gcnew XmlSerializer(List<CSPControlLocation^>::typeid);
 	};
 }

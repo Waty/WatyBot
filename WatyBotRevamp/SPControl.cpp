@@ -18,8 +18,6 @@ CSPControlLocation::CSPControlLocation(String^ name, int MapId, int X, int Y)
 
 void CSPControl::WriteXmlData()
 {
-	if(serializer == nullptr) serializer = gcnew XmlSerializer(List<CSPControlLocation^>::typeid);
-	
 	auto writer = File::Create(SPControlFileName);
 	try
 	{
@@ -31,7 +29,6 @@ void CSPControl::WriteXmlData()
 
 void CSPControl::ReadXmlData()
 {
-	if(serializer == nullptr) serializer = gcnew XmlSerializer(List<CSPControlLocation^>::typeid);
 	if(!File::Exists(SPControlFileName))
 	{
 		WriteXmlData();
