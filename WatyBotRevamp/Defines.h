@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _DEFINES_H
-#define _DEFINES_H
 #include <Windows.h>
 #include <vcclr.h>
 
@@ -41,7 +39,6 @@ using namespace System::IO;
 extern StopWatch<milliseconds> SkillInjectionStopWatch;
 extern StopWatch<milliseconds> BreathCounter;
 extern gcroot<CChangeChannel^> CC;
-extern gcroot<CPackets^> CPacket;
 extern gcroot<CSPControl^> SPControl;
 extern gcroot<NotifyIcon^> notifyIcon;
 
@@ -51,5 +48,3 @@ extern int KeyCodes[];
 #define KeyCodesSize 58
 
 extern enum SettingsIndex;
-
-#endif //_DEFINES_H

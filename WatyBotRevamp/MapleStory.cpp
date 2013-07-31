@@ -80,11 +80,11 @@ namespace CMS
 	void SendSwitch(int index)
 	{
 		if(index < KeyCodesSize) SendKey(KeyCodes[index]);	
-		else CPacket->Send(CPacket->Packets[index - KeyCodesSize]);
+		else CPackets::Send(CPackets::Packets[index - KeyCodesSize]);
 	}
 	void SpamSwitch(int index)
 	{
 		if(index < KeyCodesSize) SpamKey(KeyCodes[index]);	
-		else CPacket->Send(CPacket->Packets[index - KeyCodesSize]);
+		else CPackets::Send(CPackets::Packets[index - KeyCodesSize]);
 	}
 }

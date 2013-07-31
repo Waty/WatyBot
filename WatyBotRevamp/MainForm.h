@@ -35,6 +35,8 @@ namespace WatyBotRevamp {
 			this->ddbHotKeyLoot->Items->AddRange(KeyNames);
 			this->ddbHotKeyAttack->Items->AddRange(KeyNames);
 			this->ddbHotKeyMouseFly->Items->AddRange(KeyNames);
+
+			this->SettingsWatcher->Path = WatyBotWorkingDirectory;
 		}
 
 	protected:
@@ -201,22 +203,18 @@ private: System::Windows::Forms::Label^  lSLWSB;
 		System::Windows::Forms::ListView^  lvPackets;
 		System::Windows::Forms::ColumnHeader^  hPacketName;
 		System::Windows::Forms::ColumnHeader^  hPacket;
-		System::Windows::Forms::TextBox^  tbPacketData;
-		System::Windows::Forms::TextBox^  tbPacketName;
 		System::Windows::Forms::Button^  bAddPacket;
 		System::Windows::Forms::ContextMenuStrip^  PacketContextMenu;
 		System::Windows::Forms::ToolStripMenuItem^  bSendPacket;
 		System::Windows::Forms::ToolStripMenuItem^  bDeletePacket;
-		System::Windows::Forms::Button^  bSaveChangedPacket;
-		System::Windows::Forms::Label^  label1;
 		System::Windows::Forms::ComboBox^  ddbHotKeyMouseFly;
 		System::Windows::Forms::CheckBox^  cbHotKeyMouseFly;
-private: System::Windows::Forms::ToolStripMenuItem^  editLocationToolStripMenuItem;
-		 System::ComponentModel::IContainer^  components;
+		System::Windows::Forms::ToolStripMenuItem^  editLocationToolStripMenuItem;
+		System::Windows::Forms::Button^  button1;
+		System::Windows::Forms::ToolStripMenuItem^  bEditPacket;
+		System::IO::FileSystemWatcher^  SettingsWatcher;
 
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
+		 System::ComponentModel::IContainer^  components;
 #pragma endregion
 
 #pragma region Windows Form Designer generated code
@@ -325,17 +323,15 @@ private: System::Windows::Forms::ToolStripMenuItem^  editLocationToolStripMenuIt
 			this->cbWalkRight = (gcnew System::Windows::Forms::CheckBox());
 			this->cbVacRight = (gcnew System::Windows::Forms::CheckBox());
 			this->PacketSenderTab = (gcnew System::Windows::Forms::TabPage());
-			this->bSaveChangedPacket = (gcnew System::Windows::Forms::Button());
-			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->bAddPacket = (gcnew System::Windows::Forms::Button());
-			this->tbPacketData = (gcnew System::Windows::Forms::TextBox());
-			this->tbPacketName = (gcnew System::Windows::Forms::TextBox());
 			this->lvPackets = (gcnew System::Windows::Forms::ListView());
 			this->hPacketName = (gcnew System::Windows::Forms::ColumnHeader());
 			this->hPacket = (gcnew System::Windows::Forms::ColumnHeader());
 			this->PacketContextMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->bSendPacket = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->bDeletePacket = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->bEditPacket = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->SPControlTabPage = (gcnew System::Windows::Forms::TabPage());
 			this->gbNewSPCLocation = (gcnew System::Windows::Forms::GroupBox());
 			this->nudSPCY = (gcnew System::Windows::Forms::NumericUpDown());
@@ -389,6 +385,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  editLocationToolStripMenuIt
 			this->tAutoAttack = (gcnew System::Windows::Forms::Timer(this->components));
 			this->tAutoLoot = (gcnew System::Windows::Forms::Timer(this->components));
 			this->tTimedCC = (gcnew System::Windows::Forms::Timer(this->components));
+			this->SettingsWatcher = (gcnew System::IO::FileSystemWatcher());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->gbAutoSkill->SuspendLayout();
@@ -428,6 +425,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  editLocationToolStripMenuIt
 			this->InfoTab->SuspendLayout();
 			this->gbHotKeys->SuspendLayout();
 			this->gbPointers->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->SettingsWatcher))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -1569,11 +1567,8 @@ private: System::Windows::Forms::ToolStripMenuItem^  editLocationToolStripMenuIt
 			// 
 			// PacketSenderTab
 			// 
-			this->PacketSenderTab->Controls->Add(this->bSaveChangedPacket);
-			this->PacketSenderTab->Controls->Add(this->label1);
+			this->PacketSenderTab->Controls->Add(this->button1);
 			this->PacketSenderTab->Controls->Add(this->bAddPacket);
-			this->PacketSenderTab->Controls->Add(this->tbPacketData);
-			this->PacketSenderTab->Controls->Add(this->tbPacketName);
 			this->PacketSenderTab->Controls->Add(this->lvPackets);
 			this->PacketSenderTab->Location = System::Drawing::Point(4, 22);
 			this->PacketSenderTab->Name = L"PacketSenderTab";
@@ -1583,50 +1578,24 @@ private: System::Windows::Forms::ToolStripMenuItem^  editLocationToolStripMenuIt
 			this->PacketSenderTab->Text = L"Packets";
 			this->PacketSenderTab->UseVisualStyleBackColor = true;
 			// 
-			// bSaveChangedPacket
+			// button1
 			// 
-			this->bSaveChangedPacket->Enabled = false;
-			this->bSaveChangedPacket->Location = System::Drawing::Point(6, 202);
-			this->bSaveChangedPacket->Name = L"bSaveChangedPacket";
-			this->bSaveChangedPacket->Size = System::Drawing::Size(115, 23);
-			this->bSaveChangedPacket->TabIndex = 5;
-			this->bSaveChangedPacket->Text = L"Save Changes";
-			this->bSaveChangedPacket->UseVisualStyleBackColor = true;
-			this->bSaveChangedPacket->Click += gcnew System::EventHandler(this, &MainForm::bSaveChangedPacket_Click);
-			// 
-			// label1
-			// 
-			this->label1->Location = System::Drawing::Point(6, 177);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(115, 22);
-			this->label1->TabIndex = 4;
-			this->label1->Text = L"or";
-			this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->button1->Location = System::Drawing::Point(6, 202);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->TabIndex = 4;
+			this->button1->Text = L"Send";
+			this->button1->UseVisualStyleBackColor = true;
 			// 
 			// bAddPacket
 			// 
-			this->bAddPacket->Location = System::Drawing::Point(6, 151);
+			this->bAddPacket->Location = System::Drawing::Point(205, 202);
 			this->bAddPacket->Name = L"bAddPacket";
 			this->bAddPacket->Size = System::Drawing::Size(115, 23);
 			this->bAddPacket->TabIndex = 3;
 			this->bAddPacket->Text = L"Add Packet";
 			this->bAddPacket->UseVisualStyleBackColor = true;
 			this->bAddPacket->Click += gcnew System::EventHandler(this, &MainForm::bAddPacket_Click);
-			// 
-			// tbPacketData
-			// 
-			this->tbPacketData->Location = System::Drawing::Point(128, 125);
-			this->tbPacketData->Multiline = true;
-			this->tbPacketData->Name = L"tbPacketData";
-			this->tbPacketData->Size = System::Drawing::Size(192, 100);
-			this->tbPacketData->TabIndex = 2;
-			// 
-			// tbPacketName
-			// 
-			this->tbPacketName->Location = System::Drawing::Point(6, 125);
-			this->tbPacketName->Name = L"tbPacketName";
-			this->tbPacketName->Size = System::Drawing::Size(115, 20);
-			this->tbPacketName->TabIndex = 1;
 			// 
 			// lvPackets
 			// 
@@ -1638,7 +1607,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  editLocationToolStripMenuIt
 			this->lvPackets->Location = System::Drawing::Point(6, 7);
 			this->lvPackets->MultiSelect = false;
 			this->lvPackets->Name = L"lvPackets";
-			this->lvPackets->Size = System::Drawing::Size(314, 112);
+			this->lvPackets->Size = System::Drawing::Size(314, 189);
 			this->lvPackets->TabIndex = 0;
 			this->lvPackets->UseCompatibleStateImageBehavior = false;
 			this->lvPackets->View = System::Windows::Forms::View::Details;
@@ -1657,10 +1626,10 @@ private: System::Windows::Forms::ToolStripMenuItem^  editLocationToolStripMenuIt
 			// 
 			// PacketContextMenu
 			// 
-			this->PacketContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->bSendPacket, 
-				this->bDeletePacket});
+			this->PacketContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {this->bSendPacket, 
+				this->bDeletePacket, this->bEditPacket});
 			this->PacketContextMenu->Name = L"PacketContextMenu";
-			this->PacketContextMenu->Size = System::Drawing::Size(108, 48);
+			this->PacketContextMenu->Size = System::Drawing::Size(108, 70);
 			// 
 			// bSendPacket
 			// 
@@ -1675,6 +1644,13 @@ private: System::Windows::Forms::ToolStripMenuItem^  editLocationToolStripMenuIt
 			this->bDeletePacket->Size = System::Drawing::Size(107, 22);
 			this->bDeletePacket->Text = L"Delete";
 			this->bDeletePacket->Click += gcnew System::EventHandler(this, &MainForm::bDeletePacket_Click);
+			// 
+			// bEditPacket
+			// 
+			this->bEditPacket->Name = L"bEditPacket";
+			this->bEditPacket->Size = System::Drawing::Size(107, 22);
+			this->bEditPacket->Text = L"Edit";
+			this->bEditPacket->Click += gcnew System::EventHandler(this, &MainForm::bEditPacket_Click);
 			// 
 			// SPControlTabPage
 			// 
@@ -2164,6 +2140,14 @@ private: System::Windows::Forms::ToolStripMenuItem^  editLocationToolStripMenuIt
 			// 
 			this->tTimedCC->Tick += gcnew System::EventHandler(this, &MainForm::tTimedCC_Tick);
 			// 
+			// SettingsWatcher
+			// 
+			this->SettingsWatcher->EnableRaisingEvents = true;
+			this->SettingsWatcher->Filter = L"*.xml";
+			this->SettingsWatcher->NotifyFilter = System::IO::NotifyFilters::LastWrite;
+			this->SettingsWatcher->SynchronizingObject = this;
+			this->SettingsWatcher->Changed += gcnew System::IO::FileSystemEventHandler(this, &MainForm::SettingsWatcher_Changed);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2214,7 +2198,6 @@ private: System::Windows::Forms::ToolStripMenuItem^  editLocationToolStripMenuIt
 			this->MobHacks->ResumeLayout(false);
 			this->MobHacks->PerformLayout();
 			this->PacketSenderTab->ResumeLayout(false);
-			this->PacketSenderTab->PerformLayout();
 			this->PacketContextMenu->ResumeLayout(false);
 			this->SPControlTabPage->ResumeLayout(false);
 			this->gbNewSPCLocation->ResumeLayout(false);
@@ -2228,6 +2211,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  editLocationToolStripMenuIt
 			this->gbHotKeys->PerformLayout();
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->SettingsWatcher))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -2327,12 +2311,27 @@ private:
 	Void cbIceGuard_CheckedChanged(Object^  sender, EventArgs^  e);
 
 	//PacketSender events
-	Void InitializePacketSender();
 	Void lvPackets_SelectedIndexChanged(Object^ sender, EventArgs^ e);
 	Void bAddPacket_Click(Object^ sender, EventArgs^ e);
-	Void bSaveChangedPacket_Click(Object^ sender, EventArgs^ e);
 	Void bSendPacket_Click(Object^ sender, EventArgs^ e);
 	Void bDeletePacket_Click(Object^ sender, EventArgs^  e);
 	Void lvPackets_KeyDown(Object^ sender, KeyEventArgs^ e);
+	Void bEditPacket_Click(System::Object^  sender, System::EventArgs^  e);
+
+	//Settings
+	Void SettingsWatcher_Changed(System::Object^  sender, System::IO::FileSystemEventArgs^  e)
+	{
+		if(e->FullPath == PacketFileName)
+		{
+			CPackets::ReadXmlData();
+			lvPackets->Clear();
+			for each(CPacketData^ packet in CPackets::Packets)
+			{
+				auto i = gcnew ListViewItem(packet->Name);
+				if(packet->Data->Count > 0) i->SubItems->Add(packet->Data->Count + " packets in here");
+				lvPackets->Items->Add(i);
+			}
+		}
+	}
 };
 }

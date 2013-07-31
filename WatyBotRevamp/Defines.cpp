@@ -4,7 +4,6 @@ StopWatch<milliseconds> SkillInjectionStopWatch;
 StopWatch<milliseconds> BreathCounter(milliseconds(5500));
 
 gcroot<CChangeChannel^> CC;
-gcroot<CPackets^> CPacket;
 gcroot<CSPControl^> SPControl;
 gcroot<NotifyIcon^> notifyIcon;
 

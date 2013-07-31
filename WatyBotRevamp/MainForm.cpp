@@ -3,6 +3,7 @@
 #include "Defines.h"
 #include "Hacks.h"
 #include "EditSPControl.h"
+#include "PacketDialog.h"
 
 using namespace Settings;
 using namespace WatyBotRevamp;
@@ -208,7 +209,7 @@ Void MainForm::ddbAutoAttackKey_DropDown(System::Object^  sender, System::EventA
 {
 	ddbAutoAttackKey->Items->Clear();
 	ddbAutoAttackKey->Items->AddRange(KeyNames);
-	for each(CPacketData^ p in CPacket->Packets) ddbAutoAttackKey->Items->Add(p->Name);
+	for each(CPacketData^ p in CPackets::Packets) ddbAutoAttackKey->Items->Add(p->Name);
 }
 Void MainForm::cbAutoLoot_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -230,7 +231,7 @@ Void MainForm::ddbAutoLootKey_DropDown(Object^  sender, EventArgs^ e)
 {
 	ddbAutoLootKey->Items->Clear();
 	ddbAutoLootKey->Items->AddRange(KeyNames);
-	for each(CPacketData^ p in CPacket->Packets) ddbAutoLootKey->Items->Add(p->Name);
+	for each(CPacketData^ p in CPackets::Packets) ddbAutoLootKey->Items->Add(p->Name);
 }
 Void MainForm::cbAutoHP_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -241,7 +242,7 @@ Void MainForm::ddbAutoHPKey_DropDown(Object^  sender, EventArgs^ e)
 {
 	ddbAutoHPKey->Items->Clear();
 	ddbAutoHPKey->Items->AddRange(KeyNames);
-	for each(CPacketData^ p in CPacket->Packets) ddbAutoHPKey->Items->Add(p->Name);
+	for each(CPacketData^ p in CPackets::Packets) ddbAutoHPKey->Items->Add(p->Name);
 }
 Void MainForm::cbAutoMP_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -252,13 +253,13 @@ Void MainForm::ddbAutoMPKey_DropDown(Object^  sender, EventArgs^ e)
 {
 	ddbAutoMPKey->Items->Clear();
 	ddbAutoMPKey->Items->AddRange(KeyNames);
-	for each(CPacketData^ p in CPacket->Packets) ddbAutoMPKey->Items->Add(p->Name);
+	for each(CPacketData^ p in CPackets::Packets) ddbAutoMPKey->Items->Add(p->Name);
 }
 Void MainForm::ddbPetFeeder_DropDown(::Object^  sender, EventArgs^  e)
 {
 	ddbPetFeeder->Items->Clear();
 	ddbPetFeeder->Items->AddRange(KeyNames);
-	for each(CPacketData^ p in CPacket->Packets) ddbPetFeeder->Items->Add(p->Name);
+	for each(CPacketData^ p in CPackets::Packets) ddbPetFeeder->Items->Add(p->Name);
 }
 Void MainForm::cbCCPeople_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -302,7 +303,7 @@ void MainForm::MainForm_Load(Object^  sender, EventArgs^  e)
 	//Load all the settings and innitialize all the classes
 	CC = gcnew CChangeChannel;
 	SPControl = gcnew CSPControl;
-	InitializePacketSender();
+	CPackets::ReadXmlData();
 	LoadSettings();
 	AutoSkills = LoadAutoSkill();
 
@@ -395,7 +396,7 @@ Void MainForm::ddbAutoSkill_DropDown(Object^  sender, EventArgs^  e)
 {
 	ddbAutoSkill->Items->Clear();
 	ddbAutoSkill->Items->AddRange(KeyNames);
-	for each(CPacketData^ p in CPacket->Packets) ddbAutoSkill->Items->Add(p->Name);
+	for each(CPacketData^ p in CPackets::Packets) ddbAutoSkill->Items->Add(p->Name);
 }
 Void MainForm::castToolStripMenuItem_Click(Object^  sender, EventArgs^  e)
 {
@@ -444,7 +445,7 @@ List<CAutoSkill^>^ MainForm::LoadAutoSkill()
 	ddbAutoSkill->Items->Clear();
 	ddbAutoSkill->Items->AddRange(KeyNames);
 	ddbAutoSkill->BeginUpdate();
-	for each(CPacketData^ p in CPacket->Packets) ddbAutoSkill->Items->Add(p->Name);
+	for each(CPacketData^ p in CPackets::Packets) ddbAutoSkill->Items->Add(p->Name);
 	ddbAutoSkill->EndUpdate();
 	lvAutoSkill->BeginUpdate();
 	for each(CAutoSkill^ as in AutoSkill)
@@ -471,82 +472,39 @@ void MainForm::SaveAutoSkill()
 }
 
 //Controls on the PacketSender tab
-Void MainForm::InitializePacketSender()
-{
-	CPacket = gcnew CPackets;
-	lvPackets->BeginUpdate();
-	for each(CPacketData^ packet in CPacket->Packets)
-	{
-		ListViewItem^ i = gcnew ListViewItem(packet->Name);
-		if(packet->Data->Count > 0) i->SubItems->Add(packet->Data->Count > 1 ? packet->Data[0] + " + more" : packet->Data[0]);
-		lvPackets->Items->Add(i);
-	}
-	lvPackets->EndUpdate();
-}
 Void MainForm::bAddPacket_Click(Object^  sender, EventArgs^  e)
 {
-	List<String^>^ Data = gcnew List<String^>;
-	Data->AddRange(tbPacketData->Lines);
-	for each(String^ str in Data)
-	{
-		String^ strError = String::Empty;
-		if(!CPacket->VerifyPacket(str, strError))
-		{
-			ShowNotifyIcon(strError);
-			return;
-		}
-	}
-
-	ListViewItem^ i = gcnew ListViewItem(tbPacketName->Text);
-	i->SubItems->Add(Data->Count > 1 ? Data[0] + " + more" : Data[0]);
-	lvPackets->Items->Add(i);
-
-	CPacket->Add(tbPacketName->Text, Data);
-	CPacket->Save();
+	auto dialog = gcnew PacketDialog;
+	if(dialog->ShowDialog() == ::DialogResult::OK)
+		CPackets::Add(dialog->PacketData);
 }
-Void MainForm::bSaveChangedPacket_Click(Object^  sender, EventArgs^  e)
+Void MainForm::bEditPacket_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	String^ newName = tbPacketName->Text;
-	List<String^>^ newData = gcnew List<String^>;
-	newData->AddRange(tbPacketData->Lines);
-
-	auto item = lvPackets->SelectedItems[0];
-	item->Text = newName;
-	item->SubItems[1]->Text = newData->Count > 1 ? newData[0] + " + more" : newData[0];
-	CPacketData^ p = CPacket->Packets[item->Index];
-	p->Name = newName;
-	p->Data = newData;
-	CPacket->Packets[item->Index] = p;
-	CPacket->Save();
+	if(lvPackets->SelectedItems->Count < 1) return;
+	auto dialog = gcnew PacketDialog(CPackets::Packets[lvPackets->SelectedIndices[0]]);
+	if(dialog->ShowDialog() == ::DialogResult::OK)
+	{
+		CPackets::Packets[lvPackets->SelectedIndices[0]] = dialog->PacketData;
+		CPackets::WriteXmlData();
+	}
 }
 Void MainForm::lvPackets_SelectedIndexChanged(Object^  sender, EventArgs^  e)
 {
-	if(lvPackets->SelectedItems->Count <= 0)
-	{
-		bSaveChangedPacket->Enabled = false;
-		CPacket->SelectedPacket = nullptr;
-		tbPacketName->Text = String::Empty;
-		tbPacketData->Text = String::Empty;
-		return;
-	}
-	bSaveChangedPacket->Enabled = true;
-	CPacketData^ p = CPacket->Packets[lvPackets->SelectedItems[0]->Index];
-	CPacket->SelectedPacket = p;
-	tbPacketName->Text = p->Name;
-	tbPacketData->Lines = p->Data->ToArray();
+	if(lvPackets->SelectedItems->Count < 1) return;
+	CPackets::SelectedPacket = CPackets::Packets[lvPackets->SelectedItems[0]->Index];
 }
 Void MainForm::bSendPacket_Click(Object^  sender, EventArgs^  e)
 {
-	if(lvPackets->SelectedItems->Count <= 0) return;
-	CPacket->Send();
+	if(lvPackets->SelectedItems->Count < 1) return;
+	CPackets::Send();
 }
 Void MainForm::bDeletePacket_Click(Object^  sender, EventArgs^  e)
 {
-	if(lvPackets->SelectedItems->Count <= 0) return;
+	if(lvPackets->SelectedItems->Count < 1) return;
 	int index = lvPackets->SelectedItems[0]->Index;
 	lvPackets->Items->RemoveAt(index);
-	CPacket->Packets->RemoveAt(index);
-	CPacket->Save();
+	CPackets::Packets->RemoveAt(index);
+	CPackets::WriteXmlData();
 }
 Void MainForm::lvPackets_KeyDown(Object^  sender, Windows::Forms::KeyEventArgs^  e)
 {
@@ -556,10 +514,10 @@ Void MainForm::lvPackets_KeyDown(Object^  sender, Windows::Forms::KeyEventArgs^ 
 		if(lvPackets->SelectedItems->Count <= 0) return;
 		int index = lvPackets->SelectedItems[0]->Index;
 		lvPackets->Items->RemoveAt(index);
-		CPacket->Packets->RemoveAt(index);
-		CPacket->Save();
+		CPackets::Packets->RemoveAt(index);
+		CPackets::WriteXmlData();
 	}
-	if(e->KeyCode == Keys::Enter) CPacket->Send();
+	if(e->KeyCode == Keys::Enter) CPackets::Send();
 }
 
 //controls on SPControl Tab
@@ -639,7 +597,7 @@ Void MainForm::RefreshSPControlListView()
 enum SettingsIndex{
 	AutoAttackDelay, SAWSIL, AutoAttackKey, AutoLootDelay, SLWIB, AutoLootKey, AutoHPValue, AutoHPKey, AutoMPValue, AutoMPKey, PetFeederValue, PetFeederKey,
 	CCPeople, CCPeopleType, CCTimed, CCTimedType, CCAttacks, CCAttacksType, HotKeyAttack, HotKeyLoot, HotKeyFMA, HotKeyCCPeople, HotKeySendPacket,
-	/*SelectedPacket, PacketSpamAmount, PacketSpamDelay, */SkillInjectionDelay, SkillInjectionIndex, IceGuard, PinTyper, LogoSkipper, SettingCount
+	SkillInjectionDelay, SkillInjectionIndex, IceGuard, PinTyper, LogoSkipper, SettingCount
 };
 Void MainForm::SaveSettings()
 {
@@ -791,7 +749,7 @@ Void MainForm::bSaveSettings_Click(Object^  sender, EventArgs^  e)
 {
 	SaveSettings();
 	SPControl->Save();
-	CPacket->Save();
+	CPackets::WriteXmlData();
 	SaveAutoSkill();
 }
 
@@ -834,7 +792,7 @@ Void MainForm::HotKeys()
 	{
 		if(GetAsyncKeyState(KeyCodes[ddbHotKeySendPacket->SelectedIndex]))
 		{
-			CPacket->Send();
+			CPackets::Send();
 			Sleep(250);
 		}
 	}

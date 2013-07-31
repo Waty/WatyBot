@@ -3,70 +3,53 @@
 
 DWORD WINAPI TrySendPacket(__in_bcount(nLength) LPBYTE lpBytes, __in DWORD dwLength);
 
-CPacketData::CPacketData(String^ Name, List<String^>^ Data)
+CPacketData::CPacketData(String^ Name, List<String^>^ Data, int Interval)
 {
 	this->Name = Name;
 	this->Data = Data;
+	this->Interval = Interval;
 }
 
-CPackets::CPackets()
+void CPackets::WriteXmlData()
 {
-	timer = gcnew Windows::Forms::Timer;
-
-	if(!File::Exists(PacketFileName))
-	{
-		auto stream = File::Create(PacketFileName);
-		stream->Close();
-	}
+	if(serializer == nullptr) serializer = gcnew XmlSerializer(List<CPacketData^>::typeid);
 	
-	TextReader^ reader = gcnew StreamReader(PacketFileName);
-	s = gcnew XmlSerializer(List<CPacketData^>::typeid);
+	auto writer = File::Create(PacketFileName);
 	try
 	{
-		Packets = safe_cast<List<CPacketData^>^>(s->Deserialize(reader));
+		serializer->Serialize(writer, Packets);
 	}
-	catch(Exception^ ex)
-	{
-		ShowNotifyIcon(ex->Message);
-	}	
-	reader->Close();
-	if(Packets == nullptr) Packets = gcnew List<CPacketData^>;
-}
-
-void CPackets::Save()
-{
-	TextWriter^ writer = gcnew StreamWriter(PacketFileName);
-	try
-	{
-		s->Serialize(writer, Packets);
-	}
-	catch(Exception^ ex)
-	{
-		ShowNotifyIcon(ex->Message);
-	}
+	catch(Exception^){}
 	writer->Close();
 }
 
-void CPackets::Add(String^ name, List<String^>^ data)
+void CPackets::ReadXmlData()
 {
-	Add(gcnew CPacketData(name, data));
+	if(serializer == nullptr) serializer = gcnew XmlSerializer(List<CPacketData^>::typeid);
+	if(!File::Exists(PacketFileName))
+	{
+		WriteXmlData();
+		return;
+	}
+
+	//Deserialize the xml file
+	TextReader^ reader = gcnew StreamReader(PacketFileName);
+	try 
+	{
+		CPackets::Packets = safe_cast<List<CPacketData^>^>(serializer->Deserialize(reader));
+	}
+	catch(InvalidOperationException^){}
+	reader->Close();
+}
+
+void CPackets::Add(String^ name, List<String^>^ data, int Interval)
+{
+	Add(gcnew CPacketData(name, data, Interval));
 }
 void CPackets::Add(CPacketData^ Packet)
 {
 	Packets->Add(Packet);
-	Save();
-}
-
-void CPackets::Delete(int i)
-{
-	this->Packets->RemoveAt(i);
-}
-
-void CPackets::Edit(int i, String^ name, List<String^>^ data)
-{
-	this->Packets[i]->Name = name;
-	this->Packets[i]->Data = data;
-	this->Save();
+	WriteXmlData();
 }
 
 bool CPackets::VerifyPacket(String^ str, String^&strError)
@@ -137,38 +120,4 @@ bool CPackets::Send()
 		return false;
 	}
 	return Send(SelectedPacket);
-}
-
-void CPackets::StartSpamming(int times, int delay)
-{
-	if(delay == 0)
-	{
-		for(int i = 0; i < times; i++) Send();
-	}
-	else
-	{
-		m_sendmax = times;
-		m_timessend = 1;
-		timer->Interval = delay;
-		timer->Tick += gcnew System::EventHandler(this, &CPackets::timer_tick);
-		timer->Enabled = true;
-	}
-}
-
-void CPackets::StopSpamming()
-{
-	timer->Enabled = false;
-}
-
-void CPackets::timer_tick(System::Object^  sender, System::EventArgs^  e)
-{
-	if(m_timessend >= m_sendmax)
-	{
-		timer->Enabled = false;
-		return;
-	}
-
-	if(!Send())	timer->Enabled = false;
-	
-	m_timessend++;
 }

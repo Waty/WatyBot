@@ -82,9 +82,9 @@ void CChangeChannel::CS(System::Object^  sender, System::ComponentModel::DoWorkE
 	Sleep(500);
 	CMS::Breath(0);
 	String^ strError = String::Empty;
-	CPacket->Send(EnterCashShop, strError);
+	CPackets::Send(EnterCashShop, strError);
 	Sleep(2500);
-	CPacket->Send(LeaveCashShop, strError);
+	CPackets::Send(LeaveCashShop, strError);
 	Sleep(3000);
 }
 
@@ -93,7 +93,7 @@ void CChangeChannel::DC(System::Object^  sender, System::ComponentModel::DoWorkE
 	while(CMS::InGame())
 	{
 		String^ strError = String::Empty;
-		CPacket->Send(ChangeCharacter, strError);
+		CPackets::Send(ChangeCharacter, strError);
 		Sleep(2500);
 	}
 }
