@@ -2219,11 +2219,7 @@ namespace WatyBotRevamp {
 private:
 	//General private class members
 	List<SettingsEntry^>^ Settings;
-	List<CAutoSkill^>^ AutoSkills;
 	property XmlSerializer^ s;
-	XmlSerializer^ AutoSkillSerializer;
-	List<CAutoSkill^>^ LoadAutoSkill();
-	Void MainForm::SaveAutoSkill();
 	Void LoadSettings();
 	Void SaveSettings();
 	Void ReloadSettings();
@@ -2321,6 +2317,7 @@ private:
 	{
 		if(e->FullPath == PacketFileName) LoadPackets();
 		if(e->FullPath == SPControlFileName) LoadSPControl();
+		if(e->FullPath == AutoSkillFileName) LoadAutoSkill();
 	}
 	Void LoadPackets()
 	{
@@ -2335,5 +2332,6 @@ private:
 	}
 	
 	Void LoadSPControl();
+	Void LoadAutoSkill();
 };
 }

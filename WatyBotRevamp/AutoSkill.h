@@ -1,44 +1,63 @@
 #pragma once
 #include "MapleStory.h"
-public ref class CAutoSkill
+
+namespace WatyBotRevamp
 {
-public:
-	CAutoSkill();
-	CAutoSkill(System::String^ name, int interval, int key);
-	~CAutoSkill();
-	void Cast();
+	using namespace System;
+	using namespace System::Collections::Generic;
+	using namespace System::Xml::Serialization;
 
-	System::String^ Name;
-	int keyIndex;
-	property int Interval
+	public ref class AutoSkillEntry
 	{
-		int get()
+	public:
+		AutoSkillEntry();
+		AutoSkillEntry(System::String^ name, int interval, int key);
+		~AutoSkillEntry();
+		void Cast();
+
+		System::String^ Name;
+		int keyIndex;
+		property int Interval
 		{
-			return timer->Interval / 1000;
+			int get()
+			{
+				return timer->Interval / 1000;
+			}
+			void set(int i)
+			{
+				timer->Interval = i * 1000;
+			}
 		}
-		void set(int i)
+		[System::Xml::Serialization::XmlIgnoreAttribute]
+		property bool Enabled
 		{
-			timer->Interval = i * 1000;
+			void set(bool state)
+			{
+				if(state) Cast(); 
+				timer->Enabled = state;
+			}
+			bool get()
+			{
+				return timer->Enabled;
+			}
 		}
-	}
-	[System::Xml::Serialization::XmlIgnoreAttribute]
-	property bool Enabled
+
+	private:
+		System::Windows::Forms::Timer^ timer;
+		void AutoSkill_Tick(System::Object^  sender, System::EventArgs^  e);
+
+		System::ComponentModel::BackgroundWorker^ bw;
+		void CastBackground(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^  e);
+	};
+
+
+	public ref class AutoSkill
 	{
-		void set(bool state)
-		{
-			if(state) Cast(); 
-			timer->Enabled = state;
-		}
-		bool get()
-		{
-			return timer->Enabled;
-		}
-	}
+	public:
+		static System::Void ReadXmlData();
+		static System::Void WriteXmlData();
 
-private:
-	System::Windows::Forms::Timer^ timer;
-	void AutoSkill_Tick(System::Object^  sender, System::EventArgs^  e);
-
-	System::ComponentModel::BackgroundWorker^ bw;
-	void CastBackground(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^  e);
-};
+		static XmlSerializer^ serializer = gcnew XmlSerializer(List<AutoSkillEntry^>::typeid);
+		static List<AutoSkillEntry^>^ AutoSkills = gcnew List<AutoSkillEntry^>;
+	};
+}

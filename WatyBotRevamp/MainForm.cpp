@@ -305,7 +305,7 @@ Void MainForm::MainForm_Load(Object^  sender, EventArgs^  e)
 	LoadSPControl();
 	LoadPackets();
 	LoadSettings();
-	AutoSkills = LoadAutoSkill();
+	LoadAutoSkill();
 
 	// Fix the size of the tabs
 	MainForm::Height = TabHeight[MainTabControl->SelectedTab->TabIndex];
@@ -386,9 +386,9 @@ Void MainForm::bAutoSkill_Click(Object^  sender, EventArgs^  e)
 		item->SubItems->Add(nudAutoSkill->Value.ToString());
 		item->SubItems->Add(ddbAutoSkill->SelectedItem->ToString());
 		lvAutoSkill->Items->Add(item);
-		AutoSkills->Add(gcnew CAutoSkill(tbAutoSkill->Text, (int) nudAutoSkill->Value, ddbAutoSkill->SelectedIndex));
+		AutoSkill::AutoSkills->Add(gcnew AutoSkillEntry(tbAutoSkill->Text, (int) nudAutoSkill->Value, ddbAutoSkill->SelectedIndex));
 	}
-	SaveAutoSkill();
+	AutoSkill::WriteXmlData();
 }
 Void MainForm::ddbAutoSkill_DropDown(Object^  sender, EventArgs^  e)
 {
@@ -400,73 +400,39 @@ Void MainForm::castToolStripMenuItem_Click(Object^  sender, EventArgs^  e)
 {
 	if(lvSPControl->SelectedItems->Count < 0) return;
 	ListViewItem^ i = lvAutoSkill->SelectedItems[0];
-	AutoSkills[lvAutoSkill->Items->IndexOf(i)]->Cast();
+	AutoSkill::AutoSkills[lvAutoSkill->Items->IndexOf(i)]->Cast();
 }
 Void MainForm::deleteToolStripMenuItem_Click(Object^  sender, EventArgs^  e)
 {
-	if(lvSPControl->SelectedItems->Count < 0) return;
-	ListViewItem^ i = lvAutoSkill->SelectedItems[0];
-	int index = lvAutoSkill->Items->IndexOf(i);
-	delete AutoSkills[index];
-	AutoSkills->RemoveAt(index);
-	lvAutoSkill->Items->RemoveAt(index);
-	SaveAutoSkill();
+	if(lvSPControl->SelectedIndices->Count < 0) return;
+	AutoSkill::AutoSkills->RemoveAt(lvAutoSkill->SelectedIndices[0]);
+	AutoSkill::WriteXmlData();
 }
 Void MainForm::lvAutoSkill_ItemCheck(Object^  sender, Windows::Forms::ItemCheckEventArgs^  e)
 {
 	if(e->CurrentValue == CheckState::Checked)
-		AutoSkills[e->Index]->Enabled = false;
+		AutoSkill::AutoSkills[e->Index]->Enabled = false;
 	else if(e->CurrentValue == CheckState::Unchecked)
-		AutoSkills[e->Index]->Enabled = true;
+		AutoSkill::AutoSkills[e->Index]->Enabled = true;
 }
-
-List<CAutoSkill^>^ MainForm::LoadAutoSkill()
+Void MainForm::LoadAutoSkill()
 {
-	if(!File::Exists(AutoSkillFileName))
-	{
-		auto stream = File::Create(AutoSkillFileName);
-		stream->Close();
-	}
-	
-	TextReader^ reader = gcnew StreamReader(AutoSkillFileName);
-	AutoSkillSerializer = gcnew XmlSerializer(List<CAutoSkill^>::typeid);
-	List<CAutoSkill^>^ AutoSkill;
-	try
-	{
-		AutoSkill = safe_cast<List<CAutoSkill^>^>(AutoSkillSerializer->Deserialize(reader));
-	}
-	catch(Exception^)
-	{
-	}	
-	reader->Close();
-	if(AutoSkill == nullptr) AutoSkill = gcnew List<CAutoSkill^>;
+	AutoSkill::ReadXmlData();
+
+	//Update ComboBox
 	ddbAutoSkill->Items->Clear();
 	ddbAutoSkill->Items->AddRange(KeyNames);
-	ddbAutoSkill->BeginUpdate();
 	for each(CPacketData^ p in CPackets::Packets) ddbAutoSkill->Items->Add(p->Name);
-	ddbAutoSkill->EndUpdate();
-	lvAutoSkill->BeginUpdate();
-	for each(CAutoSkill^ as in AutoSkill)
+
+	//Update ListView
+	lvAutoSkill->Items->Clear();
+	for each(AutoSkillEntry^ as in AutoSkill::AutoSkills)
 	{
 		ListViewItem^ item = gcnew ListViewItem(as->Name);
 		item->SubItems->Add(as->Interval.ToString());
 		item->SubItems->Add(ddbAutoSkill->Items[as->keyIndex]->ToString());
 		lvAutoSkill->Items->Add(item);
 	}
-	lvAutoSkill->EndUpdate();
-	return AutoSkill;
-}
-void MainForm::SaveAutoSkill()
-{
-	TextWriter^ writer = gcnew StreamWriter(AutoSkillFileName);
-	try
-	{
-		AutoSkillSerializer->Serialize(writer, AutoSkills);
-	}
-	catch(Exception^)
-	{
-	}
-	writer->Close();
 }
 
 //Controls on the PacketSender tab
@@ -739,7 +705,7 @@ Void MainForm::bSaveSettings_Click(Object^  sender, EventArgs^  e)
 	SaveSettings();
 	CSPControl::WriteXmlData();
 	CPackets::WriteXmlData();
-	SaveAutoSkill();
+	AutoSkill::WriteXmlData();
 }
 
 //Hot Keys
