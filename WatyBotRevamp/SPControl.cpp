@@ -44,7 +44,7 @@ void CSPControl::ReadXmlData()
 	{
 		Locations = safe_cast<List<CSPControlLocation^>^>(serializer->Deserialize(reader));
 	}
-	catch(InvalidOperationException^ex ){ShowInfo(ex->ToString());}
+	catch(InvalidOperationException^){}
 	reader->Close();
 }
 
