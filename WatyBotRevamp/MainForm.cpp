@@ -283,14 +283,14 @@ Void MainForm::cbCCAttacks_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 
 //General Trainer events
-void Main(void)
+Void Main(void)
 {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	Application::Run(gcnew MainForm);
 	Application::Exit();
 }
-void MainForm::MainForm_Load(Object^  sender, EventArgs^  e)
+Void MainForm::MainForm_Load(Object^  sender, EventArgs^  e)
 {
 	//Create the Waty directory in %appdata%
 	if(!Directory::Exists(WatyBotWorkingDirectory))	Directory::CreateDirectory(WatyBotWorkingDirectory);
@@ -303,7 +303,7 @@ void MainForm::MainForm_Load(Object^  sender, EventArgs^  e)
 	//Load all the settings and innitialize all the classes
 	CC = gcnew CChangeChannel;
 	SPControl = gcnew CSPControl;
-	CPackets::ReadXmlData();
+	LoadPackets();
 	LoadSettings();
 	AutoSkills = LoadAutoSkill();
 
@@ -313,7 +313,7 @@ void MainForm::MainForm_Load(Object^  sender, EventArgs^  e)
 	MainForm::Height = TabHeight[MainTabControl->SelectedTab->TabIndex];
 	MainTabControl->Height = TabHeight[MainTabControl->SelectedTab->TabIndex] - 30;
 }
-void MainForm::StatsTimer_Tick(Object^  sender, EventArgs^  e)
+Void MainForm::StatsTimer_Tick(Object^  sender, EventArgs^  e)
 {
 	this->MobCountLabel->Text =		"Mobs: "		+ CMS::MobCount();
 	this->PeopleCountLabel->Text =	"People: "		+ CMS::PeopleCount();
@@ -341,7 +341,7 @@ void MainForm::StatsTimer_Tick(Object^  sender, EventArgs^  e)
 		MainForm::HotKeys();
 	}
 }
-void MainForm::RedrawStatBars()
+Void MainForm::RedrawStatBars()
 {
 	this->HPLabel->Text = "HP: " + CMS::CharHP() + "/" + CMS::MaxHP;
 	this->MPLabel->Text = "MP: " + CMS::CharMP() + "/" + CMS::MaxMP;
@@ -355,12 +355,12 @@ void MainForm::RedrawStatBars()
 	double EXPBarLength = (CMS::CharEXP() / 100) * lengtOfBars;
 	this->EXPForeground->Width = EXPBarLength;
 }
-void MainForm::MainTabControl_SelectedIndexChanged(Object^  sender, EventArgs^  e)
+Void MainForm::MainTabControl_SelectedIndexChanged(Object^  sender, EventArgs^  e)
 {
 	MainForm::Height = TabHeight[MainTabControl->SelectedTab->TabIndex];
 	MainTabControl->Height = TabHeight[MainTabControl->SelectedTab->TabIndex] - 30;
 }
-void MainForm::MainForm_FormClosing(Object^  sender, Windows::Forms::FormClosingEventArgs^  e)
+Void MainForm::MainForm_FormClosing(Object^  sender, Windows::Forms::FormClosingEventArgs^  e)
 {
 	switch(MessageBox::Show("Close MapleStory too?", "Terminate Maple?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
 	{

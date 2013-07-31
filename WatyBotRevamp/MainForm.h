@@ -136,8 +136,7 @@ namespace WatyBotRevamp {
 		System::Windows::Forms::CheckBox^  cbScareMobs;
 		System::Windows::Forms::CheckBox^  cbFLACC;
 		System::Windows::Forms::CheckBox^  cbCPUHack;
-private: System::Windows::Forms::Label^  lSLWSB;
-
+		System::Windows::Forms::Label^  lSLWSB;
 		System::Windows::Forms::Label^  lSAWSIL;
 		System::Windows::Forms::ComboBox^  ddbTimedType;
 		System::Windows::Forms::ComboBox^  ddbAttacksType;
@@ -2228,7 +2227,6 @@ private:
 	Void LoadSettings();
 	Void SaveSettings();
 	Void ReloadSettings();
-	Void RefreshSPControlListView();
 	Void RedrawStatBars();
 	Void HotKeys();
 	cli::array<Object^>^ KeyNames;
@@ -2321,17 +2319,20 @@ private:
 	//Settings
 	Void SettingsWatcher_Changed(System::Object^  sender, System::IO::FileSystemEventArgs^  e)
 	{
-		if(e->FullPath == PacketFileName)
+		if(e->FullPath == PacketFileName) LoadPackets();
+	}
+	Void LoadPackets()
+	{
+		CPackets::ReadXmlData();
+		lvPackets->Items->Clear();
+		for each(CPacketData^ packet in CPackets::Packets)
 		{
-			CPackets::ReadXmlData();
-			lvPackets->Clear();
-			for each(CPacketData^ packet in CPackets::Packets)
-			{
-				auto i = gcnew ListViewItem(packet->Name);
-				if(packet->Data->Count > 0) i->SubItems->Add(packet->Data->Count + " packets in here");
-				lvPackets->Items->Add(i);
-			}
+			ListViewItem^ i = gcnew ListViewItem(packet->Name);
+			i->SubItems->Add(packet->Data[0]);
+			lvPackets->Items->Add(i);
 		}
 	}
+	
+	Void RefreshSPControlListView();
 };
 }
