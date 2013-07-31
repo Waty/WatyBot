@@ -415,17 +415,31 @@ Void MainForm::lvAutoSkill_ItemCheck(Object^  sender, Windows::Forms::ItemCheckE
 	else if(e->CurrentValue == CheckState::Unchecked)
 		AutoSkill::AutoSkills[e->Index]->Enabled = true;
 }
+Void MainForm::lvAutoSkill_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e)
+{
+	if(lvAutoSkill->SelectedIndices->Count <= 0) return;
+	if(e->KeyCode == Keys::Delete || e->KeyCode == Keys::Back)
+	{
+		AutoSkill::AutoSkills->RemoveAt(lvAutoSkill->SelectedIndices[0]);
+		AutoSkill::WriteXmlData();
+	}
+	if(e->KeyCode == Keys::Enter) AutoSkill::AutoSkills[lvAutoSkill->SelectedIndices[0]]->Cast();
+}
 Void MainForm::LoadAutoSkill()
 {
 	AutoSkill::ReadXmlData();
 
-	//Update ComboBox
+	//Clear all AutoSkill controls
+	tbAutoSkill->ResetText();
+	nudAutoSkill->ResetText();
 	ddbAutoSkill->Items->Clear();
+	lvAutoSkill->Items->Clear();
+
+	//Update ComboBox
 	ddbAutoSkill->Items->AddRange(KeyNames);
 	for each(CPacketData^ p in CPackets::Packets) ddbAutoSkill->Items->Add(p->Name);
 
 	//Update ListView
-	lvAutoSkill->Items->Clear();
 	for each(AutoSkillEntry^ as in AutoSkill::AutoSkills)
 	{
 		ListViewItem^ item = gcnew ListViewItem(as->Name);
@@ -472,16 +486,24 @@ Void MainForm::bDeletePacket_Click(Object^  sender, EventArgs^  e)
 }
 Void MainForm::lvPackets_KeyDown(Object^  sender, Windows::Forms::KeyEventArgs^  e)
 {
-	if(lvPackets->SelectedItems->Count <= 0) return;
-	if(e->KeyCode == Keys::Delete)
+	if(lvPackets->SelectedIndices->Count <= 0) return;
+	if(e->KeyCode == Keys::Delete || e->KeyCode == Keys::Back)
 	{
-		if(lvPackets->SelectedItems->Count <= 0) return;
-		int index = lvPackets->SelectedItems[0]->Index;
-		lvPackets->Items->RemoveAt(index);
-		CPackets::Packets->RemoveAt(index);
+		CPackets::Packets->RemoveAt(lvPackets->SelectedIndices[0]);
 		CPackets::WriteXmlData();
 	}
 	if(e->KeyCode == Keys::Enter) CPackets::Send();
+}
+Void MainForm::LoadPackets()
+{
+	CPackets::ReadXmlData();
+	lvPackets->Items->Clear();
+	for each(CPacketData^ packet in CPackets::Packets)
+	{
+		ListViewItem^ i = gcnew ListViewItem(packet->Name);
+		i->SubItems->Add(packet->Data[0]);
+		lvPackets->Items->Add(i);
+	}
 }
 
 //controls on SPControl Tab
@@ -533,6 +555,15 @@ Void MainForm::GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e)
 	this->nudSPCMapId->Value = CMS::MapId();
 	this->nudSPCX->Value = CMS::CharX();
 	this->nudSPCY->Value = CMS::CharY();
+}
+Void MainForm::lvSPControl_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e)
+{
+	if(lvSPControl->SelectedIndices->Count <= 0) return;
+	if(e->KeyCode == Keys::Delete || e->KeyCode == Keys::Back)
+	{
+		CSPControl::Locations->RemoveAt(lvSPControl->SelectedIndices[0]);
+		CSPControl::WriteXmlData();
+	}
 }
 Void MainForm::LoadSPControl()
 {
@@ -706,6 +737,12 @@ Void MainForm::bSaveSettings_Click(Object^  sender, EventArgs^  e)
 	CSPControl::WriteXmlData();
 	CPackets::WriteXmlData();
 	AutoSkill::WriteXmlData();
+}
+Void MainForm::SettingsWatcher_Changed(System::Object^  sender, System::IO::FileSystemEventArgs^  e)
+{
+	if(e->FullPath == PacketFileName) LoadPackets();
+	if(e->FullPath == SPControlFileName) LoadSPControl();
+	if(e->FullPath == AutoSkillFileName) LoadAutoSkill();
 }
 
 //Hot Keys

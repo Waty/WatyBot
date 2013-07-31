@@ -22,7 +22,6 @@ namespace WatyBotRevamp {
 		MainForm(void)
 		{
 			InitializeComponent();
-			KeyNames = gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"};
 			this->ddbAutoSkill->Items->AddRange(KeyNames);
 			this->ddbPetFeeder->Items->AddRange(KeyNames);
 			this->ddbAutoHPKey->Items->AddRange(KeyNames);
@@ -329,8 +328,8 @@ namespace WatyBotRevamp {
 			this->hPacket = (gcnew System::Windows::Forms::ColumnHeader());
 			this->PacketContextMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->bSendPacket = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->bDeletePacket = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->bEditPacket = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->bDeletePacket = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->SPControlTabPage = (gcnew System::Windows::Forms::TabPage());
 			this->gbNewSPCLocation = (gcnew System::Windows::Forms::GroupBox());
 			this->nudSPCY = (gcnew System::Windows::Forms::NumericUpDown());
@@ -528,6 +527,7 @@ namespace WatyBotRevamp {
 			this->lvAutoSkill->UseCompatibleStateImageBehavior = false;
 			this->lvAutoSkill->View = System::Windows::Forms::View::Details;
 			this->lvAutoSkill->ItemCheck += gcnew System::Windows::Forms::ItemCheckEventHandler(this, &MainForm::lvAutoSkill_ItemCheck);
+			this->lvAutoSkill->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainForm::lvAutoSkill_KeyDown);
 			// 
 			// hName
 			// 
@@ -1626,7 +1626,7 @@ namespace WatyBotRevamp {
 			// PacketContextMenu
 			// 
 			this->PacketContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {this->bSendPacket, 
-				this->bDeletePacket, this->bEditPacket});
+				this->bEditPacket, this->bDeletePacket});
 			this->PacketContextMenu->Name = L"PacketContextMenu";
 			this->PacketContextMenu->Size = System::Drawing::Size(108, 70);
 			// 
@@ -1637,19 +1637,19 @@ namespace WatyBotRevamp {
 			this->bSendPacket->Text = L"Send";
 			this->bSendPacket->Click += gcnew System::EventHandler(this, &MainForm::bSendPacket_Click);
 			// 
-			// bDeletePacket
-			// 
-			this->bDeletePacket->Name = L"bDeletePacket";
-			this->bDeletePacket->Size = System::Drawing::Size(107, 22);
-			this->bDeletePacket->Text = L"Delete";
-			this->bDeletePacket->Click += gcnew System::EventHandler(this, &MainForm::bDeletePacket_Click);
-			// 
 			// bEditPacket
 			// 
 			this->bEditPacket->Name = L"bEditPacket";
 			this->bEditPacket->Size = System::Drawing::Size(107, 22);
 			this->bEditPacket->Text = L"Edit";
 			this->bEditPacket->Click += gcnew System::EventHandler(this, &MainForm::bEditPacket_Click);
+			// 
+			// bDeletePacket
+			// 
+			this->bDeletePacket->Name = L"bDeletePacket";
+			this->bDeletePacket->Size = System::Drawing::Size(107, 22);
+			this->bDeletePacket->Text = L"Delete";
+			this->bDeletePacket->Click += gcnew System::EventHandler(this, &MainForm::bDeletePacket_Click);
 			// 
 			// SPControlTabPage
 			// 
@@ -1803,6 +1803,7 @@ namespace WatyBotRevamp {
 			this->lvSPControl->TabStop = false;
 			this->lvSPControl->UseCompatibleStateImageBehavior = false;
 			this->lvSPControl->View = System::Windows::Forms::View::Details;
+			this->lvSPControl->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainForm::lvSPControl_KeyDown);
 			// 
 			// HeaderMapName
 			// 
@@ -2225,7 +2226,7 @@ private:
 	Void ReloadSettings();
 	Void RedrawStatBars();
 	Void HotKeys();
-	cli::array<Object^>^ KeyNames;
+	static cli::array<Object^>^ KeyNames = gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"};;
 
 	//General trainer events
 	Void MainForm_Load(Object^  sender, EventArgs^  e);
@@ -2233,6 +2234,7 @@ private:
 	Void MainTabControl_SelectedIndexChanged(Object^  sender, EventArgs^  e);
 	Void MainForm_FormClosing(Object^  sender, Windows::Forms::FormClosingEventArgs^  e);
 	Void bSaveSettings_Click(Object^  sender, EventArgs^  e);
+	Void SettingsWatcher_Changed(System::Object^  sender, System::IO::FileSystemEventArgs^  e);
 
 	//AutoBot Events
 	Void cbAutoAttack_CheckedChanged(Object^ sender, EventArgs^  e);
@@ -2257,12 +2259,17 @@ private:
 	Void deleteToolStripMenuItem_Click(Object^  sender, EventArgs^  e);
 	Void ddbAutoSkill_DropDown(Object^  sender, EventArgs^  e);
 	Void lvAutoSkill_ItemCheck(Object^  sender, Windows::Forms::ItemCheckEventArgs^  e);
+	Void lvAutoSkill_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
+	Void LoadAutoSkill();
 
 	//SPControl
 	Void bAddSPCLocation_Click(Object^  sender, EventArgs^  e);
+	Void cbSPControl_CheckedChanged(Object^  sender, EventArgs^  e);
 	Void SPControlDeleteItem_Click(Object^  sender, EventArgs^  e);
-	Void GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e);
 	Void editLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+	Void GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e);
+	Void lvSPControl_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
+	Void LoadSPControl();
 
 	//Hacks
 	Void cbFusionAttack_CheckedChanged(Object^  sender, EventArgs^  e);
@@ -2282,7 +2289,6 @@ private:
 	Void cbNoMobs_CheckedChanged(Object^  sender, EventArgs^  e);
 	Void cbUA_CheckedChanged(Object^  sender, EventArgs^  e);
 	Void cbSitHack_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbSPControl_CheckedChanged(Object^  sender, EventArgs^  e);
 	Void cb50SecGM_CheckedChanged(Object^  sender, EventArgs^  e);
 	Void cbLogoSkipper_CheckedChanged(Object^  sender, EventArgs^  e);
 	Void cbViewSwears_CheckedChanged(Object^  sender, EventArgs^  e);
@@ -2305,33 +2311,12 @@ private:
 	Void cbIceGuard_CheckedChanged(Object^  sender, EventArgs^  e);
 
 	//PacketSender events
-	Void lvPackets_SelectedIndexChanged(Object^ sender, EventArgs^ e);
 	Void bAddPacket_Click(Object^ sender, EventArgs^ e);
+	Void lvPackets_SelectedIndexChanged(Object^ sender, EventArgs^ e);
 	Void bSendPacket_Click(Object^ sender, EventArgs^ e);
 	Void bDeletePacket_Click(Object^ sender, EventArgs^  e);
 	Void lvPackets_KeyDown(Object^ sender, KeyEventArgs^ e);
 	Void bEditPacket_Click(System::Object^  sender, System::EventArgs^  e);
-
-	//Settings
-	Void SettingsWatcher_Changed(System::Object^  sender, System::IO::FileSystemEventArgs^  e)
-	{
-		if(e->FullPath == PacketFileName) LoadPackets();
-		if(e->FullPath == SPControlFileName) LoadSPControl();
-		if(e->FullPath == AutoSkillFileName) LoadAutoSkill();
-	}
-	Void LoadPackets()
-	{
-		CPackets::ReadXmlData();
-		lvPackets->Items->Clear();
-		for each(CPacketData^ packet in CPackets::Packets)
-		{
-			ListViewItem^ i = gcnew ListViewItem(packet->Name);
-			i->SubItems->Add(packet->Data[0]);
-			lvPackets->Items->Add(i);
-		}
-	}
-	
-	Void LoadSPControl();
-	Void LoadAutoSkill();
+	Void LoadPackets();
 };
 }
