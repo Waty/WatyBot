@@ -16,40 +16,36 @@ CSPControlLocation::CSPControlLocation(String^ name, int MapId, int X, int Y)
 	this->Y = Y;
 }
 
-CSPControl::CSPControl()
+void CSPControl::WriteXmlData()
 {
-	if(!File::Exists(SPControlFileName))
-	{
-		auto stream = File::Create(SPControlFileName);
-		stream->Close();
-	}
+	if(serializer == nullptr) serializer = gcnew XmlSerializer(List<CSPControlLocation^>::typeid);
 	
-	TextReader^ reader = gcnew StreamReader(SPControlFileName);
-	s = gcnew XmlSerializer(List<CSPControlLocation^>::typeid);
+	auto writer = File::Create(SPControlFileName);
 	try
 	{
-		Locations = safe_cast<List<CSPControlLocation^>^>(s->Deserialize(reader));
+		serializer->Serialize(writer, Locations);
 	}
-	catch(Exception^ ex)
-	{
-		ShowNotifyIcon(ex->Message);
-	}	
-	reader->Close();
-	if(Locations == nullptr) Locations = gcnew List<CSPControlLocation^>;
+	catch(Exception^){}
+	writer->Close();
 }
 
-void CSPControl::Save()
+void CSPControl::ReadXmlData()
 {
-	TextWriter^ writer = gcnew StreamWriter(SPControlFileName);
-	try
+	if(serializer == nullptr) serializer = gcnew XmlSerializer(List<CSPControlLocation^>::typeid);
+	if(!File::Exists(SPControlFileName))
 	{
-		s->Serialize(writer, Locations);
+		WriteXmlData();
+		return;
 	}
-	catch(Exception^ ex)
+
+	//Deserialize the xml file
+	TextReader^ reader = gcnew StreamReader(SPControlFileName);
+	try 
 	{
-		ShowNotifyIcon(ex->Message);
+		Locations = safe_cast<List<CSPControlLocation^>^>(serializer->Deserialize(reader));
 	}
-	writer->Close();
+	catch(InvalidOperationException^ex ){ShowInfo(ex->ToString());}
+	reader->Close();
 }
 
 void CSPControl::EditLocation(int index, String^ name, int mapid, int x, int y)
@@ -68,7 +64,7 @@ void CSPControl::AddLocation(String^ Name, int MapId, int X, int Y)
 	l->X = X;
 	l->Y = Y;
 	Locations->Add(l);
-	this->Save();
+	WriteXmlData();
 }
 
 DWORD dwSPControlRet = SPControlAddy + 6;
@@ -76,7 +72,7 @@ int spawn_x, spawn_y;
 BOOL WINAPI GetCoords()
 {
 	int iMapID = CMS::MapId();
-	for each(CSPControlLocation^ location in SPControl->Locations)
+	for each(CSPControlLocation^ location in CSPControl::Locations)
 	{
 		if(iMapID == location->MapId)
 		{

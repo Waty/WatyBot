@@ -2320,6 +2320,7 @@ private:
 	Void SettingsWatcher_Changed(System::Object^  sender, System::IO::FileSystemEventArgs^  e)
 	{
 		if(e->FullPath == PacketFileName) LoadPackets();
+		if(e->FullPath == SPControlFileName) LoadSPControl();
 	}
 	Void LoadPackets()
 	{
@@ -2333,6 +2334,6 @@ private:
 		}
 	}
 	
-	Void RefreshSPControlListView();
+	Void LoadSPControl();
 };
 }

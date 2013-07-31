@@ -21,14 +21,14 @@ namespace SpawnControl
 	public ref class CSPControl
 	{
 	public:
-		CSPControl();
-		void Save();
-		void EditLocation(int index, System::String^ name, int mapid, int x, int y);
-		void AddLocation(String^ Name, int MapId, int X, int Y);
+		static void WriteXmlData();
+		static void ReadXmlData();
+		static void EditLocation(int index, System::String^ name, int mapid, int x, int y);
+		static void AddLocation(String^ Name, int MapId, int X, int Y);
 
-		property List<CSPControlLocation^>^ Locations;
-		property XmlSerializer^ s;
+		static property List<CSPControlLocation^>^ Locations;
+		static property XmlSerializer^ serializer;
 
-		bool Enable(bool status);
+		static bool Enable(bool status);
 	};
 }

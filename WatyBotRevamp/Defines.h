@@ -39,7 +39,6 @@ using namespace System::IO;
 extern StopWatch<milliseconds> SkillInjectionStopWatch;
 extern StopWatch<milliseconds> BreathCounter;
 extern gcroot<CChangeChannel^> CC;
-extern gcroot<CSPControl^> SPControl;
 extern gcroot<NotifyIcon^> notifyIcon;
 
 extern int SkillInjectionSkills[];

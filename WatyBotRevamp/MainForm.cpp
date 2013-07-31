@@ -302,12 +302,10 @@ Void MainForm::MainForm_Load(Object^  sender, EventArgs^  e)
 
 	//Load all the settings and innitialize all the classes
 	CC = gcnew CChangeChannel;
-	SPControl = gcnew CSPControl;
+	LoadSPControl();
 	LoadPackets();
 	LoadSettings();
 	AutoSkills = LoadAutoSkill();
-
-	RefreshSPControlListView();
 
 	// Fix the size of the tabs
 	MainForm::Height = TabHeight[MainTabControl->SelectedTab->TabIndex];
@@ -528,12 +526,11 @@ Void MainForm::bAddSPCLocation_Click(Object^  sender, EventArgs^  e)
 	int x = (int) nudSPCX->Value;
 	int y = (int) nudSPCY->Value;
 
-	SPControl->AddLocation(name, mapid, x, y);
-	RefreshSPControlListView();
+	CSPControl::AddLocation(name, mapid, x, y);
 }
 Void MainForm::cbSPControl_CheckedChanged(Object^  sender, EventArgs^  e)
 {
-	SPControl->Enable(cbSPControl->Checked);
+	CSPControl::Enable(cbSPControl->Checked);
 }
 Void MainForm::SPControlDeleteItem_Click(Object^  sender, EventArgs^  e)
 {
@@ -542,9 +539,8 @@ Void MainForm::SPControlDeleteItem_Click(Object^  sender, EventArgs^  e)
 		switch(MessageBox::Show("Are you sure you want to delete this location?", "Confirm deletion", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
 		{
 		case ::DialogResult::Yes:
-			SPControl->Locations->RemoveAt(lvSPControl->Items->IndexOf(L));
-			SPControl->Save();
-			RefreshSPControlListView();
+			CSPControl::Locations->RemoveAt(lvSPControl->SelectedIndices[0]);
+			CSPControl::WriteXmlData();
 			break;
 		}
 	}
@@ -553,14 +549,12 @@ Void MainForm::editLocationToolStripMenuItem_Click(System::Object^  sender, Syst
 {
 	ListViewItem^ L = lvSPControl->SelectedItems[0];
 	int index = lvSPControl->Items->IndexOf(L);
-	auto SPCLoc = SPControl->Locations[index];
+	auto SPCLoc = CSPControl::Locations[index];
 	EditSPControl^ dlg = gcnew EditSPControl(SPCLoc);
-	switch(dlg->ShowDialog())
+	if(dlg->ShowDialog() == ::DialogResult::OK)
 	{
-	case ::DialogResult::OK:
 		SPCLoc = dlg->location;
-		RefreshSPControlListView();
-		SPControl->Save();
+		CSPControl::WriteXmlData();
 	}
 }
 Void MainForm::GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e)
@@ -574,15 +568,15 @@ Void MainForm::GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e)
 	this->nudSPCX->Value = CMS::CharX();
 	this->nudSPCY->Value = CMS::CharY();
 }
-Void MainForm::RefreshSPControlListView()
+Void MainForm::LoadSPControl()
 {
+	CSPControl::ReadXmlData();
 	lvSPControl->Items->Clear();
 	this->tbSPCName->Clear();
 	this->nudSPCMapId->ResetText();
 	this->nudSPCX->ResetText();
 	this->nudSPCY->ResetText();
-	lvSPControl->BeginUpdate();
-	for each(CSPControlLocation^ SP in SPControl->Locations)
+	for each(CSPControlLocation^ SP in CSPControl::Locations)
 	{
 		ListViewItem^ item = gcnew ListViewItem(SP->Name);
 		item->SubItems->Add(SP->MapId.ToString());
@@ -590,7 +584,6 @@ Void MainForm::RefreshSPControlListView()
 		item->SubItems->Add(SP->Y.ToString());
 		lvSPControl->Items->Add(item);
 	}
-	lvSPControl->EndUpdate();
 }
 
 //Loading/Saving AutoBot settings
@@ -732,10 +725,6 @@ Void MainForm::ReloadSettings()
 	s->Add(gcnew SettingsEntry(ddbHotKeyFMA));
 	s->Add(gcnew SettingsEntry(ddbHotKeyCCPeople));
 	s->Add(gcnew SettingsEntry(ddbHotKeySendPacket));
-	//PacketSender
-	//s->Add(gcnew SettingsEntry(ddbSelectedPacket));
-	//s->Add(gcnew SettingsEntry(nudSpamAmount));
-	//s->Add(gcnew SettingsEntry(nudSpamDelay));
 	//Hacks Tab
 	s->Add(gcnew SettingsEntry(nudSkillInjection));
 	s->Add(gcnew SettingsEntry(ddbSkillInjection));
@@ -748,7 +737,7 @@ Void MainForm::ReloadSettings()
 Void MainForm::bSaveSettings_Click(Object^  sender, EventArgs^  e)
 {
 	SaveSettings();
-	SPControl->Save();
+	CSPControl::WriteXmlData();
 	CPackets::WriteXmlData();
 	SaveAutoSkill();
 }
