@@ -3,24 +3,26 @@
 #include "MapleStory.h"
 namespace ChangeChannel
 {
+	using namespace System;
+
+
 	enum class CCType{CC, CS, DC};
-	public ref class CChangeChannel sealed
+	public ref class CC sealed
 	{
 	public:
-		CChangeChannel();
-		property bool Busy
+		static property bool IsBusy
 		{
 			bool get() {return bw->IsBusy;}
 		}
-		void CCSwitch(CCType type);
+		static void CCSwitch(CCType type);
 
 	private:
-		System::ComponentModel::BackgroundWorker^ bw;
-		void CC(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^  e);
-		void DC(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^  e);
-		void CS(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^  e);
-		void GenerateRandomChannel();
-		property int StartChannel;
-		property int TargetChannel;
+		static System::ComponentModel::BackgroundWorker^ bw = gcnew System::ComponentModel::BackgroundWorker;
+		static Void doCC(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^  e);
+		static Void doDC(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^  e);
+		static Void doCS(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^  e);
+		static Void GenerateRandomChannel();
+		static property int StartChannel;
+		static property int TargetChannel;
 	};
 }

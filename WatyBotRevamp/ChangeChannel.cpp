@@ -6,36 +6,31 @@ using namespace System;
 
 void TryCC(int channel);
 
-CChangeChannel::CChangeChannel()
+Void CC::CCSwitch(CCType type)
 {
-	bw = gcnew System::ComponentModel::BackgroundWorker;
-}
-
-void CChangeChannel::CCSwitch(CCType type)
-{
-	if(Busy) return;
+	if(IsBusy) return;
 	String^ strError = String::Empty;
 	switch(type)
 	{
 	case CCType::CC:
-		bw->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &CChangeChannel::CC);
+		bw->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(&CC::doCC);
 		bw->RunWorkerAsync();
 		break;
 
 	case CCType::CS:
-		bw->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &CChangeChannel::CS);
+		bw->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(&CC::doCS);
 		bw->RunWorkerAsync();
 		break;
 
 	case CCType::DC:
-		bw->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &CChangeChannel::DC);
+		bw->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(&CC::doDC);
 		bw->RunWorkerAsync();
 		break;
 	}
 }
 
 //Generate a random int to CC to + check if it is a different channel
-void CChangeChannel::GenerateRandomChannel()
+Void CC::GenerateRandomChannel()
 {
 	do
 	{
@@ -45,7 +40,7 @@ void CChangeChannel::GenerateRandomChannel()
 	while(TargetChannel == StartChannel);
 }
 
-void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
+Void CC::doCC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
 	if(!CMS::InGame())
 	{
@@ -75,7 +70,7 @@ void CChangeChannel::CC(System::Object^  sender, System::ComponentModel::DoWorkE
 	}
 }
 
-void CChangeChannel::CS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
+Void CC::doCS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
 	if(!CMS::InGame()) e->Cancel;
 	while(!BreathCounter.IsOver()) Sleep(100);
@@ -88,7 +83,7 @@ void CChangeChannel::CS(System::Object^  sender, System::ComponentModel::DoWorkE
 	Sleep(3000);
 }
 
-void CChangeChannel::DC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
+Void CC::doDC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
 	while(CMS::InGame())
 	{

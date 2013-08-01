@@ -201,7 +201,7 @@ Void MainForm::cbAutoAttack_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 Void MainForm::tAutoAttack_Tick(Object^  sender, EventArgs^  e)
 {
-	if(!CMS::InGame() || CC->Busy || CMS::MobCount() < CMS::SAWSIL || CMS::UsingAutoSkill) return;
+	if(!CMS::InGame() || CC::IsBusy || CMS::MobCount() < CMS::SAWSIL || CMS::UsingAutoSkill) return;
 	BreathCounter.Start();
 	CMS::SpamSwitch(ddbAutoAttackKey->SelectedIndex);
 }
@@ -275,7 +275,7 @@ Void MainForm::cbCCTimed_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 Void MainForm::tTimedCC_Tick(Object^  sender, EventArgs^  e)
 {
-	CC->CCSwitch((CCType) ddbTimedType->SelectedIndex);
+	CC::CCSwitch((CCType) ddbTimedType->SelectedIndex);
 }
 Void MainForm::cbCCAttacks_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -301,7 +301,6 @@ Void MainForm::MainForm_Load(Object^  sender, EventArgs^  e)
 	notifyIcon->Visible = true;
 
 	//Load all the settings and innitialize all the classes
-	CC = gcnew CChangeChannel;
 	LoadSPControl();
 	LoadPackets();
 	LoadSettings();
@@ -330,8 +329,8 @@ Void MainForm::StatsTimer_Tick(Object^  sender, EventArgs^  e)
 		if(cbAutoMP->Checked && CMS::CharMP() <= nudAutoMP->Value) CMS::SpamSwitch(ddbAutoMPKey->SelectedIndex);
 
 		//AutoCC happens here
-		if(cbCCPeople->Checked && (CMS::PeopleCount() >= (int) nudCCPeople->Value)) CC->CCSwitch((CCType) ddbPeopleType->SelectedIndex);	
-		if(cbCCAttacks->Checked && (CMS::AttackCount() >= (int) nudCCAttacks->Value)) CC->CCSwitch((CCType) ddbAttacksType->SelectedIndex);
+		if(cbCCPeople->Checked && (CMS::PeopleCount() >= (int) nudCCPeople->Value)) CC::CCSwitch((CCType) ddbPeopleType->SelectedIndex);	
+		if(cbCCAttacks->Checked && (CMS::AttackCount() >= (int) nudCCAttacks->Value)) CC::CCSwitch((CCType) ddbAttacksType->SelectedIndex);
 
 		//PetFeeder happens here
 		if(cbPetFeeder->Checked && (CMS::PetFullness() <= nudPetFeeder->Value)) CMS::SendSwitch(ddbPetFeeder->SelectedIndex);

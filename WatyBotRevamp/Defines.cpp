@@ -3,7 +3,6 @@
 StopWatch<milliseconds> SkillInjectionStopWatch;
 StopWatch<milliseconds> BreathCounter(milliseconds(5500));
 
-gcroot<CChangeChannel^> CC;
 gcroot<NotifyIcon^> notifyIcon;
 
 int SkillInjectionSkills[] = {97, 99, 100, 103, 61001005, 4001334, 4201005, 4211011, 4221001, 1001004, 1221009, 1311005, 2201004, 2211003};

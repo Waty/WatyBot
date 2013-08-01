@@ -44,7 +44,7 @@ Void AutoSkillEntry::CastBackground(System::Object^ sender, System::ComponentMod
 	if(!CMS::InGame()) return;
 
 	//Send Key
-	while(CC->Busy || CMS::UsingAutoSkill) Sleep(500);
+	while(CC::IsBusy || CMS::UsingAutoSkill) Sleep(500);
 	CMS::UsingAutoSkill = true;
 	Sleep(500);
 	CMS::SendSwitch(keyIndex);
