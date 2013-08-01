@@ -205,12 +205,6 @@ Void MainForm::tAutoAttack_Tick(Object^  sender, EventArgs^  e)
 	BreathCounter.Start();
 	CMS::SpamSwitch(ddbAutoAttackKey->SelectedIndex);
 }
-Void MainForm::ddbAutoAttackKey_DropDown(System::Object^  sender, System::EventArgs^  e)	 
-{
-	ddbAutoAttackKey->Items->Clear();
-	ddbAutoAttackKey->Items->AddRange(KeyNames);
-	for each(CPacketData^ p in CPackets::Packets) ddbAutoAttackKey->Items->Add(p->Name);
-}
 Void MainForm::cbAutoLoot_CheckedChanged(Object^  sender, EventArgs^  e)
 {
 	this->nudAutoLoot->Enabled = !this->cbAutoLoot->Checked;
@@ -227,39 +221,15 @@ Void MainForm::tAutoLoot_Tick(Object^  sender, EventArgs^  e)
 	CMS::Tubi(0);
 	CMS::SpamSwitch(ddbAutoLootKey->SelectedIndex);
 }
-Void MainForm::ddbAutoLootKey_DropDown(Object^  sender, EventArgs^ e)
-{
-	ddbAutoLootKey->Items->Clear();
-	ddbAutoLootKey->Items->AddRange(KeyNames);
-	for each(CPacketData^ p in CPackets::Packets) ddbAutoLootKey->Items->Add(p->Name);
-}
 Void MainForm::cbAutoHP_CheckedChanged(Object^  sender, EventArgs^  e)
 {
 	nudAutoHP->Enabled = !cbAutoHP->Checked;
 	ddbAutoHPKey->Enabled = !cbAutoHP->Checked;
 }
-Void MainForm::ddbAutoHPKey_DropDown(Object^  sender, EventArgs^ e)
-{
-	ddbAutoHPKey->Items->Clear();
-	ddbAutoHPKey->Items->AddRange(KeyNames);
-	for each(CPacketData^ p in CPackets::Packets) ddbAutoHPKey->Items->Add(p->Name);
-}
 Void MainForm::cbAutoMP_CheckedChanged(Object^  sender, EventArgs^  e)
 {
 	nudAutoMP->Enabled = !cbAutoMP->Checked;
 	ddbAutoMPKey->Enabled = !cbAutoMP->Checked;
-}
-Void MainForm::ddbAutoMPKey_DropDown(Object^  sender, EventArgs^ e)
-{
-	ddbAutoMPKey->Items->Clear();
-	ddbAutoMPKey->Items->AddRange(KeyNames);
-	for each(CPacketData^ p in CPackets::Packets) ddbAutoMPKey->Items->Add(p->Name);
-}
-Void MainForm::ddbPetFeeder_DropDown(::Object^  sender, EventArgs^  e)
-{
-	ddbPetFeeder->Items->Clear();
-	ddbPetFeeder->Items->AddRange(KeyNames);
-	for each(CPacketData^ p in CPackets::Packets) ddbPetFeeder->Items->Add(p->Name);
 }
 Void MainForm::cbCCPeople_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -352,6 +322,18 @@ Void MainForm::RedrawStatBars()
 	double EXPBarLength = (CMS::CharEXP() / 100) * lengtOfBars;
 	this->EXPForeground->Width = EXPBarLength;
 }
+Void MainForm::ReloadComboBox(ComboBox^ combobox)
+{
+	auto selectedItem = combobox->SelectedItem;
+	
+	//Clear the box and re-add the items
+	combobox->Items->Clear();
+	combobox->Items->AddRange(KeyNames);
+	for each(CPacketData^ p in CPackets::Packets) combobox->Items->Add(p->Name);
+	
+	//Restore the selectedindex if it still is valid
+	if(selectedItem != nullptr && combobox->Items->Contains(selectedItem)) combobox->SelectedItem = selectedItem;
+}
 Void MainForm::MainTabControl_SelectedIndexChanged(Object^  sender, EventArgs^  e)
 {
 	MainForm::Height = TabHeight[MainTabControl->SelectedTab->TabIndex];
@@ -388,12 +370,6 @@ Void MainForm::bAutoSkill_Click(Object^  sender, EventArgs^  e)
 		AutoSkill::AutoSkills->Add(gcnew AutoSkillEntry(tbAutoSkill->Text, (int) nudAutoSkill->Value, ddbAutoSkill->SelectedIndex));
 	}
 	AutoSkill::WriteXmlData();
-}
-Void MainForm::ddbAutoSkill_DropDown(Object^  sender, EventArgs^  e)
-{
-	ddbAutoSkill->Items->Clear();
-	ddbAutoSkill->Items->AddRange(KeyNames);
-	for each(CPacketData^ p in CPackets::Packets) ddbAutoSkill->Items->Add(p->Name);
 }
 Void MainForm::castToolStripMenuItem_Click(Object^  sender, EventArgs^  e)
 {
@@ -503,7 +479,14 @@ Void MainForm::LoadPackets()
 		i->SubItems->Add(packet->Data[0]);
 		lvPackets->Items->Add(i);
 	}
+	for each (Object^ o in AutoBotGroupBox->Controls)
+	{
+		if(o->GetType() != ComboBox::typeid || o == ddbPeopleType || o == ddbTimedType || o == ddbAttacksType) continue;
+		ReloadComboBox(static_cast<ComboBox^>(o));
+	}
+	ReloadComboBox(ddbAutoSkill);
 }
+
 
 //controls on SPControl Tab
 Void MainForm::bAddSPCLocation_Click(Object^  sender, EventArgs^  e)

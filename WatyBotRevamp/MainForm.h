@@ -483,7 +483,6 @@ namespace WatyBotRevamp {
 			this->ddbAutoSkill->Name = L"ddbAutoSkill";
 			this->ddbAutoSkill->Size = System::Drawing::Size(76, 21);
 			this->ddbAutoSkill->TabIndex = 90;
-			this->ddbAutoSkill->DropDown += gcnew System::EventHandler(this, &MainForm::ddbAutoSkill_DropDown);
 			// 
 			// nudAutoSkill
 			// 
@@ -865,7 +864,6 @@ namespace WatyBotRevamp {
 			this->ddbPetFeeder->Size = System::Drawing::Size(115, 21);
 			this->ddbPetFeeder->TabIndex = 15;
 			this->InfoToolTip->SetToolTip(this->ddbPetFeeder, L"Key PetFeeder will send");
-			this->ddbPetFeeder->DropDown += gcnew System::EventHandler(this, &MainForm::ddbPetFeeder_DropDown);
 			// 
 			// ddbAutoHPKey
 			// 
@@ -876,7 +874,6 @@ namespace WatyBotRevamp {
 			this->ddbAutoHPKey->Size = System::Drawing::Size(115, 21);
 			this->ddbAutoHPKey->TabIndex = 9;
 			this->InfoToolTip->SetToolTip(this->ddbAutoHPKey, L"Key for HP potions");
-			this->ddbAutoHPKey->DropDown += gcnew System::EventHandler(this, &MainForm::ddbAutoHPKey_DropDown);
 			// 
 			// cbAutoMP
 			// 
@@ -899,7 +896,6 @@ namespace WatyBotRevamp {
 			this->ddbAutoLootKey->Size = System::Drawing::Size(76, 21);
 			this->ddbAutoLootKey->TabIndex = 6;
 			this->InfoToolTip->SetToolTip(this->ddbAutoLootKey, L"The key WatyBot will press for looting");
-			this->ddbAutoLootKey->DropDown += gcnew System::EventHandler(this, &MainForm::ddbAutoLootKey_DropDown);
 			// 
 			// cbAutoLoot
 			// 
@@ -922,7 +918,6 @@ namespace WatyBotRevamp {
 			this->ddbAutoMPKey->Size = System::Drawing::Size(115, 21);
 			this->ddbAutoMPKey->TabIndex = 12;
 			this->InfoToolTip->SetToolTip(this->ddbAutoMPKey, L"Key for MP potions");
-			this->ddbAutoMPKey->DropDown += gcnew System::EventHandler(this, &MainForm::ddbAutoMPKey_DropDown);
 			// 
 			// ddbAutoAttackKey
 			// 
@@ -933,7 +928,6 @@ namespace WatyBotRevamp {
 			this->ddbAutoAttackKey->Size = System::Drawing::Size(76, 21);
 			this->ddbAutoAttackKey->TabIndex = 3;
 			this->InfoToolTip->SetToolTip(this->ddbAutoAttackKey, L"The key WatyBot will press for attacking");
-			this->ddbAutoAttackKey->DropDown += gcnew System::EventHandler(this, &MainForm::ddbAutoAttackKey_DropDown);
 			// 
 			// EXPLabel
 			// 
@@ -2225,6 +2219,7 @@ private:
 	Void SaveSettings();
 	Void ReloadSettings();
 	Void RedrawStatBars();
+	Void ReloadComboBox(ComboBox^ combobox);
 	Void HotKeys();
 	static cli::array<Object^>^ KeyNames = gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"};;
 
@@ -2239,15 +2234,10 @@ private:
 	//AutoBot Events
 	Void cbAutoAttack_CheckedChanged(Object^ sender, EventArgs^  e);
 	Void tAutoAttack_Tick(Object^ sender, EventArgs^ e);
-	Void ddbAutoAttackKey_DropDown(Object^ sender, EventArgs^ e);
 	Void cbAutoLoot_CheckedChanged(Object^ sender, EventArgs^ e);
 	Void tAutoLoot_Tick(Object^  sender, EventArgs^ e);
-	Void ddbAutoLootKey_DropDown(Object^  sender, EventArgs^ e);
 	Void cbAutoHP_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void ddbAutoHPKey_DropDown(Object^  sender, EventArgs^ e);
 	Void cbAutoMP_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void ddbAutoMPKey_DropDown(Object^  sender, EventArgs^ e);
-	Void ddbPetFeeder_DropDown(::Object^  sender, EventArgs^  e);
 	Void cbCCPeople_CheckedChanged(Object^  sender, EventArgs^  e);
 	Void cbCCTimed_CheckedChanged(Object^  sender, EventArgs^  e);
 	Void tTimedCC_Tick(Object^  sender, EventArgs^  e);
@@ -2257,7 +2247,6 @@ private:
 	Void bAutoSkill_Click(Object^  sender, EventArgs^  e);
 	Void castToolStripMenuItem_Click(Object^  sender, EventArgs^  e);
 	Void deleteToolStripMenuItem_Click(Object^  sender, EventArgs^  e);
-	Void ddbAutoSkill_DropDown(Object^  sender, EventArgs^  e);
 	Void lvAutoSkill_ItemCheck(Object^  sender, Windows::Forms::ItemCheckEventArgs^  e);
 	Void lvAutoSkill_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
 	Void LoadAutoSkill();
