@@ -1,5 +1,4 @@
 #include "Packet.h"
-#include "Hacks.h"
 #include "Defines.h"
 
 DWORD WINAPI TrySendPacket(__in_bcount(nLength) LPBYTE lpBytes, __in DWORD dwLength);
@@ -80,7 +79,6 @@ bool CPackets::VerifyPacket(String^ str, String^&strError)
 
 bool CPackets::Send(String^ str, String^&strError)
 {
-	if(!Hacks::cmPacketSenderFix.Enabled) Hacks::cmPacketSenderFix.Enable(true);
 	String^ strPacket = str->Replace(" ", "");
 	Random^ randObj = gcnew Random();
     String^ rawBytes = String::Empty;

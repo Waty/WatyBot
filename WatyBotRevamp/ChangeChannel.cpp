@@ -1,5 +1,4 @@
 #include "ChangeChannel.h"
-#include "Hacks.h"
 #include "Defines.h"
 
 using namespace ChangeChannel;
@@ -10,7 +9,6 @@ void TryCC(int channel);
 Void CC::CCSwitch(CCType type)
 {
 	if(IsBusy) return;
-	if(!Hacks::cmPacketSenderFix.Enabled) Hacks::cmPacketSenderFix.Enable(true);
 	String^ strError = String::Empty;
 	switch(type)
 	{
