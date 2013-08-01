@@ -5,9 +5,9 @@ using namespace WatyBotRevamp;
 
 Void EditSPControl::bGetCurrentLoc_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	nudMapId->Value = CMS::MapId();
-	nudXLoc->Value = CMS::CharX();
-	nudYLoc->Value = CMS::CharY();
+	nudMapId->Value = CMS::MapId;
+	nudXLoc->Value = CMS::CharX;
+	nudYLoc->Value = CMS::CharY;
 }
 Void EditSPControl::bSaveChanges_Click(System::Object^  sender, System::EventArgs^  e)
 {

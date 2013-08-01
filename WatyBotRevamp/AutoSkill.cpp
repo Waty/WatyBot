@@ -41,7 +41,7 @@ Void AutoSkillEntry::Cast()
 
 Void AutoSkillEntry::CastBackground(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
-	if(!CMS::InGame()) return;
+	if(!CMS::InGame) return;
 
 	//Send Key
 	while(CC::IsBusy || CMS::UsingAutoSkill) Sleep(500);

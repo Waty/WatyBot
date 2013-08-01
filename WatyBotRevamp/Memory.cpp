@@ -80,7 +80,7 @@ CMemory::~CMemory(void)
 //Public Methods
 bool CMemory::Enable(bool enable)
 {
-	if(!CMS::gotMSCRC())
+	if(!CMS::gotMSCRC)
 	{
 		notifyIcon->ShowBalloonTip(1000, L"WatyBot", L"Error in enabling the hack: No MSCRC bypass installed", ToolTipIcon::Error);
 		return false;

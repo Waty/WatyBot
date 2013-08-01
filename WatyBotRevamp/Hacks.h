@@ -161,8 +161,8 @@ namespace Hacks
 	int itemvac_y = 0;
 	VOID WINAPI getItemVacCoords()
 	{
-		itemvac_x = CMS::CharX();
-		itemvac_y = CMS::CharY();
+		itemvac_x = CMS::CharX;
+		itemvac_y = CMS::CharY;
 	}
 	CodeCave(ItemVac)
 	{
@@ -205,7 +205,7 @@ namespace Hacks
 	DWORD dwUARet = UAAddy + 6;
 	BOOL WINAPI UA()
 	{
-		if(CMS::AttackCount() > 90) return TRUE;
+		if(CMS::AttackCount > 90) return TRUE;
 		return FALSE;
 	}
 	CodeCave(UA)

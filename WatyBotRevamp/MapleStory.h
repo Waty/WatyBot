@@ -2,16 +2,17 @@
 #include <Windows.h>
 #include "HackAddys.h"
 
-namespace CMS
+public ref class CMS
 {
-	DWORD ReadPointer(unsigned long ulBase, int iOffset);
-	double ReadDoublePointer(DWORD ulBase, INT iOffset);
-	bool WritePointer(unsigned long ulBase, int iOffset, int iValue);
-	HWND FindProcessWindow();
-	inline void SendKey(int Key);
-	inline void SpamKey(int Key);
-	void SendSwitch(int index);
-	void SpamSwitch(int index);
+public:
+	static DWORD ReadPointer(unsigned long ulBase, int iOffset);
+	static double ReadDoublePointer(DWORD ulBase, INT iOffset);
+	static bool WritePointer(unsigned long ulBase, int iOffset, int iValue);
+	static HWND FindProcessWindow();
+	static inline void SendKey(int Key);
+	static inline void SpamKey(int Key);
+	static void SendSwitch(int index);
+	static void SpamSwitch(int index);
 
 	static bool UsingAutoSkill;
 	static int MaxHP;
@@ -20,87 +21,90 @@ namespace CMS
 	static int SAWSIL;
 	static int SLWSB;
 
-	inline int MobCount()
+	static property int MobCount
 	{
-		return (int) ReadPointer(MobBasePtr, MobCountOffset);
+		int get(){ return (int) ReadPointer(MobBasePtr, MobCountOffset);}
 	}
-	inline int ItemCount()
+	static property int ItemCount
 	{
-		return (int) ReadPointer(ItemBasePtr, ItemCountOffset);
+		int get(){ return (int) ReadPointer(ItemBasePtr, ItemCountOffset);}
 	}
-	inline int PeopleCount()
+	static property int PeopleCount
 	{
-		return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);
+		int get(){ return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);}
 	}
-	inline int CharX()
+	static property int CharX
 	{
-		return (int) ReadPointer(CharBasePtr,XOffset);
+		int get(){ return (int) ReadPointer(CharBasePtr,XOffset);}
 	}
-	inline int CharY()
+	static property int CharY
 	{
-		return (int) ReadPointer(CharBasePtr,XOffset + 4);
+		int get(){ return (int) ReadPointer(CharBasePtr,XOffset + 4);}
 	}
-	inline int CharHP()
+	static property int CharHP
 	{
-		WritePointer(SettingsBasePtr, HPAlertOffset, 20);
-		int HP = ReadPointer(StatsBasePtr, HPOffset);
-		if(HP > MaxHP) MaxHP = HP;
-		return HP;
+		int get()
+		{ 
+			WritePointer(SettingsBasePtr, HPAlertOffset, 20);
+			int HP = ReadPointer(StatsBasePtr, HPOffset);
+			if(HP > MaxHP) MaxHP = HP;
+			return HP;
+		}
 	}
-	inline int CharMP()
+	static property int CharMP
 	{
-		WritePointer(SettingsBasePtr, MPAlertOffset, 20);
-		int MP = ReadPointer(StatsBasePtr, HPOffset + 4);
-		if(MP > MaxMP) MaxMP = MP;
-		return MP;
+		int get()
+		{ 
+			WritePointer(SettingsBasePtr, MPAlertOffset, 20);
+			int MP = ReadPointer(StatsBasePtr, HPOffset + 4);
+			if(MP > MaxMP) MaxMP = MP;
+			return MP;
+		}
 	}
-	inline double CharEXP()
+	static property double CharEXP
 	{
-		return ReadDoublePointer(StatsBasePtr, EXPOffset);
+		double get(){ return ReadDoublePointer(StatsBasePtr, EXPOffset);}
 	}
-	inline int MapId()
+	static property int MapId
 	{
-		return (int) ReadPointer(InfoBasePtr, MapIDOffset);
+		int get(){ return (int) ReadPointer(InfoBasePtr, MapIDOffset);}
 	}
-	inline int AttackCount()
+	static property int AttackCount
 	{
-		return (int) ReadPointer(CharBasePtr, AttackCountOffset);
+		int get(){ return (int) ReadPointer(CharBasePtr, AttackCountOffset);}
 	}
-	inline int Tubi()
+	static property int Tubi
 	{
-		return (int) ReadPointer(ServerBasePtr, TubiOffset);
+		int get(){ return (int) ReadPointer(ServerBasePtr, TubiOffset);}
+		void set(int i) {WritePointer(ServerBasePtr, TubiOffset, i);}
 	}
-	inline void Tubi(int value)
+	static property int Breath
 	{
-		WritePointer(ServerBasePtr, TubiOffset, value);
+		int get(){ return (int) ReadPointer(CharBasePtr, BreathOffset);}
+		void set(int i){ WritePointer(CharBasePtr, BreathOffset, i);}
 	}
-	inline int Breath()
+	static property int Channel
 	{
-		return (int) ReadPointer(CharBasePtr, BreathOffset);
+		int get(){ return (int) ReadPointer(ServerBasePtr, ChannelOffset);}
 	}
-	inline void Breath(int i)
+	static property int PetFullness
 	{
-		WritePointer(CharBasePtr, BreathOffset, i);
+		int get()
+		{ 
+			unsigned long Pet = ReadPointer(CharBasePtr, PetOffset);
+			return ReadPointer(Pet+0x4, PetFullnessOffset);
+		}
 	}
-	inline int Channel()
+	static property bool gotMSCRC
 	{
-		return (int) ReadPointer(ServerBasePtr, ChannelOffset);
+		bool get(){ return *(BYTE*)MSCRCAddy == 233;}
 	}
-	inline int PetFullness()
+	static property bool InGame
 	{
-		unsigned long Pet = ReadPointer(CharBasePtr, PetOffset);
-		return ReadPointer(Pet+0x4, PetFullnessOffset);
+		bool get(){ return MapId > 0;}
 	}
-	inline bool gotMSCRC()
+	static property HWND MSHWND
 	{
-		return *(BYTE*)MSCRCAddy == 233;
-	}
-	inline bool InGame()
-	{
-		return MapId > 0;
-	}
-	inline HWND MSHWND()
-	{
-		return FindProcessWindow();
+		HWND get(){ return FindProcessWindow();}
 	}
 };

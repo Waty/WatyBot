@@ -201,7 +201,7 @@ Void MainForm::cbAutoAttack_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 Void MainForm::tAutoAttack_Tick(Object^  sender, EventArgs^  e)
 {
-	if(!CMS::InGame() || CC::IsBusy || CMS::MobCount() < CMS::SAWSIL || CMS::UsingAutoSkill) return;
+	if(!CMS::InGame || CC::IsBusy || CMS::MobCount < CMS::SAWSIL || CMS::UsingAutoSkill) return;
 	BreathCounter.Start();
 	CMS::SpamSwitch(ddbAutoAttackKey->SelectedIndex);
 }
@@ -217,8 +217,8 @@ Void MainForm::cbAutoLoot_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 Void MainForm::tAutoLoot_Tick(Object^  sender, EventArgs^  e)
 {
-	if(!CMS::InGame() || CMS::MobCount() > CMS::SLWSB || CMS::UsingAutoSkill) return;
-	CMS::Tubi(0);
+	if(!CMS::InGame || CMS::MobCount > CMS::SLWSB || CMS::UsingAutoSkill) return;
+	CMS::Tubi = 0;
 	CMS::SpamSwitch(ddbAutoLootKey->SelectedIndex);
 }
 Void MainForm::cbAutoHP_CheckedChanged(Object^  sender, EventArgs^  e)
@@ -282,44 +282,44 @@ Void MainForm::MainForm_Load(Object^  sender, EventArgs^  e)
 }
 Void MainForm::StatsTimer_Tick(Object^  sender, EventArgs^  e)
 {
-	this->MobCountLabel->Text =		"Mobs: "		+ CMS::MobCount();
-	this->PeopleCountLabel->Text =	"People: "		+ CMS::PeopleCount();
-	this->CharPosLabel->Text =		"CharPos: ("	+ CMS::CharX() +","+ CMS::CharY()+")";
-	this->ItemCountLabel->Text =	"Items: "		+ CMS::ItemCount();
-	this->AttackCountLabel->Text =	"Attacks: "		+ CMS::AttackCount();
-	this->TubiPointerLabel->Text =	"Tubi: "		+ CMS::Tubi();
-	this->BreathLabel->Text =		"Breath: "		+ CMS::Breath();
-	this->lMapID->Text =			"MapID: "		+ CMS::MapId();
-	this->lPetFullness->Text =		"PetFullness: "	+ CMS::PetFullness();
+	this->MobCountLabel->Text =		"Mobs: "		+ CMS::MobCount;
+	this->PeopleCountLabel->Text =	"People: "		+ CMS::PeopleCount;
+	this->CharPosLabel->Text =		"CharPos: ("	+ CMS::CharX +","+ CMS::CharY+")";
+	this->ItemCountLabel->Text =	"Items: "		+ CMS::ItemCount;
+	this->AttackCountLabel->Text =	"Attacks: "		+ CMS::AttackCount;
+	this->TubiPointerLabel->Text =	"Tubi: "		+ CMS::Tubi;
+	this->BreathLabel->Text =		"Breath: "		+ CMS::Breath;
+	this->lMapID->Text =			"MapID: "		+ CMS::MapId;
+	this->lPetFullness->Text =		"PetFullness: "	+ CMS::PetFullness;
 	
-	if(CMS::InGame())
+	if(CMS::InGame)
 	{
 		//AutoHP/MP happens here
-		if(cbAutoHP->Checked && CMS::CharHP() <= nudAutoHP->Value) CMS::SpamSwitch(ddbAutoHPKey->SelectedIndex);
-		if(cbAutoMP->Checked && CMS::CharMP() <= nudAutoMP->Value) CMS::SpamSwitch(ddbAutoMPKey->SelectedIndex);
+		if(cbAutoHP->Checked && CMS::CharHP <= nudAutoHP->Value) CMS::SpamSwitch(ddbAutoHPKey->SelectedIndex);
+		if(cbAutoMP->Checked && CMS::CharMP <= nudAutoMP->Value) CMS::SpamSwitch(ddbAutoMPKey->SelectedIndex);
 
 		//AutoCC happens here
-		if(cbCCPeople->Checked && (CMS::PeopleCount() >= (int) nudCCPeople->Value)) CC::CCSwitch((CCType) ddbPeopleType->SelectedIndex);	
-		if(cbCCAttacks->Checked && (CMS::AttackCount() >= (int) nudCCAttacks->Value)) CC::CCSwitch((CCType) ddbAttacksType->SelectedIndex);
+		if(cbCCPeople->Checked && (CMS::PeopleCount >= (int) nudCCPeople->Value)) CC::CCSwitch((CCType) ddbPeopleType->SelectedIndex);	
+		if(cbCCAttacks->Checked && (CMS::AttackCount >= (int) nudCCAttacks->Value)) CC::CCSwitch((CCType) ddbAttacksType->SelectedIndex);
 
 		//PetFeeder happens here
-		if(cbPetFeeder->Checked && (CMS::PetFullness() <= nudPetFeeder->Value)) CMS::SendSwitch(ddbPetFeeder->SelectedIndex);
+		if(cbPetFeeder->Checked && (CMS::PetFullness <= nudPetFeeder->Value)) CMS::SendSwitch(ddbPetFeeder->SelectedIndex);
 		MainForm::RedrawStatBars();
 		MainForm::HotKeys();
 	}
 }
 Void MainForm::RedrawStatBars()
 {
-	this->HPLabel->Text = "HP: " + CMS::CharHP() + "/" + CMS::MaxHP;
-	this->MPLabel->Text = "MP: " + CMS::CharMP() + "/" + CMS::MaxMP;
-	this->EXPLabel->Text = "EXP: " + CMS::CharEXP().ToString("f2") +"%";
+	this->HPLabel->Text = "HP: " + CMS::CharHP + "/" + CMS::MaxHP;
+	this->MPLabel->Text = "MP: " + CMS::CharMP + "/" + CMS::MaxMP;
+	this->EXPLabel->Text = "EXP: " + CMS::CharEXP.ToString("f2") +"%";
 
 	static int lengtOfBars = 223;
-	double HPBarLength = ((double) CMS::CharHP() / (double) CMS::MaxHP) * lengtOfBars;
+	double HPBarLength = ((double) CMS::CharHP / (double) CMS::MaxHP) * lengtOfBars;
 	this->HPForeground->Width = HPBarLength;
-	double MPBarLength = ((double) CMS::CharMP() / (double) CMS::MaxMP) * lengtOfBars;
+	double MPBarLength = ((double) CMS::CharMP / (double) CMS::MaxMP) * lengtOfBars;
 	this->MPForeground->Width = MPBarLength;
-	double EXPBarLength = (CMS::CharEXP() / 100) * lengtOfBars;
+	double EXPBarLength = (CMS::CharEXP / 100) * lengtOfBars;
 	this->EXPForeground->Width = EXPBarLength;
 }
 Void MainForm::ReloadComboBox(ComboBox^ combobox)
@@ -534,9 +534,9 @@ Void MainForm::GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e)
 		CMS::SpamKey(VK_DOWN);
 		Sleep(10);
 	}
-	this->nudSPCMapId->Value = CMS::MapId();
-	this->nudSPCX->Value = CMS::CharX();
-	this->nudSPCY->Value = CMS::CharY();
+	this->nudSPCMapId->Value = CMS::MapId;
+	this->nudSPCX->Value = CMS::CharX;
+	this->nudSPCY->Value = CMS::CharY;
 }
 Void MainForm::lvSPControl_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e)
 {
@@ -652,12 +652,12 @@ Void MainForm::LoadSettings()
 
 			//try's 5 seconds long if your CRC is ready for the hacks
 			int i = 0;
-			while(i<50 && !CMS::gotMSCRC())
+			while(i<50 && !CMS::gotMSCRC)
 			{
 				Sleep(100);
 				i++;
 			}
-			if(CMS::gotMSCRC())
+			if(CMS::gotMSCRC)
 			{
 				cbPinTyper->Checked = (bool)				Settings[PinTyper]->Value;
 				cbLogoSkipper->Checked = (bool)				Settings[LogoSkipper]->Value;

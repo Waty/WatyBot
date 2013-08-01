@@ -68,7 +68,7 @@ DWORD dwSPControlRet = SPControlAddy + 6;
 int spawn_x, spawn_y;
 BOOL WINAPI GetCoords()
 {
-	int iMapID = CMS::MapId();
+	int iMapID = CMS::MapId;
 	for each(CSPControlLocation^ location in CSPControl::Locations)
 	{
 		if(iMapID == location->MapId)

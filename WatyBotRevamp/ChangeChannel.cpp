@@ -44,23 +44,23 @@ Void CC::GenerateRandomChannel()
 
 Void CC::doCC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
-	if(!CMS::InGame())
+	if(!CMS::InGame)
 	{
 		e->Cancel;
 		return;
 	}
 	
 	//Store the currrent Channel
-	StartChannel = CMS::Channel();
+	StartChannel = CMS::Channel;
 
 	GenerateRandomChannel();
 
 	//Sleep while breath > 0
 	while(!BreathCounter.IsOver()) Sleep(100);
-	CMS::Breath(0);
+	CMS::Breath = 0;
 	
 	int i = 0;
-	while(CMS::Channel() != TargetChannel && CMS::Channel() != -1)
+	while(CMS::Channel != TargetChannel && CMS::Channel != -1)
 	{
 		//if the CC didn't happen after trying 10 times, Generate new random channel
 		if(i > 10) GenerateRandomChannel();
@@ -74,10 +74,10 @@ Void CC::doCC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^ 
 
 Void CC::doCS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
-	if(!CMS::InGame()) e->Cancel;
+	if(!CMS::InGame) e->Cancel;
 	while(!BreathCounter.IsOver()) Sleep(100);
 	Sleep(500);
-	CMS::Breath(0);
+	CMS::Breath = 0;
 	String^ strError = String::Empty;
 	CPackets::Send(EnterCashShop, strError);
 	Sleep(2500);
@@ -87,7 +87,7 @@ Void CC::doCS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^ 
 
 Void CC::doDC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
-	while(CMS::InGame())
+	while(CMS::InGame)
 	{
 		String^ strError = String::Empty;
 		CPackets::Send(ChangeCharacter, strError);
