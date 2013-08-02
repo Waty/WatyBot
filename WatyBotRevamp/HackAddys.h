@@ -89,8 +89,8 @@
 #define MouseXOffset 0x8C
 #define MouseAniOffset 0x9DC
 #define SettingsBasePtr 0x1401D5C
-#define HPAlertOffset 0x401D
-#define MPAlertOffset 0x1D5C
+#define HPAlertOffset 0x5C
+#define MPAlertOffset 0x60
 #define ServerBasePtr 0x13FD370
 #define TubiOffset 0x213C
 #define WorldOffset 0x20C0
