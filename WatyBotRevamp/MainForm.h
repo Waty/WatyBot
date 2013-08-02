@@ -211,6 +211,7 @@ namespace WatyBotRevamp {
 		System::Windows::Forms::Button^  button1;
 		System::Windows::Forms::ToolStripMenuItem^  bEditPacket;
 		System::IO::FileSystemWatcher^  SettingsWatcher;
+		System::Windows::Forms::CheckBox^  cbLockItemVac;
 
 		 System::ComponentModel::IContainer^  components;
 #pragma endregion
@@ -384,6 +385,7 @@ namespace WatyBotRevamp {
 			this->tAutoLoot = (gcnew System::Windows::Forms::Timer(this->components));
 			this->tTimedCC = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SettingsWatcher = (gcnew System::IO::FileSystemWatcher());
+			this->cbLockItemVac = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->gbAutoSkill->SuspendLayout();
@@ -1196,6 +1198,7 @@ namespace WatyBotRevamp {
 			// 
 			// gbCharHacks
 			// 
+			this->gbCharHacks->Controls->Add(this->cbLockItemVac);
 			this->gbCharHacks->Controls->Add(this->nudIceGuard);
 			this->gbCharHacks->Controls->Add(this->cbIceGuard);
 			this->gbCharHacks->Controls->Add(this->nudSkillInjection);
@@ -2142,6 +2145,17 @@ namespace WatyBotRevamp {
 			this->SettingsWatcher->SynchronizingObject = this;
 			this->SettingsWatcher->Changed += gcnew System::IO::FileSystemEventHandler(this, &MainForm::SettingsWatcher_Changed);
 			// 
+			// cbLockItemVac
+			// 
+			this->cbLockItemVac->AutoSize = true;
+			this->cbLockItemVac->Location = System::Drawing::Point(75, 84);
+			this->cbLockItemVac->Name = L"cbLockItemVac";
+			this->cbLockItemVac->Size = System::Drawing::Size(50, 17);
+			this->cbLockItemVac->TabIndex = 21;
+			this->cbLockItemVac->Text = L"Lock";
+			this->cbLockItemVac->UseVisualStyleBackColor = true;
+			this->cbLockItemVac->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbLockItemVac_CheckedChanged);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2211,6 +2225,10 @@ namespace WatyBotRevamp {
 		}
 #pragma endregion
 
+public:
+	static array<Object^>^ KeyNames = gcnew array<System::Object^> {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"};;
+	static NotifyIcon^ notifyIcon = gcnew NotifyIcon;
+
 private:
 	//General private class members
 	List<SettingsEntry^>^ Settings;
@@ -2221,8 +2239,6 @@ private:
 	Void RedrawStatBars();
 	Void ReloadComboBox(ComboBox^ combobox);
 	Void HotKeys();
-	static cli::array<Object^>^ KeyNames = gcnew cli::array< System::Object^  >(58) {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"};;
-
 	//General trainer events
 	Void MainForm_Load(Object^  sender, EventArgs^  e);
 	Void StatsTimer_Tick(Object^  sender, EventArgs^  e);
@@ -2281,6 +2297,7 @@ private:
 	Void cb50SecGM_CheckedChanged(Object^  sender, EventArgs^  e);
 	Void cbLogoSkipper_CheckedChanged(Object^  sender, EventArgs^  e);
 	Void cbViewSwears_CheckedChanged(Object^  sender, EventArgs^  e);
+	Void cbLockItemVac_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 	Void cbItemVac_CheckedChanged(Object^  sender, EventArgs^  e);
 	Void cbFMA_CheckedChanged(Object^  sender, EventArgs^  e);
 	Void cbScareMobs_CheckedChanged(Object^  sender, EventArgs^  e);

@@ -101,6 +101,12 @@ void MainForm::cbItemVac_CheckedChanged(Object^  sender, EventArgs^  e)
 {
 	cbItemVac->Checked = Hacks::cmItemVac.Enable(cbItemVac->Checked);
 }
+void MainForm::cbLockItemVac_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::itemvaclock = this->cbLockItemVac->Checked;
+	Hacks::getItemVacCoords();
+}
+
 void MainForm::cbFMA_CheckedChanged(Object^  sender, EventArgs^  e)
 {
 	cbNFA->Checked = cbFMA->Checked;
@@ -273,8 +279,8 @@ Void MainForm::MainForm_Load(Object^  sender, EventArgs^  e)
 	//Load all the settings and innitialize all the classes
 	LoadSPControl();
 	LoadPackets();
-	LoadSettings();
 	LoadAutoSkill();
+	LoadSettings();
 
 	// Fix the size of the tabs
 	MainForm::Height = TabHeight[MainTabControl->SelectedTab->TabIndex];
@@ -606,7 +612,6 @@ Void MainForm::LoadSettings()
 	if(Settings == nullptr) Settings = gcnew List<SettingsEntry^>;
 	else
 	{
-		if(Settings->Count != SettingCount) ShowNotifyIcon("The Loaded settings file is invalid!\n" + "WatyBot Will try to load it anyways :)\n" + "Found: " + Settings->Count + " Should be: " + (int) SettingCount);
 		try
 		{
 			//AutoAttack

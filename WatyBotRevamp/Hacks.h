@@ -159,8 +159,11 @@ namespace Hacks
 	DWORD dwItemVacCall = ItemVacCall;
 	int itemvac_x = 0;
 	int itemvac_y = 0;
+	bool itemvaclock = false;
 	VOID WINAPI getItemVacCoords()
 	{
+		if(itemvaclock) return;
+
 		itemvac_x = CMS::CharX;
 		itemvac_y = CMS::CharY;
 	}
