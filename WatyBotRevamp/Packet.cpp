@@ -10,6 +10,21 @@ CPacketData::CPacketData(String^ Name, List<String^>^ Data, int Interval)
 	this->Interval = Interval;
 }
 
+bool CPacketData::IsValidPacket(String^&strError)
+{
+	if(Data->Count < 1)
+	{
+		strError = "Empty Packet!";
+		return false;
+	}
+	for each(String^ strPacket in Data)
+	{
+		if(!CPackets::VerifyPacket(strPacket, strError)) return false;
+	}
+	return true;
+}
+
+
 void CPackets::WriteXmlData()
 {
 	auto writer = File::Create(PacketFileName);
@@ -43,16 +58,16 @@ void CPackets::Add(String^ name, List<String^>^ data, int Interval)
 {
 	Add(gcnew CPacketData(name, data, Interval));
 }
-void CPackets::Add(CPacketData^ Packet)
+void CPackets::Add(CPacketData^ PacketData)
 {
-	Packets->Add(Packet);
+	Packets->Add(PacketData);
 	WriteXmlData();
 }
 
 bool CPackets::VerifyPacket(String^ str, String^&strError)
 {
 	String^ strPacket = str->Replace(" ", "");
-    if(strPacket == String::Empty)
+	if(String::IsNullOrEmpty(strPacket))
 	{
         strError = "Packet is Empty";
         return false;
@@ -117,4 +132,9 @@ bool CPackets::Send()
 		return false;
 	}
 	return Send(SelectedPacket);
+}
+
+void CPackets::Spam(int Times)
+{
+	
 }

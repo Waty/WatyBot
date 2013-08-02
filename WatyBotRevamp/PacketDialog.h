@@ -91,6 +91,7 @@ namespace WatyBotRevamp {
 			// 
 			// tbData
 			// 
+			this->tbData->CharacterCasing = System::Windows::Forms::CharacterCasing::Upper;
 			this->tbData->Location = System::Drawing::Point(133, 25);
 			this->tbData->Multiline = true;
 			this->tbData->Name = L"tbData";
@@ -172,14 +173,19 @@ namespace WatyBotRevamp {
 #pragma endregion
 		Void bSave_Click(System::Object^  sender, System::EventArgs^  e)
 		{
-			this->DialogResult = System::Windows::Forms::DialogResult::OK;
-
 			this->PacketData->Name = tbName->Text;
 			auto data = gcnew List<String^>;
 			data->AddRange(this->tbData->Lines);
 			this->PacketData->Data = data;
 			this->PacketData->Interval = (int) nudInterval->Value;
-
+			
+			String^ strError = String::Empty;
+			if(!PacketData->IsValidPacket(strError))
+			{
+				ShowError(strError);
+				return;
+			}
+			this->DialogResult = System::Windows::Forms::DialogResult::OK;
 			Close();
 		}
 

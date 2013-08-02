@@ -24,6 +24,8 @@ namespace Packets
 		property String^ Name;
 		property List<String^>^ Data;
 		property int Interval;
+
+		bool IsValidPacket(String^&strError);
 	};
 
 	public ref class CPackets sealed
@@ -39,6 +41,7 @@ namespace Packets
 		static bool Send(String^ packet, String^&strError);
 		static bool Send(CPacketData^ packet);
 		static bool Send();
+		static void Spam(int Times);
 
 		static void WriteXmlData();
 		static void ReadXmlData();
