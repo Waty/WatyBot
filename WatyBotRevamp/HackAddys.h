@@ -102,7 +102,7 @@
 #define PeopleBasePtr 0x1401D60
 #define PeopleCountOffset 0x18
 #define ItemBasePtr 0x1407194
-#define ItemCountOffset 0x1424
+#define ItemCountOffset 0x14
 #define SendPacketAddy 0x4D99E0
 #define SendClassAddy 0x49D337
 #define ClientSocketAddy 0x49D337
