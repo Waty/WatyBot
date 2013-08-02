@@ -14,12 +14,12 @@ public:
 	static void SendSwitch(int index);
 	static void SpamSwitch(int index);
 
-	static bool UsingAutoSkill;
-	static int MaxHP;
-	static int MaxMP;
-	static bool UsingPots;
-	static int SAWSIL;
-	static int SLWSB;
+	static property bool UsingAutoSkill;
+	static property int MaxHP;
+	static property int MaxMP;
+	static property bool UsingPots;
+	static property int SAWSIL;
+	static property int SLWSB;
 
 	static property int MobCount
 	{
