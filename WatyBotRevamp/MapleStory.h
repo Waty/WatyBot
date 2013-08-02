@@ -9,8 +9,8 @@ public:
 	static double ReadDoublePointer(DWORD ulBase, INT iOffset);
 	static bool WritePointer(unsigned long ulBase, int iOffset, int iValue);
 	static HWND FindProcessWindow();
-	static inline void SendKey(int Key);
-	static inline void SpamKey(int Key);
+	static void SendKey(int Key);
+	static void SpamKey(int Key);
 	static void SendSwitch(int index);
 	static void SpamSwitch(int index);
 
