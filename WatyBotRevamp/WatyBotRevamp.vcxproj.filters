@@ -127,6 +127,9 @@
     <EmbeddedResource Include="EditSPControl.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
+    <EmbeddedResource Include="PacketDialog.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\WatyBotUpdater\AOBs.xml">

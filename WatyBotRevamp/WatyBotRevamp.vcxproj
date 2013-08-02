@@ -61,7 +61,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>D:\Programs\Europe MapleStory\</OutDir>
+    <OutDir>C:\MapleStory\</OutDir>
     <TargetName>WatyBot</TargetName>
     <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
