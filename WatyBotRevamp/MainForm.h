@@ -294,6 +294,7 @@ namespace WatyBotRevamp {
 			this->cbJDA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoBG = (gcnew System::Windows::Forms::CheckBox());
 			this->gbCharHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->cbLockItemVac = (gcnew System::Windows::Forms::CheckBox());
 			this->nudIceGuard = (gcnew System::Windows::Forms::NumericUpDown());
 			this->cbIceGuard = (gcnew System::Windows::Forms::CheckBox());
 			this->nudSkillInjection = (gcnew System::Windows::Forms::NumericUpDown());
@@ -385,7 +386,6 @@ namespace WatyBotRevamp {
 			this->tAutoLoot = (gcnew System::Windows::Forms::Timer(this->components));
 			this->tTimedCC = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SettingsWatcher = (gcnew System::IO::FileSystemWatcher());
-			this->cbLockItemVac = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->gbAutoSkill->SuspendLayout();
@@ -1223,6 +1223,17 @@ namespace WatyBotRevamp {
 			this->gbCharHacks->TabIndex = 1;
 			this->gbCharHacks->TabStop = false;
 			this->gbCharHacks->Text = L"Character";
+			// 
+			// cbLockItemVac
+			// 
+			this->cbLockItemVac->AutoSize = true;
+			this->cbLockItemVac->Location = System::Drawing::Point(75, 84);
+			this->cbLockItemVac->Name = L"cbLockItemVac";
+			this->cbLockItemVac->Size = System::Drawing::Size(50, 17);
+			this->cbLockItemVac->TabIndex = 21;
+			this->cbLockItemVac->Text = L"Lock";
+			this->cbLockItemVac->UseVisualStyleBackColor = true;
+			this->cbLockItemVac->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbLockItemVac_CheckedChanged);
 			// 
 			// nudIceGuard
 			// 
@@ -2145,17 +2156,6 @@ namespace WatyBotRevamp {
 			this->SettingsWatcher->SynchronizingObject = this;
 			this->SettingsWatcher->Changed += gcnew System::IO::FileSystemEventHandler(this, &MainForm::SettingsWatcher_Changed);
 			// 
-			// cbLockItemVac
-			// 
-			this->cbLockItemVac->AutoSize = true;
-			this->cbLockItemVac->Location = System::Drawing::Point(75, 84);
-			this->cbLockItemVac->Name = L"cbLockItemVac";
-			this->cbLockItemVac->Size = System::Drawing::Size(50, 17);
-			this->cbLockItemVac->TabIndex = 21;
-			this->cbLockItemVac->Text = L"Lock";
-			this->cbLockItemVac->UseVisualStyleBackColor = true;
-			this->cbLockItemVac->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbLockItemVac_CheckedChanged);
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2169,7 +2169,7 @@ namespace WatyBotRevamp {
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot 3.2 - CCPLZ! - EMS 93.2";
+			this->Text = L"WatyBot 3.2.2 - CCPLZ! - EMS 93.2";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);

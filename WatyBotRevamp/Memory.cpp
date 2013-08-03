@@ -1,5 +1,6 @@
 #include "Memory.h"
 #include "Defines.h"
+#include "MainForm.h"
 
 //Constructors
 CMemory::CMemory(unsigned long ulAddy, unsigned char *bytes, int size) //one addy
@@ -82,7 +83,7 @@ bool CMemory::Enable(bool enable)
 {
 	if(!CMS::gotMSCRC)
 	{
-		notifyIcon->ShowBalloonTip(1000, L"WatyBot", L"Error in enabling the hack: No MSCRC bypass installed", ToolTipIcon::Error);
+		WatyBotRevamp::MainForm::notifyIcon->ShowBalloonTip(1000, L"WatyBot", L"Error in enabling the hack: No MSCRC bypass installed", ToolTipIcon::Error);
 		return false;
 	}
 	else if(Enabled == enable) return false;
