@@ -37,34 +37,11 @@ bool inject(std::string fileName, DWORD pID)
 	return true; 
 }
 
-BOOL IsElevated( ) {
-	BOOL fRet = FALSE;
-	HANDLE hToken = NULL;
-	if( OpenProcessToken( GetCurrentProcess( ),TOKEN_QUERY,&hToken ) ) {
-		TOKEN_ELEVATION Elevation;
-		DWORD cbSize = sizeof( TOKEN_ELEVATION );
-		if( GetTokenInformation( hToken, TokenElevation, &Elevation, sizeof( Elevation ), &cbSize ) ) {
-			fRet = Elevation.TokenIsElevated;
-		}
-	}
-	if( hToken ) {
-		CloseHandle( hToken );
-	}
-	return fRet;
-}
 int main()
 {
 	cout << "WatyBotInjector 2.2 Beta WindowsXP Support:" << endl;
 	cout << "You need to have WatyBot.dll and this program in the Maplestory folder!!!!" << endl;
 	cout << "Full credits to \"TheFox\"" << endl << endl;
-
-	cout << "Checking for admin rights..." << endl;
-	if(IsElevated()) cout << "Running with admin rights!" << endl;
-	else
-	{
-		cout << "Unable to find administartor rights, this is because you didn't run it as admin, or because you're on WindowsXP" << endl;
-		cout << "Continuing anyway :)" << endl;
-	}
 	
 	if(File::Exists(Directory::GetCurrentDirectory() + "\\MapleStory.exe")) cout << "Found MapleStory.exe!" << endl;
 	else
@@ -121,4 +98,3 @@ int main()
 
 	return true;
 }
-
