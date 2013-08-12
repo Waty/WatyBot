@@ -2171,7 +2171,7 @@ namespace WatyBotRevamp {
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot 3.2.2 - CCPLZ! - EMS 93.2";
+			this->Text = L"WatyBot 3.2.3 - CCPLZ! - EMS 93.2";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
