@@ -34,7 +34,9 @@ namespace WatyBotRevamp {
 			this->ddbHotKeyLoot->Items->AddRange(KeyNames);
 			this->ddbHotKeyAttack->Items->AddRange(KeyNames);
 			this->ddbHotKeyMouseFly->Items->AddRange(KeyNames);
-
+			
+			//Create the Waty directory in %appdata%
+			if(!Directory::Exists(WatyBotWorkingDirectory))	Directory::CreateDirectory(WatyBotWorkingDirectory);
 			this->SettingsWatcher->Path = WatyBotWorkingDirectory;
 		}
 

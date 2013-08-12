@@ -266,9 +266,6 @@ Void Main(void)
 }
 Void MainForm::MainForm_Load(Object^  sender, EventArgs^  e)
 {
-	//Create the Waty directory in %appdata%
-	if(!Directory::Exists(WatyBotWorkingDirectory))	Directory::CreateDirectory(WatyBotWorkingDirectory);
-
 	//Initialize the NotifyIcon
 	notifyIcon = gcnew NotifyIcon;
 	notifyIcon->Icon = SystemIcons::Error;
