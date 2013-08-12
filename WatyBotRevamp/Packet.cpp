@@ -1,5 +1,6 @@
 #include "Packet.h"
 #include "Defines.h"
+#include "Hacks.h"
 
 DWORD WINAPI TrySendPacket(__in_bcount(nLength) LPBYTE lpBytes, __in DWORD dwLength);
 
@@ -111,6 +112,7 @@ bool CPackets::Send(String^ str, String^&strError)
     for ( int i = 0; ( dwOffset < dwLength ) && ( ( i + 1 ) < rawBytes->Length ); dwOffset++, i += 2 )
         lpBytes[dwOffset] = Byte::Parse(rawBytes->Substring(i, 2), Globalization::NumberStyles::HexNumber, Globalization::CultureInfo::InvariantCulture);
  
+	Hacks::ThreadIdFix.Enable(true);
 	TrySendPacket(lpBytes, dwLength);
 	delete [] lpBytes;
     return true;

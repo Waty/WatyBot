@@ -1,5 +1,4 @@
 #include "Memory.h"
-#include "Defines.h"
 #include "MainForm.h"
 
 //Constructors

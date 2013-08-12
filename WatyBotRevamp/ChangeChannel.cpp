@@ -1,5 +1,6 @@
 #include "ChangeChannel.h"
 #include "Defines.h"
+#include "Hacks.h"
 
 using namespace ChangeChannel;
 using namespace System;
@@ -13,6 +14,7 @@ Void CC::CCSwitch(CCType type)
 	switch(type)
 	{
 	case CCType::CC:
+		Hacks::ThreadIdFix.Enable(true);
 		bw->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(&CC::doCC);
 		bw->RunWorkerAsync();
 		break;

@@ -1,11 +1,9 @@
+#pragma once
 #include <Windows.h>
-#include <vcclr.h>
-#include "MapleStory.h"
 
 enum cType{asmtype, singleaddy, twoaddys, threeaddys, fouraddys}; 
 enum jumpType{jump, call};
 
-#pragma once
 class CMemory
 {
 public:
