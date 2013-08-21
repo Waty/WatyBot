@@ -156,7 +156,7 @@ BYTE b50SecGM2[] = {0xD4, 0x36};
 CMemory Hacks::SecondGodmode(Godmode50SecAddy1, b50SecGM1, 1, Godmode50SecAddy2, b50SecGM2, 2);
 
 /////Logo Skipper
-BYTE bLogoSkipper[] = {0xB0, 0x4A};
+BYTE bLogoSkipper[] = {0x30, 0x4D};
 CMemory Hacks::LogoSkipper(LogoSkipperAddy, bLogoSkipper, 2);
 
 /////(semi) Item Vac
