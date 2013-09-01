@@ -60,9 +60,6 @@
     <ClCompile Include="MapleStory.cpp">
       <Filter>Classes\CMapleStory</Filter>
     </ClCompile>
-    <ClCompile Include="Defines.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AutoSkill.cpp">
       <Filter>Classes\CAutoSkill</Filter>
     </ClCompile>
@@ -78,9 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainForm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Defines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hacks.h">

@@ -1,4 +1,7 @@
-#include "Defines.h"
+#include <Windows.h>
+#include "SPControl.h"
+
+using namespace WatyBotRevamp;
 
 CSPControlLocation::CSPControlLocation()
 {
@@ -18,7 +21,7 @@ CSPControlLocation::CSPControlLocation(String^ name, int MapId, int X, int Y)
 
 void CSPControl::WriteXmlData()
 {
-	auto writer = File::Create(SPControlFileName);
+	auto writer = File::Create(Path);
 	try
 	{
 		serializer->Serialize(writer, Locations);
@@ -29,14 +32,14 @@ void CSPControl::WriteXmlData()
 
 void CSPControl::ReadXmlData()
 {
-	if(!File::Exists(SPControlFileName))
+	if(!File::Exists(Path))
 	{
 		WriteXmlData();
 		return;
 	}
 
 	//Deserialize the xml file
-	TextReader^ reader = gcnew StreamReader(SPControlFileName);
+	TextReader^ reader = gcnew StreamReader(Path);
 	try 
 	{
 		Locations = safe_cast<List<CSPControlLocation^>^>(serializer->Deserialize(reader));
@@ -62,50 +65,4 @@ void CSPControl::AddLocation(String^ Name, int MapId, int X, int Y)
 	l->Y = Y;
 	Locations->Add(l);
 	WriteXmlData();
-}
-
-DWORD dwSPControlRet = SPControlAddy + 6;
-int spawn_x, spawn_y;
-BOOL WINAPI GetCoords()
-{
-	int iMapID = CMS::MapId;
-	for each(CSPControlLocation^ location in CSPControl::Locations)
-	{
-		if(iMapID == location->MapId)
-		{
-			spawn_x = location->X;
-			spawn_y = location->Y;
-			return TRUE;
-		}
-	}
-	return FALSE;
-}
-void __declspec(naked) SPControlCave()
-{
-	_asm
-	{
-		push eax
-		call GetCoords
-		cmp eax,FALSE
-		pop eax
-		je SpawnNormal //if eax == false, jump to SpawnNormal
- 
-		//Spawn on controlled location
-		mov edi,[spawn_x]
-		mov ebx,[spawn_y]
-		jmp [dwSPControlRet]
- 
-		SpawnNormal:
-		mov edi,[eax+0x0C]
-		mov ebx,[eax+0x10]
-		jmp [dwSPControlRet]
-	}
-}
-BYTE SPCCheck[] = {0xEB};
-CMemory cmSPCChecks(SPCChecksAddy, SPCCheck, 1);
-CMemory cmSPControl(SPControlAddy, SPControlCave, 1, true);
-
-bool CSPControl::Enable(bool status)
-{
-	return (cmSPCChecks.Enable(status) && cmSPControl.Enable(status));
 }

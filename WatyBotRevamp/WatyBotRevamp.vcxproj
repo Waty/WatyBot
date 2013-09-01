@@ -136,7 +136,6 @@
   <ItemGroup>
     <ClCompile Include="AutoSkill.cpp" />
     <ClCompile Include="ChangeChannel.cpp" />
-    <ClCompile Include="Defines.cpp" />
     <ClCompile Include="EditSPControl.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -197,7 +196,6 @@
   <ItemGroup>
     <ClInclude Include="AutoSkill.h" />
     <ClInclude Include="ChangeChannel.h" />
-    <ClInclude Include="Defines.h" />
     <ClInclude Include="EditSPControl.h">
       <FileType>CppForm</FileType>
     </ClInclude>

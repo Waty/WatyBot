@@ -1,8 +1,10 @@
 #pragma once
 #include "Packet.h"
+#define ShowError(Message) MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
 
 namespace WatyBotRevamp {
 
+	using namespace System;
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -19,9 +21,9 @@ namespace WatyBotRevamp {
 		PacketDialog()
 		{
 			InitializeComponent();
-			PacketData = gcnew Packets::CPacketData;
+			PacketData = gcnew CPacketData;
 		}
-		PacketDialog(Packets::CPacketData^ pd)
+		PacketDialog(CPacketData^ pd)
 		{
 			InitializeComponent();
 
@@ -35,10 +37,10 @@ namespace WatyBotRevamp {
 			this->PacketData = pd;
 		}
 		
-		Packets::CPacketData^ PacketData;
+		CPacketData^ PacketData;
 
 	protected:
-		/// <summary>
+		/// <summar>
 		/// Clean up any resources being used.
 		/// </summary>
 		~PacketDialog()
@@ -49,7 +51,7 @@ namespace WatyBotRevamp {
 			}
 		}
 	private:
-		Windows::Forms::Label^  lName;
+		Label^  lName;
 		TextBox^  tbName;
 		Windows::Forms::Label^  lData;
 		TextBox^  tbData;
@@ -168,7 +170,6 @@ namespace WatyBotRevamp {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudInterval))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
-
 		}
 #pragma endregion
 		Void bSave_Click(System::Object^  sender, System::EventArgs^  e)

@@ -1,9 +1,10 @@
 #include "Packet.h"
-#include "Defines.h"
 #include "Hacks.h"
+using namespace WatyBotRevamp;
+using namespace System::Windows::Forms;
+#define ShowError(Message) MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
 
 DWORD WINAPI TrySendPacket(__in_bcount(nLength) LPBYTE lpBytes, __in DWORD dwLength);
-
 CPacketData::CPacketData(String^ Name, List<String^>^ Data, int Interval)
 {
 	this->Name = Name;
@@ -28,7 +29,7 @@ bool CPacketData::IsValidPacket(String^&strError)
 
 void CPackets::WriteXmlData()
 {
-	auto writer = File::Create(PacketFileName);
+	auto writer = File::Create(Path);
 	try
 	{
 		serializer->Serialize(writer, Packets);
@@ -39,14 +40,14 @@ void CPackets::WriteXmlData()
 
 void CPackets::ReadXmlData()
 {
-	if(!File::Exists(PacketFileName))
+	if(!File::Exists(Path))
 	{
 		WriteXmlData();
 		return;
 	}
 
 	//Deserialize the xml file
-	TextReader^ reader = gcnew StreamReader(PacketFileName);
+	TextReader^ reader = gcnew StreamReader(Path);
 	try 
 	{
 		CPackets::Packets = safe_cast<List<CPacketData^>^>(serializer->Deserialize(reader));

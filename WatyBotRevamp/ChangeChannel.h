@@ -1,10 +1,9 @@
 #pragma once
-#include "HackAddys.h"
 #include "MapleStory.h"
-namespace ChangeChannel
+
+namespace WatyBotRevamp
 {
 	using namespace System;
-
 
 	enum class CCType{CC, CS, DC};
 	public ref class CC sealed

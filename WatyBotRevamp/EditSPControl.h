@@ -9,7 +9,6 @@ namespace WatyBotRevamp {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	using namespace SpawnControl;
 
 	/// <summary>
 	/// Summary for EditSPControl

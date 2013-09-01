@@ -1,11 +1,12 @@
-#pragma region ...
 #pragma once
+#pragma region ...
 #include <Windows.h>
-#include "Defines.h"
+#include "Settings.h"
 
 namespace WatyBotRevamp {
 
 	using namespace System;
+	using namespace System::IO;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
@@ -36,8 +37,9 @@ namespace WatyBotRevamp {
 			this->ddbHotKeyMouseFly->Items->AddRange(KeyNames);
 			
 			//Create the Waty directory in %appdata%
-			if(!Directory::Exists(WatyBotWorkingDirectory))	Directory::CreateDirectory(WatyBotWorkingDirectory);
-			this->SettingsWatcher->Path = WatyBotWorkingDirectory;
+			auto Path = Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "\\Waty\\");
+			if(!Directory::Exists(Path)) Directory::CreateDirectory(Path);
+			this->SettingsWatcher->Path = Path;
 		}
 
 	protected:

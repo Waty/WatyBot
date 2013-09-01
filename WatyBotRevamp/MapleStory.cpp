@@ -1,5 +1,9 @@
 #include "MapleStory.h"
-#include "Defines.h"
+#include "Packet.h"
+
+using namespace WatyBotRevamp;
+extern int KeyCodes[];
+extern int KeyCodesCount;
 
 DWORD CMS::ReadPointer(DWORD ulBase, int iOffset)
 {
@@ -76,11 +80,11 @@ void CMS::SpamKey(int Key)
 }
 void CMS::SendSwitch(int index)
 {
-	if(index < KeyCodesSize) SendKey(KeyCodes[index]);	
-	else CPackets::Send(CPackets::Packets[index - KeyCodesSize]);
+	if(index < KeyCodesCount) SendKey(KeyCodes[index]);	
+	else CPackets::Send(CPackets::Packets[index - KeyCodesCount]);
 }
 void CMS::SpamSwitch(int index)
 {
-	if(index < KeyCodesSize) SpamKey(KeyCodes[index]);	
-	else CPackets::Send(CPackets::Packets[index - KeyCodesSize]);
+	if(index < KeyCodesCount) SpamKey(KeyCodes[index]);	
+	else CPackets::Send(CPackets::Packets[index - KeyCodesCount]);
 }

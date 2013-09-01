@@ -1,7 +1,8 @@
 #pragma once
-namespace SpawnControl
+namespace WatyBotRevamp
 {
 	using namespace System;
+	using namespace System::IO;
 	using namespace System::Collections::Generic;
 	using namespace System::Xml::Serialization;
 
@@ -26,9 +27,8 @@ namespace SpawnControl
 		static void EditLocation(int index, System::String^ name, int mapid, int x, int y);
 		static void AddLocation(String^ Name, int MapId, int X, int Y);
 
+		static String^ Path = Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "\\Waty\\SPControl.xml");
 		static List<CSPControlLocation^>^ Locations = gcnew List<CSPControlLocation^>;
-
-		static bool Enable(bool status);
 
 	private:
 		static XmlSerializer^ serializer = gcnew XmlSerializer(List<CSPControlLocation^>::typeid);

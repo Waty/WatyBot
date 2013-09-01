@@ -1,4 +1,5 @@
 #include "Memory.h"
+#pragma warning(disable : 4793 4244 4793 4733)
 
 class Hacks
 {
@@ -8,7 +9,8 @@ public:
 	static void SetIceGuardLimit(int limit);
 	static CMemory AutoAggro;
 	static CMemory PinTyper;
-	static CMemory PicTyper;
+	static CMemory PicTyper1;
+	static CMemory PicTyper2;
 	static CMemory FusionAttack;
 	static CMemory PerfectLoot;
 	static CMemory NoBG;
@@ -45,4 +47,6 @@ public:
 	static CMemory MouseFly;
 	static CMemory ExitCS;
 	static CMemory ThreadIdFix;
+	static CMemory SpawnControlCheck;
+	static CMemory SpawnControlCave;
 };

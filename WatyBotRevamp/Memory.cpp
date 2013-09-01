@@ -1,5 +1,6 @@
 #include "Memory.h"
 #include "MainForm.h"
+#include "MapleStory.h"
 
 //Constructors
 CMemory::CMemory(unsigned long ulAddy, unsigned char *bytes, int size) //one addy

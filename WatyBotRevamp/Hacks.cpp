@@ -1,5 +1,12 @@
 #include "Hacks.h"
-#include "Defines.h"
+#include "HackAddys.h"
+#include "MapleStory.h"
+#include "SPControl.h"
+
+using namespace WatyBotRevamp;
+
+#define CodeCave(name) void __declspec(naked) Cave##name(){_asm
+#define EndCodeCave }
 
 /////Dojang Godmode
 DWORD DojangRet = DojangAddy + 5;
@@ -68,10 +75,17 @@ BYTE bPinTyper[] = {0x0F, 0x84};
 CMemory Hacks::PinTyper(PinTyperAddy1, bPinTyper, 2, PinTyperAddy2, bPinTyper, 2);
 
 /////PIC Typer
-BYTE bPicTyper1[] = {0x90, 0xE9};
+BYTE bPicTyper1[] = {0x90, 0xE9}; //Makes the je a jmp
 BYTE bPicTyper2[] = {0xC7, 0x45, 0x88, 0x00};
-BYTE bPictyper3[] = {0xE8, 0x79, 0x00, 0xC8, 0xFF};
-CMemory Hacks::PicTyper(PicTyperAddy1, bPicTyper1, 2, PicTyperAddy2, bPicTyper2, 4, PicTyperAddy3, bPictyper3, 5);
+CMemory Hacks::PicTyper1(PicTyperAddy1, bPicTyper1, 2, PicTyperAddy2, bPicTyper2, 4);
+DWORD dwPicTyperCall = PicTyperCall;
+CodeCave(PicTyper)
+{
+	call dwPicTyperCall
+	ret
+}
+EndCodeCave
+CMemory Hacks::PicTyper2(PicTyperAddy3, CavePicTyper, true);
 
 /////FusionAttack
 DWORD dwFusionRet = FusionAddy + 8;
@@ -156,7 +170,7 @@ BYTE b50SecGM2[] = {0xD4, 0x36};
 CMemory Hacks::SecondGodmode(Godmode50SecAddy1, b50SecGM1, 1, Godmode50SecAddy2, b50SecGM2, 2);
 
 /////Logo Skipper
-BYTE bLogoSkipper[] = {0x30, 0x4D};
+BYTE bLogoSkipper[] = {0x50, 0x42};
 CMemory Hacks::LogoSkipper(LogoSkipperAddy, bLogoSkipper, 2);
 
 /////(semi) Item Vac
@@ -263,6 +277,8 @@ BYTE bMercedesCombo[] = {0xEB};
 CMemory Hacks::MercedesCombo(MercedesComboAddy, bMercedesCombo, 1);
 
 /* Patched ?
+int SkillInjectionSkills[] = {97, 99, 100, 103, 61001005, 4001334, 4201005, 4211011, 4221001, 1001004, 1221009, 1311005, 2201004, 2211003};
+
 /////SkillInjection Disable Checks
 BYTE bSkillInjection1[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
 BYTE bSkillInjection3[] = {0xEB, 0x12};
@@ -296,6 +312,7 @@ CodeCave(SkillInjection)
 }
 EndCodeCave
 CMemory cmSkillInjectionCave(SkillInjectionInjectAddy, CaveSkillInjection, 1, true);
+StopWatch<milliseconds> SkillInjectionStopWatch;
 */
 
 /////No Fadestarge
@@ -390,3 +407,42 @@ Continue: //Do the original shit
 }
 EndCodeCave
 CMemory Hacks::ThreadIdFix(SendPacketAddy, CaveFixPacketSender, 0, true);
+
+DWORD dwSPControlRet = SPControlAddy + 6;
+int spawn_x, spawn_y;
+BOOL WINAPI GetCoords()
+{
+	int iMapID = CMS::MapId;
+	for each(CSPControlLocation^ location in CSPControl::Locations)
+	{
+		if(iMapID == location->MapId)
+		{
+			spawn_x = location->X;
+			spawn_y = location->Y;
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+CodeCave(SPControl)
+{
+	push eax
+	call GetCoords
+	cmp eax,FALSE
+	pop eax
+	je SpawnNormal //if eax == false, jump to SpawnNormal
+ 
+	//Spawn on controlled location
+	mov edi,[spawn_x]
+	mov ebx,[spawn_y]
+	jmp [dwSPControlRet]
+ 
+	SpawnNormal:
+	mov edi,[eax+0x0C]
+	mov ebx,[eax+0x10]
+	jmp [dwSPControlRet]
+}
+EndCodeCave
+BYTE SPCCheck[] = {0xEB};
+CMemory Hacks::SpawnControlCheck(SPCChecksAddy, SPCCheck, 1);
+CMemory Hacks::SpawnControlCave(SPControlAddy, CaveSPControl, 1);

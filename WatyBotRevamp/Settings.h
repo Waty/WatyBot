@@ -4,7 +4,7 @@ using namespace System::Collections;
 using namespace System::Windows::Forms;
 using namespace System::Xml::Serialization;
 
-namespace Settings
+namespace WatyBotRevamp
 {
 	public ref class SettingsEntry
 	{
@@ -34,4 +34,12 @@ namespace Settings
 		property String^ Name;
 		property Object^ Value;
 	};
+
+	public ref class Settings
+	{
+	public:
+		static String^ Path = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "\\Waty\\Packets.xml");
+
+	};
+
 }

@@ -1,12 +1,15 @@
 #pragma once
 #include "MainForm.h"
-#include "Defines.h"
 #include "Hacks.h"
 #include "EditSPControl.h"
 #include "PacketDialog.h"
+#include "MapleStory.h"
+#include "ChangeChannel.h"
+#include "AutoSkill.h"
+#include "StopWatch.h"
 
-using namespace Settings;
 using namespace WatyBotRevamp;
+#define ShowError(Message) MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
 
 //Hack CheckBoxes
 void MainForm::cbFusionAttack_CheckedChanged(Object^  sender, EventArgs^  e)
@@ -49,7 +52,8 @@ void MainForm::cbJDA_CheckedChanged(Object^  sender, EventArgs^  e)
 void MainForm::cbPinTyper_CheckedChanged(Object^  sender, EventArgs^  e)
 {
 	cbPinTyper->Checked = Hacks::PinTyper.Enable(cbPinTyper->Checked);
-	cbPinTyper->Checked = Hacks::PicTyper.Enable(cbPinTyper->Checked);
+	cbPinTyper->Checked = Hacks::PicTyper1.Enable(cbPinTyper->Checked);
+	cbPinTyper->Checked = Hacks::PicTyper2.Enable(cbPinTyper->Checked);
 }
 void MainForm::cbDojangGodmode_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -180,7 +184,7 @@ void MainForm::cbSkillInjection_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 void MainForm::nudSkillInjectionDelay_ValueChanged(Object^  sender, EventArgs^  e)
 {
-	SkillInjectionStopWatch.SetDelay(milliseconds((int) nudSkillInjection->Value));
+	//SkillInjectionStopWatch.SetDelay(milliseconds((int) nudSkillInjection->Value));
 }
 void MainForm::ddbSkillInjectionSkills_SelectedIndexChanged(Object^  sender, EventArgs^  e)
 {
@@ -193,6 +197,7 @@ void MainForm::cbNoCCBlueBoxes_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 
 //AutoBot Events
+StopWatch<milliseconds> BreathCounter(milliseconds(5500));
 Void MainForm::cbAutoAttack_CheckedChanged(Object^  sender, EventArgs^  e)
 {
 	this->nudAutoAttack->Enabled = !cbAutoAttack->Checked;
@@ -257,6 +262,7 @@ Void MainForm::cbCCAttacks_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 
 //General Trainer events
+int TabHeight[] = {541, 461, 286, 431, 266};
 Void Main(void)
 {
 	Application::EnableVisualStyles();
@@ -270,7 +276,7 @@ Void MainForm::MainForm_Load(Object^  sender, EventArgs^  e)
 	notifyIcon = gcnew NotifyIcon;
 	notifyIcon->Icon = SystemIcons::Error;
 	notifyIcon->Visible = true;
-
+	
 	//Load all the settings and innitialize all the classes
 	LoadSPControl();
 	LoadPackets();
@@ -501,7 +507,8 @@ Void MainForm::bAddSPCLocation_Click(Object^  sender, EventArgs^  e)
 }
 Void MainForm::cbSPControl_CheckedChanged(Object^  sender, EventArgs^  e)
 {
-	CSPControl::Enable(cbSPControl->Checked);
+	cbSPControl->Checked = Hacks::SpawnControlCheck.Enable(cbSPControl->Checked);
+	cbSPControl->Checked = Hacks::SpawnControlCave.Enable(cbSPControl->Checked);
 }
 Void MainForm::SPControlDeleteItem_Click(Object^  sender, EventArgs^  e)
 {
@@ -575,7 +582,7 @@ enum SettingsIndex{
 Void MainForm::SaveSettings()
 {
 	ReloadSettings();
-	TextWriter^ writer = gcnew StreamWriter(SettingsFileName);
+	TextWriter^ writer = gcnew StreamWriter(Settings::Path);
 	try
 	{
 		XmlSerializer^ serializer = gcnew XmlSerializer(List<SettingsEntry^>::typeid);
@@ -588,13 +595,13 @@ Void MainForm::SaveSettings()
 }
 Void MainForm::LoadSettings()
 {
-	if(!File::Exists(SettingsFileName))
+	if(!File::Exists(Settings::Path))
 	{
-		auto stream = File::Create(SettingsFileName);
+		auto stream = File::Create(Settings::Path);
 		stream->Close();
 	}
 
-	TextReader^ reader = gcnew StreamReader(SettingsFileName);
+	TextReader^ reader = gcnew StreamReader(Settings::Path);
 	s = gcnew XmlSerializer(List<SettingsEntry^>::typeid);
 	try
 	{
@@ -722,12 +729,14 @@ Void MainForm::bSaveSettings_Click(Object^  sender, EventArgs^  e)
 }
 Void MainForm::SettingsWatcher_Changed(System::Object^  sender, System::IO::FileSystemEventArgs^  e)
 {
-	if(e->FullPath == PacketFileName) LoadPackets();
-	if(e->FullPath == SPControlFileName) LoadSPControl();
-	if(e->FullPath == AutoSkillFileName) LoadAutoSkill();
+	if(e->FullPath == CPackets::Path) LoadPackets();
+	if(e->FullPath == CSPControl::Path) LoadSPControl();
+	if(e->FullPath == AutoSkill::Path) LoadAutoSkill();
 }
 
 //Hot Keys
+int KeyCodes[] = {VK_SHIFT, VK_SPACE, VK_CONTROL, VK_MENU, VK_INSERT, VK_DELETE, VK_HOME, VK_END, VK_PRIOR, VK_NEXT, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B, 0x4C, 0x4D, 0x4E, 0x4F, 0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5A, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, VK_F1, VK_F2, VK_F3, VK_F4, VK_F5, VK_F6, VK_F7, VK_F8, VK_F9, VK_F10, VK_F11, VK_F12};
+int KeyCodesCount = sizeof(KeyCodes) / 4;
 Void MainForm::HotKeys()
 {
 	if(this->cbHotKeyAttack->Checked)

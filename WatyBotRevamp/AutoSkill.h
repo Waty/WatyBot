@@ -1,9 +1,9 @@
 #pragma once
-#include "MapleStory.h"
 
 namespace WatyBotRevamp
 {
 	using namespace System;
+	using namespace System::IO;
 	using namespace System::Collections::Generic;
 	using namespace System::Xml::Serialization;
 
@@ -54,8 +54,9 @@ namespace WatyBotRevamp
 	public ref class AutoSkill
 	{
 	public:
-		static System::Void ReadXmlData();
-		static System::Void WriteXmlData();
+		static Void ReadXmlData();
+		static Void WriteXmlData();
+		static String^ Path = Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "\\Waty\\AutoSkill.xml");
 
 		static XmlSerializer^ serializer = gcnew XmlSerializer(List<AutoSkillEntry^>::typeid);
 		static List<AutoSkillEntry^>^ AutoSkills = gcnew List<AutoSkillEntry^>;

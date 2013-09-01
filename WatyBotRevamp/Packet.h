@@ -1,15 +1,17 @@
 #pragma once
 #include <Windows.h>
-using namespace System;
-using namespace System::Collections::Generic;
-using namespace System::Xml::Serialization;
 
 #define EnterCashShop "40 00 ** ** ** 00 00"
 #define	LeaveCashShop "3E 00"
 #define ChangeCharacter "7F"//"2C 01 01 00 **"
 
-namespace Packets
+namespace WatyBotRevamp
 {
+	using namespace System;
+	using namespace System::IO;
+	using namespace System::Collections::Generic;
+	using namespace System::Xml::Serialization;
+
 	public ref class CPacketData sealed
 	{
 	public:
@@ -31,6 +33,7 @@ namespace Packets
 	public ref class CPackets sealed
 	{
 	public:
+		static String^ Path = Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "\\Waty\\Packets.xml");
 		static List<CPacketData^>^ Packets = gcnew List<CPacketData^>;
 		static CPacketData^ SelectedPacket;
 

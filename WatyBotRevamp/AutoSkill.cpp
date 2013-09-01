@@ -1,5 +1,6 @@
 #include "AutoSkill.h"
-#include "Defines.h"
+#include "MapleStory.h"
+#include "ChangeChannel.h"
 
 using namespace WatyBotRevamp;
 
@@ -54,7 +55,7 @@ Void AutoSkillEntry::CastBackground(System::Object^ sender, System::ComponentMod
 
 Void AutoSkill::WriteXmlData()
 {
-	auto writer = File::Create(AutoSkillFileName);
+	auto writer = File::Create(Path);
 	try
 	{
 		serializer->Serialize(writer, AutoSkills);
@@ -65,14 +66,15 @@ Void AutoSkill::WriteXmlData()
 
 Void AutoSkill::ReadXmlData()
 {
-	if(!File::Exists(AutoSkillFileName))
+	//If the file doesnt exist, it writes the basic structure of the class to the file, making the FileSystemWatcher reload the settings
+	if(!File::Exists(Path))
 	{
 		WriteXmlData();
 		return;
 	}
 
 	//Deserialize the xml file
-	TextReader^ reader = gcnew StreamReader(AutoSkillFileName);
+	TextReader^ reader = gcnew StreamReader(Path);
 	try 
 	{
 		AutoSkills = safe_cast<List<AutoSkillEntry^>^>(serializer->Deserialize(reader));

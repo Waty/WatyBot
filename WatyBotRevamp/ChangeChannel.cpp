@@ -1,11 +1,13 @@
 #include "ChangeChannel.h"
-#include "Defines.h"
+#include "Packet.h"
 #include "Hacks.h"
+#include "StopWatch.h"
 
-using namespace ChangeChannel;
+using namespace WatyBotRevamp;
 using namespace System;
 
 void TryCC(int channel);
+extern StopWatch<milliseconds> BreathCounter;
 
 Void CC::CCSwitch(CCType type)
 {
@@ -37,7 +39,7 @@ Void CC::GenerateRandomChannel()
 	do
 	{
 		srand (GetCurrentTime());
-		TargetChannel = rand()%14;
+		TargetChannel = rand() %14;
 	}		
 	while(TargetChannel == StartChannel);
 }
