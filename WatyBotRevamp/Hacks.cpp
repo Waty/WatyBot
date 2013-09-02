@@ -24,7 +24,7 @@ CodeCave(Dojang)
 	jmp [DojangRet]
 }
 EndCodeCave
-CMemory Hacks::DojangGodmode(DojangAddy, CaveDojang, 0, true);
+CMemory Hacks::DojangGodmode(DojangAddy, CaveDojang);
 
 /////Ice GuardGM
 DWORD IceGuardRet = IceGuardAddy + 7;
@@ -48,7 +48,7 @@ blockDMG:
 	ret 0x002C
 }
 EndCodeCave
-CMemory Hacks::IceGuard(IceGuardAddy, CaveIceGuard, 2, true);
+CMemory Hacks::IceGuard(IceGuardAddy, CaveIceGuard, 2);
 
 void Hacks::SetIceGuardLimit(int limit)
 {
@@ -68,7 +68,7 @@ CodeCave(Aggro)
 	jmp dwAggroRet
 }
 EndCodeCave
-CMemory Hacks::AutoAggro(AggroAddy, CaveAggro, 0, true);
+CMemory Hacks::AutoAggro(AggroAddy, CaveAggro);
 
 /////Pin Typer
 BYTE bPinTyper[] = {0x0F, 0x84};
@@ -78,14 +78,7 @@ CMemory Hacks::PinTyper(PinTyperAddy1, bPinTyper, 2, PinTyperAddy2, bPinTyper, 2
 BYTE bPicTyper1[] = {0x90, 0xE9}; //Makes the je a jmp
 BYTE bPicTyper2[] = {0xC7, 0x45, 0x88, 0x00};
 CMemory Hacks::PicTyper1(PicTyperAddy1, bPicTyper1, 2, PicTyperAddy2, bPicTyper2, 4);
-DWORD dwPicTyperCall = PicTyperCall;
-CodeCave(PicTyper)
-{
-	call dwPicTyperCall
-	ret
-}
-EndCodeCave
-CMemory Hacks::PicTyper2(PicTyperAddy3, CavePicTyper, true);
+CMemory Hacks::PicTyper2(PicTyperAddy3, (void*)PicTyperCall, 0, CMemory::Call);
 
 /////FusionAttack
 DWORD dwFusionRet = FusionAddy + 8;
@@ -100,7 +93,7 @@ CodeCave(FusionAttack)
 	jmp dwFusionRet
 }
 EndCodeCave
-CMemory Hacks::FusionAttack(FusionAddy, CaveFusionAttack, 3, true);
+CMemory Hacks::FusionAttack(FusionAddy, CaveFusionAttack, 3);
 
 /////Perfect Loot
 BYTE bPerfectLoot1[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
@@ -200,7 +193,7 @@ CodeCave(ItemVac)
 	ret 0004
 }
 EndCodeCave 
-CMemory Hacks::ItemVac(ItemVacAddy, CaveItemVac, 0, true); // E8 ? ? ? ? 8B C8 8B 44 24 ? 89 38 5F 89 48 ? 5E C2 04 00 CC CC CC CC CC CC CC 56 - 4th result
+CMemory Hacks::ItemVac(ItemVacAddy, CaveItemVac); // E8 ? ? ? ? 8B C8 8B 44 24 ? 89 38 5F 89 48 ? 5E C2 04 00 CC CC CC CC CC CC CC 56 - 4th result
 void Hacks::LockItemVac(bool state)
 {
 	if(state) getItemVacCoords();
@@ -251,7 +244,7 @@ UAexit:
 	jmp dwUARet
 }
 EndCodeCave
-CMemory Hacks::UnlimitedAttack(UAAddy, CaveUA, 1, true);
+CMemory Hacks::UnlimitedAttack(UAAddy, CaveUA, 1);
 
 /////Disable Final Attack Luna
 BYTE bDFA[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
@@ -359,7 +352,7 @@ FlyExit:
 	jmp dwMouseFlyRet
 }
 EndCodeCave
-CMemory Hacks::MouseFly(MouseFlyAddy, CaveMouseFly, 0, true);
+CMemory Hacks::MouseFly(MouseFlyAddy, CaveMouseFly);
 
 ////Auto ExitCS Script
 DWORD dwExitCSRet = ExitCSAddy + 9;
@@ -374,7 +367,7 @@ CodeCave(ExitCS)
 	jmp dwExitCSRet
 }
 EndCodeCave
-CMemory Hacks::ExitCS(ExitCSAddy, CaveExitCS, 2, true);
+CMemory Hacks::ExitCS(ExitCSAddy, CaveExitCS, 2);
 
 //PacketSender Fix
 DWORD dwMainThreadID = 0;
@@ -406,7 +399,7 @@ Continue: //Do the original shit
 	jmp SendPacketRet
 }
 EndCodeCave
-CMemory Hacks::ThreadIdFix(SendPacketAddy, CaveFixPacketSender, 0, true);
+CMemory Hacks::ThreadIdFix(SendPacketAddy, CaveFixPacketSender);
 
 DWORD dwSPControlRet = SPControlAddy + 6;
 int spawn_x, spawn_y;

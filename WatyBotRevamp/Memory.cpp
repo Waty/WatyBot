@@ -3,75 +3,11 @@
 #include "MapleStory.h"
 
 //Constructors
-CMemory::CMemory(unsigned long ulAddy, unsigned char *bytes, int size) //one addy
-{
-	this->Enabled = false;
-	this->Type = cType::singleaddy;
-
-	this->ulAddress = ulAddy;
-	this->bMem = bytes;
-	this->bCount = size;
-}
-CMemory::CMemory(unsigned long ulAddres1, unsigned char* bMem1, int size, unsigned long ulAddres2, unsigned char* bMem2, int size2)
-{
-	this->Enabled = false;
-	this->Type = cType::twoaddys;
-	
-	this->ulAddress = ulAddres1;
-	this->bMem = bMem1;
-	this->bCount = size;
-
-	this->ulAddress2 = ulAddres2;
-	this->bMem2 = bMem2;
-	this->bCount2 = size2;
-}
-CMemory::CMemory(unsigned long ulAddres1, unsigned char* bMem1, int size, unsigned long ulAddres2, unsigned char* bMem2, int size2, unsigned long ulAddres3, unsigned char* bMem3, int size3)
-{
-	this->Enabled = false;
-	this->Type = cType::threeaddys;
-
-	this->ulAddress = ulAddres1;
-	this->bMem = bMem1;
-	this->bCount = size;
-
-	this->ulAddress2 = ulAddres2;
-	this->bMem2 = bMem2;
-	this->bCount2 = size2;
-	
-	this->ulAddress3 = ulAddres3;
-	this->bMem3 = bMem3;
-	this->bCount3 = size3;
-}
-CMemory::CMemory(unsigned long ulAddres1, unsigned char* bMem1, int size, unsigned long ulAddres2, unsigned char* bMem2, int size2, unsigned long ulAddres3, unsigned char* bMem3, int size3, unsigned long ulAddres4, unsigned char* bMem4, int size4)
-{
-	this->Enabled = false;
-	this->Type = cType::fouraddys;	
-
-	this->ulAddress = ulAddres1;
-	this->bMem = bMem1;
-	this->bCount = size;
-
-	this->ulAddress2 = ulAddres2;
-	this->bMem2 = bMem2;
-	this->bCount2 = size2;
-	
-	this->ulAddress3 = ulAddres3;
-	this->bMem3 = bMem3;
-	this->bCount3 = size3;
-	
-	this->ulAddress4 = ulAddres4;
-	this->bMem4 = bMem4;
-	this->bCount4 = size4;
-}
-CMemory::CMemory(unsigned long ulAddress, void* ulDestination, SIZE_T ulNops, bool jump)
-{
-	this->Type = cType::asmtype;
-	this->ulAddress = ulAddress;
-	this->iNops = ulNops;
-	this->ulDestination = ulDestination;
-
-	this->jump = jump ? jumpType::jump : jumpType::call;
-}
+CMemory::CMemory(DWORD ulAddress1, BYTE *bMem1, int size1) : Enabled(false), Type(singleaddy), ulAddress(ulAddress1), bMem(bMem1), bCount(size1) {}
+CMemory::CMemory(DWORD ulAddress1, BYTE* bMem1, int size1, DWORD ulAddres2, BYTE* bMem2, int size2) : Enabled(false), Type(twoaddys), ulAddress(ulAddress1), bMem(bMem1), bCount(size1), ulAddress2(ulAddres2), bMem2(bMem2), bCount2(size2) {}
+CMemory::CMemory(DWORD ulAddress1, BYTE* bMem1, int size1, DWORD ulAddres2, BYTE* bMem2, int size2, DWORD ulAddres3, BYTE* bMem3, int size3) : Enabled(false), Type(threeaddys), ulAddress(ulAddress1), bMem(bMem1), bCount(size1), ulAddress2(ulAddres2), bMem2(bMem2), bCount2(size2), ulAddress3(ulAddres3), bMem3(bMem3), bCount3(size3) {}
+CMemory::CMemory(DWORD ulAddress1, BYTE* bMem1, int size1, DWORD ulAddres2, BYTE* bMem2, int size2, DWORD ulAddres3, BYTE* bMem3, int size3, DWORD ulAddres4, BYTE* bMem4, int size4) : Enabled(false), Type(threeaddys), ulAddress(ulAddress1), bMem(bMem1), bCount(size1), ulAddress2(ulAddres2), bMem2(bMem2), bCount2(size2), ulAddress3(ulAddres3), bMem3(bMem3), bCount3(size3), ulAddress4(ulAddres4), bMem4(bMem4), bCount4(size3) {}
+CMemory::CMemory(DWORD ulAddress1, void* ulDestination, int ulNops, eJumpType type) : Type(asmtype), ulAddress(ulAddress1), iNops(ulNops), ulDestination(ulDestination), JumpType(type), bCount(ulNops + 5) {}
 //Destructor
 CMemory::~CMemory(void)
 {
@@ -96,25 +32,6 @@ bool CMemory::Enable(bool enable)
 }
 
 //Private Methods
-int CMemory::jmp(unsigned long ulSource, void* ulDestination) 
-{
-	return (int)(((int)ulDestination - (int) ulSource) - 5);
-}
-void CMemory::JumpCall(void* destination, SIZE_T ulNops)
-{
-	this->bCount = ulNops + 5;
-
-	__try
-	{
-		*(unsigned char*)ulAddress = (jump == jumpType::jump ? 0xE9: 0xE8);
-		*(unsigned long*)(ulAddress + 1) = jmp(ulAddress, ulDestination);
-		if (ulNops)
-		{
-			memset((void*)(ulAddress + 5), 0x90, ulNops);
-		}
-	}
-	__except(EXCEPTION_EXECUTE_HANDLER){};
-}
 void CMemory::WriteMem()
 {
 	if(this->Type == cType::asmtype)
@@ -124,10 +41,16 @@ void CMemory::WriteMem()
 		VirtualProtect((void*)ulAddress, bCount, PAGE_EXECUTE_READWRITE, &dwOldProtect);
 
 		//Backing up old mem
-		oldMem = new BYTE[iNops + 5];
-		memcpy(oldMem, (void*)ulAddress, iNops + 5);
+		oldMem = new BYTE[bCount];
+		memcpy(oldMem, (void*)ulAddress, bCount);
 
-		JumpCall(this->ulDestination, this->iNops);
+		__try
+		{
+			*(BYTE*)ulAddress = JumpType;
+			*(DWORD*)(ulAddress + 1) = (int)(((int)ulDestination - (int) ulAddress) - 5);
+			if(iNops) memset((void*)(ulAddress + 5), Nop, iNops);
+		}
+		__except(EXCEPTION_EXECUTE_HANDLER){};
 
 		//VirtualProtect stop
 		VirtualProtect((void*)ulAddress, bCount, dwOldProtect, &dwOldProtect);
@@ -200,8 +123,6 @@ void CMemory::WriteMem()
 		//VirtualProtect4 stop
 		VirtualProtect((void*)ulAddress4, bCount4, dwOldProtect4, &dwOldProtect4);
 	}
-
-
 }
 void CMemory::RestoreMem()
 {
