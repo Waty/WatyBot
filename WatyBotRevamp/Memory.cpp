@@ -1,6 +1,7 @@
 #include "Memory.h"
-#include "MainForm.h"
 #include "MapleStory.h"
+
+extern void ShowError(System::String^ Message);
 
 //Constructors
 CMemory::CMemory(DWORD ulAddress1, BYTE *bMem1, int size1) : Enabled(false), Type(singleaddy), ulAddress(ulAddress1), bMem(bMem1), bCount(size1) {}
@@ -17,18 +18,15 @@ CMemory::~CMemory(void)
 //Public Methods
 bool CMemory::Enable(bool enable)
 {
-	if(!CMS::gotMSCRC)
-	{
-		WatyBotRevamp::MainForm::notifyIcon->ShowBalloonTip(1000, L"WatyBot", L"Error in enabling the hack: No MSCRC bypass installed", ToolTipIcon::Error);
-		return false;
-	}
-	else if(Enabled == enable) return false;
+	if(Enabled == enable) return false;
+	if(!CMS::gotMSCRC) ShowError("Error in enabling the hack: No MSCRC bypass installed");
 	else
 	{
 		enable ? this->WriteMem() : this->RestoreMem();
 		this->Enabled = enable;
 		return enable ? true : false;
 	}
+	return false;
 }
 
 //Private Methods

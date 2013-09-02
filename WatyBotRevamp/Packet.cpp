@@ -2,7 +2,7 @@
 #include "Hacks.h"
 using namespace WatyBotRevamp;
 using namespace System::Windows::Forms;
-#define ShowError(Message) MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
+extern Void ShowErrorDialog(System::String^ Message);
 
 DWORD WINAPI TrySendPacket(__in_bcount(nLength) LPBYTE lpBytes, __in DWORD dwLength);
 CPacketData::CPacketData(String^ Name, List<String^>^ Data, int Interval)
@@ -131,7 +131,7 @@ bool CPackets::Send()
 {
 	if(SelectedPacket == nullptr)
 	{
-		ShowError("Please select a packet");
+		ShowErrorDialog("Please select a packet");
 		return false;
 	}
 	return Send(SelectedPacket);

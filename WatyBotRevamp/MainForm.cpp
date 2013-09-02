@@ -9,7 +9,6 @@
 #include "StopWatch.h"
 
 using namespace WatyBotRevamp;
-#define ShowError(Message) MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
 
 //Hack CheckBoxes
 void MainForm::cbFusionAttack_CheckedChanged(Object^  sender, EventArgs^  e)
@@ -269,6 +268,14 @@ Void Main(void)
 	Application::SetCompatibleTextRenderingDefault(false);
 	Application::Run(gcnew MainForm);
 	Application::Exit();
+}
+Void ShowError(String^ Message)
+{
+	MainForm::notifyIcon->ShowBalloonTip(1000, "WatyBot", Message, ToolTipIcon::Error);
+}
+Void ShowErrorDialog(String^ Message)
+{
+	MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 }
 Void MainForm::MainForm_Load(Object^  sender, EventArgs^  e)
 {

@@ -1,6 +1,6 @@
 #pragma once
 #include "Packet.h"
-#define ShowError(Message) MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
+extern Void ShowErrorDialog(System::String^ Message);
 
 namespace WatyBotRevamp {
 
@@ -183,7 +183,7 @@ namespace WatyBotRevamp {
 			String^ strError = String::Empty;
 			if(!PacketData->IsValidPacket(strError))
 			{
-				ShowError(strError);
+				ShowErrorDialog(strError);
 				return;
 			}
 			this->DialogResult = System::Windows::Forms::DialogResult::OK;
