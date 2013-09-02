@@ -1,6 +1,5 @@
 #pragma once
 #include <Windows.h>
-#include "HackAddys.h"
 
 public ref class CMS
 {
@@ -21,90 +20,21 @@ public:
 	static property int SAWSIL;
 	static property int SLWSB;
 
-	static property int MobCount
-	{
-		int get(){ return (int) ReadPointer(MobBasePtr, MobCountOffset);}
-	}
-	static property int ItemCount
-	{
-		int get(){ return (int) ReadPointer(ItemBasePtr, ItemCountOffset);}
-	}
-	static property int PeopleCount
-	{
-		int get(){ return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);}
-	}
-	static property int CharX
-	{
-		int get(){ return (int) ReadPointer(CharBasePtr,XOffset);}
-	}
-	static property int CharY
-	{
-		int get(){ return (int) ReadPointer(CharBasePtr,XOffset + 4);}
-	}
-	static property int CharHP
-	{
-		int get()
-		{ 
-			WritePointer(SettingsBasePtr, HPAlertOffset, 20);
-			int HP = ReadPointer(StatsBasePtr, HPOffset);
-			if(HP > MaxHP) MaxHP = HP;
-			return HP;
-		}
-	}
-	static property int CharMP
-	{
-		int get()
-		{ 
-			WritePointer(SettingsBasePtr, MPAlertOffset, 20);
-			int MP = ReadPointer(StatsBasePtr, HPOffset + 4);
-			if(MP > MaxMP) MaxMP = MP;
-			return MP;
-		}
-	}
-	static property double CharEXP
-	{
-		double get(){ return ReadDoublePointer(StatsBasePtr, EXPOffset);}
-	}
-	static property int MapId
-	{
-		int get(){ return (int) ReadPointer(InfoBasePtr, MapIDOffset);}
-	}
-	static property int AttackCount
-	{
-		int get(){ return (int) ReadPointer(CharBasePtr, AttackCountOffset);}
-	}
-	static property int Tubi
-	{
-		int get(){ return (int) ReadPointer(ServerBasePtr, TubiOffset);}
-		void set(int i) {WritePointer(ServerBasePtr, TubiOffset, i);}
-	}
-	static property int Breath
-	{
-		int get(){ return (int) ReadPointer(CharBasePtr, BreathOffset);}
-		void set(int i){ WritePointer(CharBasePtr, BreathOffset, i);}
-	}
-	static property int Channel
-	{
-		int get(){ return (int) ReadPointer(ServerBasePtr, ChannelOffset);}
-	}
-	static property int PetFullness
-	{
-		int get()
-		{ 
-			unsigned long Pet = ReadPointer(CharBasePtr, PetOffset);
-			return ReadPointer(Pet+0x4, PetFullnessOffset);
-		}
-	}
-	static property bool gotMSCRC
-	{
-		bool get(){ return *(BYTE*)MSCRCAddy == 233;}
-	}
-	static property bool InGame
-	{
-		bool get(){ return MapId > 0;}
-	}
-	static property HWND MSHWND
-	{
-		HWND get(){ return FindProcessWindow();}
-	}
+	static property int MobCount{int get();}
+	static property int ItemCount{int get();}
+	static property int PeopleCount{int get();}
+	static property int CharX{int get();}
+	static property int CharY{int get();}
+	static property int CharHP{int get();}
+	static property int CharMP{int get();}
+	static property double CharEXP{double get();}
+	static property int MapId{int get();}
+	static property int AttackCount{int get();}
+	static property int Tubi{int get(); void set(int i);}
+	static property int Breath{int get(); void set(int i);}
+	static property int Channel{int get();}
+	static property int PetFullness{int get();}
+	static property bool gotMSCRC{bool get();}
+	static property bool InGame{bool get();}
+	static property HWND MSHWND{HWND get();}
 };
