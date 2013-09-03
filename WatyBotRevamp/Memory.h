@@ -5,13 +5,13 @@
 class CMemory
 {
 public:
-	enum eJumpType{Nop = 0x90, Call = 0xE8, Jump = 0xE9};
+	enum class ASM{Nop = 0x90, Call = 0xE8, Jump = 0xE9};
 	//--constructor--//
 	CMemory(DWORD ulAddress1, BYTE *bMem1, int size1);
 	CMemory(DWORD ulAddress1, BYTE* bMem1, int size1, DWORD ulAddres2, BYTE* bMem2, int size2);
 	CMemory(DWORD ulAddress1, BYTE* bMem1, int size1, DWORD ulAddres2, BYTE* bMem2, int size2, DWORD ulAddres3, BYTE* bMem3, int size3);
 	CMemory(DWORD ulAddress1, BYTE* bMem1, int size1, DWORD ulAddres2, BYTE* bMem2, int size2, DWORD ulAddres3, BYTE* bMem3, int size3, DWORD ulAddres4, BYTE* bMem4, int size4);
-	CMemory(DWORD ulAddress1, void* ulDestination, int ulNops = 0, eJumpType Type = Jump);
+	CMemory(DWORD ulAddress1, void* ulDestination, int ulNops = 0, ASM Type = ASM::Jump);
 	//--destructor--//
 	~CMemory();
 
@@ -47,5 +47,5 @@ private:
 	void* ulDestination;
 	int iNops;
 	cType Type;
-	eJumpType JumpType;
+	ASM ASMType;
 };

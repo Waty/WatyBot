@@ -8,7 +8,7 @@ CMemory::CMemory(DWORD ulAddress1, BYTE *bMem1, int size1) : Enabled(false), Typ
 CMemory::CMemory(DWORD ulAddress1, BYTE* bMem1, int size1, DWORD ulAddres2, BYTE* bMem2, int size2) : Enabled(false), Type(twoaddys), ulAddress(ulAddress1), bMem(bMem1), bCount(size1), ulAddress2(ulAddres2), bMem2(bMem2), bCount2(size2) {}
 CMemory::CMemory(DWORD ulAddress1, BYTE* bMem1, int size1, DWORD ulAddres2, BYTE* bMem2, int size2, DWORD ulAddres3, BYTE* bMem3, int size3) : Enabled(false), Type(threeaddys), ulAddress(ulAddress1), bMem(bMem1), bCount(size1), ulAddress2(ulAddres2), bMem2(bMem2), bCount2(size2), ulAddress3(ulAddres3), bMem3(bMem3), bCount3(size3) {}
 CMemory::CMemory(DWORD ulAddress1, BYTE* bMem1, int size1, DWORD ulAddres2, BYTE* bMem2, int size2, DWORD ulAddres3, BYTE* bMem3, int size3, DWORD ulAddres4, BYTE* bMem4, int size4) : Enabled(false), Type(threeaddys), ulAddress(ulAddress1), bMem(bMem1), bCount(size1), ulAddress2(ulAddres2), bMem2(bMem2), bCount2(size2), ulAddress3(ulAddres3), bMem3(bMem3), bCount3(size3), ulAddress4(ulAddres4), bMem4(bMem4), bCount4(size3) {}
-CMemory::CMemory(DWORD ulAddress1, void* ulDestination, int ulNops, eJumpType type) : Type(asmtype), ulAddress(ulAddress1), iNops(ulNops), ulDestination(ulDestination), JumpType(type), bCount(ulNops + 5) {}
+CMemory::CMemory(DWORD ulAddress1, void* ulDestination, int ulNops, ASM type) : Type(asmtype), ulAddress(ulAddress1), iNops(ulNops), ulDestination(ulDestination), ASMType(type), bCount(ulNops + 5) {}
 //Destructor
 CMemory::~CMemory(void)
 {
@@ -44,9 +44,9 @@ void CMemory::WriteMem()
 
 		__try
 		{
-			*(BYTE*)ulAddress = JumpType;
+			*(BYTE*)ulAddress = (int)ASMType;
 			*(DWORD*)(ulAddress + 1) = (int)(((int)ulDestination - (int) ulAddress) - 5);
-			if(iNops) memset((void*)(ulAddress + 5), Nop, iNops);
+			if(iNops) memset((void*)(ulAddress + 5), (int)ASM::Nop, iNops);
 		}
 		__except(EXCEPTION_EXECUTE_HANDLER){};
 

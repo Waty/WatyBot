@@ -78,7 +78,7 @@ CMemory Hacks::PinTyper(PinTyperAddy1, bPinTyper, 2, PinTyperAddy2, bPinTyper, 2
 BYTE bPicTyper1[] = {0x90, 0xE9}; //Makes the je a jmp
 BYTE bPicTyper2[] = {0xC7, 0x45, 0x88, 0x00};
 CMemory Hacks::PicTyper1(PicTyperAddy1, bPicTyper1, 2, PicTyperAddy2, bPicTyper2, 4);
-CMemory Hacks::PicTyper2(PicTyperAddy3, (void*)PicTyperCall, 0, CMemory::Call);
+CMemory Hacks::PicTyper2(PicTyperAddy3, (void*)PicTyperCall, 0, CMemory::ASM::Call);
 
 /////FusionAttack
 DWORD dwFusionRet = FusionAddy + 8;
