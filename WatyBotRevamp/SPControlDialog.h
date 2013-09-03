@@ -16,7 +16,7 @@ namespace WatyBotRevamp {
 	public ref class EditSPControl : public Form
 	{
 	public:
-		EditSPControl(CSPControlLocation^ loc)
+		EditSPControl(SPControlLocation^ loc)
 		{
 			InitializeComponent();
 
@@ -27,7 +27,7 @@ namespace WatyBotRevamp {
 
 			location = loc;
 		}
-		CSPControlLocation^ location;
+		SPControlLocation^ location;
 
 	protected:
 		/// <summary>

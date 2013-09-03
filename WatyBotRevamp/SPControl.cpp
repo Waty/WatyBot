@@ -2,7 +2,7 @@
 
 using namespace WatyBotRevamp;
 
-CSPControlLocation::CSPControlLocation()
+SPControlLocation::SPControlLocation()
 {
 	Name = "Error";
 	MapId = -1;
@@ -10,7 +10,7 @@ CSPControlLocation::CSPControlLocation()
 	Y = -1;
 }
 
-CSPControlLocation::CSPControlLocation(String^ name, int MapId, int X, int Y)
+SPControlLocation::SPControlLocation(String^ name, int MapId, int X, int Y)
 {
 	this->Name = name;
 	this->MapId = MapId;
@@ -18,7 +18,7 @@ CSPControlLocation::CSPControlLocation(String^ name, int MapId, int X, int Y)
 	this->Y = Y;
 }
 
-void CSPControl::WriteXmlData()
+void SPControl::WriteXmlData()
 {
 	auto writer = File::Create(Path);
 	try
@@ -29,7 +29,7 @@ void CSPControl::WriteXmlData()
 	writer->Close();
 }
 
-void CSPControl::ReadXmlData()
+void SPControl::ReadXmlData()
 {
 	if(!File::Exists(Path))
 	{
@@ -41,13 +41,13 @@ void CSPControl::ReadXmlData()
 	TextReader^ reader = gcnew StreamReader(Path);
 	try 
 	{
-		Locations = safe_cast<List<CSPControlLocation^>^>(serializer->Deserialize(reader));
+		Locations = safe_cast<List<SPControlLocation^>^>(serializer->Deserialize(reader));
 	}
 	catch(InvalidOperationException^){}
 	reader->Close();
 }
 
-void CSPControl::EditLocation(int index, String^ name, int mapid, int x, int y)
+void SPControl::EditLocation(int index, String^ name, int mapid, int x, int y)
 {
 	Locations[index]->Name = name;
 	Locations[index]->MapId = mapid;
@@ -55,9 +55,9 @@ void CSPControl::EditLocation(int index, String^ name, int mapid, int x, int y)
 	Locations[index]->Y = y;
 }
 
-void CSPControl::AddLocation(String^ Name, int MapId, int X, int Y)
+void SPControl::AddLocation(String^ Name, int MapId, int X, int Y)
 {
-	CSPControlLocation^ l = gcnew CSPControlLocation;
+	SPControlLocation^ l = gcnew SPControlLocation;
 	l->Name = Name;
 	l->MapId = MapId;
 	l->X = X;

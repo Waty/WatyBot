@@ -12,6 +12,7 @@ Packet::Packet()
 	this->Data = gcnew List<String^>(1);
 	this->Interval = 0;
 }
+
 Packet::Packet(String^ Name, List<String^>^ Data, int Interval)
 {
 	this->Name = Name;
@@ -32,7 +33,6 @@ bool Packet::IsValidPacket(String^&strError)
 	}
 	return true;
 }
-
 
 void PacketSender::WriteXmlData()
 {
@@ -130,7 +130,11 @@ bool PacketSender::Send(Packet^ packet)
 {
 	String^ strError = String::Empty;
 	bool succes;
-	for each(String^ packet in packet->Data) if(!Send(packet, strError)) succes = false;
+	for each(String^ strPacket in packet->Data)
+	{
+		if(!Send(strPacket, strError)) succes = false;
+		Sleep(packet->Interval);
+	}
 	return succes;
 }
 

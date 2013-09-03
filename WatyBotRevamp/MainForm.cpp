@@ -510,7 +510,7 @@ Void MainForm::bAddSPCLocation_Click(Object^  sender, EventArgs^  e)
 	int x = (int) nudSPCX->Value;
 	int y = (int) nudSPCY->Value;
 
-	CSPControl::AddLocation(name, mapid, x, y);
+	SPControl::AddLocation(name, mapid, x, y);
 }
 Void MainForm::cbSPControl_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -524,8 +524,8 @@ Void MainForm::SPControlDeleteItem_Click(Object^  sender, EventArgs^  e)
 		switch(MessageBox::Show("Are you sure you want to delete this location?", "Confirm deletion", MessageBoxButtons::YesNo, MessageBoxIcon::Question))
 		{
 		case ::DialogResult::Yes:
-			CSPControl::Locations->RemoveAt(lvSPControl->SelectedIndices[0]);
-			CSPControl::WriteXmlData();
+			SPControl::Locations->RemoveAt(lvSPControl->SelectedIndices[0]);
+			SPControl::WriteXmlData();
 			break;
 		}
 	}
@@ -534,12 +534,12 @@ Void MainForm::editLocationToolStripMenuItem_Click(System::Object^  sender, Syst
 {
 	ListViewItem^ L = lvSPControl->SelectedItems[0];
 	int index = lvSPControl->Items->IndexOf(L);
-	auto SPCLoc = CSPControl::Locations[index];
+	auto SPCLoc = SPControl::Locations[index];
 	EditSPControl^ dlg = gcnew EditSPControl(SPCLoc);
 	if(dlg->ShowDialog() == ::DialogResult::OK)
 	{
 		SPCLoc = dlg->location;
-		CSPControl::WriteXmlData();
+		SPControl::WriteXmlData();
 	}
 }
 Void MainForm::GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e)
@@ -558,19 +558,19 @@ Void MainForm::lvSPControl_KeyDown(System::Object^  sender, System::Windows::For
 	if(lvSPControl->SelectedIndices->Count <= 0) return;
 	if(e->KeyCode == Keys::Delete || e->KeyCode == Keys::Back)
 	{
-		CSPControl::Locations->RemoveAt(lvSPControl->SelectedIndices[0]);
-		CSPControl::WriteXmlData();
+		SPControl::Locations->RemoveAt(lvSPControl->SelectedIndices[0]);
+		SPControl::WriteXmlData();
 	}
 }
 Void MainForm::LoadSPControl()
 {
-	CSPControl::ReadXmlData();
+	SPControl::ReadXmlData();
 	lvSPControl->Items->Clear();
 	this->tbSPCName->Clear();
 	this->nudSPCMapId->ResetText();
 	this->nudSPCX->ResetText();
 	this->nudSPCY->ResetText();
-	for each(CSPControlLocation^ SP in CSPControl::Locations)
+	for each(SPControlLocation^ SP in SPControl::Locations)
 	{
 		ListViewItem^ item = gcnew ListViewItem(SP->Name);
 		item->SubItems->Add(SP->MapId.ToString());
@@ -730,14 +730,14 @@ Void MainForm::ReloadSettings()
 Void MainForm::bSaveSettings_Click(Object^  sender, EventArgs^  e)
 {
 	SaveSettings();
-	CSPControl::WriteXmlData();
+	SPControl::WriteXmlData();
 	PacketSender::WriteXmlData();
 	AutoSkill::WriteXmlData();
 }
 Void MainForm::SettingsWatcher_Changed(System::Object^  sender, System::IO::FileSystemEventArgs^  e)
 {
 	if(e->FullPath == PacketSender::Path) LoadPackets();
-	if(e->FullPath == CSPControl::Path) LoadSPControl();
+	if(e->FullPath == SPControl::Path) LoadSPControl();
 	if(e->FullPath == AutoSkill::Path) LoadAutoSkill();
 }
 

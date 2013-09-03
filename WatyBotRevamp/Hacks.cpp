@@ -406,7 +406,7 @@ int spawn_x, spawn_y;
 BOOL WINAPI GetCoords()
 {
 	int iMapID = CMS::MapId;
-	for each(CSPControlLocation^ location in CSPControl::Locations)
+	for each(SPControlLocation^ location in SPControl::Locations)
 	{
 		if(iMapID == location->MapId)
 		{
