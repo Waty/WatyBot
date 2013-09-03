@@ -1,4 +1,4 @@
-#include "EditSPControl.h"
+#include "SPControlDialog.h"
 #include "MapleStory.h"
 
 using namespace WatyBotRevamp;

@@ -136,7 +136,7 @@
   <ItemGroup>
     <ClCompile Include="AutoSkill.cpp" />
     <ClCompile Include="ChangeChannel.cpp" />
-    <ClCompile Include="EditSPControl.cpp">
+    <ClCompile Include="SPControlDialog.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeader>
@@ -196,7 +196,7 @@
   <ItemGroup>
     <ClInclude Include="AutoSkill.h" />
     <ClInclude Include="ChangeChannel.h" />
-    <ClInclude Include="EditSPControl.h">
+    <ClInclude Include="SPControlDialog.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="HackAddys.h" />
@@ -216,8 +216,8 @@
     <ClInclude Include="StopWatch.h" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EditSPControl.resx">
-      <DependentUpon>EditSPControl.h</DependentUpon>
+    <EmbeddedResource Include="SPControlDialog.resx">
+      <DependentUpon>SPControlDialog.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>

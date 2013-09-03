@@ -66,10 +66,10 @@
     <ClCompile Include="Hooks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EditSPControl.cpp">
+    <ClCompile Include="Hacks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Hacks.cpp">
+    <ClCompile Include="SPControlDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -110,10 +110,10 @@
     <ClInclude Include="noncopyable.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="EditSPControl.h">
+    <ClInclude Include="PacketDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PacketDialog.h">
+    <ClInclude Include="SPControlDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -121,10 +121,10 @@
     <EmbeddedResource Include="MainForm.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditSPControl.resx">
+    <EmbeddedResource Include="PacketDialog.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
-    <EmbeddedResource Include="PacketDialog.resx">
+    <EmbeddedResource Include="SPControlDialog.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>
