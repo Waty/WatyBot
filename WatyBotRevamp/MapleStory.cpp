@@ -82,12 +82,12 @@ void CMS::SpamKey(int Key)
 void CMS::SendSwitch(int index)
 {
 	if(index < KeyCodesCount) SendKey(KeyCodes[index]);	
-	else CPackets::Send(CPackets::Packets[index - KeyCodesCount]);
+	else PacketSender::Send(PacketSender::Packets[index - KeyCodesCount]);
 }
 void CMS::SpamSwitch(int index)
 {
 	if(index < KeyCodesCount) SpamKey(KeyCodes[index]);	
-	else CPackets::Send(CPackets::Packets[index - KeyCodesCount]);
+	else PacketSender::Send(PacketSender::Packets[index - KeyCodesCount]);
 }
 
 int CMS::MobCount::get()

@@ -1,18 +1,25 @@
-#include "Packet.h"
+#include "PacketSender.h"
 #include "Hacks.h"
+
 using namespace WatyBotRevamp;
 using namespace System::Windows::Forms;
 extern Void ShowErrorDialog(System::String^ Message);
 
 DWORD WINAPI TrySendPacket(__in_bcount(nLength) LPBYTE lpBytes, __in DWORD dwLength);
-CPacketData::CPacketData(String^ Name, List<String^>^ Data, int Interval)
+Packet::Packet()
+{
+	this->Name = String::Empty;
+	this->Data = gcnew List<String^>(1);
+	this->Interval = 0;
+}
+Packet::Packet(String^ Name, List<String^>^ Data, int Interval)
 {
 	this->Name = Name;
 	this->Data = Data;
 	this->Interval = Interval;
 }
 
-bool CPacketData::IsValidPacket(String^&strError)
+bool Packet::IsValidPacket(String^&strError)
 {
 	if(Data->Count < 1)
 	{
@@ -21,13 +28,13 @@ bool CPacketData::IsValidPacket(String^&strError)
 	}
 	for each(String^ strPacket in Data)
 	{
-		if(!CPackets::VerifyPacket(strPacket, strError)) return false;
+		if(!PacketSender::VerifyPacket(strPacket, strError)) return false;
 	}
 	return true;
 }
 
 
-void CPackets::WriteXmlData()
+void PacketSender::WriteXmlData()
 {
 	auto writer = File::Create(Path);
 	try
@@ -38,7 +45,7 @@ void CPackets::WriteXmlData()
 	writer->Close();
 }
 
-void CPackets::ReadXmlData()
+void PacketSender::ReadXmlData()
 {
 	if(!File::Exists(Path))
 	{
@@ -50,23 +57,23 @@ void CPackets::ReadXmlData()
 	TextReader^ reader = gcnew StreamReader(Path);
 	try 
 	{
-		CPackets::Packets = safe_cast<List<CPacketData^>^>(serializer->Deserialize(reader));
+		PacketSender::Packets = safe_cast<List<Packet^>^>(serializer->Deserialize(reader));
 	}
 	catch(InvalidOperationException^){}
 	reader->Close();
 }
 
-void CPackets::Add(String^ name, List<String^>^ data, int Interval)
+void PacketSender::Add(String^ name, List<String^>^ data, int Interval)
 {
-	Add(gcnew CPacketData(name, data, Interval));
+	Add(gcnew Packet(name, data, Interval));
 }
-void CPackets::Add(CPacketData^ PacketData)
+void PacketSender::Add(Packet^ Packet)
 {
-	Packets->Add(PacketData);
+	Packets->Add(Packet);
 	WriteXmlData();
 }
 
-bool CPackets::VerifyPacket(String^ str, String^&strError)
+bool PacketSender::VerifyPacket(String^ str, String^&strError)
 {
 	String^ strPacket = str->Replace(" ", "");
 	if(String::IsNullOrEmpty(strPacket))
@@ -94,7 +101,7 @@ bool CPackets::VerifyPacket(String^ str, String^&strError)
     return true;
 }
 
-bool CPackets::Send(String^ str, String^&strError)
+bool PacketSender::Send(String^ str, String^&strError)
 {
 	String^ strPacket = str->Replace(" ", "");
 	Random^ randObj = gcnew Random();
@@ -119,7 +126,7 @@ bool CPackets::Send(String^ str, String^&strError)
     return true;
 }
 
-bool CPackets::Send(CPacketData^ packet)
+bool PacketSender::Send(Packet^ packet)
 {
 	String^ strError = String::Empty;
 	bool succes;
@@ -127,7 +134,7 @@ bool CPackets::Send(CPacketData^ packet)
 	return succes;
 }
 
-bool CPackets::Send()
+bool PacketSender::Send()
 {
 	if(SelectedPacket == nullptr)
 	{
@@ -137,7 +144,7 @@ bool CPackets::Send()
 	return Send(SelectedPacket);
 }
 
-void CPackets::Spam(int Times)
+void PacketSender::Spam(int Times)
 {
 	
 }

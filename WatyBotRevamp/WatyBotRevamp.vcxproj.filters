@@ -45,9 +45,6 @@
     <ClCompile Include="MainDll.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Packet.cpp">
-      <Filter>Classes\Packets</Filter>
-    </ClCompile>
     <ClCompile Include="Memory.cpp">
       <Filter>Classes\CMemory</Filter>
     </ClCompile>
@@ -72,6 +69,9 @@
     <ClCompile Include="SPControlDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PacketSender.cpp">
+      <Filter>Classes\Packets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainForm.h">
@@ -82,9 +82,6 @@
     </ClInclude>
     <ClInclude Include="HackAddys.h">
       <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Packet.h">
-      <Filter>Classes\Packets</Filter>
     </ClInclude>
     <ClInclude Include="Memory.h">
       <Filter>Classes\CMemory</Filter>
@@ -115,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="SPControlDialog.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketSender.h">
+      <Filter>Classes\Packets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

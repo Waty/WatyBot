@@ -1,5 +1,5 @@
 #include "ChangeChannel.h"
-#include "Packet.h"
+#include "PacketSender.h"
 #include "Hacks.h"
 #include "StopWatch.h"
 
@@ -81,9 +81,9 @@ Void CC::doCS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^ 
 	Sleep(500);
 	CMS::Breath = 0;
 	String^ strError = String::Empty;
-	CPackets::Send(EnterCashShop, strError);
+	PacketSender::Send(EnterCashShop, strError);
 	Sleep(2500);
-	CPackets::Send(LeaveCashShop, strError);
+	PacketSender::Send(LeaveCashShop, strError);
 	Sleep(3000);
 }
 
@@ -92,7 +92,7 @@ Void CC::doDC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^ 
 	while(CMS::InGame)
 	{
 		String^ strError = String::Empty;
-		CPackets::Send(ChangeCharacter, strError);
+		PacketSender::Send(ChangeCharacter, strError);
 		Sleep(2500);
 	}
 }

@@ -343,7 +343,7 @@ Void MainForm::ReloadComboBox(ComboBox^ combobox)
 	//Clear the box and re-add the items
 	combobox->Items->Clear();
 	combobox->Items->AddRange(KeyNames);
-	for each(CPacketData^ p in CPackets::Packets) combobox->Items->Add(p->Name);
+	for each(Packet^ p in PacketSender::Packets) combobox->Items->Add(p->Name);
 	
 	//Restore the selectedindex if it still is valid
 	if(selectedItem != nullptr && combobox->Items->Contains(selectedItem)) combobox->SelectedItem = selectedItem;
@@ -426,7 +426,7 @@ Void MainForm::LoadAutoSkill()
 
 	//Update ComboBox
 	ddbAutoSkill->Items->AddRange(KeyNames);
-	for each(CPacketData^ p in CPackets::Packets) ddbAutoSkill->Items->Add(p->Name);
+	for each(Packet^ p in PacketSender::Packets) ddbAutoSkill->Items->Add(p->Name);
 
 	//Update ListView
 	for each(AutoSkillEntry^ as in AutoSkill::AutoSkills)
@@ -443,51 +443,51 @@ Void MainForm::bAddPacket_Click(Object^  sender, EventArgs^  e)
 {
 	auto dialog = gcnew PacketDialog;
 	if(dialog->ShowDialog() == ::DialogResult::OK)
-		CPackets::Add(dialog->PacketData);
+		PacketSender::Add(dialog->Packet);
 }
 Void MainForm::bEditPacket_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	if(lvPackets->SelectedItems->Count < 1) return;
-	auto dialog = gcnew PacketDialog(CPackets::Packets[lvPackets->SelectedIndices[0]]);
+	auto dialog = gcnew PacketDialog(PacketSender::Packets[lvPackets->SelectedIndices[0]]);
 	if(dialog->ShowDialog() == ::DialogResult::OK)
 	{
-		CPackets::Packets[lvPackets->SelectedIndices[0]] = dialog->PacketData;
-		CPackets::WriteXmlData();
+		PacketSender::Packets[lvPackets->SelectedIndices[0]] = dialog->Packet;
+		PacketSender::WriteXmlData();
 	}
 }
 Void MainForm::lvPackets_SelectedIndexChanged(Object^  sender, EventArgs^  e)
 {
 	if(lvPackets->SelectedItems->Count < 1) return;
-	CPackets::SelectedPacket = CPackets::Packets[lvPackets->SelectedItems[0]->Index];
+	PacketSender::SelectedPacket = PacketSender::Packets[lvPackets->SelectedItems[0]->Index];
 }
 Void MainForm::bSendPacket_Click(Object^  sender, EventArgs^  e)
 {
 	if(lvPackets->SelectedItems->Count < 1) return;
-	CPackets::Send();
+	PacketSender::Send();
 }
 Void MainForm::bDeletePacket_Click(Object^  sender, EventArgs^  e)
 {
 	if(lvPackets->SelectedItems->Count < 1) return;
 	int index = lvPackets->SelectedItems[0]->Index;
 	lvPackets->Items->RemoveAt(index);
-	CPackets::Packets->RemoveAt(index);
-	CPackets::WriteXmlData();
+	PacketSender::Packets->RemoveAt(index);
+	PacketSender::WriteXmlData();
 }
 Void MainForm::lvPackets_KeyDown(Object^  sender, Windows::Forms::KeyEventArgs^  e)
 {
 	if(lvPackets->SelectedIndices->Count <= 0) return;
 	if(e->KeyCode == Keys::Delete || e->KeyCode == Keys::Back)
 	{
-		CPackets::Packets->RemoveAt(lvPackets->SelectedIndices[0]);
-		CPackets::WriteXmlData();
+		PacketSender::Packets->RemoveAt(lvPackets->SelectedIndices[0]);
+		PacketSender::WriteXmlData();
 	}
-	if(e->KeyCode == Keys::Enter) CPackets::Send();
+	if(e->KeyCode == Keys::Enter) PacketSender::Send();
 }
 Void MainForm::LoadPackets()
 {
-	CPackets::ReadXmlData();
+	PacketSender::ReadXmlData();
 	lvPackets->Items->Clear();
-	for each(CPacketData^ packet in CPackets::Packets)
+	for each(Packet^ packet in PacketSender::Packets)
 	{
 		ListViewItem^ i = gcnew ListViewItem(packet->Name);
 		i->SubItems->Add(packet->Data[0]);
@@ -731,12 +731,12 @@ Void MainForm::bSaveSettings_Click(Object^  sender, EventArgs^  e)
 {
 	SaveSettings();
 	CSPControl::WriteXmlData();
-	CPackets::WriteXmlData();
+	PacketSender::WriteXmlData();
 	AutoSkill::WriteXmlData();
 }
 Void MainForm::SettingsWatcher_Changed(System::Object^  sender, System::IO::FileSystemEventArgs^  e)
 {
-	if(e->FullPath == CPackets::Path) LoadPackets();
+	if(e->FullPath == PacketSender::Path) LoadPackets();
 	if(e->FullPath == CSPControl::Path) LoadSPControl();
 	if(e->FullPath == AutoSkill::Path) LoadAutoSkill();
 }
@@ -782,7 +782,7 @@ Void MainForm::HotKeys()
 	{
 		if(GetAsyncKeyState(KeyCodes[ddbHotKeySendPacket->SelectedIndex]))
 		{
-			CPackets::Send();
+			PacketSender::Send();
 			Sleep(250);
 		}
 	}

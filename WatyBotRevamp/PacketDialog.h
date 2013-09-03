@@ -1,5 +1,5 @@
 #pragma once
-#include "Packet.h"
+#include "PacketSender.h"
 extern Void ShowErrorDialog(System::String^ Message);
 
 namespace WatyBotRevamp {
@@ -21,9 +21,9 @@ namespace WatyBotRevamp {
 		PacketDialog()
 		{
 			InitializeComponent();
-			PacketData = gcnew CPacketData;
+			Packet = gcnew WatyBotRevamp::Packet();
 		}
-		PacketDialog(CPacketData^ pd)
+		PacketDialog(Packet^ pd)
 		{
 			InitializeComponent();
 
@@ -34,10 +34,10 @@ namespace WatyBotRevamp {
 			this->tbData->Lines = pd->Data->ToArray();
 			this->nudInterval->Value = pd->Interval;
 
-			this->PacketData = pd;
+			this->Packet = pd;
 		}
 		
-		CPacketData^ PacketData;
+		Packet^ Packet;
 
 	protected:
 		/// <summar>
@@ -174,14 +174,14 @@ namespace WatyBotRevamp {
 #pragma endregion
 		Void bSave_Click(System::Object^  sender, System::EventArgs^  e)
 		{
-			this->PacketData->Name = tbName->Text;
+			Packet->Name = tbName->Text;
 			auto data = gcnew List<String^>;
 			data->AddRange(this->tbData->Lines);
-			this->PacketData->Data = data;
-			this->PacketData->Interval = (int) nudInterval->Value;
+			Packet->Data = data;
+			Packet->Interval = (int) nudInterval->Value;
 			
 			String^ strError = String::Empty;
-			if(!PacketData->IsValidPacket(strError))
+			if(!Packet->IsValidPacket(strError))
 			{
 				ShowErrorDialog(strError);
 				return;
@@ -193,7 +193,6 @@ namespace WatyBotRevamp {
 		Void bCancel_Click(System::Object^  sender, System::EventArgs^  e)
 		{
 			this->DialogResult = System::Windows::Forms::DialogResult::Cancel;
-
 			Close();
 		}
 };

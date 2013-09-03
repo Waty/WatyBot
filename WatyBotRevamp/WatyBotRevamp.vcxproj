@@ -179,7 +179,7 @@
     </ClCompile>
     <ClCompile Include="MapleStory.cpp" />
     <ClCompile Include="Memory.cpp" />
-    <ClCompile Include="Packet.cpp" />
+    <ClCompile Include="PacketSender.cpp" />
     <ClCompile Include="Hooks.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
@@ -207,7 +207,7 @@
     <ClInclude Include="MapleStory.h" />
     <ClInclude Include="Memory.h" />
     <ClInclude Include="noncopyable.h" />
-    <ClInclude Include="Packet.h" />
+    <ClInclude Include="PacketSender.h" />
     <ClInclude Include="PacketDialog.h">
       <FileType>CppForm</FileType>
     </ClInclude>
