@@ -1,11 +1,11 @@
 #pragma once
 #include "MainForm.h"
 #include "Hacks.h"
-#include "EditSPControl.h"
-#include "PacketDialog.h"
 #include "MapleStory.h"
-#include "ChangeChannel.h"
 #include "AutoSkill.h"
+#include "ChangeChannel.h"
+#include "SPControlDialog.h"
+#include "PacketDialog.h"
 #include "StopWatch.h"
 
 using namespace WatyBotRevamp;

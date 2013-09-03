@@ -33,7 +33,7 @@ namespace WatyBotRevamp
 	public ref class CPackets sealed
 	{
 	public:
-		static String^ Path = Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "\\Waty\\Packets.xml");
+		static String^ Path = Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "Waty\\Packets.xml");
 		static List<CPacketData^>^ Packets = gcnew List<CPacketData^>;
 		static CPacketData^ SelectedPacket;
 

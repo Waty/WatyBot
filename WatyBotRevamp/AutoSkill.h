@@ -56,7 +56,7 @@ namespace WatyBotRevamp
 	public:
 		static Void ReadXmlData();
 		static Void WriteXmlData();
-		static String^ Path = Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "\\Waty\\AutoSkill.xml");
+		static String^ Path = Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "Waty\\AutoSkill.xml");
 
 		static XmlSerializer^ serializer = gcnew XmlSerializer(List<AutoSkillEntry^>::typeid);
 		static List<AutoSkillEntry^>^ AutoSkills = gcnew List<AutoSkillEntry^>;

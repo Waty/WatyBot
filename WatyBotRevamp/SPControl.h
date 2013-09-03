@@ -27,7 +27,7 @@ namespace WatyBotRevamp
 		static void EditLocation(int index, System::String^ name, int mapid, int x, int y);
 		static void AddLocation(String^ Name, int MapId, int X, int Y);
 
-		static String^ Path = Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "\\Waty\\SPControl.xml");
+		static String^ Path = Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "Waty\\SPControl.xml");
 		static List<CSPControlLocation^>^ Locations = gcnew List<CSPControlLocation^>;
 
 	private:

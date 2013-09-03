@@ -38,7 +38,7 @@ namespace WatyBotRevamp
 	public ref class Settings
 	{
 	public:
-		static String^ Path = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "\\Waty\\Packets.xml");
+		static String^ Path = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "Waty\\Settings.xml");
 
 	};
 

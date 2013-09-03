@@ -1,4 +1,3 @@
-#include <Windows.h>
 #include "SPControl.h"
 
 using namespace WatyBotRevamp;

@@ -37,7 +37,7 @@ namespace WatyBotRevamp {
 			this->ddbHotKeyMouseFly->Items->AddRange(KeyNames);
 			
 			//Create the Waty directory in %appdata%
-			auto Path = Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "\\Waty\\");
+			auto Path = Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "Waty");
 			if(!Directory::Exists(Path)) Directory::CreateDirectory(Path);
 			this->SettingsWatcher->Path = Path;
 		}
