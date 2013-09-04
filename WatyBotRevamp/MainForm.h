@@ -139,7 +139,7 @@ namespace WatyBotRevamp {
 		System::Windows::Forms::CheckBox^  cbScareMobs;
 		System::Windows::Forms::CheckBox^  cbFLACC;
 		System::Windows::Forms::CheckBox^  cbCPUHack;
-		System::Windows::Forms::Label^  lSLWSB;
+
 		System::Windows::Forms::Label^  lSAWSIL;
 		System::Windows::Forms::ComboBox^  ddbTimedType;
 		System::Windows::Forms::ComboBox^  ddbAttacksType;
@@ -150,7 +150,7 @@ namespace WatyBotRevamp {
 		System::Windows::Forms::ComboBox^  ddbHotKeyLoot;
 		System::Windows::Forms::CheckBox^  cbHotKeyLoot;
 		System::Windows::Forms::Label^  lMapID;
-		System::Windows::Forms::NumericUpDown^  nudSLWIB;
+
 		System::Windows::Forms::NumericUpDown^  nudSAWSIL;
 		System::Windows::Forms::NumericUpDown^  nudAutoLoot;
 		System::Windows::Forms::NumericUpDown^  nudAutoAttack;
@@ -216,6 +216,8 @@ namespace WatyBotRevamp {
 		System::Windows::Forms::ToolStripMenuItem^  bEditPacket;
 		System::IO::FileSystemWatcher^  SettingsWatcher;
 		System::Windows::Forms::CheckBox^  cbLockItemVac;
+private: System::Windows::Forms::CheckBox^  cbOLWNA;
+
 
 		 System::ComponentModel::IContainer^  components;
 #pragma endregion
@@ -251,12 +253,10 @@ namespace WatyBotRevamp {
 			this->nudAutoHP = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudAutoLoot = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudAutoAttack = (gcnew System::Windows::Forms::NumericUpDown());
-			this->nudSLWIB = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudSAWSIL = (gcnew System::Windows::Forms::NumericUpDown());
 			this->ddbTimedType = (gcnew System::Windows::Forms::ComboBox());
 			this->ddbAttacksType = (gcnew System::Windows::Forms::ComboBox());
 			this->ddbPeopleType = (gcnew System::Windows::Forms::ComboBox());
-			this->lSLWSB = (gcnew System::Windows::Forms::Label());
 			this->lSAWSIL = (gcnew System::Windows::Forms::Label());
 			this->CCAttacksLabel = (gcnew System::Windows::Forms::Label());
 			this->CCTimedLabel = (gcnew System::Windows::Forms::Label());
@@ -390,6 +390,7 @@ namespace WatyBotRevamp {
 			this->tAutoLoot = (gcnew System::Windows::Forms::Timer(this->components));
 			this->tTimedCC = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SettingsWatcher = (gcnew System::IO::FileSystemWatcher());
+			this->cbOLWNA = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->gbAutoSkill->SuspendLayout();
@@ -404,7 +405,6 @@ namespace WatyBotRevamp {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoHP))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoLoot))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoAttack))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSLWIB))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSAWSIL))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->EXPForeground))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->MPForeground))->BeginInit();
@@ -572,6 +572,7 @@ namespace WatyBotRevamp {
 			// 
 			// AutoBotGroupBox
 			// 
+			this->AutoBotGroupBox->Controls->Add(this->cbOLWNA);
 			this->AutoBotGroupBox->Controls->Add(this->nudCCAttacks);
 			this->AutoBotGroupBox->Controls->Add(this->nudCCTimed);
 			this->AutoBotGroupBox->Controls->Add(this->nudCCPeople);
@@ -580,12 +581,10 @@ namespace WatyBotRevamp {
 			this->AutoBotGroupBox->Controls->Add(this->nudAutoHP);
 			this->AutoBotGroupBox->Controls->Add(this->nudAutoLoot);
 			this->AutoBotGroupBox->Controls->Add(this->nudAutoAttack);
-			this->AutoBotGroupBox->Controls->Add(this->nudSLWIB);
 			this->AutoBotGroupBox->Controls->Add(this->nudSAWSIL);
 			this->AutoBotGroupBox->Controls->Add(this->ddbTimedType);
 			this->AutoBotGroupBox->Controls->Add(this->ddbAttacksType);
 			this->AutoBotGroupBox->Controls->Add(this->ddbPeopleType);
-			this->AutoBotGroupBox->Controls->Add(this->lSLWSB);
 			this->AutoBotGroupBox->Controls->Add(this->lSAWSIL);
 			this->AutoBotGroupBox->Controls->Add(this->CCAttacksLabel);
 			this->AutoBotGroupBox->Controls->Add(this->CCTimedLabel);
@@ -686,16 +685,6 @@ namespace WatyBotRevamp {
 			this->InfoToolTip->SetToolTip(this->nudAutoAttack, L"The delay in milliseconds between pressing keys in MapleStory");
 			this->nudAutoAttack->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
 			// 
-			// nudSLWIB
-			// 
-			this->nudSLWIB->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
-			this->nudSLWIB->Location = System::Drawing::Point(202, 42);
-			this->nudSLWIB->Name = L"nudSLWIB";
-			this->nudSLWIB->Size = System::Drawing::Size(35, 20);
-			this->nudSLWIB->TabIndex = 69;
-			this->InfoToolTip->SetToolTip(this->nudSLWIB, L"SLWIB: Stop Looting When Items Below, the number is for the number of items that " 
-				L"need to be dropped before the Looting starts");
-			// 
 			// nudSAWSIL
 			// 
 			this->nudSAWSIL->Location = System::Drawing::Point(202, 14);
@@ -743,28 +732,17 @@ namespace WatyBotRevamp {
 			this->InfoToolTip->SetToolTip(this->ddbPeopleType, L"Set here the method you want to use. CC is ChangeChannel, CS is enter/leave cashs" 
 				L"hop, DC is relog to character select screen");
 			// 
-			// lSLWSB
-			// 
-			this->lSLWSB->AutoSize = true;
-			this->lSLWSB->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7));
-			this->lSLWSB->Location = System::Drawing::Point(150, 45);
-			this->lSLWSB->Name = L"lSLWSB";
-			this->lSLWSB->Size = System::Drawing::Size(43, 13);
-			this->lSLWSB->TabIndex = 64;
-			this->lSLWSB->Text = L"SLWSB";
-			this->InfoToolTip->SetToolTip(this->lSLWSB, L"StartLootingWhenSpawnBelow");
-			// 
 			// lSAWSIL
 			// 
 			this->lSAWSIL->AutoSize = true;
 			this->lSAWSIL->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7));
-			this->lSAWSIL->Location = System::Drawing::Point(150, 17);
+			this->lSAWSIL->Location = System::Drawing::Point(142, 18);
 			this->lSAWSIL->Name = L"lSAWSIL";
-			this->lSAWSIL->Size = System::Drawing::Size(46, 13);
+			this->lSAWSIL->Size = System::Drawing::Size(56, 13);
 			this->lSAWSIL->TabIndex = 63;
-			this->lSAWSIL->Text = L"SAWSIL";
-			this->InfoToolTip->SetToolTip(this->lSAWSIL, L"SAWSIL: Stop Attacking When Spawn Is Low, the number is for the amount of mobs th" 
-				L"at need to be in the map for AutoAttack to attack");
+			this->lSAWSIL->Text = L"MobCount";
+			this->InfoToolTip->SetToolTip(this->lSAWSIL, L"MobCount makes AutoAttack stop when the amount of mobs in the map is lower then t" 
+				L"he amount you inputted");
 			// 
 			// CCAttacksLabel
 			// 
@@ -2160,6 +2138,17 @@ namespace WatyBotRevamp {
 			this->SettingsWatcher->SynchronizingObject = this;
 			this->SettingsWatcher->Changed += gcnew System::IO::FileSystemEventHandler(this, &MainForm::SettingsWatcher_Changed);
 			// 
+			// cbOLWNA
+			// 
+			this->cbOLWNA->AutoSize = true;
+			this->cbOLWNA->Location = System::Drawing::Point(145, 43);
+			this->cbOLWNA->Name = L"cbOLWNA";
+			this->cbOLWNA->Size = System::Drawing::Size(66, 17);
+			this->cbOLWNA->TabIndex = 81;
+			this->cbOLWNA->Text = L"OLWNA";
+			this->InfoToolTip->SetToolTip(this->cbOLWNA, L"OnlyLootWhenNotAttacking");
+			this->cbOLWNA->UseVisualStyleBackColor = true;
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2192,7 +2181,6 @@ namespace WatyBotRevamp {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoHP))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoLoot))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoAttack))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSLWIB))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSAWSIL))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->EXPForeground))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->MPForeground))->EndInit();

@@ -4,8 +4,8 @@
 public ref class CMS
 {
 public:
-	static DWORD ReadPointer(unsigned long ulBase, int iOffset);
-	static double ReadDoublePointer(DWORD ulBase, INT iOffset);
+	template<class T>
+	static T ReadPointer(unsigned long ulBase, int iOffset);
 	static bool WritePointer(unsigned long ulBase, int iOffset, int iValue);
 	static HWND FindProcessWindow();
 	static void SendKey(int Key);
@@ -18,7 +18,9 @@ public:
 	static property int MaxMP;
 	static property bool UsingPots;
 	static property int SAWSIL;
-	static property int SLWSB;
+	static property bool OLWNA;
+	static bool ShouldAttack();
+	static bool ShouldLoot();
 
 	static property int MobCount{int get();}
 	static property int ItemCount{int get();}

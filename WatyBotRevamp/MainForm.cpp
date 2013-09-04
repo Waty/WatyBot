@@ -209,25 +209,29 @@ Void MainForm::cbAutoAttack_CheckedChanged(Object^  sender, EventArgs^  e)
 }
 Void MainForm::tAutoAttack_Tick(Object^  sender, EventArgs^  e)
 {
-	if(!CMS::InGame || CC::IsBusy || CMS::MobCount < CMS::SAWSIL || CMS::UsingAutoSkill) return;
-	BreathCounter.Start();
-	CMS::SpamSwitch(ddbAutoAttackKey->SelectedIndex);
+	if(CMS::ShouldAttack())
+	{
+		BreathCounter.Start();
+		CMS::SpamSwitch(ddbAutoAttackKey->SelectedIndex);
+	}
 }
 Void MainForm::cbAutoLoot_CheckedChanged(Object^  sender, EventArgs^  e)
 {
 	this->nudAutoLoot->Enabled = !this->cbAutoLoot->Checked;
 	this->ddbAutoLootKey->Enabled = !this->cbAutoLoot->Checked;
-	this->nudSLWIB->Enabled = !this->cbAutoLoot->Checked;
+	this->cbOLWNA->Enabled = !this->cbAutoLoot->Checked;
 		
-	CMS::SLWSB = (int) nudSLWIB->Value;
-	tAutoLoot->Interval = ((int) nudAutoLoot->Value);
+	CMS::OLWNA = cbOLWNA->Checked;
+	tAutoLoot->Interval = (int) nudAutoLoot->Value;
 	tAutoLoot->Enabled = cbAutoLoot->Checked;
 }
 Void MainForm::tAutoLoot_Tick(Object^  sender, EventArgs^  e)
 {
-	if(!CMS::InGame || CMS::MobCount > CMS::SLWSB || CMS::UsingAutoSkill) return;
-	CMS::Tubi = 0;
-	CMS::SpamSwitch(ddbAutoLootKey->SelectedIndex);
+	if(CMS::ShouldLoot())
+	{
+		CMS::Tubi = 0;
+		CMS::SpamSwitch(ddbAutoLootKey->SelectedIndex);
+	}
 }
 Void MainForm::cbAutoHP_CheckedChanged(Object^  sender, EventArgs^  e)
 {
@@ -582,7 +586,7 @@ Void MainForm::LoadSPControl()
 
 //Loading/Saving AutoBot settings
 enum SettingsIndex{
-	AutoAttackDelay, SAWSIL, AutoAttackKey, AutoLootDelay, SLWIB, AutoLootKey, AutoHPValue, AutoHPKey, AutoMPValue, AutoMPKey, PetFeederValue, PetFeederKey,
+	AutoAttackDelay, SAWSIL, AutoAttackKey, AutoLootDelay, OLWNA, AutoLootKey, AutoHPValue, AutoHPKey, AutoMPValue, AutoMPKey, PetFeederValue, PetFeederKey,
 	CCPeople, CCPeopleType, CCTimed, CCTimedType, CCAttacks, CCAttacksType, HotKeyAttack, HotKeyLoot, HotKeyFMA, HotKeyCCPeople, HotKeySendPacket,
 	SkillInjectionDelay, SkillInjectionIndex, IceGuard, PinTyper, LogoSkipper, SettingCount
 };
@@ -618,7 +622,7 @@ Void MainForm::LoadSettings()
 	{
 	}	
 	reader->Close();
-	if(Settings == nullptr) Settings = gcnew List<SettingsEntry^>;
+	if(!Settings) Settings = gcnew List<SettingsEntry^>;
 	else
 	{
 		try
@@ -629,7 +633,7 @@ Void MainForm::LoadSettings()
 			ddbAutoAttackKey->SelectedIndex = (int)		Settings[AutoAttackKey]->Value;
 			//AutoLoot
 			nudAutoLoot->Value = (Decimal)				Settings[AutoLootDelay]->Value;
-			nudSLWIB->Value = (Decimal)					Settings[SLWIB]->Value;
+			cbOLWNA->Checked = (bool)					Settings[OLWNA]->Value;
 			ddbAutoLootKey->SelectedIndex = (int)		Settings[AutoLootKey]->Value;
 			//AutoHP
 			nudAutoHP->Value = (Decimal)				Settings[AutoHPValue]->Value;
@@ -692,7 +696,7 @@ Void MainForm::ReloadSettings()
 	s->Add(gcnew SettingsEntry(ddbAutoAttackKey));
 	//AutoLoot
 	s->Add(gcnew SettingsEntry(nudAutoLoot));
-	s->Add(gcnew SettingsEntry(nudSLWIB));
+	s->Add(gcnew SettingsEntry(cbOLWNA));
 	s->Add(gcnew SettingsEntry(ddbAutoLootKey));
 	//AutoHP
 	s->Add(gcnew SettingsEntry(nudAutoHP));

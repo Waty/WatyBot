@@ -1,34 +1,25 @@
 #include "MapleStory.h"
-#include "Packet.h"
+#include "PacketSender.h"
+#include "ChangeChannel.h"
 #include "HackAddys.h"
 
 using namespace WatyBotRevamp;
 extern int KeyCodes[];
 extern int KeyCodesCount;
+extern void ShowError(String^ Message);
 
-DWORD CMS::ReadPointer(DWORD ulBase, int iOffset)
+template<class T>
+T CMS::ReadPointer(DWORD ulBase, int iOffset)
 {
 	if(*(int*)WallBasePtr)
 	{
 		__try
 		{
-			return *(unsigned long*)(*(unsigned long*)ulBase + iOffset);
+			return *(T*)(*(DWORD*)ulBase + iOffset);
 		}
 		__except(EXCEPTION_EXECUTE_HANDLER) { return -1; }
 	}
 	else return -1;
-}
-double CMS::ReadDoublePointer(DWORD ulBase, INT iOffset)
-{
-	if(*(int*)WallBasePtr)
-	{
-		__try
-		{
-			return (*(DOUBLE*)(*(DWORD*)ulBase + iOffset));
-		}
-		__except(EXCEPTION_EXECUTE_HANDLER) { return 0.0; }
-	}
-	return -1.0;
 }
 bool CMS::WritePointer(unsigned long ulBase, int iOffset, int iValue)
 {
@@ -90,55 +81,66 @@ void CMS::SpamSwitch(int index)
 	else PacketSender::Send(PacketSender::Packets[index - KeyCodesCount]);
 }
 
+bool CMS::ShouldAttack()
+{
+	if(!InGame || CC::IsBusy || MobCount < SAWSIL || UsingAutoSkill) return false;
+	return true;
+}
+bool CMS::ShouldLoot()
+{
+	if(OLWNA) return !ShouldAttack();
+	return true;
+}
+
 int CMS::MobCount::get()
 {
-	return (int) ReadPointer(MobBasePtr, MobCountOffset);
+	return ReadPointer<int>(MobBasePtr, MobCountOffset);
 }
 int CMS::ItemCount::get()
 {
-	return (int) ReadPointer(ItemBasePtr, ItemCountOffset);
+	return ReadPointer<int>(ItemBasePtr, ItemCountOffset);
 }
 int CMS::PeopleCount::get()
 {
-	return (int) ReadPointer(PeopleBasePtr, PeopleCountOffset);
+	return ReadPointer<int>(PeopleBasePtr, PeopleCountOffset);
 }
 int CMS::CharX::get()
 {
-	return (int) ReadPointer(CharBasePtr,XOffset);
+	return ReadPointer<int>(CharBasePtr,XOffset);
 }
 int CMS::CharY::get()
 {
-	return (int) ReadPointer(CharBasePtr,XOffset + 4);
+	return ReadPointer<int>(CharBasePtr,XOffset + 4);
 }
 int CMS::CharHP::get()
 {
 	WritePointer(SettingsBasePtr, HPAlertOffset, 20);
-	int HP = ReadPointer(StatsBasePtr, HPOffset);
+	int HP = ReadPointer<int>(StatsBasePtr, HPOffset);
 	if(HP > MaxHP) MaxHP = HP;
 	return HP;
 }
 int CMS::CharMP::get()
 {
 	WritePointer(SettingsBasePtr, MPAlertOffset, 20);
-	int MP = ReadPointer(StatsBasePtr, HPOffset + 4);
+	int MP = ReadPointer<int>(StatsBasePtr, HPOffset + 4);
 	if(MP > MaxMP) MaxMP = MP;
 	return MP;
 }
 double CMS::CharEXP::get()
 {
-	return (int) ReadPointer(MobBasePtr, MobCountOffset);
+	return ReadPointer<double>(StatsBasePtr, EXPOffset);
 }
 int CMS::MapId::get()
 {
-	return (int) ReadPointer(InfoBasePtr, MapIDOffset);
+	return ReadPointer<int>(InfoBasePtr, MapIDOffset);
 }
 int CMS::AttackCount::get()
 {
-	return (int) ReadPointer(CharBasePtr, AttackCountOffset);
+	return ReadPointer<int>(CharBasePtr, AttackCountOffset);
 }
 int CMS::Tubi::get()
 {
-	return (int) ReadPointer(ServerBasePtr, TubiOffset);
+	return ReadPointer<int>(ServerBasePtr, TubiOffset);
 }
 void CMS::Tubi::set(int i)
 {
@@ -146,7 +148,7 @@ void CMS::Tubi::set(int i)
 }
 int CMS::Breath::get()
 {
-	return (int) ReadPointer(CharBasePtr, BreathOffset);
+	return ReadPointer<int>(CharBasePtr, BreathOffset);
 }
 void CMS::Breath::set(int i)
 {
@@ -154,12 +156,12 @@ void CMS::Breath::set(int i)
 }
 int CMS::Channel::get()
 {
-	return (int) ReadPointer(ServerBasePtr, ChannelOffset);
+	return ReadPointer<int>(ServerBasePtr, ChannelOffset);
 }
 int CMS::PetFullness::get()
 {
-	unsigned long Pet = ReadPointer(CharBasePtr, PetOffset);
-	return ReadPointer(Pet+0x4, PetFullnessOffset);
+	DWORD Pet = ReadPointer<DWORD>(CharBasePtr, PetOffset);
+	return ReadPointer<int>(Pet+0x4, PetFullnessOffset);
 }
 bool CMS::gotMSCRC::get()
 {
@@ -167,7 +169,10 @@ bool CMS::gotMSCRC::get()
 }
 bool CMS::InGame::get()
 {
-	return MapId > 0;
+	static bool previousTime = false;
+	if(MapId <= 0 && previousTime) ShowError("You DC'd");
+	previousTime = MapId > 0;
+	return previousTime;
 }
 HWND CMS::MSHWND::get()
 {
