@@ -2,17 +2,10 @@
 #include <Windows.h>
 #include "Address.h"
 
-#define appdatadir  Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData) + "\\Waty\\Updater\\"
-#define aobfile (appdatadir + "AOBs.xml")
-#define outputfile (appdatadir + "Addys.h")
-
-#define ShowInfo(Message)		MessageBox::Show(Message, "Information", MessageBoxButtons::OK, MessageBoxIcon::Information)
-#define ShowError(Message)		MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
-
 namespace WatyBotUpdater
 {
-
 	using namespace System;
+	using namespace System::IO;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
@@ -30,8 +23,11 @@ namespace WatyBotUpdater
 		{
 			InitializeComponent();
 			ReadXmlData();
-			AOBFileWatcher->Path = appdatadir;
+			AOBFileWatcher->Path = AppDataDir;
 		}
+		static String^ AppDataDir = Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "Waty", "Updater");
+		static String^ InputPath = Path::Combine(AppDataDir, "AOBs.xml");
+		static String^ OutputPath = Path::Combine(AppDataDir, "Addys.h");
 
 	protected:
 		/// <summary>
@@ -46,36 +42,34 @@ namespace WatyBotUpdater
 		}
 
 	private:
-
 		ListView^  lvAddys;
-		ColumnHeader^  chName;
-		ColumnHeader^  chAddy;
-		ColumnHeader^  chType;
-		ColumnHeader^  chAOB;
-		ColumnHeader^  chComments;
+		ColumnHeader^ chName;
+		ColumnHeader^ chAddy;
+		ColumnHeader^ chType;
+		ColumnHeader^ chAOB;
+		ColumnHeader^ chComments;
 
-		OpenFileDialog^  InputFileDialog;
+		OpenFileDialog^ InputFileDialog;
 		XmlSerializer^ serializer;
 		List<Address^>^ addressList;
-		System::IO::FileSystemWatcher^  AOBFileWatcher;
-		MenuStrip^  menuStrip1;
-		ToolStripMenuItem^  updateToolStripMenuItem;
-		ToolStripMenuItem^  loadDifferentFileItem;
-		ToolStripMenuItem^  saveAOBItem;
+		FileSystemWatcher^ AOBFileWatcher;
+		MenuStrip^ menuStrip1;
+		ToolStripMenuItem^ updateToolStripMenuItem;
+		ToolStripMenuItem^ loadDifferentFileItem;
+		ToolStripMenuItem^ saveAOBItem;
+		ToolStripMenuItem^ openAppdataToolStripMenuItem;
 
-		GroupBox^  gbNewAOB;
-		TextBox^  tbName;
-		ComboBox^  ddbType;
-		TextBox^  tbAOB;
-		TextBox^  tbComment;
-		Button^  bAdd;
-		Windows::Forms::ContextMenuStrip^  contextMenuStrip1;
-		Windows::Forms::ToolStripMenuItem^  copySearchResultToolStripMenuItem;
-		Windows::Forms::ToolStripMenuItem^  copyAOBToolStripMenuItem;
-		Windows::Forms::ToolStripMenuItem^  copyCommentToolStripMenuItem;
-		Windows::Forms::ToolStripMenuItem^  deleteEntryToolStripMenuItem;
-		Windows::Forms::ToolStripMenuItem^  openFileLocationToolStripMenuItem;
-
+		GroupBox^ gbNewAOB;
+		TextBox^ tbName;
+		ComboBox^ ddbType;
+		TextBox^ tbAOB;
+		TextBox^ tbComment;
+		Button^ bAdd;
+		Windows::Forms::ContextMenuStrip^ contextMenuStrip1;
+		Windows::Forms::ToolStripMenuItem^ copySearchResultToolStripMenuItem;
+		Windows::Forms::ToolStripMenuItem^ copyAOBToolStripMenuItem;
+		Windows::Forms::ToolStripMenuItem^ copyCommentToolStripMenuItem;
+		Windows::Forms::ToolStripMenuItem^ deleteEntryToolStripMenuItem;
 		IContainer^  components;
 
 #pragma region Windows Form Designer generated code
@@ -97,7 +91,6 @@ namespace WatyBotUpdater
 			this->copyAOBToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->copyCommentToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->deleteEntryToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->openFileLocationToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->InputFileDialog = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->AOBFileWatcher = (gcnew System::IO::FileSystemWatcher());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
@@ -110,6 +103,7 @@ namespace WatyBotUpdater
 			this->bAdd = (gcnew System::Windows::Forms::Button());
 			this->tbComment = (gcnew System::Windows::Forms::TextBox());
 			this->tbAOB = (gcnew System::Windows::Forms::TextBox());
+			this->openAppdataToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->contextMenuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->AOBFileWatcher))->BeginInit();
 			this->menuStrip1->SuspendLayout();
@@ -160,10 +154,10 @@ namespace WatyBotUpdater
 			// 
 			// contextMenuStrip1
 			// 
-			this->contextMenuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {this->copySearchResultToolStripMenuItem, 
-				this->copyAOBToolStripMenuItem, this->copyCommentToolStripMenuItem, this->deleteEntryToolStripMenuItem, this->openFileLocationToolStripMenuItem});
+			this->contextMenuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {this->copySearchResultToolStripMenuItem, 
+				this->copyAOBToolStripMenuItem, this->copyCommentToolStripMenuItem, this->deleteEntryToolStripMenuItem});
 			this->contextMenuStrip1->Name = L"contextMenuStrip1";
-			this->contextMenuStrip1->Size = System::Drawing::Size(172, 114);
+			this->contextMenuStrip1->Size = System::Drawing::Size(172, 92);
 			// 
 			// copySearchResultToolStripMenuItem
 			// 
@@ -193,13 +187,6 @@ namespace WatyBotUpdater
 			this->deleteEntryToolStripMenuItem->Text = L"Delete entry";
 			this->deleteEntryToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::deleteEntryToolStripMenuItem_Click);
 			// 
-			// openFileLocationToolStripMenuItem
-			// 
-			this->openFileLocationToolStripMenuItem->Name = L"openFileLocationToolStripMenuItem";
-			this->openFileLocationToolStripMenuItem->Size = System::Drawing::Size(171, 22);
-			this->openFileLocationToolStripMenuItem->Text = L"Open file location";
-			this->openFileLocationToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::openFileLocationToolStripMenuItem_Click);
-			// 
 			// InputFileDialog
 			// 
 			this->InputFileDialog->DefaultExt = L"xml";
@@ -218,8 +205,8 @@ namespace WatyBotUpdater
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {this->updateToolStripMenuItem, 
-				this->loadDifferentFileItem, this->saveAOBItem});
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {this->updateToolStripMenuItem, 
+				this->loadDifferentFileItem, this->saveAOBItem, this->openAppdataToolStripMenuItem});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->RenderMode = System::Windows::Forms::ToolStripRenderMode::Professional;
@@ -302,6 +289,13 @@ namespace WatyBotUpdater
 			this->tbAOB->Size = System::Drawing::Size(345, 20);
 			this->tbAOB->TabIndex = 8;
 			// 
+			// openAppdataToolStripMenuItem
+			// 
+			this->openAppdataToolStripMenuItem->Name = L"openAppdataToolStripMenuItem";
+			this->openAppdataToolStripMenuItem->Size = System::Drawing::Size(116, 20);
+			this->openAppdataToolStripMenuItem->Text = L"Open %Appdata%";
+			this->openAppdataToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::openAppdataToolStripMenuItem_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -342,6 +336,6 @@ namespace WatyBotUpdater
 		Void copyAOBToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 		Void copyCommentToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 		Void deleteEntryToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-		Void openFileLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-	};
+		Void openAppdataToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+};
 }

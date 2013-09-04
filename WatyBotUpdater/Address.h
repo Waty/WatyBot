@@ -4,14 +4,9 @@ using namespace System::Xml::Serialization;
 public ref class Address
 {
 public:
-	Address()
-	{
-		this->Name = "N/A";
-		this->AOB = "N/A";
-		this->Type = AddressType::Address;
-	}
+	Address(){}
 
-	enum class AddressType{Address, Pointer, Offset};
+	enum class AddressType{Address, Pointer, OffsetBYTE, OffsetWORD};
 
 	[XmlAttribute]
 	property String^ Name;

@@ -8,6 +8,8 @@ using namespace System::IO;
 using namespace msclr::interop;
 using namespace std;
 
+#define ShowInfo(Message)		MessageBox::Show(Message, "Information", MessageBoxButtons::OK, MessageBoxIcon::Information)
+#define ShowError(Message)		MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error)
 
 void *lpvMapleBase = NULL;
 DWORD dwMapleSize = 0;
@@ -27,7 +29,7 @@ void InitializeTrainer(HINSTANCE hInstance)
 	//Set the maple base for the scanner
 	lpvMapleBase = reinterpret_cast<LPVOID>(0x00400000);
 	
-	if(!Directory::Exists(appdatadir))	Directory::CreateDirectory(appdatadir);
+	if(!Directory::Exists(MyForm::AppDataDir))	Directory::CreateDirectory(MyForm::AppDataDir);
 
 	Threading::Thread^ tMain = gcnew Threading::Thread(gcnew Threading::ThreadStart(CreateGUI));
 	tMain->SetApartmentState(Threading::ApartmentState::STA);
@@ -39,7 +41,7 @@ Void MyForm::update_Click(System::Object^  sender, System::EventArgs^  e)
 	static PFSEARCH pf;
 	this->ReadXmlData();
 	
-	StreamWriter^ sw = File::CreateText(outputfile);
+	StreamWriter^ sw = File::CreateText(OutputPath);
 	
 	int SuccesCount = 0;
 	int index = 0;
@@ -55,7 +57,8 @@ Void MyForm::update_Click(System::Object^  sender, System::EventArgs^  e)
 		{
 			if(address->Type == Address::AddressType::Address) Addy = pf.dwResult.ToString("X");
 			if(address->Type == Address::AddressType::Pointer) Addy = (*(DWORD*)((DWORD)pf.dwResult + 2)).ToString("X");
-			if(address->Type == Address::AddressType::Offset) Addy = (*(WORD*)((DWORD)pf.dwResult + 2)).ToString("X");
+			if(address->Type == Address::AddressType::OffsetBYTE) Addy = (*(BYTE*)((DWORD)pf.dwResult + 2)).ToString("X");
+			if(address->Type == Address::AddressType::OffsetWORD) Addy = (*(WORD*)((DWORD)pf.dwResult + 2)).ToString("X");
 			SuccesCount++;
 		}
 		
@@ -100,21 +103,21 @@ Void MyForm::MyForm_FormClosing(System::Object^  sender, System::Windows::Forms:
 Void MyForm::ReadXmlData()
 {
 	if(this->serializer == nullptr) this->serializer = gcnew XmlSerializer(List<Address^>::typeid);
-	if(!File::Exists(aobfile))
+	if(!File::Exists(InputPath))
 	{
 		WriteXmlData();
 		return;
 	}
 
 	//Deserialize the xml file
-	TextReader^ reader = gcnew StreamReader(aobfile);
+	TextReader^ reader = gcnew StreamReader(InputPath);
 	try 
 	{
 		addressList = safe_cast<List<Address^>^>(serializer->Deserialize(reader));
 	}
 	catch(InvalidOperationException^ ex)
 	{
-		ShowError(ex->ToString());
+		ShowError(ex->Message);
 	}
 	reader->Close();
 
@@ -134,7 +137,7 @@ Void MyForm::WriteXmlData()
 {
 	if(this->serializer == nullptr) this->serializer = gcnew XmlSerializer(List<Address^>::typeid);
 	
-	auto writer = File::Create(aobfile);
+	auto writer = File::Create(InputPath);
 	try
 	{
 		serializer->Serialize(writer, addressList);
@@ -157,8 +160,8 @@ Void MyForm::loadDifferentFile_Click(System::Object^  sender, System::EventArgs^
 	
 	if(InputFileDialog->ShowDialog() == ::DialogResult::OK)
 	{
-		File::Delete(aobfile);
-		File::Copy(InputFileDialog->FileName, aobfile);
+		File::Delete(InputPath);
+		File::Copy(InputFileDialog->FileName, InputPath);
 	}
 }
 
@@ -220,7 +223,7 @@ Void MyForm::deleteEntryToolStripMenuItem_Click(System::Object^  sender, System:
 	WriteXmlData();
 }
 
-Void MyForm::openFileLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+Void MyForm::openAppdataToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	System::Diagnostics::Process::Start("explorer.exe", "/select," + aobfile);
+	System::Diagnostics::Process::Start("explorer.exe", "/select," + InputPath);
 }
