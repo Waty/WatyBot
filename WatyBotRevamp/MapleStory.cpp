@@ -121,7 +121,7 @@ int CMS::CharHP::get()
 }
 int CMS::CharMP::get()
 {
-	WritePointer(SettingsBasePtr, MPAlertOffset, 20);
+	WritePointer(SettingsBasePtr, HPAlertOffset + 4, 20);
 	int MP = ReadPointer<int>(StatsBasePtr, HPOffset + 4);
 	if(MP > MaxMP) MaxMP = MP;
 	return MP;
