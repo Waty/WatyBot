@@ -679,7 +679,7 @@ Void MainForm::LoadSettings()
 			{
 				cbPinTyper->Checked = (bool)				Settings[PinTyper]->Value;
 				cbLogoSkipper->Checked = (bool)				Settings[LogoSkipper]->Value;
-				bool enableThreadIdFix(true);
+				Hacks::ThreadIdFix.Enable(true);
 			}
 		}
 		catch(Exception^)
