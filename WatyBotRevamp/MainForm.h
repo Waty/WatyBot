@@ -216,10 +216,8 @@ namespace WatyBotRevamp {
 		System::Windows::Forms::ToolStripMenuItem^  bEditPacket;
 		System::IO::FileSystemWatcher^  SettingsWatcher;
 		System::Windows::Forms::CheckBox^  cbLockItemVac;
-private: System::Windows::Forms::CheckBox^  cbOLWNA;
-
-
-		 System::ComponentModel::IContainer^  components;
+		System::Windows::Forms::CheckBox^  cbOLWNA;
+		System::ComponentModel::IContainer^  components;
 #pragma endregion
 
 #pragma region Windows Form Designer generated code
@@ -2163,7 +2161,7 @@ private: System::Windows::Forms::CheckBox^  cbOLWNA;
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
 			this->ShowIcon = false;
-			this->Text = L"WatyBot 3.2.3 - CCPLZ! - EMS 93.2";
+			this->Text = L"WatyBot 3.3 - CCPLZ! - EMS 94.1";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->MainTabControl->ResumeLayout(false);
