@@ -170,7 +170,7 @@ bool CMS::gotMSCRC::get()
 bool CMS::InGame::get()
 {
 	static bool previousTime = false;
-	if(MapId <= 0 && previousTime) ShowError("You DC'd");
+	if(MapId <= 0 && previousTime && !CC::IsBusy) ShowError("You DC'd");
 	previousTime = MapId > 0;
 	return previousTime;
 }
