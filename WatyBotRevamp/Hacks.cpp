@@ -117,7 +117,7 @@ CMemory Hacks::UnlimitedMorph(UnlimitedMorphAddy1, bMorph1, 2, UnlimitedMorphAdd
 /////ND - All Attacks
 BYTE bgND1[] = {0x74};
 BYTE bgND2[] = {0x00};
-CMemory Hacks::NDAllAttacks(gNDAddy1, bgND1, 1/*, gNDAddy2, bgND2, 1*/);
+CMemory Hacks::NDAllAttacks(gNDAddy1, bgND1, 1, gNDAddy2, bgND2, 1);
 
 /////Jump Down Anywhere
 BYTE bJDA1[] = {0xEB};
@@ -267,7 +267,7 @@ CMemory Hacks::HideDamage2(HideDamageAddy5, bHideDamage5, 1);
 
 /////Mercedes Combos without comboing
 BYTE bMercedesCombo[] = {0xEB};
-CMemory Hacks::MercedesCombo(MercedesComboAddy, bMercedesCombo, 1);
+CMemory Hacks::MercedesCombo(MercedesComboAddy1, bMercedesCombo, 1, MercedesComboAddy2, bMercedesCombo, 1);
 
 /* Patched ?
 int SkillInjectionSkills[] = {97, 99, 100, 103, 61001005, 4001334, 4201005, 4211011, 4221001, 1001004, 1221009, 1311005, 2201004, 2211003};

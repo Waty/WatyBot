@@ -1,4 +1,4 @@
-#define DojangAddy 0xC7F820 //8B 01 8B 50 ? FF D2 8B 88 ? ? ? ? 51 05 ? ? ? ? 50 E8 ? ? ? ? 83 C4 ? - addy is at the call
+#define DojangAddy 0xC7F834 //8B 01 8B 50 ? FF D2 8B 88 ? ? ? ? 51 05 ? ? ? ? 50 E8 ? ? ? ? 83 C4 ? - addy is at the call
 #define DojangCall 0xD54CD0
 #define IceGuardAddy 0xCD50B0
 #define IceGuardPush 0xF51D8B //The push 1 line below the Addy
@@ -20,7 +20,7 @@
 #define UnlimitedMorphAddy1 0xCF289F
 #define UnlimitedMorphAddy2 0xCF33AE
 #define gNDAddy1 0xCB47B3
-#define gNDAddy2 0xERROR
+#define gNDAddy2 0x87AF55
 #define JDAAddy1 0xC8E4B7
 #define JDAAddy2 0xC8E4F4
 #define JDAAddy3 0xC8E512
@@ -56,7 +56,8 @@
 #define HideDamageAddy3 0x72F7C7
 #define HideDamageAddy4 0x72F7D4
 #define HideDamageAddy5 0x72F7EF
-#define MercedesComboAddy 0x41304B
+#define MercedesComboAddy1 0x55B5BB
+#define MercedesComboAddy2 0xCD2D5E
 #define ExitCSAddy 0x919A90 //75 15 57 FF 15 ? ? ? ? 3B F3 74 0A 8B 16 8B 02 6A 01 8B CE FF d0 8b 4c 24 ? 64 89 0D 00 00 00 00 -4th Result MemoryView below: mov fs:[00000000],ecx
 #define ExitCSCall 0xFB0084 //See ExitCSAddy
 #define NoCCBoxesAddy1 0x58A48E
@@ -65,7 +66,7 @@
 #define FadeAddy2 0x893270
 #define MouseFlyAddy 0xCD1E29
 #define MouseFlyCall1 0xD11820 //Opcode
-#define MouseFlyCall2 0x732AA0
+#define MouseFlyCall2 0x421F80
 #define CCAddy 0x58A3C0 //CField::SendTransferChannelRequest
 #define CSAddy 0xDB1C70 //lpfnCWvsContext::SendMigrateToShopRequest
 #define SendPacketHookAddy 0x427620 //8B 44 24 04 8B 0D ? ? ? ? 50 E8 ? ? ? ? C3 - 2nd result, check if it ends with a call to SendPacketAddy
