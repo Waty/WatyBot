@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <ArrayOfAddress xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Address Type="Address" Name="DojangAddy">
-    <Comment>8B 01 8B 50 ? FF D2 8B 88 ? ? ? ? 51 05 ? ? ? ? 50 E8 ? ? ? ? 83 C4 ? - addy is at the call</Comment>
+    <Comment>Warning: 8B 01 8B 50 ? FF D2 8B 88 ? ? ? ? 51 05 ? ? ? ? 50 E8 ? ? ? ? 83 C4 ? - addy is at the call near the end or this: 8B 01 8B 50 14 FF D2 8B 88 B8 0C 00 00 51 05 ? ? ? ? 50 E8 ? ? ? ? 83 C4 ?</Comment>
     <AOB>N/A</AOB>
   </Address>
   <Address Type="Address" Name="DojangCall">
@@ -71,7 +71,7 @@
     <AOB>75 ? C7 85 ? ? ? ? ? ? ? ? EB ? C7 85 ? ? ? ? ? ? ? ? 8B 8D ? ? ? ? 89 4D ? 8B 4D ? E8 ? ? ? ? 50</AOB>
   </Address>
   <Address Type="Address" Name="gNDAddy2">
-    <AOB>06 33 FF 89 7C 24 ? 81 7C 24 ? ? ? ? ? 75 ? 8B 5C 24 ? 8B CB</AOB>
+    <AOB>? ? ? ? ? ? ? 81 7C 24 ? ? ? ? ? 75 ? 8B 5C</AOB>
   </Address>
   <Address Type="Address" Name="JDAAddy1">
     <AOB>74 ? 3B 5C 24 ? 75 ? 8B 4C 24 ? 6A ? 03 C1</AOB>
@@ -182,8 +182,11 @@
   <Address Type="Address" Name="HideDamageAddy5">
     <AOB>7D ? 6A ? 6A ? 6A ? F7 D8</AOB>
   </Address>
-  <Address Type="Address" Name="MercedesComboAddy">
-    <AOB>74 ? 8B 55 ? 52 E8 ? ? ? ? 83 C4 ? 85 C0</AOB>
+  <Address Type="Address" Name="MercedesComboAddy1">
+    <AOB>74 ? 8B 56 ? 52 E8 ? ? ? ? 83 C4 ? 85 C0</AOB>
+  </Address>
+  <Address Type="Address" Name="MercedesComboAddy2">
+    <AOB>75 ? 68 ? ? ? ? 6A ? 68 ? ? ? ? E8 ? ? ? ?</AOB>
   </Address>
   <Address Type="Address" Name="ExitCSAddy">
     <Comment>75 15 57 FF 15 ? ? ? ? 3B F3 74 0A 8B 16 8B 02 6A 01 8B CE FF d0 8b 4c 24 ? 64 89 0D 00 00 00 00 -4th Result MemoryView below: mov fs:[00000000],ecx</Comment>
@@ -226,7 +229,7 @@
   </Address>
   <Address Type="Address" Name="SendPacketAddy">
     <Comment>CClientSocket::SendPacket</Comment>
-    <AOB>E9 ? ? ? ? 68 ? ? ? ? 64 A1 ? ? ? ? 50 83 EC ? 53</AOB>
+    <AOB>55 8b ec 6a ? 68 ? ? ? ? 64 a1 00 00 00 00 50 83 ec ? 53 56 57 a1 ? ? ? ? 33 c5 50 8d 45 ? 64 a3 00 00 00 00 89 4d ?</AOB>
   </Address>
   <Address Type="Address" Name="SendPacketHookAddy">
     <Comment>8B 44 24 04 8B 0D ? ? ? ? 50 E8 ? ? ? ? C3 - 2nd result, check if it ends with a call to SendPacketAddy</Comment>
@@ -296,7 +299,7 @@
     <AOB>8B 0D ? ? ? ? E8 ? ? ? ? 3B C3 0F 85 ? ? ? ? 8D 44 24 ? 50</AOB>
   </Address>
   <Address Type="OffsetWORD" Name="HPAlertOffset">
-    <AOB>8B 48 ?? 8D 0C 89 85 C9 74 ?? 8B 5D ?? 8B C3</AOB>
+    <AOB>8B 48 ? 8D 0C 89 85 C9 74 ? 8B 5D ? 8B C3</AOB>
   </Address>
   <Address Type="Pointer" Name="ServerBasePtr">
     <AOB>8b 0d ? ? ? ? 8D 44 24 ? 50 E8 ? ? ? ? 8B 70 ? 8D 4C 24 ? E8 ? ? ? ? 8B 4B ? 51</AOB>
@@ -333,15 +336,6 @@
   </Address>
   <Address Type="OffsetBYTE" Name="ItemCountOffset">
     <AOB>8B 4C 24 ? 83 C1 F8 83 F9 50</AOB>
-  </Address>
-  <Address Type="Address" Name="SendAddy">
-    <AOB>55 8b ec 6a ? 68 ? ? ? ? 64 a1 00 00 00 00 50 83 ec ? 53 56 57 a1 ? ? ? ? 33 c5 50 8d 45 ? 64 a3 00 00 00 00 89 4d ?</AOB>
-  </Address>
-  <Address Type="Address" Name="SendClassAddy">
-    <AOB>8B 0D ? ? ? ? E8 ? ? ? ? 8D 4C 24 ? C7 44 24 ? ? ? ? ? E8 ? ? ? ? 8B 4C 24 ? 64 89 0D ? ? ? ? 59</AOB>
-  </Address>
-  <Address Type="Address" Name="ClientSocketAddy">
-    <AOB>8B 0D ? ? ? ? E8 ? ? ? ? 8D 4C 24 ? C7 44 24 ? ? ? ? ? E8 ? ? ? ? 8B 4C 24 ? 64 89 0D ? ? ? ? 59</AOB>
   </Address>
   <Address Type="Address" Name="MSCRCAddy">
     <AOB>8a 11 80 c2 ? 8b 4d ? 8b 09</AOB>

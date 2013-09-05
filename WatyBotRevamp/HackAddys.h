@@ -105,6 +105,4 @@
 #define ItemBasePtr 0x14081E4
 #define ItemCountOffset 0x14
 #define SendPacketAddy 0x4D96B0
-#define SendClassAddy 0x49DB77
-#define ClientSocketAddy 0x49DB77
 #define MSCRCAddy 0xE72C52
