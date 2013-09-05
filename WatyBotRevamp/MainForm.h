@@ -245,6 +245,7 @@ private: System::Windows::Forms::CheckBox^  cbOLWNA;
 			this->castToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->deleteToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->AutoBotGroupBox = (gcnew System::Windows::Forms::GroupBox());
+			this->cbOLWNA = (gcnew System::Windows::Forms::CheckBox());
 			this->nudCCAttacks = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudCCTimed = (gcnew System::Windows::Forms::NumericUpDown());
 			this->nudCCPeople = (gcnew System::Windows::Forms::NumericUpDown());
@@ -390,7 +391,6 @@ private: System::Windows::Forms::CheckBox^  cbOLWNA;
 			this->tAutoLoot = (gcnew System::Windows::Forms::Timer(this->components));
 			this->tTimedCC = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SettingsWatcher = (gcnew System::IO::FileSystemWatcher());
-			this->cbOLWNA = (gcnew System::Windows::Forms::CheckBox());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->gbAutoSkill->SuspendLayout();
@@ -610,6 +610,19 @@ private: System::Windows::Forms::CheckBox^  cbOLWNA;
 			this->AutoBotGroupBox->Text = L"Autobot";
 			this->InfoToolTip->SetToolTip(this->AutoBotGroupBox, L"StopAttackingWhenSpawnIsLow");
 			// 
+			// cbOLWNA
+			// 
+			this->cbOLWNA->AutoSize = true;
+			this->cbOLWNA->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6.5F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
+			this->cbOLWNA->Location = System::Drawing::Point(138, 46);
+			this->cbOLWNA->Name = L"cbOLWNA";
+			this->cbOLWNA->Size = System::Drawing::Size(103, 16);
+			this->cbOLWNA->TabIndex = 81;
+			this->cbOLWNA->Text = L"WhenNotAttacking";
+			this->InfoToolTip->SetToolTip(this->cbOLWNA, L"OnlyLootWhenNotAttacking");
+			this->cbOLWNA->UseVisualStyleBackColor = true;
+			// 
 			// nudCCAttacks
 			// 
 			this->nudCCAttacks->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
@@ -687,7 +700,7 @@ private: System::Windows::Forms::CheckBox^  cbOLWNA;
 			// 
 			// nudSAWSIL
 			// 
-			this->nudSAWSIL->Location = System::Drawing::Point(202, 14);
+			this->nudSAWSIL->Location = System::Drawing::Point(202, 15);
 			this->nudSAWSIL->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {25, 0, 0, 0});
 			this->nudSAWSIL->Name = L"nudSAWSIL";
 			this->nudSAWSIL->Size = System::Drawing::Size(35, 20);
@@ -735,8 +748,7 @@ private: System::Windows::Forms::CheckBox^  cbOLWNA;
 			// lSAWSIL
 			// 
 			this->lSAWSIL->AutoSize = true;
-			this->lSAWSIL->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7));
-			this->lSAWSIL->Location = System::Drawing::Point(142, 18);
+			this->lSAWSIL->Location = System::Drawing::Point(140, 18);
 			this->lSAWSIL->Name = L"lSAWSIL";
 			this->lSAWSIL->Size = System::Drawing::Size(56, 13);
 			this->lSAWSIL->TabIndex = 63;
@@ -2137,17 +2149,6 @@ private: System::Windows::Forms::CheckBox^  cbOLWNA;
 			this->SettingsWatcher->NotifyFilter = System::IO::NotifyFilters::LastWrite;
 			this->SettingsWatcher->SynchronizingObject = this;
 			this->SettingsWatcher->Changed += gcnew System::IO::FileSystemEventHandler(this, &MainForm::SettingsWatcher_Changed);
-			// 
-			// cbOLWNA
-			// 
-			this->cbOLWNA->AutoSize = true;
-			this->cbOLWNA->Location = System::Drawing::Point(145, 43);
-			this->cbOLWNA->Name = L"cbOLWNA";
-			this->cbOLWNA->Size = System::Drawing::Size(66, 17);
-			this->cbOLWNA->TabIndex = 81;
-			this->cbOLWNA->Text = L"OLWNA";
-			this->InfoToolTip->SetToolTip(this->cbOLWNA, L"OnlyLootWhenNotAttacking");
-			this->cbOLWNA->UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 
