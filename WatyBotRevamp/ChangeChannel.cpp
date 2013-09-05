@@ -9,6 +9,10 @@ using namespace System;
 void TryCC(int channel);
 extern StopWatch<milliseconds> BreathCounter;
 
+bool CC::IsBusy::get()
+{
+	return bw->IsBusy;
+}
 Void CC::CCSwitch(CCType type)
 {
 	if(IsBusy) return;

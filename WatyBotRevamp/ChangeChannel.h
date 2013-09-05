@@ -9,10 +9,7 @@ namespace WatyBotRevamp
 	public ref class CC sealed
 	{
 	public:
-		static property bool IsBusy
-		{
-			bool get() {return bw->IsBusy;}
-		}
+		static property bool IsBusy{bool get();}
 		static void CCSwitch(CCType type);
 
 	private:
