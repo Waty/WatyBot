@@ -24,7 +24,7 @@ bool CMemory::Enable(bool enable)
 	{
 		enable ? this->WriteMem() : this->RestoreMem();
 		this->Enabled = enable;
-		return enable ? true : false;
+		return enable;
 	}
 	return false;
 }
