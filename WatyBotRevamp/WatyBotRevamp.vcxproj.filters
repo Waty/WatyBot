@@ -13,30 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Classes">
-      <UniqueIdentifier>{351550c1-2891-40aa-a4ab-c543881f5b16}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\SPControl">
-      <UniqueIdentifier>{9be2962f-3efe-49d7-9004-e3995e2c2283}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\Packets">
-      <UniqueIdentifier>{6726158c-b3d6-40a4-bf21-0aed4542d4f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\CMemory">
-      <UniqueIdentifier>{88a9a07f-3871-4467-b9d2-ad4a3faf437e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\ChangeChannel">
-      <UniqueIdentifier>{696ca6ab-1668-4da5-9064-bce6adf12b59}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\CMapleStory">
-      <UniqueIdentifier>{f466243f-d519-45eb-8fc5-930a68bcd3d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\Settings">
-      <UniqueIdentifier>{73e9a498-1009-4f53-a6f3-0eba6532c7ff}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\CAutoSkill">
-      <UniqueIdentifier>{717c3d74-0f51-4145-b5e1-e89cda80b9fb}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainForm.cpp">
@@ -44,21 +20,6 @@
     </ClCompile>
     <ClCompile Include="MainDll.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Memory.cpp">
-      <Filter>Classes\CMemory</Filter>
-    </ClCompile>
-    <ClCompile Include="SPControl.cpp">
-      <Filter>Classes\SPControl</Filter>
-    </ClCompile>
-    <ClCompile Include="ChangeChannel.cpp">
-      <Filter>Classes\ChangeChannel</Filter>
-    </ClCompile>
-    <ClCompile Include="MapleStory.cpp">
-      <Filter>Classes\CMapleStory</Filter>
-    </ClCompile>
-    <ClCompile Include="AutoSkill.cpp">
-      <Filter>Classes\CAutoSkill</Filter>
     </ClCompile>
     <ClCompile Include="Hooks.cpp">
       <Filter>Source Files</Filter>
@@ -69,8 +30,23 @@
     <ClCompile Include="SPControlDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SPControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="PacketSender.cpp">
-      <Filter>Classes\Packets</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MapleStory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeChannel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoSkill.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,24 +58,6 @@
     </ClInclude>
     <ClInclude Include="HackAddys.h">
       <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Memory.h">
-      <Filter>Classes\CMemory</Filter>
-    </ClInclude>
-    <ClInclude Include="SPControl.h">
-      <Filter>Classes\SPControl</Filter>
-    </ClInclude>
-    <ClInclude Include="ChangeChannel.h">
-      <Filter>Classes\ChangeChannel</Filter>
-    </ClInclude>
-    <ClInclude Include="MapleStory.h">
-      <Filter>Classes\CMapleStory</Filter>
-    </ClInclude>
-    <ClInclude Include="Settings.h">
-      <Filter>Classes\Settings</Filter>
-    </ClInclude>
-    <ClInclude Include="AutoSkill.h">
-      <Filter>Classes\CAutoSkill</Filter>
     </ClInclude>
     <ClInclude Include="StopWatch.h">
       <Filter>Source Files</Filter>
@@ -113,8 +71,26 @@
     <ClInclude Include="SPControlDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AutoSkill.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeChannel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MapleStory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="PacketSender.h">
-      <Filter>Classes\Packets</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SPControl.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
