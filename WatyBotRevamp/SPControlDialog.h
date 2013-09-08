@@ -51,7 +51,7 @@ namespace WatyBotRevamp {
 		Windows::Forms::Label^  lMapId;
 		Windows::Forms::Label^  lYLoc;
 		Windows::Forms::Label^  lXLoc;
-		
+
 		Void bGetCurrentLoc_Click(System::Object^  sender, System::EventArgs^  e);
 		Void bSaveChanges_Click(System::Object^  sender, System::EventArgs^  e);
 		Void bCancel_Click(System::Object^  sender, System::EventArgs^  e);
@@ -87,8 +87,8 @@ namespace WatyBotRevamp {
 			// nudYLoc
 			// 
 			this->nudYLoc->Location = System::Drawing::Point(264, 21);
-			this->nudYLoc->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
-			this->nudYLoc->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, System::Int32::MinValue});
+			this->nudYLoc->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10000, 0, 0, 0 });
+			this->nudYLoc->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10000, 0, 0, System::Int32::MinValue });
 			this->nudYLoc->Name = L"nudYLoc";
 			this->nudYLoc->Size = System::Drawing::Size(36, 20);
 			this->nudYLoc->TabIndex = 4;
@@ -96,8 +96,8 @@ namespace WatyBotRevamp {
 			// nudXLoc
 			// 
 			this->nudXLoc->Location = System::Drawing::Point(225, 21);
-			this->nudXLoc->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
-			this->nudXLoc->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, System::Int32::MinValue});
+			this->nudXLoc->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10000, 0, 0, 0 });
+			this->nudXLoc->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10000, 0, 0, System::Int32::MinValue });
 			this->nudXLoc->Name = L"nudXLoc";
 			this->nudXLoc->Size = System::Drawing::Size(36, 20);
 			this->nudXLoc->TabIndex = 3;
@@ -105,8 +105,8 @@ namespace WatyBotRevamp {
 			// nudMapId
 			// 
 			this->nudMapId->Location = System::Drawing::Point(145, 21);
-			this->nudMapId->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1410065408, 2, 0, 0});
-			this->nudMapId->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, System::Int32::MinValue});
+			this->nudMapId->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1410065408, 2, 0, 0 });
+			this->nudMapId->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10000, 0, 0, System::Int32::MinValue });
 			this->nudMapId->Name = L"nudMapId";
 			this->nudMapId->Size = System::Drawing::Size(77, 20);
 			this->nudMapId->TabIndex = 2;
@@ -215,5 +215,5 @@ namespace WatyBotRevamp {
 
 		}
 #pragma endregion
-};
+	};
 }

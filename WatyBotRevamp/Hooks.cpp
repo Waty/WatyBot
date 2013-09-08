@@ -4,9 +4,9 @@
 /* all outdated from 90
 struct SKILLENTRY
 {
-	unsigned int uSkillId;
-	char* lpszName;
-	char* lpszDescription;
+unsigned int uSkillId;
+char* lpszName;
+char* lpszDescription;
 };
 
 //NDFA/SkillInjection Hooks
@@ -43,9 +43,9 @@ DWORD WINAPI TrySendPacket(__in_bcount(nLength) LPBYTE lpBytes, __in DWORD dwLen
 	COutPacket Packet;
 	ZeroMemory(&Packet, sizeof(COutPacket));
 
-	Packet.lpbData  = lpBytes;
-    Packet.dwcbData = dwLength;
- 
+	Packet.lpbData = lpBytes;
+	Packet.dwcbData = dwLength;
+
 	try
 	{
 		InjectPacket(&Packet);

@@ -41,7 +41,7 @@ public:
 	static CMemory HideDamage1;
 	static CMemory HideDamage2;
 	static CMemory MercedesCombo;
-//	static CMemory SkillInjection;
+	//	static CMemory SkillInjection;
 	static CMemory NoFadeStages;
 	static CMemory NoCCBoxes;
 	static CMemory MouseFly;

@@ -36,7 +36,7 @@ namespace WatyBotRevamp {
 
 			this->Packet = pd;
 		}
-		
+
 		Packet^ Packet;
 
 	protected:
@@ -137,7 +137,7 @@ namespace WatyBotRevamp {
 			// nudInterval
 			// 
 			this->nudInterval->Location = System::Drawing::Point(13, 65);
-			this->nudInterval->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {276447232, 23283, 0, 0});
+			this->nudInterval->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 276447232, 23283, 0, 0 });
 			this->nudInterval->Name = L"nudInterval";
 			this->nudInterval->Size = System::Drawing::Size(114, 20);
 			this->nudInterval->TabIndex = 12;
@@ -179,9 +179,9 @@ namespace WatyBotRevamp {
 			data->AddRange(this->tbData->Lines);
 			Packet->Data = data;
 			Packet->Interval = (int) nudInterval->Value;
-			
+
 			String^ strError = String::Empty;
-			if(!Packet->IsValidPacket(strError))
+			if (!Packet->IsValidPacket(strError))
 			{
 				ShowErrorDialog(strError);
 				return;
@@ -195,5 +195,5 @@ namespace WatyBotRevamp {
 			this->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 			Close();
 		}
-};
+	};
 }

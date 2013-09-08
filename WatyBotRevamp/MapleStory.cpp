@@ -4,30 +4,30 @@
 #include "HackAddys.h"
 
 using namespace WatyBotRevamp;
-extern int KeyCodes[];
+extern int KeyCodes [];
 extern int KeyCodesCount;
 extern void ShowError(String^ Message);
 
 template<class T>
 T CMS::ReadPointer(DWORD ulBase, int iOffset)
 {
-	if(*(int*)WallBasePtr)
+	if (*(int*) WallBasePtr)
 	{
 		__try
 		{
-			return *(T*)(*(DWORD*)ulBase + iOffset);
+			return *(T*) (*(DWORD*) ulBase + iOffset);
 		}
-		__except(EXCEPTION_EXECUTE_HANDLER) { return -1; }
+		__except (EXCEPTION_EXECUTE_HANDLER) { return -1; }
 	}
 	else return -1;
 }
 bool CMS::WritePointer(unsigned long ulBase, int iOffset, int iValue)
 {
-	if(*(int*)WallBasePtr)
+	if (*(int*) WallBasePtr)
 	{
 		__try
 		{
-			*(int*)(*(unsigned long*)ulBase + iOffset) = iValue;
+			*(int*) (*(unsigned long*) ulBase + iOffset) = iValue;
 			return true;
 		}
 		__except (EXCEPTION_EXECUTE_HANDLER)
@@ -40,7 +40,7 @@ bool CMS::WritePointer(unsigned long ulBase, int iOffset, int iValue)
 HWND CMS::FindProcessWindow()
 {
 	static HWND MShWnd = NULL;
-	if(MShWnd != NULL) return MShWnd;
+	if (MShWnd != NULL) return MShWnd;
 
 	TCHAR szBuffer[200];
 	DWORD dwTemp;
@@ -48,12 +48,12 @@ HWND CMS::FindProcessWindow()
 	for (HWND hWnd = GetTopWindow(NULL); hWnd != NULL; hWnd = GetNextWindow(hWnd, GW_HWNDNEXT))
 	{
 		GetWindowThreadProcessId(hWnd, &dwTemp);
-	
+
 		if (dwTemp != GetCurrentProcessId()) continue;
-	
-	
-		if(!GetClassName(hWnd, szBuffer, sizeof(szBuffer) / sizeof(TCHAR))) continue;
-			if(!wcscmp(szBuffer, L"MapleStoryClass"))
+
+
+		if (!GetClassName(hWnd, szBuffer, sizeof(szBuffer) / sizeof(TCHAR))) continue;
+		if (!wcscmp(szBuffer, L"MapleStoryClass"))
 		{
 			MShWnd = hWnd;
 			return hWnd;
@@ -72,23 +72,23 @@ void CMS::SpamKey(int Key)
 }
 void CMS::SendSwitch(int index)
 {
-	if(index < KeyCodesCount) SendKey(KeyCodes[index]);	
+	if (index < KeyCodesCount) SendKey(KeyCodes[index]);
 	else PacketSender::Send(PacketSender::Packets[index - KeyCodesCount]);
 }
 void CMS::SpamSwitch(int index)
 {
-	if(index < KeyCodesCount) SpamKey(KeyCodes[index]);	
+	if (index < KeyCodesCount) SpamKey(KeyCodes[index]);
 	else PacketSender::Send(PacketSender::Packets[index - KeyCodesCount]);
 }
 
 bool CMS::ShouldAttack()
 {
-	if(!InGame || CC::IsBusy || MobCount < SAWSIL || UsingAutoSkill) return false;
+	if (!InGame || CC::IsBusy || MobCount < SAWSIL || UsingAutoSkill) return false;
 	return true;
 }
 bool CMS::ShouldLoot()
 {
-	if(OLWNA) return !ShouldAttack();
+	if (OLWNA) return !ShouldAttack();
 	return true;
 }
 
@@ -106,24 +106,24 @@ int CMS::PeopleCount::get()
 }
 int CMS::CharX::get()
 {
-	return ReadPointer<int>(CharBasePtr,XOffset);
+	return ReadPointer<int>(CharBasePtr, XOffset);
 }
 int CMS::CharY::get()
 {
-	return ReadPointer<int>(CharBasePtr,XOffset + 4);
+	return ReadPointer<int>(CharBasePtr, XOffset + 4);
 }
 int CMS::CharHP::get()
 {
 	WritePointer(SettingsBasePtr, HPAlertOffset, 20);
 	int HP = ReadPointer<int>(StatsBasePtr, HPOffset);
-	if(HP > MaxHP) MaxHP = HP;
+	if (HP > MaxHP) MaxHP = HP;
 	return HP;
 }
 int CMS::CharMP::get()
 {
 	WritePointer(SettingsBasePtr, HPAlertOffset + 4, 20);
 	int MP = ReadPointer<int>(StatsBasePtr, HPOffset + 4);
-	if(MP > MaxMP) MaxMP = MP;
+	if (MP > MaxMP) MaxMP = MP;
 	return MP;
 }
 double CMS::CharEXP::get()
@@ -161,16 +161,16 @@ int CMS::Channel::get()
 int CMS::PetFullness::get()
 {
 	DWORD Pet = ReadPointer<DWORD>(CharBasePtr, PetOffset);
-	return ReadPointer<int>(Pet+0x4, PetFullnessOffset);
+	return ReadPointer<int>(Pet + 0x4, PetFullnessOffset);
 }
 bool CMS::gotMSCRC::get()
 {
-	return *(BYTE*)MSCRCAddy == 233;
+	return *(BYTE*) MSCRCAddy == 233;
 }
 bool CMS::InGame::get()
 {
 	static bool previousTime = false;
-	if(MapId <= 0 && previousTime && !CC::IsBusy) ShowError("You DC'd");
+	if (MapId <= 0 && previousTime && !CC::IsBusy) ShowError("You DC'd");
 	previousTime = MapId > 0;
 	return previousTime;
 }

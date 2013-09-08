@@ -22,21 +22,21 @@ public:
 	static bool ShouldAttack();
 	static bool ShouldLoot();
 
-	static property int MobCount{int get();}
-	static property int ItemCount{int get();}
-	static property int PeopleCount{int get();}
-	static property int CharX{int get();}
-	static property int CharY{int get();}
-	static property int CharHP{int get();}
-	static property int CharMP{int get();}
-	static property double CharEXP{double get();}
-	static property int MapId{int get();}
-	static property int AttackCount{int get();}
-	static property int Tubi{int get(); void set(int i);}
-	static property int Breath{int get(); void set(int i);}
-	static property int Channel{int get();}
-	static property int PetFullness{int get();}
-	static property bool gotMSCRC{bool get();}
-	static property bool InGame{bool get();}
-	static property HWND MSHWND{HWND get();}
+	static property int MobCount{int get(); }
+	static property int ItemCount{int get(); }
+	static property int PeopleCount{int get(); }
+	static property int CharX{int get(); }
+	static property int CharY{int get(); }
+	static property int CharHP{int get(); }
+	static property int CharMP{int get(); }
+	static property double CharEXP{double get(); }
+	static property int MapId{int get(); }
+	static property int AttackCount{int get(); }
+	static property int Tubi{int get(); void set(int i); }
+	static property int Breath{int get(); void set(int i); }
+	static property int Channel{int get(); }
+	static property int PetFullness{int get(); }
+	static property bool gotMSCRC{bool get(); }
+	static property bool InGame{bool get(); }
+	static property HWND MSHWND{HWND get(); }
 };

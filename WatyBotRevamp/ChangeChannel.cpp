@@ -15,9 +15,9 @@ bool CC::IsBusy::get()
 }
 Void CC::CCSwitch(CCType type)
 {
-	if(IsBusy) return;
+	if (IsBusy) return;
 	String^ strError = String::Empty;
-	switch(type)
+	switch (type)
 	{
 	case CCType::CC:
 		Hacks::ThreadIdFix.Enable(true);
@@ -42,34 +42,33 @@ Void CC::GenerateRandomChannel()
 {
 	do
 	{
-		srand (GetCurrentTime());
-		TargetChannel = rand() %14;
-	}		
-	while(TargetChannel == StartChannel);
+		srand(GetCurrentTime());
+		TargetChannel = rand() % 14;
+	} while (TargetChannel == StartChannel);
 }
 
 Void CC::doCC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
-	if(!CMS::InGame)
+	if (!CMS::InGame)
 	{
 		e->Cancel;
 		return;
 	}
-	
+
 	//Store the currrent Channel
 	StartChannel = CMS::Channel;
 
 	GenerateRandomChannel();
 
 	//Sleep while breath > 0
-	while(!BreathCounter.IsOver()) Sleep(100);
+	while (!BreathCounter.IsOver()) Sleep(100);
 	CMS::Breath = 0;
-	
+
 	int i = 0;
-	while(CMS::Channel != TargetChannel && CMS::Channel != -1)
+	while (CMS::Channel != TargetChannel && CMS::Channel != -1)
 	{
 		//if the CC didn't happen after trying 10 times, Generate new random channel
-		if(i > 10) GenerateRandomChannel();
+		if (i > 10) GenerateRandomChannel();
 
 		//Send the CC request
 		TryCC(TargetChannel);
@@ -80,8 +79,8 @@ Void CC::doCC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^ 
 
 Void CC::doCS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
-	if(!CMS::InGame) e->Cancel;
-	while(!BreathCounter.IsOver()) Sleep(100);
+	if (!CMS::InGame) e->Cancel;
+	while (!BreathCounter.IsOver()) Sleep(100);
 	Sleep(500);
 	CMS::Breath = 0;
 	String^ strError = String::Empty;
@@ -93,7 +92,7 @@ Void CC::doCS(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^ 
 
 Void CC::doDC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
-	while(CMS::InGame)
+	while (CMS::InGame)
 	{
 		String^ strError = String::Empty;
 		PacketSender::Send(ChangeCharacter, strError);

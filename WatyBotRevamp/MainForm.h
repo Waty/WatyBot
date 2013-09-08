@@ -35,10 +35,10 @@ namespace WatyBotRevamp {
 			this->ddbHotKeyLoot->Items->AddRange(KeyNames);
 			this->ddbHotKeyAttack->Items->AddRange(KeyNames);
 			this->ddbHotKeyMouseFly->Items->AddRange(KeyNames);
-			
+
 			//Create the Waty directory in %appdata%
 			auto Path = Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "Waty");
-			if(!Directory::Exists(Path)) Directory::CreateDirectory(Path);
+			if (!Directory::Exists(Path)) Directory::CreateDirectory(Path);
 			this->SettingsWatcher->Path = Path;
 		}
 
@@ -490,9 +490,9 @@ namespace WatyBotRevamp {
 			// 
 			// nudAutoSkill
 			// 
-			this->nudAutoSkill->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudAutoSkill->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10, 0, 0, 0 });
 			this->nudAutoSkill->Location = System::Drawing::Point(163, 156);
-			this->nudAutoSkill->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
+			this->nudAutoSkill->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10000, 0, 0, 0 });
 			this->nudAutoSkill->Name = L"nudAutoSkill";
 			this->nudAutoSkill->Size = System::Drawing::Size(75, 20);
 			this->nudAutoSkill->TabIndex = 89;
@@ -518,8 +518,10 @@ namespace WatyBotRevamp {
 			// 
 			this->lvAutoSkill->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->lvAutoSkill->CheckBoxes = true;
-			this->lvAutoSkill->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(3) {this->hName, this->hInterval, 
-				this->hKey});
+			this->lvAutoSkill->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(3) {
+				this->hName, this->hInterval,
+					this->hKey
+			});
 			this->lvAutoSkill->ContextMenuStrip = this->AutoSkillContextMenu;
 			this->lvAutoSkill->FullRowSelect = true;
 			this->lvAutoSkill->Location = System::Drawing::Point(7, 19);
@@ -549,8 +551,10 @@ namespace WatyBotRevamp {
 			// 
 			// AutoSkillContextMenu
 			// 
-			this->AutoSkillContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->castToolStripMenuItem, 
-				this->deleteToolStripMenuItem});
+			this->AutoSkillContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->castToolStripMenuItem,
+					this->deleteToolStripMenuItem
+			});
 			this->AutoSkillContextMenu->Name = L"AutoSkillContextMenu";
 			this->AutoSkillContextMenu->Size = System::Drawing::Size(108, 48);
 			// 
@@ -611,7 +615,7 @@ namespace WatyBotRevamp {
 			// cbOLWNA
 			// 
 			this->cbOLWNA->AutoSize = true;
-			this->cbOLWNA->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6.5F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->cbOLWNA->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 6.5F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->cbOLWNA->Location = System::Drawing::Point(138, 46);
 			this->cbOLWNA->Name = L"cbOLWNA";
@@ -623,7 +627,7 @@ namespace WatyBotRevamp {
 			// 
 			// nudCCAttacks
 			// 
-			this->nudCCAttacks->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
+			this->nudCCAttacks->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) { 5, 0, 0, 0 });
 			this->nudCCAttacks->Location = System::Drawing::Point(91, 197);
 			this->nudCCAttacks->Name = L"nudCCAttacks";
 			this->nudCCAttacks->Size = System::Drawing::Size(107, 20);
@@ -632,7 +636,7 @@ namespace WatyBotRevamp {
 			// nudCCTimed
 			// 
 			this->nudCCTimed->Location = System::Drawing::Point(91, 171);
-			this->nudCCTimed->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {7200, 0, 0, 0});
+			this->nudCCTimed->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 7200, 0, 0, 0 });
 			this->nudCCTimed->Name = L"nudCCTimed";
 			this->nudCCTimed->Size = System::Drawing::Size(107, 20);
 			this->nudCCTimed->TabIndex = 79;
@@ -646,9 +650,9 @@ namespace WatyBotRevamp {
 			// 
 			// nudPetFeeder
 			// 
-			this->nudPetFeeder->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudPetFeeder->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10, 0, 0, 0 });
 			this->nudPetFeeder->Location = System::Drawing::Point(91, 119);
-			this->nudPetFeeder->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000, 0, 0, 0});
+			this->nudPetFeeder->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1000000, 0, 0, 0 });
 			this->nudPetFeeder->Name = L"nudPetFeeder";
 			this->nudPetFeeder->Size = System::Drawing::Size(107, 20);
 			this->nudPetFeeder->TabIndex = 74;
@@ -656,9 +660,9 @@ namespace WatyBotRevamp {
 			// 
 			// nudAutoMP
 			// 
-			this->nudAutoMP->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudAutoMP->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10, 0, 0, 0 });
 			this->nudAutoMP->Location = System::Drawing::Point(91, 94);
-			this->nudAutoMP->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
+			this->nudAutoMP->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 100000, 0, 0, 0 });
 			this->nudAutoMP->Name = L"nudAutoMP";
 			this->nudAutoMP->Size = System::Drawing::Size(107, 20);
 			this->nudAutoMP->TabIndex = 73;
@@ -666,9 +670,9 @@ namespace WatyBotRevamp {
 			// 
 			// nudAutoHP
 			// 
-			this->nudAutoHP->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->nudAutoHP->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10, 0, 0, 0 });
 			this->nudAutoHP->Location = System::Drawing::Point(91, 69);
-			this->nudAutoHP->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {100000, 0, 0, 0});
+			this->nudAutoHP->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 100000, 0, 0, 0 });
 			this->nudAutoHP->Name = L"nudAutoHP";
 			this->nudAutoHP->Size = System::Drawing::Size(107, 20);
 			this->nudAutoHP->TabIndex = 72;
@@ -676,71 +680,71 @@ namespace WatyBotRevamp {
 			// 
 			// nudAutoLoot
 			// 
-			this->nudAutoLoot->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
+			this->nudAutoLoot->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) { 5, 0, 0, 0 });
 			this->nudAutoLoot->Location = System::Drawing::Point(91, 43);
-			this->nudAutoLoot->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1500, 0, 0, 0});
+			this->nudAutoLoot->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1500, 0, 0, 0 });
 			this->nudAutoLoot->Name = L"nudAutoLoot";
 			this->nudAutoLoot->Size = System::Drawing::Size(44, 20);
 			this->nudAutoLoot->TabIndex = 71;
 			this->InfoToolTip->SetToolTip(this->nudAutoLoot, L"The delay in milliseconds between pressing keys in MapleStory");
-			this->nudAutoLoot->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
+			this->nudAutoLoot->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 50, 0, 0, 0 });
 			// 
 			// nudAutoAttack
 			// 
-			this->nudAutoAttack->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
+			this->nudAutoAttack->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) { 5, 0, 0, 0 });
 			this->nudAutoAttack->Location = System::Drawing::Point(91, 15);
-			this->nudAutoAttack->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1500, 0, 0, 0});
+			this->nudAutoAttack->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1500, 0, 0, 0 });
 			this->nudAutoAttack->Name = L"nudAutoAttack";
 			this->nudAutoAttack->Size = System::Drawing::Size(44, 20);
 			this->nudAutoAttack->TabIndex = 70;
 			this->InfoToolTip->SetToolTip(this->nudAutoAttack, L"The delay in milliseconds between pressing keys in MapleStory");
-			this->nudAutoAttack->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {50, 0, 0, 0});
+			this->nudAutoAttack->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 50, 0, 0, 0 });
 			// 
 			// nudSAWSIL
 			// 
 			this->nudSAWSIL->Location = System::Drawing::Point(202, 15);
-			this->nudSAWSIL->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {25, 0, 0, 0});
+			this->nudSAWSIL->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 25, 0, 0, 0 });
 			this->nudSAWSIL->Name = L"nudSAWSIL";
 			this->nudSAWSIL->Size = System::Drawing::Size(35, 20);
 			this->nudSAWSIL->TabIndex = 68;
-			this->InfoToolTip->SetToolTip(this->nudSAWSIL, L"SAWSIL: Stop Attacking When Spawn Is Low, the number is for the amount of mobs th" 
+			this->InfoToolTip->SetToolTip(this->nudSAWSIL, L"SAWSIL: Stop Attacking When Spawn Is Low, the number is for the amount of mobs th"
 				L"at need to be in the map for AutoAttack to attack");
-			this->nudSAWSIL->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {5, 0, 0, 0});
+			this->nudSAWSIL->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 5, 0, 0, 0 });
 			// 
 			// ddbTimedType
 			// 
 			this->ddbTimedType->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbTimedType->FormattingEnabled = true;
-			this->ddbTimedType->Items->AddRange(gcnew cli::array< System::Object^  >(3) {L"CC", L"CS", L"DC"});
+			this->ddbTimedType->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"CC", L"CS", L"DC" });
 			this->ddbTimedType->Location = System::Drawing::Point(47, 169);
 			this->ddbTimedType->Name = L"ddbTimedType";
 			this->ddbTimedType->Size = System::Drawing::Size(38, 21);
 			this->ddbTimedType->TabIndex = 67;
-			this->InfoToolTip->SetToolTip(this->ddbTimedType, L"Set here the method you want to use. CC is ChangeChannel, CS is enter/leave cashs" 
+			this->InfoToolTip->SetToolTip(this->ddbTimedType, L"Set here the method you want to use. CC is ChangeChannel, CS is enter/leave cashs"
 				L"hop, DC is relog to character select screen");
 			// 
 			// ddbAttacksType
 			// 
 			this->ddbAttacksType->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbAttacksType->FormattingEnabled = true;
-			this->ddbAttacksType->Items->AddRange(gcnew cli::array< System::Object^  >(3) {L"CC", L"CS", L"DC"});
+			this->ddbAttacksType->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"CC", L"CS", L"DC" });
 			this->ddbAttacksType->Location = System::Drawing::Point(47, 196);
 			this->ddbAttacksType->Name = L"ddbAttacksType";
 			this->ddbAttacksType->Size = System::Drawing::Size(38, 21);
 			this->ddbAttacksType->TabIndex = 66;
-			this->InfoToolTip->SetToolTip(this->ddbAttacksType, L"Set here the method you want to use. CC is ChangeChannel, CS is enter/leave cashs" 
+			this->InfoToolTip->SetToolTip(this->ddbAttacksType, L"Set here the method you want to use. CC is ChangeChannel, CS is enter/leave cashs"
 				L"hop, DC is relog to character select screen");
 			// 
 			// ddbPeopleType
 			// 
 			this->ddbPeopleType->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbPeopleType->FormattingEnabled = true;
-			this->ddbPeopleType->Items->AddRange(gcnew cli::array< System::Object^  >(3) {L"CC", L"CS", L"DC"});
+			this->ddbPeopleType->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"CC", L"CS", L"DC" });
 			this->ddbPeopleType->Location = System::Drawing::Point(47, 143);
 			this->ddbPeopleType->Name = L"ddbPeopleType";
 			this->ddbPeopleType->Size = System::Drawing::Size(38, 21);
 			this->ddbPeopleType->TabIndex = 65;
-			this->InfoToolTip->SetToolTip(this->ddbPeopleType, L"Set here the method you want to use. CC is ChangeChannel, CS is enter/leave cashs" 
+			this->InfoToolTip->SetToolTip(this->ddbPeopleType, L"Set here the method you want to use. CC is ChangeChannel, CS is enter/leave cashs"
 				L"hop, DC is relog to character select screen");
 			// 
 			// lSAWSIL
@@ -751,7 +755,7 @@ namespace WatyBotRevamp {
 			this->lSAWSIL->Size = System::Drawing::Size(56, 13);
 			this->lSAWSIL->TabIndex = 63;
 			this->lSAWSIL->Text = L"MobCount";
-			this->InfoToolTip->SetToolTip(this->lSAWSIL, L"MobCount makes AutoAttack stop when the amount of mobs in the map is lower then t" 
+			this->InfoToolTip->SetToolTip(this->lSAWSIL, L"MobCount makes AutoAttack stop when the amount of mobs in the map is lower then t"
 				L"he amount you inputted");
 			// 
 			// CCAttacksLabel
@@ -1063,7 +1067,7 @@ namespace WatyBotRevamp {
 			this->cbNoCCBlueBoxes->Size = System::Drawing::Size(110, 17);
 			this->cbNoCCBlueBoxes->TabIndex = 12;
 			this->cbNoCCBlueBoxes->Text = L"No CC BlueBoxes";
-			this->InfoToolTip->SetToolTip(this->cbNoCCBlueBoxes, L"If you try to CC when breath is higher then 0, you won\'t get a breath message, bu" 
+			this->InfoToolTip->SetToolTip(this->cbNoCCBlueBoxes, L"If you try to CC when breath is higher then 0, you won\'t get a breath message, bu"
 				L"t you won\'t CC");
 			this->cbNoCCBlueBoxes->UseVisualStyleBackColor = true;
 			this->cbNoCCBlueBoxes->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoCCBlueBoxes_CheckedChanged);
@@ -1229,14 +1233,14 @@ namespace WatyBotRevamp {
 			// 
 			// nudIceGuard
 			// 
-			this->nudIceGuard->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) {100, 0, 0, 0});
+			this->nudIceGuard->Increment = System::Decimal(gcnew cli::array< System::Int32 >(4) { 100, 0, 0, 0 });
 			this->nudIceGuard->Location = System::Drawing::Point(95, 31);
-			this->nudIceGuard->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000000000, 0, 0, 0});
+			this->nudIceGuard->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1000000000, 0, 0, 0 });
 			this->nudIceGuard->Name = L"nudIceGuard";
 			this->nudIceGuard->Size = System::Drawing::Size(59, 20);
 			this->nudIceGuard->TabIndex = 20;
 			this->InfoToolTip->SetToolTip(this->nudIceGuard, L"Another godmode, use with caution, a to high amount could AB");
-			this->nudIceGuard->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {1000, 0, 0, 0});
+			this->nudIceGuard->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1000, 0, 0, 0 });
 			// 
 			// cbIceGuard
 			// 
@@ -1254,7 +1258,7 @@ namespace WatyBotRevamp {
 			// 
 			this->nudSkillInjection->Enabled = false;
 			this->nudSkillInjection->Location = System::Drawing::Point(95, 136);
-			this->nudSkillInjection->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
+			this->nudSkillInjection->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10000, 0, 0, 0 });
 			this->nudSkillInjection->Name = L"nudSkillInjection";
 			this->nudSkillInjection->Size = System::Drawing::Size(58, 20);
 			this->nudSkillInjection->TabIndex = 17;
@@ -1267,10 +1271,12 @@ namespace WatyBotRevamp {
 			this->ddbSkillInjection->DropDownWidth = 215;
 			this->ddbSkillInjection->Enabled = false;
 			this->ddbSkillInjection->FormattingEnabled = true;
-			this->ddbSkillInjection->Items->AddRange(gcnew cli::array< System::Object^  >(14) {L"Ice Attack (600% dmg, 10 mobs)", L"Ice Smash (1200% dmg, 10 mobs)", 
-				L"Ice Snow Tempest (500% x 4 dmg, 10 mobs)", L"Ice chop (900% dmg, 10 mob count)", L"Kaiser: 3rd Dragon Slash", L"Bandit 1st Job: DoubleStab", 
-				L"Bandit 2nd Job: SavageBlow", L"Bandit 3rd Job: Midnight Carneval", L"Bandit 4th Job: Assasinate", L"Warrior 1st Job: Power Strike", 
-				L"Paladin 4th Job: Blast", L"Spearman 3rd Job: Sacrifice", L"Ice/Lightning 2nd Job: Cold Beam", L"Ice/Lightning 3rd Job: Thunder Spear"});
+			this->ddbSkillInjection->Items->AddRange(gcnew cli::array< System::Object^  >(14) {
+				L"Ice Attack (600% dmg, 10 mobs)", L"Ice Smash (1200% dmg, 10 mobs)",
+					L"Ice Snow Tempest (500% x 4 dmg, 10 mobs)", L"Ice chop (900% dmg, 10 mob count)", L"Kaiser: 3rd Dragon Slash", L"Bandit 1st Job: DoubleStab",
+					L"Bandit 2nd Job: SavageBlow", L"Bandit 3rd Job: Midnight Carneval", L"Bandit 4th Job: Assasinate", L"Warrior 1st Job: Power Strike",
+					L"Paladin 4th Job: Blast", L"Spearman 3rd Job: Sacrifice", L"Ice/Lightning 2nd Job: Cold Beam", L"Ice/Lightning 3rd Job: Thunder Spear"
+			});
 			this->ddbSkillInjection->Location = System::Drawing::Point(159, 136);
 			this->ddbSkillInjection->Name = L"ddbSkillInjection";
 			this->ddbSkillInjection->Size = System::Drawing::Size(145, 21);
@@ -1347,7 +1353,7 @@ namespace WatyBotRevamp {
 			this->cbUA->Size = System::Drawing::Size(103, 17);
 			this->cbUA->TabIndex = 8;
 			this->cbUA->Text = L"Unlimited Attack";
-			this->InfoToolTip->SetToolTip(this->cbUA, L"Let\'s you attack without stopping after 100 attacks, (very small chance on a A/B)" 
+			this->InfoToolTip->SetToolTip(this->cbUA, L"Let\'s you attack without stopping after 100 attacks, (very small chance on a A/B)"
 				L"");
 			this->cbUA->UseVisualStyleBackColor = true;
 			this->cbUA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbUA_CheckedChanged);
@@ -1384,7 +1390,7 @@ namespace WatyBotRevamp {
 			this->cbNDAllAttacks->Size = System::Drawing::Size(104, 17);
 			this->cbNDAllAttacks->TabIndex = 8;
 			this->cbNDAllAttacks->Text = L"GenericNoDelay";
-			this->InfoToolTip->SetToolTip(this->cbNDAllAttacks, L"Removes the AttackAnimation and the delay between attacks, and it gives Unlimited" 
+			this->InfoToolTip->SetToolTip(this->cbNDAllAttacks, L"Removes the AttackAnimation and the delay between attacks, and it gives Unlimited"
 				L" MP");
 			this->cbNDAllAttacks->UseVisualStyleBackColor = true;
 			this->cbNDAllAttacks->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNDAllAttacks_CheckedChanged);
@@ -1433,7 +1439,7 @@ namespace WatyBotRevamp {
 			this->cbFusionAttack->Size = System::Drawing::Size(91, 17);
 			this->cbFusionAttack->TabIndex = 0;
 			this->cbFusionAttack->Text = L"Fusion Attack";
-			this->InfoToolTip->SetToolTip(this->cbFusionAttack, L"If you have an atack that hits 10 mobs 2 times, with fusion you will hit 1 mob 20" 
+			this->InfoToolTip->SetToolTip(this->cbFusionAttack, L"If you have an atack that hits 10 mobs 2 times, with fusion you will hit 1 mob 20"
 				L" times");
 			this->cbFusionAttack->UseVisualStyleBackColor = true;
 			this->cbFusionAttack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbFusionAttack_CheckedChanged);
@@ -1598,7 +1604,7 @@ namespace WatyBotRevamp {
 			// 
 			// lvPackets
 			// 
-			this->lvPackets->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(2) {this->hPacketName, this->hPacket});
+			this->lvPackets->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(2) { this->hPacketName, this->hPacket });
 			this->lvPackets->ContextMenuStrip = this->PacketContextMenu;
 			this->lvPackets->FullRowSelect = true;
 			this->lvPackets->GridLines = true;
@@ -1625,8 +1631,10 @@ namespace WatyBotRevamp {
 			// 
 			// PacketContextMenu
 			// 
-			this->PacketContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {this->bSendPacket, 
-				this->bEditPacket, this->bDeletePacket});
+			this->PacketContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->bSendPacket,
+					this->bEditPacket, this->bDeletePacket
+			});
 			this->PacketContextMenu->Name = L"PacketContextMenu";
 			this->PacketContextMenu->Size = System::Drawing::Size(108, 70);
 			// 
@@ -1685,8 +1693,8 @@ namespace WatyBotRevamp {
 			// nudSPCY
 			// 
 			this->nudSPCY->Location = System::Drawing::Point(269, 33);
-			this->nudSPCY->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
-			this->nudSPCY->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, System::Int32::MinValue});
+			this->nudSPCY->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10000, 0, 0, 0 });
+			this->nudSPCY->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10000, 0, 0, System::Int32::MinValue });
 			this->nudSPCY->Name = L"nudSPCY";
 			this->nudSPCY->Size = System::Drawing::Size(36, 20);
 			this->nudSPCY->TabIndex = 43;
@@ -1694,8 +1702,8 @@ namespace WatyBotRevamp {
 			// nudSPCX
 			// 
 			this->nudSPCX->Location = System::Drawing::Point(230, 33);
-			this->nudSPCX->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, 0});
-			this->nudSPCX->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, System::Int32::MinValue});
+			this->nudSPCX->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10000, 0, 0, 0 });
+			this->nudSPCX->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10000, 0, 0, System::Int32::MinValue });
 			this->nudSPCX->Name = L"nudSPCX";
 			this->nudSPCX->Size = System::Drawing::Size(36, 20);
 			this->nudSPCX->TabIndex = 42;
@@ -1703,8 +1711,8 @@ namespace WatyBotRevamp {
 			// nudSPCMapId
 			// 
 			this->nudSPCMapId->Location = System::Drawing::Point(150, 33);
-			this->nudSPCMapId->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1410065408, 2, 0, 0});
-			this->nudSPCMapId->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10000, 0, 0, System::Int32::MinValue});
+			this->nudSPCMapId->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1410065408, 2, 0, 0 });
+			this->nudSPCMapId->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10000, 0, 0, System::Int32::MinValue });
 			this->nudSPCMapId->Name = L"nudSPCMapId";
 			this->nudSPCMapId->Size = System::Drawing::Size(77, 20);
 			this->nudSPCMapId->TabIndex = 41;
@@ -1789,8 +1797,10 @@ namespace WatyBotRevamp {
 			// lvSPControl
 			// 
 			this->lvSPControl->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->lvSPControl->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(4) {this->HeaderMapName, 
-				this->HeaderMapID, this->HeaderX, this->HeaderY});
+			this->lvSPControl->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(4) {
+				this->HeaderMapName,
+					this->HeaderMapID, this->HeaderX, this->HeaderY
+			});
 			this->lvSPControl->ContextMenuStrip = this->SPControlContextMenu;
 			this->lvSPControl->FullRowSelect = true;
 			this->lvSPControl->GridLines = true;
@@ -1827,8 +1837,10 @@ namespace WatyBotRevamp {
 			// 
 			// SPControlContextMenu
 			// 
-			this->SPControlContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->editLocationToolStripMenuItem, 
-				this->deleteSPControlToolStripMenuItem});
+			this->SPControlContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->editLocationToolStripMenuItem,
+					this->deleteSPControlToolStripMenuItem
+			});
 			this->SPControlContextMenu->Name = L"SPControlContextMenu";
 			this->SPControlContextMenu->Size = System::Drawing::Size(157, 48);
 			// 
@@ -2155,7 +2167,7 @@ namespace WatyBotRevamp {
 			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(334, 622);
 			this->Controls->Add(this->MainTabControl);
-			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->MaximizeBox = false;
@@ -2216,104 +2228,104 @@ namespace WatyBotRevamp {
 		}
 #pragma endregion
 
-public:
-	static array<Object^>^ KeyNames = gcnew array<System::Object^> {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"};;
-	static NotifyIcon^ notifyIcon = gcnew NotifyIcon;
+	public:
+		static array<Object^>^ KeyNames = gcnew array<System::Object^> {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"};;
+		static NotifyIcon^ notifyIcon = gcnew NotifyIcon;
 
-private:
-	//General private class members
-	List<SettingsEntry^>^ Settings;
-	property XmlSerializer^ s;
-	Void LoadSettings();
-	Void SaveSettings();
-	Void ReloadSettings();
-	Void RedrawStatBars();
-	Void ReloadComboBox(ComboBox^ combobox);
-	Void HotKeys();
-	//General trainer events
-	Void MainForm_Load(Object^  sender, EventArgs^  e);
-	Void StatsTimer_Tick(Object^  sender, EventArgs^  e);
-	Void MainTabControl_SelectedIndexChanged(Object^  sender, EventArgs^  e);
-	Void MainForm_FormClosing(Object^  sender, Windows::Forms::FormClosingEventArgs^  e);
-	Void bSaveSettings_Click(Object^  sender, EventArgs^  e);
-	Void SettingsWatcher_Changed(System::Object^  sender, System::IO::FileSystemEventArgs^  e);
+	private:
+		//General private class members
+		List<SettingsEntry^>^ Settings;
+		property XmlSerializer^ s;
+		Void LoadSettings();
+		Void SaveSettings();
+		Void ReloadSettings();
+		Void RedrawStatBars();
+		Void ReloadComboBox(ComboBox^ combobox);
+		Void HotKeys();
+		//General trainer events
+		Void MainForm_Load(Object^  sender, EventArgs^  e);
+		Void StatsTimer_Tick(Object^  sender, EventArgs^  e);
+		Void MainTabControl_SelectedIndexChanged(Object^  sender, EventArgs^  e);
+		Void MainForm_FormClosing(Object^  sender, Windows::Forms::FormClosingEventArgs^  e);
+		Void bSaveSettings_Click(Object^  sender, EventArgs^  e);
+		Void SettingsWatcher_Changed(System::Object^  sender, System::IO::FileSystemEventArgs^  e);
 
-	//AutoBot Events
-	Void cbAutoAttack_CheckedChanged(Object^ sender, EventArgs^  e);
-	Void tAutoAttack_Tick(Object^ sender, EventArgs^ e);
-	Void cbAutoLoot_CheckedChanged(Object^ sender, EventArgs^ e);
-	Void tAutoLoot_Tick(Object^  sender, EventArgs^ e);
-	Void cbAutoHP_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbAutoMP_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbCCPeople_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbCCTimed_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void tTimedCC_Tick(Object^  sender, EventArgs^  e);
-	Void cbCCAttacks_CheckedChanged(Object^  sender, EventArgs^  e);
+		//AutoBot Events
+		Void cbAutoAttack_CheckedChanged(Object^ sender, EventArgs^  e);
+		Void tAutoAttack_Tick(Object^ sender, EventArgs^ e);
+		Void cbAutoLoot_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void tAutoLoot_Tick(Object^  sender, EventArgs^ e);
+		Void cbAutoHP_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbAutoMP_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbCCPeople_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbCCTimed_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void tTimedCC_Tick(Object^  sender, EventArgs^  e);
+		Void cbCCAttacks_CheckedChanged(Object^  sender, EventArgs^  e);
 
-	//AutoSkill
-	Void bAutoSkill_Click(Object^  sender, EventArgs^  e);
-	Void castToolStripMenuItem_Click(Object^  sender, EventArgs^  e);
-	Void deleteToolStripMenuItem_Click(Object^  sender, EventArgs^  e);
-	Void lvAutoSkill_ItemCheck(Object^  sender, Windows::Forms::ItemCheckEventArgs^  e);
-	Void lvAutoSkill_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
-	Void LoadAutoSkill();
+		//AutoSkill
+		Void bAutoSkill_Click(Object^  sender, EventArgs^  e);
+		Void castToolStripMenuItem_Click(Object^  sender, EventArgs^  e);
+		Void deleteToolStripMenuItem_Click(Object^  sender, EventArgs^  e);
+		Void lvAutoSkill_ItemCheck(Object^  sender, Windows::Forms::ItemCheckEventArgs^  e);
+		Void lvAutoSkill_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
+		Void LoadAutoSkill();
 
-	//SPControl
-	Void bAddSPCLocation_Click(Object^  sender, EventArgs^  e);
-	Void cbSPControl_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void SPControlDeleteItem_Click(Object^  sender, EventArgs^  e);
-	Void editLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-	Void GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e);
-	Void lvSPControl_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
-	Void LoadSPControl();
+		//SPControl
+		Void bAddSPCLocation_Click(Object^  sender, EventArgs^  e);
+		Void cbSPControl_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void SPControlDeleteItem_Click(Object^  sender, EventArgs^  e);
+		Void editLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+		Void GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e);
+		Void lvSPControl_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
+		Void LoadSPControl();
 
-	//Hacks
-	Void cbFusionAttack_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbNoKB_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbPerfectLoot_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbVacRight_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbWalkRight_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbJumpRight_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbNoBG_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbMobDisarm_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbJDA_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbPinTyper_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbDojangGodmode_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbUnlimitedMorph_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbFasterMobs_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbNDAllAttacks_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbNoMobs_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbUA_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbSitHack_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cb50SecGM_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbLogoSkipper_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbViewSwears_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbLockItemVac_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-	Void cbItemVac_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbFMA_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbScareMobs_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbFLACC_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbCPUHack_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbNFA_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbAutoAggro_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbNDMining_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbHideDamage_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbMercedesCombo_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbSkillInjection_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbNoFadeStages_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbNoCCBlueBoxes_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void nudSkillInjectionDelay_ValueChanged(Object^  sender, EventArgs^  e);
-	Void ddbSkillInjectionSkills_SelectedIndexChanged(Object^  sender, EventArgs^  e);
-	Void cbMouseFly_CheckedChanged(Object^  sender, EventArgs^  e);
-	Void cbIceGuard_CheckedChanged(Object^  sender, EventArgs^  e);
+		//Hacks
+		Void cbFusionAttack_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbNoKB_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbPerfectLoot_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbVacRight_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbWalkRight_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbJumpRight_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbNoBG_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbMobDisarm_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbJDA_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbPinTyper_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbDojangGodmode_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbUnlimitedMorph_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbFasterMobs_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbNDAllAttacks_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbNoMobs_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbUA_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbSitHack_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cb50SecGM_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbLogoSkipper_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbViewSwears_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbLockItemVac_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+		Void cbItemVac_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbFMA_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbScareMobs_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbFLACC_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbCPUHack_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbNFA_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbAutoAggro_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbNDMining_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbHideDamage_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbMercedesCombo_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbSkillInjection_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbNoFadeStages_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbNoCCBlueBoxes_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void nudSkillInjectionDelay_ValueChanged(Object^  sender, EventArgs^  e);
+		Void ddbSkillInjectionSkills_SelectedIndexChanged(Object^  sender, EventArgs^  e);
+		Void cbMouseFly_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbIceGuard_CheckedChanged(Object^  sender, EventArgs^  e);
 
-	//PacketSender events
-	Void bAddPacket_Click(Object^ sender, EventArgs^ e);
-	Void lvPackets_SelectedIndexChanged(Object^ sender, EventArgs^ e);
-	Void bSendPacket_Click(Object^ sender, EventArgs^ e);
-	Void bDeletePacket_Click(Object^ sender, EventArgs^  e);
-	Void lvPackets_KeyDown(Object^ sender, KeyEventArgs^ e);
-	Void bEditPacket_Click(System::Object^  sender, System::EventArgs^  e);
-	Void LoadPackets();
-};
+		//PacketSender events
+		Void bAddPacket_Click(Object^ sender, EventArgs^ e);
+		Void lvPackets_SelectedIndexChanged(Object^ sender, EventArgs^ e);
+		Void bSendPacket_Click(Object^ sender, EventArgs^ e);
+		Void bDeletePacket_Click(Object^ sender, EventArgs^  e);
+		Void lvPackets_KeyDown(Object^ sender, KeyEventArgs^ e);
+		Void bEditPacket_Click(System::Object^  sender, System::EventArgs^  e);
+		Void LoadPackets();
+	};
 }

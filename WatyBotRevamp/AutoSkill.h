@@ -33,7 +33,7 @@ namespace WatyBotRevamp
 		{
 			void set(bool state)
 			{
-				if(state) Cast(); 
+				if (state) Cast();
 				timer->Enabled = state;
 			}
 			bool get()

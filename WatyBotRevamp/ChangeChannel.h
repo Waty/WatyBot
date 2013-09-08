@@ -5,11 +5,11 @@ namespace WatyBotRevamp
 {
 	using namespace System;
 
-	enum class CCType{CC, CS, DC};
+	enum class CCType{ CC, CS, DC };
 	public ref class CC sealed
 	{
 	public:
-		static property bool IsBusy{bool get();}
+		static property bool IsBusy{bool get(); }
 		static void CCSwitch(CCType type);
 
 	private:

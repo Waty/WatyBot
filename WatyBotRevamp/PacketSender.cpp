@@ -22,14 +22,14 @@ Packet::Packet(String^ Name, List<String^>^ Data, int Interval)
 
 bool Packet::IsValidPacket(String^&strError)
 {
-	if(Data->Count < 1)
+	if (Data->Count < 1)
 	{
 		strError = "Empty Packet!";
 		return false;
 	}
 	for each(String^ strPacket in Data)
 	{
-		if(!PacketSender::VerifyPacket(strPacket, strError)) return false;
+		if (!PacketSender::VerifyPacket(strPacket, strError)) return false;
 	}
 	return true;
 }
@@ -41,13 +41,13 @@ void PacketSender::WriteXmlData()
 	{
 		serializer->Serialize(writer, Packets);
 	}
-	catch(Exception^){}
+	catch (Exception^){}
 	writer->Close();
 }
 
 void PacketSender::ReadXmlData()
 {
-	if(!File::Exists(Path))
+	if (!File::Exists(Path))
 	{
 		WriteXmlData();
 		return;
@@ -55,11 +55,11 @@ void PacketSender::ReadXmlData()
 
 	//Deserialize the xml file
 	TextReader^ reader = gcnew StreamReader(Path);
-	try 
+	try
 	{
 		PacketSender::Packets = safe_cast<List<Packet^>^>(serializer->Deserialize(reader));
 	}
-	catch(InvalidOperationException^){}
+	catch (InvalidOperationException^){}
 	reader->Close();
 }
 
@@ -76,54 +76,54 @@ void PacketSender::Add(Packet^ Packet)
 bool PacketSender::VerifyPacket(String^ str, String^&strError)
 {
 	String^ strPacket = str->Replace(" ", "");
-	if(String::IsNullOrEmpty(strPacket))
+	if (String::IsNullOrEmpty(strPacket))
 	{
-        strError = "Packet is Empty";
-        return false;
-    }
- 
-    if((strPacket->Length)%2 == 1)
+		strError = "Packet is Empty";
+		return false;
+	}
+
+	if ((strPacket->Length) % 2 == 1)
 	{
-        strError = "Packet size is not a multiple of 2";
-        return false;
-    }
- 
-    for (int i = 0; i < strPacket->Length; i++)
-    {
-        if (strPacket[i] >= '0' && strPacket[i] <= '9') continue;
-        if (strPacket[i] >= 'A' && strPacket[i] <= 'F') continue;
-        if (strPacket[i] == '*') continue;
- 
-        strError = "Invalid character detected in packet: It contains a \"" + strPacket[i] + "\"";
-   
-        return false;
-    }
-    return true;
+		strError = "Packet size is not a multiple of 2";
+		return false;
+	}
+
+	for (int i = 0; i < strPacket->Length; i++)
+	{
+		if (strPacket[i] >= '0' && strPacket[i] <= '9') continue;
+		if (strPacket[i] >= 'A' && strPacket[i] <= 'F') continue;
+		if (strPacket[i] == '*') continue;
+
+		strError = "Invalid character detected in packet: It contains a \"" + strPacket[i] + "\"";
+
+		return false;
+	}
+	return true;
 }
 
 bool PacketSender::Send(String^ str, String^&strError)
 {
 	String^ strPacket = str->Replace(" ", "");
 	Random^ randObj = gcnew Random();
-    String^ rawBytes = String::Empty;
- 
-    for(int i = 0; i < strPacket->Length; i++)
+	String^ rawBytes = String::Empty;
+
+	for (int i = 0; i < strPacket->Length; i++)
 	{
-        if(strPacket[i] == '*')	rawBytes += randObj->Next(16).ToString("X");
-        else rawBytes += strPacket[i];
-    }
- 
-    ::DWORD dwOffset = 0;
-    ::DWORD dwLength = ( rawBytes->Length / 2 );
-    ::LPBYTE lpBytes = new ::BYTE [ dwLength ];
- 
-    for ( int i = 0; ( dwOffset < dwLength ) && ( ( i + 1 ) < rawBytes->Length ); dwOffset++, i += 2 )
-        lpBytes[dwOffset] = Byte::Parse(rawBytes->Substring(i, 2), Globalization::NumberStyles::HexNumber, Globalization::CultureInfo::InvariantCulture);
- 
+		if (strPacket[i] == '*')	rawBytes += randObj->Next(16).ToString("X");
+		else rawBytes += strPacket[i];
+	}
+
+	::DWORD dwOffset = 0;
+	::DWORD dwLength = (rawBytes->Length / 2);
+	::LPBYTE lpBytes = new ::BYTE[dwLength];
+
+	for (int i = 0; (dwOffset < dwLength) && ((i + 1) < rawBytes->Length); dwOffset++, i += 2)
+		lpBytes[dwOffset] = Byte::Parse(rawBytes->Substring(i, 2), Globalization::NumberStyles::HexNumber, Globalization::CultureInfo::InvariantCulture);
+
 	Hacks::ThreadIdFix.Enable(true);
 	TrySendPacket(lpBytes, dwLength);
 	delete [] lpBytes;
-    return true;
+	return true;
 }
 
 bool PacketSender::Send(Packet^ packet)
@@ -132,7 +132,7 @@ bool PacketSender::Send(Packet^ packet)
 	bool succes;
 	for each(String^ strPacket in packet->Data)
 	{
-		if(!Send(strPacket, strError)) succes = false;
+		if (!Send(strPacket, strError)) succes = false;
 		Sleep(packet->Interval);
 	}
 	return succes;
@@ -140,7 +140,7 @@ bool PacketSender::Send(Packet^ packet)
 
 bool PacketSender::Send()
 {
-	if(SelectedPacket == nullptr)
+	if (SelectedPacket == nullptr)
 	{
 		ShowErrorDialog("Please select a packet");
 		return false;
@@ -150,5 +150,5 @@ bool PacketSender::Send()
 
 void PacketSender::Spam(int Times)
 {
-	
+
 }

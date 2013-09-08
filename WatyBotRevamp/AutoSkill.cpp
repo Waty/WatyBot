@@ -37,15 +37,15 @@ Void AutoSkillEntry::AutoSkill_Tick(System::Object^  sender, System::EventArgs^ 
 
 Void AutoSkillEntry::Cast()
 {
-	if(!bw->IsBusy) bw->RunWorkerAsync();
+	if (!bw->IsBusy) bw->RunWorkerAsync();
 }
 
 Void AutoSkillEntry::CastBackground(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^  e)
 {
-	if(!CMS::InGame) return;
+	if (!CMS::InGame) return;
 
 	//Send Key
-	while(CC::IsBusy || CMS::UsingAutoSkill) Sleep(500);
+	while (CC::IsBusy || CMS::UsingAutoSkill) Sleep(500);
 	CMS::UsingAutoSkill = true;
 	Sleep(500);
 	CMS::SendSwitch(keyIndex);
@@ -60,14 +60,14 @@ Void AutoSkill::WriteXmlData()
 	{
 		serializer->Serialize(writer, AutoSkills);
 	}
-	catch(Exception^){}
+	catch (Exception^){}
 	writer->Close();
 }
 
 Void AutoSkill::ReadXmlData()
 {
 	//If the file doesnt exist, it writes the basic structure of the class to the file, making the FileSystemWatcher reload the settings
-	if(!File::Exists(Path))
+	if (!File::Exists(Path))
 	{
 		WriteXmlData();
 		return;
@@ -75,10 +75,10 @@ Void AutoSkill::ReadXmlData()
 
 	//Deserialize the xml file
 	TextReader^ reader = gcnew StreamReader(Path);
-	try 
+	try
 	{
 		AutoSkills = safe_cast<List<AutoSkillEntry^>^>(serializer->Deserialize(reader));
 	}
-	catch(InvalidOperationException^){}
+	catch (InvalidOperationException^){}
 	reader->Close();
 }

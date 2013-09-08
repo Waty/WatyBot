@@ -5,7 +5,7 @@
 class CMemory
 {
 public:
-	enum class ASM{Nop = 0x90, Call = 0xE8, Jump = 0xE9};
+	enum class ASM{ Nop = 0x90, Call = 0xE8, Jump = 0xE9 };
 	//--constructor--//
 	CMemory(DWORD ulAddress1, BYTE *bMem1, int size1);
 	CMemory(DWORD ulAddress1, BYTE* bMem1, int size1, DWORD ulAddres2, BYTE* bMem2, int size2);
@@ -21,8 +21,8 @@ public:
 private:
 	void WriteMem();
 	void RestoreMem();
-	
-	enum cType{asmtype, singleaddy, twoaddys, threeaddys, fouraddys}; 
+
+	enum cType{ asmtype, singleaddy, twoaddys, threeaddys, fouraddys };
 
 	DWORD ulAddress;
 	BYTE* bMem;
