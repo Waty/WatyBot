@@ -1,5 +1,6 @@
 #include "PacketSender.h"
 #include "Hacks.h"
+#include "Settings.h"
 
 using namespace WatyBotRevamp;
 using namespace System::Windows::Forms;
@@ -36,32 +37,15 @@ bool Packet::IsValidPacket(String^&strError)
 
 void PacketSender::WriteXmlData()
 {
-	auto writer = File::Create(Path);
-	try
-	{
-		serializer->Serialize(writer, Packets);
-	}
-	catch (Exception^){}
-	writer->Close();
+	Settings::Serialize(Path, serializer, Packets);
 }
 
 void PacketSender::ReadXmlData()
 {
-	if (!File::Exists(Path))
-	{
-		WriteXmlData();
-		return;
-	}
-
-	//Deserialize the xml file
-	TextReader^ reader = gcnew StreamReader(Path);
-	try
-	{
-		PacketSender::Packets = safe_cast<List<Packet^>^>(serializer->Deserialize(reader));
-	}
-	catch (InvalidOperationException^){}
-	reader->Close();
+	Object^ Result = Settings::Deserialize(Path, serializer);
+	if (Result != nullptr) Packets = safe_cast<List<Packet^>^>(Result);
 }
+
 
 void PacketSender::Add(String^ name, List<String^>^ data, int Interval)
 {

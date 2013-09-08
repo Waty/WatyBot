@@ -1,4 +1,5 @@
 #include "SPControl.h"
+#include "Settings.h"
 
 using namespace WatyBotRevamp;
 
@@ -20,31 +21,13 @@ SPControlLocation::SPControlLocation(String^ name, int MapId, int X, int Y)
 
 void SPControl::WriteXmlData()
 {
-	auto writer = File::Create(Path);
-	try
-	{
-		serializer->Serialize(writer, Locations);
-	}
-	catch(Exception^){}
-	writer->Close();
+	Settings::Serialize(Path, serializer, Locations);
 }
 
 void SPControl::ReadXmlData()
 {
-	if(!File::Exists(Path))
-	{
-		WriteXmlData();
-		return;
-	}
-
-	//Deserialize the xml file
-	TextReader^ reader = gcnew StreamReader(Path);
-	try 
-	{
-		Locations = safe_cast<List<SPControlLocation^>^>(serializer->Deserialize(reader));
-	}
-	catch(InvalidOperationException^){}
-	reader->Close();
+	Object^ Result = Settings::Deserialize(Path, serializer);
+	if (Result != nullptr) Locations = safe_cast<List<SPControlLocation^>^>(Result);
 }
 
 void SPControl::EditLocation(int index, String^ name, int mapid, int x, int y)

@@ -2235,7 +2235,6 @@ namespace WatyBotRevamp {
 	private:
 		//General private class members
 		List<SettingsEntry^>^ Settings;
-		property XmlSerializer^ s;
 		Void LoadSettings();
 		Void SaveSettings();
 		Void ReloadSettings();

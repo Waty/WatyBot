@@ -7,6 +7,7 @@
 #include "SPControlDialog.h"
 #include "PacketDialog.h"
 #include "StopWatch.h"
+#include "Log.h"
 
 using namespace WatyBotRevamp;
 
@@ -593,16 +594,7 @@ enum SettingsIndex{
 Void MainForm::SaveSettings()
 {
 	ReloadSettings();
-	TextWriter^ writer = gcnew StreamWriter(Settings::Path);
-	try
-	{
-		XmlSerializer^ serializer = gcnew XmlSerializer(List<SettingsEntry^>::typeid);
-		serializer->Serialize(writer, Settings);
-	}
-	catch (Exception^)
-	{
-	}
-	writer->Close();
+	Settings::Serialize(Settings::Path, gcnew XmlSerializer(List<SettingsEntry^>::typeid), Settings);
 }
 Void MainForm::LoadSettings()
 {
@@ -612,17 +604,8 @@ Void MainForm::LoadSettings()
 		stream->Close();
 	}
 
-	TextReader^ reader = gcnew StreamReader(Settings::Path);
-	s = gcnew XmlSerializer(List<SettingsEntry^>::typeid);
-	try
-	{
-		Settings = safe_cast<List<SettingsEntry^>^>(s->Deserialize(reader));
-	}
-	catch (Exception^)
-	{
-	}
-	reader->Close();
-	if (!Settings) Settings = gcnew List<SettingsEntry^>;
+	Object^ Result = Settings::Deserialize(Settings::Path, gcnew XmlSerializer(List<SettingsEntry^>::typeid));
+	if (Result == nullptr) Settings = safe_cast<List<SettingsEntry^>^>(Result);
 	else
 	{
 		try
@@ -682,8 +665,9 @@ Void MainForm::LoadSettings()
 				Hacks::ThreadIdFix.Enable(true);
 			}
 		}
-		catch (Exception^)
+		catch (Exception^ ex)
 		{
+			Log::WriteLine(ex->Message);
 		}
 	}
 }
