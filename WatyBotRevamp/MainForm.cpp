@@ -588,8 +588,8 @@ Void MainForm::LoadSPControl()
 //Loading/Saving AutoBot settings
 enum SettingsIndex{
 	AutoAttackDelay, SAWSIL, AutoAttackKey, AutoLootDelay, OLWNA, AutoLootKey, AutoHPValue, AutoHPKey, AutoMPValue, AutoMPKey, PetFeederValue, PetFeederKey,
-	CCPeople, CCPeopleType, CCTimed, CCTimedType, CCAttacks, CCAttacksType, HotKeyAttack, HotKeyLoot, HotKeyFMA, HotKeyCCPeople, HotKeySendPacket,
-	SkillInjectionDelay, SkillInjectionIndex, IceGuard, PinTyper, LogoSkipper, SettingCount
+	CCPeople, CCPeopleType, CCTimed, CCTimedType, CCAttacks, CCAttacksType, HotKeyAttack, HotKeyLoot, HotKeyFMA, HotKeyCCPeople, HotKeySendPacket, IceGuard,
+	PinTyper, LogoSkipper, SettingCount
 };
 Void MainForm::SaveSettings()
 {
@@ -598,79 +598,77 @@ Void MainForm::SaveSettings()
 }
 Void MainForm::LoadSettings()
 {
-	if (!File::Exists(Settings::Path))
-	{
-		auto stream = File::Create(Settings::Path);
-		stream->Close();
-	}
-
 	Object^ Result = Settings::Deserialize(Settings::Path, gcnew XmlSerializer(List<SettingsEntry^>::typeid));
-	if (Result == nullptr) Settings = safe_cast<List<SettingsEntry^>^>(Result);
-	else
-	{
-		try
-		{
-			//AutoAttack
-			nudAutoAttack->Value = (Decimal) Settings[AutoAttackDelay]->Value;
-			nudSAWSIL->Value = (Decimal) Settings[SAWSIL]->Value;
-			ddbAutoAttackKey->SelectedIndex = (int) Settings[AutoAttackKey]->Value;
-			//AutoLoot
-			nudAutoLoot->Value = (Decimal) Settings[AutoLootDelay]->Value;
-			cbOLWNA->Checked = (bool) Settings[OLWNA]->Value;
-			ddbAutoLootKey->SelectedIndex = (int) Settings[AutoLootKey]->Value;
-			//AutoHP
-			nudAutoHP->Value = (Decimal) Settings[AutoHPValue]->Value;
-			ddbAutoHPKey->SelectedIndex = (int) Settings[AutoHPKey]->Value;
-			//AutoMP
-			nudAutoMP->Value = (Decimal) Settings[AutoMPValue]->Value;
-			ddbAutoMPKey->SelectedIndex = (int) Settings[AutoMPKey]->Value;
-			//PetFeeder
-			nudPetFeeder->Value = (Decimal) Settings[PetFeederValue]->Value;
-			ddbPetFeeder->SelectedIndex = (int) Settings[PetFeederKey]->Value;
-			//CC People
-			nudCCPeople->Value = (Decimal) Settings[CCPeople]->Value;
-			ddbPeopleType->SelectedIndex = (int) Settings[CCPeopleType]->Value;
-			//CC Timed
-			nudCCTimed->Value = (Decimal) Settings[CCTimed]->Value;
-			ddbTimedType->SelectedIndex = (int) Settings[CCTimedType]->Value;
-			//CC Attacks
-			nudCCAttacks->Value = (Decimal) Settings[CCAttacks]->Value;
-			ddbAttacksType->SelectedIndex = (int) Settings[CCAttacksType]->Value;
-			//HotKeys
-			ddbHotKeyAttack->SelectedIndex = (int) Settings[HotKeyAttack]->Value;
-			ddbHotKeyLoot->SelectedIndex = (int) Settings[HotKeyLoot]->Value;
-			ddbHotKeyFMA->SelectedIndex = (int) Settings[HotKeyFMA]->Value;
-			ddbHotKeyCCPeople->SelectedIndex = (int) Settings[HotKeyCCPeople]->Value;
-			ddbHotKeySendPacket->SelectedIndex = (int) Settings[HotKeySendPacket]->Value;
-			//PacketSender
-			//			ddbSelectedPacket->SelectedIndex = (int)	Settings[SelectedPacket]->Value;
-			//			nudSpamAmount->Value = (Decimal)			Settings[PacketSpamAmount]->Value;
-			//			nudSpamDelay->Value = (Decimal)				Settings[PacketSpamDelay]->Value;
-			//Hacks Tab
-			nudSkillInjection->Value = (Decimal) Settings[SkillInjectionDelay]->Value;
-			ddbSkillInjection->SelectedIndex = (int) Settings[SkillInjectionIndex]->Value;
-			nudIceGuard->Value = (Decimal) Settings[IceGuard]->Value;
+	if (Result == nullptr) return;
 
-			//try's 5 seconds long if your CRC is ready for the hacks
-			System::Threading::Thread^ t = gcnew Threading::Thread(gcnew Threading::ThreadStart(this, &MainForm::LoadEnabledHacks));
-			t->Start();
-		}
-		catch (Exception^ ex)
-		{
-			Log::WriteLine(ex->Message);
-		}
+	Settings = safe_cast<List<SettingsEntry^>^>(Result);
+	try
+	{
+		//AutoAttack
+		nudAutoAttack->Value = (Decimal) Settings[AutoAttackDelay]->Value;
+		nudSAWSIL->Value = (Decimal) Settings[SAWSIL]->Value;
+		ddbAutoAttackKey->SelectedIndex = (int) Settings[AutoAttackKey]->Value;
+		//AutoLoot
+		nudAutoLoot->Value = (Decimal) Settings[AutoLootDelay]->Value;
+		cbOLWNA->Checked = (bool) Settings[OLWNA]->Value;
+		ddbAutoLootKey->SelectedIndex = (int) Settings[AutoLootKey]->Value;
+		//AutoHP
+		nudAutoHP->Value = (Decimal) Settings[AutoHPValue]->Value;
+		ddbAutoHPKey->SelectedIndex = (int) Settings[AutoHPKey]->Value;
+		//AutoMP
+		nudAutoMP->Value = (Decimal) Settings[AutoMPValue]->Value;
+		ddbAutoMPKey->SelectedIndex = (int) Settings[AutoMPKey]->Value;
+		//PetFeeder
+		nudPetFeeder->Value = (Decimal) Settings[PetFeederValue]->Value;
+		ddbPetFeeder->SelectedIndex = (int) Settings[PetFeederKey]->Value;
+		//CC People
+		nudCCPeople->Value = (Decimal) Settings[CCPeople]->Value;
+		ddbPeopleType->SelectedIndex = (int) Settings[CCPeopleType]->Value;
+		//CC Timed
+		nudCCTimed->Value = (Decimal) Settings[CCTimed]->Value;
+		ddbTimedType->SelectedIndex = (int) Settings[CCTimedType]->Value;
+		//CC Attacks
+		nudCCAttacks->Value = (Decimal) Settings[CCAttacks]->Value;
+		ddbAttacksType->SelectedIndex = (int) Settings[CCAttacksType]->Value;
+		//HotKeys
+		ddbHotKeyAttack->SelectedIndex = (int) Settings[HotKeyAttack]->Value;
+		ddbHotKeyLoot->SelectedIndex = (int) Settings[HotKeyLoot]->Value;
+		ddbHotKeyFMA->SelectedIndex = (int) Settings[HotKeyFMA]->Value;
+		ddbHotKeyCCPeople->SelectedIndex = (int) Settings[HotKeyCCPeople]->Value;
+		ddbHotKeySendPacket->SelectedIndex = (int) Settings[HotKeySendPacket]->Value;
+
+		//try's 5 seconds long if your CRC is ready for the hacks
+		System::Threading::Thread^ t = gcnew Threading::Thread(gcnew Threading::ThreadStart(this, &MainForm::LoadEnabledHacks));
+		t->Start();
 	}
+	catch (Exception^ ex)
+	{
+		Log::WriteLine("While loading saved general settings, the followin exception occured: " + ex->Message);
+	}
+
 }
 Void MainForm::LoadEnabledHacks()
 {
-	int count = 0;
-	while (!CMS::gotMSCRC && count < 10) Sleep(1000);
-
-	if (CMS::gotMSCRC)
+	try
 	{
-		cbPinTyper->Checked = (bool) Settings[PinTyper]->Value;
-		cbLogoSkipper->Checked = (bool) Settings[LogoSkipper]->Value;
-		Hacks::ThreadIdFix.Enable(true);
+		int count = 0;
+		while (!CMS::gotMSCRC && count < 10)
+		{
+			Sleep(1000);
+			count++;
+		}
+
+		if (CMS::gotMSCRC)
+		{
+			cbPinTyper->Checked = (bool) Settings[PinTyper]->Value;
+			cbLogoSkipper->Checked = (bool) Settings[LogoSkipper]->Value;
+			Hacks::ThreadIdFix.Enable(true);
+			Log::WriteLine("Succeeded in enabling the hacks after waiting " + count + " seconds.");
+		}
+	}
+	catch (Exception^ ex)
+	{
+		Log::WriteLine("While loading enabled hacks, the following exception occured : " + ex->Message);
 	}
 }
 Void MainForm::ReloadSettings()
@@ -709,8 +707,6 @@ Void MainForm::ReloadSettings()
 	s->Add(gcnew SettingsEntry(ddbHotKeyCCPeople));
 	s->Add(gcnew SettingsEntry(ddbHotKeySendPacket));
 	//Hacks Tab
-	s->Add(gcnew SettingsEntry(nudSkillInjection));
-	s->Add(gcnew SettingsEntry(ddbSkillInjection));
 	s->Add(gcnew SettingsEntry(nudIceGuard));
 
 	s->Add(gcnew SettingsEntry(cbPinTyper));

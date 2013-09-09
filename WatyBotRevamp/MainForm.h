@@ -2234,7 +2234,7 @@ namespace WatyBotRevamp {
 
 	private:
 		//General private class members
-		List<SettingsEntry^>^ Settings;
+		static List<SettingsEntry^>^ Settings = gcnew List<SettingsEntry^>(10);
 		Void LoadSettings();
 		Void LoadEnabledHacks();
 		Void SaveSettings();

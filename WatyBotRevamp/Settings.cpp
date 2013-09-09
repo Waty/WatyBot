@@ -6,19 +6,19 @@ using namespace System;
 using namespace System::IO;
 using namespace System::Collections::Generic;
 
-Object^ Settings::Deserialize(String^ Path, XmlSerializer^ Serializer)
+Object^ Settings::Deserialize(String^ path, XmlSerializer^ serializer)
 {
-	if (File::Exists(Path))
+	if (File::Exists(path))
 	{
 		FileStream^ stream;
 		try
 		{
-			stream = gcnew FileStream(Path, FileMode::Open, FileAccess::Read, FileShare::Read);
-			return Serializer->Deserialize(stream);
+			stream = gcnew FileStream(path, FileMode::Open, FileAccess::Read, FileShare::Read);
+			return serializer->Deserialize(stream);
 		}
 		catch (Exception^ ex)
 		{
-			Log::WriteLine("Exception occured while reading from " + Path + " : " + ex->Message);
+			Log::WriteLine("Exception occured while reading from " + path + " : " + ex->Message);
 		}
 		finally
 		{
@@ -28,20 +28,24 @@ Object^ Settings::Deserialize(String^ Path, XmlSerializer^ Serializer)
 	return nullptr;
 }
 
-Void Settings::Serialize(String^ Path, XmlSerializer^ Serializer, Object^ Collection)
+Void Settings::Serialize(String^ path, XmlSerializer^ serializer, Object^ object)
 {
-	FileStream^ stream;
-	try
+	if (path != nullptr && serializer != nullptr && object != nullptr)
 	{
-		stream = gcnew FileStream(Path, FileMode::OpenOrCreate, FileAccess::Write, FileShare::Read);
-		Serializer->Serialize(stream, Collection);
-	}
-	catch (Exception^ ex)
-	{
-		Log::WriteLine("Exception occured while writing to " + Path + " : " + ex->Message);
-	}
-	finally
-	{
-		if (stream) delete (IDisposable^) stream;
+		FileStream^ stream;
+		try
+		{
+			if (File::Exists(path)) File::Delete(path);
+			stream = gcnew FileStream(path, FileMode::OpenOrCreate, FileAccess::Write, FileShare::None);
+			serializer->Serialize(stream, object);
+		}
+		catch (Exception^ ex)
+		{
+			Log::WriteLine("Exception occured while writing to " + path + " : " + ex->Message);
+		}
+		finally
+		{
+			if (stream) delete (IDisposable^) stream;
+		}
 	}
 }
