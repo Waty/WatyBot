@@ -2236,11 +2236,13 @@ namespace WatyBotRevamp {
 		//General private class members
 		List<SettingsEntry^>^ Settings;
 		Void LoadSettings();
+		Void LoadEnabledHacks();
 		Void SaveSettings();
 		Void ReloadSettings();
 		Void RedrawStatBars();
 		Void ReloadComboBox(ComboBox^ combobox);
 		Void HotKeys();
+
 		//General trainer events
 		Void MainForm_Load(Object^  sender, EventArgs^  e);
 		Void StatsTimer_Tick(Object^  sender, EventArgs^  e);

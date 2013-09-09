@@ -652,23 +652,25 @@ Void MainForm::LoadSettings()
 			nudIceGuard->Value = (Decimal) Settings[IceGuard]->Value;
 
 			//try's 5 seconds long if your CRC is ready for the hacks
-			int i = 0;
-			while (i < 50 && !CMS::gotMSCRC)
-			{
-				Sleep(100);
-				i++;
-			}
-			if (CMS::gotMSCRC)
-			{
-				cbPinTyper->Checked = (bool) Settings[PinTyper]->Value;
-				cbLogoSkipper->Checked = (bool) Settings[LogoSkipper]->Value;
-				Hacks::ThreadIdFix.Enable(true);
-			}
+			System::Threading::Thread^ t = gcnew Threading::Thread(gcnew Threading::ThreadStart(this, &MainForm::LoadEnabledHacks));
+			t->Start();
 		}
 		catch (Exception^ ex)
 		{
 			Log::WriteLine(ex->Message);
 		}
+	}
+}
+Void MainForm::LoadEnabledHacks()
+{
+	int count = 0;
+	while (!CMS::gotMSCRC && count < 10) Sleep(1000);
+
+	if (CMS::gotMSCRC)
+	{
+		cbPinTyper->Checked = (bool) Settings[PinTyper]->Value;
+		cbLogoSkipper->Checked = (bool) Settings[LogoSkipper]->Value;
+		Hacks::ThreadIdFix.Enable(true);
 	}
 }
 Void MainForm::ReloadSettings()

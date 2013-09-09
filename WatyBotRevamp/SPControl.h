@@ -12,6 +12,7 @@ namespace WatyBotRevamp
 		SPControlLocation();
 		SPControlLocation(String^ name, int MapId, int X, int Y);
 
+		[XmlAttribute]
 		property String^ Name;
 		property int MapId;
 		property int X;
