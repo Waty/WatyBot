@@ -35,8 +35,7 @@ Void Settings::Serialize(String^ path, XmlSerializer^ serializer, Object^ object
 		FileStream^ stream;
 		try
 		{
-			if (File::Exists(path)) File::Delete(path);
-			stream = gcnew FileStream(path, FileMode::OpenOrCreate, FileAccess::Write, FileShare::None);
+			stream = gcnew FileStream(path, FileMode::Create, FileAccess::Write, FileShare::None);
 			serializer->Serialize(stream, object);
 		}
 		catch (Exception^ ex)
