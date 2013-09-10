@@ -284,6 +284,8 @@ Void ShowErrorDialog(String^ Message)
 }
 Void MainForm::MainForm_Load(Object^  sender, EventArgs^  e)
 {
+	Log::WriteLine(String::Empty);
+	Log::WriteLine("Starting WatyBot");
 	//Initialize the NotifyIcon
 	notifyIcon = gcnew NotifyIcon;
 	notifyIcon->Icon = SystemIcons::Error;
@@ -363,7 +365,8 @@ Void MainForm::MainForm_FormClosing(Object^  sender, Windows::Forms::FormClosing
 	switch (MessageBox::Show("Close MapleStory too?", "Terminate Maple?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
 	{
 	case ::DialogResult::Yes:
-		notifyIcon->Visible = false;
+		Log::WriteLine("Exiting process");
+		if (notifyIcon) delete (IDisposable^) notifyIcon;
 		SaveSettings();
 		TerminateProcess(GetCurrentProcess(), 0);
 		ExitProcess(0);
@@ -722,6 +725,7 @@ Void MainForm::bSaveSettings_Click(Object^  sender, EventArgs^  e)
 }
 Void MainForm::SettingsWatcher_Changed(System::Object^  sender, System::IO::FileSystemEventArgs^  e)
 {
+	Log::WriteLine("Saved " + e->FullPath);
 	if (e->FullPath == PacketSender::Path) LoadPackets();
 	if (e->FullPath == SPControl::Path) LoadSPControl();
 	if (e->FullPath == AutoSkill::Path) LoadAutoSkill();
