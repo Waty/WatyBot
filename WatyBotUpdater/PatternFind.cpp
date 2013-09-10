@@ -5,15 +5,16 @@
 #pragma  comment(lib, "dbghelp")
 #pragma  comment(lib, "psapi")
 
-BOOL GetModuleSize(HMODULE hModule, LPVOID* lplpBase, LPDWORD lpdwSize) {
+BOOL GetModuleSize(HMODULE hModule, LPVOID* lplpBase, LPDWORD lpdwSize)
+{
 	if (hModule == GetModuleHandle(NULL))
 	{
-		PIMAGE_NT_HEADERS pImageNtHeaders = ImageNtHeader((PVOID)hModule);
+		PIMAGE_NT_HEADERS pImageNtHeaders = ImageNtHeader((PVOID) hModule);
 
 		if (pImageNtHeaders == NULL)
 			return FALSE;
 
-		*lplpBase = (LPVOID)hModule;
+		*lplpBase = (LPVOID) hModule;
 		*lpdwSize = pImageNtHeaders->OptionalHeader.SizeOfImage;
 	}
 	else
@@ -29,16 +30,22 @@ BOOL GetModuleSize(HMODULE hModule, LPVOID* lplpBase, LPDWORD lpdwSize) {
 	return TRUE;
 }
 
-DWORD PFAPI GetPatternCB(char *szPattern) {
+DWORD PFAPI GetPatternCB(char *szPattern)
+{
 	DWORD cb = 0;
 	bool first_nibble = false;
-	for (DWORD i=0; i<strlen(szPattern); i++) {
+	for (DWORD i = 0; i < strlen(szPattern); i++)
+	{
 		char c = toupper(szPattern[i]);
-		if (c != ' ') {
-			if (c == '?') {
+		if (c != ' ')
+		{
+			if (c == '?')
+			{
 				if (!first_nibble) cb++;
 				else return 0;
-			} else {
+			}
+			else
+			{
 				if (!isxdigit(c)) return 0;
 				if (first_nibble) cb++;
 				first_nibble ^= true;
@@ -49,10 +56,10 @@ DWORD PFAPI GetPatternCB(char *szPattern) {
 	return cb;
 }
 
-BOOL PFAPI GeneratePatternMask(char *szPattern, char *buffer) 
+BOOL PFAPI GeneratePatternMask(char *szPattern, char *buffer)
 {
 	bool first_nibble = false;
-	for (DWORD i=0; i<strlen(szPattern); i++)
+	for (DWORD i = 0; i < strlen(szPattern); i++)
 	{
 		char c = toupper(szPattern[i]);
 		if (c != ' ')
@@ -78,10 +85,11 @@ BOOL PFAPI GeneratePatternBytes(char *szPattern, LPBYTE buffer)
 {
 	bool first_nibble = false;
 	DWORD cb = 0;
-	for (DWORD i=0; i<strlen(szPattern); i++)
+	for (DWORD i = 0; i < strlen(szPattern); i++)
 	{
 		char c = toupper(szPattern[i]);
-		if (c != ' ') {
+		if (c != ' ')
+		{
 			if (c == '?')
 			{
 				if (!first_nibble)
@@ -96,11 +104,11 @@ BOOL PFAPI GeneratePatternBytes(char *szPattern, LPBYTE buffer)
 				if (!isxdigit(c)) return FALSE;
 				if (first_nibble)
 				{
-					char byte[3] = {0};
-					byte[0] = szPattern[i-1];
+					char byte[3] = { 0 };
+					byte[0] = szPattern[i - 1];
 					byte[1] = c;
 					byte[2] = '\0';
-					buffer[cb] = (BYTE)strtol(byte, NULL, 16);
+					buffer[cb] = (BYTE) strtol(byte, NULL, 16);
 					cb++;
 				}
 				first_nibble ^= true;
@@ -115,14 +123,14 @@ VOID PFAPI SearchPattern(PFSEARCH *ppf, LPVOID lpvBase, DWORD dwSize)
 {
 	ppf->dwResult = 0;
 	DWORD dwBase = (DWORD) lpvBase;
-	for (DWORD i=dwBase; i<dwBase+dwSize; i++)
+	for (DWORD i = dwBase; i < dwBase + dwSize; i++)
 	{
 		bool found = true;
-		for (DWORD j=0; j<ppf->dwLength; j++)
+		for (DWORD j = 0; j < ppf->dwLength; j++)
 		{
 			if (ppf->szMask[j] == 'x')
 			{
-				if (*reinterpret_cast<BYTE*>(i+j) != ppf->lpbData[j])
+				if (*reinterpret_cast<BYTE*>(i + j) != ppf->lpbData[j])
 				{
 					found = false;
 					break;

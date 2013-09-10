@@ -113,8 +113,10 @@ namespace WatyBotUpdater
 			// lvAddys
 			// 
 			this->lvAddys->AllowColumnReorder = true;
-			this->lvAddys->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(5) {this->chName, this->chAddy, 
-				this->chType, this->chAOB, this->chComments});
+			this->lvAddys->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(5) {
+				this->chName, this->chAddy,
+					this->chType, this->chAOB, this->chComments
+			});
 			this->lvAddys->ContextMenuStrip = this->contextMenuStrip1;
 			this->lvAddys->FullRowSelect = true;
 			this->lvAddys->GridLines = true;
@@ -154,8 +156,10 @@ namespace WatyBotUpdater
 			// 
 			// contextMenuStrip1
 			// 
-			this->contextMenuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {this->copySearchResultToolStripMenuItem, 
-				this->copyAOBToolStripMenuItem, this->copyCommentToolStripMenuItem, this->deleteEntryToolStripMenuItem});
+			this->contextMenuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+				this->copySearchResultToolStripMenuItem,
+					this->copyAOBToolStripMenuItem, this->copyCommentToolStripMenuItem, this->deleteEntryToolStripMenuItem
+			});
 			this->contextMenuStrip1->Name = L"contextMenuStrip1";
 			this->contextMenuStrip1->Size = System::Drawing::Size(172, 92);
 			// 
@@ -205,8 +209,10 @@ namespace WatyBotUpdater
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {this->updateToolStripMenuItem, 
-				this->loadDifferentFileItem, this->saveAOBItem, this->openAppdataToolStripMenuItem});
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+				this->updateToolStripMenuItem,
+					this->loadDifferentFileItem, this->saveAOBItem, this->openAppdataToolStripMenuItem
+			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->RenderMode = System::Windows::Forms::ToolStripRenderMode::Professional;
@@ -246,7 +252,7 @@ namespace WatyBotUpdater
 			// 
 			this->ddbType->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbType->FormattingEnabled = true;
-			this->ddbType->Items->AddRange(gcnew cli::array< System::Object^  >(3) {L"Address", L"Pointer", L"Offset"});
+			this->ddbType->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Address", L"Pointer", L"Offset" });
 			this->ddbType->Location = System::Drawing::Point(129, 19);
 			this->ddbType->Name = L"ddbType";
 			this->ddbType->Size = System::Drawing::Size(103, 21);
@@ -324,18 +330,18 @@ namespace WatyBotUpdater
 		Void ReadXmlData();
 		Void WriteXmlData();
 		Void AOBFileWatcher_Changed(System::Object^  sender, System::IO::FileSystemEventArgs^  e);
-		
+
 		Void update_Click(System::Object^  sender, System::EventArgs^  e);
 		Void loadDifferentFile_Click(System::Object^  sender, System::EventArgs^  e);
 		Void MyForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
 		Void MyForm_SizeChanged(System::Object^  sender, System::EventArgs^  e);
 		Void saveAOBItem_Click(System::Object^  sender, System::EventArgs^  e);
 		Void bAdd_Click(System::Object^  sender, System::EventArgs^  e);
-		
+
 		Void copySearchResultToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 		Void copyAOBToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 		Void copyCommentToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 		Void deleteEntryToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 		Void openAppdataToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-};
+	};
 }

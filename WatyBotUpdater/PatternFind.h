@@ -12,7 +12,7 @@
 
 struct PFSEARCH {
 	DWORD dwLength;
-	char szMask[MAX_PATTERN+1];
+	char szMask[MAX_PATTERN + 1];
 	BYTE lpbData[MAX_PATTERN];
 	DWORD dwResult;
 };

@@ -23,13 +23,13 @@ void CreateGUI(void)
 }
 void InitializeTrainer(HINSTANCE hInstance)
 {
-    DisableThreadLibraryCalls(hInstance);
-    GetModuleSize(GetModuleHandle(NULL), &lpvMapleBase, &dwMapleSize); // Obtain Maple base address & size
+	DisableThreadLibraryCalls(hInstance);
+	GetModuleSize(GetModuleHandle(NULL), &lpvMapleBase, &dwMapleSize); // Obtain Maple base address & size
 
 	//Set the maple base for the scanner
 	lpvMapleBase = reinterpret_cast<LPVOID>(0x00400000);
-	
-	if(!Directory::Exists(MyForm::AppDataDir))	Directory::CreateDirectory(MyForm::AppDataDir);
+
+	if (!Directory::Exists(MyForm::AppDataDir))	Directory::CreateDirectory(MyForm::AppDataDir);
 
 	Threading::Thread^ tMain = gcnew Threading::Thread(gcnew Threading::ThreadStart(CreateGUI));
 	tMain->SetApartmentState(Threading::ApartmentState::STA);
@@ -40,9 +40,9 @@ Void MyForm::update_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	static PFSEARCH pf;
 	this->ReadXmlData();
-	
+
 	StreamWriter^ sw = File::CreateText(OutputPath);
-	
+
 	int SuccesCount = 0;
 	int index = 0;
 
@@ -50,46 +50,46 @@ Void MyForm::update_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		char* aob = (char*) marshal_as<string>(address->AOB).c_str();
 		FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
-		
+
 		String^ Name = address->Name;
 		String^ Addy = "ERROR";
-		if(pf.dwResult) // If the search got a result
+		if (pf.dwResult) // If the search got a result
 		{
-			if(address->Type == Address::AddressType::Address) Addy = pf.dwResult.ToString("X");
-			if(address->Type == Address::AddressType::Pointer) Addy = (*(DWORD*)((DWORD)pf.dwResult + 2)).ToString("X");
-			if(address->Type == Address::AddressType::OffsetBYTE) Addy = (*(BYTE*)((DWORD)pf.dwResult + 2)).ToString("X");
-			if(address->Type == Address::AddressType::OffsetWORD) Addy = (*(WORD*)((DWORD)pf.dwResult + 2)).ToString("X");
+			if (address->Type == Address::AddressType::Address) Addy = pf.dwResult.ToString("X");
+			if (address->Type == Address::AddressType::Pointer) Addy = (*(DWORD*) ((DWORD) pf.dwResult + 2)).ToString("X");
+			if (address->Type == Address::AddressType::OffsetBYTE) Addy = (*(BYTE*) ((DWORD) pf.dwResult + 2)).ToString("X");
+			if (address->Type == Address::AddressType::OffsetWORD) Addy = (*(WORD*) ((DWORD) pf.dwResult + 2)).ToString("X");
 			SuccesCount++;
 		}
-		
+
 		String^ Comment = String::Empty;
-		if(address->Comment) Comment = " //" + address->Comment;
-		
+		if (address->Comment) Comment = " //" + address->Comment;
+
 		//Add the result to the ListView
 		auto lvItem = lvAddys->Items[index];
-		lvItem->SubItems[1]->Text = "0x"+Addy;
+		lvItem->SubItems[1]->Text = "0x" + Addy;
 		lvItem->ToolTipText = Comment;
-		if(!pf.dwResult)
+		if (!pf.dwResult)
 		{
 			lvItem->UseItemStyleForSubItems = false;
 			lvItem->SubItems[1]->BackColor = address->Comment ? Color::Orange : Color::Red;
 		}
 		//lvAddys->Items[index] = lvItem;
 		index++;
-		
+
 		//Write the found addy to the header file
 		sw->WriteLine("#define " + Name + " 0x" + Addy + Comment);
 	}
-	if(sw) delete (IDisposable^)(sw);
+	if (sw) delete (IDisposable^) (sw);
 	//lvAddys->EndUpdate();
 	ShowInfo(SuccesCount + " of the " + addressList->Count + " where succesfull");
 }
 
 Void MyForm::MyForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 {
-	switch(MessageBox::Show("Do you want to close MS too?", "Close MapleStory?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
+	switch (MessageBox::Show("Do you want to close MS too?", "Close MapleStory?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
 	{
-	case ::DialogResult::Yes:		
+	case ::DialogResult::Yes:
 		TerminateProcess(GetCurrentProcess(), 0);
 		ExitProcess(0);
 		break;
@@ -102,8 +102,8 @@ Void MyForm::MyForm_FormClosing(System::Object^  sender, System::Windows::Forms:
 
 Void MyForm::ReadXmlData()
 {
-	if(this->serializer == nullptr) this->serializer = gcnew XmlSerializer(List<Address^>::typeid);
-	if(!File::Exists(InputPath))
+	if (this->serializer == nullptr) this->serializer = gcnew XmlSerializer(List<Address^>::typeid);
+	if (!File::Exists(InputPath))
 	{
 		WriteXmlData();
 		return;
@@ -111,11 +111,11 @@ Void MyForm::ReadXmlData()
 
 	//Deserialize the xml file
 	TextReader^ reader = gcnew StreamReader(InputPath);
-	try 
+	try
 	{
 		addressList = safe_cast<List<Address^>^>(serializer->Deserialize(reader));
 	}
-	catch(InvalidOperationException^ ex)
+	catch (InvalidOperationException^ ex)
 	{
 		ShowError(ex->Message);
 	}
@@ -135,14 +135,14 @@ Void MyForm::ReadXmlData()
 
 Void MyForm::WriteXmlData()
 {
-	if(this->serializer == nullptr) this->serializer = gcnew XmlSerializer(List<Address^>::typeid);
-	
+	if (this->serializer == nullptr) this->serializer = gcnew XmlSerializer(List<Address^>::typeid);
+
 	auto writer = File::Create(InputPath);
 	try
 	{
 		serializer->Serialize(writer, addressList);
 	}
-	catch(Exception^ ex)
+	catch (Exception^ ex)
 	{
 		ShowError(ex->Message);
 	}
@@ -156,9 +156,9 @@ Void MyForm::AOBFileWatcher_Changed(System::Object^  sender, System::IO::FileSys
 
 Void MyForm::loadDifferentFile_Click(System::Object^  sender, System::EventArgs^  e)
 {
-	if(MessageBox::Show("The current file will be overwritten!!!\n Are you sure you want to continue?", "Warning", MessageBoxButtons::YesNo, MessageBoxIcon::Warning) == ::DialogResult::No) return;
-	
-	if(InputFileDialog->ShowDialog() == ::DialogResult::OK)
+	if (MessageBox::Show("The current file will be overwritten!!!\n Are you sure you want to continue?", "Warning", MessageBoxButtons::YesNo, MessageBoxIcon::Warning) == ::DialogResult::No) return;
+
+	if (InputFileDialog->ShowDialog() == ::DialogResult::OK)
 	{
 		File::Delete(InputPath);
 		File::Copy(InputFileDialog->FileName, InputPath);
@@ -198,27 +198,27 @@ Void MyForm::copySearchResultToolStripMenuItem_Click(System::Object^  sender, Sy
 {
 	auto selectedItem = lvAddys->SelectedItems[0];
 	auto text = selectedItem->SubItems[1]->Text;
-	if(text != nullptr) Clipboard::SetText(text);
+	if (text != nullptr) Clipboard::SetText(text);
 }
 
 Void MyForm::copyAOBToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	auto selectedItem = lvAddys->SelectedItems[0];
 	auto text = selectedItem->SubItems[3]->Text;
-	if(text != nullptr) Clipboard::SetText(text);
+	if (text != nullptr) Clipboard::SetText(text);
 }
 
 Void MyForm::copyCommentToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	auto selectedItem = lvAddys->SelectedItems[0];
 	auto text = selectedItem->SubItems[4]->Text;
-	if(text != nullptr && !String::Empty) Clipboard::SetText(text);
+	if (text != nullptr && !String::Empty) Clipboard::SetText(text);
 }
 
 Void MyForm::deleteEntryToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 {
 	auto selectedItem = lvAddys->SelectedItems[0];
-	if(MessageBox::Show("Are you sure you want to delete \"" + selectedItem->Text + "\" ?", "Confirm", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::No) return;
+	if (MessageBox::Show("Are you sure you want to delete \"" + selectedItem->Text + "\" ?", "Confirm", MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::No) return;
 	addressList->RemoveAt(lvAddys->SelectedIndices[0]);
 	WriteXmlData();
 }
