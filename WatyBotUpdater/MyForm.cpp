@@ -103,23 +103,23 @@ Void MyForm::MyForm_FormClosing(System::Object^  sender, System::Windows::Forms:
 Void MyForm::ReadXmlData()
 {
 	if (this->serializer == nullptr) this->serializer = gcnew XmlSerializer(List<Address^>::typeid);
-	if (!File::Exists(InputPath))
+	if (File::Exists(InputPath))
 	{
-		WriteXmlData();
-		return;
+		FileStream^ stream;
+		try
+		{
+			stream = gcnew FileStream(InputPath, FileMode::Open, FileAccess::Read, FileShare::Read);
+			addressList = safe_cast<List<Address^>^>(serializer->Deserialize(stream));
+		}
+		catch (Exception^ ex)
+		{
+			Console::WriteLine(ex->Message);
+		}
+		finally
+		{
+			if (stream) delete (IDisposable^) stream;
+		}
 	}
-
-	//Deserialize the xml file
-	TextReader^ reader = gcnew StreamReader(InputPath);
-	try
-	{
-		addressList = safe_cast<List<Address^>^>(serializer->Deserialize(reader));
-	}
-	catch (InvalidOperationException^ ex)
-	{
-		ShowError(ex->Message);
-	}
-	reader->Close();
 
 	lvAddys->Items->Clear();
 	for each(Address^ address in addressList)
@@ -135,26 +135,31 @@ Void MyForm::ReadXmlData()
 
 Void MyForm::WriteXmlData()
 {
-	if (this->serializer == nullptr) this->serializer = gcnew XmlSerializer(List<Address^>::typeid);
-
-	auto writer = File::Create(InputPath);
-	try
+	if (InputPath != nullptr && serializer != nullptr && addressList != nullptr)
 	{
-		serializer->Serialize(writer, addressList);
+		FileStream^ stream;
+		try
+		{
+			stream = gcnew FileStream(InputPath, FileMode::Create, FileAccess::Write, FileShare::None);
+			serializer->Serialize(stream, addressList);
+		}
+		catch (Exception^ ex)
+		{
+			Console::WriteLine(ex->Message);
+		}
+		finally
+		{
+			if (stream) delete (IDisposable^) stream;
+		}
 	}
-	catch (Exception^ ex)
-	{
-		ShowError(ex->Message);
-	}
-	writer->Close();
 }
 
-Void MyForm::AOBFileWatcher_Changed(System::Object^  sender, System::IO::FileSystemEventArgs^  e)
+Void MyForm::AOBFileWatcher_Changed(Object^  sender, FileSystemEventArgs^ e)
 {
 	ReadXmlData();
 }
 
-Void MyForm::loadDifferentFile_Click(System::Object^  sender, System::EventArgs^  e)
+Void MyForm::loadDifferentFile_Click(Object^ sender, EventArgs^ e)
 {
 	if (MessageBox::Show("The current file will be overwritten!!!\n Are you sure you want to continue?", "Warning", MessageBoxButtons::YesNo, MessageBoxIcon::Warning) == ::DialogResult::No) return;
 
@@ -165,7 +170,7 @@ Void MyForm::loadDifferentFile_Click(System::Object^  sender, System::EventArgs^
 	}
 }
 
-Void MyForm::MyForm_SizeChanged(System::Object^  sender, System::EventArgs^  e)
+Void MyForm::MyForm_SizeChanged(Object^ sender, EventArgs^ e)
 {
 	lvAddys->Width = this->Width - 40;
 	lvAddys->Height = this->Height - 131;
@@ -173,12 +178,12 @@ Void MyForm::MyForm_SizeChanged(System::Object^  sender, System::EventArgs^  e)
 	gbNewAOB->Location = Point(12, Height - 98);
 }
 
-Void MyForm::saveAOBItem_Click(System::Object^  sender, System::EventArgs^  e)
+Void MyForm::saveAOBItem_Click(Object^ sender, EventArgs^ e)
 {
 	WriteXmlData();
 }
 
-Void MyForm::bAdd_Click(System::Object^  sender, System::EventArgs^  e)
+Void MyForm::bAdd_Click(Object^ sender, EventArgs^ e)
 {
 	auto address = gcnew Address();
 	address->Name = tbName->Text;
