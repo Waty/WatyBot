@@ -23,6 +23,7 @@ Object^ Settings::Deserialize(String^ path, XmlSerializer^ serializer)
 		finally
 		{
 			if (stream) delete (IDisposable^) stream;
+			Log::WriteLine("Loaded " + path);
 		}
 	}
 	return nullptr;
@@ -45,6 +46,7 @@ Void Settings::Serialize(String^ path, XmlSerializer^ serializer, Object^ object
 		finally
 		{
 			if (stream) delete (IDisposable^) stream;
+			Log::WriteLine("Saved " + path);
 		}
 	}
 }
