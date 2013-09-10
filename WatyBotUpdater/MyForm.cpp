@@ -99,28 +99,27 @@ Void MyForm::MyForm_FormClosing(System::Object^  sender, System::Windows::Forms:
 		break;
 	}
 }
-
 Void MyForm::ReadXmlData()
 {
 	if(this->serializer == nullptr) this->serializer = gcnew XmlSerializer(List<Address^>::typeid);
-	if(!File::Exists(InputPath))
+	if (File::Exists(InputPath))
 	{
-		WriteXmlData();
-		return;
+		FileStream^ stream;
+		try
+		{
+			stream = gcnew FileStream(path, FileMode::Open, FileAccess::Read, FileShare::Read);
+			addressList = safe_cast<List<Address^>^>(serializer->Deserialize(stream));
+		}
+		catch (Exception^ ex)
+		{
+			//No ErrorLogger yet
+		}
+		finally
+		{
+			if (stream) delete (IDisposable^) stream;
+		}
 	}
-
-	//Deserialize the xml file
-	TextReader^ reader = gcnew StreamReader(InputPath);
-	try 
-	{
-		addressList = safe_cast<List<Address^>^>(serializer->Deserialize(reader));
-	}
-	catch(InvalidOperationException^ ex)
-	{
-		ShowError(ex->Message);
-	}
-	reader->Close();
-
+	
 	lvAddys->Items->Clear();
 	for each(Address^ address in addressList)
 	{
@@ -133,20 +132,25 @@ Void MyForm::ReadXmlData()
 	}
 }
 
-Void MyForm::WriteXmlData()
+Void MyForm::WriteXml()
 {
-	if(this->serializer == nullptr) this->serializer = gcnew XmlSerializer(List<Address^>::typeid);
-	
-	auto writer = File::Create(InputPath);
-	try
+	if (InputPath != nullptr && serializer != nullptr && addressList != nullptr)
 	{
-		serializer->Serialize(writer, addressList);
+		FileStream^ stream;
+		try
+		{
+			stream = gcnew FileStream(InputPath, FileMode::Create, FileAccess::Write, FileShare::None);
+			serializer->Serialize(stream, addressList);
+		}
+		catch (Exception^ ex)
+		{
+			//No Error logger
+		}
+		finally
+		{
+			if (stream) delete (IDisposable^) stream;
+		}
 	}
-	catch(Exception^ ex)
-	{
-		ShowError(ex->Message);
-	}
-	writer->Close();
 }
 
 Void MyForm::AOBFileWatcher_Changed(System::Object^  sender, System::IO::FileSystemEventArgs^  e)
