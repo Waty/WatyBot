@@ -16,25 +16,25 @@ HWND hProcesswnd = NULL;
 
 bool inject(std::string fileName, DWORD pID)
 {
-	if(!pID) return false;
+	if (!pID) return false;
 
-	HANDLE Proc; 
-	LPVOID RemoteString, LoadLibAddy; 
-	Proc = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pID); 
-	if(!Proc) 
-	{ 
-		MessageBox::Show("OpenProcess() failed: " + GetLastError()); 
-		return false; 
-	} 
-	LoadLibAddy = (LPVOID)GetProcAddress(GetModuleHandle("kernel32.dll"), "LoadLibraryA"); 
+	HANDLE Proc;
+	LPVOID RemoteString, LoadLibAddy;
+	Proc = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pID);
+	if (!Proc)
+	{
+		MessageBox::Show("OpenProcess() failed: " + GetLastError());
+		return false;
+	}
+	LoadLibAddy = (LPVOID) GetProcAddress(GetModuleHandle("kernel32.dll"), "LoadLibraryA");
 	// Allocate space in the process for our DLL
-	RemoteString = (LPVOID)VirtualAllocEx(Proc, NULL, strlen(fileName.c_str()), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE); 
+	RemoteString = (LPVOID) VirtualAllocEx(Proc, NULL, strlen(fileName.c_str()), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
 	// Write the string name of our DLL in the memory allocated 
-	WriteProcessMemory(Proc, (LPVOID)RemoteString, fileName.c_str(), strlen(fileName.c_str()), NULL); 
+	WriteProcessMemory(Proc, (LPVOID) RemoteString, fileName.c_str(), strlen(fileName.c_str()), NULL);
 	// Load our DLL 
-	CreateRemoteThread(Proc, NULL, NULL, (LPTHREAD_START_ROUTINE)LoadLibAddy, (LPVOID)RemoteString, NULL, NULL); 
+	CreateRemoteThread(Proc, NULL, NULL, (LPTHREAD_START_ROUTINE) LoadLibAddy, (LPVOID) RemoteString, NULL, NULL);
 	CloseHandle(Proc);
-	return true; 
+	return true;
 }
 
 int main()
@@ -42,8 +42,8 @@ int main()
 	cout << "WatyBotInjector 2.2 Beta WindowsXP Support:" << endl;
 	cout << "You need to have WatyBot.dll and this program in the Maplestory folder!!!!" << endl;
 	cout << "Full credits to \"TheFox\"" << endl << endl;
-	
-	if(File::Exists(Directory::GetCurrentDirectory() + "\\MapleStory.exe")) cout << "Found MapleStory.exe!" << endl;
+
+	if (File::Exists(Directory::GetCurrentDirectory() + "\\MapleStory.exe")) cout << "Found MapleStory.exe!" << endl;
 	else
 	{
 		cout << "Couldn't find MapleStory.exe!";
@@ -51,9 +51,9 @@ int main()
 		return false;
 	}
 
-	if(File::Exists(Directory::GetCurrentDirectory() + "\\WatyBot.dll")) cout << "Found WatyBot.dll!" << endl;
+	if (File::Exists(Directory::GetCurrentDirectory() + "\\WatyBot.dll")) cout << "Found WatyBot.dll!" << endl;
 	else
-	{		
+	{
 		cout << "Couldn't find WatyBot.dll!";
 		system("pause");
 		return false;
@@ -64,37 +64,37 @@ int main()
 	procMS->StartInfo->FileName = Directory::GetCurrentDirectory() + "\\MapleStory.exe";
 
 	cout << "Trying to start MS..." << endl;
-	if(procMS->Start()) cout << "Started MS succesfull!" << endl;
+	if (procMS->Start()) cout << "Started MS succesfull!" << endl;
 	else
 	{
 		cout << "Failed in starting MS :(" << endl;
 		system("pause");
 		return false;
 	}
-	
+
 	cout << "Waiting for MS..." << endl;
 	WaitForInputIdle((HANDLE) procMS->Handle.ToPointer(), INFINITE);
 	Sleep(1000);
 
-	if(procMS->CloseMainWindow()) cout << "Closed the Play screen..." << endl;
+	if (procMS->CloseMainWindow()) cout << "Closed the Play screen..." << endl;
 	else
 	{
 		cout << "A Error occured while trying to close the Play screen..." << endl;
 		system("pause");
 		return false;
 	}
-	
+
 	cout << "Trying to inject WatyBot..." << endl;
-	if(inject(marshal_as<string>(Directory::GetCurrentDirectory() + "\\WatyBot.dll"), procMS->Id)) cout << "Injected WatyBot :)" << endl;
+	if (inject(marshal_as<string>(Directory::GetCurrentDirectory() + "\\WatyBot.dll"), procMS->Id)) cout << "Injected WatyBot :)" << endl;
 	else
 	{
-		cout << "Failed in injecting WatyBot :(" << endl;		
+		cout << "Failed in injecting WatyBot :(" << endl;
 		system("pause");
 		return false;
 	}
-	
-	if(File::Exists(Directory::GetCurrentDirectory() + "\\WatyBotUpdater.dll")) inject(marshal_as<string>(Directory::GetCurrentDirectory() + "\\WatyBotUpdater.dll"), procMS->Id);
-	if(File::Exists(Directory::GetCurrentDirectory() + "\\MSCRC.dll")) inject(marshal_as<string>(Directory::GetCurrentDirectory() + "\\MSCRC.dll"), procMS->Id);
+
+	if (File::Exists(Directory::GetCurrentDirectory() + "\\WatyBotUpdater.dll")) inject(marshal_as<string>(Directory::GetCurrentDirectory() + "\\WatyBotUpdater.dll"), procMS->Id);
+	if (File::Exists(Directory::GetCurrentDirectory() + "\\MSCRC.dll")) inject(marshal_as<string>(Directory::GetCurrentDirectory() + "\\MSCRC.dll"), procMS->Id);
 
 	return true;
 }
