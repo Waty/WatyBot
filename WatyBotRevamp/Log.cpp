@@ -1,12 +1,13 @@
 #include "Log.h"
 
-void Log::WriteLine(String^ Message)
+Void Log::WriteLine(String^ Message)
 {
 	StreamWriter^ sw;
 	try
 	{
 		sw = gcnew StreamWriter(Path, true);
-		sw->WriteLine(DateTime::Now.ToString() + ": " + Message);
+		if (Message == String::Empty) sw->WriteLine();
+		else sw->WriteLine(DateTime::Now.ToString() + ": " + Message);
 	}
 	catch (Exception^)
 	{
@@ -16,4 +17,9 @@ void Log::WriteLine(String^ Message)
 	{
 		if (sw) delete (IDisposable^) sw;
 	}
+}
+
+Void Log::WriteLine()
+{
+	WriteLine(String::Empty);
 }
