@@ -12,152 +12,152 @@
 using namespace WatyBotRevamp;
 
 //Hack CheckBoxes
-void MainForm::cbFusionAttack_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbFusionAttack_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbFusionAttack->Checked = Hacks::FusionAttack.Enable(cbFusionAttack->Checked);
 }
-void MainForm::cbNoKB_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbNoKB_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbNoKB->Checked = Hacks::NoKB.Enable(cbNoKB->Checked);
 }
-void MainForm::cbPerfectLoot_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbPerfectLoot_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbPerfectLoot->Checked = Hacks::PerfectLoot.Enable(cbPerfectLoot->Checked);
 	cbPerfectLoot->Checked = Hacks::InstantAirLoot.Enable(cbPerfectLoot->Checked);
 }
-void MainForm::cbVacRight_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbVacRight_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbVacRight->Checked = Hacks::VacRight.Enable(cbVacRight->Checked);
 }
-void MainForm::cbWalkRight_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbWalkRight_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbWalkRight->Checked = Hacks::WalkRight.Enable(cbWalkRight->Checked);
 }
-void MainForm::cbJumpRight_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbJumpRight_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbJumpRight->Checked = Hacks::JumpRight.Enable(cbJumpRight->Checked);
 }
-void MainForm::cbMobDisarm_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbMobDisarm_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbMobDisarm->Checked = Hacks::MobDisarm.Enable(cbMobDisarm->Checked);
 }
-void MainForm::cbNoBG_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbNoBG_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbNoBG->Checked = Hacks::NoBG.Enable(cbNoBG->Checked);
 }
-void MainForm::cbJDA_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbJDA_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbJDA->Checked = Hacks::JDA.Enable(cbJDA->Checked);
 }
-void MainForm::cbPinTyper_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbPinTyper_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbPinTyper->Checked = Hacks::PinTyper.Enable(cbPinTyper->Checked);
 	cbPinTyper->Checked = Hacks::PicTyper1.Enable(cbPinTyper->Checked);
 	cbPinTyper->Checked = Hacks::PicTyper2.Enable(cbPinTyper->Checked);
 }
-void MainForm::cbDojangGodmode_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbDojangGodmode_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbDojangGodmode->Checked = Hacks::DojangGodmode.Enable(cbDojangGodmode->Checked);
 }
-void MainForm::cbIceGuard_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbIceGuard_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	this->nudIceGuard->Enabled = !this->cbIceGuard->Checked;
 	Hacks::SetIceGuardLimit((int) nudIceGuard->Value);
 	cbIceGuard->Checked = Hacks::IceGuard.Enable(cbIceGuard->Checked);
 }
-void MainForm::cbUnlimitedMorph_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbUnlimitedMorph_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbUnlimitedMorph->Checked = Hacks::UnlimitedMorph.Enable(cbUnlimitedMorph->Checked);
 }
-void MainForm::cbFasterMobs_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbFasterMobs_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbFasterMobs->Checked = Hacks::FasterMobs.Enable(cbFasterMobs->Checked);
 }
-void MainForm::cbNDAllAttacks_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbNDAllAttacks_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbNDAllAttacks->Checked = Hacks::NDAllAttacks.Enable(cbNDAllAttacks->Checked);
 }
-void MainForm::cbNoMobs_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbNoMobs_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbNoMobs->Checked = Hacks::NoMobs.Enable(cbNoMobs->Checked);
 }
-void MainForm::cbAutoAggro_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbAutoAggro_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbAutoAggro->Checked = Hacks::AutoAggro.Enable(cbAutoAggro->Checked);
 }
-void MainForm::cbSitHack_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbSitHack_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbSitHack->Checked = Hacks::SitHack.Enable(cbSitHack->Checked);
 }
-void MainForm::cb50SecGM_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cb50SecGM_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cb50SecGM->Checked = Hacks::SecondGodmode.Enable(cb50SecGM->Checked);
 }
-void MainForm::cbLogoSkipper_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbLogoSkipper_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbLogoSkipper->Checked = Hacks::LogoSkipper.Enable(cbLogoSkipper->Checked);
 }
-void MainForm::cbViewSwears_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbViewSwears_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbViewSwears->Checked = Hacks::NoSwears.Enable(cbViewSwears->Checked);
 }
-void MainForm::cbItemVac_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbItemVac_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbItemVac->Checked = Hacks::ItemVac.Enable(cbItemVac->Checked);
 }
-void MainForm::cbLockItemVac_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+void MainForm::cbLockItemVac_CheckedChanged(System::Object^ sender, System::EventArgs^ e)
 {
 	Hacks::LockItemVac(cbLockItemVac->Checked);
 }
-void MainForm::cbFMA_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbFMA_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbNFA->Checked = cbFMA->Checked;
 	cbItemVac->Checked = cbFMA->Checked;
 	cbItemVac->Enabled = !cbFMA->Checked;
 	cbFMA->Checked = Hacks::FMA.Enable(cbFMA->Checked);
 }
-void MainForm::cbScareMobs_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbScareMobs_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbScareMobs->Checked = Hacks::ScareMobs.Enable(cbScareMobs->Checked);
 }
-void MainForm::cbFLACC_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbFLACC_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbFLACC->Checked = Hacks::FaceLeftAfterCC.Enable(cbFLACC->Checked);
 }
-void MainForm::cbCPUHack_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbCPUHack_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbCPUHack->Checked = Hacks::CPUHack.Enable(cbCPUHack->Checked);
 }
-void MainForm::cbUA_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbUA_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbUA->Checked = Hacks::UnlimitedAttack.Enable(cbUA->Checked);
 }
-void MainForm::cbNFA_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbNFA_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbNFA->Checked = Hacks::DisableFinalAttack.Enable(cbNFA->Checked);
 }
-void MainForm::cbNDMining_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbNDMining_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbNDMining->Checked = Hacks::NDMining.Enable(cbNDMining->Checked);
 }
-void MainForm::cbHideDamage_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbHideDamage_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbHideDamage->Checked = Hacks::HideDamage1.Enable(cbHideDamage->Checked);
 	cbHideDamage->Checked = Hacks::HideDamage2.Enable(cbHideDamage->Checked);
 }
-void MainForm::cbMercedesCombo_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbMercedesCombo_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbMercedesCombo->Checked = Hacks::MercedesCombo.Enable(cbMercedesCombo->Checked);
 }
-void MainForm::cbNoFadeStages_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbNoFadeStages_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbNoFadeStages->Checked = Hacks::NoFadeStages.Enable(cbNoFadeStages->Checked);
 }
-void MainForm::cbMouseFly_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbMouseFly_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbMouseFly->Checked = Hacks::MouseFly.Enable(cbMouseFly->Checked);
 }
-void MainForm::cbSkillInjection_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbSkillInjection_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	/* Patched :(
 	if(ddbSkillInjection->SelectedIndex < 0)
@@ -182,23 +182,23 @@ void MainForm::cbSkillInjection_CheckedChanged(Object^  sender, EventArgs^  e)
 	}
 	*/
 }
-void MainForm::nudSkillInjectionDelay_ValueChanged(Object^  sender, EventArgs^  e)
+void MainForm::nudSkillInjectionDelay_ValueChanged(Object^ sender, EventArgs^ e)
 {
 	//SkillInjectionStopWatch.SetDelay(milliseconds((int) nudSkillInjection->Value));
 }
-void MainForm::ddbSkillInjectionSkills_SelectedIndexChanged(Object^  sender, EventArgs^  e)
+void MainForm::ddbSkillInjectionSkills_SelectedIndexChanged(Object^ sender, EventArgs^ e)
 {
 	//Patched
 	//Hacks::iSkillInjectionSkillID = SkillInjectionSkills[ddbSkillInjection->SelectedIndex];
 }
-void MainForm::cbNoCCBlueBoxes_CheckedChanged(Object^  sender, EventArgs^  e)
+void MainForm::cbNoCCBlueBoxes_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbNoCCBlueBoxes->Checked = Hacks::NoCCBoxes.Enable(cbNoCCBlueBoxes->Checked);
 }
 
 //AutoBot Events
 StopWatch<milliseconds> BreathCounter(milliseconds(5500));
-Void MainForm::cbAutoAttack_CheckedChanged(Object^  sender, EventArgs^  e)
+Void MainForm::cbAutoAttack_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	this->nudAutoAttack->Enabled = !cbAutoAttack->Checked;
 	this->nudSAWSIL->Enabled = !cbAutoAttack->Checked;
@@ -208,7 +208,7 @@ Void MainForm::cbAutoAttack_CheckedChanged(Object^  sender, EventArgs^  e)
 	this->tAutoAttack->Interval = (int) nudAutoAttack->Value;
 	this->tAutoAttack->Enabled = cbAutoAttack->Checked;
 }
-Void MainForm::tAutoAttack_Tick(Object^  sender, EventArgs^  e)
+Void MainForm::tAutoAttack_Tick(Object^ sender, EventArgs^ e)
 {
 	if (CMS::ShouldAttack())
 	{
@@ -216,7 +216,7 @@ Void MainForm::tAutoAttack_Tick(Object^  sender, EventArgs^  e)
 		CMS::SpamSwitch(ddbAutoAttackKey->SelectedIndex);
 	}
 }
-Void MainForm::cbAutoLoot_CheckedChanged(Object^  sender, EventArgs^  e)
+Void MainForm::cbAutoLoot_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	this->nudAutoLoot->Enabled = !this->cbAutoLoot->Checked;
 	this->ddbAutoLootKey->Enabled = !this->cbAutoLoot->Checked;
@@ -226,7 +226,7 @@ Void MainForm::cbAutoLoot_CheckedChanged(Object^  sender, EventArgs^  e)
 	tAutoLoot->Interval = (int) nudAutoLoot->Value;
 	tAutoLoot->Enabled = cbAutoLoot->Checked;
 }
-Void MainForm::tAutoLoot_Tick(Object^  sender, EventArgs^  e)
+Void MainForm::tAutoLoot_Tick(Object^ sender, EventArgs^ e)
 {
 	if (CMS::ShouldLoot())
 	{
@@ -234,21 +234,21 @@ Void MainForm::tAutoLoot_Tick(Object^  sender, EventArgs^  e)
 		CMS::SpamSwitch(ddbAutoLootKey->SelectedIndex);
 	}
 }
-Void MainForm::cbAutoHP_CheckedChanged(Object^  sender, EventArgs^  e)
+Void MainForm::cbAutoHP_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	nudAutoHP->Enabled = !cbAutoHP->Checked;
 	ddbAutoHPKey->Enabled = !cbAutoHP->Checked;
 }
-Void MainForm::cbAutoMP_CheckedChanged(Object^  sender, EventArgs^  e)
+Void MainForm::cbAutoMP_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	nudAutoMP->Enabled = !cbAutoMP->Checked;
 	ddbAutoMPKey->Enabled = !cbAutoMP->Checked;
 }
-Void MainForm::cbCCPeople_CheckedChanged(Object^  sender, EventArgs^  e)
+Void MainForm::cbCCPeople_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	nudCCPeople->Enabled = !cbCCPeople->Checked;
 }
-Void MainForm::cbCCTimed_CheckedChanged(Object^  sender, EventArgs^  e)
+Void MainForm::cbCCTimed_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	this->ddbTimedType->Enabled = !this->cbCCTimed->Checked;
 	this->nudCCTimed->Enabled = !this->cbCCTimed->Checked;
@@ -256,11 +256,11 @@ Void MainForm::cbCCTimed_CheckedChanged(Object^  sender, EventArgs^  e)
 	tTimedCC->Interval = (int) nudCCTimed->Value * 1000;
 	tTimedCC->Enabled = cbCCTimed->Checked;
 }
-Void MainForm::tTimedCC_Tick(Object^  sender, EventArgs^  e)
+Void MainForm::tTimedCC_Tick(Object^ sender, EventArgs^ e)
 {
 	CC::CCSwitch((CCType) ddbTimedType->SelectedIndex);
 }
-Void MainForm::cbCCAttacks_CheckedChanged(Object^  sender, EventArgs^  e)
+Void MainForm::cbCCAttacks_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	nudCCAttacks->Enabled = !cbCCAttacks->Checked;
 }
@@ -282,7 +282,7 @@ Void ShowErrorDialog(String^ Message)
 {
 	MessageBox::Show(Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 }
-Void MainForm::MainForm_Load(Object^  sender, EventArgs^  e)
+Void MainForm::MainForm_Load(Object^ sender, EventArgs^ e)
 {
 	Log::WriteLine();
 	Log::WriteLine("Starting WatyBot");
@@ -301,7 +301,7 @@ Void MainForm::MainForm_Load(Object^  sender, EventArgs^  e)
 	MainForm::Height = TabHeight[MainTabControl->SelectedTab->TabIndex];
 	MainTabControl->Height = TabHeight[MainTabControl->SelectedTab->TabIndex] - 30;
 }
-Void MainForm::StatsTimer_Tick(Object^  sender, EventArgs^  e)
+Void MainForm::StatsTimer_Tick(Object^ sender, EventArgs^ e)
 {
 	this->MobCountLabel->Text = "Mobs: " + CMS::MobCount;
 	this->PeopleCountLabel->Text = "People: " + CMS::PeopleCount;
@@ -355,12 +355,12 @@ Void MainForm::ReloadComboBox(ComboBox^ combobox)
 	//Restore the selectedindex if it still is valid
 	if (selectedItem != nullptr && combobox->Items->Contains(selectedItem)) combobox->SelectedItem = selectedItem;
 }
-Void MainForm::MainTabControl_SelectedIndexChanged(Object^  sender, EventArgs^  e)
+Void MainForm::MainTabControl_SelectedIndexChanged(Object^ sender, EventArgs^ e)
 {
 	MainForm::Height = TabHeight[MainTabControl->SelectedTab->TabIndex];
 	MainTabControl->Height = TabHeight[MainTabControl->SelectedTab->TabIndex] - 30;
 }
-Void MainForm::MainForm_FormClosing(Object^  sender, Windows::Forms::FormClosingEventArgs^  e)
+Void MainForm::MainForm_FormClosing(Object^ sender, Windows::Forms::FormClosingEventArgs^ e)
 {
 	switch (MessageBox::Show("Close MapleStory too?", "Terminate Maple?", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Question))
 	{
@@ -379,7 +379,7 @@ Void MainForm::MainForm_FormClosing(Object^  sender, Windows::Forms::FormClosing
 }
 
 //Autoskill
-Void MainForm::bAutoSkill_Click(Object^  sender, EventArgs^  e)
+Void MainForm::bAutoSkill_Click(Object^ sender, EventArgs^ e)
 {
 	if (nudAutoSkill->Value == 0) ShowError("The interval can't be 0!");
 	else if (ddbAutoSkill->SelectedIndex == -1) ShowError("You must select a key!");
@@ -393,26 +393,26 @@ Void MainForm::bAutoSkill_Click(Object^  sender, EventArgs^  e)
 	}
 	AutoSkill::WriteXmlData();
 }
-Void MainForm::castToolStripMenuItem_Click(Object^  sender, EventArgs^  e)
+Void MainForm::castToolStripMenuItem_Click(Object^ sender, EventArgs^ e)
 {
 	if (lvSPControl->SelectedItems->Count < 0) return;
 	ListViewItem^ i = lvAutoSkill->SelectedItems[0];
 	AutoSkill::AutoSkills[lvAutoSkill->Items->IndexOf(i)]->Cast();
 }
-Void MainForm::deleteToolStripMenuItem_Click(Object^  sender, EventArgs^  e)
+Void MainForm::deleteToolStripMenuItem_Click(Object^ sender, EventArgs^ e)
 {
 	if (lvSPControl->SelectedIndices->Count < 0) return;
 	AutoSkill::AutoSkills->RemoveAt(lvAutoSkill->SelectedIndices[0]);
 	AutoSkill::WriteXmlData();
 }
-Void MainForm::lvAutoSkill_ItemCheck(Object^  sender, Windows::Forms::ItemCheckEventArgs^  e)
+Void MainForm::lvAutoSkill_ItemCheck(Object^ sender, Windows::Forms::ItemCheckEventArgs^ e)
 {
 	if (e->CurrentValue == CheckState::Checked)
 		AutoSkill::AutoSkills[e->Index]->Enabled = false;
 	else if (e->CurrentValue == CheckState::Unchecked)
 		AutoSkill::AutoSkills[e->Index]->Enabled = true;
 }
-Void MainForm::lvAutoSkill_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e)
+Void MainForm::lvAutoSkill_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
 {
 	if (lvAutoSkill->SelectedIndices->Count <= 0) return;
 	if (e->KeyCode == Keys::Delete || e->KeyCode == Keys::Back)
@@ -447,13 +447,13 @@ Void MainForm::LoadAutoSkill()
 }
 
 //Controls on the PacketSender tab
-Void MainForm::bAddPacket_Click(Object^  sender, EventArgs^  e)
+Void MainForm::bAddPacket_Click(Object^ sender, EventArgs^ e)
 {
 	auto dialog = gcnew PacketDialog;
 	if (dialog->ShowDialog() == ::DialogResult::OK)
 		PacketSender::Add(dialog->Packet);
 }
-Void MainForm::bEditPacket_Click(System::Object^  sender, System::EventArgs^  e)
+Void MainForm::bEditPacket_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	if (lvPackets->SelectedItems->Count < 1) return;
 	auto dialog = gcnew PacketDialog(PacketSender::Packets[lvPackets->SelectedIndices[0]]);
@@ -463,17 +463,17 @@ Void MainForm::bEditPacket_Click(System::Object^  sender, System::EventArgs^  e)
 		PacketSender::WriteXmlData();
 	}
 }
-Void MainForm::lvPackets_SelectedIndexChanged(Object^  sender, EventArgs^  e)
+Void MainForm::lvPackets_SelectedIndexChanged(Object^ sender, EventArgs^ e)
 {
 	if (lvPackets->SelectedItems->Count < 1) return;
 	PacketSender::SelectedPacket = PacketSender::Packets[lvPackets->SelectedItems[0]->Index];
 }
-Void MainForm::bSendPacket_Click(Object^  sender, EventArgs^  e)
+Void MainForm::bSendPacket_Click(Object^ sender, EventArgs^ e)
 {
 	if (lvPackets->SelectedItems->Count < 1) return;
 	PacketSender::Send();
 }
-Void MainForm::bDeletePacket_Click(Object^  sender, EventArgs^  e)
+Void MainForm::bDeletePacket_Click(Object^ sender, EventArgs^ e)
 {
 	if (lvPackets->SelectedItems->Count < 1) return;
 	int index = lvPackets->SelectedItems[0]->Index;
@@ -481,7 +481,7 @@ Void MainForm::bDeletePacket_Click(Object^  sender, EventArgs^  e)
 	PacketSender::Packets->RemoveAt(index);
 	PacketSender::WriteXmlData();
 }
-Void MainForm::lvPackets_KeyDown(Object^  sender, Windows::Forms::KeyEventArgs^  e)
+Void MainForm::lvPackets_KeyDown(Object^ sender, Windows::Forms::KeyEventArgs^ e)
 {
 	if (lvPackets->SelectedIndices->Count <= 0) return;
 	if (e->KeyCode == Keys::Delete || e->KeyCode == Keys::Back)
@@ -511,7 +511,7 @@ Void MainForm::LoadPackets()
 
 
 //controls on SPControl Tab
-Void MainForm::bAddSPCLocation_Click(Object^  sender, EventArgs^  e)
+Void MainForm::bAddSPCLocation_Click(Object^ sender, EventArgs^ e)
 {
 	String^ name = tbSPCName->Text;
 	int mapid = (int) nudSPCMapId->Value;
@@ -520,12 +520,12 @@ Void MainForm::bAddSPCLocation_Click(Object^  sender, EventArgs^  e)
 
 	SPControl::AddLocation(name, mapid, x, y);
 }
-Void MainForm::cbSPControl_CheckedChanged(Object^  sender, EventArgs^  e)
+Void MainForm::cbSPControl_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbSPControl->Checked = Hacks::SpawnControlCheck.Enable(cbSPControl->Checked);
 	cbSPControl->Checked = Hacks::SpawnControlCave.Enable(cbSPControl->Checked);
 }
-Void MainForm::SPControlDeleteItem_Click(Object^  sender, EventArgs^  e)
+Void MainForm::SPControlDeleteItem_Click(Object^ sender, EventArgs^ e)
 {
 	{
 		ListViewItem^ L = lvSPControl->SelectedItems[0];
@@ -538,7 +538,7 @@ Void MainForm::SPControlDeleteItem_Click(Object^  sender, EventArgs^  e)
 		}
 	}
 }
-Void MainForm::editLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+Void MainForm::editLocationToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	ListViewItem^ L = lvSPControl->SelectedItems[0];
 	int index = lvSPControl->Items->IndexOf(L);
@@ -550,7 +550,7 @@ Void MainForm::editLocationToolStripMenuItem_Click(System::Object^  sender, Syst
 		SPControl::WriteXmlData();
 	}
 }
-Void MainForm::GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e)
+Void MainForm::GetSPControlCoordsButton_Click(Object^ sender, EventArgs^ e)
 {
 	for (int i = 0; i < 10; i++)
 	{
@@ -561,7 +561,7 @@ Void MainForm::GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e)
 	this->nudSPCX->Value = CMS::CharX;
 	this->nudSPCY->Value = CMS::CharY;
 }
-Void MainForm::lvSPControl_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e)
+Void MainForm::lvSPControl_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e)
 {
 	if (lvSPControl->SelectedIndices->Count <= 0) return;
 	if (e->KeyCode == Keys::Delete || e->KeyCode == Keys::Back)
@@ -589,141 +589,22 @@ Void MainForm::LoadSPControl()
 }
 
 //Loading/Saving AutoBot settings
-enum SettingsIndex{
-	AutoAttackDelay, SAWSIL, AutoAttackKey, AutoLootDelay, OLWNA, AutoLootKey, AutoHPValue, AutoHPKey, AutoMPValue, AutoMPKey, PetFeederValue, PetFeederKey,
-	CCPeople, CCPeopleType, CCTimed, CCTimedType, CCAttacks, CCAttacksType, HotKeyAttack, HotKeyLoot, HotKeyFMA, HotKeyCCPeople, HotKeySendPacket, IceGuard,
-	PinTyper, LogoSkipper, SettingCount
-};
 Void MainForm::SaveSettings()
 {
-	ReloadSettings();
-	Settings::Serialize(Settings::Path, gcnew XmlSerializer(List<SettingsEntry^>::typeid), Settings);
+	Settings::Serialize(this, Path);
 }
 Void MainForm::LoadSettings()
 {
-	Object^ Result = Settings::Deserialize(Settings::Path, gcnew XmlSerializer(List<SettingsEntry^>::typeid));
-	if (Result == nullptr) return;
-
-	Settings = safe_cast<List<SettingsEntry^>^>(Result);
-	try
-	{
-		//AutoAttack
-		nudAutoAttack->Value = (Decimal) Settings[AutoAttackDelay]->Value;
-		nudSAWSIL->Value = (Decimal) Settings[SAWSIL]->Value;
-		ddbAutoAttackKey->SelectedIndex = (int) Settings[AutoAttackKey]->Value;
-		//AutoLoot
-		nudAutoLoot->Value = (Decimal) Settings[AutoLootDelay]->Value;
-		cbOLWNA->Checked = (bool) Settings[OLWNA]->Value;
-		ddbAutoLootKey->SelectedIndex = (int) Settings[AutoLootKey]->Value;
-		//AutoHP
-		nudAutoHP->Value = (Decimal) Settings[AutoHPValue]->Value;
-		ddbAutoHPKey->SelectedIndex = (int) Settings[AutoHPKey]->Value;
-		//AutoMP
-		nudAutoMP->Value = (Decimal) Settings[AutoMPValue]->Value;
-		ddbAutoMPKey->SelectedIndex = (int) Settings[AutoMPKey]->Value;
-		//PetFeeder
-		nudPetFeeder->Value = (Decimal) Settings[PetFeederValue]->Value;
-		ddbPetFeeder->SelectedIndex = (int) Settings[PetFeederKey]->Value;
-		//CC People
-		nudCCPeople->Value = (Decimal) Settings[CCPeople]->Value;
-		ddbPeopleType->SelectedIndex = (int) Settings[CCPeopleType]->Value;
-		//CC Timed
-		nudCCTimed->Value = (Decimal) Settings[CCTimed]->Value;
-		ddbTimedType->SelectedIndex = (int) Settings[CCTimedType]->Value;
-		//CC Attacks
-		nudCCAttacks->Value = (Decimal) Settings[CCAttacks]->Value;
-		ddbAttacksType->SelectedIndex = (int) Settings[CCAttacksType]->Value;
-		//HotKeys
-		ddbHotKeyAttack->SelectedIndex = (int) Settings[HotKeyAttack]->Value;
-		ddbHotKeyLoot->SelectedIndex = (int) Settings[HotKeyLoot]->Value;
-		ddbHotKeyFMA->SelectedIndex = (int) Settings[HotKeyFMA]->Value;
-		ddbHotKeyCCPeople->SelectedIndex = (int) Settings[HotKeyCCPeople]->Value;
-		ddbHotKeySendPacket->SelectedIndex = (int) Settings[HotKeySendPacket]->Value;
-
-		//try's 5 seconds long if your CRC is ready for the hacks
-		System::Threading::Thread^ t = gcnew Threading::Thread(gcnew Threading::ThreadStart(this, &MainForm::LoadEnabledHacks));
-		t->Start();
-	}
-	catch (Exception^ ex)
-	{
-		Log::WriteLine("While loading saved general settings, the followin exception occured: " + ex->Message);
-	}
-
+	Settings::Deserialize(this, Path);
 }
-Void MainForm::LoadEnabledHacks()
-{
-	try
-	{
-		int count = 0;
-		while (!CMS::gotMSCRC && count < 10)
-		{
-			Sleep(1000);
-			count++;
-		}
-
-		if (CMS::gotMSCRC)
-		{
-			cbPinTyper->Checked = (bool) Settings[PinTyper]->Value;
-			cbLogoSkipper->Checked = (bool) Settings[LogoSkipper]->Value;
-			Hacks::ThreadIdFix.Enable(true);
-			Log::WriteLine("Succeeded in enabling the hacks after waiting " + count + " seconds.");
-		}
-	}
-	catch (Exception^ ex)
-	{
-		Log::WriteLine("While loading enabled hacks, the following exception occured : " + ex->Message);
-	}
-}
-Void MainForm::ReloadSettings()
-{
-	List<SettingsEntry^>^ s = gcnew List<SettingsEntry^>(SettingCount);
-	//AutoAttack
-	s->Add(gcnew SettingsEntry(nudAutoAttack));
-	s->Add(gcnew SettingsEntry(nudSAWSIL));
-	s->Add(gcnew SettingsEntry(ddbAutoAttackKey));
-	//AutoLoot
-	s->Add(gcnew SettingsEntry(nudAutoLoot));
-	s->Add(gcnew SettingsEntry(cbOLWNA));
-	s->Add(gcnew SettingsEntry(ddbAutoLootKey));
-	//AutoHP
-	s->Add(gcnew SettingsEntry(nudAutoHP));
-	s->Add(gcnew SettingsEntry(ddbAutoHPKey));
-	//AutoMP
-	s->Add(gcnew SettingsEntry(nudAutoMP));
-	s->Add(gcnew SettingsEntry(ddbAutoMPKey));
-	//PetFeeder
-	s->Add(gcnew SettingsEntry(nudPetFeeder));
-	s->Add(gcnew SettingsEntry(ddbPetFeeder));
-	//CC People
-	s->Add(gcnew SettingsEntry(nudCCPeople));
-	s->Add(gcnew SettingsEntry(ddbPeopleType));
-	//CC Timed
-	s->Add(gcnew SettingsEntry(nudCCTimed));
-	s->Add(gcnew SettingsEntry(ddbTimedType));
-	//CC Attacks
-	s->Add(gcnew SettingsEntry(nudCCAttacks));
-	s->Add(gcnew SettingsEntry(ddbAttacksType));
-	//HotKeys
-	s->Add(gcnew SettingsEntry(ddbHotKeyAttack));
-	s->Add(gcnew SettingsEntry(ddbHotKeyLoot));
-	s->Add(gcnew SettingsEntry(ddbHotKeyFMA));
-	s->Add(gcnew SettingsEntry(ddbHotKeyCCPeople));
-	s->Add(gcnew SettingsEntry(ddbHotKeySendPacket));
-	//Hacks Tab
-	s->Add(gcnew SettingsEntry(nudIceGuard));
-
-	s->Add(gcnew SettingsEntry(cbPinTyper));
-	s->Add(gcnew SettingsEntry(cbLogoSkipper));
-	Settings = s;
-}
-Void MainForm::bSaveSettings_Click(Object^  sender, EventArgs^  e)
+Void MainForm::bSaveSettings_Click(Object^ sender, EventArgs^ e)
 {
 	SaveSettings();
 	SPControl::WriteXmlData();
 	PacketSender::WriteXmlData();
 	AutoSkill::WriteXmlData();
 }
-Void MainForm::SettingsWatcher_Changed(System::Object^  sender, System::IO::FileSystemEventArgs^  e)
+Void MainForm::SettingsWatcher_Changed(System::Object^ sender, System::IO::FileSystemEventArgs^ e)
 {
 	if (e->FullPath == PacketSender::Path) LoadPackets();
 	if (e->FullPath == SPControl::Path) LoadSPControl();

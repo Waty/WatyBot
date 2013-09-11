@@ -54,170 +54,170 @@ namespace WatyBotRevamp {
 			}
 		}
 	private:
-		System::Windows::Forms::TabControl^  MainTabControl;
-		System::Windows::Forms::TabPage^  AutoBotTab;
-		System::Windows::Forms::TabPage^  HacksTab;
-		System::Windows::Forms::Timer^  StatsTimer;
-		System::Windows::Forms::Label^  HPLabel;
-		System::Windows::Forms::Label^  MPLabel;
-		System::Windows::Forms::Label^  EXPLabel;
-		System::Windows::Forms::PictureBox^  HPBackground;
-		System::Windows::Forms::PictureBox^  MPBackground;
-		System::Windows::Forms::PictureBox^  EXPForeground;
-		System::Windows::Forms::PictureBox^  MPForeground;
-		System::Windows::Forms::PictureBox^  HPForeground;
-		System::Windows::Forms::PictureBox^  EXPBackground;
-		System::Windows::Forms::CheckBox^  cbAutoHP;
-		System::Windows::Forms::ComboBox^  ddbAutoHPKey;
-		System::Windows::Forms::ComboBox^  ddbAutoMPKey;
-		System::Windows::Forms::CheckBox^  cbAutoMP;
-		System::Windows::Forms::ComboBox^  ddbAutoAttackKey;
-		System::Windows::Forms::CheckBox^  cbAutoAttack;
-		System::Windows::Forms::TabPage^  InfoTab;
-		System::Windows::Forms::Label^  AttackCountLabel;
-		System::Windows::Forms::Label^  ItemCountLabel;
-		System::Windows::Forms::Label^  CharPosLabel;
-		System::Windows::Forms::Label^  PeopleCountLabel;
-		System::Windows::Forms::Label^  MobCountLabel;
-		System::Windows::Forms::GroupBox^  gbPointers;
-		System::Windows::Forms::CheckBox^  cbAutoLoot;
-		System::Windows::Forms::ComboBox^  ddbAutoLootKey;
-		System::Windows::Forms::CheckBox^  cbPetFeeder;
-		System::Windows::Forms::ComboBox^  ddbPetFeeder;
-		System::Windows::Forms::GroupBox^  AutoBotGroupBox;
-		System::Windows::Forms::Label^  TubiPointerLabel;
-		System::Windows::Forms::Label^  BreathLabel;
-		System::Windows::Forms::CheckBox^  cbCCPeople;
-		System::Windows::Forms::TabPage^  PacketSenderTab;
-		System::Windows::Forms::TabPage^  SPControlTabPage;
-		System::Windows::Forms::CheckBox^  cbSPControl;
-		System::Windows::Forms::CheckBox^  cbCCAttacks;
-		System::Windows::Forms::CheckBox^  cbCCTimed;
-		System::Windows::Forms::Label^  CCTimedLabel;
-		System::Windows::Forms::Label^  CCPeopleLabel;
-		System::Windows::Forms::Label^  CCAttacksLabel;
-		System::Windows::Forms::ListView^  lvSPControl;
-		System::Windows::Forms::ColumnHeader^  HeaderMapName;
-		System::Windows::Forms::ColumnHeader^  HeaderMapID;
-		System::Windows::Forms::ColumnHeader^  HeaderX;
-		System::Windows::Forms::ColumnHeader^  HeaderY;
-		System::Windows::Forms::Label^  SPControlNameLabel;
-		System::Windows::Forms::Label^  SPControlMapIDLabel;
-		System::Windows::Forms::Label^  SPControlXLabel;
-		System::Windows::Forms::Label^  SPControlYLabel;
-		System::Windows::Forms::GroupBox^  gbNewSPCLocation;
-		System::Windows::Forms::TextBox^  tbSPCName;
-		System::Windows::Forms::Button^  bAddSPCLocation;
-		System::Windows::Forms::ContextMenuStrip^  SPControlContextMenu;
-		System::Windows::Forms::ToolStripMenuItem^  deleteSPControlToolStripMenuItem;
-		System::Windows::Forms::Button^  bSPCGetCurrent;
-		System::Windows::Forms::GroupBox^  MobHacks;
-		System::Windows::Forms::CheckBox^  cbPerfectLoot;
-		System::Windows::Forms::CheckBox^  cbFusionAttack;
-		System::Windows::Forms::GroupBox^  gbMiscHacks;
-		System::Windows::Forms::CheckBox^  cbJDA;
-		System::Windows::Forms::CheckBox^  cbNoBG;
-		System::Windows::Forms::GroupBox^  gbCharHacks;
-		System::Windows::Forms::CheckBox^  cbVacRight;
-		System::Windows::Forms::CheckBox^  cbJumpRight;
-		System::Windows::Forms::CheckBox^  cbWalkRight;
-		System::Windows::Forms::CheckBox^  cbPinTyper;
-		System::Windows::Forms::CheckBox^  cbNoKB;
-		System::Windows::Forms::CheckBox^  cbMobDisarm;
-		System::Windows::Forms::CheckBox^  cbDojangGodmode;
-		System::Windows::Forms::CheckBox^  cbUnlimitedMorph;
-		System::Windows::Forms::CheckBox^  cbFasterMobs;
-		System::Windows::Forms::CheckBox^  cbNDAllAttacks;
-		System::Windows::Forms::CheckBox^  cbNoMobs;
-		System::Windows::Forms::CheckBox^  cbUA;
-		System::Windows::Forms::CheckBox^  cbSitHack;
-		System::Windows::Forms::CheckBox^  cb50SecGM;
-		System::Windows::Forms::CheckBox^  cbLogoSkipper;
-		System::Windows::Forms::CheckBox^  cbViewSwears;
-		System::Windows::Forms::CheckBox^  cbItemVac;
-		System::Windows::Forms::CheckBox^  cbFMA;
-		System::Windows::Forms::CheckBox^  cbScareMobs;
-		System::Windows::Forms::CheckBox^  cbFLACC;
-		System::Windows::Forms::CheckBox^  cbCPUHack;
+		System::Windows::Forms::TabControl^ MainTabControl;
+		System::Windows::Forms::TabPage^ AutoBotTab;
+		System::Windows::Forms::TabPage^ HacksTab;
+		System::Windows::Forms::Timer^ StatsTimer;
+		System::Windows::Forms::Label^ HPLabel;
+		System::Windows::Forms::Label^ MPLabel;
+		System::Windows::Forms::Label^ EXPLabel;
+		System::Windows::Forms::PictureBox^ HPBackground;
+		System::Windows::Forms::PictureBox^ MPBackground;
+		System::Windows::Forms::PictureBox^ EXPForeground;
+		System::Windows::Forms::PictureBox^ MPForeground;
+		System::Windows::Forms::PictureBox^ HPForeground;
+		System::Windows::Forms::PictureBox^ EXPBackground;
+		System::Windows::Forms::CheckBox^ cbAutoHP;
+		System::Windows::Forms::ComboBox^ ddbAutoHPKey;
+		System::Windows::Forms::ComboBox^ ddbAutoMPKey;
+		System::Windows::Forms::CheckBox^ cbAutoMP;
+		System::Windows::Forms::ComboBox^ ddbAutoAttackKey;
+		System::Windows::Forms::CheckBox^ cbAutoAttack;
+		System::Windows::Forms::TabPage^ InfoTab;
+		System::Windows::Forms::Label^ AttackCountLabel;
+		System::Windows::Forms::Label^ ItemCountLabel;
+		System::Windows::Forms::Label^ CharPosLabel;
+		System::Windows::Forms::Label^ PeopleCountLabel;
+		System::Windows::Forms::Label^ MobCountLabel;
+		System::Windows::Forms::GroupBox^ gbPointers;
+		System::Windows::Forms::CheckBox^ cbAutoLoot;
+		System::Windows::Forms::ComboBox^ ddbAutoLootKey;
+		System::Windows::Forms::CheckBox^ cbPetFeeder;
+		System::Windows::Forms::ComboBox^ ddbPetFeeder;
+		System::Windows::Forms::GroupBox^ AutoBotGroupBox;
+		System::Windows::Forms::Label^ TubiPointerLabel;
+		System::Windows::Forms::Label^ BreathLabel;
+		System::Windows::Forms::CheckBox^ cbCCPeople;
+		System::Windows::Forms::TabPage^ PacketSenderTab;
+		System::Windows::Forms::TabPage^ SPControlTabPage;
+		System::Windows::Forms::CheckBox^ cbSPControl;
+		System::Windows::Forms::CheckBox^ cbCCAttacks;
+		System::Windows::Forms::CheckBox^ cbCCTimed;
+		System::Windows::Forms::Label^ CCTimedLabel;
+		System::Windows::Forms::Label^ CCPeopleLabel;
+		System::Windows::Forms::Label^ CCAttacksLabel;
+		System::Windows::Forms::ListView^ lvSPControl;
+		System::Windows::Forms::ColumnHeader^ HeaderMapName;
+		System::Windows::Forms::ColumnHeader^ HeaderMapID;
+		System::Windows::Forms::ColumnHeader^ HeaderX;
+		System::Windows::Forms::ColumnHeader^ HeaderY;
+		System::Windows::Forms::Label^ SPControlNameLabel;
+		System::Windows::Forms::Label^ SPControlMapIDLabel;
+		System::Windows::Forms::Label^ SPControlXLabel;
+		System::Windows::Forms::Label^ SPControlYLabel;
+		System::Windows::Forms::GroupBox^ gbNewSPCLocation;
+		System::Windows::Forms::TextBox^ tbSPCName;
+		System::Windows::Forms::Button^ bAddSPCLocation;
+		System::Windows::Forms::ContextMenuStrip^ SPControlContextMenu;
+		System::Windows::Forms::ToolStripMenuItem^ deleteSPControlToolStripMenuItem;
+		System::Windows::Forms::Button^ bSPCGetCurrent;
+		System::Windows::Forms::GroupBox^ MobHacks;
+		System::Windows::Forms::CheckBox^ cbPerfectLoot;
+		System::Windows::Forms::CheckBox^ cbFusionAttack;
+		System::Windows::Forms::GroupBox^ gbMiscHacks;
+		System::Windows::Forms::CheckBox^ cbJDA;
+		System::Windows::Forms::CheckBox^ cbNoBG;
+		System::Windows::Forms::GroupBox^ gbCharHacks;
+		System::Windows::Forms::CheckBox^ cbVacRight;
+		System::Windows::Forms::CheckBox^ cbJumpRight;
+		System::Windows::Forms::CheckBox^ cbWalkRight;
+		System::Windows::Forms::CheckBox^ cbPinTyper;
+		System::Windows::Forms::CheckBox^ cbNoKB;
+		System::Windows::Forms::CheckBox^ cbMobDisarm;
+		System::Windows::Forms::CheckBox^ cbDojangGodmode;
+		System::Windows::Forms::CheckBox^ cbUnlimitedMorph;
+		System::Windows::Forms::CheckBox^ cbFasterMobs;
+		System::Windows::Forms::CheckBox^ cbNDAllAttacks;
+		System::Windows::Forms::CheckBox^ cbNoMobs;
+		System::Windows::Forms::CheckBox^ cbUA;
+		System::Windows::Forms::CheckBox^ cbSitHack;
+		System::Windows::Forms::CheckBox^ cb50SecGM;
+		System::Windows::Forms::CheckBox^ cbLogoSkipper;
+		System::Windows::Forms::CheckBox^ cbViewSwears;
+		System::Windows::Forms::CheckBox^ cbItemVac;
+		System::Windows::Forms::CheckBox^ cbFMA;
+		System::Windows::Forms::CheckBox^ cbScareMobs;
+		System::Windows::Forms::CheckBox^ cbFLACC;
+		System::Windows::Forms::CheckBox^ cbCPUHack;
 
-		System::Windows::Forms::Label^  lSAWSIL;
-		System::Windows::Forms::ComboBox^  ddbTimedType;
-		System::Windows::Forms::ComboBox^  ddbAttacksType;
-		System::Windows::Forms::ComboBox^  ddbPeopleType;
-		System::Windows::Forms::GroupBox^  gbHotKeys;
-		System::Windows::Forms::CheckBox^  cbHotKeyAttack;
-		System::Windows::Forms::ComboBox^  ddbHotKeyAttack;
-		System::Windows::Forms::ComboBox^  ddbHotKeyLoot;
-		System::Windows::Forms::CheckBox^  cbHotKeyLoot;
-		System::Windows::Forms::Label^  lMapID;
+		System::Windows::Forms::Label^ lSAWSIL;
+		System::Windows::Forms::ComboBox^ ddbTimedType;
+		System::Windows::Forms::ComboBox^ ddbAttacksType;
+		System::Windows::Forms::ComboBox^ ddbPeopleType;
+		System::Windows::Forms::GroupBox^ gbHotKeys;
+		System::Windows::Forms::CheckBox^ cbHotKeyAttack;
+		System::Windows::Forms::ComboBox^ ddbHotKeyAttack;
+		System::Windows::Forms::ComboBox^ ddbHotKeyLoot;
+		System::Windows::Forms::CheckBox^ cbHotKeyLoot;
+		System::Windows::Forms::Label^ lMapID;
 
-		System::Windows::Forms::NumericUpDown^  nudSAWSIL;
-		System::Windows::Forms::NumericUpDown^  nudAutoLoot;
-		System::Windows::Forms::NumericUpDown^  nudAutoAttack;
-		System::Windows::Forms::NumericUpDown^  nudAutoMP;
-		System::Windows::Forms::NumericUpDown^  nudAutoHP;
-		System::Windows::Forms::NumericUpDown^  nudCCAttacks;
-		System::Windows::Forms::NumericUpDown^  nudCCTimed;
-		System::Windows::Forms::NumericUpDown^  nudCCPeople;
-		System::Windows::Forms::NumericUpDown^  nudPetFeeder;
-		System::Windows::Forms::CheckBox^  cbNFA;
-		System::Windows::Forms::CheckBox^  cbAutoAggro;
-		System::Windows::Forms::Button^  bSaveSettings;
-		System::Windows::Forms::ComboBox^  ddbHotKeyFMA;
-		System::Windows::Forms::CheckBox^  cbHotKeyFMA;
-		System::Windows::Forms::ComboBox^  ddbHotKeyCCPeople;
-		System::Windows::Forms::CheckBox^  cbHotKeyCCPeople;
-		System::Windows::Forms::CheckBox^  cbNDMining;
-		System::Windows::Forms::ComboBox^  ddbHotKeySendPacket;
-		System::Windows::Forms::CheckBox^  cbHotKeySendPacket;
-		System::Windows::Forms::Label^  lCharacterpID;
-		System::Windows::Forms::CheckBox^  cbHideDamage;
-		System::Windows::Forms::CheckBox^  cbMercedesCombo;
-		System::Windows::Forms::ToolTip^  InfoToolTip;
-		System::Windows::Forms::Label^  lKnockBack;
-		System::Windows::Forms::CheckBox^  cbSkillInjection;
-		System::Windows::Forms::ComboBox^  ddbSkillInjection;
-		System::Windows::Forms::NumericUpDown^  nudSkillInjection;
-		System::Windows::Forms::CheckBox^  cbNoFadeStages;
-		System::Windows::Forms::CheckBox^  cbNoCCBlueBoxes;
-		System::Windows::Forms::CheckBox^  cbMouseFly;
-		System::Windows::Forms::NumericUpDown^  nudIceGuard;
-		System::Windows::Forms::CheckBox^  cbIceGuard;
-		System::Windows::Forms::NumericUpDown^  nudSPCY;
-		System::Windows::Forms::NumericUpDown^  nudSPCX;
-		System::Windows::Forms::NumericUpDown^  nudSPCMapId;
-		System::Windows::Forms::ContextMenuStrip^  AutoSkillContextMenu;
-		System::Windows::Forms::ToolStripMenuItem^  castToolStripMenuItem;
-		System::Windows::Forms::ToolStripMenuItem^  deleteToolStripMenuItem;
-		System::Windows::Forms::Label^  lPetFullness;
-		System::Windows::Forms::GroupBox^  gbAutoSkill;
-		System::Windows::Forms::ComboBox^  ddbAutoSkill;
-		System::Windows::Forms::NumericUpDown^  nudAutoSkill;
-		System::Windows::Forms::TextBox^  tbAutoSkill;
-		System::Windows::Forms::Button^  bAutoSkill;
-		System::Windows::Forms::ListView^  lvAutoSkill;
-		System::Windows::Forms::ColumnHeader^  hName;
-		System::Windows::Forms::ColumnHeader^  hInterval;
-		System::Windows::Forms::ColumnHeader^  hKey;
-		System::Windows::Forms::Timer^  tAutoAttack;
-		System::Windows::Forms::Timer^  tAutoLoot;
-		System::Windows::Forms::Timer^  tTimedCC;
-		System::Windows::Forms::ListView^  lvPackets;
-		System::Windows::Forms::ColumnHeader^  hPacketName;
-		System::Windows::Forms::ColumnHeader^  hPacket;
-		System::Windows::Forms::Button^  bAddPacket;
-		System::Windows::Forms::ContextMenuStrip^  PacketContextMenu;
-		System::Windows::Forms::ToolStripMenuItem^  bSendPacket;
-		System::Windows::Forms::ToolStripMenuItem^  bDeletePacket;
-		System::Windows::Forms::ComboBox^  ddbHotKeyMouseFly;
-		System::Windows::Forms::CheckBox^  cbHotKeyMouseFly;
-		System::Windows::Forms::ToolStripMenuItem^  editLocationToolStripMenuItem;
-		System::Windows::Forms::Button^  button1;
-		System::Windows::Forms::ToolStripMenuItem^  bEditPacket;
-		System::IO::FileSystemWatcher^  SettingsWatcher;
-		System::Windows::Forms::CheckBox^  cbLockItemVac;
-		System::Windows::Forms::CheckBox^  cbOLWNA;
-		System::ComponentModel::IContainer^  components;
+		System::Windows::Forms::NumericUpDown^ nudSAWSIL;
+		System::Windows::Forms::NumericUpDown^ nudAutoLoot;
+		System::Windows::Forms::NumericUpDown^ nudAutoAttack;
+		System::Windows::Forms::NumericUpDown^ nudAutoMP;
+		System::Windows::Forms::NumericUpDown^ nudAutoHP;
+		System::Windows::Forms::NumericUpDown^ nudCCAttacks;
+		System::Windows::Forms::NumericUpDown^ nudCCTimed;
+		System::Windows::Forms::NumericUpDown^ nudCCPeople;
+		System::Windows::Forms::NumericUpDown^ nudPetFeeder;
+		System::Windows::Forms::CheckBox^ cbNFA;
+		System::Windows::Forms::CheckBox^ cbAutoAggro;
+		System::Windows::Forms::Button^ bSaveSettings;
+		System::Windows::Forms::ComboBox^ ddbHotKeyFMA;
+		System::Windows::Forms::CheckBox^ cbHotKeyFMA;
+		System::Windows::Forms::ComboBox^ ddbHotKeyCCPeople;
+		System::Windows::Forms::CheckBox^ cbHotKeyCCPeople;
+		System::Windows::Forms::CheckBox^ cbNDMining;
+		System::Windows::Forms::ComboBox^ ddbHotKeySendPacket;
+		System::Windows::Forms::CheckBox^ cbHotKeySendPacket;
+		System::Windows::Forms::Label^ lCharacterpID;
+		System::Windows::Forms::CheckBox^ cbHideDamage;
+		System::Windows::Forms::CheckBox^ cbMercedesCombo;
+		System::Windows::Forms::ToolTip^ InfoToolTip;
+		System::Windows::Forms::Label^ lKnockBack;
+		System::Windows::Forms::CheckBox^ cbSkillInjection;
+		System::Windows::Forms::ComboBox^ ddbSkillInjection;
+		System::Windows::Forms::NumericUpDown^ nudSkillInjection;
+		System::Windows::Forms::CheckBox^ cbNoFadeStages;
+		System::Windows::Forms::CheckBox^ cbNoCCBlueBoxes;
+		System::Windows::Forms::CheckBox^ cbMouseFly;
+		System::Windows::Forms::NumericUpDown^ nudIceGuard;
+		System::Windows::Forms::CheckBox^ cbIceGuard;
+		System::Windows::Forms::NumericUpDown^ nudSPCY;
+		System::Windows::Forms::NumericUpDown^ nudSPCX;
+		System::Windows::Forms::NumericUpDown^ nudSPCMapId;
+		System::Windows::Forms::ContextMenuStrip^ AutoSkillContextMenu;
+		System::Windows::Forms::ToolStripMenuItem^ castToolStripMenuItem;
+		System::Windows::Forms::ToolStripMenuItem^ deleteToolStripMenuItem;
+		System::Windows::Forms::Label^ lPetFullness;
+		System::Windows::Forms::GroupBox^ gbAutoSkill;
+		System::Windows::Forms::ComboBox^ ddbAutoSkill;
+		System::Windows::Forms::NumericUpDown^ nudAutoSkill;
+		System::Windows::Forms::TextBox^ tbAutoSkill;
+		System::Windows::Forms::Button^ bAutoSkill;
+		System::Windows::Forms::ListView^ lvAutoSkill;
+		System::Windows::Forms::ColumnHeader^ hName;
+		System::Windows::Forms::ColumnHeader^ hInterval;
+		System::Windows::Forms::ColumnHeader^ hKey;
+		System::Windows::Forms::Timer^ tAutoAttack;
+		System::Windows::Forms::Timer^ tAutoLoot;
+		System::Windows::Forms::Timer^ tTimedCC;
+		System::Windows::Forms::ListView^ lvPackets;
+		System::Windows::Forms::ColumnHeader^ hPacketName;
+		System::Windows::Forms::ColumnHeader^ hPacket;
+		System::Windows::Forms::Button^ bAddPacket;
+		System::Windows::Forms::ContextMenuStrip^ PacketContextMenu;
+		System::Windows::Forms::ToolStripMenuItem^ bSendPacket;
+		System::Windows::Forms::ToolStripMenuItem^ bDeletePacket;
+		System::Windows::Forms::ComboBox^ ddbHotKeyMouseFly;
+		System::Windows::Forms::CheckBox^ cbHotKeyMouseFly;
+		System::Windows::Forms::ToolStripMenuItem^ editLocationToolStripMenuItem;
+		System::Windows::Forms::Button^ button1;
+		System::Windows::Forms::ToolStripMenuItem^ bEditPacket;
+		System::IO::FileSystemWatcher^ SettingsWatcher;
+		System::Windows::Forms::CheckBox^ cbLockItemVac;
+		System::Windows::Forms::CheckBox^ cbOLWNA;
+		System::ComponentModel::IContainer^ components;
 #pragma endregion
 
 #pragma region Windows Form Designer generated code
@@ -392,42 +392,42 @@ namespace WatyBotRevamp {
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->gbAutoSkill->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoSkill))->BeginInit();
 			this->AutoSkillContextMenu->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCAttacks))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCTimed))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCPeople))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPetFeeder))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoMP))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoHP))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoLoot))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoAttack))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSAWSIL))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->EXPForeground))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->MPForeground))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->HPForeground))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->EXPBackground))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->MPBackground))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->HPBackground))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudCCAttacks))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudCCTimed))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudCCPeople))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudPetFeeder))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoMP))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoHP))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoLoot))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoAttack))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSAWSIL))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->EXPForeground))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->MPForeground))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->HPForeground))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->EXPBackground))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->MPBackground))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->HPBackground))->BeginInit();
 			this->HacksTab->SuspendLayout();
 			this->gbMiscHacks->SuspendLayout();
 			this->gbCharHacks->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudIceGuard))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkillInjection))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudIceGuard))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSkillInjection))->BeginInit();
 			this->MobHacks->SuspendLayout();
 			this->PacketSenderTab->SuspendLayout();
 			this->PacketContextMenu->SuspendLayout();
 			this->SPControlTabPage->SuspendLayout();
 			this->gbNewSPCLocation->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCY))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCX))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCMapId))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSPCY))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSPCX))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSPCMapId))->BeginInit();
 			this->SPControlContextMenu->SuspendLayout();
 			this->InfoTab->SuspendLayout();
 			this->gbHotKeys->SuspendLayout();
 			this->gbPointers->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->SettingsWatcher))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->SettingsWatcher))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -518,7 +518,7 @@ namespace WatyBotRevamp {
 			// 
 			this->lvAutoSkill->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->lvAutoSkill->CheckBoxes = true;
-			this->lvAutoSkill->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(3) {
+			this->lvAutoSkill->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^ >(3) {
 				this->hName, this->hInterval,
 					this->hKey
 			});
@@ -551,7 +551,7 @@ namespace WatyBotRevamp {
 			// 
 			// AutoSkillContextMenu
 			// 
-			this->AutoSkillContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->AutoSkillContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^ >(2) {
 				this->castToolStripMenuItem,
 					this->deleteToolStripMenuItem
 			});
@@ -715,7 +715,7 @@ namespace WatyBotRevamp {
 			// 
 			this->ddbTimedType->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbTimedType->FormattingEnabled = true;
-			this->ddbTimedType->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"CC", L"CS", L"DC" });
+			this->ddbTimedType->Items->AddRange(gcnew cli::array< System::Object^ >(3) { L"CC", L"CS", L"DC" });
 			this->ddbTimedType->Location = System::Drawing::Point(47, 169);
 			this->ddbTimedType->Name = L"ddbTimedType";
 			this->ddbTimedType->Size = System::Drawing::Size(38, 21);
@@ -727,7 +727,7 @@ namespace WatyBotRevamp {
 			// 
 			this->ddbAttacksType->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbAttacksType->FormattingEnabled = true;
-			this->ddbAttacksType->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"CC", L"CS", L"DC" });
+			this->ddbAttacksType->Items->AddRange(gcnew cli::array< System::Object^ >(3) { L"CC", L"CS", L"DC" });
 			this->ddbAttacksType->Location = System::Drawing::Point(47, 196);
 			this->ddbAttacksType->Name = L"ddbAttacksType";
 			this->ddbAttacksType->Size = System::Drawing::Size(38, 21);
@@ -739,7 +739,7 @@ namespace WatyBotRevamp {
 			// 
 			this->ddbPeopleType->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbPeopleType->FormattingEnabled = true;
-			this->ddbPeopleType->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"CC", L"CS", L"DC" });
+			this->ddbPeopleType->Items->AddRange(gcnew cli::array< System::Object^ >(3) { L"CC", L"CS", L"DC" });
 			this->ddbPeopleType->Location = System::Drawing::Point(47, 143);
 			this->ddbPeopleType->Name = L"ddbPeopleType";
 			this->ddbPeopleType->Size = System::Drawing::Size(38, 21);
@@ -1271,7 +1271,7 @@ namespace WatyBotRevamp {
 			this->ddbSkillInjection->DropDownWidth = 215;
 			this->ddbSkillInjection->Enabled = false;
 			this->ddbSkillInjection->FormattingEnabled = true;
-			this->ddbSkillInjection->Items->AddRange(gcnew cli::array< System::Object^  >(14) {
+			this->ddbSkillInjection->Items->AddRange(gcnew cli::array< System::Object^ >(14) {
 				L"Ice Attack (600% dmg, 10 mobs)", L"Ice Smash (1200% dmg, 10 mobs)",
 					L"Ice Snow Tempest (500% x 4 dmg, 10 mobs)", L"Ice chop (900% dmg, 10 mob count)", L"Kaiser: 3rd Dragon Slash", L"Bandit 1st Job: DoubleStab",
 					L"Bandit 2nd Job: SavageBlow", L"Bandit 3rd Job: Midnight Carneval", L"Bandit 4th Job: Assasinate", L"Warrior 1st Job: Power Strike",
@@ -1604,7 +1604,7 @@ namespace WatyBotRevamp {
 			// 
 			// lvPackets
 			// 
-			this->lvPackets->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(2) { this->hPacketName, this->hPacket });
+			this->lvPackets->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^ >(2) { this->hPacketName, this->hPacket });
 			this->lvPackets->ContextMenuStrip = this->PacketContextMenu;
 			this->lvPackets->FullRowSelect = true;
 			this->lvPackets->GridLines = true;
@@ -1631,7 +1631,7 @@ namespace WatyBotRevamp {
 			// 
 			// PacketContextMenu
 			// 
-			this->PacketContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+			this->PacketContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^ >(3) {
 				this->bSendPacket,
 					this->bEditPacket, this->bDeletePacket
 			});
@@ -1797,7 +1797,7 @@ namespace WatyBotRevamp {
 			// lvSPControl
 			// 
 			this->lvSPControl->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->lvSPControl->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(4) {
+			this->lvSPControl->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^ >(4) {
 				this->HeaderMapName,
 					this->HeaderMapID, this->HeaderX, this->HeaderY
 			});
@@ -1837,7 +1837,7 @@ namespace WatyBotRevamp {
 			// 
 			// SPControlContextMenu
 			// 
-			this->SPControlContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->SPControlContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^ >(2) {
 				this->editLocationToolStripMenuItem,
 					this->deleteSPControlToolStripMenuItem
 			});
@@ -2180,32 +2180,32 @@ namespace WatyBotRevamp {
 			this->AutoBotTab->ResumeLayout(false);
 			this->gbAutoSkill->ResumeLayout(false);
 			this->gbAutoSkill->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoSkill))->EndInit();
 			this->AutoSkillContextMenu->ResumeLayout(false);
 			this->AutoBotGroupBox->ResumeLayout(false);
 			this->AutoBotGroupBox->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCAttacks))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCTimed))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCPeople))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPetFeeder))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoMP))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoHP))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoLoot))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoAttack))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSAWSIL))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->EXPForeground))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->MPForeground))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->HPForeground))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->EXPBackground))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->MPBackground))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->HPBackground))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudCCAttacks))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudCCTimed))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudCCPeople))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudPetFeeder))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoMP))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoHP))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoLoot))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoAttack))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSAWSIL))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->EXPForeground))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->MPForeground))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->HPForeground))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->EXPBackground))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->MPBackground))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->HPBackground))->EndInit();
 			this->HacksTab->ResumeLayout(false);
 			this->gbMiscHacks->ResumeLayout(false);
 			this->gbMiscHacks->PerformLayout();
 			this->gbCharHacks->ResumeLayout(false);
 			this->gbCharHacks->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudIceGuard))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkillInjection))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudIceGuard))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSkillInjection))->EndInit();
 			this->MobHacks->ResumeLayout(false);
 			this->MobHacks->PerformLayout();
 			this->PacketSenderTab->ResumeLayout(false);
@@ -2213,120 +2213,120 @@ namespace WatyBotRevamp {
 			this->SPControlTabPage->ResumeLayout(false);
 			this->gbNewSPCLocation->ResumeLayout(false);
 			this->gbNewSPCLocation->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCY))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCX))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCMapId))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSPCY))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSPCX))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSPCMapId))->EndInit();
 			this->SPControlContextMenu->ResumeLayout(false);
 			this->InfoTab->ResumeLayout(false);
 			this->gbHotKeys->ResumeLayout(false);
 			this->gbHotKeys->PerformLayout();
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->SettingsWatcher))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->SettingsWatcher))->EndInit();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
 
 	public:
-		static array<Object^>^ KeyNames = gcnew array<System::Object^> {L"Shift", L"Space", L"Ctrl", L"Alt", L"Insert", L"Delete", L"Home", L"End", L"Page Up", L"Page Down", L"A", L"B", L"C", L"D", L"E", L"F", L"G", L"H", L"I", L"J", L"K", L"L", L"M", L"N", L"O", L"P", L"Q", L"R", L"S", L"T", L"U", L"V", L"W", L"X", L"Y", L"Z", L"0", L"1", L"2", L"3", L"4", L"5", L"6", L"7", L"8", L"9", L"F1", L"F2", L"F3", L"F4", L"F5", L"F6", L"F7", L"F8", L"F9", L"F10", L"F11", L"F12"};;
+		static String^ Path = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "Waty", "Settings.xml");
+		static array<String^>^ KeyNames = gcnew array<String^>{"Shift", "Space", "Ctr", "Alt", "Insert", "Delete", "Home", "End", "Page Up", "Page Down",
+			"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+			"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12"};
 		static NotifyIcon^ notifyIcon = gcnew NotifyIcon;
 
 	private:
 		//General private class members
-		static List<SettingsEntry^>^ Settings = gcnew List<SettingsEntry^>(10);
 		Void LoadSettings();
-		Void LoadEnabledHacks();
 		Void SaveSettings();
-		Void ReloadSettings();
 		Void RedrawStatBars();
 		Void ReloadComboBox(ComboBox^ combobox);
 		Void HotKeys();
 
 		//General trainer events
-		Void MainForm_Load(Object^  sender, EventArgs^  e);
-		Void StatsTimer_Tick(Object^  sender, EventArgs^  e);
-		Void MainTabControl_SelectedIndexChanged(Object^  sender, EventArgs^  e);
-		Void MainForm_FormClosing(Object^  sender, Windows::Forms::FormClosingEventArgs^  e);
-		Void bSaveSettings_Click(Object^  sender, EventArgs^  e);
-		Void SettingsWatcher_Changed(System::Object^  sender, System::IO::FileSystemEventArgs^  e);
+		Void MainForm_Load(Object^ sender, EventArgs^ e);
+		Void StatsTimer_Tick(Object^ sender, EventArgs^ e);
+		Void MainTabControl_SelectedIndexChanged(Object^ sender, EventArgs^ e);
+		Void MainForm_FormClosing(Object^ sender, Windows::Forms::FormClosingEventArgs^ e);
+		Void bSaveSettings_Click(Object^ sender, EventArgs^ e);
+		Void SettingsWatcher_Changed(System::Object^ sender, System::IO::FileSystemEventArgs^ e);
 
 		//AutoBot Events
-		Void cbAutoAttack_CheckedChanged(Object^ sender, EventArgs^  e);
+		Void cbAutoAttack_CheckedChanged(Object^ sender, EventArgs^ e);
 		Void tAutoAttack_Tick(Object^ sender, EventArgs^ e);
 		Void cbAutoLoot_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void tAutoLoot_Tick(Object^  sender, EventArgs^ e);
-		Void cbAutoHP_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbAutoMP_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbCCPeople_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbCCTimed_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void tTimedCC_Tick(Object^  sender, EventArgs^  e);
-		Void cbCCAttacks_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void tAutoLoot_Tick(Object^ sender, EventArgs^ e);
+		Void cbAutoHP_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbAutoMP_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbCCPeople_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbCCTimed_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void tTimedCC_Tick(Object^ sender, EventArgs^ e);
+		Void cbCCAttacks_CheckedChanged(Object^ sender, EventArgs^ e);
 
 		//AutoSkill
-		Void bAutoSkill_Click(Object^  sender, EventArgs^  e);
-		Void castToolStripMenuItem_Click(Object^  sender, EventArgs^  e);
-		Void deleteToolStripMenuItem_Click(Object^  sender, EventArgs^  e);
-		Void lvAutoSkill_ItemCheck(Object^  sender, Windows::Forms::ItemCheckEventArgs^  e);
-		Void lvAutoSkill_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
+		Void bAutoSkill_Click(Object^ sender, EventArgs^ e);
+		Void castToolStripMenuItem_Click(Object^ sender, EventArgs^ e);
+		Void deleteToolStripMenuItem_Click(Object^ sender, EventArgs^ e);
+		Void lvAutoSkill_ItemCheck(Object^ sender, Windows::Forms::ItemCheckEventArgs^ e);
+		Void lvAutoSkill_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e);
 		Void LoadAutoSkill();
 
 		//SPControl
-		Void bAddSPCLocation_Click(Object^  sender, EventArgs^  e);
-		Void cbSPControl_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void SPControlDeleteItem_Click(Object^  sender, EventArgs^  e);
-		Void editLocationToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-		Void GetSPControlCoordsButton_Click(Object^  sender, EventArgs^  e);
-		Void lvSPControl_KeyDown(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e);
+		Void bAddSPCLocation_Click(Object^ sender, EventArgs^ e);
+		Void cbSPControl_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void SPControlDeleteItem_Click(Object^ sender, EventArgs^ e);
+		Void editLocationToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+		Void GetSPControlCoordsButton_Click(Object^ sender, EventArgs^ e);
+		Void lvSPControl_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e);
 		Void LoadSPControl();
 
 		//Hacks
-		Void cbFusionAttack_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbNoKB_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbPerfectLoot_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbVacRight_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbWalkRight_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbJumpRight_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbNoBG_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbMobDisarm_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbJDA_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbPinTyper_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbDojangGodmode_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbUnlimitedMorph_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbFasterMobs_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbNDAllAttacks_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbNoMobs_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbUA_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbSitHack_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cb50SecGM_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbLogoSkipper_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbViewSwears_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbLockItemVac_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-		Void cbItemVac_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbFMA_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbScareMobs_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbFLACC_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbCPUHack_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbNFA_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbAutoAggro_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbNDMining_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbHideDamage_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbMercedesCombo_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbSkillInjection_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbNoFadeStages_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbNoCCBlueBoxes_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void nudSkillInjectionDelay_ValueChanged(Object^  sender, EventArgs^  e);
-		Void ddbSkillInjectionSkills_SelectedIndexChanged(Object^  sender, EventArgs^  e);
-		Void cbMouseFly_CheckedChanged(Object^  sender, EventArgs^  e);
-		Void cbIceGuard_CheckedChanged(Object^  sender, EventArgs^  e);
+		Void cbFusionAttack_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbNoKB_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbPerfectLoot_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbVacRight_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbWalkRight_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbJumpRight_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbNoBG_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbMobDisarm_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbJDA_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbPinTyper_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbDojangGodmode_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbUnlimitedMorph_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbFasterMobs_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbNDAllAttacks_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbNoMobs_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbUA_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbSitHack_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cb50SecGM_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbLogoSkipper_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbViewSwears_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbLockItemVac_CheckedChanged(System::Object^ sender, System::EventArgs^ e);
+		Void cbItemVac_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbFMA_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbScareMobs_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbFLACC_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbCPUHack_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbNFA_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbAutoAggro_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbNDMining_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbHideDamage_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbMercedesCombo_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbSkillInjection_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbNoFadeStages_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbNoCCBlueBoxes_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void nudSkillInjectionDelay_ValueChanged(Object^ sender, EventArgs^ e);
+		Void ddbSkillInjectionSkills_SelectedIndexChanged(Object^ sender, EventArgs^ e);
+		Void cbMouseFly_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbIceGuard_CheckedChanged(Object^ sender, EventArgs^ e);
 
 		//PacketSender events
 		Void bAddPacket_Click(Object^ sender, EventArgs^ e);
 		Void lvPackets_SelectedIndexChanged(Object^ sender, EventArgs^ e);
 		Void bSendPacket_Click(Object^ sender, EventArgs^ e);
-		Void bDeletePacket_Click(Object^ sender, EventArgs^  e);
+		Void bDeletePacket_Click(Object^ sender, EventArgs^ e);
 		Void lvPackets_KeyDown(Object^ sender, KeyEventArgs^ e);
-		Void bEditPacket_Click(System::Object^  sender, System::EventArgs^  e);
+		Void bEditPacket_Click(System::Object^ sender, System::EventArgs^ e);
 		Void LoadPackets();
 	};
 }
