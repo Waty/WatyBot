@@ -300,6 +300,9 @@ Void MainForm::MainForm_Load(Object^ sender, EventArgs^ e)
 	// Fix the size of the tabs
 	MainForm::Height = TabHeight[MainTabControl->SelectedTab->TabIndex];
 	MainTabControl->Height = TabHeight[MainTabControl->SelectedTab->TabIndex] - 30;
+
+	Hacks::InstantFinalSlash1.Enable(true);
+	Hacks::InstantFinalSlash2.Enable(true);
 }
 Void MainForm::StatsTimer_Tick(Object^ sender, EventArgs^ e)
 {

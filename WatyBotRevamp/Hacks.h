@@ -49,4 +49,6 @@ public:
 	static CMemory ThreadIdFix;
 	static CMemory SpawnControlCheck;
 	static CMemory SpawnControlCave;
+	static CMemory InstantFinalSlash1;
+	static CMemory InstantFinalSlash2;
 };
