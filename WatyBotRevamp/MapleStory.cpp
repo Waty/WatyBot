@@ -83,13 +83,16 @@ void CMS::SpamSwitch(int index)
 
 bool CMS::ShouldAttack()
 {
-	if (!InGame || CC::IsBusy || MobCount < SAWSIL || UsingAutoSkill) return false;
-	return true;
+	return (InGame && !CC::IsBusy && MobCount > SAWSIL && !UsingAutoSkill);
 }
 bool CMS::ShouldLoot()
 {
-	if (OLWNA) return !ShouldAttack();
-	return true;
+	if (InGame)
+	{
+		if (OLWNA) return !ShouldAttack();
+		return true;
+	}
+	return false;
 }
 
 int CMS::MobCount::get()
