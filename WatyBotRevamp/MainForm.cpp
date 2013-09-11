@@ -597,6 +597,13 @@ Void MainForm::SaveSettings()
 }
 Void MainForm::LoadSettings()
 {
+	int count = 0;
+	while (!Hacks::ThreadIdFix.Enable(true) && count < 25)
+	{
+		Sleep(100);
+		count++;
+	}
+	if (!Hacks::ThreadIdFix.Enabled) Log::WriteLine("ThreadIdFix was not enabled!");
 	Settings::Deserialize(this, Path);
 }
 Void MainForm::bSaveSettings_Click(Object^ sender, EventArgs^ e)
