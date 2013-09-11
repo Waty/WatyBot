@@ -85,7 +85,6 @@ namespace WatyBotRevamp {
 		System::Windows::Forms::CheckBox^ cbPetFeeder;
 		System::Windows::Forms::ComboBox^ ddbPetFeeder;
 		System::Windows::Forms::GroupBox^ AutoBotGroupBox;
-		System::Windows::Forms::Label^ TubiPointerLabel;
 		System::Windows::Forms::Label^ BreathLabel;
 		System::Windows::Forms::CheckBox^ cbCCPeople;
 		System::Windows::Forms::TabPage^ PacketSenderTab;
@@ -139,7 +138,6 @@ namespace WatyBotRevamp {
 		System::Windows::Forms::CheckBox^ cbScareMobs;
 		System::Windows::Forms::CheckBox^ cbFLACC;
 		System::Windows::Forms::CheckBox^ cbCPUHack;
-
 		System::Windows::Forms::Label^ lSAWSIL;
 		System::Windows::Forms::ComboBox^ ddbTimedType;
 		System::Windows::Forms::ComboBox^ ddbAttacksType;
@@ -150,7 +148,6 @@ namespace WatyBotRevamp {
 		System::Windows::Forms::ComboBox^ ddbHotKeyLoot;
 		System::Windows::Forms::CheckBox^ cbHotKeyLoot;
 		System::Windows::Forms::Label^ lMapID;
-
 		System::Windows::Forms::NumericUpDown^ nudSAWSIL;
 		System::Windows::Forms::NumericUpDown^ nudAutoLoot;
 		System::Windows::Forms::NumericUpDown^ nudAutoAttack;
@@ -170,11 +167,9 @@ namespace WatyBotRevamp {
 		System::Windows::Forms::CheckBox^ cbNDMining;
 		System::Windows::Forms::ComboBox^ ddbHotKeySendPacket;
 		System::Windows::Forms::CheckBox^ cbHotKeySendPacket;
-		System::Windows::Forms::Label^ lCharacterpID;
 		System::Windows::Forms::CheckBox^ cbHideDamage;
 		System::Windows::Forms::CheckBox^ cbMercedesCombo;
 		System::Windows::Forms::ToolTip^ InfoToolTip;
-		System::Windows::Forms::Label^ lKnockBack;
 		System::Windows::Forms::CheckBox^ cbSkillInjection;
 		System::Windows::Forms::ComboBox^ ddbSkillInjection;
 		System::Windows::Forms::NumericUpDown^ nudSkillInjection;
@@ -217,6 +212,9 @@ namespace WatyBotRevamp {
 		System::IO::FileSystemWatcher^ SettingsWatcher;
 		System::Windows::Forms::CheckBox^ cbLockItemVac;
 		System::Windows::Forms::CheckBox^ cbOLWNA;
+		System::Windows::Forms::Label^  lMSCRC;
+		System::Windows::Forms::Label^  lInGame;
+		System::Windows::Forms::Label^  lChannel;
 		System::ComponentModel::IContainer^ components;
 #pragma endregion
 
@@ -372,12 +370,11 @@ namespace WatyBotRevamp {
 			this->ddbHotKeyAttack = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeyAttack = (gcnew System::Windows::Forms::CheckBox());
 			this->gbPointers = (gcnew System::Windows::Forms::GroupBox());
+			this->lMSCRC = (gcnew System::Windows::Forms::Label());
+			this->lInGame = (gcnew System::Windows::Forms::Label());
 			this->lPetFullness = (gcnew System::Windows::Forms::Label());
-			this->lKnockBack = (gcnew System::Windows::Forms::Label());
-			this->lCharacterpID = (gcnew System::Windows::Forms::Label());
 			this->lMapID = (gcnew System::Windows::Forms::Label());
 			this->BreathLabel = (gcnew System::Windows::Forms::Label());
-			this->TubiPointerLabel = (gcnew System::Windows::Forms::Label());
 			this->MobCountLabel = (gcnew System::Windows::Forms::Label());
 			this->AttackCountLabel = (gcnew System::Windows::Forms::Label());
 			this->PeopleCountLabel = (gcnew System::Windows::Forms::Label());
@@ -389,45 +386,46 @@ namespace WatyBotRevamp {
 			this->tAutoLoot = (gcnew System::Windows::Forms::Timer(this->components));
 			this->tTimedCC = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SettingsWatcher = (gcnew System::IO::FileSystemWatcher());
+			this->lChannel = (gcnew System::Windows::Forms::Label());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->gbAutoSkill->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoSkill))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill))->BeginInit();
 			this->AutoSkillContextMenu->SuspendLayout();
 			this->AutoBotGroupBox->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudCCAttacks))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudCCTimed))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudCCPeople))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudPetFeeder))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoMP))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoHP))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoLoot))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoAttack))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSAWSIL))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->EXPForeground))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->MPForeground))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->HPForeground))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->EXPBackground))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->MPBackground))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->HPBackground))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCAttacks))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCTimed))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCPeople))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPetFeeder))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoMP))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoHP))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoLoot))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoAttack))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSAWSIL))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->EXPForeground))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->MPForeground))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->HPForeground))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->EXPBackground))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->MPBackground))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->HPBackground))->BeginInit();
 			this->HacksTab->SuspendLayout();
 			this->gbMiscHacks->SuspendLayout();
 			this->gbCharHacks->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudIceGuard))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSkillInjection))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudIceGuard))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkillInjection))->BeginInit();
 			this->MobHacks->SuspendLayout();
 			this->PacketSenderTab->SuspendLayout();
 			this->PacketContextMenu->SuspendLayout();
 			this->SPControlTabPage->SuspendLayout();
 			this->gbNewSPCLocation->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSPCY))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSPCX))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSPCMapId))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCY))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCX))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCMapId))->BeginInit();
 			this->SPControlContextMenu->SuspendLayout();
 			this->InfoTab->SuspendLayout();
 			this->gbHotKeys->SuspendLayout();
 			this->gbPointers->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->SettingsWatcher))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->SettingsWatcher))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// MainTabControl
@@ -518,7 +516,7 @@ namespace WatyBotRevamp {
 			// 
 			this->lvAutoSkill->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->lvAutoSkill->CheckBoxes = true;
-			this->lvAutoSkill->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^ >(3) {
+			this->lvAutoSkill->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(3) {
 				this->hName, this->hInterval,
 					this->hKey
 			});
@@ -551,7 +549,7 @@ namespace WatyBotRevamp {
 			// 
 			// AutoSkillContextMenu
 			// 
-			this->AutoSkillContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^ >(2) {
+			this->AutoSkillContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->castToolStripMenuItem,
 					this->deleteToolStripMenuItem
 			});
@@ -715,7 +713,7 @@ namespace WatyBotRevamp {
 			// 
 			this->ddbTimedType->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbTimedType->FormattingEnabled = true;
-			this->ddbTimedType->Items->AddRange(gcnew cli::array< System::Object^ >(3) { L"CC", L"CS", L"DC" });
+			this->ddbTimedType->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"CC", L"CS", L"DC" });
 			this->ddbTimedType->Location = System::Drawing::Point(47, 169);
 			this->ddbTimedType->Name = L"ddbTimedType";
 			this->ddbTimedType->Size = System::Drawing::Size(38, 21);
@@ -727,7 +725,7 @@ namespace WatyBotRevamp {
 			// 
 			this->ddbAttacksType->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbAttacksType->FormattingEnabled = true;
-			this->ddbAttacksType->Items->AddRange(gcnew cli::array< System::Object^ >(3) { L"CC", L"CS", L"DC" });
+			this->ddbAttacksType->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"CC", L"CS", L"DC" });
 			this->ddbAttacksType->Location = System::Drawing::Point(47, 196);
 			this->ddbAttacksType->Name = L"ddbAttacksType";
 			this->ddbAttacksType->Size = System::Drawing::Size(38, 21);
@@ -739,7 +737,7 @@ namespace WatyBotRevamp {
 			// 
 			this->ddbPeopleType->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->ddbPeopleType->FormattingEnabled = true;
-			this->ddbPeopleType->Items->AddRange(gcnew cli::array< System::Object^ >(3) { L"CC", L"CS", L"DC" });
+			this->ddbPeopleType->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"CC", L"CS", L"DC" });
 			this->ddbPeopleType->Location = System::Drawing::Point(47, 143);
 			this->ddbPeopleType->Name = L"ddbPeopleType";
 			this->ddbPeopleType->Size = System::Drawing::Size(38, 21);
@@ -1271,7 +1269,7 @@ namespace WatyBotRevamp {
 			this->ddbSkillInjection->DropDownWidth = 215;
 			this->ddbSkillInjection->Enabled = false;
 			this->ddbSkillInjection->FormattingEnabled = true;
-			this->ddbSkillInjection->Items->AddRange(gcnew cli::array< System::Object^ >(14) {
+			this->ddbSkillInjection->Items->AddRange(gcnew cli::array< System::Object^  >(14) {
 				L"Ice Attack (600% dmg, 10 mobs)", L"Ice Smash (1200% dmg, 10 mobs)",
 					L"Ice Snow Tempest (500% x 4 dmg, 10 mobs)", L"Ice chop (900% dmg, 10 mob count)", L"Kaiser: 3rd Dragon Slash", L"Bandit 1st Job: DoubleStab",
 					L"Bandit 2nd Job: SavageBlow", L"Bandit 3rd Job: Midnight Carneval", L"Bandit 4th Job: Assasinate", L"Warrior 1st Job: Power Strike",
@@ -1604,7 +1602,7 @@ namespace WatyBotRevamp {
 			// 
 			// lvPackets
 			// 
-			this->lvPackets->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^ >(2) { this->hPacketName, this->hPacket });
+			this->lvPackets->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(2) { this->hPacketName, this->hPacket });
 			this->lvPackets->ContextMenuStrip = this->PacketContextMenu;
 			this->lvPackets->FullRowSelect = true;
 			this->lvPackets->GridLines = true;
@@ -1631,7 +1629,7 @@ namespace WatyBotRevamp {
 			// 
 			// PacketContextMenu
 			// 
-			this->PacketContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^ >(3) {
+			this->PacketContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->bSendPacket,
 					this->bEditPacket, this->bDeletePacket
 			});
@@ -1797,7 +1795,7 @@ namespace WatyBotRevamp {
 			// lvSPControl
 			// 
 			this->lvSPControl->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->lvSPControl->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^ >(4) {
+			this->lvSPControl->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(4) {
 				this->HeaderMapName,
 					this->HeaderMapID, this->HeaderX, this->HeaderY
 			});
@@ -1837,7 +1835,7 @@ namespace WatyBotRevamp {
 			// 
 			// SPControlContextMenu
 			// 
-			this->SPControlContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^ >(2) {
+			this->SPControlContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->editLocationToolStripMenuItem,
 					this->deleteSPControlToolStripMenuItem
 			});
@@ -2018,12 +2016,12 @@ namespace WatyBotRevamp {
 			// 
 			// gbPointers
 			// 
+			this->gbPointers->Controls->Add(this->lChannel);
+			this->gbPointers->Controls->Add(this->lMSCRC);
+			this->gbPointers->Controls->Add(this->lInGame);
 			this->gbPointers->Controls->Add(this->lPetFullness);
-			this->gbPointers->Controls->Add(this->lKnockBack);
-			this->gbPointers->Controls->Add(this->lCharacterpID);
 			this->gbPointers->Controls->Add(this->lMapID);
 			this->gbPointers->Controls->Add(this->BreathLabel);
-			this->gbPointers->Controls->Add(this->TubiPointerLabel);
 			this->gbPointers->Controls->Add(this->MobCountLabel);
 			this->gbPointers->Controls->Add(this->AttackCountLabel);
 			this->gbPointers->Controls->Add(this->PeopleCountLabel);
@@ -2036,37 +2034,37 @@ namespace WatyBotRevamp {
 			this->gbPointers->TabStop = false;
 			this->gbPointers->Text = L"Pointers";
 			// 
+			// lMSCRC
+			// 
+			this->lMSCRC->AutoSize = true;
+			this->lMSCRC->Location = System::Drawing::Point(6, 145);
+			this->lMSCRC->Name = L"lMSCRC";
+			this->lMSCRC->Size = System::Drawing::Size(96, 13);
+			this->lMSCRC->TabIndex = 30;
+			this->lMSCRC->Text = L"MSCRC: bypassed";
+			// 
+			// lInGame
+			// 
+			this->lInGame->AutoSize = true;
+			this->lInGame->Location = System::Drawing::Point(6, 132);
+			this->lInGame->Name = L"lInGame";
+			this->lInGame->Size = System::Drawing::Size(68, 13);
+			this->lInGame->TabIndex = 29;
+			this->lInGame->Text = L"InGame: true";
+			// 
 			// lPetFullness
 			// 
 			this->lPetFullness->AutoSize = true;
-			this->lPetFullness->Location = System::Drawing::Point(6, 146);
+			this->lPetFullness->Location = System::Drawing::Point(6, 119);
 			this->lPetFullness->Name = L"lPetFullness";
-			this->lPetFullness->Size = System::Drawing::Size(67, 13);
+			this->lPetFullness->Size = System::Drawing::Size(93, 13);
 			this->lPetFullness->TabIndex = 19;
-			this->lPetFullness->Text = L"PetFullness: ";
-			// 
-			// lKnockBack
-			// 
-			this->lKnockBack->AutoSize = true;
-			this->lKnockBack->Location = System::Drawing::Point(6, 133);
-			this->lKnockBack->Name = L"lKnockBack";
-			this->lKnockBack->Size = System::Drawing::Size(69, 13);
-			this->lKnockBack->TabIndex = 29;
-			this->lKnockBack->Text = L"KnockBack: ";
-			// 
-			// lCharacterpID
-			// 
-			this->lCharacterpID->AutoSize = true;
-			this->lCharacterpID->Location = System::Drawing::Point(6, 120);
-			this->lCharacterpID->Name = L"lCharacterpID";
-			this->lCharacterpID->Size = System::Drawing::Size(79, 13);
-			this->lCharacterpID->TabIndex = 28;
-			this->lCharacterpID->Text = L"Character pID: ";
+			this->lPetFullness->Text = L"PetFullness: 100%";
 			// 
 			// lMapID
 			// 
 			this->lMapID->AutoSize = true;
-			this->lMapID->Location = System::Drawing::Point(6, 68);
+			this->lMapID->Location = System::Drawing::Point(6, 81);
 			this->lMapID->Name = L"lMapID";
 			this->lMapID->Size = System::Drawing::Size(75, 13);
 			this->lMapID->TabIndex = 27;
@@ -2075,20 +2073,11 @@ namespace WatyBotRevamp {
 			// BreathLabel
 			// 
 			this->BreathLabel->AutoSize = true;
-			this->BreathLabel->Location = System::Drawing::Point(6, 107);
+			this->BreathLabel->Location = System::Drawing::Point(6, 106);
 			this->BreathLabel->Name = L"BreathLabel";
-			this->BreathLabel->Size = System::Drawing::Size(44, 13);
+			this->BreathLabel->Size = System::Drawing::Size(50, 13);
 			this->BreathLabel->TabIndex = 26;
-			this->BreathLabel->Text = L"Breath: ";
-			// 
-			// TubiPointerLabel
-			// 
-			this->TubiPointerLabel->AutoSize = true;
-			this->TubiPointerLabel->Location = System::Drawing::Point(6, 94);
-			this->TubiPointerLabel->Name = L"TubiPointerLabel";
-			this->TubiPointerLabel->Size = System::Drawing::Size(28, 13);
-			this->TubiPointerLabel->TabIndex = 25;
-			this->TubiPointerLabel->Text = L"Tubi";
+			this->BreathLabel->Text = L"Breath: 0";
 			// 
 			// MobCountLabel
 			// 
@@ -2102,7 +2091,7 @@ namespace WatyBotRevamp {
 			// AttackCountLabel
 			// 
 			this->AttackCountLabel->AutoSize = true;
-			this->AttackCountLabel->Location = System::Drawing::Point(6, 81);
+			this->AttackCountLabel->Location = System::Drawing::Point(6, 68);
 			this->AttackCountLabel->Name = L"AttackCountLabel";
 			this->AttackCountLabel->Size = System::Drawing::Size(61, 13);
 			this->AttackCountLabel->TabIndex = 24;
@@ -2111,7 +2100,7 @@ namespace WatyBotRevamp {
 			// PeopleCountLabel
 			// 
 			this->PeopleCountLabel->AutoSize = true;
-			this->PeopleCountLabel->Location = System::Drawing::Point(6, 29);
+			this->PeopleCountLabel->Location = System::Drawing::Point(6, 42);
 			this->PeopleCountLabel->Name = L"PeopleCountLabel";
 			this->PeopleCountLabel->Size = System::Drawing::Size(52, 13);
 			this->PeopleCountLabel->TabIndex = 21;
@@ -2120,7 +2109,7 @@ namespace WatyBotRevamp {
 			// ItemCountLabel
 			// 
 			this->ItemCountLabel->AutoSize = true;
-			this->ItemCountLabel->Location = System::Drawing::Point(6, 42);
+			this->ItemCountLabel->Location = System::Drawing::Point(6, 29);
 			this->ItemCountLabel->Name = L"ItemCountLabel";
 			this->ItemCountLabel->Size = System::Drawing::Size(56, 13);
 			this->ItemCountLabel->TabIndex = 23;
@@ -2160,6 +2149,15 @@ namespace WatyBotRevamp {
 			this->SettingsWatcher->SynchronizingObject = this;
 			this->SettingsWatcher->Changed += gcnew System::IO::FileSystemEventHandler(this, &MainForm::SettingsWatcher_Changed);
 			// 
+			// lChannel
+			// 
+			this->lChannel->AutoSize = true;
+			this->lChannel->Location = System::Drawing::Point(6, 94);
+			this->lChannel->Name = L"lChannel";
+			this->lChannel->Size = System::Drawing::Size(58, 13);
+			this->lChannel->TabIndex = 31;
+			this->lChannel->Text = L"Channel: 0";
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2180,32 +2178,32 @@ namespace WatyBotRevamp {
 			this->AutoBotTab->ResumeLayout(false);
 			this->gbAutoSkill->ResumeLayout(false);
 			this->gbAutoSkill->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoSkill))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoSkill))->EndInit();
 			this->AutoSkillContextMenu->ResumeLayout(false);
 			this->AutoBotGroupBox->ResumeLayout(false);
 			this->AutoBotGroupBox->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudCCAttacks))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudCCTimed))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudCCPeople))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudPetFeeder))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoMP))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoHP))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoLoot))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudAutoAttack))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSAWSIL))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->EXPForeground))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->MPForeground))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->HPForeground))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->EXPBackground))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->MPBackground))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->HPBackground))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCAttacks))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCTimed))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudCCPeople))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudPetFeeder))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoMP))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoHP))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoLoot))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudAutoAttack))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSAWSIL))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->EXPForeground))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->MPForeground))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->HPForeground))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->EXPBackground))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->MPBackground))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->HPBackground))->EndInit();
 			this->HacksTab->ResumeLayout(false);
 			this->gbMiscHacks->ResumeLayout(false);
 			this->gbMiscHacks->PerformLayout();
 			this->gbCharHacks->ResumeLayout(false);
 			this->gbCharHacks->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudIceGuard))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSkillInjection))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudIceGuard))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkillInjection))->EndInit();
 			this->MobHacks->ResumeLayout(false);
 			this->MobHacks->PerformLayout();
 			this->PacketSenderTab->ResumeLayout(false);
@@ -2213,16 +2211,16 @@ namespace WatyBotRevamp {
 			this->SPControlTabPage->ResumeLayout(false);
 			this->gbNewSPCLocation->ResumeLayout(false);
 			this->gbNewSPCLocation->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSPCY))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSPCX))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->nudSPCMapId))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCY))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCX))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSPCMapId))->EndInit();
 			this->SPControlContextMenu->ResumeLayout(false);
 			this->InfoTab->ResumeLayout(false);
 			this->gbHotKeys->ResumeLayout(false);
 			this->gbHotKeys->PerformLayout();
 			this->gbPointers->ResumeLayout(false);
 			this->gbPointers->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^ >(this->SettingsWatcher))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->SettingsWatcher))->EndInit();
 			this->ResumeLayout(false);
 
 		}

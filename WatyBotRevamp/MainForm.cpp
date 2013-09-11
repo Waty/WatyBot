@@ -304,14 +304,16 @@ Void MainForm::MainForm_Load(Object^ sender, EventArgs^ e)
 Void MainForm::StatsTimer_Tick(Object^ sender, EventArgs^ e)
 {
 	this->MobCountLabel->Text = "Mobs: " + CMS::MobCount;
+	this->ItemCountLabel->Text = "Items: " + CMS::ItemCount;
 	this->PeopleCountLabel->Text = "People: " + CMS::PeopleCount;
 	this->CharPosLabel->Text = "CharPos: (" + CMS::CharX + "," + CMS::CharY + ")";
-	this->ItemCountLabel->Text = "Items: " + CMS::ItemCount;
-	this->AttackCountLabel->Text = "Attacks: " + CMS::AttackCount;
-	this->TubiPointerLabel->Text = "Tubi: " + CMS::Tubi;
-	this->BreathLabel->Text = "Breath: " + CMS::Breath;
 	this->lMapID->Text = "MapID: " + CMS::MapId;
-	this->lPetFullness->Text = "PetFullness: " + CMS::PetFullness;
+	this->AttackCountLabel->Text = "Attacks: " + CMS::AttackCount;
+	this->BreathLabel->Text = "ClientBreath: " + CMS::Breath;
+	this->lChannel->Text = "Channel: " + CMS::Channel;
+	this->lPetFullness->Text = "PetFullness: " + CMS::PetFullness + "%";
+	this->lInGame->Text = "InGame: " + CMS::InGame;
+	this->lMSCRC->Text = "MSCRC: " + (CMS::gotMSCRC ? "Bypassed" : "Original!");
 
 	if (CMS::InGame)
 	{
@@ -320,8 +322,8 @@ Void MainForm::StatsTimer_Tick(Object^ sender, EventArgs^ e)
 		if (cbAutoMP->Checked && CMS::CharMP <= nudAutoMP->Value) CMS::SpamSwitch(ddbAutoMPKey->SelectedIndex);
 
 		//AutoCC happens here
-		if (cbCCPeople->Checked && (CMS::PeopleCount >= (int) nudCCPeople->Value)) CC::CCSwitch((CCType) ddbPeopleType->SelectedIndex);
-		if (cbCCAttacks->Checked && (CMS::AttackCount >= (int) nudCCAttacks->Value)) CC::CCSwitch((CCType) ddbAttacksType->SelectedIndex);
+		if (cbCCPeople->Checked && (CMS::PeopleCount >= (int) nudCCPeople->Value)) CC::CCSwitch(CCType(ddbPeopleType->SelectedIndex));
+		if (cbCCAttacks->Checked && (CMS::AttackCount >= (int) nudCCAttacks->Value)) CC::CCSwitch(CCType(ddbAttacksType->SelectedIndex));
 
 		//PetFeeder happens here
 		if (cbPetFeeder->Checked && (CMS::PetFullness <= nudPetFeeder->Value)) CMS::SendSwitch(ddbPetFeeder->SelectedIndex);
