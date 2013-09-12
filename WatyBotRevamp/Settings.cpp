@@ -70,7 +70,7 @@ Void Settings::AddChildControls(XmlTextWriter^ xmlSerialisedForm, Control^ c)
 	for each(Control^ childCtrl in c->Controls)
 	{
 		auto type = childCtrl->GetType();
-		if (childCtrl->HasChildren || type == ComboBox::typeid || type == NumericUpDown::typeid || childCtrl->Name == "cbLogoSkipper" || childCtrl->Name == "cbPinTyper")
+		if (childCtrl->HasChildren || type == ComboBox::typeid || type == NumericUpDown::typeid || childCtrl->Name == "cbLogoSkipper" || childCtrl->Name == "cbPinTyper" || childCtrl->Name == "cbOLWNA")
 		{
 			// serialise this control
 			xmlSerialisedForm->WriteStartElement("Control");
