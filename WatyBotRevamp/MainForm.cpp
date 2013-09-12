@@ -369,6 +369,7 @@ Void MainForm::bAutoSkill_Click(Object^ sender, EventArgs^ e)
 		lvAutoSkill->Items->Add(item);
 		AutoSkill::AutoSkills->Add(gcnew AutoSkillEntry(tbAutoSkill->Text, (int) nudAutoSkill->Value, ddbAutoSkill->SelectedIndex));
 	}
+	Log::WriteLine("Added \"" + tbAutoSkill->Text + "\" to the AutoSkills.");
 	AutoSkill::WriteXmlData();
 }
 Void MainForm::castToolStripMenuItem_Click(Object^ sender, EventArgs^ e)
@@ -429,7 +430,10 @@ Void MainForm::bAddPacket_Click(Object^ sender, EventArgs^ e)
 {
 	auto dialog = gcnew PacketDialog;
 	if (dialog->ShowDialog() == ::DialogResult::OK)
+	{
+		Log::WriteLine("Added \"" + dialog->Packet->Name + "\" to the PacketSender.");
 		PacketSender::Add(dialog->Packet);
+	}
 }
 Void MainForm::bEditPacket_Click(System::Object^ sender, System::EventArgs^ e)
 {
@@ -453,10 +457,8 @@ Void MainForm::bSendPacket_Click(Object^ sender, EventArgs^ e)
 }
 Void MainForm::bDeletePacket_Click(Object^ sender, EventArgs^ e)
 {
-	if (lvPackets->SelectedItems->Count < 1) return;
-	int index = lvPackets->SelectedItems[0]->Index;
-	lvPackets->Items->RemoveAt(index);
-	PacketSender::Packets->RemoveAt(index);
+	if (lvPackets->SelectedIndices->Count <= 0) return;
+	PacketSender::Packets->RemoveAt(lvPackets->SelectedIndices[0]);
 	PacketSender::WriteXmlData();
 }
 Void MainForm::lvPackets_KeyDown(Object^ sender, Windows::Forms::KeyEventArgs^ e)
@@ -495,7 +497,7 @@ Void MainForm::bAddSPCLocation_Click(Object^ sender, EventArgs^ e)
 	int mapid = (int) nudSPCMapId->Value;
 	int x = (int) nudSPCX->Value;
 	int y = (int) nudSPCY->Value;
-
+	Log::WriteLine("Added \"" + name + "\" to SPControl.");
 	SPControl::AddLocation(name, mapid, x, y);
 }
 Void MainForm::cbSPControl_CheckedChanged(Object^ sender, EventArgs^ e)
