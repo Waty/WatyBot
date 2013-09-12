@@ -51,4 +51,5 @@ public:
 	static CMemory SpawnControlCave;
 	static CMemory InstantFinalSlash1;
 	static CMemory InstantFinalSlash2;
+	static void SetIFSClass(int index);
 };

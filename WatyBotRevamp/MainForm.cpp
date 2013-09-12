@@ -157,43 +157,19 @@ void MainForm::cbMouseFly_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbMouseFly->Checked = Hacks::MouseFly.Enable(cbMouseFly->Checked);
 }
-void MainForm::cbSkillInjection_CheckedChanged(Object^ sender, EventArgs^ e)
-{
-	/* Patched :(
-	if(ddbSkillInjection->SelectedIndex < 0)
-	{
-	if(cbSkillInjection->Checked)
-	{
-	ShowError("Please Select a Skill");
-	cbSkillInjection->Checked = false;
-	}
-	}
-	else
-	{
-	//set variables
-	Hacks::iSkillInjectionSkillID = SkillInjectionSkills[ddbSkillInjection->SelectedIndex];
-	SkillInjectionStopWatch.SetDelay(milliseconds((int) nudSkillInjection->Value));
-
-	cbNFA->Checked = false;
-	cbSkillInjection->Checked = Hacks::cmSkillInjectionChecks.Enable(cbSkillInjection->Checked);
-	cbSkillInjection->Checked = Hacks::cmSkillInjectionCave.Enable(cbSkillInjection->Checked);
-	cbNoCCBlueBoxes->Checked = cbSkillInjection->Checked;
-	cbNoCCBlueBoxes->Enabled = !cbSkillInjection->Checked;
-	}
-	*/
-}
-void MainForm::nudSkillInjectionDelay_ValueChanged(Object^ sender, EventArgs^ e)
-{
-	//SkillInjectionStopWatch.SetDelay(milliseconds((int) nudSkillInjection->Value));
-}
-void MainForm::ddbSkillInjectionSkills_SelectedIndexChanged(Object^ sender, EventArgs^ e)
-{
-	//Patched
-	//Hacks::iSkillInjectionSkillID = SkillInjectionSkills[ddbSkillInjection->SelectedIndex];
-}
 void MainForm::cbNoCCBlueBoxes_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbNoCCBlueBoxes->Checked = Hacks::NoCCBoxes.Enable(cbNoCCBlueBoxes->Checked);
+}
+void MainForm::cbIFS_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::InstantFinalSlash1.Enable(cbIFS->Checked);
+	Hacks::InstantFinalSlash2.Enable(cbIFS->Checked);
+	ddbIFS->Enabled = !cbIFS->Checked;
+}
+void MainForm::ddbIFS_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	Hacks::SetIFSClass(ddbIFS->SelectedIndex);
 }
 
 //AutoBot Events
@@ -300,9 +276,6 @@ Void MainForm::MainForm_Load(Object^ sender, EventArgs^ e)
 	// Fix the size of the tabs
 	MainForm::Height = TabHeight[MainTabControl->SelectedTab->TabIndex];
 	MainTabControl->Height = TabHeight[MainTabControl->SelectedTab->TabIndex] - 30;
-
-	Hacks::InstantFinalSlash1.Enable(true);
-	Hacks::InstantFinalSlash2.Enable(true);
 }
 Void MainForm::StatsTimer_Tick(Object^ sender, EventArgs^ e)
 {

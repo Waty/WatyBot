@@ -170,9 +170,7 @@ namespace WatyBotRevamp {
 		System::Windows::Forms::CheckBox^ cbHideDamage;
 		System::Windows::Forms::CheckBox^ cbMercedesCombo;
 		System::Windows::Forms::ToolTip^ InfoToolTip;
-		System::Windows::Forms::CheckBox^ cbSkillInjection;
-		System::Windows::Forms::ComboBox^ ddbSkillInjection;
-		System::Windows::Forms::NumericUpDown^ nudSkillInjection;
+		System::Windows::Forms::CheckBox^  cbIFS;
 		System::Windows::Forms::CheckBox^ cbNoFadeStages;
 		System::Windows::Forms::CheckBox^ cbNoCCBlueBoxes;
 		System::Windows::Forms::CheckBox^ cbMouseFly;
@@ -215,6 +213,7 @@ namespace WatyBotRevamp {
 		System::Windows::Forms::Label^  lMSCRC;
 		System::Windows::Forms::Label^  lInGame;
 		System::Windows::Forms::Label^  lChannel;
+		System::Windows::Forms::ComboBox^  ddbIFS;
 		System::ComponentModel::IContainer^ components;
 #pragma endregion
 
@@ -295,12 +294,11 @@ namespace WatyBotRevamp {
 			this->cbJDA = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNoBG = (gcnew System::Windows::Forms::CheckBox());
 			this->gbCharHacks = (gcnew System::Windows::Forms::GroupBox());
+			this->ddbIFS = (gcnew System::Windows::Forms::ComboBox());
 			this->cbLockItemVac = (gcnew System::Windows::Forms::CheckBox());
 			this->nudIceGuard = (gcnew System::Windows::Forms::NumericUpDown());
 			this->cbIceGuard = (gcnew System::Windows::Forms::CheckBox());
-			this->nudSkillInjection = (gcnew System::Windows::Forms::NumericUpDown());
-			this->ddbSkillInjection = (gcnew System::Windows::Forms::ComboBox());
-			this->cbSkillInjection = (gcnew System::Windows::Forms::CheckBox());
+			this->cbIFS = (gcnew System::Windows::Forms::CheckBox());
 			this->cbMercedesCombo = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNDMining = (gcnew System::Windows::Forms::CheckBox());
 			this->cbNFA = (gcnew System::Windows::Forms::CheckBox());
@@ -370,6 +368,7 @@ namespace WatyBotRevamp {
 			this->ddbHotKeyAttack = (gcnew System::Windows::Forms::ComboBox());
 			this->cbHotKeyAttack = (gcnew System::Windows::Forms::CheckBox());
 			this->gbPointers = (gcnew System::Windows::Forms::GroupBox());
+			this->lChannel = (gcnew System::Windows::Forms::Label());
 			this->lMSCRC = (gcnew System::Windows::Forms::Label());
 			this->lInGame = (gcnew System::Windows::Forms::Label());
 			this->lPetFullness = (gcnew System::Windows::Forms::Label());
@@ -386,7 +385,6 @@ namespace WatyBotRevamp {
 			this->tAutoLoot = (gcnew System::Windows::Forms::Timer(this->components));
 			this->tTimedCC = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SettingsWatcher = (gcnew System::IO::FileSystemWatcher());
-			this->lChannel = (gcnew System::Windows::Forms::Label());
 			this->MainTabControl->SuspendLayout();
 			this->AutoBotTab->SuspendLayout();
 			this->gbAutoSkill->SuspendLayout();
@@ -412,7 +410,6 @@ namespace WatyBotRevamp {
 			this->gbMiscHacks->SuspendLayout();
 			this->gbCharHacks->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudIceGuard))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkillInjection))->BeginInit();
 			this->MobHacks->SuspendLayout();
 			this->PacketSenderTab->SuspendLayout();
 			this->PacketContextMenu->SuspendLayout();
@@ -1192,12 +1189,11 @@ namespace WatyBotRevamp {
 			// 
 			// gbCharHacks
 			// 
+			this->gbCharHacks->Controls->Add(this->ddbIFS);
 			this->gbCharHacks->Controls->Add(this->cbLockItemVac);
 			this->gbCharHacks->Controls->Add(this->nudIceGuard);
 			this->gbCharHacks->Controls->Add(this->cbIceGuard);
-			this->gbCharHacks->Controls->Add(this->nudSkillInjection);
-			this->gbCharHacks->Controls->Add(this->ddbSkillInjection);
-			this->gbCharHacks->Controls->Add(this->cbSkillInjection);
+			this->gbCharHacks->Controls->Add(this->cbIFS);
 			this->gbCharHacks->Controls->Add(this->cbMercedesCombo);
 			this->gbCharHacks->Controls->Add(this->cbNDMining);
 			this->gbCharHacks->Controls->Add(this->cbNFA);
@@ -1217,6 +1213,17 @@ namespace WatyBotRevamp {
 			this->gbCharHacks->TabIndex = 1;
 			this->gbCharHacks->TabStop = false;
 			this->gbCharHacks->Text = L"Character";
+			// 
+			// ddbIFS
+			// 
+			this->ddbIFS->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			this->ddbIFS->FormattingEnabled = true;
+			this->ddbIFS->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Kaizer", L"Demon Slayer" });
+			this->ddbIFS->Location = System::Drawing::Point(83, 135);
+			this->ddbIFS->Name = L"ddbIFS";
+			this->ddbIFS->Size = System::Drawing::Size(70, 21);
+			this->ddbIFS->TabIndex = 22;
+			this->ddbIFS->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::ddbIFS_SelectedIndexChanged);
 			// 
 			// cbLockItemVac
 			// 
@@ -1252,48 +1259,17 @@ namespace WatyBotRevamp {
 			this->cbIceGuard->UseVisualStyleBackColor = true;
 			this->cbIceGuard->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbIceGuard_CheckedChanged);
 			// 
-			// nudSkillInjection
+			// cbIFS
 			// 
-			this->nudSkillInjection->Enabled = false;
-			this->nudSkillInjection->Location = System::Drawing::Point(95, 136);
-			this->nudSkillInjection->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10000, 0, 0, 0 });
-			this->nudSkillInjection->Name = L"nudSkillInjection";
-			this->nudSkillInjection->Size = System::Drawing::Size(58, 20);
-			this->nudSkillInjection->TabIndex = 17;
-			this->InfoToolTip->SetToolTip(this->nudSkillInjection, L"Delay for Skill Injection, 200 is high, 0 is low");
-			this->nudSkillInjection->ValueChanged += gcnew System::EventHandler(this, &MainForm::nudSkillInjectionDelay_ValueChanged);
-			// 
-			// ddbSkillInjection
-			// 
-			this->ddbSkillInjection->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->ddbSkillInjection->DropDownWidth = 215;
-			this->ddbSkillInjection->Enabled = false;
-			this->ddbSkillInjection->FormattingEnabled = true;
-			this->ddbSkillInjection->Items->AddRange(gcnew cli::array< System::Object^  >(14) {
-				L"Ice Attack (600% dmg, 10 mobs)", L"Ice Smash (1200% dmg, 10 mobs)",
-					L"Ice Snow Tempest (500% x 4 dmg, 10 mobs)", L"Ice chop (900% dmg, 10 mob count)", L"Kaiser: 3rd Dragon Slash", L"Bandit 1st Job: DoubleStab",
-					L"Bandit 2nd Job: SavageBlow", L"Bandit 3rd Job: Midnight Carneval", L"Bandit 4th Job: Assasinate", L"Warrior 1st Job: Power Strike",
-					L"Paladin 4th Job: Blast", L"Spearman 3rd Job: Sacrifice", L"Ice/Lightning 2nd Job: Cold Beam", L"Ice/Lightning 3rd Job: Thunder Spear"
-			});
-			this->ddbSkillInjection->Location = System::Drawing::Point(159, 136);
-			this->ddbSkillInjection->Name = L"ddbSkillInjection";
-			this->ddbSkillInjection->Size = System::Drawing::Size(145, 21);
-			this->ddbSkillInjection->TabIndex = 16;
-			this->InfoToolTip->SetToolTip(this->ddbSkillInjection, L"Select here the skill you want to use with Skill Injection");
-			this->ddbSkillInjection->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::ddbSkillInjectionSkills_SelectedIndexChanged);
-			// 
-			// cbSkillInjection
-			// 
-			this->cbSkillInjection->AutoSize = true;
-			this->cbSkillInjection->Enabled = false;
-			this->cbSkillInjection->Location = System::Drawing::Point(6, 137);
-			this->cbSkillInjection->Name = L"cbSkillInjection";
-			this->cbSkillInjection->Size = System::Drawing::Size(88, 17);
-			this->cbSkillInjection->TabIndex = 15;
-			this->cbSkillInjection->Text = L"Skill Injection";
-			this->InfoToolTip->SetToolTip(this->cbSkillInjection, L"Spams a powerfull attack");
-			this->cbSkillInjection->UseVisualStyleBackColor = true;
-			this->cbSkillInjection->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbSkillInjection_CheckedChanged);
+			this->cbIFS->AutoSize = true;
+			this->cbIFS->Location = System::Drawing::Point(6, 137);
+			this->cbIFS->Name = L"cbIFS";
+			this->cbIFS->Size = System::Drawing::Size(77, 17);
+			this->cbIFS->TabIndex = 15;
+			this->cbIFS->Text = L"Final Slash";
+			this->InfoToolTip->SetToolTip(this->cbIFS, L"Makes you skip the 2 attacks before the final attack");
+			this->cbIFS->UseVisualStyleBackColor = true;
+			this->cbIFS->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbIFS_CheckedChanged);
 			// 
 			// cbMercedesCombo
 			// 
@@ -2034,6 +2010,15 @@ namespace WatyBotRevamp {
 			this->gbPointers->TabStop = false;
 			this->gbPointers->Text = L"Pointers";
 			// 
+			// lChannel
+			// 
+			this->lChannel->AutoSize = true;
+			this->lChannel->Location = System::Drawing::Point(6, 94);
+			this->lChannel->Name = L"lChannel";
+			this->lChannel->Size = System::Drawing::Size(58, 13);
+			this->lChannel->TabIndex = 31;
+			this->lChannel->Text = L"Channel: 0";
+			// 
 			// lMSCRC
 			// 
 			this->lMSCRC->AutoSize = true;
@@ -2149,15 +2134,6 @@ namespace WatyBotRevamp {
 			this->SettingsWatcher->SynchronizingObject = this;
 			this->SettingsWatcher->Changed += gcnew System::IO::FileSystemEventHandler(this, &MainForm::SettingsWatcher_Changed);
 			// 
-			// lChannel
-			// 
-			this->lChannel->AutoSize = true;
-			this->lChannel->Location = System::Drawing::Point(6, 94);
-			this->lChannel->Name = L"lChannel";
-			this->lChannel->Size = System::Drawing::Size(58, 13);
-			this->lChannel->TabIndex = 31;
-			this->lChannel->Text = L"Channel: 0";
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -2203,7 +2179,6 @@ namespace WatyBotRevamp {
 			this->gbCharHacks->ResumeLayout(false);
 			this->gbCharHacks->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudIceGuard))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudSkillInjection))->EndInit();
 			this->MobHacks->ResumeLayout(false);
 			this->MobHacks->PerformLayout();
 			this->PacketSenderTab->ResumeLayout(false);
@@ -2228,8 +2203,8 @@ namespace WatyBotRevamp {
 
 	public:
 		static String^ Path = System::IO::Path::Combine(Environment::GetFolderPath(Environment::SpecialFolder::ApplicationData), "Waty", "Settings.xml");
-		static array<String^>^ KeyNames = gcnew array<String^>{"Shift", "Space", "Ctr", "Alt", "Insert", "Delete", "Home", "End", "Page Up", "Page Down",
-			"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+		static array<String^>^ KeyNames = gcnew array<String^>{"Shift", "Space", "Ctrl", "Alt", "Insert", "Delete", "Home", "End", "Page Up", "Page Down",
+			"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
 			"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12"};
 		static NotifyIcon^ notifyIcon = gcnew NotifyIcon;
 
@@ -2310,13 +2285,12 @@ namespace WatyBotRevamp {
 		Void cbNDMining_CheckedChanged(Object^ sender, EventArgs^ e);
 		Void cbHideDamage_CheckedChanged(Object^ sender, EventArgs^ e);
 		Void cbMercedesCombo_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbSkillInjection_CheckedChanged(Object^ sender, EventArgs^ e);
 		Void cbNoFadeStages_CheckedChanged(Object^ sender, EventArgs^ e);
 		Void cbNoCCBlueBoxes_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void nudSkillInjectionDelay_ValueChanged(Object^ sender, EventArgs^ e);
-		Void ddbSkillInjectionSkills_SelectedIndexChanged(Object^ sender, EventArgs^ e);
 		Void cbMouseFly_CheckedChanged(Object^ sender, EventArgs^ e);
 		Void cbIceGuard_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void cbIFS_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+		Void ddbIFS_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
 
 		//PacketSender events
 		Void bAddPacket_Click(Object^ sender, EventArgs^ e);

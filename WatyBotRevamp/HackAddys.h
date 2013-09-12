@@ -34,6 +34,9 @@
 #define SitHackAddy 0xC844C1
 #define SPControlAddy 0xCAD863
 #define SPCChecksAddy 0xCAD870
+#define IFSAddy1 0xCF8C24 
+#define IFSAddy2 0xCF49A8
+#define IFSCall 0x86C210
 #define Godmode50SecAddy1 0xCD6E8F
 #define Godmode50SecAddy2 0xCD6EAA
 #define LogoSkipperAddy 0x112B4A8
