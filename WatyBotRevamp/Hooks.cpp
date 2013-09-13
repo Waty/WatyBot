@@ -1,5 +1,7 @@
 #include <Windows.h>
 #include "HackAddys.h"
+#include "Detours.h"
+#pragma warning(disable:4099)
 
 /* all outdated from 90
 struct SKILLENTRY
@@ -63,4 +65,40 @@ auto CField_SendTransferChannelRequest = reinterpret_cast<CField__SendTransferCh
 void TryCC(int channel)
 {
 	CField_SendTransferChannelRequest(channel);
+}
+
+BOOL SetHook(__in BOOL bInstall, __inout PVOID* ppvTarget, __in PVOID pvDetour)
+{
+	if (DetourTransactionBegin() != NO_ERROR)
+		return FALSE;
+
+	if (DetourUpdateThread(GetCurrentThread()) == NO_ERROR)
+		if ((bInstall ? DetourAttach : DetourDetach)(ppvTarget, pvDetour) == NO_ERROR)
+			if (DetourTransactionCommit() == NO_ERROR)
+				return TRUE;
+
+	DetourTransactionAbort();
+	return FALSE;
+}
+
+typedef void(__fastcall*CUIStatusBar__SetNumberValue_t)(void*lpvEcx, void*lpvEdx, int iCurrentHp, int iMaximumHp, int iCurrentMp, int iMaximumMp, __int64 iCurrentExp, __int64 iMaximumExp, int iTempExp);
+auto CUIStatusBar__SetNumberValue = reinterpret_cast<CUIStatusBar__SetNumberValue_t>(0x00B574A0);//7D ? 39 ? ? ? 00 00 7E (first) (Start)
+
+extern void UpdateStats(int hp, int maxHp, int mp, int maxMp, __int64 exp, __int64 maxExp);
+void __fastcall CUIStatusBar__SetNumberValue__Hook(void*lpvEcx, void*lpvEdx, int iCurrentHp, int iMaximumHp, int iCurrentMp, int iMaximumMp, __int64 iCurrentExp, __int64 iMaximumExp, int iTempExp)
+{
+	UpdateStats(iCurrentHp, iMaximumHp, iCurrentMp, iMaximumMp, iCurrentExp, iMaximumExp);
+	return CUIStatusBar__SetNumberValue(lpvEcx, 0, iCurrentHp, iMaximumHp, iCurrentMp, iMaximumMp, iCurrentExp, iMaximumExp, iTempExp);
+}
+
+void EnableStatsHook(bool enable)
+{
+	SetHook(enable, (PVOID*) &CUIStatusBar__SetNumberValue, CUIStatusBar__SetNumberValue__Hook);
+}
+
+typedef int (__cdecl *CUIStatusBar__FlashHPBar_t)();
+auto CUIStatusBar__FlashHPBar = reinterpret_cast<CUIStatusBar__FlashHPBar_t>(0x00B53550);
+void FlashHPBar()
+{
+	CUIStatusBar__FlashHPBar();
 }

@@ -276,6 +276,8 @@ Void MainForm::MainForm_Load(Object^ sender, EventArgs^ e)
 	// Fix the size of the tabs
 	MainForm::Height = TabHeight[MainTabControl->SelectedTab->TabIndex];
 	MainTabControl->Height = TabHeight[MainTabControl->SelectedTab->TabIndex] - 30;
+	extern void EnableStatsHook(bool enable);
+	EnableStatsHook(true);
 }
 Void MainForm::StatsTimer_Tick(Object^ sender, EventArgs^ e)
 {
@@ -294,8 +296,8 @@ Void MainForm::StatsTimer_Tick(Object^ sender, EventArgs^ e)
 	if (CMS::InGame)
 	{
 		//AutoHP/MP happens here
-		if (cbAutoHP->Checked && CMS::CharHP <= nudAutoHP->Value) CMS::SpamSwitch(ddbAutoHPKey->SelectedIndex);
-		if (cbAutoMP->Checked && CMS::CharMP <= nudAutoMP->Value) CMS::SpamSwitch(ddbAutoMPKey->SelectedIndex);
+		if (cbAutoHP->Checked && CMS::CurHP <= nudAutoHP->Value) CMS::SpamSwitch(ddbAutoHPKey->SelectedIndex);
+		if (cbAutoMP->Checked && CMS::CurMP <= nudAutoMP->Value) CMS::SpamSwitch(ddbAutoMPKey->SelectedIndex);
 
 		//AutoCC happens here
 		if (cbCCPeople->Checked && (CMS::PeopleCount >= (int) nudCCPeople->Value)) CC::CCSwitch(CCType(ddbPeopleType->SelectedIndex));
@@ -309,17 +311,20 @@ Void MainForm::StatsTimer_Tick(Object^ sender, EventArgs^ e)
 }
 Void MainForm::RedrawStatBars()
 {
-	this->HPLabel->Text = "HP: " + CMS::CharHP + "/" + CMS::MaxHP;
-	this->MPLabel->Text = "MP: " + CMS::CharMP + "/" + CMS::MaxMP;
-	this->EXPLabel->Text = "EXP: " + CMS::CharEXP.ToString("f2") + "%";
+	this->HPLabel->Text = "HP: " + CMS::CurHP + "/" + CMS::MaxHP;
+	this->MPLabel->Text = "MP: " + CMS::CurMP + "/" + CMS::MaxMP;
+	if (CMS::MaxEXP > 0 && CMS::MaxHP > 0 && CMS::MaxMP > 0)
+	{
+		auto ExpPercentage = ((double) CMS::CurEXP / (double) CMS::MaxEXP) * 100;
+		this->EXPLabel->Text = "EXP: " + ExpPercentage.ToString("f2") + "%";
 
-	static int lengtOfBars = 223;
-	double HPBarLength = ((double) CMS::CharHP / (double) CMS::MaxHP) * lengtOfBars;
-	this->HPForeground->Width = HPBarLength;
-	double MPBarLength = ((double) CMS::CharMP / (double) CMS::MaxMP) * lengtOfBars;
-	this->MPForeground->Width = MPBarLength;
-	double EXPBarLength = (CMS::CharEXP / 100) * lengtOfBars;
-	this->EXPForeground->Width = EXPBarLength;
+		static int lengtOfBars = 223;
+		this->HPForeground->Width = ((double) CMS::CurHP / (double) CMS::MaxHP) * lengtOfBars;
+		this->MPForeground->Width = ((double) CMS::CurMP / (double) CMS::MaxMP) * lengtOfBars;
+		this->EXPForeground->Width = (ExpPercentage / 100) * lengtOfBars;
+	}
+	extern void FlashHPBar();
+	FlashHPBar();
 }
 Void MainForm::ReloadComboBox(ComboBox^ combobox)
 {

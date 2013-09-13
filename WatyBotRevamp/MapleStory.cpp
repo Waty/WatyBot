@@ -2,6 +2,7 @@
 #include "PacketSender.h"
 #include "ChangeChannel.h"
 #include "HackAddys.h"
+#include "Log.h"
 
 using namespace WatyBotRevamp;
 extern int KeyCodes [];
@@ -115,23 +116,14 @@ int CMS::CharY::get()
 {
 	return ReadPointer<int>(CharBasePtr, XOffset + 4);
 }
-int CMS::CharHP::get()
+void UpdateStats(int hp, int maxHp, int mp, int maxMp, __int64 exp, __int64 maxExp)
 {
-	WritePointer(SettingsBasePtr, HPAlertOffset, 20);
-	int HP = ReadPointer<int>(StatsBasePtr, HPOffset);
-	if (HP > MaxHP) MaxHP = HP;
-	return HP;
-}
-int CMS::CharMP::get()
-{
-	WritePointer(SettingsBasePtr, HPAlertOffset + 4, 20);
-	int MP = ReadPointer<int>(StatsBasePtr, HPOffset + 4);
-	if (MP > MaxMP) MaxMP = MP;
-	return MP;
-}
-double CMS::CharEXP::get()
-{
-	return ReadPointer<double>(StatsBasePtr, EXPOffset);
+	CMS::CurHP = hp;
+	CMS::MaxHP = maxHp;
+	CMS::CurMP = mp;
+	CMS::MaxMP = maxMp;
+	CMS::CurEXP = exp;
+	CMS::MaxEXP = maxExp;
 }
 int CMS::MapId::get()
 {

@@ -14,8 +14,12 @@ public:
 	static void SpamSwitch(int index);
 
 	static property bool UsingAutoSkill;
+	static property int CurHP;
 	static property int MaxHP;
+	static property int CurMP;
 	static property int MaxMP;
+	static property __int64 CurEXP;
+	static property __int64 MaxEXP;
 	static property bool UsingPots;
 	static property int SAWSIL;
 	static property bool OLWNA;
@@ -27,9 +31,6 @@ public:
 	static property int PeopleCount{int get(); }
 	static property int CharX{int get(); }
 	static property int CharY{int get(); }
-	static property int CharHP{int get(); }
-	static property int CharMP{int get(); }
-	static property double CharEXP{double get(); }
 	static property int MapId{int get(); }
 	static property int AttackCount{int get(); }
 	static property int Tubi{int get(); void set(int i); }
