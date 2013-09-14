@@ -21,14 +21,14 @@ private:
 	void WriteMem();
 	void RestoreMem();
 
-	enum class eType{ Bytes, Nops, Cave };
+	enum class HackType{ Bytes, Nops, Cave };
 
 	//Both Types
 	DWORD ulAddress;
 	BYTE* oldMem;
 	int bCount;
 
-	eType Type;
+	HackType Type;
 	ASM ASMType;
 
 	//Bytes
