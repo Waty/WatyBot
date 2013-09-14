@@ -24,7 +24,7 @@ DojangExit:
 	jmp[DojangRet]
 }
 EndCodeCave
-CMemory Hacks::DojangGodmode(DojangAddy, CaveDojang);
+Hack Hacks::DojangGodmode = { new CMemory(DojangAddy, CaveDojang) };
 
 /////Ice GuardGM
 DWORD IceGuardRet = IceGuardAddy + 7;
@@ -48,7 +48,7 @@ blockDMG :
 	ret 0x002C
 }
 EndCodeCave
-CMemory Hacks::IceGuard(IceGuardAddy, CaveIceGuard, 2);
+Hack Hacks::IceGuard = { new CMemory(IceGuardAddy, CaveIceGuard, 2) };
 
 void Hacks::SetIceGuardLimit(int limit)
 {
@@ -68,17 +68,20 @@ CodeCave(Aggro)
 	jmp dwAggroRet
 }
 EndCodeCave
-CMemory Hacks::AutoAggro(AggroAddy, CaveAggro);
+Hack Hacks::AutoAggro = { new CMemory(AggroAddy, CaveAggro) };
 
 /////Pin Typer
 BYTE bPinTyper [] = { 0x0F, 0x84 };
-CMemory Hacks::PinTyper(PinTyperAddy1, bPinTyper, 2, PinTyperAddy2, bPinTyper, 2);
-
-/////PIC Typer
+//Pic Typer
 BYTE bPicTyper1 [] = { 0x90, 0xE9 }; //Makes the je a jmp
 BYTE bPicTyper2 [] = { 0xC7, 0x45, 0x88, 0x00 };
-CMemory Hacks::PicTyper1(PicTyperAddy1, bPicTyper1, 2, PicTyperAddy2, bPicTyper2, 4);
-CMemory Hacks::PicTyper2(PicTyperAddy3, (void*) PicTyperCall, 0, CMemory::ASM::Call);
+Hack Hacks::PinPicTyper = {
+	new CMemory(PinTyperAddy1, bPinTyper, 2),
+	new CMemory(PinTyperAddy2, bPinTyper, 2),
+	new CMemory(PicTyperAddy1, bPicTyper1, 2),
+	new CMemory(PicTyperAddy2, bPicTyper2, 4),
+	new CMemory(PicTyperAddy3, (void*) PicTyperCall, 0, CMemory::ASM::Call)
+};
 
 /////FusionAttack
 DWORD dwFusionRet = FusionAddy + 8;
@@ -93,78 +96,95 @@ Hook:
 	jmp dwFusionRet
 }
 EndCodeCave
-CMemory Hacks::FusionAttack(FusionAddy, CaveFusionAttack, 3);
+Hack Hacks::FusionAttack = { new CMemory(FusionAddy, CaveFusionAttack, 3) };
 
 /////Perfect Loot
-BYTE bPerfectLoot1 [] = { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 };
 BYTE bPerfectLoot2 [] = { 0x25 };
 BYTE bPerfectLoot3 [] = { 0x81, 0xFE, 0x00, 0x00, 0x00, 0x00 };
-CMemory Hacks::PerfectLoot(PerfectLootAddy1, bPerfectLoot1, sizeof(bPerfectLoot1), PerfectLootAddy2, bPerfectLoot2, sizeof(bPerfectLoot2), PerfectLootAddy3, bPerfectLoot3, sizeof(bPerfectLoot3));
+Hack Hacks::PerfectLoot = {
+	new CMemory(PerfectLootAddy1, 6),
+	new CMemory(PerfectLootAddy2, bPerfectLoot2, sizeof(bPerfectLoot2)),
+	new CMemory(PerfectLootAddy3, bPerfectLoot3, sizeof(bPerfectLoot3))
+};
 
 /////No Background + Clouds
-BYTE bNoBG [] = { 0x90, 0x90, 0x90, 0x90, 0x90 };
-CMemory Hacks::NoBG(NoBGAddy1, bNoBG, 5, NoBGAddy2, bNoBG, 5);
+Hack Hacks::NoBG = {
+	new CMemory(NoBGAddy1, 5),
+	new CMemory(NoBGAddy2, 5)
+};
 
 /////Faster Mobs
 BYTE bFasterMobs [] = { 0x90, 0x90 };
-CMemory Hacks::FasterMobs(FasterMobsAddy, bFasterMobs, 2);
+Hack Hacks::FasterMobs = { new CMemory(FasterMobsAddy, bFasterMobs, 2) };
 
 /////Unlimited Morp
 BYTE bMorph1 [] = { 0xEB, 0x2E };
 BYTE bMorph2 [] = { 0xEB };
-CMemory Hacks::UnlimitedMorph(UnlimitedMorphAddy1, bMorph1, 2, UnlimitedMorphAddy2, bMorph2, 1);
+Hack Hacks::UnlimitedMorph = {
+	new CMemory(UnlimitedMorphAddy1, bMorph1, 2),
+	new CMemory(UnlimitedMorphAddy2, bMorph2, 1)
+};
 
 /////ND - All Attacks
 BYTE bgND1 [] = { 0x74 };
 BYTE bgND2 [] = { 0x00 };
-CMemory Hacks::NDAllAttacks(gNDAddy1, bgND1, 1, gNDAddy2, bgND2, 1);
+Hack Hacks::NDAllAttacks = {
+	new CMemory(gNDAddy1, bgND1, 1),
+	new CMemory(gNDAddy2, bgND2, 1)
+};
 
 /////Jump Down Anywhere
 BYTE bJDA1 [] = { 0xEB };
-BYTE bJDA2 [] = { 0xEB };
 BYTE bJDA3 [] = { 0x90, 0x90 };
-CMemory Hacks::JDA(JDAAddy1, bJDA1, 1, JDAAddy2, bJDA2, 1, JDAAddy3, bJDA3, 2);
+Hack Hacks::JDA = {
+	new CMemory(JDAAddy1, bJDA1, 1),
+	new CMemory(JDAAddy2, bJDA1, 1),
+	new CMemory(JDAAddy3, bJDA3, 2)
+};
 
 /////Full Mob Disarm
 BYTE bDisarm [] = { 0xE9, 0x24, 0x04, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90 }; //jmp 00772493 + 4 nops
-CMemory Hacks::MobDisarm(MobDisarmAddy, bDisarm, sizeof(bDisarm));
+Hack Hacks::MobDisarm(new CMemory(MobDisarmAddy, bDisarm, sizeof(bDisarm)));
 
 /////No Mobs
 BYTE bNoMobs [] = { 0xEB };
-CMemory Hacks::NoMobs(NoMobsAddy, bNoMobs, 1);
+Hack Hacks::NoMobs(new CMemory(NoMobsAddy, bNoMobs, 1));
 
 /////Instant Air Loot
 BYTE bAirLoot [] = { 0x90, 0x90 };
-CMemory Hacks::InstantAirLoot(AirLootAddy, bAirLoot, 2);
+Hack Hacks::InstantAirLoot(new CMemory(AirLootAddy, bAirLoot, 2));
 
 /////Vac Right
 BYTE bVacRight [] = { 0x75, 0x48 };
-CMemory Hacks::VacRight(VacRightAddy, bVacRight, 2);// 75 ?? DC 11 DF E0 F6 C4 41 75 ?? D9 C9 DC 74 24 10 DC 4C 24 20 DC 01 DD 11 D8 D9 DF E0 F6 C4 41
+Hack Hacks::VacRight(new CMemory(VacRightAddy, bVacRight, 2));
 
 /////Walk Unrandom Right
 BYTE bWalkRight [] = { 0xE9, 0x95, 0x00, 0x00, 0x00, 0x90 };
-CMemory Hacks::WalkRight(WalkRightAddy, bWalkRight, 6);
+Hack Hacks::WalkRight(new CMemory(WalkRightAddy, bWalkRight, 6));
 
 /////Jump Unrandom Right
 BYTE bJumpRight [] = { 0xE9, 0x7A, 0x02, 0x00, 0x00, 0x90 };
-CMemory Hacks::JumpRight(JumpRightAddy, bJumpRight, 6);
+Hack Hacks::JumpRight(new CMemory(JumpRightAddy, bJumpRight, 6));
 
 /////NoKB
 BYTE bNoKB [] = { 0x00 };
-CMemory Hacks::NoKB(NoKBAddy, bNoKB, 1);
+Hack Hacks::NoKB(new CMemory(NoKBAddy, bNoKB, 1));
 
 /////Sit Hack
 BYTE bSit [] = { 0x75 };
-CMemory Hacks::SitHack(SitHackAddy, bSit, 1);
+Hack Hacks::SitHack(new CMemory(SitHackAddy, bSit, 1));
 
 /////50 Seconds Godmode
 BYTE b50SecGM1 [] = { 0x7E };
 BYTE b50SecGM2 [] = { 0xD4, 0x36 };
-CMemory Hacks::SecondGodmode(Godmode50SecAddy1, b50SecGM1, 1, Godmode50SecAddy2, b50SecGM2, 2);
+Hack Hacks::SecondGodmode = {
+	new CMemory(Godmode50SecAddy1, b50SecGM1, 1),
+	new CMemory(Godmode50SecAddy2, b50SecGM2, 2)
+};
 
 /////Logo Skipper
 BYTE bLogoSkipper [] = { 0x50, 0x42 };
-CMemory Hacks::LogoSkipper(LogoSkipperAddy, bLogoSkipper, 2);
+Hack Hacks::LogoSkipper(new CMemory(LogoSkipperAddy, bLogoSkipper, 2));
 
 /////(semi) Item Vac
 DWORD dwItemVacCall = ItemVacCall;
@@ -193,33 +213,36 @@ CodeCave(ItemVac)
 	ret 0004
 }
 EndCodeCave
-CMemory Hacks::ItemVac(ItemVacAddy, CaveItemVac); // E8 ? ? ? ? 8B C8 8B 44 24 ? 89 38 5F 89 48 ? 5E C2 04 00 CC CC CC CC CC CC CC 56 - 4th result
+Hack Hacks::ItemVac(new CMemory(ItemVacAddy, CaveItemVac));
 void Hacks::LockItemVac(bool state)
 {
 	if (state) getItemVacCoords();
 	itemvaclock = state;
 }
 
-
 /////View Swears
 BYTE bNoSwears [] = { 0x90, 0x90 };
-CMemory Hacks::NoSwears(ViewSwearsAddy, bNoSwears, 2);
+Hack Hacks::NoSwears(new CMemory(ViewSwearsAddy, bNoSwears, 2));
 
 /////FMA
 BYTE bFMA [] = { 0xEB };
-CMemory Hacks::FMA(FMAAddy, bFMA, 1);
+Hack Hacks::FMA(new CMemory(FMAAddy, bFMA, 1));
 
 /////Ghoul's Scare Mob Lagg
 BYTE bScareMobs [] = { 0x75 };
-CMemory Hacks::ScareMobs(ScareMobsAddy, bScareMobs, 1);
+Hack Hacks::ScareMobs = { new CMemory(ScareMobsAddy, bScareMobs, 1) };
 
 /////Always Face Left
 BYTE bFLACC [] = { 0xB8, 0x05, 0x00, 0x00, 0x00, 0x90 };
-CMemory Hacks::FaceLeftAfterCC(FLACC, bFLACC, 6);
+Hack Hacks::FaceLeftAfterCC = { new CMemory(FLACC, bFLACC, 6) };
 
 /////CPU Hack
 BYTE bCPU [] = { 0x90, 0x90, 0x90, 0x90, 0x90 };
-CMemory Hacks::CPUHack(CPUAddy1, bCPU, 5/*, CPUAddy2, bCPU, 5, CPUAddy3, bCPU, 5*/);
+Hack Hacks::CPUHack = {
+	new CMemory(CPUAddy1, bCPU, 5)/*,
+	new CMemory(CPUAddy2, bCPU, 5),
+	new CMemory(CPUAddy3, bCPU, 5)*/
+};
 
 /////Unlimited Attack
 DWORD dwUARet = UAAddy + 6;
@@ -244,30 +267,39 @@ CodeCave(UA)
 	jmp dwUARet
 }
 EndCodeCave
-CMemory Hacks::UnlimitedAttack(UAAddy, CaveUA, 1);
+Hack Hacks::UnlimitedAttack = { new CMemory(UAAddy, CaveUA, 1) };
 
 /////Disable Final Attack Luna
-BYTE bDFA [] = { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 };
-CMemory Hacks::DisableFinalAttack(DFAAddy, bDFA, 7);
+Hack Hacks::DisableFinalAttack = { new CMemory(DFAAddy, 7) };
 
 /////ND Mining
 BYTE bNDMining1 [] = { 0x90, 0x90 };
 BYTE bNDMining2 [] = { 0xEB };
 BYTE bNDMining3 [] = { 0x90, 0x90 };
-CMemory Hacks::NDMining(NDMiningAddy1, bNDMining1, 2, NDMiningAddy2, bNDMining2, 1, NDMiningAddy3, bNDMining3, 2);
+Hack Hacks::NDMining = {
+	new CMemory(NDMiningAddy1, bNDMining1, 2),
+	new CMemory(NDMiningAddy2, bNDMining2, 1),
+	new CMemory(NDMiningAddy3, bNDMining3, 2)
+};
 
 /////Hide Damage
 BYTE bHideDamage1 [] = { 0x00 };
 BYTE bHideDamage2 [] = { 0x90, 0xE9 };
 BYTE bHideDamage3 [] = { 0xEB };
-BYTE bHideDamage4 [] = { 0xEB };
-BYTE bHideDamage5 [] = { 0xEB };
-CMemory Hacks::HideDamage1(HideDamageAddy1, bHideDamage1, 1, HideDamageAddy2, bHideDamage2, 2, HideDamageAddy3, bHideDamage3, 1, HideDamageAddy4, bHideDamage4, 1);
-CMemory Hacks::HideDamage2(HideDamageAddy5, bHideDamage5, 1);
+Hack Hacks::HideDamage = {
+	new  CMemory(HideDamageAddy1, bHideDamage1, 1),
+	new  CMemory(HideDamageAddy2, bHideDamage2, 2),
+	new  CMemory(HideDamageAddy3, bHideDamage3, 1),
+	new  CMemory(HideDamageAddy4, bHideDamage3, 1),
+	new  CMemory(HideDamageAddy5, bHideDamage3, 1)
+};
 
 /////Mercedes Combos without comboing
 BYTE bMercedesCombo [] = { 0xEB };
-CMemory Hacks::MercedesCombo(MercedesComboAddy1, bMercedesCombo, 1, MercedesComboAddy2, bMercedesCombo, 1);
+Hack Hacks::MercedesCombo = {
+	new CMemory(MercedesComboAddy1, bMercedesCombo, 1),
+	new CMemory(MercedesComboAddy2, bMercedesCombo, 1)
+};
 
 /* Patched ?
 int SkillInjectionSkills[] = {97, 99, 100, 103, 61001005, 4001334, 4201005, 4211011, 4221001, 1001004, 1221009, 1311005, 2201004, 2211003};
@@ -275,7 +307,7 @@ int SkillInjectionSkills[] = {97, 99, 100, 103, 61001005, 4001334, 4201005, 4211
 /////SkillInjection Disable Checks
 BYTE bSkillInjection1[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
 BYTE bSkillInjection3[] = {0xEB, 0x12};
-//CMemory cmSkillInjectionChecks(SkillInjectionChecksAddy1, bSkillInjection1, 6, SkillInjectionChecksAddy2, bSkillInjection1, 6, SkillInjectionChecksAddy3, bSkillInjection3, 2);
+//new CMemory cmSkillInjectionChecks(SkillInjectionChecksAddy1, bSkillInjection1, 6, SkillInjectionChecksAddy2, bSkillInjection1, 6, SkillInjectionChecksAddy3, bSkillInjection3, 2);
 
 /////SkillInjection Set Skill ID
 DWORD dwSkillInjectionRet = SkillInjectionInjectAddy + 6;
@@ -304,18 +336,24 @@ mov edx,[iSkillInjectionSkillID]
 jmp dword ptr [dwSkillInjectionRet]
 }
 EndCodeCave
-CMemory cmSkillInjectionCave(SkillInjectionInjectAddy, CaveSkillInjection, 1, true);
+new CMemory cmSkillInjectionCave(SkillInjectionInjectAddy, CaveSkillInjection, 1, true);
 StopWatch<milliseconds> SkillInjectionStopWatch;
 */
 
 /////No Fadestarge
 BYTE bNoFadeStages [] = { 0xc2, 0x04, 0x00 };
-CMemory Hacks::NoFadeStages(FadeAddy1, bNoFadeStages, 3, FadeAddy2, bNoFadeStages, 3);
+Hack Hacks::NoFadeStages = {
+	new CMemory(FadeAddy1, bNoFadeStages, 3),
+	new CMemory(FadeAddy2, bNoFadeStages, 3)
+};
 
 ///No CC BLue Boxes
 //TODO: Fix this:
 BYTE bNoCCBoxes [] = { 0x90, 0x90, 0x90, 0x90, 0x90 };
-CMemory Hacks::NoCCBoxes(NoCCBoxesAddy1, bNoCCBoxes, 5, NoCCBoxesAddy2, bNoCCBoxes, 5);
+Hack Hacks::NoCCBoxes = {
+	new CMemory(NoCCBoxesAddy1, 5),
+	new CMemory(NoCCBoxesAddy2, 5)
+};
 
 ////SS Mouse Fly
 DWORD dwMouseFlyRet = MouseFlyAddy + 5;
@@ -352,7 +390,7 @@ FlyExit:
 	jmp dwMouseFlyRet
 }
 EndCodeCave
-CMemory Hacks::MouseFly(MouseFlyAddy, CaveMouseFly);
+Hack Hacks::MouseFly = { new CMemory(MouseFlyAddy, CaveMouseFly) };
 
 ////Auto ExitCS Script
 DWORD dwExitCSRet = ExitCSAddy + 9;
@@ -366,7 +404,7 @@ CodeCave(ExitCS)
 	jmp dwExitCSRet
 }
 EndCodeCave
-CMemory Hacks::ExitCS(ExitCSAddy, CaveExitCS, 2);
+Hack Hacks::ExitCS = { new CMemory(ExitCSAddy, CaveExitCS, 2) };
 
 //PacketSender Fix
 DWORD dwMainThreadID = 0;
@@ -398,7 +436,7 @@ Continue : //Do the original shit
 	jmp SendPacketRet
 }
 EndCodeCave
-CMemory Hacks::ThreadIdFix(SendPacketAddy, CaveFixPacketSender);
+Hack Hacks::ThreadIdFix = { new CMemory(SendPacketAddy, CaveFixPacketSender) };
 
 DWORD dwSPControlRet = SPControlAddy + 6;
 int spawn_x, spawn_y;
@@ -436,8 +474,10 @@ SpawnNormal:
 }
 EndCodeCave
 BYTE SPCCheck [] = { 0xEB };
-CMemory Hacks::SpawnControlCheck(SPCChecksAddy, SPCCheck, 1);
-CMemory Hacks::SpawnControlCave(SPControlAddy, CaveSPControl, 1);
+Hack Hacks::SpawnControl = {
+	new CMemory(SPCChecksAddy, SPCCheck, 1),
+	new CMemory(SPControlAddy, CaveSPControl, 1)
+};
 
 DWORD IFSJump = IFSCall; //55 8B EC 83 E4 ?? 6A ?? 68 ?? ?? ?? ?? 64 A1 ?? ?? ?? ?? 50 83 EC ?? 53 56 57 A1 ?? ?? ?? ?? 33 C4 50 8D 44 24 ?? 64 A3 ?? ?? ?? ?? 8B D9 8B 75 ?? 8B 7D ?? 85 F6
 DWORD Skill1 = 61001000, Skill2 = 61001005;
@@ -454,9 +494,12 @@ IFSEnd:
 	jmp IFSJump
 }
 EndCodeCave
-CMemory Hacks::InstantFinalSlash1(IFSAddy1, CaveIFS, 0, CMemory::ASM::Call);//E8 ?? ?? ?? ?? 85 C0 0F 8E ?? ?? ?? ?? 8B 7C 24 ?? 85 FF 74 ?? 81 C7 ?? ?? ?? ?? 83 3F ?? 74 ?? 8B 6C 24 ?? 8B 5F ?? 8B CD
-CMemory Hacks::InstantFinalSlash2(IFSAddy2, CaveIFS, 0, CMemory::ASM::Call);//E8 ?? ?? ?? ?? 8B E8 89 6C 24 ?? 81 FE ?? ?? ?? ?? 75 ?? 8B 4C 24 ?? E8 ?? ?? ?? ?? 85 C0
-Void Hacks::SetIFSClass(int index)
+Hack Hacks::InstantFinalSlash = {
+	new CMemory(IFSAddy1, CaveIFS, 0, CMemory::ASM::Call), //E8 ?? ?? ?? ?? 85 C0 0F 8E ?? ?? ?? ?? 8B 7C 24 ?? 85 FF 74 ?? 81 C7 ?? ?? ?? ?? 83 3F ?? 74 ?? 8B 6C 24 ?? 8B 5F ?? 8B CD
+	new CMemory(IFSAddy2, CaveIFS, 0, CMemory::ASM::Call) //E8 ?? ?? ?? ?? 8B E8 89 6C 24 ?? 81 FE ?? ?? ?? ?? 75 ?? 8B 4C 24 ?? E8 ?? ?? ?? ?? 85 C0
+};
+;
+void Hacks::SetIFSClass(int index)
 {
 	switch (index)
 	{

@@ -51,9 +51,7 @@ void MainForm::cbJDA_CheckedChanged(Object^ sender, EventArgs^ e)
 }
 void MainForm::cbPinTyper_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbPinTyper->Checked = Hacks::PinTyper.Enable(cbPinTyper->Checked);
-	cbPinTyper->Checked = Hacks::PicTyper1.Enable(cbPinTyper->Checked);
-	cbPinTyper->Checked = Hacks::PicTyper2.Enable(cbPinTyper->Checked);
+	cbPinTyper->Checked = Hacks::PinPicTyper.Enable(cbPinTyper->Checked);
 }
 void MainForm::cbDojangGodmode_CheckedChanged(Object^ sender, EventArgs^ e)
 {
@@ -142,8 +140,7 @@ void MainForm::cbNDMining_CheckedChanged(Object^ sender, EventArgs^ e)
 }
 void MainForm::cbHideDamage_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbHideDamage->Checked = Hacks::HideDamage1.Enable(cbHideDamage->Checked);
-	cbHideDamage->Checked = Hacks::HideDamage2.Enable(cbHideDamage->Checked);
+	cbHideDamage->Checked = Hacks::HideDamage.Enable(cbHideDamage->Checked);
 }
 void MainForm::cbMercedesCombo_CheckedChanged(Object^ sender, EventArgs^ e)
 {
@@ -163,8 +160,7 @@ void MainForm::cbNoCCBlueBoxes_CheckedChanged(Object^ sender, EventArgs^ e)
 }
 void MainForm::cbIFS_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
-	Hacks::InstantFinalSlash1.Enable(cbIFS->Checked);
-	Hacks::InstantFinalSlash2.Enable(cbIFS->Checked);
+	Hacks::InstantFinalSlash.Enable(cbIFS->Checked);
 	ddbIFS->Enabled = !cbIFS->Checked;
 }
 void MainForm::ddbIFS_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
@@ -253,6 +249,7 @@ Void Main(void)
 Void ShowError(String^ Message)
 {
 	MainForm::notifyIcon->ShowBalloonTip(1000, "WatyBot", Message, ToolTipIcon::Error);
+	Log::WriteLine(Message);
 }
 Void ShowErrorDialog(String^ Message)
 {
@@ -507,8 +504,7 @@ Void MainForm::bAddSPCLocation_Click(Object^ sender, EventArgs^ e)
 }
 Void MainForm::cbSPControl_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbSPControl->Checked = Hacks::SpawnControlCheck.Enable(cbSPControl->Checked);
-	cbSPControl->Checked = Hacks::SpawnControlCave.Enable(cbSPControl->Checked);
+	cbSPControl->Checked = Hacks::SpawnControl.Enable(cbSPControl->Checked);
 }
 Void MainForm::SPControlDeleteItem_Click(Object^ sender, EventArgs^ e)
 {
