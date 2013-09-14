@@ -104,7 +104,8 @@ BYTE bPerfectLoot3 [] = { 0x81, 0xFE, 0x00, 0x00, 0x00, 0x00 };
 Hack Hacks::PerfectLoot = {
 	new CMemory(PerfectLootAddy1, 6),
 	new CMemory(PerfectLootAddy2, bPerfectLoot2, sizeof(bPerfectLoot2)),
-	new CMemory(PerfectLootAddy3, bPerfectLoot3, sizeof(bPerfectLoot3))
+	new CMemory(PerfectLootAddy3, bPerfectLoot3, sizeof(bPerfectLoot3)),
+	new CMemory(AirLootAddy, 2)
 };
 
 /////No Background + Clouds
@@ -149,10 +150,6 @@ Hack Hacks::MobDisarm(new CMemory(MobDisarmAddy, bDisarm, sizeof(bDisarm)));
 /////No Mobs
 BYTE bNoMobs [] = { 0xEB };
 Hack Hacks::NoMobs(new CMemory(NoMobsAddy, bNoMobs, 1));
-
-/////Instant Air Loot
-BYTE bAirLoot [] = { 0x90, 0x90 };
-Hack Hacks::InstantAirLoot(new CMemory(AirLootAddy, bAirLoot, 2));
 
 /////Vac Right
 BYTE bVacRight [] = { 0x75, 0x48 };
@@ -498,7 +495,6 @@ Hack Hacks::InstantFinalSlash = {
 	new CMemory(IFSAddy1, CaveIFS, 0, CMemory::ASM::Call), //E8 ?? ?? ?? ?? 85 C0 0F 8E ?? ?? ?? ?? 8B 7C 24 ?? 85 FF 74 ?? 81 C7 ?? ?? ?? ?? 83 3F ?? 74 ?? 8B 6C 24 ?? 8B 5F ?? 8B CD
 	new CMemory(IFSAddy2, CaveIFS, 0, CMemory::ASM::Call) //E8 ?? ?? ?? ?? 8B E8 89 6C 24 ?? 81 FE ?? ?? ?? ?? 75 ?? 8B 4C 24 ?? E8 ?? ?? ?? ?? 85 C0
 };
-;
 void Hacks::SetIFSClass(int index)
 {
 	switch (index)

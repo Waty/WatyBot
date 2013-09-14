@@ -1223,7 +1223,6 @@ namespace WatyBotRevamp {
 			this->ddbIFS->Name = L"ddbIFS";
 			this->ddbIFS->Size = System::Drawing::Size(70, 21);
 			this->ddbIFS->TabIndex = 22;
-			this->ddbIFS->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::ddbIFS_SelectedIndexChanged);
 			// 
 			// cbLockItemVac
 			// 
@@ -2290,7 +2289,6 @@ namespace WatyBotRevamp {
 		Void cbMouseFly_CheckedChanged(Object^ sender, EventArgs^ e);
 		Void cbIceGuard_CheckedChanged(Object^ sender, EventArgs^ e);
 		Void cbIFS_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
-		Void ddbIFS_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e);
 
 		//PacketSender events
 		Void bAddPacket_Click(Object^ sender, EventArgs^ e);

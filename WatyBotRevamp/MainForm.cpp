@@ -23,7 +23,6 @@ void MainForm::cbNoKB_CheckedChanged(Object^ sender, EventArgs^ e)
 void MainForm::cbPerfectLoot_CheckedChanged(Object^ sender, EventArgs^ e)
 {
 	cbPerfectLoot->Checked = Hacks::PerfectLoot.Enable(cbPerfectLoot->Checked);
-	cbPerfectLoot->Checked = Hacks::InstantAirLoot.Enable(cbPerfectLoot->Checked);
 }
 void MainForm::cbVacRight_CheckedChanged(Object^ sender, EventArgs^ e)
 {
@@ -161,11 +160,8 @@ void MainForm::cbNoCCBlueBoxes_CheckedChanged(Object^ sender, EventArgs^ e)
 void MainForm::cbIFS_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
 	Hacks::InstantFinalSlash.Enable(cbIFS->Checked);
-	ddbIFS->Enabled = !cbIFS->Checked;
-}
-void MainForm::ddbIFS_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
-{
 	Hacks::SetIFSClass(ddbIFS->SelectedIndex);
+	ddbIFS->Enabled = !cbIFS->Checked;
 }
 
 //AutoBot Events
