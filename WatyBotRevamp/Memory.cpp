@@ -65,6 +65,7 @@ bool Hack::Enable(bool state)
 		ShowError("Couldn't enable the hack because there was no CRC bypass enabled");
 		return false;
 	}
-	for (CMemory* cm : hacks)cm->Enable(state);
+	for (CMemory* cm : hacks) cm->Enable(state);
+	Enabled = state;
 	return state;
 }
