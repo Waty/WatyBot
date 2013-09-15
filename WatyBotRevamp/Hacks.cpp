@@ -154,8 +154,7 @@ BYTE bVacRight [] = { 0x75, 0x48 };
 Hack Hacks::VacRight = { new CMemory(VacRightAddy, bVacRight, 2) };
 
 /////Walk Unrandom Right
-BYTE bWalkRight [] = { 0xE9, 0x95, 0x00, 0x00, 0x00, 0x90 };
-Hack Hacks::WalkRight = { new CMemory(WalkRightAddy, bWalkRight, 6) };
+Hack Hacks::WalkRight = { new CMemory(WalkRightAddy, (void*)(WalkRightAddy + 154), 1) };
 
 /////Jump Unrandom Right
 BYTE bJumpRight [] = { 0xE9, 0x7A, 0x02, 0x00, 0x00, 0x90 };
