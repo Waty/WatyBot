@@ -95,3 +95,30 @@ void EnableStatsHook(bool enable)
 {
 	SetHook(enable, (PVOID*) &CUIStatusBar__SetNumberValue, CUIStatusBar__SetNumberValue__Hook);
 }
+
+
+int ItemX, ItemY;
+void __declspec(naked) ItemHookAsm()
+{
+	__asm
+	{
+		cmp dword ptr[esp], 0x56048C
+		jne Exit
+		mov eax, [esp + 0x08]
+		mov[ItemX], eax
+		mov eax, [esp + 0x0C]
+		mov[ItemY], eax
+
+	Exit:
+		jmp dword ptr PtInRect
+	}
+}
+
+void EnableItemHook(bool state)
+{
+	DWORD PtInRectAddy = 0x14115A4;
+	if (state) *(unsigned long*) PtInRectAddy = (unsigned long) ItemHookAsm;
+	else *(unsigned long*) PtInRectAddy = (unsigned long) PtInRect;
+}
+/*typedef void (__thiscall *SetData_t)(int x, int y);
+auto SetData = reinterpret_cast<SetData_t>(0x421F80);*/

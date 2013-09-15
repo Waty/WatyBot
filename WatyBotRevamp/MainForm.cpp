@@ -271,6 +271,8 @@ Void MainForm::MainForm_Load(Object^ sender, EventArgs^ e)
 	MainTabControl->Height = TabHeight[MainTabControl->SelectedTab->TabIndex] - 30;
 	extern void EnableStatsHook(bool enable);
 	EnableStatsHook(true);
+	extern void EnableItemHook(bool state);
+	EnableItemHook(true);
 }
 Void MainForm::StatsTimer_Tick(Object^ sender, EventArgs^ e)
 {
