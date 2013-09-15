@@ -63,9 +63,8 @@ bool Hack::Enable(bool state)
 	if (!CMS::gotMSCRC)
 	{
 		ShowError("Couldn't enable the hack because there was no CRC bypass enabled");
-		Enabled = false;
+		return false;
 	}
-	else for (CMemory* cm : hacks) cm->Enable(state);
-	Enabled = state;
-	return Enabled;
+	for (CMemory* cm : hacks)cm->Enable(state);
+	return state;
 }
