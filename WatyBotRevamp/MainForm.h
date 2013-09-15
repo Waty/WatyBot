@@ -111,33 +111,33 @@ namespace WatyBotRevamp {
 		System::Windows::Forms::ToolStripMenuItem^ deleteSPControlToolStripMenuItem;
 		System::Windows::Forms::Button^ bSPCGetCurrent;
 		System::Windows::Forms::GroupBox^ MobHacks;
-		System::Windows::Forms::CheckBox^ cbPerfectLoot;
-		System::Windows::Forms::CheckBox^ cbFusionAttack;
+		System::Windows::Forms::CheckBox^ PerfectLoot;
+		System::Windows::Forms::CheckBox^ FusionAttack;
 		System::Windows::Forms::GroupBox^ gbMiscHacks;
-		System::Windows::Forms::CheckBox^ cbJDA;
-		System::Windows::Forms::CheckBox^ cbNoBG;
+		System::Windows::Forms::CheckBox^ JDA;
+		System::Windows::Forms::CheckBox^ NoBackground;
 		System::Windows::Forms::GroupBox^ gbCharHacks;
-		System::Windows::Forms::CheckBox^ cbVacRight;
-		System::Windows::Forms::CheckBox^ cbJumpRight;
-		System::Windows::Forms::CheckBox^ cbWalkRight;
-		System::Windows::Forms::CheckBox^ cbPinTyper;
-		System::Windows::Forms::CheckBox^ cbNoKB;
-		System::Windows::Forms::CheckBox^ cbMobDisarm;
-		System::Windows::Forms::CheckBox^ cbDojangGodmode;
-		System::Windows::Forms::CheckBox^ cbUnlimitedMorph;
-		System::Windows::Forms::CheckBox^ cbFasterMobs;
-		System::Windows::Forms::CheckBox^ cbNDAllAttacks;
-		System::Windows::Forms::CheckBox^ cbNoMobs;
-		System::Windows::Forms::CheckBox^ cbUA;
-		System::Windows::Forms::CheckBox^ cbSitHack;
-		System::Windows::Forms::CheckBox^ cb50SecGM;
-		System::Windows::Forms::CheckBox^ cbLogoSkipper;
-		System::Windows::Forms::CheckBox^ cbViewSwears;
-		System::Windows::Forms::CheckBox^ cbItemVac;
-		System::Windows::Forms::CheckBox^ cbFMA;
-		System::Windows::Forms::CheckBox^ cbScareMobs;
-		System::Windows::Forms::CheckBox^ cbFLACC;
-		System::Windows::Forms::CheckBox^ cbCPUHack;
+		System::Windows::Forms::CheckBox^ VacRight;
+		System::Windows::Forms::CheckBox^ JumpRight;
+		System::Windows::Forms::CheckBox^ WalkRight;
+		System::Windows::Forms::CheckBox^ PinPicTyper;
+		System::Windows::Forms::CheckBox^ NoKB;
+		System::Windows::Forms::CheckBox^ MobDisarm;
+		System::Windows::Forms::CheckBox^ DojangGodmode;
+		System::Windows::Forms::CheckBox^ UnlimitedMorph;
+		System::Windows::Forms::CheckBox^ FasterMobs;
+		System::Windows::Forms::CheckBox^ NDAllAttacks;
+		System::Windows::Forms::CheckBox^ NoMobs;
+		System::Windows::Forms::CheckBox^ UnlimitedAttack;
+		System::Windows::Forms::CheckBox^ SitHack;
+		System::Windows::Forms::CheckBox^ SecondGodmode;
+		System::Windows::Forms::CheckBox^ LogoSkipper;
+		System::Windows::Forms::CheckBox^ ViewSwears;
+		System::Windows::Forms::CheckBox^ ItemVac;
+		System::Windows::Forms::CheckBox^ FMA;
+		System::Windows::Forms::CheckBox^ ScareMobs;
+		System::Windows::Forms::CheckBox^ FaceLeftAfterCC;
+		System::Windows::Forms::CheckBox^ CPUHack;
 		System::Windows::Forms::Label^ lSAWSIL;
 		System::Windows::Forms::ComboBox^ ddbTimedType;
 		System::Windows::Forms::ComboBox^ ddbAttacksType;
@@ -157,25 +157,25 @@ namespace WatyBotRevamp {
 		System::Windows::Forms::NumericUpDown^ nudCCTimed;
 		System::Windows::Forms::NumericUpDown^ nudCCPeople;
 		System::Windows::Forms::NumericUpDown^ nudPetFeeder;
-		System::Windows::Forms::CheckBox^ cbNFA;
-		System::Windows::Forms::CheckBox^ cbAutoAggro;
+		System::Windows::Forms::CheckBox^ DisableFinalAttack;
+		System::Windows::Forms::CheckBox^ AutoAggro;
 		System::Windows::Forms::Button^ bSaveSettings;
 		System::Windows::Forms::ComboBox^ ddbHotKeyFMA;
 		System::Windows::Forms::CheckBox^ cbHotKeyFMA;
 		System::Windows::Forms::ComboBox^ ddbHotKeyCCPeople;
 		System::Windows::Forms::CheckBox^ cbHotKeyCCPeople;
-		System::Windows::Forms::CheckBox^ cbNDMining;
+		System::Windows::Forms::CheckBox^ NDMining;
 		System::Windows::Forms::ComboBox^ ddbHotKeySendPacket;
 		System::Windows::Forms::CheckBox^ cbHotKeySendPacket;
-		System::Windows::Forms::CheckBox^ cbHideDamage;
-		System::Windows::Forms::CheckBox^ cbMercedesCombo;
+		System::Windows::Forms::CheckBox^ HideDamage;
+		System::Windows::Forms::CheckBox^ MercedesCombo;
 		System::Windows::Forms::ToolTip^ InfoToolTip;
 		System::Windows::Forms::CheckBox^  cbIFS;
-		System::Windows::Forms::CheckBox^ cbNoFadeStages;
-		System::Windows::Forms::CheckBox^ cbNoCCBlueBoxes;
-		System::Windows::Forms::CheckBox^ cbMouseFly;
+		System::Windows::Forms::CheckBox^ NoFadeStages;
+		System::Windows::Forms::CheckBox^ NoCCBoxes;
+		System::Windows::Forms::CheckBox^ MouseFly;
 		System::Windows::Forms::NumericUpDown^ nudIceGuard;
-		System::Windows::Forms::CheckBox^ cbIceGuard;
+		System::Windows::Forms::CheckBox^ IceGuard;
 		System::Windows::Forms::NumericUpDown^ nudSPCY;
 		System::Windows::Forms::NumericUpDown^ nudSPCX;
 		System::Windows::Forms::NumericUpDown^ nudSPCMapId;
@@ -281,46 +281,46 @@ namespace WatyBotRevamp {
 			this->HPBackground = (gcnew System::Windows::Forms::PictureBox());
 			this->HacksTab = (gcnew System::Windows::Forms::TabPage());
 			this->gbMiscHacks = (gcnew System::Windows::Forms::GroupBox());
-			this->cbMouseFly = (gcnew System::Windows::Forms::CheckBox());
-			this->cbNoCCBlueBoxes = (gcnew System::Windows::Forms::CheckBox());
-			this->cbNoFadeStages = (gcnew System::Windows::Forms::CheckBox());
-			this->cbHideDamage = (gcnew System::Windows::Forms::CheckBox());
-			this->cbCPUHack = (gcnew System::Windows::Forms::CheckBox());
-			this->cbFLACC = (gcnew System::Windows::Forms::CheckBox());
-			this->cbViewSwears = (gcnew System::Windows::Forms::CheckBox());
-			this->cbLogoSkipper = (gcnew System::Windows::Forms::CheckBox());
-			this->cbSitHack = (gcnew System::Windows::Forms::CheckBox());
-			this->cbPinTyper = (gcnew System::Windows::Forms::CheckBox());
-			this->cbJDA = (gcnew System::Windows::Forms::CheckBox());
-			this->cbNoBG = (gcnew System::Windows::Forms::CheckBox());
+			this->MouseFly = (gcnew System::Windows::Forms::CheckBox());
+			this->NoCCBoxes = (gcnew System::Windows::Forms::CheckBox());
+			this->NoFadeStages = (gcnew System::Windows::Forms::CheckBox());
+			this->HideDamage = (gcnew System::Windows::Forms::CheckBox());
+			this->CPUHack = (gcnew System::Windows::Forms::CheckBox());
+			this->FaceLeftAfterCC = (gcnew System::Windows::Forms::CheckBox());
+			this->ViewSwears = (gcnew System::Windows::Forms::CheckBox());
+			this->LogoSkipper = (gcnew System::Windows::Forms::CheckBox());
+			this->SitHack = (gcnew System::Windows::Forms::CheckBox());
+			this->PinPicTyper = (gcnew System::Windows::Forms::CheckBox());
+			this->JDA = (gcnew System::Windows::Forms::CheckBox());
+			this->NoBackground = (gcnew System::Windows::Forms::CheckBox());
 			this->gbCharHacks = (gcnew System::Windows::Forms::GroupBox());
 			this->ddbIFS = (gcnew System::Windows::Forms::ComboBox());
 			this->cbLockItemVac = (gcnew System::Windows::Forms::CheckBox());
 			this->nudIceGuard = (gcnew System::Windows::Forms::NumericUpDown());
-			this->cbIceGuard = (gcnew System::Windows::Forms::CheckBox());
+			this->IceGuard = (gcnew System::Windows::Forms::CheckBox());
 			this->cbIFS = (gcnew System::Windows::Forms::CheckBox());
-			this->cbMercedesCombo = (gcnew System::Windows::Forms::CheckBox());
-			this->cbNDMining = (gcnew System::Windows::Forms::CheckBox());
-			this->cbNFA = (gcnew System::Windows::Forms::CheckBox());
-			this->cbFMA = (gcnew System::Windows::Forms::CheckBox());
-			this->cbUA = (gcnew System::Windows::Forms::CheckBox());
-			this->cbItemVac = (gcnew System::Windows::Forms::CheckBox());
-			this->cb50SecGM = (gcnew System::Windows::Forms::CheckBox());
-			this->cbNDAllAttacks = (gcnew System::Windows::Forms::CheckBox());
-			this->cbUnlimitedMorph = (gcnew System::Windows::Forms::CheckBox());
-			this->cbDojangGodmode = (gcnew System::Windows::Forms::CheckBox());
-			this->cbNoKB = (gcnew System::Windows::Forms::CheckBox());
-			this->cbFusionAttack = (gcnew System::Windows::Forms::CheckBox());
-			this->cbPerfectLoot = (gcnew System::Windows::Forms::CheckBox());
+			this->MercedesCombo = (gcnew System::Windows::Forms::CheckBox());
+			this->NDMining = (gcnew System::Windows::Forms::CheckBox());
+			this->DisableFinalAttack = (gcnew System::Windows::Forms::CheckBox());
+			this->FMA = (gcnew System::Windows::Forms::CheckBox());
+			this->UnlimitedAttack = (gcnew System::Windows::Forms::CheckBox());
+			this->ItemVac = (gcnew System::Windows::Forms::CheckBox());
+			this->SecondGodmode = (gcnew System::Windows::Forms::CheckBox());
+			this->NDAllAttacks = (gcnew System::Windows::Forms::CheckBox());
+			this->UnlimitedMorph = (gcnew System::Windows::Forms::CheckBox());
+			this->DojangGodmode = (gcnew System::Windows::Forms::CheckBox());
+			this->NoKB = (gcnew System::Windows::Forms::CheckBox());
+			this->FusionAttack = (gcnew System::Windows::Forms::CheckBox());
+			this->PerfectLoot = (gcnew System::Windows::Forms::CheckBox());
 			this->MobHacks = (gcnew System::Windows::Forms::GroupBox());
-			this->cbAutoAggro = (gcnew System::Windows::Forms::CheckBox());
-			this->cbScareMobs = (gcnew System::Windows::Forms::CheckBox());
-			this->cbNoMobs = (gcnew System::Windows::Forms::CheckBox());
-			this->cbFasterMobs = (gcnew System::Windows::Forms::CheckBox());
-			this->cbMobDisarm = (gcnew System::Windows::Forms::CheckBox());
-			this->cbJumpRight = (gcnew System::Windows::Forms::CheckBox());
-			this->cbWalkRight = (gcnew System::Windows::Forms::CheckBox());
-			this->cbVacRight = (gcnew System::Windows::Forms::CheckBox());
+			this->AutoAggro = (gcnew System::Windows::Forms::CheckBox());
+			this->ScareMobs = (gcnew System::Windows::Forms::CheckBox());
+			this->NoMobs = (gcnew System::Windows::Forms::CheckBox());
+			this->FasterMobs = (gcnew System::Windows::Forms::CheckBox());
+			this->MobDisarm = (gcnew System::Windows::Forms::CheckBox());
+			this->JumpRight = (gcnew System::Windows::Forms::CheckBox());
+			this->WalkRight = (gcnew System::Windows::Forms::CheckBox());
+			this->VacRight = (gcnew System::Windows::Forms::CheckBox());
 			this->PacketSenderTab = (gcnew System::Windows::Forms::TabPage());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->bAddPacket = (gcnew System::Windows::Forms::Button());
@@ -1023,18 +1023,18 @@ namespace WatyBotRevamp {
 			// 
 			// gbMiscHacks
 			// 
-			this->gbMiscHacks->Controls->Add(this->cbMouseFly);
-			this->gbMiscHacks->Controls->Add(this->cbNoCCBlueBoxes);
-			this->gbMiscHacks->Controls->Add(this->cbNoFadeStages);
-			this->gbMiscHacks->Controls->Add(this->cbHideDamage);
-			this->gbMiscHacks->Controls->Add(this->cbCPUHack);
-			this->gbMiscHacks->Controls->Add(this->cbFLACC);
-			this->gbMiscHacks->Controls->Add(this->cbViewSwears);
-			this->gbMiscHacks->Controls->Add(this->cbLogoSkipper);
-			this->gbMiscHacks->Controls->Add(this->cbSitHack);
-			this->gbMiscHacks->Controls->Add(this->cbPinTyper);
-			this->gbMiscHacks->Controls->Add(this->cbJDA);
-			this->gbMiscHacks->Controls->Add(this->cbNoBG);
+			this->gbMiscHacks->Controls->Add(this->MouseFly);
+			this->gbMiscHacks->Controls->Add(this->NoCCBoxes);
+			this->gbMiscHacks->Controls->Add(this->NoFadeStages);
+			this->gbMiscHacks->Controls->Add(this->HideDamage);
+			this->gbMiscHacks->Controls->Add(this->CPUHack);
+			this->gbMiscHacks->Controls->Add(this->FaceLeftAfterCC);
+			this->gbMiscHacks->Controls->Add(this->ViewSwears);
+			this->gbMiscHacks->Controls->Add(this->LogoSkipper);
+			this->gbMiscHacks->Controls->Add(this->SitHack);
+			this->gbMiscHacks->Controls->Add(this->PinPicTyper);
+			this->gbMiscHacks->Controls->Add(this->JDA);
+			this->gbMiscHacks->Controls->Add(this->NoBackground);
 			this->gbMiscHacks->Location = System::Drawing::Point(7, 273);
 			this->gbMiscHacks->Name = L"gbMiscHacks";
 			this->gbMiscHacks->Size = System::Drawing::Size(310, 127);
@@ -1042,171 +1042,171 @@ namespace WatyBotRevamp {
 			this->gbMiscHacks->TabStop = false;
 			this->gbMiscHacks->Text = L"Other";
 			// 
-			// cbMouseFly
+			// MouseFly
 			// 
-			this->cbMouseFly->AutoSize = true;
-			this->cbMouseFly->Location = System::Drawing::Point(159, 107);
-			this->cbMouseFly->Name = L"cbMouseFly";
-			this->cbMouseFly->Size = System::Drawing::Size(74, 17);
-			this->cbMouseFly->TabIndex = 13;
-			this->cbMouseFly->Text = L"Mouse Fly";
-			this->InfoToolTip->SetToolTip(this->cbMouseFly, L"If you enable this hack, everywhere you click, you will get teleported");
-			this->cbMouseFly->UseVisualStyleBackColor = true;
-			this->cbMouseFly->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbMouseFly_CheckedChanged);
+			this->MouseFly->AutoSize = true;
+			this->MouseFly->Location = System::Drawing::Point(159, 107);
+			this->MouseFly->Name = L"MouseFly";
+			this->MouseFly->Size = System::Drawing::Size(74, 17);
+			this->MouseFly->TabIndex = 13;
+			this->MouseFly->Text = L"Mouse Fly";
+			this->InfoToolTip->SetToolTip(this->MouseFly, L"If you enable this hack, everywhere you click, you will get teleported");
+			this->MouseFly->UseVisualStyleBackColor = true;
+			this->MouseFly->CheckedChanged += gcnew System::EventHandler(this, &MainForm::MouseFly_CheckedChanged);
 			// 
-			// cbNoCCBlueBoxes
+			// NoCCBoxes
 			// 
-			this->cbNoCCBlueBoxes->AutoSize = true;
-			this->cbNoCCBlueBoxes->Location = System::Drawing::Point(7, 107);
-			this->cbNoCCBlueBoxes->Name = L"cbNoCCBlueBoxes";
-			this->cbNoCCBlueBoxes->Size = System::Drawing::Size(110, 17);
-			this->cbNoCCBlueBoxes->TabIndex = 12;
-			this->cbNoCCBlueBoxes->Text = L"No CC BlueBoxes";
-			this->InfoToolTip->SetToolTip(this->cbNoCCBlueBoxes, L"If you try to CC when breath is higher then 0, you won\'t get a breath message, bu"
+			this->NoCCBoxes->AutoSize = true;
+			this->NoCCBoxes->Location = System::Drawing::Point(7, 107);
+			this->NoCCBoxes->Name = L"NoCCBoxes";
+			this->NoCCBoxes->Size = System::Drawing::Size(110, 17);
+			this->NoCCBoxes->TabIndex = 12;
+			this->NoCCBoxes->Text = L"No CC BlueBoxes";
+			this->InfoToolTip->SetToolTip(this->NoCCBoxes, L"If you try to CC when breath is higher then 0, you won\'t get a breath message, bu"
 				L"t you won\'t CC");
-			this->cbNoCCBlueBoxes->UseVisualStyleBackColor = true;
-			this->cbNoCCBlueBoxes->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoCCBlueBoxes_CheckedChanged);
+			this->NoCCBoxes->UseVisualStyleBackColor = true;
+			this->NoCCBoxes->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NoCCBoxes_CheckedChanged);
 			// 
-			// cbNoFadeStages
+			// NoFadeStages
 			// 
-			this->cbNoFadeStages->AutoSize = true;
-			this->cbNoFadeStages->Location = System::Drawing::Point(159, 89);
-			this->cbNoFadeStages->Name = L"cbNoFadeStages";
-			this->cbNoFadeStages->Size = System::Drawing::Size(100, 17);
-			this->cbNoFadeStages->TabIndex = 11;
-			this->cbNoFadeStages->Text = L"No FadeStages";
-			this->InfoToolTip->SetToolTip(this->cbNoFadeStages, L"On changin map or loggin in, the game won\'t Fade out or fade in");
-			this->cbNoFadeStages->UseVisualStyleBackColor = true;
-			this->cbNoFadeStages->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoFadeStages_CheckedChanged);
+			this->NoFadeStages->AutoSize = true;
+			this->NoFadeStages->Location = System::Drawing::Point(159, 89);
+			this->NoFadeStages->Name = L"NoFadeStages";
+			this->NoFadeStages->Size = System::Drawing::Size(100, 17);
+			this->NoFadeStages->TabIndex = 11;
+			this->NoFadeStages->Text = L"No FadeStages";
+			this->InfoToolTip->SetToolTip(this->NoFadeStages, L"On changin map or loggin in, the game won\'t Fade out or fade in");
+			this->NoFadeStages->UseVisualStyleBackColor = true;
+			this->NoFadeStages->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NoFadeStages_CheckedChanged);
 			// 
-			// cbHideDamage
+			// HideDamage
 			// 
-			this->cbHideDamage->AutoSize = true;
-			this->cbHideDamage->Location = System::Drawing::Point(7, 89);
-			this->cbHideDamage->Name = L"cbHideDamage";
-			this->cbHideDamage->Size = System::Drawing::Size(147, 17);
-			this->cbHideDamage->TabIndex = 8;
-			this->cbHideDamage->Text = L"Hide Damage/Animations";
-			this->InfoToolTip->SetToolTip(this->cbHideDamage, L"Hides all the damage you do, use if you DC because you have to much hits");
-			this->cbHideDamage->UseVisualStyleBackColor = true;
-			this->cbHideDamage->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbHideDamage_CheckedChanged);
+			this->HideDamage->AutoSize = true;
+			this->HideDamage->Location = System::Drawing::Point(7, 89);
+			this->HideDamage->Name = L"HideDamage";
+			this->HideDamage->Size = System::Drawing::Size(147, 17);
+			this->HideDamage->TabIndex = 8;
+			this->HideDamage->Text = L"Hide Damage/Animations";
+			this->InfoToolTip->SetToolTip(this->HideDamage, L"Hides all the damage you do, use if you DC because you have to much hits");
+			this->HideDamage->UseVisualStyleBackColor = true;
+			this->HideDamage->CheckedChanged += gcnew System::EventHandler(this, &MainForm::HideDamage_CheckedChanged);
 			// 
-			// cbCPUHack
+			// CPUHack
 			// 
-			this->cbCPUHack->AutoSize = true;
-			this->cbCPUHack->Location = System::Drawing::Point(159, 71);
-			this->cbCPUHack->Name = L"cbCPUHack";
-			this->cbCPUHack->Size = System::Drawing::Size(77, 17);
-			this->cbCPUHack->TabIndex = 7;
-			this->cbCPUHack->Text = L"CPU Hack";
-			this->InfoToolTip->SetToolTip(this->cbCPUHack, L"Reduces CPU usage");
-			this->cbCPUHack->UseVisualStyleBackColor = true;
-			this->cbCPUHack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbCPUHack_CheckedChanged);
+			this->CPUHack->AutoSize = true;
+			this->CPUHack->Location = System::Drawing::Point(159, 71);
+			this->CPUHack->Name = L"CPUHack";
+			this->CPUHack->Size = System::Drawing::Size(77, 17);
+			this->CPUHack->TabIndex = 7;
+			this->CPUHack->Text = L"CPU Hack";
+			this->InfoToolTip->SetToolTip(this->CPUHack, L"Reduces CPU usage");
+			this->CPUHack->UseVisualStyleBackColor = true;
+			this->CPUHack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::CPUHack_CheckedChanged);
 			// 
-			// cbFLACC
+			// FaceLeftAfterCC
 			// 
-			this->cbFLACC->AutoSize = true;
-			this->cbFLACC->Location = System::Drawing::Point(7, 71);
-			this->cbFLACC->Name = L"cbFLACC";
-			this->cbFLACC->Size = System::Drawing::Size(107, 17);
-			this->cbFLACC->TabIndex = 6;
-			this->cbFLACC->Text = L"Always Face Left";
-			this->InfoToolTip->SetToolTip(this->cbFLACC, L"You will face left when you stand still");
-			this->cbFLACC->UseVisualStyleBackColor = true;
-			this->cbFLACC->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbFLACC_CheckedChanged);
+			this->FaceLeftAfterCC->AutoSize = true;
+			this->FaceLeftAfterCC->Location = System::Drawing::Point(7, 71);
+			this->FaceLeftAfterCC->Name = L"FaceLeftAfterCC";
+			this->FaceLeftAfterCC->Size = System::Drawing::Size(107, 17);
+			this->FaceLeftAfterCC->TabIndex = 6;
+			this->FaceLeftAfterCC->Text = L"Always Face Left";
+			this->InfoToolTip->SetToolTip(this->FaceLeftAfterCC, L"You will face left when you stand still");
+			this->FaceLeftAfterCC->UseVisualStyleBackColor = true;
+			this->FaceLeftAfterCC->CheckedChanged += gcnew System::EventHandler(this, &MainForm::FaceLeftAfterCC_CheckedChanged);
 			// 
-			// cbViewSwears
+			// ViewSwears
 			// 
-			this->cbViewSwears->AutoSize = true;
-			this->cbViewSwears->Location = System::Drawing::Point(159, 55);
-			this->cbViewSwears->Name = L"cbViewSwears";
-			this->cbViewSwears->Size = System::Drawing::Size(87, 17);
-			this->cbViewSwears->TabIndex = 5;
-			this->cbViewSwears->Text = L"View Swears";
-			this->InfoToolTip->SetToolTip(this->cbViewSwears, L"Makes you able to view words without ***");
-			this->cbViewSwears->UseVisualStyleBackColor = true;
-			this->cbViewSwears->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbViewSwears_CheckedChanged);
+			this->ViewSwears->AutoSize = true;
+			this->ViewSwears->Location = System::Drawing::Point(159, 55);
+			this->ViewSwears->Name = L"ViewSwears";
+			this->ViewSwears->Size = System::Drawing::Size(87, 17);
+			this->ViewSwears->TabIndex = 5;
+			this->ViewSwears->Text = L"View Swears";
+			this->InfoToolTip->SetToolTip(this->ViewSwears, L"Makes you able to view words without ***");
+			this->ViewSwears->UseVisualStyleBackColor = true;
+			this->ViewSwears->CheckedChanged += gcnew System::EventHandler(this, &MainForm::ViewSwears_CheckedChanged);
 			// 
-			// cbLogoSkipper
+			// LogoSkipper
 			// 
-			this->cbLogoSkipper->AutoSize = true;
-			this->cbLogoSkipper->Location = System::Drawing::Point(159, 37);
-			this->cbLogoSkipper->Name = L"cbLogoSkipper";
-			this->cbLogoSkipper->Size = System::Drawing::Size(89, 17);
-			this->cbLogoSkipper->TabIndex = 4;
-			this->cbLogoSkipper->Text = L"Logo Skipper";
-			this->InfoToolTip->SetToolTip(this->cbLogoSkipper, L"Skips the logo, making your ms start faster");
-			this->cbLogoSkipper->UseVisualStyleBackColor = true;
-			this->cbLogoSkipper->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbLogoSkipper_CheckedChanged);
+			this->LogoSkipper->AutoSize = true;
+			this->LogoSkipper->Location = System::Drawing::Point(159, 37);
+			this->LogoSkipper->Name = L"LogoSkipper";
+			this->LogoSkipper->Size = System::Drawing::Size(89, 17);
+			this->LogoSkipper->TabIndex = 4;
+			this->LogoSkipper->Text = L"Logo Skipper";
+			this->InfoToolTip->SetToolTip(this->LogoSkipper, L"Skips the logo, making your ms start faster");
+			this->LogoSkipper->UseVisualStyleBackColor = true;
+			this->LogoSkipper->CheckedChanged += gcnew System::EventHandler(this, &MainForm::LogoSkipper_CheckedChanged);
 			// 
-			// cbSitHack
+			// SitHack
 			// 
-			this->cbSitHack->AutoSize = true;
-			this->cbSitHack->Location = System::Drawing::Point(159, 19);
-			this->cbSitHack->Name = L"cbSitHack";
-			this->cbSitHack->Size = System::Drawing::Size(67, 17);
-			this->cbSitHack->TabIndex = 3;
-			this->cbSitHack->Text = L"Sit Hack";
-			this->InfoToolTip->SetToolTip(this->cbSitHack, L"Makes your char sit");
-			this->cbSitHack->UseVisualStyleBackColor = true;
-			this->cbSitHack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbSitHack_CheckedChanged);
+			this->SitHack->AutoSize = true;
+			this->SitHack->Location = System::Drawing::Point(159, 19);
+			this->SitHack->Name = L"SitHack";
+			this->SitHack->Size = System::Drawing::Size(67, 17);
+			this->SitHack->TabIndex = 3;
+			this->SitHack->Text = L"Sit Hack";
+			this->InfoToolTip->SetToolTip(this->SitHack, L"Makes your char sit");
+			this->SitHack->UseVisualStyleBackColor = true;
+			this->SitHack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::SitHack_CheckedChanged);
 			// 
-			// cbPinTyper
+			// PinPicTyper
 			// 
-			this->cbPinTyper->AutoSize = true;
-			this->cbPinTyper->Location = System::Drawing::Point(7, 55);
-			this->cbPinTyper->Name = L"cbPinTyper";
-			this->cbPinTyper->Size = System::Drawing::Size(91, 17);
-			this->cbPinTyper->TabIndex = 2;
-			this->cbPinTyper->Text = L"Pin/Pic Typer";
-			this->InfoToolTip->SetToolTip(this->cbPinTyper, L"Lets you type your pin instead of clicking it");
-			this->cbPinTyper->UseVisualStyleBackColor = true;
-			this->cbPinTyper->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbPinTyper_CheckedChanged);
+			this->PinPicTyper->AutoSize = true;
+			this->PinPicTyper->Location = System::Drawing::Point(7, 55);
+			this->PinPicTyper->Name = L"PinPicTyper";
+			this->PinPicTyper->Size = System::Drawing::Size(91, 17);
+			this->PinPicTyper->TabIndex = 2;
+			this->PinPicTyper->Text = L"Pin/Pic Typer";
+			this->InfoToolTip->SetToolTip(this->PinPicTyper, L"Lets you type your pin instead of clicking it");
+			this->PinPicTyper->UseVisualStyleBackColor = true;
+			this->PinPicTyper->CheckedChanged += gcnew System::EventHandler(this, &MainForm::PinPicTyper_CheckedChanged);
 			// 
-			// cbJDA
+			// JDA
 			// 
-			this->cbJDA->AutoSize = true;
-			this->cbJDA->Location = System::Drawing::Point(7, 37);
-			this->cbJDA->Name = L"cbJDA";
-			this->cbJDA->Size = System::Drawing::Size(46, 17);
-			this->cbJDA->TabIndex = 1;
-			this->cbJDA->Text = L"JDA";
-			this->InfoToolTip->SetToolTip(this->cbJDA, L"Lets you JumpDownAnywhere");
-			this->cbJDA->UseVisualStyleBackColor = true;
-			this->cbJDA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbJDA_CheckedChanged);
+			this->JDA->AutoSize = true;
+			this->JDA->Location = System::Drawing::Point(7, 37);
+			this->JDA->Name = L"JDA";
+			this->JDA->Size = System::Drawing::Size(46, 17);
+			this->JDA->TabIndex = 1;
+			this->JDA->Text = L"JDA";
+			this->InfoToolTip->SetToolTip(this->JDA, L"Lets you JumpDownAnywhere");
+			this->JDA->UseVisualStyleBackColor = true;
+			this->JDA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::JDA_CheckedChanged);
 			// 
-			// cbNoBG
+			// NoBackground
 			// 
-			this->cbNoBG->AutoSize = true;
-			this->cbNoBG->Location = System::Drawing::Point(7, 19);
-			this->cbNoBG->Name = L"cbNoBG";
-			this->cbNoBG->Size = System::Drawing::Size(145, 17);
-			this->cbNoBG->TabIndex = 0;
-			this->cbNoBG->Text = L"No Background + Clouds";
-			this->InfoToolTip->SetToolTip(this->cbNoBG, L"After CCing your background and clouds are gone");
-			this->cbNoBG->UseVisualStyleBackColor = true;
-			this->cbNoBG->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoBG_CheckedChanged);
+			this->NoBackground->AutoSize = true;
+			this->NoBackground->Location = System::Drawing::Point(7, 19);
+			this->NoBackground->Name = L"NoBackground";
+			this->NoBackground->Size = System::Drawing::Size(145, 17);
+			this->NoBackground->TabIndex = 0;
+			this->NoBackground->Text = L"No Background + Clouds";
+			this->InfoToolTip->SetToolTip(this->NoBackground, L"After CCing your background and clouds are gone");
+			this->NoBackground->UseVisualStyleBackColor = true;
+			this->NoBackground->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NoBackground_CheckedChanged);
 			// 
 			// gbCharHacks
 			// 
 			this->gbCharHacks->Controls->Add(this->ddbIFS);
 			this->gbCharHacks->Controls->Add(this->cbLockItemVac);
 			this->gbCharHacks->Controls->Add(this->nudIceGuard);
-			this->gbCharHacks->Controls->Add(this->cbIceGuard);
+			this->gbCharHacks->Controls->Add(this->IceGuard);
 			this->gbCharHacks->Controls->Add(this->cbIFS);
-			this->gbCharHacks->Controls->Add(this->cbMercedesCombo);
-			this->gbCharHacks->Controls->Add(this->cbNDMining);
-			this->gbCharHacks->Controls->Add(this->cbNFA);
-			this->gbCharHacks->Controls->Add(this->cbFMA);
-			this->gbCharHacks->Controls->Add(this->cbUA);
-			this->gbCharHacks->Controls->Add(this->cbItemVac);
-			this->gbCharHacks->Controls->Add(this->cb50SecGM);
-			this->gbCharHacks->Controls->Add(this->cbNDAllAttacks);
-			this->gbCharHacks->Controls->Add(this->cbUnlimitedMorph);
-			this->gbCharHacks->Controls->Add(this->cbDojangGodmode);
-			this->gbCharHacks->Controls->Add(this->cbNoKB);
-			this->gbCharHacks->Controls->Add(this->cbFusionAttack);
-			this->gbCharHacks->Controls->Add(this->cbPerfectLoot);
+			this->gbCharHacks->Controls->Add(this->MercedesCombo);
+			this->gbCharHacks->Controls->Add(this->NDMining);
+			this->gbCharHacks->Controls->Add(this->DisableFinalAttack);
+			this->gbCharHacks->Controls->Add(this->FMA);
+			this->gbCharHacks->Controls->Add(this->UnlimitedAttack);
+			this->gbCharHacks->Controls->Add(this->ItemVac);
+			this->gbCharHacks->Controls->Add(this->SecondGodmode);
+			this->gbCharHacks->Controls->Add(this->NDAllAttacks);
+			this->gbCharHacks->Controls->Add(this->UnlimitedMorph);
+			this->gbCharHacks->Controls->Add(this->DojangGodmode);
+			this->gbCharHacks->Controls->Add(this->NoKB);
+			this->gbCharHacks->Controls->Add(this->FusionAttack);
+			this->gbCharHacks->Controls->Add(this->PerfectLoot);
 			this->gbCharHacks->Location = System::Drawing::Point(7, 6);
 			this->gbCharHacks->Name = L"gbCharHacks";
 			this->gbCharHacks->Size = System::Drawing::Size(310, 162);
@@ -1246,17 +1246,17 @@ namespace WatyBotRevamp {
 			this->InfoToolTip->SetToolTip(this->nudIceGuard, L"Another godmode, use with caution, a to high amount could AB");
 			this->nudIceGuard->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1000, 0, 0, 0 });
 			// 
-			// cbIceGuard
+			// IceGuard
 			// 
-			this->cbIceGuard->AutoSize = true;
-			this->cbIceGuard->Location = System::Drawing::Point(6, 32);
-			this->cbIceGuard->Name = L"cbIceGuard";
-			this->cbIceGuard->Size = System::Drawing::Size(73, 17);
-			this->cbIceGuard->TabIndex = 18;
-			this->cbIceGuard->Text = L"Ice Guard";
-			this->InfoToolTip->SetToolTip(this->cbIceGuard, L"Another godmode, use with caution, a to high amount could AB");
-			this->cbIceGuard->UseVisualStyleBackColor = true;
-			this->cbIceGuard->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbIceGuard_CheckedChanged);
+			this->IceGuard->AutoSize = true;
+			this->IceGuard->Location = System::Drawing::Point(6, 32);
+			this->IceGuard->Name = L"IceGuard";
+			this->IceGuard->Size = System::Drawing::Size(73, 17);
+			this->IceGuard->TabIndex = 18;
+			this->IceGuard->Text = L"Ice Guard";
+			this->InfoToolTip->SetToolTip(this->IceGuard, L"Another godmode, use with caution, a to high amount could AB");
+			this->IceGuard->UseVisualStyleBackColor = true;
+			this->IceGuard->CheckedChanged += gcnew System::EventHandler(this, &MainForm::IceGuard_CheckedChanged);
 			// 
 			// cbIFS
 			// 
@@ -1270,175 +1270,175 @@ namespace WatyBotRevamp {
 			this->cbIFS->UseVisualStyleBackColor = true;
 			this->cbIFS->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbIFS_CheckedChanged);
 			// 
-			// cbMercedesCombo
+			// MercedesCombo
 			// 
-			this->cbMercedesCombo->AutoSize = true;
-			this->cbMercedesCombo->Location = System::Drawing::Point(159, 118);
-			this->cbMercedesCombo->Name = L"cbMercedesCombo";
-			this->cbMercedesCombo->Size = System::Drawing::Size(137, 17);
-			this->cbMercedesCombo->TabIndex = 14;
-			this->cbMercedesCombo->Text = L"Mercedes Perfect Skills";
-			this->InfoToolTip->SetToolTip(this->cbMercedesCombo, L"Lets you use Aerial Barrage, Parting Shot, etc, without using Rising Rush first");
-			this->cbMercedesCombo->UseVisualStyleBackColor = true;
-			this->cbMercedesCombo->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbMercedesCombo_CheckedChanged);
+			this->MercedesCombo->AutoSize = true;
+			this->MercedesCombo->Location = System::Drawing::Point(159, 118);
+			this->MercedesCombo->Name = L"MercedesCombo";
+			this->MercedesCombo->Size = System::Drawing::Size(137, 17);
+			this->MercedesCombo->TabIndex = 14;
+			this->MercedesCombo->Text = L"Mercedes Perfect Skills";
+			this->InfoToolTip->SetToolTip(this->MercedesCombo, L"Lets you use Aerial Barrage, Parting Shot, etc, without using Rising Rush first");
+			this->MercedesCombo->UseVisualStyleBackColor = true;
+			this->MercedesCombo->CheckedChanged += gcnew System::EventHandler(this, &MainForm::MercedesCombo_CheckedChanged);
 			// 
-			// cbNDMining
+			// NDMining
 			// 
-			this->cbNDMining->AutoSize = true;
-			this->cbNDMining->Location = System::Drawing::Point(6, 118);
-			this->cbNDMining->Name = L"cbNDMining";
-			this->cbNDMining->Size = System::Drawing::Size(104, 17);
-			this->cbNDMining->TabIndex = 13;
-			this->cbNDMining->Text = L"No Delay Mining";
-			this->InfoToolTip->SetToolTip(this->cbNDMining, L"Removes the delay on mining");
-			this->cbNDMining->UseVisualStyleBackColor = true;
-			this->cbNDMining->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNDMining_CheckedChanged);
+			this->NDMining->AutoSize = true;
+			this->NDMining->Location = System::Drawing::Point(6, 118);
+			this->NDMining->Name = L"NDMining";
+			this->NDMining->Size = System::Drawing::Size(104, 17);
+			this->NDMining->TabIndex = 13;
+			this->NDMining->Text = L"No Delay Mining";
+			this->InfoToolTip->SetToolTip(this->NDMining, L"Removes the delay on mining");
+			this->NDMining->UseVisualStyleBackColor = true;
+			this->NDMining->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NDMining_CheckedChanged);
 			// 
-			// cbNFA
+			// DisableFinalAttack
 			// 
-			this->cbNFA->AutoSize = true;
-			this->cbNFA->Location = System::Drawing::Point(159, 102);
-			this->cbNFA->Name = L"cbNFA";
-			this->cbNFA->Size = System::Drawing::Size(99, 17);
-			this->cbNFA->TabIndex = 12;
-			this->cbNFA->Text = L"No Final Attack";
-			this->InfoToolTip->SetToolTip(this->cbNFA, L"Removes your ability to have a FinalAttack, use it with FMA to not get DC\'d");
-			this->cbNFA->UseVisualStyleBackColor = true;
-			this->cbNFA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNFA_CheckedChanged);
+			this->DisableFinalAttack->AutoSize = true;
+			this->DisableFinalAttack->Location = System::Drawing::Point(159, 102);
+			this->DisableFinalAttack->Name = L"DisableFinalAttack";
+			this->DisableFinalAttack->Size = System::Drawing::Size(99, 17);
+			this->DisableFinalAttack->TabIndex = 12;
+			this->DisableFinalAttack->Text = L"No Final Attack";
+			this->InfoToolTip->SetToolTip(this->DisableFinalAttack, L"Removes your ability to have a FinalAttack, use it with FMA to not get DC\'d");
+			this->DisableFinalAttack->UseVisualStyleBackColor = true;
+			this->DisableFinalAttack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::DisableFinalAttack_CheckedChanged);
 			// 
-			// cbFMA
+			// FMA
 			// 
-			this->cbFMA->AutoSize = true;
-			this->cbFMA->Location = System::Drawing::Point(159, 84);
-			this->cbFMA->Name = L"cbFMA";
-			this->cbFMA->Size = System::Drawing::Size(100, 17);
-			this->cbFMA->TabIndex = 11;
-			this->cbFMA->Text = L"Full Map Attack";
-			this->InfoToolTip->SetToolTip(this->cbFMA, L"Let\'s you hit the whole map that\'s vissible for you, also called FMA");
-			this->cbFMA->UseVisualStyleBackColor = true;
-			this->cbFMA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbFMA_CheckedChanged);
+			this->FMA->AutoSize = true;
+			this->FMA->Location = System::Drawing::Point(159, 84);
+			this->FMA->Name = L"FMA";
+			this->FMA->Size = System::Drawing::Size(100, 17);
+			this->FMA->TabIndex = 11;
+			this->FMA->Text = L"Full Map Attack";
+			this->InfoToolTip->SetToolTip(this->FMA, L"Let\'s you hit the whole map that\'s vissible for you, also called FMA");
+			this->FMA->UseVisualStyleBackColor = true;
+			this->FMA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::FMA_CheckedChanged);
 			// 
-			// cbUA
+			// UnlimitedAttack
 			// 
-			this->cbUA->AutoSize = true;
-			this->cbUA->Location = System::Drawing::Point(6, 102);
-			this->cbUA->Name = L"cbUA";
-			this->cbUA->Size = System::Drawing::Size(103, 17);
-			this->cbUA->TabIndex = 8;
-			this->cbUA->Text = L"Unlimited Attack";
-			this->InfoToolTip->SetToolTip(this->cbUA, L"Let\'s you attack without stopping after 100 attacks, (very small chance on a A/B)"
+			this->UnlimitedAttack->AutoSize = true;
+			this->UnlimitedAttack->Location = System::Drawing::Point(6, 102);
+			this->UnlimitedAttack->Name = L"UnlimitedAttack";
+			this->UnlimitedAttack->Size = System::Drawing::Size(103, 17);
+			this->UnlimitedAttack->TabIndex = 8;
+			this->UnlimitedAttack->Text = L"Unlimited Attack";
+			this->InfoToolTip->SetToolTip(this->UnlimitedAttack, L"Let\'s you attack without stopping after 100 attacks, (very small chance on a A/B)"
 				L"");
-			this->cbUA->UseVisualStyleBackColor = true;
-			this->cbUA->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbUA_CheckedChanged);
+			this->UnlimitedAttack->UseVisualStyleBackColor = true;
+			this->UnlimitedAttack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::UnlimitedAttack_CheckedChanged);
 			// 
-			// cbItemVac
+			// ItemVac
 			// 
-			this->cbItemVac->AutoSize = true;
-			this->cbItemVac->Location = System::Drawing::Point(6, 84);
-			this->cbItemVac->Name = L"cbItemVac";
-			this->cbItemVac->Size = System::Drawing::Size(68, 17);
-			this->cbItemVac->TabIndex = 10;
-			this->cbItemVac->Text = L"Item Vac";
-			this->InfoToolTip->SetToolTip(this->cbItemVac, L"All the items drop below your feet");
-			this->cbItemVac->UseVisualStyleBackColor = true;
-			this->cbItemVac->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbItemVac_CheckedChanged);
+			this->ItemVac->AutoSize = true;
+			this->ItemVac->Location = System::Drawing::Point(6, 84);
+			this->ItemVac->Name = L"ItemVac";
+			this->ItemVac->Size = System::Drawing::Size(68, 17);
+			this->ItemVac->TabIndex = 10;
+			this->ItemVac->Text = L"Item Vac";
+			this->InfoToolTip->SetToolTip(this->ItemVac, L"All the items drop below your feet");
+			this->ItemVac->UseVisualStyleBackColor = true;
+			this->ItemVac->CheckedChanged += gcnew System::EventHandler(this, &MainForm::ItemVac_CheckedChanged);
 			// 
-			// cb50SecGM
+			// SecondGodmode
 			// 
-			this->cb50SecGM->AutoSize = true;
-			this->cb50SecGM->Location = System::Drawing::Point(159, 14);
-			this->cb50SecGM->Name = L"cb50SecGM";
-			this->cb50SecGM->Size = System::Drawing::Size(132, 17);
-			this->cb50SecGM->TabIndex = 9;
-			this->cb50SecGM->Text = L"50 Seconds Godmode";
-			this->InfoToolTip->SetToolTip(this->cb50SecGM, L"After you get hit you have godmode for 50 seconds");
-			this->cb50SecGM->UseVisualStyleBackColor = true;
-			this->cb50SecGM->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cb50SecGM_CheckedChanged);
+			this->SecondGodmode->AutoSize = true;
+			this->SecondGodmode->Location = System::Drawing::Point(159, 14);
+			this->SecondGodmode->Name = L"SecondGodmode";
+			this->SecondGodmode->Size = System::Drawing::Size(132, 17);
+			this->SecondGodmode->TabIndex = 9;
+			this->SecondGodmode->Text = L"50 Seconds Godmode";
+			this->InfoToolTip->SetToolTip(this->SecondGodmode, L"After you get hit you have godmode for 50 seconds");
+			this->SecondGodmode->UseVisualStyleBackColor = true;
+			this->SecondGodmode->CheckedChanged += gcnew System::EventHandler(this, &MainForm::SecondGodmode_CheckedChanged);
 			// 
-			// cbNDAllAttacks
+			// NDAllAttacks
 			// 
-			this->cbNDAllAttacks->AutoSize = true;
-			this->cbNDAllAttacks->Location = System::Drawing::Point(6, 66);
-			this->cbNDAllAttacks->Name = L"cbNDAllAttacks";
-			this->cbNDAllAttacks->Size = System::Drawing::Size(104, 17);
-			this->cbNDAllAttacks->TabIndex = 8;
-			this->cbNDAllAttacks->Text = L"GenericNoDelay";
-			this->InfoToolTip->SetToolTip(this->cbNDAllAttacks, L"Removes the AttackAnimation and the delay between attacks, and it gives Unlimited"
+			this->NDAllAttacks->AutoSize = true;
+			this->NDAllAttacks->Location = System::Drawing::Point(6, 66);
+			this->NDAllAttacks->Name = L"NDAllAttacks";
+			this->NDAllAttacks->Size = System::Drawing::Size(104, 17);
+			this->NDAllAttacks->TabIndex = 8;
+			this->NDAllAttacks->Text = L"GenericNoDelay";
+			this->InfoToolTip->SetToolTip(this->NDAllAttacks, L"Removes the AttackAnimation and the delay between attacks, and it gives Unlimited"
 				L" MP");
-			this->cbNDAllAttacks->UseVisualStyleBackColor = true;
-			this->cbNDAllAttacks->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNDAllAttacks_CheckedChanged);
+			this->NDAllAttacks->UseVisualStyleBackColor = true;
+			this->NDAllAttacks->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NDAllAttacks_CheckedChanged);
 			// 
-			// cbUnlimitedMorph
+			// UnlimitedMorph
 			// 
-			this->cbUnlimitedMorph->AutoSize = true;
-			this->cbUnlimitedMorph->Location = System::Drawing::Point(159, 49);
-			this->cbUnlimitedMorph->Name = L"cbUnlimitedMorph";
-			this->cbUnlimitedMorph->Size = System::Drawing::Size(102, 17);
-			this->cbUnlimitedMorph->TabIndex = 7;
-			this->cbUnlimitedMorph->Text = L"Unlimited Morph";
-			this->InfoToolTip->SetToolTip(this->cbUnlimitedMorph, L"Kaizers can get in their final form without having the morph gauge filled");
-			this->cbUnlimitedMorph->UseVisualStyleBackColor = true;
-			this->cbUnlimitedMorph->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbUnlimitedMorph_CheckedChanged);
+			this->UnlimitedMorph->AutoSize = true;
+			this->UnlimitedMorph->Location = System::Drawing::Point(159, 49);
+			this->UnlimitedMorph->Name = L"UnlimitedMorph";
+			this->UnlimitedMorph->Size = System::Drawing::Size(102, 17);
+			this->UnlimitedMorph->TabIndex = 7;
+			this->UnlimitedMorph->Text = L"Unlimited Morph";
+			this->InfoToolTip->SetToolTip(this->UnlimitedMorph, L"Kaizers can get in their final form without having the morph gauge filled");
+			this->UnlimitedMorph->UseVisualStyleBackColor = true;
+			this->UnlimitedMorph->CheckedChanged += gcnew System::EventHandler(this, &MainForm::UnlimitedMorph_CheckedChanged);
 			// 
-			// cbDojangGodmode
+			// DojangGodmode
 			// 
-			this->cbDojangGodmode->AutoSize = true;
-			this->cbDojangGodmode->Location = System::Drawing::Point(6, 14);
-			this->cbDojangGodmode->Name = L"cbDojangGodmode";
-			this->cbDojangGodmode->Size = System::Drawing::Size(109, 17);
-			this->cbDojangGodmode->TabIndex = 6;
-			this->cbDojangGodmode->Text = L"Dojang Godmode";
-			this->InfoToolTip->SetToolTip(this->cbDojangGodmode, L"Let\'s you get missed 7 times before taking a hit");
-			this->cbDojangGodmode->UseVisualStyleBackColor = true;
-			this->cbDojangGodmode->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbDojangGodmode_CheckedChanged);
+			this->DojangGodmode->AutoSize = true;
+			this->DojangGodmode->Location = System::Drawing::Point(6, 14);
+			this->DojangGodmode->Name = L"DojangGodmode";
+			this->DojangGodmode->Size = System::Drawing::Size(109, 17);
+			this->DojangGodmode->TabIndex = 6;
+			this->DojangGodmode->Text = L"Dojang Godmode";
+			this->InfoToolTip->SetToolTip(this->DojangGodmode, L"Let\'s you get missed 7 times before taking a hit");
+			this->DojangGodmode->UseVisualStyleBackColor = true;
+			this->DojangGodmode->CheckedChanged += gcnew System::EventHandler(this, &MainForm::DojangGodmode_CheckedChanged);
 			// 
-			// cbNoKB
+			// NoKB
 			// 
-			this->cbNoKB->AutoSize = true;
-			this->cbNoKB->Location = System::Drawing::Point(6, 49);
-			this->cbNoKB->Name = L"cbNoKB";
-			this->cbNoKB->Size = System::Drawing::Size(99, 17);
-			this->cbNoKB->TabIndex = 5;
-			this->cbNoKB->Text = L"No KnockBack";
-			this->InfoToolTip->SetToolTip(this->cbNoKB, L"You won\'t get Knocked Back when you get hit");
-			this->cbNoKB->UseVisualStyleBackColor = true;
-			this->cbNoKB->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoKB_CheckedChanged);
+			this->NoKB->AutoSize = true;
+			this->NoKB->Location = System::Drawing::Point(6, 49);
+			this->NoKB->Name = L"NoKB";
+			this->NoKB->Size = System::Drawing::Size(99, 17);
+			this->NoKB->TabIndex = 5;
+			this->NoKB->Text = L"No KnockBack";
+			this->InfoToolTip->SetToolTip(this->NoKB, L"You won\'t get Knocked Back when you get hit");
+			this->NoKB->UseVisualStyleBackColor = true;
+			this->NoKB->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NoKB_CheckedChanged);
 			// 
-			// cbFusionAttack
+			// FusionAttack
 			// 
-			this->cbFusionAttack->AutoSize = true;
-			this->cbFusionAttack->Location = System::Drawing::Point(159, 66);
-			this->cbFusionAttack->Name = L"cbFusionAttack";
-			this->cbFusionAttack->Size = System::Drawing::Size(91, 17);
-			this->cbFusionAttack->TabIndex = 0;
-			this->cbFusionAttack->Text = L"Fusion Attack";
-			this->InfoToolTip->SetToolTip(this->cbFusionAttack, L"If you have an atack that hits 10 mobs 2 times, with fusion you will hit 1 mob 20"
+			this->FusionAttack->AutoSize = true;
+			this->FusionAttack->Location = System::Drawing::Point(159, 66);
+			this->FusionAttack->Name = L"FusionAttack";
+			this->FusionAttack->Size = System::Drawing::Size(91, 17);
+			this->FusionAttack->TabIndex = 0;
+			this->FusionAttack->Text = L"Fusion Attack";
+			this->InfoToolTip->SetToolTip(this->FusionAttack, L"If you have an atack that hits 10 mobs 2 times, with fusion you will hit 1 mob 20"
 				L" times");
-			this->cbFusionAttack->UseVisualStyleBackColor = true;
-			this->cbFusionAttack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbFusionAttack_CheckedChanged);
+			this->FusionAttack->UseVisualStyleBackColor = true;
+			this->FusionAttack->CheckedChanged += gcnew System::EventHandler(this, &MainForm::FusionAttack_CheckedChanged);
 			// 
-			// cbPerfectLoot
+			// PerfectLoot
 			// 
-			this->cbPerfectLoot->AutoSize = true;
-			this->cbPerfectLoot->Location = System::Drawing::Point(159, 31);
-			this->cbPerfectLoot->Name = L"cbPerfectLoot";
-			this->cbPerfectLoot->Size = System::Drawing::Size(84, 17);
-			this->cbPerfectLoot->TabIndex = 1;
-			this->cbPerfectLoot->Text = L"Perfect Loot";
-			this->InfoToolTip->SetToolTip(this->cbPerfectLoot, L"Removes drop and loot animation and loots faster");
-			this->cbPerfectLoot->UseVisualStyleBackColor = true;
-			this->cbPerfectLoot->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbPerfectLoot_CheckedChanged);
+			this->PerfectLoot->AutoSize = true;
+			this->PerfectLoot->Location = System::Drawing::Point(159, 31);
+			this->PerfectLoot->Name = L"PerfectLoot";
+			this->PerfectLoot->Size = System::Drawing::Size(84, 17);
+			this->PerfectLoot->TabIndex = 1;
+			this->PerfectLoot->Text = L"Perfect Loot";
+			this->InfoToolTip->SetToolTip(this->PerfectLoot, L"Removes drop and loot animation and loots faster");
+			this->PerfectLoot->UseVisualStyleBackColor = true;
+			this->PerfectLoot->CheckedChanged += gcnew System::EventHandler(this, &MainForm::PerfectLoot_CheckedChanged);
 			// 
 			// MobHacks
 			// 
-			this->MobHacks->Controls->Add(this->cbAutoAggro);
-			this->MobHacks->Controls->Add(this->cbScareMobs);
-			this->MobHacks->Controls->Add(this->cbNoMobs);
-			this->MobHacks->Controls->Add(this->cbFasterMobs);
-			this->MobHacks->Controls->Add(this->cbMobDisarm);
-			this->MobHacks->Controls->Add(this->cbJumpRight);
-			this->MobHacks->Controls->Add(this->cbWalkRight);
-			this->MobHacks->Controls->Add(this->cbVacRight);
+			this->MobHacks->Controls->Add(this->AutoAggro);
+			this->MobHacks->Controls->Add(this->ScareMobs);
+			this->MobHacks->Controls->Add(this->NoMobs);
+			this->MobHacks->Controls->Add(this->FasterMobs);
+			this->MobHacks->Controls->Add(this->MobDisarm);
+			this->MobHacks->Controls->Add(this->JumpRight);
+			this->MobHacks->Controls->Add(this->WalkRight);
+			this->MobHacks->Controls->Add(this->VacRight);
 			this->MobHacks->Location = System::Drawing::Point(7, 174);
 			this->MobHacks->Name = L"MobHacks";
 			this->MobHacks->Size = System::Drawing::Size(310, 93);
@@ -1446,102 +1446,102 @@ namespace WatyBotRevamp {
 			this->MobHacks->TabStop = false;
 			this->MobHacks->Text = L"Mob";
 			// 
-			// cbAutoAggro
+			// AutoAggro
 			// 
-			this->cbAutoAggro->AutoSize = true;
-			this->cbAutoAggro->Enabled = false;
-			this->cbAutoAggro->Location = System::Drawing::Point(159, 19);
-			this->cbAutoAggro->Name = L"cbAutoAggro";
-			this->cbAutoAggro->Size = System::Drawing::Size(79, 17);
-			this->cbAutoAggro->TabIndex = 10;
-			this->cbAutoAggro->Text = L"Auto Aggro";
-			this->InfoToolTip->SetToolTip(this->cbAutoAggro, L"Let\'s all mobs get aggresive at you");
-			this->cbAutoAggro->UseVisualStyleBackColor = true;
-			this->cbAutoAggro->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbAutoAggro_CheckedChanged);
+			this->AutoAggro->AutoSize = true;
+			this->AutoAggro->Enabled = false;
+			this->AutoAggro->Location = System::Drawing::Point(159, 19);
+			this->AutoAggro->Name = L"AutoAggro";
+			this->AutoAggro->Size = System::Drawing::Size(79, 17);
+			this->AutoAggro->TabIndex = 10;
+			this->AutoAggro->Text = L"Auto Aggro";
+			this->InfoToolTip->SetToolTip(this->AutoAggro, L"Let\'s all mobs get aggresive at you");
+			this->AutoAggro->UseVisualStyleBackColor = true;
+			this->AutoAggro->CheckedChanged += gcnew System::EventHandler(this, &MainForm::AutoAggro_CheckedChanged);
 			// 
-			// cbScareMobs
+			// ScareMobs
 			// 
-			this->cbScareMobs->AutoSize = true;
-			this->cbScareMobs->Location = System::Drawing::Point(159, 55);
-			this->cbScareMobs->Name = L"cbScareMobs";
-			this->cbScareMobs->Size = System::Drawing::Size(83, 17);
-			this->cbScareMobs->TabIndex = 9;
-			this->cbScareMobs->Text = L"Scare Mobs";
-			this->InfoToolTip->SetToolTip(this->cbScareMobs, L"Freezes mobs");
-			this->cbScareMobs->UseVisualStyleBackColor = true;
-			this->cbScareMobs->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbScareMobs_CheckedChanged);
+			this->ScareMobs->AutoSize = true;
+			this->ScareMobs->Location = System::Drawing::Point(159, 55);
+			this->ScareMobs->Name = L"ScareMobs";
+			this->ScareMobs->Size = System::Drawing::Size(83, 17);
+			this->ScareMobs->TabIndex = 9;
+			this->ScareMobs->Text = L"Scare Mobs";
+			this->InfoToolTip->SetToolTip(this->ScareMobs, L"Freezes mobs");
+			this->ScareMobs->UseVisualStyleBackColor = true;
+			this->ScareMobs->CheckedChanged += gcnew System::EventHandler(this, &MainForm::ScareMobs_CheckedChanged);
 			// 
-			// cbNoMobs
+			// NoMobs
 			// 
-			this->cbNoMobs->AutoSize = true;
-			this->cbNoMobs->Location = System::Drawing::Point(159, 37);
-			this->cbNoMobs->Name = L"cbNoMobs";
-			this->cbNoMobs->Size = System::Drawing::Size(69, 17);
-			this->cbNoMobs->TabIndex = 7;
-			this->cbNoMobs->Text = L"No Mobs";
-			this->InfoToolTip->SetToolTip(this->cbNoMobs, L"After ccing with NoMobs enabled, there will be no more mobs in the map");
-			this->cbNoMobs->UseVisualStyleBackColor = true;
-			this->cbNoMobs->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbNoMobs_CheckedChanged);
+			this->NoMobs->AutoSize = true;
+			this->NoMobs->Location = System::Drawing::Point(159, 37);
+			this->NoMobs->Name = L"NoMobs";
+			this->NoMobs->Size = System::Drawing::Size(69, 17);
+			this->NoMobs->TabIndex = 7;
+			this->NoMobs->Text = L"No Mobs";
+			this->InfoToolTip->SetToolTip(this->NoMobs, L"After ccing with NoMobs enabled, there will be no more mobs in the map");
+			this->NoMobs->UseVisualStyleBackColor = true;
+			this->NoMobs->CheckedChanged += gcnew System::EventHandler(this, &MainForm::NoMobs_CheckedChanged);
 			// 
-			// cbFasterMobs
+			// FasterMobs
 			// 
-			this->cbFasterMobs->AutoSize = true;
-			this->cbFasterMobs->Location = System::Drawing::Point(159, 73);
-			this->cbFasterMobs->Name = L"cbFasterMobs";
-			this->cbFasterMobs->Size = System::Drawing::Size(84, 17);
-			this->cbFasterMobs->TabIndex = 6;
-			this->cbFasterMobs->Text = L"Faster Mobs";
-			this->InfoToolTip->SetToolTip(this->cbFasterMobs, L"Mobs walk faster");
-			this->cbFasterMobs->UseVisualStyleBackColor = true;
-			this->cbFasterMobs->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbFasterMobs_CheckedChanged);
+			this->FasterMobs->AutoSize = true;
+			this->FasterMobs->Location = System::Drawing::Point(159, 73);
+			this->FasterMobs->Name = L"FasterMobs";
+			this->FasterMobs->Size = System::Drawing::Size(84, 17);
+			this->FasterMobs->TabIndex = 6;
+			this->FasterMobs->Text = L"Faster Mobs";
+			this->InfoToolTip->SetToolTip(this->FasterMobs, L"Mobs walk faster");
+			this->FasterMobs->UseVisualStyleBackColor = true;
+			this->FasterMobs->CheckedChanged += gcnew System::EventHandler(this, &MainForm::FasterMobs_CheckedChanged);
 			// 
-			// cbMobDisarm
+			// MobDisarm
 			// 
-			this->cbMobDisarm->AutoSize = true;
-			this->cbMobDisarm->Location = System::Drawing::Point(6, 73);
-			this->cbMobDisarm->Name = L"cbMobDisarm";
-			this->cbMobDisarm->Size = System::Drawing::Size(101, 17);
-			this->cbMobDisarm->TabIndex = 5;
-			this->cbMobDisarm->Text = L"Full Mob Disarm";
-			this->InfoToolTip->SetToolTip(this->cbMobDisarm, L"Makes mobs unable to use magical attack and other skills");
-			this->cbMobDisarm->UseVisualStyleBackColor = true;
-			this->cbMobDisarm->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbMobDisarm_CheckedChanged);
+			this->MobDisarm->AutoSize = true;
+			this->MobDisarm->Location = System::Drawing::Point(6, 73);
+			this->MobDisarm->Name = L"MobDisarm";
+			this->MobDisarm->Size = System::Drawing::Size(101, 17);
+			this->MobDisarm->TabIndex = 5;
+			this->MobDisarm->Text = L"Full Mob Disarm";
+			this->InfoToolTip->SetToolTip(this->MobDisarm, L"Makes mobs unable to use magical attack and other skills");
+			this->MobDisarm->UseVisualStyleBackColor = true;
+			this->MobDisarm->CheckedChanged += gcnew System::EventHandler(this, &MainForm::MobDisarm_CheckedChanged);
 			// 
-			// cbJumpRight
+			// JumpRight
 			// 
-			this->cbJumpRight->AutoSize = true;
-			this->cbJumpRight->Location = System::Drawing::Point(6, 55);
-			this->cbJumpRight->Name = L"cbJumpRight";
-			this->cbJumpRight->Size = System::Drawing::Size(131, 17);
-			this->cbJumpRight->TabIndex = 4;
-			this->cbJumpRight->Text = L"Jump Unrandom Right";
-			this->InfoToolTip->SetToolTip(this->cbJumpRight, L"All jumping mobs jump right");
-			this->cbJumpRight->UseVisualStyleBackColor = true;
-			this->cbJumpRight->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbJumpRight_CheckedChanged);
+			this->JumpRight->AutoSize = true;
+			this->JumpRight->Location = System::Drawing::Point(6, 55);
+			this->JumpRight->Name = L"JumpRight";
+			this->JumpRight->Size = System::Drawing::Size(131, 17);
+			this->JumpRight->TabIndex = 4;
+			this->JumpRight->Text = L"Jump Unrandom Right";
+			this->InfoToolTip->SetToolTip(this->JumpRight, L"All jumping mobs jump right");
+			this->JumpRight->UseVisualStyleBackColor = true;
+			this->JumpRight->CheckedChanged += gcnew System::EventHandler(this, &MainForm::JumpRight_CheckedChanged);
 			// 
-			// cbWalkRight
+			// WalkRight
 			// 
-			this->cbWalkRight->AutoSize = true;
-			this->cbWalkRight->Location = System::Drawing::Point(6, 37);
-			this->cbWalkRight->Name = L"cbWalkRight";
-			this->cbWalkRight->Size = System::Drawing::Size(131, 17);
-			this->cbWalkRight->TabIndex = 2;
-			this->cbWalkRight->Text = L"Walk Unrandom Right";
-			this->InfoToolTip->SetToolTip(this->cbWalkRight, L"All walking mobs walk right");
-			this->cbWalkRight->UseVisualStyleBackColor = true;
-			this->cbWalkRight->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbWalkRight_CheckedChanged);
+			this->WalkRight->AutoSize = true;
+			this->WalkRight->Location = System::Drawing::Point(6, 37);
+			this->WalkRight->Name = L"WalkRight";
+			this->WalkRight->Size = System::Drawing::Size(131, 17);
+			this->WalkRight->TabIndex = 2;
+			this->WalkRight->Text = L"Walk Unrandom Right";
+			this->InfoToolTip->SetToolTip(this->WalkRight, L"All walking mobs walk right");
+			this->WalkRight->UseVisualStyleBackColor = true;
+			this->WalkRight->CheckedChanged += gcnew System::EventHandler(this, &MainForm::WalkRight_CheckedChanged);
 			// 
-			// cbVacRight
+			// VacRight
 			// 
-			this->cbVacRight->AutoSize = true;
-			this->cbVacRight->Location = System::Drawing::Point(6, 19);
-			this->cbVacRight->Name = L"cbVacRight";
-			this->cbVacRight->Size = System::Drawing::Size(73, 17);
-			this->cbVacRight->TabIndex = 3;
-			this->cbVacRight->Text = L"Vac Right";
-			this->InfoToolTip->SetToolTip(this->cbVacRight, L"Everyone in the map walk right, you too!");
-			this->cbVacRight->UseVisualStyleBackColor = true;
-			this->cbVacRight->CheckedChanged += gcnew System::EventHandler(this, &MainForm::cbVacRight_CheckedChanged);
+			this->VacRight->AutoSize = true;
+			this->VacRight->Location = System::Drawing::Point(6, 19);
+			this->VacRight->Name = L"VacRight";
+			this->VacRight->Size = System::Drawing::Size(73, 17);
+			this->VacRight->TabIndex = 3;
+			this->VacRight->Text = L"Vac Right";
+			this->InfoToolTip->SetToolTip(this->VacRight, L"Everyone in the map walk right, you too!");
+			this->VacRight->UseVisualStyleBackColor = true;
+			this->VacRight->CheckedChanged += gcnew System::EventHandler(this, &MainForm::VacRight_CheckedChanged);
 			// 
 			// PacketSenderTab
 			// 
@@ -2253,41 +2253,41 @@ namespace WatyBotRevamp {
 		Void LoadSPControl();
 
 		//Hacks
-		Void cbFusionAttack_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbNoKB_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbPerfectLoot_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbVacRight_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbWalkRight_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbJumpRight_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbNoBG_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbMobDisarm_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbJDA_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbPinTyper_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbDojangGodmode_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbUnlimitedMorph_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbFasterMobs_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbNDAllAttacks_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbNoMobs_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbUA_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbSitHack_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cb50SecGM_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbLogoSkipper_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbViewSwears_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void FusionAttack_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void NoKB_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void PerfectLoot_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void VacRight_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void WalkRight_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void JumpRight_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void NoBackground_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void MobDisarm_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void JDA_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void PinPicTyper_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void DojangGodmode_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void UnlimitedMorph_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void FasterMobs_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void NDAllAttacks_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void NoMobs_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void UnlimitedAttack_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void SitHack_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void SecondGodmode_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void LogoSkipper_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void ViewSwears_CheckedChanged(Object^ sender, EventArgs^ e);
 		Void cbLockItemVac_CheckedChanged(System::Object^ sender, System::EventArgs^ e);
-		Void cbItemVac_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbFMA_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbScareMobs_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbFLACC_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbCPUHack_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbNFA_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbAutoAggro_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbNDMining_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbHideDamage_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbMercedesCombo_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbNoFadeStages_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbNoCCBlueBoxes_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbMouseFly_CheckedChanged(Object^ sender, EventArgs^ e);
-		Void cbIceGuard_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void ItemVac_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void FMA_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void ScareMobs_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void FaceLeftAfterCC_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void CPUHack_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void DisableFinalAttack_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void AutoAggro_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void NDMining_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void HideDamage_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void MercedesCombo_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void NoFadeStages_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void NoCCBoxes_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void MouseFly_CheckedChanged(Object^ sender, EventArgs^ e);
+		Void IceGuard_CheckedChanged(Object^ sender, EventArgs^ e);
 		Void cbIFS_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
 
 		//PacketSender events

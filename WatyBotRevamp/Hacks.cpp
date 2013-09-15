@@ -109,14 +109,13 @@ Hack Hacks::PerfectLoot = {
 };
 
 /////No Background + Clouds
-Hack Hacks::NoBG = {
+Hack Hacks::NoBackground = {
 	new CMemory(NoBGAddy1, 5),
 	new CMemory(NoBGAddy2, 5)
 };
 
 /////Faster Mobs
-BYTE bFasterMobs [] = { 0x90, 0x90 };
-Hack Hacks::FasterMobs = { new CMemory(FasterMobsAddy, bFasterMobs, 2) };
+Hack Hacks::FasterMobs = { new CMemory(FasterMobsAddy, 2) };
 
 /////Unlimited Morp
 BYTE bMorph1 [] = { 0xEB, 0x2E };
@@ -135,53 +134,52 @@ Hack Hacks::NDAllAttacks = {
 };
 
 /////Jump Down Anywhere
-BYTE bJDA1 [] = { 0xEB };
-BYTE bJDA3 [] = { 0x90, 0x90 };
+BYTE bJDA [] = { 0xEB };
 Hack Hacks::JDA = {
-	new CMemory(JDAAddy1, bJDA1, 1),
-	new CMemory(JDAAddy2, bJDA1, 1),
-	new CMemory(JDAAddy3, bJDA3, 2)
+	new CMemory(JDAAddy1, bJDA, 1),
+	new CMemory(JDAAddy2, bJDA, 1),
+	new CMemory(JDAAddy3, 2)
 };
 
 /////Full Mob Disarm
 BYTE bDisarm [] = { 0xE9, 0x24, 0x04, 0x00, 0x00, 0x90, 0x90, 0x90, 0x90 }; //jmp 00772493 + 4 nops
-Hack Hacks::MobDisarm(new CMemory(MobDisarmAddy, bDisarm, sizeof(bDisarm)));
+Hack Hacks::MobDisarm = { new CMemory(MobDisarmAddy, bDisarm, sizeof(bDisarm)) };
 
 /////No Mobs
 BYTE bNoMobs [] = { 0xEB };
-Hack Hacks::NoMobs(new CMemory(NoMobsAddy, bNoMobs, 1));
+Hack Hacks::NoMobs = { new CMemory(NoMobsAddy, bNoMobs, 1) };
 
 /////Vac Right
 BYTE bVacRight [] = { 0x75, 0x48 };
-Hack Hacks::VacRight(new CMemory(VacRightAddy, bVacRight, 2));
+Hack Hacks::VacRight = { new CMemory(VacRightAddy, bVacRight, 2) };
 
 /////Walk Unrandom Right
 BYTE bWalkRight [] = { 0xE9, 0x95, 0x00, 0x00, 0x00, 0x90 };
-Hack Hacks::WalkRight(new CMemory(WalkRightAddy, bWalkRight, 6));
+Hack Hacks::WalkRight = { new CMemory(WalkRightAddy, bWalkRight, 6) };
 
 /////Jump Unrandom Right
 BYTE bJumpRight [] = { 0xE9, 0x7A, 0x02, 0x00, 0x00, 0x90 };
-Hack Hacks::JumpRight(new CMemory(JumpRightAddy, bJumpRight, 6));
+Hack Hacks::JumpRight = { new CMemory(JumpRightAddy, bJumpRight, 6) };
 
 /////NoKB
 BYTE bNoKB [] = { 0x00 };
-Hack Hacks::NoKB(new CMemory(NoKBAddy, bNoKB, 1));
+Hack Hacks::NoKB = { new CMemory(NoKBAddy, bNoKB, 1) };
 
 /////Sit Hack
 BYTE bSit [] = { 0x75 };
-Hack Hacks::SitHack(new CMemory(SitHackAddy, bSit, 1));
+Hack Hacks::SitHack = { new CMemory(SitHackAddy, bSit, 1) };
 
 /////50 Seconds Godmode
-BYTE b50SecGM1 [] = { 0x7E };
-BYTE b50SecGM2 [] = { 0xD4, 0x36 };
+BYTE bSecondGodmode1 [] = { 0x7E };
+BYTE bSecondGodmode2 [] = { 0xD4, 0x36 };
 Hack Hacks::SecondGodmode = {
-	new CMemory(Godmode50SecAddy1, b50SecGM1, 1),
-	new CMemory(Godmode50SecAddy2, b50SecGM2, 2)
+	new CMemory(Godmode50SecAddy1, bSecondGodmode1, 1),
+	new CMemory(Godmode50SecAddy2, bSecondGodmode2, 2)
 };
 
 /////Logo Skipper
 BYTE bLogoSkipper [] = { 0x50, 0x42 };
-Hack Hacks::LogoSkipper(new CMemory(LogoSkipperAddy, bLogoSkipper, 2));
+Hack Hacks::LogoSkipper = { new CMemory(LogoSkipperAddy, bLogoSkipper, 2) };
 
 /////(semi) Item Vac
 DWORD dwItemVacCall = ItemVacCall;
@@ -210,7 +208,7 @@ CodeCave(ItemVac)
 	ret 0004
 }
 EndCodeCave
-Hack Hacks::ItemVac(new CMemory(ItemVacAddy, CaveItemVac));
+Hack Hacks::ItemVac = { new CMemory(ItemVacAddy, CaveItemVac) };
 void Hacks::LockItemVac(bool state)
 {
 	if (state) getItemVacCoords();
@@ -218,27 +216,25 @@ void Hacks::LockItemVac(bool state)
 }
 
 /////View Swears
-BYTE bNoSwears [] = { 0x90, 0x90 };
-Hack Hacks::NoSwears(new CMemory(ViewSwearsAddy, bNoSwears, 2));
+Hack Hacks::NoSwears = { new CMemory(ViewSwearsAddy, 2) };
 
 /////FMA
 BYTE bFMA [] = { 0xEB };
-Hack Hacks::FMA(new CMemory(FMAAddy, bFMA, 1));
+Hack Hacks::FMA = { new CMemory(FMAAddy, bFMA, 1) };
 
 /////Ghoul's Scare Mob Lagg
 BYTE bScareMobs [] = { 0x75 };
 Hack Hacks::ScareMobs = { new CMemory(ScareMobsAddy, bScareMobs, 1) };
 
 /////Always Face Left
-BYTE bFLACC [] = { 0xB8, 0x05, 0x00, 0x00, 0x00, 0x90 };
-Hack Hacks::FaceLeftAfterCC = { new CMemory(FLACC, bFLACC, 6) };
+BYTE bFaceLeftAfterCC [] = { 0xB8, 0x05, 0x00, 0x00, 0x00, 0x90 };
+Hack Hacks::FaceLeftAfterCC = { new CMemory(FLACC, bFaceLeftAfterCC, 6) };
 
 /////CPU Hack
-BYTE bCPU [] = { 0x90, 0x90, 0x90, 0x90, 0x90 };
 Hack Hacks::CPUHack = {
-	new CMemory(CPUAddy1, bCPU, 5)/*,
-	new CMemory(CPUAddy2, bCPU, 5),
-	new CMemory(CPUAddy3, bCPU, 5)*/
+	new CMemory(CPUAddy1, 5)/*,
+	new CMemory(CPUAddy2, 5),
+	new CMemory(CPUAddy3, 5)*/
 };
 
 /////Unlimited Attack
@@ -270,13 +266,11 @@ Hack Hacks::UnlimitedAttack = { new CMemory(UAAddy, CaveUA, 1) };
 Hack Hacks::DisableFinalAttack = { new CMemory(DFAAddy, 7) };
 
 /////ND Mining
-BYTE bNDMining1 [] = { 0x90, 0x90 };
-BYTE bNDMining2 [] = { 0xEB };
-BYTE bNDMining3 [] = { 0x90, 0x90 };
+BYTE bNDMining [] = { 0xEB };
 Hack Hacks::NDMining = {
-	new CMemory(NDMiningAddy1, bNDMining1, 2),
-	new CMemory(NDMiningAddy2, bNDMining2, 1),
-	new CMemory(NDMiningAddy3, bNDMining3, 2)
+	new CMemory(NDMiningAddy1, 2),
+	new CMemory(NDMiningAddy2, bNDMining, 1),
+	new CMemory(NDMiningAddy3, 2)
 };
 
 /////Hide Damage
@@ -345,8 +339,6 @@ Hack Hacks::NoFadeStages = {
 };
 
 ///No CC BLue Boxes
-//TODO: Fix this:
-BYTE bNoCCBoxes [] = { 0x90, 0x90, 0x90, 0x90, 0x90 };
 Hack Hacks::NoCCBoxes = {
 	new CMemory(NoCCBoxesAddy1, 5),
 	new CMemory(NoCCBoxesAddy2, 5)

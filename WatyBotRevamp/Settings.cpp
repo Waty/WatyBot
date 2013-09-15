@@ -63,6 +63,7 @@ Void Settings::Serialize(Control^ c, String^ XmlFileName)
 	xmlSerialisedForm->WriteEndDocument();
 	xmlSerialisedForm->Flush();
 	xmlSerialisedForm->Close();
+	Log::WriteLine("Saved " + XmlFileName);
 }
 
 Void Settings::AddChildControls(XmlTextWriter^ xmlSerialisedForm, Control^ c)
@@ -70,7 +71,7 @@ Void Settings::AddChildControls(XmlTextWriter^ xmlSerialisedForm, Control^ c)
 	for each(Control^ childCtrl in c->Controls)
 	{
 		auto type = childCtrl->GetType();
-		if (childCtrl->HasChildren || type == ComboBox::typeid || type == NumericUpDown::typeid || childCtrl->Name == "cbLogoSkipper" || childCtrl->Name == "cbPinTyper" || childCtrl->Name == "cbOLWNA")
+		if (childCtrl->HasChildren || type == ComboBox::typeid || type == NumericUpDown::typeid || childCtrl->Name == "LogoSkipper" || childCtrl->Name == "PinPicTyper" || childCtrl->Name == "cbOLWNA")
 		{
 			// serialise this control
 			xmlSerialisedForm->WriteStartElement("Control");
@@ -112,23 +113,16 @@ Void Settings::SetControlProperties(Control^ currentCtrl, XmlNode^ n)
 		String^ controlName = n->Attributes["Name"]->Value;
 		// find the control
 		auto ctrl = currentCtrl->Controls->Find(controlName, true);
-		if (ctrl->Length == 1)
-		{
-			// the right type too ;-)
-			if (n->Attributes["SelectedIndex"]) safe_cast<ComboBox^>(ctrl[0])->SelectedIndex = Convert::ToInt32(n->Attributes["SelectedIndex"]->Value);
-			else if (n->Attributes["Value"]) safe_cast<NumericUpDown^>(ctrl[0])->Value = Convert::ToDecimal(n->Attributes["Value"]->Value);
-			else if (n->Attributes["Checked"]) safe_cast<CheckBox^>(ctrl[0])->Checked = Convert::ToBoolean(n->Attributes["Checked"]->Value);
+		// the right type too ;-)
+		if (n->Attributes["SelectedIndex"]) safe_cast<ComboBox^>(ctrl[0])->SelectedIndex = Convert::ToInt32(n->Attributes["SelectedIndex"]->Value);
+		else if (n->Attributes["Value"]) safe_cast<NumericUpDown^>(ctrl[0])->Value = Convert::ToDecimal(n->Attributes["Value"]->Value);
+		else if (n->Attributes["Checked"]) safe_cast<CheckBox^>(ctrl[0])->Checked = Convert::ToBoolean(n->Attributes["Checked"]->Value);
 
-			// if n has any children that are controls, deserialise them as well
-			if (n->HasChildNodes && ctrl[0]->HasChildren)
-			{
-				XmlNodeList^ xnlControls = n->SelectNodes("Control");
-				for each(XmlNode^ n2 in xnlControls) SetControlProperties(ctrl[0], n2);
-			}
-		}
-		else
+		// if n has any children that are controls, deserialise them as well
+		if (n->HasChildNodes && ctrl[0]->HasChildren)
 		{
-			Log::WriteLine(ctrl->ToString());
+			XmlNodeList^ xnlControls = n->SelectNodes("Control");
+			for each(XmlNode^ n2 in xnlControls) SetControlProperties(ctrl[0], n2);
 		}
 	}
 	catch (Exception^ ex)

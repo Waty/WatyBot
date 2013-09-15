@@ -95,10 +95,3 @@ void EnableStatsHook(bool enable)
 {
 	SetHook(enable, (PVOID*) &CUIStatusBar__SetNumberValue, CUIStatusBar__SetNumberValue__Hook);
 }
-
-typedef int (__cdecl *CUIStatusBar__FlashHPBar_t)();
-auto CUIStatusBar__FlashHPBar = reinterpret_cast<CUIStatusBar__FlashHPBar_t>(0x00B53550);
-void FlashHPBar()
-{
-	CUIStatusBar__FlashHPBar();
-}

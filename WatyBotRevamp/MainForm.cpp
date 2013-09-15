@@ -12,150 +12,150 @@
 using namespace WatyBotRevamp;
 
 //Hack CheckBoxes
-void MainForm::cbFusionAttack_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::FusionAttack_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbFusionAttack->Checked = Hacks::FusionAttack.Enable(cbFusionAttack->Checked);
+	FusionAttack->Checked = Hacks::FusionAttack.Enable(FusionAttack->Checked);
 }
-void MainForm::cbNoKB_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::NoKB_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbNoKB->Checked = Hacks::NoKB.Enable(cbNoKB->Checked);
+	NoKB->Checked = Hacks::NoKB.Enable(NoKB->Checked);
 }
-void MainForm::cbPerfectLoot_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::PerfectLoot_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbPerfectLoot->Checked = Hacks::PerfectLoot.Enable(cbPerfectLoot->Checked);
+	PerfectLoot->Checked = Hacks::PerfectLoot.Enable(PerfectLoot->Checked);
 }
-void MainForm::cbVacRight_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::VacRight_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbVacRight->Checked = Hacks::VacRight.Enable(cbVacRight->Checked);
+	VacRight->Checked = Hacks::VacRight.Enable(VacRight->Checked);
 }
-void MainForm::cbWalkRight_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::WalkRight_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbWalkRight->Checked = Hacks::WalkRight.Enable(cbWalkRight->Checked);
+	WalkRight->Checked = Hacks::WalkRight.Enable(WalkRight->Checked);
 }
-void MainForm::cbJumpRight_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::JumpRight_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbJumpRight->Checked = Hacks::JumpRight.Enable(cbJumpRight->Checked);
+	JumpRight->Checked = Hacks::JumpRight.Enable(JumpRight->Checked);
 }
-void MainForm::cbMobDisarm_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::MobDisarm_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbMobDisarm->Checked = Hacks::MobDisarm.Enable(cbMobDisarm->Checked);
+	MobDisarm->Checked = Hacks::MobDisarm.Enable(MobDisarm->Checked);
 }
-void MainForm::cbNoBG_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::NoBackground_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbNoBG->Checked = Hacks::NoBG.Enable(cbNoBG->Checked);
+	NoBackground->Checked = Hacks::NoBackground.Enable(NoBackground->Checked);
 }
-void MainForm::cbJDA_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::JDA_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbJDA->Checked = Hacks::JDA.Enable(cbJDA->Checked);
+	JDA->Checked = Hacks::JDA.Enable(JDA->Checked);
 }
-void MainForm::cbPinTyper_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::PinPicTyper_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbPinTyper->Checked = Hacks::PinPicTyper.Enable(cbPinTyper->Checked);
+	PinPicTyper->Checked = Hacks::PinPicTyper.Enable(PinPicTyper->Checked);
 }
-void MainForm::cbDojangGodmode_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::DojangGodmode_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbDojangGodmode->Checked = Hacks::DojangGodmode.Enable(cbDojangGodmode->Checked);
+	DojangGodmode->Checked = Hacks::DojangGodmode.Enable(DojangGodmode->Checked);
 }
-void MainForm::cbIceGuard_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::IceGuard_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	this->nudIceGuard->Enabled = !this->cbIceGuard->Checked;
+	this->nudIceGuard->Enabled = !this->IceGuard->Checked;
 	Hacks::SetIceGuardLimit((int) nudIceGuard->Value);
-	cbIceGuard->Checked = Hacks::IceGuard.Enable(cbIceGuard->Checked);
+	IceGuard->Checked = Hacks::IceGuard.Enable(IceGuard->Checked);
 }
-void MainForm::cbUnlimitedMorph_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::UnlimitedMorph_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbUnlimitedMorph->Checked = Hacks::UnlimitedMorph.Enable(cbUnlimitedMorph->Checked);
+	UnlimitedMorph->Checked = Hacks::UnlimitedMorph.Enable(UnlimitedMorph->Checked);
 }
-void MainForm::cbFasterMobs_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::FasterMobs_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbFasterMobs->Checked = Hacks::FasterMobs.Enable(cbFasterMobs->Checked);
+	FasterMobs->Checked = Hacks::FasterMobs.Enable(FasterMobs->Checked);
 }
-void MainForm::cbNDAllAttacks_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::NDAllAttacks_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbNDAllAttacks->Checked = Hacks::NDAllAttacks.Enable(cbNDAllAttacks->Checked);
+	NDAllAttacks->Checked = Hacks::NDAllAttacks.Enable(NDAllAttacks->Checked);
 }
-void MainForm::cbNoMobs_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::NoMobs_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbNoMobs->Checked = Hacks::NoMobs.Enable(cbNoMobs->Checked);
+	NoMobs->Checked = Hacks::NoMobs.Enable(NoMobs->Checked);
 }
-void MainForm::cbAutoAggro_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::AutoAggro_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbAutoAggro->Checked = Hacks::AutoAggro.Enable(cbAutoAggro->Checked);
+	AutoAggro->Checked = Hacks::AutoAggro.Enable(AutoAggro->Checked);
 }
-void MainForm::cbSitHack_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::SitHack_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbSitHack->Checked = Hacks::SitHack.Enable(cbSitHack->Checked);
+	SitHack->Checked = Hacks::SitHack.Enable(SitHack->Checked);
 }
-void MainForm::cb50SecGM_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::SecondGodmode_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cb50SecGM->Checked = Hacks::SecondGodmode.Enable(cb50SecGM->Checked);
+	SecondGodmode->Checked = Hacks::SecondGodmode.Enable(SecondGodmode->Checked);
 }
-void MainForm::cbLogoSkipper_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::LogoSkipper_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbLogoSkipper->Checked = Hacks::LogoSkipper.Enable(cbLogoSkipper->Checked);
+	LogoSkipper->Checked = Hacks::LogoSkipper.Enable(LogoSkipper->Checked);
 }
-void MainForm::cbViewSwears_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::ViewSwears_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbViewSwears->Checked = Hacks::NoSwears.Enable(cbViewSwears->Checked);
+	ViewSwears->Checked = Hacks::NoSwears.Enable(ViewSwears->Checked);
 }
-void MainForm::cbItemVac_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::ItemVac_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbItemVac->Checked = Hacks::ItemVac.Enable(cbItemVac->Checked);
+	ItemVac->Checked = Hacks::ItemVac.Enable(ItemVac->Checked);
 }
 void MainForm::cbLockItemVac_CheckedChanged(System::Object^ sender, System::EventArgs^ e)
 {
 	Hacks::LockItemVac(cbLockItemVac->Checked);
 }
-void MainForm::cbFMA_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::FMA_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbNFA->Checked = cbFMA->Checked;
-	cbItemVac->Checked = cbFMA->Checked;
-	cbItemVac->Enabled = !cbFMA->Checked;
-	cbFMA->Checked = Hacks::FMA.Enable(cbFMA->Checked);
+	DisableFinalAttack->Checked = FMA->Checked;
+	ItemVac->Checked = FMA->Checked;
+	ItemVac->Enabled = !FMA->Checked;
+	FMA->Checked = Hacks::FMA.Enable(FMA->Checked);
 }
-void MainForm::cbScareMobs_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::ScareMobs_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbScareMobs->Checked = Hacks::ScareMobs.Enable(cbScareMobs->Checked);
+	ScareMobs->Checked = Hacks::ScareMobs.Enable(ScareMobs->Checked);
 }
-void MainForm::cbFLACC_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::FaceLeftAfterCC_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbFLACC->Checked = Hacks::FaceLeftAfterCC.Enable(cbFLACC->Checked);
+	FaceLeftAfterCC->Checked = Hacks::FaceLeftAfterCC.Enable(FaceLeftAfterCC->Checked);
 }
-void MainForm::cbCPUHack_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::CPUHack_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbCPUHack->Checked = Hacks::CPUHack.Enable(cbCPUHack->Checked);
+	CPUHack->Checked = Hacks::CPUHack.Enable(CPUHack->Checked);
 }
-void MainForm::cbUA_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::UnlimitedAttack_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbUA->Checked = Hacks::UnlimitedAttack.Enable(cbUA->Checked);
+	UnlimitedAttack->Checked = Hacks::UnlimitedAttack.Enable(UnlimitedAttack->Checked);
 }
-void MainForm::cbNFA_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::DisableFinalAttack_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbNFA->Checked = Hacks::DisableFinalAttack.Enable(cbNFA->Checked);
+	DisableFinalAttack->Checked = Hacks::DisableFinalAttack.Enable(DisableFinalAttack->Checked);
 }
-void MainForm::cbNDMining_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::NDMining_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbNDMining->Checked = Hacks::NDMining.Enable(cbNDMining->Checked);
+	NDMining->Checked = Hacks::NDMining.Enable(NDMining->Checked);
 }
-void MainForm::cbHideDamage_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::HideDamage_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbHideDamage->Checked = Hacks::HideDamage.Enable(cbHideDamage->Checked);
+	HideDamage->Checked = Hacks::HideDamage.Enable(HideDamage->Checked);
 }
-void MainForm::cbMercedesCombo_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::MercedesCombo_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbMercedesCombo->Checked = Hacks::MercedesCombo.Enable(cbMercedesCombo->Checked);
+	MercedesCombo->Checked = Hacks::MercedesCombo.Enable(MercedesCombo->Checked);
 }
-void MainForm::cbNoFadeStages_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::NoFadeStages_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbNoFadeStages->Checked = Hacks::NoFadeStages.Enable(cbNoFadeStages->Checked);
+	NoFadeStages->Checked = Hacks::NoFadeStages.Enable(NoFadeStages->Checked);
 }
-void MainForm::cbMouseFly_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::MouseFly_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbMouseFly->Checked = Hacks::MouseFly.Enable(cbMouseFly->Checked);
+	MouseFly->Checked = Hacks::MouseFly.Enable(MouseFly->Checked);
 }
-void MainForm::cbNoCCBlueBoxes_CheckedChanged(Object^ sender, EventArgs^ e)
+void MainForm::NoCCBoxes_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	cbNoCCBlueBoxes->Checked = Hacks::NoCCBoxes.Enable(cbNoCCBlueBoxes->Checked);
+	NoCCBoxes->Checked = Hacks::NoCCBoxes.Enable(NoCCBoxes->Checked);
 }
 void MainForm::cbIFS_CheckedChanged(System::Object^  sender, System::EventArgs^  e)
 {
@@ -316,8 +316,6 @@ Void MainForm::RedrawStatBars()
 		this->MPForeground->Width = ((double) CMS::CurMP / (double) CMS::MaxMP) * lengtOfBars;
 		this->EXPForeground->Width = (ExpPercentage / 100) * lengtOfBars;
 	}
-	extern void FlashHPBar();
-	FlashHPBar();
 }
 Void MainForm::ReloadComboBox(ComboBox^ combobox)
 {
@@ -620,7 +618,7 @@ Void MainForm::HotKeys()
 	{
 		if (GetAsyncKeyState(KeyCodes[ddbHotKeyFMA->SelectedIndex]))
 		{
-			this->cbFMA->Checked = !this->cbFMA->Checked;
+			this->FMA->Checked = !this->FMA->Checked;
 			Sleep(250);
 		}
 	}
@@ -644,7 +642,7 @@ Void MainForm::HotKeys()
 	{
 		if (GetAsyncKeyState(KeyCodes[ddbHotKeyMouseFly->SelectedIndex]))
 		{
-			this->cbMouseFly->Checked = !this->cbMouseFly->Checked;
+			this->MouseFly->Checked = !this->MouseFly->Checked;
 			Sleep(250);
 		}
 	}

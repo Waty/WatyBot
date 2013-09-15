@@ -11,7 +11,7 @@ public:
 	static Hack PinPicTyper;
 	static Hack FusionAttack;
 	static Hack PerfectLoot;
-	static Hack NoBG;
+	static Hack NoBackground;
 	static Hack FasterMobs;
 	static Hack UnlimitedMorph;
 	static Hack NDAllAttacks;

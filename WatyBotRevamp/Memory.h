@@ -42,10 +42,6 @@ private:
 class Hack
 {
 public:
-	Hack(CMemory* cm)
-	{
-		hacks.push_back(cm);
-	}
 	Hack(std::initializer_list<CMemory*> list) : hacks(list) {}
 
 	bool Enable(bool state);
