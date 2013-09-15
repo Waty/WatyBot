@@ -8,8 +8,10 @@
 #include "PacketDialog.h"
 #include "StopWatch.h"
 #include "Log.h"
-
 using namespace WatyBotRevamp;
+
+extern bool EnableStatsHook(bool enable);
+extern void EnableItemHook(bool enable);
 
 //Hack CheckBoxes
 void MainForm::FusionAttack_CheckedChanged(Object^ sender, EventArgs^ e)
@@ -151,7 +153,8 @@ void MainForm::NoFadeStages_CheckedChanged(Object^ sender, EventArgs^ e)
 }
 void MainForm::MouseFly_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	MouseFly->Checked = Hacks::MouseFly.Enable(MouseFly->Checked);
+	//MouseFly->Checked = Hacks::MouseFly.Enable(MouseFly->Checked);
+	EnableItemHook(MouseFly->Checked);
 }
 void MainForm::NoCCBoxes_CheckedChanged(Object^ sender, EventArgs^ e)
 {
@@ -269,10 +272,6 @@ Void MainForm::MainForm_Load(Object^ sender, EventArgs^ e)
 	// Fix the size of the tabs
 	MainForm::Height = TabHeight[MainTabControl->SelectedTab->TabIndex];
 	MainTabControl->Height = TabHeight[MainTabControl->SelectedTab->TabIndex] - 30;
-	extern void EnableStatsHook(bool enable);
-	EnableStatsHook(true);
-	extern void EnableItemHook(bool state);
-	EnableItemHook(true);
 }
 Void MainForm::StatsTimer_Tick(Object^ sender, EventArgs^ e)
 {
@@ -580,6 +579,7 @@ Void MainForm::LoadSettings()
 	}
 	if (!Hacks::ThreadIdFix.Enabled) Log::WriteLine("ThreadIdFix was not enabled!");
 	Settings::Deserialize(this, Path);
+	EnableStatsHook(true);
 }
 Void MainForm::bSaveSettings_Click(Object^ sender, EventArgs^ e)
 {

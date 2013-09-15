@@ -2,8 +2,12 @@
 #include "HackAddys.h"
 #include "MapleStory.h"
 #include "SPControl.h"
+#include "StopWatch.h"
+#include "Log.h"
 
 using namespace WatyBotRevamp;
+
+extern bool Teleport(int x, int y);
 
 #define CodeCave(name) void __declspec(naked) Cave##name(){_asm
 #define EndCodeCave }
@@ -343,43 +347,6 @@ Hack Hacks::NoCCBoxes = {
 	new CMemory(NoCCBoxesAddy2, 5)
 };
 
-////SS Mouse Fly
-DWORD dwMouseFlyRet = MouseFlyAddy + 5;
-DWORD dwMouseFlyCall1 = MouseFlyCall1;
-DWORD dwMouseFlyCall2 = MouseFlyCall2;
-CodeCave(MouseFly)
-{
-	call dwMouseFlyCall1
-	pushad
-		//looking for the mouse click
-		mov ebx, [MouseBasePtr]
-		mov ebx, [ebx]
-		cmp dword ptr[ebx + MouseAniOffset], 0x0C
-		jne FlyExit
-
-		//get mouselocation
-		mov ebx, [ebx + MouseLocOffset]
-		mov eax, [ebx + MouseXOffset]
-		mov ebx, [ebx + (MouseXOffset + 4)]
-
-		//encrypt and set teleoffsets
-		lea ecx, [esi + 0x7B28]
-		push eax //Set X
-		call dwMouseFlyCall2
-		lea ecx, [esi + 0x7B1C]
-		push ebx //Set Y
-		call dwMouseFlyCall2
-		lea ecx, [esi + 0x7B04]
-		push 00000001 //Probably dont need all the proceeding 0's but wthell
-		call dwMouseFlyCall2
-
-FlyExit:
-	popad
-	jmp dwMouseFlyRet
-}
-EndCodeCave
-Hack Hacks::MouseFly = { new CMemory(MouseFlyAddy, CaveMouseFly) };
-
 ////Auto ExitCS Script
 DWORD dwExitCSRet = ExitCSAddy + 9;
 DWORD dwExitCSCall = ExitCSCall;
@@ -442,6 +409,7 @@ BOOL WINAPI GetCoords()
 	}
 	return FALSE;
 }
+
 CodeCave(SPControl)
 {
 	push eax
@@ -499,4 +467,24 @@ void Hacks::SetIFSClass(int index)
 		Skill2 = 31001008;
 		break;
 	}
+}
+
+StopWatch<milliseconds> TeleportWatch(milliseconds(2500));
+void TryTeleport(int X, int Y)
+{
+	if (!TeleportWatch.IsOver() || CMS::ShouldAttack()) return;
+	if (GetCoords() == TRUE && CMS::ItemCount == 0)
+	{
+		X = spawn_x;
+		Y = spawn_y;
+	}
+	if (!X || !Y || (X == CMS::CharX && Y == CMS::CharY)) return;
+	TeleportWatch.Start();
+	Log::WriteLine("Teleporting to (" + X + ";" + Y + ")");
+	Teleport(X, Y);
+}
+
+void LogTeleport(DWORD Address, DWORD Value)
+{
+	Log::WriteLine(Address.ToString("X") + "=" + Value.ToString("X"));
 }

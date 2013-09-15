@@ -40,7 +40,7 @@ public:
 	//	static Hack SkillInjection;
 	static Hack NoFadeStages;
 	static Hack NoCCBoxes;
-	static Hack MouseFly;
+	//	static Hack MouseFly;
 	static Hack ExitCS;
 	static Hack ThreadIdFix;
 	static Hack SpawnControl;

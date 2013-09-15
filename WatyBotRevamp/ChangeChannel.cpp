@@ -6,8 +6,8 @@
 using namespace WatyBotRevamp;
 using namespace System;
 
-void TryCC(int channel);
 extern StopWatch<milliseconds> BreathCounter;
+extern bool ChangeChannel(int channel);
 
 bool CC::IsBusy::get()
 {
@@ -71,7 +71,7 @@ Void CC::doCC(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^ 
 		if (i > 10) GenerateRandomChannel();
 
 		//Send the CC request
-		TryCC(TargetChannel);
+		ChangeChannel(TargetChannel);
 		Sleep(1000);
 		i++;
 	}
