@@ -88,7 +88,7 @@ bool CMS::ShouldAttack()
 }
 bool CMS::ShouldLoot()
 {
-	if (InGame)
+	if (InGame && ItemCount > 0)
 	{
 		if (OLWNA) return !ShouldAttack();
 		return true;
