@@ -12,6 +12,7 @@ using namespace WatyBotRevamp;
 
 extern bool EnableStatsHook(bool enable);
 extern void EnableItemHook(bool enable);
+extern bool HookCMob__GetPos(bool enable);
 
 //Hack CheckBoxes
 void MainForm::FusionAttack_CheckedChanged(Object^ sender, EventArgs^ e)
@@ -102,7 +103,7 @@ void MainForm::ViewSwears_CheckedChanged(Object^ sender, EventArgs^ e)
 }
 void MainForm::ItemVac_CheckedChanged(Object^ sender, EventArgs^ e)
 {
-	ItemVac->Checked = Hacks::ItemVac.Enable(ItemVac->Checked);
+	ItemVac->Checked = HookCMob__GetPos(ItemVac->Checked);
 }
 void MainForm::cbLockItemVac_CheckedChanged(System::Object^ sender, System::EventArgs^ e)
 {

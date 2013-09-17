@@ -31,12 +31,14 @@ struct SKILLENTRY
 //typedefs
 typedef void (__cdecl *SendPacket_t)(COutPacket *oPacket);
 typedef void (__stdcall *CField__SendTransferChannelRequest_t)(int nChannel);
+typedef POINT*(__fastcall* CMob__GetPos_t)(void* ECX, void* EDX, POINT* pptUser);
 typedef void (__fastcall *TSecType_long___SetData_t)(DWORD dwAddress, DWORD dwEDX, DWORD dwValue);
-typedef void (__fastcall *CUIStatusBar__SetNumberValue_t)(void* lpvEcx, void* lpvEdx, int iCurrentHp, int iMaximumHp, int iCurrentMp, int iMaximumMp, __int64 iCurrentExp, __int64 iMaximumExp, int iTempExp);
-auto SendPacket = reinterpret_cast<SendPacket_t>(SendPacketHookAddy);
+typedef void (__fastcall *CUIStatusBar__SetNumberValue_t)(void* ECX, void* EDX, int iCurrentHp, int iMaximumHp, int iCurrentMp, int iMaximumMp, __int64 iCurrentExp, __int64 iMaximumExp, int iTempExp);
 auto CField_SendTransferChannelRequest = reinterpret_cast<CField__SendTransferChannelRequest_t>(CCAddy);
 auto CUIStatusBar__SetNumberValue = reinterpret_cast<CUIStatusBar__SetNumberValue_t>(0xB574A0);//7D ? 39 ? ? ? 00 00 7E (first) (Start)
 auto TSecType_long___SetData = reinterpret_cast<TSecType_long___SetData_t>(0x421F80);
+auto SendPacket = reinterpret_cast<SendPacket_t>(SendPacketHookAddy);
+auto CMob__GetPos = reinterpret_cast<CMob__GetPos_t>(0x71DC70);
 /* NDFA / SkillInjection Hooks outdated from 90
 typedef void (__fastcall* CUserLocal__TryDoingFinalAttack_t)(void* lpvEcx, void* lpvEdx);//0F 84 ? ? 00 00 2B AE (start)
 typedef int (__fastcall* CUserLocal__TryDoingMeleeAttack_t)(void* lpvEcx, void* lpvEdx, SKILLENTRY* pSkill, int iSkillLevel, int* lpiShootRange, int iSerialAttackSkillId, unsigned int uLastAttackMobId, int iKeyDown, class CGrenade* pGrenade, int iReservedSkillId, BOOL bTimeBombAttack, int iTimeBombX, int iTimeBombY, int iShootSkillId);//85 C0 74 ? 33 C0 E9 ? ? ? 00 83 (start)
@@ -53,26 +55,15 @@ void __fastcall CUIStatusBar__SetNumberValue__Hook(void*lpvEcx, void*lpvEdx, int
 	UpdateStats(iCurrentHp, iMaximumHp, iCurrentMp, iMaximumMp, iCurrentExp, iMaximumExp);
 	return CUIStatusBar__SetNumberValue(lpvEcx, 0, iCurrentHp, iMaximumHp, iCurrentMp, iMaximumMp, iCurrentExp, iMaximumExp, iTempExp);
 }
-int ItemX, ItemY;
-VOID WINAPI UpdateTPLocations()
+BOOL WINAPI PtInRect__Hook(_In_ CONST RECT *lprc, _In_ POINT pt)
 {
-	TryTeleport(ItemX, ItemY);
+	TryTeleport(pt.x, pt.y);
+	return PtInRect(lprc, pt);
 }
-void __declspec(naked) ItemHookAsm()
+POINT* __fastcall CMob__GetPos__Hook(void* ECX, void* EDX, POINT* pptUser)
 {
-	__asm
-	{
-		cmp dword ptr[esp], 0x56048C
-			jne Exit
-			mov eax, [esp + 0x08]
-			mov[ItemX], eax
-			mov eax, [esp + 0x0C]
-			mov[ItemY], eax
-			call UpdateTPLocations
-
-		Exit :
-		jmp dword ptr PtInRect
-	}
+	extern POINT* GetItemvacCoords();
+	return GetItemvacCoords();
 }
 
 //constants
@@ -133,7 +124,7 @@ bool EnableStatsHook(bool enable)
 void EnableItemHook(bool state)
 {
 	DWORD PtInRectAddy = 0x14115A4;
-	if (state) *(unsigned long*) PtInRectAddy = (unsigned long) ItemHookAsm;
+	if (state) *(unsigned long*) PtInRectAddy = (unsigned long) PtInRect__Hook;
 	else *(unsigned long*) PtInRectAddy = (unsigned long) PtInRect;
 }
 bool Teleport(_In_ int x, _In_ int y)
@@ -151,4 +142,8 @@ bool Teleport(_In_ int x, _In_ int y)
 		return false;
 	}
 	return true;
+}
+bool HookCMob__GetPos(bool enable)
+{
+	return SetHook(enable, (PVOID*) &CMob__GetPos, CMob__GetPos__Hook) == TRUE;
 }

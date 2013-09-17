@@ -25,8 +25,7 @@ public:
 	static Hack SitHack;
 	static Hack SecondGodmode;
 	static Hack LogoSkipper;
-	static Hack ItemVac;
-	static void LockItemVac(bool status);
+	static void Hacks::LockItemVac(bool enable);
 	static Hack NoSwears;
 	static Hack FMA;
 	static Hack ScareMobs;

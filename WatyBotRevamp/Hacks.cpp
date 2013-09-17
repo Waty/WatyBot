@@ -184,40 +184,6 @@ Hack Hacks::SecondGodmode = {
 BYTE bLogoSkipper [] = { 0x50, 0x42 };
 Hack Hacks::LogoSkipper = { new CMemory(LogoSkipperAddy, bLogoSkipper, 2) };
 
-/////(semi) Item Vac
-DWORD dwItemVacCall = ItemVacCall;
-int itemvac_x = 0;
-int itemvac_y = 0;
-bool itemvaclock = false;
-VOID WINAPI getItemVacCoords()
-{
-	if (itemvaclock) return;
-
-	itemvac_x = CMS::CharX;
-	itemvac_y = CMS::CharY;
-}
-CodeCave(ItemVac)
-{
-	call dwItemVacCall //Original Opcode
-	call getItemVacCoords
-	mov ecx, eax
-	mov eax, [esp + 0x0C]
-	mov edi, [itemvac_x]
-	mov[eax], edi //X
-	pop edi
-	mov esi, [itemvac_y]
-	mov[eax + 04], esi //Y
-	pop esi
-	ret 0004
-}
-EndCodeCave
-Hack Hacks::ItemVac = { new CMemory(ItemVacAddy, CaveItemVac) };
-void Hacks::LockItemVac(bool state)
-{
-	if (state) getItemVacCoords();
-	itemvaclock = state;
-}
-
 /////View Swears
 Hack Hacks::NoSwears = { new CMemory(ViewSwearsAddy, 2) };
 
@@ -473,10 +439,11 @@ StopWatch<milliseconds> TeleportWatch(milliseconds(2500));
 void TryTeleport(int X, int Y)
 {
 	if (!TeleportWatch.IsOver() || CMS::ShouldAttack()) return;
-	if (GetCoords() == TRUE && CMS::ItemCount == 0)
+	if (CMS::ItemCount == 0 && GetCoords() == TRUE)
 	{
 		X = spawn_x;
 		Y = spawn_y;
+		Log::WriteLine("Teleporting back to SPControl point");
 	}
 	if (!X || !Y || (X == CMS::CharX && Y == CMS::CharY)) return;
 	TeleportWatch.Start();
@@ -484,7 +451,29 @@ void TryTeleport(int X, int Y)
 	Teleport(X, Y);
 }
 
-void LogTeleport(DWORD Address, DWORD Value)
+void Log(POINT* p)
 {
-	Log::WriteLine(Address.ToString("X") + "=" + Value.ToString("X"));
+	Log::WriteLine("X: " + p->x + " Y: " + p->y);
+}
+
+bool ItemvacLocked;
+POINT* GetItemvacCoords()
+{
+	static int itemvacX = 0;
+	static int itemvacY = 0;
+	if (!ItemvacLocked)
+	{
+		itemvacX = CMS::CharX;
+		itemvacY = CMS::CharY;
+	}
+	POINT* p = new POINT;
+	p->x = itemvacX;
+	p->y = itemvacY;
+	return p;
+}
+
+void Hacks::LockItemVac(bool enable)
+{
+	GetItemvacCoords();
+	ItemvacLocked = enable;
 }
