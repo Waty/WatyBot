@@ -1,6 +1,7 @@
 #include <Windows.h>
 #include "HackAddys.h"
 #include "Detours.h"
+#include <intrin.h>
 #pragma warning(disable:4099)
 
 extern void TryTeleport(int x, int y);
@@ -57,6 +58,7 @@ void __fastcall CUIStatusBar__SetNumberValue__Hook(void*lpvEcx, void*lpvEdx, int
 }
 BOOL WINAPI PtInRect__Hook(_In_ CONST RECT *lprc, _In_ POINT pt)
 {
+	MessageBox(0,(LPWSTR)((unsigned long) _ReturnAddress()),0,0);
 	TryTeleport(pt.x, pt.y);
 	return PtInRect(lprc, pt);
 }
