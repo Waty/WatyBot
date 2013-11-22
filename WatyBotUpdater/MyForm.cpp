@@ -18,7 +18,7 @@ void CreateGUI(void)
 {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
-	Application::Run(gcnew MyForm);
+	Application::Run(gcnew MyForm());
 	Application::Exit();
 }
 void InitializeTrainer(HINSTANCE hInstance)
@@ -48,7 +48,7 @@ Void MyForm::update_Click(System::Object^  sender, System::EventArgs^  e)
 
 	for each(Address^ address in addressList)
 	{
-		char* aob = (char*) marshal_as<string>(address->AOB).c_str();
+		char* aob = (char*)marshal_as<string>(address->AOB).c_str();
 		FindPattern(aob, &pf, lpvMapleBase, dwMapleSize);
 
 		String^ Name = address->Name;
@@ -56,9 +56,9 @@ Void MyForm::update_Click(System::Object^  sender, System::EventArgs^  e)
 		if (pf.dwResult) // If the search got a result
 		{
 			if (address->Type == Address::AddressType::Address) Addy = pf.dwResult.ToString("X");
-			if (address->Type == Address::AddressType::Pointer) Addy = (*(DWORD*) ((DWORD) pf.dwResult + 2)).ToString("X");
-			if (address->Type == Address::AddressType::OffsetBYTE) Addy = (*(BYTE*) ((DWORD) pf.dwResult + 2)).ToString("X");
-			if (address->Type == Address::AddressType::OffsetWORD) Addy = (*(WORD*) ((DWORD) pf.dwResult + 2)).ToString("X");
+			if (address->Type == Address::AddressType::Pointer) Addy = (*(DWORD*)((DWORD)pf.dwResult + 2)).ToString("X");
+			if (address->Type == Address::AddressType::OffsetBYTE) Addy = (*(BYTE*)((DWORD)pf.dwResult + 2)).ToString("X");
+			if (address->Type == Address::AddressType::OffsetWORD) Addy = (*(WORD*)((DWORD)pf.dwResult + 2)).ToString("X");
 			SuccesCount++;
 		}
 
@@ -80,7 +80,7 @@ Void MyForm::update_Click(System::Object^  sender, System::EventArgs^  e)
 		//Write the found addy to the header file
 		sw->WriteLine("#define " + Name + " 0x" + Addy + Comment);
 	}
-	if (sw) delete (IDisposable^) (sw);
+	if (sw) delete (IDisposable^)(sw);
 	//lvAddys->EndUpdate();
 	ShowInfo(SuccesCount + " of the " + addressList->Count + " where succesfull");
 }
@@ -110,6 +110,17 @@ Void MyForm::ReadXmlData()
 		{
 			stream = gcnew FileStream(InputPath, FileMode::Open, FileAccess::Read, FileShare::Read);
 			addressList = safe_cast<List<Address^>^>(serializer->Deserialize(stream));
+
+			lvAddys->Items->Clear();
+			for each(Address^ address in addressList)
+			{
+				auto item = gcnew ListViewItem(address->Name);
+				item->SubItems->Add("N/A");
+				item->SubItems->Add(address->Type.ToString());
+				item->SubItems->Add(address->AOB);
+				item->SubItems->Add(address->Comment);
+				lvAddys->Items->Add(item);
+			}
 		}
 		catch (Exception^ ex)
 		{
@@ -117,19 +128,8 @@ Void MyForm::ReadXmlData()
 		}
 		finally
 		{
-			if (stream) delete (IDisposable^) stream;
+			if (stream) delete (IDisposable^)stream;
 		}
-	}
-
-	lvAddys->Items->Clear();
-	for each(Address^ address in addressList)
-	{
-		auto item = gcnew ListViewItem(address->Name);
-		item->SubItems->Add("N/A");
-		item->SubItems->Add(address->Type.ToString());
-		item->SubItems->Add(address->AOB);
-		item->SubItems->Add(address->Comment);
-		lvAddys->Items->Add(item);
 	}
 }
 
@@ -149,7 +149,7 @@ Void MyForm::WriteXmlData()
 		}
 		finally
 		{
-			if (stream) delete (IDisposable^) stream;
+			if (stream) delete (IDisposable^)stream;
 		}
 	}
 }

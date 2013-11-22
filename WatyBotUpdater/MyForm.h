@@ -21,6 +21,7 @@ namespace WatyBotUpdater
 	public:
 		MyForm(void)
 		{
+
 			InitializeComponent();
 			ReadXmlData();
 			AOBFileWatcher->Path = AppDataDir;
@@ -105,7 +106,7 @@ namespace WatyBotUpdater
 			this->tbAOB = (gcnew System::Windows::Forms::TextBox());
 			this->openAppdataToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->contextMenuStrip1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->AOBFileWatcher))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AOBFileWatcher))->BeginInit();
 			this->menuStrip1->SuspendLayout();
 			this->gbNewAOB->SuspendLayout();
 			this->SuspendLayout();
@@ -317,7 +318,7 @@ namespace WatyBotUpdater
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MyForm::MyForm_FormClosing);
 			this->SizeChanged += gcnew System::EventHandler(this, &MyForm::MyForm_SizeChanged);
 			this->contextMenuStrip1->ResumeLayout(false);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->AOBFileWatcher))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->AOBFileWatcher))->EndInit();
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->gbNewAOB->ResumeLayout(false);
