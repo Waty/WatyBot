@@ -28,9 +28,9 @@ bool inject(std::string fileName, DWORD pID)
 	}
 	LoadLibAddy = (LPVOID) GetProcAddress(GetModuleHandle("kernel32.dll"), "LoadLibraryA");
 	// Allocate space in the process for our DLL
-	RemoteString = (LPVOID) VirtualAllocEx(Proc, NULL, strlen(fileName.c_str()), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+	RemoteString = (LPVOID) VirtualAllocEx(Proc, NULL, fileName.length(), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
 	// Write the string name of our DLL in the memory allocated 
-	WriteProcessMemory(Proc, (LPVOID) RemoteString, fileName.c_str(), strlen(fileName.c_str()), NULL);
+	WriteProcessMemory(Proc, (LPVOID)RemoteString, fileName.c_str(), fileName.length(), NULL);
 	// Load our DLL 
 	CreateRemoteThread(Proc, NULL, NULL, (LPTHREAD_START_ROUTINE) LoadLibAddy, (LPVOID) RemoteString, NULL, NULL);
 	CloseHandle(Proc);
