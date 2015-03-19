@@ -131,6 +131,10 @@ Void MyForm::ReadXmlData()
 			if (stream) delete (IDisposable^)stream;
 		}
 	}
+	else
+	{
+		addressList = gcnew List<Address^>();
+	}
 }
 
 Void MyForm::WriteXmlData()
